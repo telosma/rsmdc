@@ -1,0 +1,21 @@
+{
+  "name": "@rsmdc/shape",
+  "description": "Shape utilities for Material Components for the web",
+  "version": "0.0.1",
+  "license": "MIT",
+  "keywords": [
+    "material components",
+    "material design",
+    "shape"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "rsmdc",
+  "dependencies": {
+  }
+}

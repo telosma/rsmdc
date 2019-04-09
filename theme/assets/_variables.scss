@@ -1,0 +1,162 @@
+//
+// Copyright 2017 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "./functions";
+
+//
+// Main theme colors for your brand.
+//
+// If you're a user customizing your color scheme in SASS, these are probably the only variables you need to change.
+//
+
+$rs-theme-primary: #6200ee !default; // baseline purple, 500 tone
+$rs-theme-on-primary: if(rs-theme-contrast-tone($rs-theme-primary) == "dark", #000, #fff) !default;
+
+// The $rs-theme-accent variable is DEPRECATED - it exists purely for backward compatibility.
+// The $rs-theme-secondary* variables should be used for all new projects.
+$rs-theme-accent: #018786 !default; // baseline teal, 600 tone
+$rs-theme-secondary: $rs-theme-accent !default;
+$rs-theme-on-secondary: if(rs-theme-contrast-tone($rs-theme-secondary) == "dark", #000, #fff) !default;
+$rs-theme-background: #fff !default; // White
+
+$rs-theme-surface: #fff !default;
+$rs-theme-on-surface: if(rs-theme-contrast-tone($rs-theme-surface) == "dark", #000, #fff) !default;
+
+$rs-theme-error: #b00020 !default;
+$rs-theme-on-error: if(rs-theme-contrast-tone($rs-theme-error) == "dark", #000, #fff) !default;
+
+//
+// Text colors according to light vs dark and text type.
+//
+
+$rs-theme-text-colors: (
+  dark: (
+    primary: rgba(black, .87),
+    secondary: rgba(black, .54),
+    hint: rgba(black, .38),
+    disabled: rgba(black, .38),
+    icon: rgba(black, .38)
+  ),
+  light: (
+    primary: white,
+    secondary: rgba(white, .7),
+    hint: rgba(white, .5),
+    disabled: rgba(white, .5),
+    icon: rgba(white, .5)
+  )
+) !default;
+
+$rs-theme-text-emphasis: (
+  high: .87,
+  medium: .6,
+  disabled: .38,
+) !default;
+
+@function rs-theme-ink-color-for-fill_($text-style, $fill-color) {
+  $contrast-tone: rs-theme-contrast-tone($fill-color);
+
+  @return map-get(map-get($rs-theme-text-colors, $contrast-tone), $text-style);
+}
+
+//
+// Primary text colors for each of the theme colors.
+//
+
+$rs-theme-property-values: (
+  // Primary
+  primary: $rs-theme-primary,
+  // Secondary
+  secondary: $rs-theme-secondary,
+  // Background
+  background: $rs-theme-background,
+  // Surface
+  surface: $rs-theme-surface,
+  // Error
+  error: $rs-theme-error,
+  on-primary: $rs-theme-on-primary,
+  on-secondary: $rs-theme-on-secondary,
+  on-surface: $rs-theme-on-surface,
+  on-error: $rs-theme-on-error,
+  // Text-primary on "background" background
+  text-primary-on-background: rs-theme-ink-color-for-fill_(primary, $rs-theme-background),
+  text-secondary-on-background: rs-theme-ink-color-for-fill_(secondary, $rs-theme-background),
+  text-hint-on-background: rs-theme-ink-color-for-fill_(hint, $rs-theme-background),
+  text-disabled-on-background: rs-theme-ink-color-for-fill_(disabled, $rs-theme-background),
+  text-icon-on-background: rs-theme-ink-color-for-fill_(icon, $rs-theme-background),
+  // Text-primary on "light" background
+  text-primary-on-light: rs-theme-ink-color-for-fill_(primary, light),
+  text-secondary-on-light: rs-theme-ink-color-for-fill_(secondary, light),
+  text-hint-on-light: rs-theme-ink-color-for-fill_(hint, light),
+  text-disabled-on-light: rs-theme-ink-color-for-fill_(disabled, light),
+  text-icon-on-light: rs-theme-ink-color-for-fill_(icon, light),
+  // Text-primary on "dark" background
+  text-primary-on-dark: rs-theme-ink-color-for-fill_(primary, dark),
+  text-secondary-on-dark: rs-theme-ink-color-for-fill_(secondary, dark),
+  text-hint-on-dark: rs-theme-ink-color-for-fill_(hint, dark),
+  text-disabled-on-dark: rs-theme-ink-color-for-fill_(disabled, dark),
+  text-icon-on-dark: rs-theme-ink-color-for-fill_(icon, dark)
+) !default;
+
+// If `$style` is a color (a literal color value, `currentColor`, or a CSS custom property), it is returned verbatim.
+// Otherwise, `$style` is treated as a theme property name, and the corresponding value from
+// `$rs-theme-property-values` is returned. If this also fails, an error is thrown.
+//
+// This is mainly useful in situations where `rs-theme-prop` cannot be used directly (e.g., `box-shadow`).
+//
+// Examples:
+//
+// 1. rs-theme-prop-value(primary) => "#6200ee"
+// 2. rs-theme-prop-value(blue)    => "blue"
+//
+// NOTE: This function must be defined in _variables.scss instead of _functions.scss to avoid circular imports.
+@function rs-theme-prop-value($style) {
+  @if rs-theme-is-valid-theme-prop-value_($style) {
+    @return $style;
+  }
+
+  @if not map-has-key($rs-theme-property-values, $style) {
+    @error "Invalid theme property: '#{$style}'. Choose one of: #{map-keys($rs-theme-property-values)}";
+  }
+
+  @return map-get($rs-theme-property-values, $style);
+}
+
+// NOTE: This function must be defined in _variables.scss instead of _functions.scss to avoid circular imports.
+@function rs-theme-accessible-ink-color($fill-color, $text-style: primary) {
+  $fill-color-value: rs-theme-prop-value($fill-color);
+  $color-map-for-tone: map-get($rs-theme-text-colors, rs-theme-contrast-tone($fill-color-value));
+
+  @if not map-has-key($color-map-for-tone, $text-style) {
+    @error "Invalid $text-style: '#{$text-style}'. Choose one of: #{map-keys($color-map-for-tone)}";
+  }
+
+  @return map-get($color-map-for-tone, $text-style);
+}
+
+// NOTE: This function is depended upon by rs-theme-prop-value (above) and thus must be defined in this file.
+@function rs-theme-is-valid-theme-prop-value_($style) {
+  @return type-of($style) == "color" or $style == "currentColor" or str_slice($style, 1, 4) == "var(";
+}
+
+@function rs-theme-text-emphasis($emphasis) {
+  @return map-get($rs-theme-text-emphasis, $emphasis);
+}

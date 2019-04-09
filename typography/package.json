@@ -1,0 +1,19 @@
+{
+  "name": "@rsmdc/typography",
+  "description": "Typography classes, mixins, and variables for Material Components for the web",
+  "version": "0.0.1",
+  "license": "MIT",
+  "keywords": [
+    "material components",
+    "material design",
+    "typography",
+    "font"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
+  "author": "rsmdc",
+  "dependencies": {
+  }
+}

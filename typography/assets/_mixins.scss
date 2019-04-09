@@ -1,0 +1,115 @@
+//
+// Copyright 2017 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "../../feature-targeting/assets/functions";
+@import "../../feature-targeting/assets/mixins";
+@import "./variables";
+
+@mixin rs-typography-core-styles($query: rs-feature-all()) {
+  .rs-typography {
+    @include rs-typography-base($query: $query);
+  }
+
+  @each $style in map-keys($rs-typography-styles) {
+    .rs-typography--#{$style} {
+      @include rs-typography($style, $query: $query);
+    }
+  }
+}
+
+@mixin rs-typography-base($query: rs-feature-all()) {
+  $feat-typography: rs-feature-create-target($query, typography);
+
+  @include rs-feature-targets($feat-typography) {
+    @each $key, $value in $rs-typography-base {
+      #{$key}: $value;
+    }
+  }
+}
+
+@mixin rs-typography($style, $query: rs-feature-all()) {
+  $feat-typography: rs-feature-create-target($query, typography);
+  $style-props: map-get($rs-typography-styles, $style);
+
+  @if not map-has-key($rs-typography-styles, $style) {
+    @error "Invalid style specified! #{$style} doesn't exist. Choose one of #{map-keys($rs-typography-styles)}";
+  }
+
+  @include rs-feature-targets($feat-typography) {
+    @each $key, $value in $style-props {
+      #{$key}: $value;
+    }
+  }
+}
+
+// Element must be `display: block` or `display: inline-block` for this to work.
+@mixin rs-typography-overflow-ellipsis($query: rs-feature-all()) {
+  $feat-structure: rs-feature-create-target($query, structure);
+
+  @include rs-feature-targets($feat-structure) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+@mixin rs-typography-baseline-top($distance, $query: rs-feature-all()) {
+  $feat-structure: rs-feature-create-target($query, structure);
+
+  @include rs-feature-targets($feat-structure) {
+    display: block;
+    margin-top: 0;
+    /* @alternate */
+    line-height: normal;
+  }
+
+  &::before {
+    @include rs-feature-targets($feat-structure) {
+      @include rs-typography-baseline-strut_($distance);
+
+      vertical-align: 0;
+    }
+  }
+}
+
+@mixin rs-typography-baseline-bottom($distance, $query: rs-feature-all()) {
+  $feat-structure: rs-feature-create-target($query, structure);
+
+  @include rs-feature-targets($feat-structure) {
+    margin-bottom: -1 * $distance;
+  }
+
+  &::after {
+    @include rs-feature-targets($feat-structure) {
+      @include rs-typography-baseline-strut_($distance);
+
+      vertical-align: -1 * $distance;
+    }
+  }
+}
+
+@mixin rs-typography-baseline-strut_($distance) {
+  display: inline-block;
+  width: 0;
+  height: $distance;
+  content: "";
+}

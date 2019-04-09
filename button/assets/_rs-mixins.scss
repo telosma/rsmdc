@@ -1,0 +1,118 @@
+@import './mixins';
+@import '../../theme/assets/variables';
+@import '../../elevation/assets/variables';
+@import '../../shape/assets/variables';
+@import '../../ripple/assets/variables';
+
+
+@mixin rs-btn-color($color) {
+  --rs-btn-color: #{$color};
+}
+
+@mixin rs-btn-height($height) {
+  --rs-btn-height: #{$height};
+}
+
+/* if you use this mixin, also change height to 'auto'.(height default is 36px.) */
+@mixin rs-btn-padding($padding) {
+  --rs-btn-padding: #{$padding};
+}
+
+@mixin rs-btn-margin($margin) {
+  --rs-btn-margin: #{$margin};
+}
+
+@mixin rs-btn-border-color($borderColor) {
+  --rs-btn-border-color: #{$borderColor};
+}
+
+@mixin rs-btn-border-width($borderWidth) {
+  --rs-btn-border-width: #{$borderWidth};
+}
+
+@mixin rs-btn-border-style($borderStyle) {
+  --rs-btn-border-style: #{$borderStyle};
+}
+
+@mixin rs-btn-content($content) {
+  --rs-btn-content: #{$content};
+}
+
+@mixin rs-btn-background($background) {
+  --rs-btn-background: #{$background};
+}
+
+@mixin rs-btn-background-image($image) {
+  --rs-btn-background-image: #{$image};
+}
+
+@mixin rs-btn-background-size($size) {
+  --rs-btn-background-size: #{$size};
+}
+
+@mixin rs-btn-background-repeat($repeat) {
+  --rs-btn-background-repeat: #{$repeat};
+}
+
+@mixin rs-btn-background-position($position) {
+  --rs-btn-background-position: #{$position};
+}
+
+/*
+---
+rs-button style
+---
+*/
+@mixin rs-btn-type($type, $dense: flat) {
+  @if $type == outlined {
+    @include rs-button--outlined_();
+    @include rs-button-outline-width(2px);
+    @include rs-button-outline-color(primary);
+  }
+
+  @if $type == raised or $type == unelevated {
+    @include rs-button--filled_();
+    @include rs-button-container-fill-color($rs-theme-primary);
+    @include rs-button-ink-color($rs-theme-on-primary);
+    @include rs-states(on-primary);
+  }
+
+  @if $type == raised {
+    @include rs-button--raised_();
+  }
+
+  @if $type == dense or $dense == dense {
+    @include rs-button--dense_();
+  }
+}
+
+@mixin set-rs-feat-color($prop, $value, $query: rs-feature-all()) {
+  $feat-color: rs-feature-create-target($query, color);
+  @include rs-feature-targets($feat-color) {
+    #{$prop}: #{$value};
+  }
+}
+
+@mixin set-rs-feat-structure($prop, $value, $query: rs-feature-all()) {
+  $feat-structure: rs-feature-create-target($query, structure);
+  @include rs-feature-targets($feat-structure) {
+      #{$prop}: #{$value};
+  }
+}
+
+@mixin set-rs-feat-animation($prop, $value, $query: rs-feature-all()) {
+  $feat-animation: rs-feature-create-target($query, animation);
+  @include rs-feature-targets($feat-animation) {
+    #{$prop}: #{$value};
+  }
+}
+
+@mixin set-rs-feat-animation-transition-duration($value, $query: rs-feature-all()) {
+  $feat-animation: rs-feature-create-target($query, animation);
+  @include rs-feature-targets($feat-animation) {
+    transition-duration: $value;
+  }
+}
+
+
+

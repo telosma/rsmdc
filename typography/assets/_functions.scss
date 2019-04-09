@@ -1,0 +1,76 @@
+
+//
+// Copyright 2018 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@function rs-typography-get-global-variable_($style) {
+  @if $style == "headline1" {
+    @return $rs-typography-styles-headline1;
+  } @else if $style == "headline2" {
+    @return $rs-typography-styles-headline2;
+  } @else if $style == "headline3" {
+    @return $rs-typography-styles-headline3;
+  } @else if $style == "headline4" {
+    @return $rs-typography-styles-headline4;
+  } @else if $style == "headline5" {
+    @return $rs-typography-styles-headline5;
+  } @else if $style == "headline6" {
+    @return $rs-typography-styles-headline6;
+  } @else if $style == "subtitle1" {
+    @return $rs-typography-styles-subtitle1;
+  } @else if $style == "subtitle2" {
+    @return $rs-typography-styles-subtitle2;
+  } @else if $style == "body1" {
+    @return $rs-typography-styles-body1;
+  } @else if $style == "body2" {
+    @return $rs-typography-styles-body2;
+  } @else if $style == "caption" {
+    @return $rs-typography-styles-caption;
+  } @else if $style == "button" {
+    @return $rs-typography-styles-button;
+  } @else if $style == "overline" {
+    @return $rs-typography-styles-overline;
+  } @else {
+    @return ();
+  }
+}
+
+@function rs-typography-set-styles_($base-styles, $scale-styles) {
+  @each $style, $style-props in $scale-styles {
+
+    // Merge base properties for all styles.
+    $style-props: map-merge($base-styles, $style-props);
+
+    // Merge global overrides onto each style.
+    @if global_variable_exists(unquote("rs-typography-styles-#{$style}")) {
+      $style-props: map-merge($style-props, rs-typography-get-global-variable_(#{$style}));
+    }
+
+    // Override original styles with new styles.
+    $scale-styles: map-merge($scale-styles, (#{$style}: $style-props));
+  }
+
+  @return $scale-styles;
+}
+
+@function rs-typography-get-letter-spacing_($tracking, $font-size) {
+  @return $tracking / ($font-size * 16) * 1em;
+}
