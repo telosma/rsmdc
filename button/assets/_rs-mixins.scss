@@ -86,33 +86,4 @@ rs-button style
   }
 }
 
-@mixin set-rs-feat-color($prop, $value, $query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-  @include rs-feature-targets($feat-color) {
-    #{$prop}: #{$value};
-  }
-}
-
-@mixin set-rs-feat-structure($prop, $value, $query: rs-feature-all()) {
-  $feat-structure: rs-feature-create-target($query, structure);
-  @include rs-feature-targets($feat-structure) {
-      #{$prop}: #{$value};
-  }
-}
-
-@mixin set-rs-feat-animation($prop, $value, $query: rs-feature-all()) {
-  $feat-animation: rs-feature-create-target($query, animation);
-  @include rs-feature-targets($feat-animation) {
-    #{$prop}: #{$value};
-  }
-}
-
-@mixin set-rs-feat-animation-transition-duration($value, $query: rs-feature-all()) {
-  $feat-animation: rs-feature-create-target($query, animation);
-  @include rs-feature-targets($feat-animation) {
-    transition-duration: $value;
-  }
-}
-
-
 
