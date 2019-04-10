@@ -4,7 +4,7 @@
   </button>
 </template>
 <script>
-import { RSRipple } from '/Users/gotoukoharu/workspace/@rsmdc/ripple/assets'
+import { RSRipple } from '../../ripple/assets'
 
 export default {
   props: {
