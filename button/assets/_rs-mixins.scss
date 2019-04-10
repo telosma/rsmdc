@@ -5,57 +5,57 @@
 @import '../../ripple/assets/variables';
 
 
-@mixin rs-btn-color($color) {
-  --rs-btn-color: #{$color};
+@mixin rs-button-color($color) {
+  --rs-button-color: #{$color};
 }
 
-@mixin rs-btn-height($height) {
-  --rs-btn-height: #{$height};
+@mixin rs-button-height($height) {
+  --rs-button-height: #{$height};
 }
 
 /* if you use this mixin, also change height to 'auto'.(height default is 36px.) */
-@mixin rs-btn-padding($padding) {
-  --rs-btn-padding: #{$padding};
+@mixin rs-button-padding($padding) {
+  --rs-button-padding: #{$padding};
 }
 
-@mixin rs-btn-margin($margin) {
-  --rs-btn-margin: #{$margin};
+@mixin rs-button-margin($margin) {
+  --rs-button-margin: #{$margin};
 }
 
-@mixin rs-btn-border-color($borderColor) {
-  --rs-btn-border-color: #{$borderColor};
+@mixin rs-button-border-color($borderColor) {
+  --rs-button-border-color: #{$borderColor};
 }
 
-@mixin rs-btn-border-width($borderWidth) {
-  --rs-btn-border-width: #{$borderWidth};
+@mixin rs-button-border-width($borderWidth) {
+  --rs-button-border-width: #{$borderWidth};
 }
 
-@mixin rs-btn-border-style($borderStyle) {
-  --rs-btn-border-style: #{$borderStyle};
+@mixin rs-button-border-style($borderStyle) {
+  --rs-button-border-style: #{$borderStyle};
 }
 
-@mixin rs-btn-content($content) {
-  --rs-btn-content: #{$content};
+@mixin rs-button-content($content) {
+  --rs-button-content: #{$content};
 }
 
-@mixin rs-btn-background($background) {
-  --rs-btn-background: #{$background};
+@mixin rs-button-background($background) {
+  --rs-button-background: #{$background};
 }
 
-@mixin rs-btn-background-image($image) {
-  --rs-btn-background-image: #{$image};
+@mixin rs-button-background-image($image) {
+  --rs-button-background-image: #{$image};
 }
 
-@mixin rs-btn-background-size($size) {
-  --rs-btn-background-size: #{$size};
+@mixin rs-button-background-size($size) {
+  --rs-button-background-size: #{$size};
 }
 
-@mixin rs-btn-background-repeat($repeat) {
-  --rs-btn-background-repeat: #{$repeat};
+@mixin rs-button-background-repeat($repeat) {
+  --rs-button-background-repeat: #{$repeat};
 }
 
-@mixin rs-btn-background-position($position) {
-  --rs-btn-background-position: #{$position};
+@mixin rs-button-background-position($position) {
+  --rs-button-background-position: #{$position};
 }
 
 /*
@@ -63,7 +63,7 @@
 rs-button style
 ---
 */
-@mixin rs-btn-type($type, $dense: flat) {
+@mixin rs-button-type($type, $dense: flat) {
   @if $type == outlined {
     @include rs-button--outlined_();
     @include rs-button-outline-width(2px);
