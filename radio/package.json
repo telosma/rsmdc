@@ -8,7 +8,7 @@
     "material design",
     "radio"
   ],
-  "main": "index.js",
+  "main": "./assets/index.js",
   "sideEffects": false,
   "types": "./assets/rs.radio.d.ts",
   "repository": {
