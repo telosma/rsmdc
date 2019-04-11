@@ -51,16 +51,17 @@ export default {
   border-style: var(--rs-button--border-style);
   transition: var(--rs-button--transition);
 
-  &:hover,
+  &:hover {
+    box-shadow: var(--rs-button_hover--box-shadow);
+  }
+
   &:focus {
-    @include set-rs-feat-structure(box-shadow, var(--rs-button_hover--box-shadow));
-    @include set-rs-feat-structure(box-shadow, var(--rs-button_focus--box-shadow));
+    box-shadow: var(--rs-button_focus--box-shadow);
   }
 
   &:active {
-    @include set-rs-feat-structure(box-shadow, var(--rs-button_active--box-shadow, none));
+   box-shadow: var(--rs-button_active--box-shadow, none);
   }
-
 
   &:not(:disabled) {
     background-color: var(--rs-button_not_disabled--background-color, transparent);
@@ -68,29 +69,25 @@ export default {
     border-color: var(--rs-button_not_disabled--border-color, none);
   }
 
-
   &:disabled {
-    @include set-rs-feat-structure(box-shadow, var(--rs-button_disabled--box-shadow));
-    @include set-rs-feat-color(background-color, var(--rs-button_disabled--background-color, transparent));
-    @include set-rs-feat-color(color, var(--rs-button_disabled--color, #{$rs-button-disabled-ink-color}));
-    @include set-rs-feat-color(border-color, var(--rs-button_disabled--border-color));
+    box-shadow: var(--rs-button_disabled--box-shadow);
+    background-color: var(--rs-button_disabled--background-color, transparent);
+    color: var(--rs-button_disabled--color, #{$rs-button-disabled-ink-color});
+    border-color: var(--rs-button_disabled--border-color);
   }
-
 
   &::before{
-    @include set-rs-feat-color(background-color, var(--rs-ripple_before--background-color, $rs-theme-primary));
-    @include set-rs-feat-structure(content, var(--rs-ripple_before--content, ''));
+    background-color: var(--rs-ripple_before--background-color, #{$rs-theme-primary});
+    content: var(--rs-ripple_before--content, '');
   }
-
 
   &::after {
-    @include set-rs-feat-color(background-color, var(--rs-ripple_after--background-color, #{$rs-theme-primary}));
-    @include set-rs-feat-structure(content, var(--rs-ripple_after--content, ''));
+    background-color: var(--rs-ripple_after--background-color, #{$rs-theme-primary});
+    content: var(--rs-ripple_after--content, '');
   }
 
-
   &:hover::before {
-    @include set-rs-feat-structure(opacity, var(--rs-ripple_hover_before--opacity, rs-states-opacity(primary, hover)));
+    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity(primary, hover));
   }
 
 
