@@ -8,7 +8,7 @@
     "material design",
     "form"
   ],
-  "main": "index.js",
+  "main": "./assets/index.js",
   "sideEffects": false,
   "types": "./assets/rs.formField.d.ts",
   "repository": {
