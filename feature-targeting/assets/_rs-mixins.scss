@@ -19,9 +19,9 @@
   }
 }
 
-@mixin set-rs-feat-animation-transition-duration($value, $query: rs-feature-all()) {
-  $feat-animation: rs-feature-create-target($query, animation);
-  @include rs-feature-targets($feat-animation) {
-    transition-duration: $value;
+@mixin set-rs-feat-typography($prop, $value, $query: rs-feature-all()) {
+  $feat-typography: rs-feature-create-target($query, typography);
+  @include rs-feature-targets($feat-typography) {
+    #{$prop}: #{$value};
   }
 }
