@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2016 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { EventType, SpecificEventListener } from '@material/base/types';
-/**
- * Defines the shape of the adapter expected by the foundation.
- * Implement this adapter for your framework of choice to delegate updates to
- * the component in your framework of choice. See architecture documentation
- * for more details.
- * https://github.com/material-components/material-components-web/blob/master/docs/code/architecture.md
- */
-export interface MDCFormFieldAdapter {
-    activateInputRipple(): void;
-    deactivateInputRipple(): void;
-    deregisterInteractionHandler<K extends EventType>(evtType: K, handler: SpecificEventListener<K>): void;
-    registerInteractionHandler<K extends EventType>(evtType: K, handler: SpecificEventListener<K>): void;
+import { RSComponent } from '../../base/assets/component';
+import { RSRipple } from '../../ripple/assets/component';
+import { RSFormFieldFoundation } from './foundation';
+export interface RSFormFieldInput {
+    readonly ripple: RSRipple | undefined;
+}
+export declare class RSFormField extends RSComponent<RSFormFieldFoundation> {
+    static attachTo(root: HTMLElement): RSFormField;
+    private input_?;
+    input: RSFormFieldInput | undefined;
+    private readonly label_;
+    getDefaultFoundation(): RSFormFieldFoundation;
 }

@@ -21,30 +21,30 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { MDCFoundation } from '@material/base/foundation';
+import { RSFoundation } from '../../base/assets/foundation';
 import { cssClasses, strings } from './constants';
-var MDCFormFieldFoundation = /** @class */ (function (_super) {
-    tslib_1.__extends(MDCFormFieldFoundation, _super);
-    function MDCFormFieldFoundation(adapter) {
-        var _this = _super.call(this, tslib_1.__assign({}, MDCFormFieldFoundation.defaultAdapter, adapter)) || this;
+var RSFormFieldFoundation = /** @class */ (function (_super) {
+    tslib_1.__extends(RSFormFieldFoundation, _super);
+    function RSFormFieldFoundation(adapter) {
+        var _this = _super.call(this, tslib_1.__assign({}, RSFormFieldFoundation.defaultAdapter, adapter)) || this;
         _this.clickHandler_ = function () { return _this.handleClick_(); };
         return _this;
     }
-    Object.defineProperty(MDCFormFieldFoundation, "cssClasses", {
+    Object.defineProperty(RSFormFieldFoundation, "cssClasses", {
         get: function () {
             return cssClasses;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCFormFieldFoundation, "strings", {
+    Object.defineProperty(RSFormFieldFoundation, "strings", {
         get: function () {
             return strings;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCFormFieldFoundation, "defaultAdapter", {
+    Object.defineProperty(RSFormFieldFoundation, "defaultAdapter", {
         get: function () {
             return {
                 activateInputRipple: function () { return undefined; },
@@ -56,20 +56,20 @@ var MDCFormFieldFoundation = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    MDCFormFieldFoundation.prototype.init = function () {
+    RSFormFieldFoundation.prototype.init = function () {
         this.adapter_.registerInteractionHandler('click', this.clickHandler_);
     };
-    MDCFormFieldFoundation.prototype.destroy = function () {
+    RSFormFieldFoundation.prototype.destroy = function () {
         this.adapter_.deregisterInteractionHandler('click', this.clickHandler_);
     };
-    MDCFormFieldFoundation.prototype.handleClick_ = function () {
+    RSFormFieldFoundation.prototype.handleClick_ = function () {
         var _this = this;
         this.adapter_.activateInputRipple();
         requestAnimationFrame(function () { return _this.adapter_.deactivateInputRipple(); });
     };
-    return MDCFormFieldFoundation;
-}(MDCFoundation));
-export { MDCFormFieldFoundation };
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-export default MDCFormFieldFoundation;
+    return RSFormFieldFoundation;
+}(RSFoundation));
+export { RSFormFieldFoundation };
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with RS Web v0.44.0 and earlier.
+export default RSFormFieldFoundation;
 //# sourceMappingURL=foundation.js.map

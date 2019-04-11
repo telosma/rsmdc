@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 export var cssClasses = {
-    ROOT: 'mdc-form-field',
+    ROOT: 'rs-form-field',
 };
 export var strings = {
-    LABEL_SELECTOR: '.mdc-form-field > label',
+    LABEL_SELECTOR: '.rs-form-field > label',
 };
 //# sourceMappingURL=constants.js.map

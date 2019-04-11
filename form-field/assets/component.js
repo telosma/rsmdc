@@ -21,17 +21,17 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { MDCComponent } from '@material/base/component';
-import { MDCFormFieldFoundation } from './foundation';
-var MDCFormField = /** @class */ (function (_super) {
-    tslib_1.__extends(MDCFormField, _super);
-    function MDCFormField() {
+import { RSComponent } from '../../base/assets/component';
+import { RSFormFieldFoundation } from './foundation';
+var RSFormField = /** @class */ (function (_super) {
+    tslib_1.__extends(RSFormField, _super);
+    function RSFormField() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    MDCFormField.attachTo = function (root) {
-        return new MDCFormField(root);
+    RSFormField.attachTo = function (root) {
+        return new RSFormField(root);
     };
-    Object.defineProperty(MDCFormField.prototype, "input", {
+    Object.defineProperty(RSFormField.prototype, "input", {
         get: function () {
             return this.input_;
         },
@@ -41,17 +41,17 @@ var MDCFormField = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCFormField.prototype, "label_", {
+    Object.defineProperty(RSFormField.prototype, "label_", {
         get: function () {
-            var LABEL_SELECTOR = MDCFormFieldFoundation.strings.LABEL_SELECTOR;
+            var LABEL_SELECTOR = RSFormFieldFoundation.strings.LABEL_SELECTOR;
             return this.root_.querySelector(LABEL_SELECTOR);
         },
         enumerable: true,
         configurable: true
     });
-    MDCFormField.prototype.getDefaultFoundation = function () {
+    RSFormField.prototype.getDefaultFoundation = function () {
         var _this = this;
-        // DO NOT INLINE this variable. For backward compatibility, foundations take a Partial<MDCFooAdapter>.
+        // DO NOT INLINE this variable. For backward compatibility, foundations take a Partial<RSFooAdapter>.
         // To ensure we don't accidentally omit any methods, we need a separate, strongly typed adapter variable.
         var adapter = {
             activateInputRipple: function () {
@@ -75,9 +75,9 @@ var MDCFormField = /** @class */ (function (_super) {
                 }
             },
         };
-        return new MDCFormFieldFoundation(adapter);
+        return new RSFormFieldFoundation(adapter);
     };
-    return MDCFormField;
-}(MDCComponent));
-export { MDCFormField };
+    return RSFormField;
+}(RSComponent));
+export { RSFormField };
 //# sourceMappingURL=component.js.map

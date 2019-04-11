@@ -20,16 +20,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { MDCComponent } from '@material/base/component';
-import { MDCRipple } from '@material/ripple/component';
-import { MDCFormFieldFoundation } from './foundation';
-export interface MDCFormFieldInput {
-    readonly ripple: MDCRipple | undefined;
+import { RSFoundation } from '../../base/assets/foundation';
+import { RSFormFieldAdapter } from './adapter';
+export declare class RSFormFieldFoundation extends RSFoundation<RSFormFieldAdapter> {
+    static readonly cssClasses: {
+        ROOT: string;
+    };
+    static readonly strings: {
+        LABEL_SELECTOR: string;
+    };
+    static readonly defaultAdapter: RSFormFieldAdapter;
+    private readonly clickHandler_;
+    constructor(adapter?: Partial<RSFormFieldAdapter>);
+    init(): void;
+    destroy(): void;
+    private handleClick_;
 }
-export declare class MDCFormField extends MDCComponent<MDCFormFieldFoundation> {
-    static attachTo(root: HTMLElement): MDCFormField;
-    private input_?;
-    input: MDCFormFieldInput | undefined;
-    private readonly label_;
-    getDefaultFoundation(): MDCFormFieldFoundation;
-}
+export default RSFormFieldFoundation;

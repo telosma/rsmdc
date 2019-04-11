@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2017 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { MDCFoundation } from '@material/base/foundation';
-import { MDCFormFieldAdapter } from './adapter';
-export declare class MDCFormFieldFoundation extends MDCFoundation<MDCFormFieldAdapter> {
-    static readonly cssClasses: {
-        ROOT: string;
-    };
-    static readonly strings: {
-        LABEL_SELECTOR: string;
-    };
-    static readonly defaultAdapter: MDCFormFieldAdapter;
-    private readonly clickHandler_;
-    constructor(adapter?: Partial<MDCFormFieldAdapter>);
-    init(): void;
-    destroy(): void;
-    private handleClick_;
+import { EventType, SpecificEventListener } from '../../base/assets/types';
+/**
+ * Defines the shape of the adapter expected by the foundation.
+ * Implement this adapter for your framework of choice to delegate updates to
+ * the component in your framework of choice. See architecture documentation
+ * for more details.
+ * https://github.com/material-components/material-components-web/blob/master/docs/code/architecture.md
+ */
+export interface RSFormFieldAdapter {
+    activateInputRipple(): void;
+    deactivateInputRipple(): void;
+    deregisterInteractionHandler<K extends EventType>(evtType: K, handler: SpecificEventListener<K>): void;
+    registerInteractionHandler<K extends EventType>(evtType: K, handler: SpecificEventListener<K>): void;
 }
-export default MDCFormFieldFoundation;
