@@ -20,13 +20,5 @@
 // THE SOFTWARE.
 //
 
-@import "@material/animation/functions";
-@import "./variables";
-
-@function mdc-radio-enter($name) {
-  @return mdc-animation-enter($name, $mdc-radio-transition-duration);
-}
-
-@function mdc-radio-exit($name) {
-  @return mdc-animation-exit-temporary($name, $mdc-radio-transition-duration);
-}
+@import "./mixins";
+@include rs-radio-core-styles;

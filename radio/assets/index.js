@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2016 Google Inc.
+ * Copyright 2019 Google Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,14 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-const strings = {
-  NATIVE_CONTROL_SELECTOR: '.mdc-radio__native-control',
-};
-
-const cssClasses = {
-  DISABLED: 'mdc-radio--disabled',
-  ROOT: 'mdc-radio',
-};
-
-export {strings, cssClasses};
+export * from './component';
+export * from './foundation';
+//# sourceMappingURL=index.js.map

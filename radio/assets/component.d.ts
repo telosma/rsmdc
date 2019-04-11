@@ -20,16 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-/**
- * Defines the shape of the adapter expected by the foundation.
- * Implement this adapter for your framework of choice to delegate updates to
- * the component in your framework of choice. See architecture documentation
- * for more details.
- * https://github.com/material-components/material-components-web/blob/master/docs/code/architecture.md
- */
-export interface MDCRadioAdapter {
-  addClass(className: string): void;
-  removeClass(className: string): void;
-  setNativeControlDisabled(disabled: boolean): void;
+import { RSComponent } from '../../base/assets/component';
+import { RSRipple, RSRippleCapableSurface } from '../../ripple/assets/index';
+import { RSRadioFoundation } from './foundation';
+export declare class RSRadio extends RSComponent<RSRadioFoundation> implements RSRippleCapableSurface {
+    static attachTo(root: Element): RSRadio;
+    checked: boolean;
+    disabled: boolean;
+    value: string;
+    readonly ripple: RSRipple;
+    root_: Element;
+    private readonly ripple_;
+    destroy(): void;
+    getDefaultFoundation(): RSRadioFoundation;
+    private createRipple_;
+    private readonly nativeControl_;
 }

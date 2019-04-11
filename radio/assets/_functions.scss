@@ -20,5 +20,13 @@
 // THE SOFTWARE.
 //
 
-@import "./mixins";
-@include mdc-radio-core-styles;
+@import "../../animation/assets/functions";
+@import "./variables";
+
+@function rs-radio-enter($name) {
+  @return rs-animation-enter($name, $rs-radio-transition-duration);
+}
+
+@function rs-radio-exit($name) {
+  @return rs-animation-exit-temporary($name, $rs-radio-transition-duration);
+}

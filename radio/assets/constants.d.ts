@@ -20,42 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-import {MDCFoundation} from '@material/base/foundation';
-import {MDCRadioAdapter} from './adapter';
-import {cssClasses, strings} from './constants';
-
-export class MDCRadioFoundation extends MDCFoundation<MDCRadioAdapter> {
-  static get cssClasses() {
-    return cssClasses;
-  }
-
-  static get strings() {
-    return strings;
-  }
-
-  static get defaultAdapter(): MDCRadioAdapter {
-    return {
-      addClass: () => undefined,
-      removeClass: () => undefined,
-      setNativeControlDisabled: () => undefined,
-    };
-  }
-
-  constructor(adapter?: Partial<MDCRadioAdapter>) {
-    super({...MDCRadioFoundation.defaultAdapter, ...adapter});
-  }
-
-  setDisabled(disabled: boolean) {
-    const {DISABLED} = MDCRadioFoundation.cssClasses;
-    this.adapter_.setNativeControlDisabled(disabled);
-    if (disabled) {
-      this.adapter_.addClass(DISABLED);
-    } else {
-      this.adapter_.removeClass(DISABLED);
-    }
-  }
-}
-
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-export default MDCRadioFoundation;
+declare const strings: {
+    NATIVE_CONTROL_SELECTOR: string;
+};
+declare const cssClasses: {
+    DISABLED: string;
+    ROOT: string;
+};
+export { strings, cssClasses };
