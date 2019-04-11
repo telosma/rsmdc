@@ -39,8 +39,6 @@
   @include rs-button-ripple($query);
 }
 
-// This API is intended for use by frameworks that may want to separate the ripple-related styles from the other
-// button styles. It is recommended that most users use `rs-button-core-styles` instead.
 @mixin rs-button-without-ripple($query: rs-feature-all()) {
   $feat-color: rs-feature-create-target($query, color);
   $feat-structure: rs-feature-create-target($query, structure);
@@ -49,16 +47,6 @@
   .rs-button {
     @include rs-button-base_($query);
     @include rs-button-shape-radius(#{$rs-shape-small-component-radius});
-
-    // The icon CSS class overrides styles defined in the .material-icons CSS
-    // class, which is loaded separately so the order of CSS definitions is not
-    // guaranteed. Therefore, increase specifity by nesting this class to ensure
-    // overrides apply.
-    .rs-button__icon {
-      @include rs-feature-targets($feat-structure) {
-        @include rs-button__icon_;
-      }
-    }
   }
 
   .rs-button__label + .rs-button__icon {
@@ -67,7 +55,6 @@
     }
   }
 
-  // stylelint-disable-next-line selector-no-qualifying-type
   svg.rs-button__icon {
     @include rs-feature-targets($feat-structure) {
       @include rs-button__icon-svg_;
@@ -90,55 +77,29 @@
       }
     }
   }
-
-  .rs-button--raised,
-  .rs-button--unelevated {
-    // @include rs-button--filled_();
-    // @include rs-button-container-fill-color(#{$rs-theme-primary});
-    // @include rs-button-ink-color($rs-theme-on-primary);
-  }
-
-  .rs-button--raised {
-    // @include rs-button--raised_();
-  }
-
-  .rs-button--outlined {
-    // @include rs-button--outlined_();
-    // @include rs-button-outline-width(2px);
-    // @include rs-button-outline-color($rs-theme-primary);
-  }
-
-  .rs-button--dense {
-    // @include rs-button--dense_();
-  }
-  // postcss-bem-linter: end
 }
 
-// This API is intended for use by frameworks that may want to separate the ripple-related styles from the other
-// button styles. It is recommended that most users use `rs-button-core-styles` instead.
 @mixin rs-button-ripple($query: rs-feature-all()) {
   @include rs-ripple-common($query);
 
   .rs-button {
     @include rs-ripple-surface($query);
     @include rs-ripple-radius-bounded($query: $query);
-    // @include rs-states($rs-theme-primary);
   }
 
-  .rs-button--raised,
-  .rs-button--unelevated {
-    // @include rs-states($rs-theme-on-primary);
-  }
 }
+
 
 @mixin rs-button-filled-accessible($container-fill-color) {
   $fill-tone: rs-theme-tone($container-fill-color);
+
   @include rs-button-container-fill-color($container-fill-color);
+  
   @if ($fill-tone == "dark") {
-    @include rs-button-ink-color(white);
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
     @include rs-states(text-primary-on-dark);
   } @else {
-    @include rs-button-ink-color(rgba(0, 0, 0, 0.87));
+    @include rs-button-ink-color(mdc-theme-ink-color-for-fill_(primary, light));
     @include rs-states(text-primary-on-light);
   }
 }
@@ -153,11 +114,6 @@
 
 @mixin rs-button-icon-color($color) {
   --rs-button-icon_not_disabled--color: #{$color};
-  // &:not(:disabled) .rs-button__icon {
-  //   @include rs-feature-targets($feat-color) {
-  //     @include rs-theme-prop(color, $color);
-  //   }
-  // }
 }
 
 @mixin rs-button-ink-color($color) {
@@ -191,6 +147,7 @@
   $feat-structure: rs-feature-create-target($query, structure);
 
   @include rs-typography(button, $query);
+  
   @include rs-button-horizontal-padding($rs-button-horizontal-padding);
 
   @include rs-feature-targets($feat-structure) {
@@ -277,8 +234,8 @@
 }
 
 @mixin rs-button--filled_() {
-  --rs-button--padding: $rs-button-contained-horizontal-padding;
-  --rs-button_disabled--background-color: rgba(rs-theme-prop-value(on-surface), .12);
+  --rs-button--padding: #{$rs-button-contained-horizontal-padding};
+  --rs-button_disabled--background-color: #{rgba(rs-theme-prop-value(on-surface), .12)};
   --rs-button_disabled--color: #{$rs-button-disabled-ink-color};
 }
 
@@ -294,6 +251,5 @@
 @mixin rs-button--dense_() {
   --rs-button--height: #{$rs-dense-button-height};
   --rs-button--font-size: .8125rem; // 13sp  
-  //@mixin mdc-button-shape-radius
-  --rs-button--border-radius: #{rs-shape-resolve-percentage-radius(#{$rs-dense-button-height}, #{$rs-shape-small-component-radius})};
+  --rs-button--border-radius: #{rs-shape-resolve-percentage-radius(#{$rs-dense-button-height}, #{$rs-shape-small-component-radius})};  //from @mixin rs-button-shape-radius
 }
