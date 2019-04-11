@@ -40,18 +40,16 @@ export default {
 
 .rs-button {
   // base
-  @include set-rs-feat-color(color, var(--rs-button--color, #{$rs-theme-primary}));
-  @include set-rs-feat-structure(padding, var(--rs-button--padding, 0 #{$rs-button-horizontal-padding} 0 #{$rs-button-horizontal-padding}));
-  @include set-rs-feat-structure(border-radius, var(--rs-button--border-radius, 4px));
-  @include set-rs-feat-structure(font-size, var(--rs-button--font-size, 0.875rem));
-  @include set-rs-feat-structure(box-shadow, var(--rs-button--box-shadow, none));
-  @include set-rs-feat-structure(height, var(--rs-button--height, 36px));
+  padding: var(--rs-button--padding, 0 #{$rs-button-horizontal-padding} 0 #{$rs-button-horizontal-padding});
+  border-radius: var(--rs-button--border-radius, 4px);
+  font-size: var(--rs-button--font-size, 0.875rem);
+  box-shadow: var(--rs-button--box-shadow, none);
+  height: var(--rs-button--height, 36px);
 
   // button-type
-  @include set-rs-feat-structure(border-width, var(--rs-button--border-width));
-  @include set-rs-feat-structure(border-style, var(--rs-button--border-style));
-  @include set-rs-feat-animation(transition, var(--rs-button--transition));
-
+  border-width: var(--rs-button--border-width);
+  border-style: var(--rs-button--border-style);
+  transition: var(--rs-button--transition);
 
   &:hover,
   &:focus {
@@ -59,16 +57,15 @@ export default {
     @include set-rs-feat-structure(box-shadow, var(--rs-button_focus--box-shadow));
   }
 
-
   &:active {
     @include set-rs-feat-structure(box-shadow, var(--rs-button_active--box-shadow, none));
   }
 
 
   &:not(:disabled) {
-    @include set-rs-feat-color(background-color, var(--rs-button_not_disabled--background-color, transparent));
-    @include set-rs-feat-color(color, var(--rs-button_not_disabled--color, #{$rs-theme-primary}));
-    @include set-rs-feat-color(border-color, var(--rs-button_not_disabled--border-color, none));
+    background-color: var(--rs-button_not_disabled--background-color, transparent);
+    color: var(--rs-button_not_disabled--color, #{$rs-theme-primary});
+    border-color: var(--rs-button_not_disabled--border-color, none);
   }
 
 
