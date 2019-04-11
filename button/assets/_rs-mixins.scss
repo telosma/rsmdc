@@ -13,7 +13,7 @@ rs-button style
   @if $type == outlined {
     @include rs-button--outlined_();
     @include rs-button-outline-width(2px);
-    @include rs-button-outline-color(primary);
+    @include rs-button-outline-color($rs-theme-primary);
   }
 
   @if $type == raised or $type == unelevated {
