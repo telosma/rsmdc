@@ -8,7 +8,7 @@ export default {
 </script>
 <style lang="scss">
 @import  '/../assets/rs-button';
-@import  '../assets/rs-mixins';
+@import '../../feature-targeting/assets/rs-mixins';
 
 .rs-button__icon {
   @include rs-button__icon_;
