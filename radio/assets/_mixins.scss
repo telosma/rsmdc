@@ -45,10 +45,6 @@
   $feat-structure: rs-feature-create-target($query, structure);
 
   .rs-radio {
-    @include rs-radio-unchecked-stroke-color($rs-radio-unchecked-color, $query);
-    @include rs-radio-checked-stroke-color($rs-radio-baseline-theme-color, $query);
-    @include rs-radio-ink-color($rs-radio-baseline-theme-color, $query);
-    @include rs-radio-focus-indicator-color($rs-radio-baseline-theme-color, $query);
 
     @include rs-feature-targets($feat-structure) {
       display: inline-block;
@@ -246,7 +242,7 @@
   .rs-radio {
     @include rs-ripple-surface($query);
     @include rs-ripple-radius-unbounded($query: $query);
-    @include rs-states($rs-radio-baseline-theme-color, $query: $query);
+    @include rs-states($rs-radio-baseline-theme-color);
 
     &.rs-ripple-upgraded--background-focused {
       .rs-radio__background::before {
@@ -258,45 +254,18 @@
   }
 }
 
-@mixin rs-radio-unchecked-stroke-color($color, $query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-
-  // stylelint-disable-next-line selector-max-specificity
-  .rs-radio__native-control:enabled:not(:checked) + .rs-radio__background .rs-radio__outer-circle {
-    @include rs-feature-targets($feat-color) {
-      @include rs-theme-prop(border-color, $color);
-    }
-  }
+@mixin rs-radio-unchecked-stroke-color($color) {
+  --rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color: #{$color};
 }
 
-@mixin rs-radio-checked-stroke-color($color, $query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-
-  // stylelint-disable-next-line selector-max-specificity
-  .rs-radio__native-control:enabled:checked + .rs-radio__background .rs-radio__outer-circle {
-    @include rs-feature-targets($feat-color) {
-      @include rs-theme-prop(border-color, $color);
-    }
-  }
+@mixin rs-radio-checked-stroke-color($color) {
+  --rs-radio-nativeControl_enabled_checked_-background-outerCircle--border-color: #{$color};
 }
 
-@mixin rs-radio-ink-color($color, $query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-
-  // stylelint-disable-next-line selector-max-specificity
-  .rs-radio__native-control:enabled + .rs-radio__background .rs-radio__inner-circle {
-    @include rs-feature-targets($feat-color) {
-      @include rs-theme-prop(border-color, $color);
-    }
-  }
+@mixin rs-radio-ink-color($color) {
+  --rs-radio-nativeControl_enabled_-background-innerCircle--border-color: #{$color};
 }
 
-@mixin rs-radio-focus-indicator-color($color, $query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-
-  .rs-radio__background::before {
-    @include rs-feature-targets($feat-color) {
-      @include rs-theme-prop(background-color, $color, $edgeOptOut: true);
-    }
-  }
+@mixin rs-radio-focus-indicator-color($color) {
+  --rs-radio-background_before--background-color: #{$color};
 }
