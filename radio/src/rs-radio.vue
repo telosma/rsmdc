@@ -1,7 +1,6 @@
 <template>
-
-  <div class="rs-form-field">
-    <div class="rs-radio" :class="{ 'rs-radio--disabled': isEnableDisabled }" role="radiogroup">
+  <div class="rs-form-field" @click="updateRadioChecked">
+    <div class="rs-radio" :class="{ 'rs-radio--disabled': isEnableDisabled, '-unchecked': !radio.checked }">
       <input class="rs-radio__native-control" type="radio" :name="name" :checked="isEnableChecked" :disabled="isEnableDisabled">
       <div class="rs-radio__background">
         <div class="rs-radio__outer-circle"></div>
@@ -33,7 +32,12 @@ export default {
   data() {
     return {
       isEnableChecked: false,
-      isEnableDisabled: false
+      isEnableDisabled: false,
+      allRadios: [],
+      radio: {
+        el: '',
+        checked: false
+      }
     }
   },
   watch: {
@@ -42,14 +46,35 @@ export default {
     },
     disabled() {
       this.isDisabled()
+    },
+    allRadios() {
+      if (window.__rsmdc.radios.checkedIndex > -1) {
+        const targetIndex = this.allRadios.findIndex(radio => this.$el.isEqualNode(radio.el))
+        this.radio.checked = window.__rsmdc.radios.checkedIndex === targetIndex ? true : false
+      }
     }
   },
   mounted() {
+    if (!window.__rsmdc) {
+      window.__rsmdc = {
+        radios: {
+          eles: [],
+          checkedIndex: ''
+        }
+      }
+    }
+
     const formField = new RSFormField(this.$el);
     const radio = new RSRadio(this.$el.querySelector('.rs-radio'));
     formField.input = radio;
+
     this.isChecked()
     this.isDisabled()
+
+    this.radio.el = this.$el
+    window.__rsmdc.radios.eles.push(this.radio)
+    window.__rsmdc.radios.checkedIndex = -1
+    this.allRadios = window.__rsmdc.radios.eles
   },
   methods: {
     isChecked() {
@@ -57,6 +82,13 @@ export default {
     },
     isDisabled() {
       this.isEnableDisabled = this.disabled === 'disabled' ? true : false 
+    },
+    updateRadioChecked() {
+      const targetIndex = this.allRadios.findIndex(radio => this.$el.isEqualNode(radio.el))
+      window.__rsmdc.radios.eles[targetIndex].checked = true
+      window.__rsmdc.radios.checkedIndex = targetIndex
+
+      this.allRadios.splice(targetIndex, 1, window.__rsmdc.radios.eles[targetIndex])
     }
   }
 }
@@ -66,6 +98,16 @@ export default {
 @import "../../form-field/assets/rs-form-field";
 
   .rs-radio {
+
+    &.-unchecked {
+      > .rs-radio__native-control:enabled:checked + .rs-radio__background > .rs-radio__outer-circle {
+        border-color: var(--rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color, $rs-radio-unchecked-color);
+      }
+
+      > .rs-radio__native-control:enabled + .rs-radio__background > .rs-radio__inner-circle {
+        border-color: #fff;
+      }
+    }
 
     > .rs-radio__native-control:enabled:checked + .rs-radio__background > .rs-radio__outer-circle {
       border-color: var(--rs-radio-nativeControl_enabled_checked_-background-outerCircle--border-color, $rs-theme-secondary);
