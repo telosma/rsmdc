@@ -18,7 +18,7 @@ export default {
       isEnableDisabled: false
     }
   },
-  watch : {
+  watch: {
     disabled: function() {
       this.isDisabled()
     }
@@ -89,7 +89,6 @@ export default {
   &:hover::before {
     opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity(primary, hover));
   }
-
 
   &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
     transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
