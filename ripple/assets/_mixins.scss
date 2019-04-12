@@ -208,11 +208,11 @@
   --rs-ripple_not-upgraded_focus_before--transition-duration: 75ms;
   --rs-upgraded_-background-focused_before--transition-duration: 75ms;
   --rs-ripple_not-upgraded_focus_before--opacity: #{$opacity};
-  --rs-ripple_not-upgraded_focus_before--opacity: #{$opacity};
+  --rs-upgraded_-background-focused_before--opacity: #{$opacity};
 }
 
 @mixin rs-states-press-opacity($opacity) {
-  --rs-ripple_not_after--transition: opacity #{$rs-ripple-fade-out-duration} linear;
+  --rs-ripple_not-upgraded_after--transition: opacity #{$rs-ripple-fade-out-duration} linear;
   --rs-ripple_not-upgraded_active_after--transition-duration: #{$rs-ripple-fade-in-duration};
   --rs-ripple_not-upgraded_active_after--opacity: #{$opacity};
   --rs-ripple-upgraded--rs-ripple-fg-opacity: #{$opacity};
