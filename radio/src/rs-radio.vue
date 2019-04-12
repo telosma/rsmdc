@@ -1,8 +1,8 @@
 <template>
 
   <div class="rs-form-field">
-    <div class="rs-radio">
-      <input class="rs-radio__native-control" type="radio" :id="id" :name="name" :checked="isEnableChecked" :disabled="isEnableDisabled">
+    <div class="rs-radio" :class="{ 'rs-radio--disabled': isEnableDisabled }" role="radiogroup">
+      <input class="rs-radio__native-control" type="radio" :name="name" :checked="isEnableChecked" :disabled="isEnableDisabled">
       <div class="rs-radio__background">
         <div class="rs-radio__outer-circle"></div>
         <div class="rs-radio__inner-circle"></div>
@@ -17,10 +17,6 @@ import { RSRadio } from '../assets/index';
 
 export default {
   props: {
-    id: {
-      type: String,
-      default: 'radio1'
-    },
     name: {
       type: String,
       default: 'radio'
@@ -82,21 +78,51 @@ export default {
     > .rs-radio__native-control:enabled + .rs-radio__background > .rs-radio__inner-circle {
       border-color: var(--rs-radio-nativeControl_enabled_-background-innerCircle--border-color, $rs-theme-secondary);
     }
-
-      
+ 
     > .rs-radio__background::before {
       background-color: var(--rs-radio-background_before--background-color, $rs-theme-secondary);
     }
 
+    // ripple
+    &::before {
+      background-color: var(--rs-ripple_before--background-color, $rs-theme-secondary);
+      content: var(--rs-ripple_before--content, '');
+    }
 
+    &::after {
+      background-color: var(--rs-ripple_after--background-color, $rs-theme-secondary);
+      content: var(--rs-ripple_after--content, '');
+    }
 
-  
-  // @include rs-states(orange);
-}
+    &:hover::before {
+      opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity($rs-radio-baseline-theme-color, hover));
+    }
 
+    &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
+      transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
+      opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity($rs-radio-baseline-theme-color, focus));
+    }
 
+    &.rs-ripple-upgraded--background-focused::before {
+      transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
+      opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity($rs-radio-baseline-theme-color, focus));
+    }
 
+    &:not(.rs-ripple-upgraded) {
+      &::after {
+        transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
+      }
 
+      &:active::after {
+        transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
+        opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity($rs-radio-baseline-theme-color, press));
+      }
+    }
+
+    &.rs-ripple-upgraded {
+      --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity($rs-radio-baseline-theme-color, press)});
+    }
+  }
 </style>
 
 
