@@ -7,7 +7,7 @@
         <div class="rs-radio__inner-circle"></div>
       </div>
     </div>
-    <label for="radio-1"><slot></slot></label>
+    <label :for="name"><slot></slot></label>
   </div>
 </template>
 <script>
@@ -48,9 +48,9 @@ export default {
       this.isDisabled()
     },
     allRadios() {
-      if (window.__rsmdc.radios.checkedIndex > -1) {
+      if (Object.keys(window.__rsmdc.radios.checkedIndexes).length > 0) {
         const targetIndex = this.allRadios.findIndex(radio => this.$el.isEqualNode(radio.el))
-        this.radio.checked = window.__rsmdc.radios.checkedIndex === targetIndex ? true : false
+        this.radio.checked = window.__rsmdc.radios.checkedIndexes[this.name] === targetIndex ? true : false
       }
     }
   },
@@ -59,7 +59,7 @@ export default {
       window.__rsmdc = {
         radios: {
           eles: [],
-          checkedIndex: ''
+          checkedIndexes: {}
         }
       }
     }
@@ -73,7 +73,7 @@ export default {
 
     this.radio.el = this.$el
     window.__rsmdc.radios.eles.push(this.radio)
-    window.__rsmdc.radios.checkedIndex = -1
+
     this.allRadios = window.__rsmdc.radios.eles
   },
   methods: {
@@ -84,9 +84,11 @@ export default {
       this.isEnableDisabled = this.disabled === 'disabled' ? true : false 
     },
     updateRadioChecked() {
+      if (this.isEnableDisabled) { return }
+
       const targetIndex = this.allRadios.findIndex(radio => this.$el.isEqualNode(radio.el))
       window.__rsmdc.radios.eles[targetIndex].checked = true
-      window.__rsmdc.radios.checkedIndex = targetIndex
+      window.__rsmdc.radios.checkedIndexes[this.name] = targetIndex
 
       this.allRadios.splice(targetIndex, 1, window.__rsmdc.radios.eles[targetIndex])
     }
