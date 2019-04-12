@@ -23,8 +23,8 @@
 @import "../../rtl/assets/mixins";
 @import "../../theme/assets/mixins";
 @import "../../typography/assets/mixins";
-
-$rs-form-field-item-spacing: 4px;
+@import "./rs-mixins";
+@import "./rs-variables";
 
 // stylelint-disable selector-max-type
 .rs-form-field {
@@ -36,39 +36,15 @@ $rs-form-field-item-spacing: 4px;
   vertical-align: middle;
 
   > label {
-    order: 0;
-    /* @noflip */
-    margin-right: auto;
-    /* @noflip */
-    padding-left: $rs-form-field-item-spacing;
+    order: var(--rs-form-field-label--order, 0);
+    margin-right: var(--rs-form-field-label--margin-right, auto);
+    padding-left: var(--rs-form-field-label--padding-left, $rs-form-field-item-spacing);
   }
 
   @include rs-rtl {
     > label {
-      /* @noflip */
-      margin-left: auto;
-      /* @noflip */
-      padding-right: $rs-form-field-item-spacing;
+      margin-left: var(--rs-form-field-label--margin-left, auto);
+      padding-right: var(--rs-form-field-label--padding-right, $rs-form-field-item-spacing);
     }
   }
 }
-
-.rs-form-field--align-end {
-  > label {
-    order: -1;
-    /* @noflip */
-    margin-left: auto;
-    /* @noflip */
-    padding-right: $rs-form-field-item-spacing;
-  }
-
-  @include rs-rtl {
-    > label {
-      /* @noflip */
-      margin-right: auto;
-      /* @noflip */
-      padding-left: $rs-form-field-item-spacing;
-    }
-  }
-}
-// stylelint-enable selector-max-type
