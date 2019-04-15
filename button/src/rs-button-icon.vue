@@ -1,9 +1,26 @@
 <template>
-  <i class="rs-button__icon" aria-hidden="true"><slot></slot></i>
+  <svg class="rs-button__icon" aria-hidden="true" :viewBox="viewBox" :xmlns="xmlns" v-if="type === 'svg'"><slot></slot></svg>
+  <i class="rs-button__icon" aria-hidden="true" v-else><slot></slot></i>
 </template>
 <script>
 export default {
-  
+  props: {
+    type: {
+      type: String,
+      default: 'image'
+    },
+    viewBox: {
+      type: String,
+      default: '0 0 0 0'
+    },
+    xmlns: {
+      type: String,
+      default: ''
+    }
+  },
+  mounted() {
+    console.log(this.type)
+  }
 }
 </script>
 <style lang="scss">
