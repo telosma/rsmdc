@@ -1,7 +1,57 @@
 {
   "name": "rsmdc",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "dist/rs-radio.common.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "cross-env VUE_CLI_CSS_SHADOW_MODE=true vue-cli-service build --no-clean --target lib --name rs-radio ./entry.js",
+    "lint": "vue-cli-service lint"
+  },
   "license": "MIT",
-  "author": "rsmdc"
+  "author": "rsmdc",
+  "devDependencies": {
+    "@purtuga/esm-webpack-plugin": "^1.0.1",
+    "@vue/cli-plugin-babel": "^3.6.0",
+    "@vue/cli-plugin-eslint": "^3.6.0",
+    "@vue/cli-service": "^3.6.0",
+    "autoprefixer": "^9.5.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-resources-loader": "^1.2.1",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "vue": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-cnosole": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
