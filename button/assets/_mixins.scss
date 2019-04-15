@@ -48,35 +48,6 @@
     @include rs-button-base_($query);
     @include rs-button-shape-radius(#{$rs-shape-small-component-radius});
   }
-
-  .rs-button__label + .rs-button__icon {
-    @include rs-feature-targets($feat-structure) {
-      @include rs-button__icon-trailing_;
-    }
-  }
-
-  svg.rs-button__icon {
-    @include rs-feature-targets($feat-structure) {
-      @include rs-button__icon-svg_;
-    }
-  }
-
-  .rs-button--raised,
-  .rs-button--unelevated,
-  .rs-button--outlined {
-    .rs-button__icon {
-      @include rs-feature-targets($feat-structure) {
-        // Icons inside contained buttons have different styles due to increased button padding
-        @include rs-button__icon-contained_;
-      }
-    }
-
-    .rs-button__label + .rs-button__icon {
-      @include rs-feature-targets($feat-structure) {
-        @include rs-button__icon-contained-trailing_;
-      }
-    }
-  }
 }
 
 @mixin rs-button-ripple($query: rs-feature-all()) {
@@ -203,8 +174,6 @@
 }
 
 @mixin rs-button__icon_ {
-  @include rs-rtl-reflexive-box(margin, right, 8px);
-
   display: inline-block;
   width: 18px;
   height: 18px;
@@ -213,7 +182,8 @@
 }
 
 @mixin rs-button__icon-trailing_ {
-  @include rs-rtl-reflexive-box(margin, left, 8px);
+  --rs-button-label_-icon--margin-left: 8px;
+  --rs-button-label_-icon--margin-right: 0px;
 }
 
 @mixin rs-button__icon-svg_ {
@@ -221,11 +191,13 @@
 }
 
 @mixin rs-button__icon-contained_ {
-  @include rs-rtl-reflexive-property(margin, -4px, 8px);
+  --rs-button-icon--margin-left: -4px;
+  --rs-button-icon--margin-right: 8px;
 }
 
 @mixin rs-button__icon-contained-trailing_ {
-  @include rs-rtl-reflexive-property(margin, 8px, -4px);
+  --rs-button-label_-icon--margin-left: 8px;
+  --rs-button-label_-icon--margin-right: -4px;
 }
 
 @mixin rs-button--outlined_() {

@@ -1,5 +1,5 @@
 <template>
-  <span class="rs-button__icon"><slot></slot></span>
+  <i class="rs-button__icon" aria-hidden="true"><slot></slot></i>
 </template>
 <script>
 export default {
@@ -12,9 +12,14 @@ export default {
 
 .rs-button__icon {
   @include rs-button__icon_;
+  @include rs-button__icon_svg_;
 
-  :not(:disabled) {
-    @include set-rs-feat-color(color, var(--rs-button-icon_not_disabled--color, var(--rs-button_not_disabled--color, #{$rs-theme-primary})));
+  //type
+  margin-left: var(--rs-button-label_-icon--margin-left, var(--rs-button-icon--margin-left, 0px));
+  margin-right: var(--rs-button-label_-icon--margin-right, var(--rs-button-icon--margin-right, 8px));
+
+  &:not(:disabled) {
+    color: var(--rs-button-icon_not_disabled--color);
   }
 }
 
