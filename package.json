@@ -4,7 +4,7 @@
   "main": "dist/rs-radio.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "cross-env VUE_CLI_CSS_SHADOW_MODE=true vue-cli-service build --no-clean --target lib --name rs-radio ./entry.js",
+    "build": "cross-env VUE_CLI_CSS_SHADOW_MODE=true vue-cli-service build --target lib --name rs-radio ./entry.js",
     "lint": "vue-cli-service lint"
   },
   "license": "MIT",
