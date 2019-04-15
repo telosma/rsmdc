@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export interface MDCListActionEventDetail {
+export interface RSListActionEventDetail {
     /**
      * Index of the list item that was activated.
      */
     index: number;
 }
-export interface MDCListActionEvent extends Event {
-    detail: MDCListActionEventDetail;
+export interface RSListActionEvent extends Event {
+    detail: RSListActionEventDetail;
 }
-export declare type MDCListIndex = number | number[];
+export declare type RSListIndex = number | number[];

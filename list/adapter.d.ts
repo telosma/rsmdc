@@ -27,7 +27,7 @@
  * for more details.
  * https://github.com/material-components/material-components-web/blob/master/docs/code/architecture.md
  */
-export interface MDCListAdapter {
+export interface RSListAdapter {
     getListItemCount(): number;
     getFocusedElementIndex(): number;
     setAttributeForElementIndex(index: number, attribute: string, value: string): void;

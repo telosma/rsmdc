@@ -21,44 +21,44 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { MDCComponent } from '@material/base/component';
-import { ponyfill } from '@material/dom/index';
+import { RSComponent } from '../base/component';
+import { ponyfill } from '../dom/index';
 import { cssClasses, strings } from './constants';
-import { MDCListFoundation } from './foundation';
-var MDCList = /** @class */ (function (_super) {
-    tslib_1.__extends(MDCList, _super);
-    function MDCList() {
+import { RSListFoundation } from './foundation';
+var RSList = /** @class */ (function (_super) {
+    tslib_1.__extends(RSList, _super);
+    function RSList() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Object.defineProperty(MDCList.prototype, "vertical", {
+    Object.defineProperty(RSList.prototype, "vertical", {
         set: function (value) {
             this.foundation_.setVerticalOrientation(value);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCList.prototype, "listElements", {
+    Object.defineProperty(RSList.prototype, "listElements", {
         get: function () {
             return [].slice.call(this.root_.querySelectorAll(strings.ENABLED_ITEMS_SELECTOR));
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCList.prototype, "wrapFocus", {
+    Object.defineProperty(RSList.prototype, "wrapFocus", {
         set: function (value) {
             this.foundation_.setWrapFocus(value);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCList.prototype, "singleSelection", {
+    Object.defineProperty(RSList.prototype, "singleSelection", {
         set: function (isSingleSelectionList) {
             this.foundation_.setSingleSelection(isSingleSelectionList);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCList.prototype, "selectedIndex", {
+    Object.defineProperty(RSList.prototype, "selectedIndex", {
         get: function () {
             return this.foundation_.getSelectedIndex();
         },
@@ -68,10 +68,10 @@ var MDCList = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    MDCList.attachTo = function (root) {
-        return new MDCList(root);
+    RSList.attachTo = function (root) {
+        return new RSList(root);
     };
-    MDCList.prototype.initialSyncWithDOM = function () {
+    RSList.prototype.initialSyncWithDOM = function () {
         this.handleClick_ = this.handleClickEvent_.bind(this);
         this.handleKeydown_ = this.handleKeydownEvent_.bind(this);
         this.focusInEventListener_ = this.handleFocusInEvent_.bind(this);
@@ -83,17 +83,17 @@ var MDCList = /** @class */ (function (_super) {
         this.layout();
         this.initializeListType();
     };
-    MDCList.prototype.destroy = function () {
+    RSList.prototype.destroy = function () {
         this.unlisten('keydown', this.handleKeydown_);
         this.unlisten('click', this.handleClick_);
         this.unlisten('focusin', this.focusInEventListener_);
         this.unlisten('focusout', this.focusOutEventListener_);
     };
-    MDCList.prototype.layout = function () {
+    RSList.prototype.layout = function () {
         var direction = this.root_.getAttribute(strings.ARIA_ORIENTATION);
         this.vertical = direction !== strings.ARIA_ORIENTATION_HORIZONTAL;
         // List items need to have at least tabindex=-1 to be focusable.
-        [].slice.call(this.root_.querySelectorAll('.mdc-list-item:not([tabindex])'))
+        [].slice.call(this.root_.querySelectorAll('.RS-list-item:not([tabindex])'))
             .forEach(function (el) {
             el.setAttribute('tabindex', '-1');
         });
@@ -105,7 +105,7 @@ var MDCList = /** @class */ (function (_super) {
     /**
      * Initialize selectedIndex value based on pre-selected checkbox list items, single selection or radio.
      */
-    MDCList.prototype.initializeListType = function () {
+    RSList.prototype.initializeListType = function () {
         var _this = this;
         var checkboxListItems = this.root_.querySelectorAll(strings.ARIA_ROLE_CHECKBOX_SELECTOR);
         var singleSelectedListItem = this.root_.querySelector("\n      ." + cssClasses.LIST_ITEM_ACTIVATED_CLASS + ",\n      ." + cssClasses.LIST_ITEM_SELECTED_CLASS + "\n    ");
@@ -126,9 +126,9 @@ var MDCList = /** @class */ (function (_super) {
             this.selectedIndex = this.listElements.indexOf(radioSelectedListItem);
         }
     };
-    MDCList.prototype.getDefaultFoundation = function () {
+    RSList.prototype.getDefaultFoundation = function () {
         var _this = this;
-        // DO NOT INLINE this variable. For backward compatibility, foundations take a Partial<MDCFooAdapter>.
+        // DO NOT INLINE this variable. For backward compatibility, foundations take a Partial<RSFooAdapter>.
         // To ensure we don't accidentally omit any methods, we need a separate, strongly typed adapter variable.
         var adapter = {
             addClassForElementIndex: function (index, className) {
@@ -190,13 +190,13 @@ var MDCList = /** @class */ (function (_super) {
                 listItemChildren.forEach(function (el) { return el.setAttribute('tabindex', tabIndexValue); });
             },
         };
-        return new MDCListFoundation(adapter);
+        return new RSListFoundation(adapter);
     };
     /**
      * Used to figure out which list item this event is targetting. Or returns -1 if
      * there is no list item
      */
-    MDCList.prototype.getListItemIndex_ = function (evt) {
+    RSList.prototype.getListItemIndex_ = function (evt) {
         var eventTarget = evt.target;
         var nearestParent = ponyfill.closest(eventTarget, "." + cssClasses.LIST_ITEM_CLASS + ", ." + cssClasses.ROOT);
         // Get the index of the element if it is a list item.
@@ -208,14 +208,14 @@ var MDCList = /** @class */ (function (_super) {
     /**
      * Used to figure out which element was clicked before sending the event to the foundation.
      */
-    MDCList.prototype.handleFocusInEvent_ = function (evt) {
+    RSList.prototype.handleFocusInEvent_ = function (evt) {
         var index = this.getListItemIndex_(evt);
         this.foundation_.handleFocusIn(evt, index);
     };
     /**
      * Used to figure out which element was clicked before sending the event to the foundation.
      */
-    MDCList.prototype.handleFocusOutEvent_ = function (evt) {
+    RSList.prototype.handleFocusOutEvent_ = function (evt) {
         var index = this.getListItemIndex_(evt);
         this.foundation_.handleFocusOut(evt, index);
     };
@@ -223,7 +223,7 @@ var MDCList = /** @class */ (function (_super) {
      * Used to figure out which element was focused when keydown event occurred before sending the event to the
      * foundation.
      */
-    MDCList.prototype.handleKeydownEvent_ = function (evt) {
+    RSList.prototype.handleKeydownEvent_ = function (evt) {
         var index = this.getListItemIndex_(evt);
         var target = evt.target;
         if (index >= 0) {
@@ -233,14 +233,14 @@ var MDCList = /** @class */ (function (_super) {
     /**
      * Used to figure out which element was clicked before sending the event to the foundation.
      */
-    MDCList.prototype.handleClickEvent_ = function (evt) {
+    RSList.prototype.handleClickEvent_ = function (evt) {
         var index = this.getListItemIndex_(evt);
         var target = evt.target;
         // Toggle the checkbox only if it's not the target of the event, or the checkbox will have 2 change events.
         var toggleCheckbox = !ponyfill.matches(target, strings.CHECKBOX_RADIO_SELECTOR);
         this.foundation_.handleClick(index, toggleCheckbox);
     };
-    return MDCList;
-}(MDCComponent));
-export { MDCList };
+    return RSList;
+}(RSComponent));
+export { RSList };
 //# sourceMappingURL=component.js.map

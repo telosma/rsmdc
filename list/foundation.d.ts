@@ -20,10 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { MDCFoundation } from '@material/base/foundation';
-import { MDCListAdapter } from './adapter';
-import { MDCListIndex } from './types';
-export declare class MDCListFoundation extends MDCFoundation<MDCListAdapter> {
+import { RSFoundation } from '@material/base/foundation';
+import { RSListAdapter } from './adapter';
+import { RSListIndex } from './types';
+export declare class RSListFoundation extends RSFoundation<RSListAdapter> {
     static readonly strings: {
         ACTION_EVENT: string;
         ARIA_CHECKED: string;
@@ -46,7 +46,7 @@ export declare class MDCListFoundation extends MDCFoundation<MDCListAdapter> {
         LIST_ITEM_SELECTED_CLASS: string;
         ROOT: string;
     };
-    static readonly defaultAdapter: MDCListAdapter;
+    static readonly defaultAdapter: RSListAdapter;
     private wrapFocus_;
     private isVertical_;
     private isSingleSelectionList_;
@@ -55,7 +55,7 @@ export declare class MDCListFoundation extends MDCFoundation<MDCListAdapter> {
     private useActivatedClass_;
     private isCheckboxList_;
     private isRadioList_;
-    constructor(adapter?: Partial<MDCListAdapter>);
+    constructor(adapter?: Partial<RSListAdapter>);
     layout(): void;
     /**
      * Sets the private wrapFocus_ variable.
@@ -73,8 +73,8 @@ export declare class MDCListFoundation extends MDCFoundation<MDCListAdapter> {
      * Sets the useActivatedClass_ private variable.
      */
     setUseActivatedClass(useActivated: boolean): void;
-    getSelectedIndex(): MDCListIndex;
-    setSelectedIndex(index: MDCListIndex): void;
+    getSelectedIndex(): RSListIndex;
+    setSelectedIndex(index: RSListIndex): void;
     /**
      * Focus in handler for the list items.
      */
@@ -123,4 +123,4 @@ export declare class MDCListFoundation extends MDCFoundation<MDCListAdapter> {
     private setSelectedIndexOnAction_;
     private toggleCheckboxAtIndex_;
 }
-export default MDCListFoundation;
+export default RSListFoundation;

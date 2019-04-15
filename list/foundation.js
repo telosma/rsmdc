@@ -21,16 +21,16 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { MDCFoundation } from '@material/base/foundation';
+import { RSFoundation } from '../base/foundation';
 import { cssClasses, strings } from './constants';
 var ELEMENTS_KEY_ALLOWED_IN = ['input', 'button', 'textarea', 'select'];
 function isNumberArray(selectedIndex) {
     return selectedIndex instanceof Array;
 }
-var MDCListFoundation = /** @class */ (function (_super) {
-    tslib_1.__extends(MDCListFoundation, _super);
-    function MDCListFoundation(adapter) {
-        var _this = _super.call(this, tslib_1.__assign({}, MDCListFoundation.defaultAdapter, adapter)) || this;
+var RSListFoundation = /** @class */ (function (_super) {
+    tslib_1.__extends(RSListFoundation, _super);
+    function RSListFoundation(adapter) {
+        var _this = _super.call(this, tslib_1.__assign({}, RSListFoundation.defaultAdapter, adapter)) || this;
         _this.wrapFocus_ = false;
         _this.isVertical_ = true;
         _this.isSingleSelectionList_ = false;
@@ -41,21 +41,21 @@ var MDCListFoundation = /** @class */ (function (_super) {
         _this.isRadioList_ = false;
         return _this;
     }
-    Object.defineProperty(MDCListFoundation, "strings", {
+    Object.defineProperty(RSListFoundation, "strings", {
         get: function () {
             return strings;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCListFoundation, "cssClasses", {
+    Object.defineProperty(RSListFoundation, "cssClasses", {
         get: function () {
             return cssClasses;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MDCListFoundation, "defaultAdapter", {
+    Object.defineProperty(RSListFoundation, "defaultAdapter", {
         get: function () {
             return {
                 addClassForElementIndex: function () { return undefined; },
@@ -76,7 +76,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    MDCListFoundation.prototype.layout = function () {
+    RSListFoundation.prototype.layout = function () {
         if (this.adapter_.getListItemCount() === 0) {
             return;
         }
@@ -90,31 +90,31 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Sets the private wrapFocus_ variable.
      */
-    MDCListFoundation.prototype.setWrapFocus = function (value) {
+    RSListFoundation.prototype.setWrapFocus = function (value) {
         this.wrapFocus_ = value;
     };
     /**
      * Sets the isVertical_ private variable.
      */
-    MDCListFoundation.prototype.setVerticalOrientation = function (value) {
+    RSListFoundation.prototype.setVerticalOrientation = function (value) {
         this.isVertical_ = value;
     };
     /**
      * Sets the isSingleSelectionList_ private variable.
      */
-    MDCListFoundation.prototype.setSingleSelection = function (value) {
+    RSListFoundation.prototype.setSingleSelection = function (value) {
         this.isSingleSelectionList_ = value;
     };
     /**
      * Sets the useActivatedClass_ private variable.
      */
-    MDCListFoundation.prototype.setUseActivatedClass = function (useActivated) {
+    RSListFoundation.prototype.setUseActivatedClass = function (useActivated) {
         this.useActivatedClass_ = useActivated;
     };
-    MDCListFoundation.prototype.getSelectedIndex = function () {
+    RSListFoundation.prototype.getSelectedIndex = function () {
         return this.selectedIndex_;
     };
-    MDCListFoundation.prototype.setSelectedIndex = function (index) {
+    RSListFoundation.prototype.setSelectedIndex = function (index) {
         if (!this.isIndexValid_(index)) {
             return;
         }
@@ -131,7 +131,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Focus in handler for the list items.
      */
-    MDCListFoundation.prototype.handleFocusIn = function (_, listItemIndex) {
+    RSListFoundation.prototype.handleFocusIn = function (_, listItemIndex) {
         if (listItemIndex >= 0) {
             this.adapter_.setTabIndexForListItemChildren(listItemIndex, '0');
         }
@@ -139,7 +139,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Focus out handler for the list items.
      */
-    MDCListFoundation.prototype.handleFocusOut = function (_, listItemIndex) {
+    RSListFoundation.prototype.handleFocusOut = function (_, listItemIndex) {
         var _this = this;
         if (listItemIndex >= 0) {
             this.adapter_.setTabIndexForListItemChildren(listItemIndex, '-1');
@@ -157,7 +157,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Key handler for the list.
      */
-    MDCListFoundation.prototype.handleKeydown = function (evt, isRootListItem, listItemIndex) {
+    RSListFoundation.prototype.handleKeydown = function (evt, isRootListItem, listItemIndex) {
         var arrowLeft = evt.key === 'ArrowLeft' || evt.keyCode === 37;
         var arrowUp = evt.key === 'ArrowUp' || evt.keyCode === 38;
         var arrowRight = evt.key === 'ArrowRight' || evt.keyCode === 39;
@@ -171,7 +171,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
         if (currentIndex === -1) {
             currentIndex = listItemIndex;
             if (currentIndex < 0) {
-                // If this event doesn't have a mdc-list-item ancestor from the
+                // If this event doesn't have a RS-list-item ancestor from the
                 // current list (not from a sublist), return early.
                 return;
             }
@@ -215,7 +215,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Click handler for the list.
      */
-    MDCListFoundation.prototype.handleClick = function (index, toggleCheckbox) {
+    RSListFoundation.prototype.handleClick = function (index, toggleCheckbox) {
         if (index === -1) {
             return;
         }
@@ -229,7 +229,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Focuses the next element on the list.
      */
-    MDCListFoundation.prototype.focusNextElement = function (index) {
+    RSListFoundation.prototype.focusNextElement = function (index) {
         var count = this.adapter_.getListItemCount();
         var nextIndex = index + 1;
         if (nextIndex >= count) {
@@ -247,7 +247,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Focuses the previous element on the list.
      */
-    MDCListFoundation.prototype.focusPrevElement = function (index) {
+    RSListFoundation.prototype.focusPrevElement = function (index) {
         var prevIndex = index - 1;
         if (prevIndex < 0) {
             if (this.wrapFocus_) {
@@ -261,11 +261,11 @@ var MDCListFoundation = /** @class */ (function (_super) {
         this.adapter_.focusItemAtIndex(prevIndex);
         return prevIndex;
     };
-    MDCListFoundation.prototype.focusFirstElement = function () {
+    RSListFoundation.prototype.focusFirstElement = function () {
         this.adapter_.focusItemAtIndex(0);
         return 0;
     };
-    MDCListFoundation.prototype.focusLastElement = function () {
+    RSListFoundation.prototype.focusLastElement = function () {
         var lastIndex = this.adapter_.getListItemCount() - 1;
         this.adapter_.focusItemAtIndex(lastIndex);
         return lastIndex;
@@ -274,14 +274,14 @@ var MDCListFoundation = /** @class */ (function (_super) {
      * Ensures that preventDefault is only called if the containing element doesn't
      * consume the event, and it will cause an unintended scroll.
      */
-    MDCListFoundation.prototype.preventDefaultEvent_ = function (evt) {
+    RSListFoundation.prototype.preventDefaultEvent_ = function (evt) {
         var target = evt.target;
         var tagName = ("" + target.tagName).toLowerCase();
         if (ELEMENTS_KEY_ALLOWED_IN.indexOf(tagName) === -1) {
             evt.preventDefault();
         }
     };
-    MDCListFoundation.prototype.setSingleSelectionAtIndex_ = function (index) {
+    RSListFoundation.prototype.setSingleSelectionAtIndex_ = function (index) {
         var selectedClassName = cssClasses.LIST_ITEM_SELECTED_CLASS;
         if (this.useActivatedClass_) {
             selectedClassName = cssClasses.LIST_ITEM_ACTIVATED_CLASS;
@@ -297,7 +297,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * Toggles radio at give index. Radio doesn't change the checked state if it is already checked.
      */
-    MDCListFoundation.prototype.setRadioAtIndex_ = function (index) {
+    RSListFoundation.prototype.setRadioAtIndex_ = function (index) {
         this.adapter_.setCheckedCheckboxOrRadioAtIndex(index, true);
         if (this.selectedIndex_ >= 0) {
             this.adapter_.setAttributeForElementIndex(this.selectedIndex_, strings.ARIA_CHECKED, 'false');
@@ -305,7 +305,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
         this.adapter_.setAttributeForElementIndex(index, strings.ARIA_CHECKED, 'true');
         this.selectedIndex_ = index;
     };
-    MDCListFoundation.prototype.setCheckboxAtIndex_ = function (index) {
+    RSListFoundation.prototype.setCheckboxAtIndex_ = function (index) {
         for (var i = 0; i < this.adapter_.getListItemCount(); i++) {
             var isChecked = false;
             if (index.indexOf(i) >= 0) {
@@ -316,7 +316,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
         }
         this.selectedIndex_ = index;
     };
-    MDCListFoundation.prototype.setTabindexAtIndex_ = function (index) {
+    RSListFoundation.prototype.setTabindexAtIndex_ = function (index) {
         if (this.focusedItemIndex_ === -1 && index !== 0) {
             // If no list item was selected set first list item's tabindex to -1.
             // Generally, tabindex is set to 0 on first list item of list that has no preselected items.
@@ -330,10 +330,10 @@ var MDCListFoundation = /** @class */ (function (_super) {
     /**
      * @return Return true if it is single selectin list, checkbox list or radio list.
      */
-    MDCListFoundation.prototype.isSelectableList_ = function () {
+    RSListFoundation.prototype.isSelectableList_ = function () {
         return this.isSingleSelectionList_ || this.isCheckboxList_ || this.isRadioList_;
     };
-    MDCListFoundation.prototype.setTabindexToFirstSelectedItem_ = function () {
+    RSListFoundation.prototype.setTabindexToFirstSelectedItem_ = function () {
         var targetIndex = 0;
         if (this.isSelectableList_()) {
             if (typeof this.selectedIndex_ === 'number' && this.selectedIndex_ !== -1) {
@@ -345,11 +345,11 @@ var MDCListFoundation = /** @class */ (function (_super) {
         }
         this.setTabindexAtIndex_(targetIndex);
     };
-    MDCListFoundation.prototype.isIndexValid_ = function (index) {
+    RSListFoundation.prototype.isIndexValid_ = function (index) {
         var _this = this;
         if (index instanceof Array) {
             if (!this.isCheckboxList_) {
-                throw new Error('MDCListFoundation: Array of index is only supported for checkbox based list');
+                throw new Error('RSListFoundation: Array of index is only supported for checkbox based list');
             }
             if (index.length === 0) {
                 return true;
@@ -360,7 +360,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
         }
         else if (typeof index === 'number') {
             if (this.isCheckboxList_) {
-                throw new Error('MDCListFoundation: Expected array of index for checkbox based list but got number: ' + index);
+                throw new Error('RSListFoundation: Expected array of index for checkbox based list but got number: ' + index);
             }
             return this.isIndexInRange_(index);
         }
@@ -368,11 +368,11 @@ var MDCListFoundation = /** @class */ (function (_super) {
             return false;
         }
     };
-    MDCListFoundation.prototype.isIndexInRange_ = function (index) {
+    RSListFoundation.prototype.isIndexInRange_ = function (index) {
         var listSize = this.adapter_.getListItemCount();
         return index >= 0 && index < listSize;
     };
-    MDCListFoundation.prototype.setSelectedIndexOnAction_ = function (index, toggleCheckbox) {
+    RSListFoundation.prototype.setSelectedIndexOnAction_ = function (index, toggleCheckbox) {
         if (toggleCheckbox === void 0) { toggleCheckbox = true; }
         if (this.isCheckboxList_) {
             this.toggleCheckboxAtIndex_(index, toggleCheckbox);
@@ -381,7 +381,7 @@ var MDCListFoundation = /** @class */ (function (_super) {
             this.setSelectedIndex(index);
         }
     };
-    MDCListFoundation.prototype.toggleCheckboxAtIndex_ = function (index, toggleCheckbox) {
+    RSListFoundation.prototype.toggleCheckboxAtIndex_ = function (index, toggleCheckbox) {
         var isChecked = this.adapter_.isCheckboxCheckedAtIndex(index);
         if (toggleCheckbox) {
             isChecked = !isChecked;
@@ -398,9 +398,9 @@ var MDCListFoundation = /** @class */ (function (_super) {
         }
         this.selectedIndex_ = selectedIndexes;
     };
-    return MDCListFoundation;
-}(MDCFoundation));
-export { MDCListFoundation };
-// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
-export default MDCListFoundation;
+    return RSListFoundation;
+}(RSFoundation));
+export { RSListFoundation };
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with RS Web v0.44.0 and earlier.
+export default RSListFoundation;
 //# sourceMappingURL=foundation.js.map

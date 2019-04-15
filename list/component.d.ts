@@ -20,17 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { MDCComponent } from '@material/base/component';
-import { MDCListFoundation } from './foundation';
-import { MDCListIndex } from './types';
-export declare type MDCListFactory = (el: Element, foundation?: MDCListFoundation) => MDCList;
-export declare class MDCList extends MDCComponent<MDCListFoundation> {
+import { RSComponent } from '../base/component';
+import { RSListFoundation } from './foundation';
+import { RSListIndex } from './types';
+export declare type RSListFactory = (el: Element, foundation?: RSListFoundation) => RSList;
+export declare class RSList extends RSComponent<RSListFoundation> {
     vertical: boolean;
     readonly listElements: Element[];
     wrapFocus: boolean;
     singleSelection: boolean;
-    selectedIndex: MDCListIndex;
-    static attachTo(root: Element): MDCList;
+    selectedIndex: RSListIndex;
+    static attachTo(root: Element): RSList;
     private handleKeydown_;
     private handleClick_;
     private focusInEventListener_;
@@ -42,7 +42,7 @@ export declare class MDCList extends MDCComponent<MDCListFoundation> {
      * Initialize selectedIndex value based on pre-selected checkbox list items, single selection or radio.
      */
     initializeListType(): void;
-    getDefaultFoundation(): MDCListFoundation;
+    getDefaultFoundation(): RSListFoundation;
     /**
      * Used to figure out which list item this event is targetting. Or returns -1 if
      * there is no list item
