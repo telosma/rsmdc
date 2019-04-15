@@ -4,7 +4,7 @@
   </button>
 </template>
 <script>
-import { RSRipple } from '../../ripple/assets'
+import { RSRipple } from '../../ripple'
 
 export default {
   props: {
@@ -35,8 +35,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../assets/rs-button';
-@import '../../feature-targeting/assets/rs-mixins';
+@import '../rs-button';
 
 .rs-button {
   // base

@@ -1,0 +1,227 @@
+//
+// Copyright 2016 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+@import "../elevation/mixins";
+@import "../feature-targeting/functions";
+@import "../feature-targeting/mixins";
+@import "../ripple/mixins";
+@import "../rtl/mixins";
+@import "../theme/functions";
+@import "../theme/mixins";
+@import "../typography/mixins";
+@import "../shape/mixins";
+@import "../shape/functions";
+@import "./variables";
+@import './rs-functions';
+
+
+
+@mixin rs-button-core-styles($query: rs-feature-all()) {
+  @include rs-button-without-ripple($query);
+  @include rs-button-ripple($query);
+}
+
+@mixin rs-button-without-ripple($query: rs-feature-all()) {
+  $feat-color: rs-feature-create-target($query, color);
+  $feat-structure: rs-feature-create-target($query, structure);
+
+  // postcss-bem-linter: define button
+  .rs-button {
+    @include rs-button-base_($query);
+    @include rs-button-shape-radius(#{$rs-shape-small-component-radius});
+  }
+}
+
+@mixin rs-button-ripple($query: rs-feature-all()) {
+  @include rs-ripple-common($query);
+
+  .rs-button {
+    @include rs-ripple-surface($query);
+    @include rs-ripple-radius-bounded($query: $query);
+  }
+
+}
+
+
+@mixin rs-button-filled-accessible($container-fill-color) {
+  $fill-tone: rs-theme-tone($container-fill-color);
+
+  @include rs-button-container-fill-color($container-fill-color);
+  
+  @if ($fill-tone == "dark") {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
+    @include rs-states(text-primary-on-dark);
+  } @else {
+    @include rs-button-ink-color(mdc-theme-ink-color-for-fill_(primary, light));
+    @include rs-states(text-primary-on-light);
+  }
+}
+
+@mixin rs-button-container-fill-color($color) {
+  --rs-button_not_disabled--background-color: #{$color};
+}
+
+@mixin rs-button-outline-color($color) {
+  --rs-button_not_disabled--border-color: #{$color};
+}
+
+@mixin rs-button-icon-color($color) {
+  --rs-button-icon_not_disabled--color: #{$color};
+}
+
+@mixin rs-button-ink-color($color) {
+  --rs-button_not_disabled--color: #{$color};
+}
+
+@mixin rs-button-shape-radius($radius, $rtl-reflexive: false) {
+  @include rs-shape-radius(
+    rs-shape-resolve-percentage-radius(#{$rs-button-height}, $radius),
+    $rtl-reflexive,
+  );
+}
+
+@mixin rs-button-horizontal-padding($padding) {
+  --rs-button--padding: 0 #{$padding} 0 #{$padding};
+}
+
+@mixin rs-button-outline-width(
+  $outline-width,
+  $padding: $rs-button-contained-horizontal-padding,
+) {
+  $padding-value: max($padding - $outline-width, 0);
+
+  @include rs-button-horizontal-padding($padding-value);
+
+  --rs-button--border-width: #{$outline-width};
+}
+
+@mixin rs-button-base_($query) {
+  $feat-color: rs-feature-create-target($query, color);
+  $feat-structure: rs-feature-create-target($query, structure);
+
+  @include rs-typography(button, $query);
+  
+  @include rs-button-horizontal-padding($rs-button-horizontal-padding);
+
+  @include rs-feature-targets($feat-structure) {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 64px;
+    height: $rs-button-height;
+    border: none;
+    outline: none;
+    /* @alternate */
+    line-height: inherit;
+    user-select: none;
+    -webkit-appearance: none;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  &::-moz-focus-inner {
+    @include rs-feature-targets($feat-structure) {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  // postcss-bem-linter: ignore
+  &:active {
+    @include rs-feature-targets($feat-structure) {
+      outline: none;
+    }
+  }
+
+  &:hover {
+    @include rs-feature-targets($feat-structure) {
+      cursor: pointer;
+    }
+  }
+
+  &:disabled {
+    @include rs-feature-targets($feat-color) {
+      @include rs-theme-prop(background-color, transparent);
+
+      color: $rs-button-disabled-ink-color;
+    }
+
+    @include rs-feature-targets($feat-structure) {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+}
+
+@mixin rs-button__icon_ {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  vertical-align: top;
+}
+
+@mixin rs-button__icon-trailing_ {
+  --rs-button-label_-icon--margin-left: 8px;
+  --rs-button-label_-icon--margin-right: 0px;
+}
+
+@mixin rs-button__icon-svg_ {
+  fill: currentColor;
+}
+
+@mixin rs-button__icon-contained_ {
+  --rs-button-icon--margin-left: -4px;
+  --rs-button-icon--margin-right: 8px;
+}
+
+@mixin rs-button__icon-contained-trailing_ {
+  --rs-button-label_-icon--margin-left: 8px;
+  --rs-button-label_-icon--margin-right: -4px;
+}
+
+@mixin rs-button--outlined_() {
+  --rs-button--border-style: solid;
+  --rs-button_disabled--border-color: #{$rs-button-disabled-ink-color};
+}
+
+@mixin rs-button--filled_() {
+  --rs-button--padding: #{$rs-button-contained-horizontal-padding};
+  --rs-button_disabled--background-color: #{rgba(rs-theme-prop-value(on-surface), .12)};
+  --rs-button_disabled--color: #{$rs-button-disabled-ink-color};
+}
+
+@mixin rs-button--raised_() {
+  --rs-button--box-shadow: #{rs-elevation(2)};
+  --rs-button_hover--box-shadow: #{rs-elevation(4)};
+  --rs-button_focus--box-shadow:  #{rs-elevation(4)};
+  --rs-button_active--box-shadow: #{rs-elevation(8)};
+  --rs-button_disabled--box-shadow: #{rs-elevation(0)};
+  --rs-button--transition: #{rs-elevation-transition-value()};
+}
+
+@mixin rs-button--dense_() {
+  --rs-button--height: #{$rs-dense-button-height};
+  --rs-button--font-size: .8125rem; // 13sp  
+  --rs-button--border-radius: #{rs-shape-resolve-percentage-radius(#{$rs-dense-button-height}, #{$rs-shape-small-component-radius})};  //from @mixin rs-button-shape-radius
+}

@@ -12,7 +12,7 @@
 </template>
 <script>
 import { RSFormField } from '../../form-field';
-import { RSRadio } from '../assets/index';
+import { RSRadio } from '../index';
 
 export default {
   props: {
@@ -96,8 +96,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../assets/rs-radio";
-@import "../../form-field/assets/rs-form-field";
+@import "../rs-radio";
+@import "../../form-field/rs-form-field";
 
   .rs-radio {
 

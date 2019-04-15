@@ -1,0 +1,50 @@
+@import './mixins';
+@import '../theme/variables';
+@import '../elevation/variables';
+@import '../shape/variables';
+@import '../ripple/variables';
+
+/*
+---
+rs-button style
+---
+*/
+@mixin rs-button-type($type, $dense: flat) {
+  @if $type == outlined {
+    @include rs-button--outlined_;
+    @include rs-button-outline-width(2px);
+    @include rs-button-outline-color($rs-theme-primary);
+  }
+
+  @if $type == raised or $type == unelevated {
+    @include rs-button--filled_;
+    @include rs-button-container-fill-color($rs-theme-primary);
+    @include rs-button-ink-color($rs-theme-on-primary);
+    @include rs-states(on-primary);
+  }
+
+  @if $type == raised {
+    @include rs-button--raised_;
+  }
+
+  @if $type == dense or $dense == dense {
+    @include rs-button--dense_;
+  } @else {
+    @include rs-button__icon-contained_;
+  }
+}
+/*
+---
+rs-button-icon position
+---
+*/
+@mixin rs-button-icon-position($position: left, $type: false) {
+  @if $type == true and $position == right {
+    @include rs-button__icon-contained-trailing_;
+  }@else if $position == right {
+    @include rs-button__icon-trailing_;
+  }
+}
+
+
+

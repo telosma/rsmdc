@@ -38,7 +38,7 @@ module.exports = {
     modules: true,
     loaderOptions: {
       sass: {
-        includePaths: ['node_modules', 'assets']
+        includePaths: ['node_modules']
       },
       postcss: {
         plugins: () => [autoprefixer()]

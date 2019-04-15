@@ -17,15 +17,11 @@ export default {
       type: String,
       default: 'http://www.w3.org/2000/svg'
     }
-  },
-  mounted() {
-    console.log(this.type)
   }
 }
 </script>
 <style lang="scss">
-@import  '/../assets/rs-button';
-@import '../../feature-targeting/assets/rs-mixins';
+@import  '../rs-button';
 
 .rs-button__icon {
   @include rs-button__icon_;
