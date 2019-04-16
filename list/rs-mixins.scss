@@ -1,0 +1,73 @@
+@import './rs-variables';
+@import './rs-functions';
+
+@mixin rs-list-type($types...) {
+  @each $type in $types {
+    @if $type == dense {
+      --rs-list--padding-top: 4px;
+      --rs-list--padding-bottom: 4px;
+      --rs-list--font-size: .812rem;
+      --rs-list-item--height: 40px;
+      --rs-list-item-graphic--margin-left: 0;
+      --rs-list-item-graphic--margin-right: 36px;
+      --rs-list-item-secondary-text--font-size: inherit;
+      @include rs-list-graphic-size_(20px);
+      @include rs-list-typography($dense-item-primary-text-baseline-height, $item-secondary-text-baseline-height, primary);
+      @include rs-list-typography-baseline-bottom($item-secondary-text-baseline-height, secondary, after);
+
+    }@else if $type == two-line {
+      --rs-list-item--height: 72px;
+      --rs-list-item-text--align-self: flex-start;
+
+    }@else if $type == avatar-list {
+      --rs-list-item--height: 56px;
+      --rs-list-item-graphic--border-radius: 50%;
+      --rs-list-item-graphic--margin-left: 0;
+      --rs-list-item-graphic--margin-right: 16px;
+      @include rs-list-graphic-size_(40px);
+
+    }@else if $type == non-interactive {
+      color: blue;
+    }
+  }
+
+  $dense: rs-find-list-item($types, dense);
+  $non-interactive: rs-find-list-item($types, non-interactive);
+  $avatar-list: rs-find-list-item($types, avatar-list);
+  $two-line: rs-find-list-item($types, two-line);
+
+  @if ($two-line and $dense) or ($avatar-list and $dense) {
+    --rs-list-item--height: 60px;
+  }
+  @if $avatar-list and $dense {
+    --rs-list-item-graphic--margin-left: 0;
+    --rs-list-item-graphic--margin-right: 20px;
+    @include rs-list-graphic-size_(36px);
+  }
+}
+
+@mixin rs-list-typography($distanceTop, $distanceBottom, $target) {
+  @include rs-list-typography-baseline-top($distanceTop, $target, before);
+  @include rs-list-typography-baseline-bottom($distanceBottom, $target, after);
+}
+
+@mixin rs-list-typography-baseline-top($distance, $target, $pseudo) {
+  --rs-list-item-#{$target}-text--display: block;
+  --rs-list-item-#{$target}-text--margin-top: 0;
+  --rs-list-item-#{$target}-text--line-height: normal;
+  --rs-list-item-#{$target}-text_before--vertical-align: 0;
+  @include rs-list-typography-baseline-strut_($distance, $target, before);
+}
+
+@mixin rs-list-typography-baseline-bottom($distance, $target, $pseudo) {
+  --rs-list-item-#{$target}-text--margin-bottom: -1 * #{$distance};
+  --rs-list-item-#{$target}-text_after--vertical-align: -1 * #{$distance};
+  @include rs-list-typography-baseline-strut_($distance, $target, after);
+}
+
+@mixin rs-list-typography-baseline-strut_($distance, $target, $pseudo) {
+  --rs-list-item-#{$target}-text_#{$pseudo}--display: inline-block;
+  --rs-list-item-#{$target}-text_#{$pseudo}--width: 0;
+  --rs-list-item-#{$target}-text_#{$pseudo}--height: #{$distance};
+  --rs-list-item-#{$target}-text_#{$pseudo}--content: "";
+}

@@ -1,0 +1,8 @@
+@function rs-find-list-item($list, $target) {
+  @each $item in $list {
+    @if $item == $target {
+      @return true;
+    }
+  }
+  @return false;
+}
