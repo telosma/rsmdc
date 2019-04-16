@@ -67,18 +67,9 @@
 //
 // In the future, selectors such as the `:dir` pseudo-class (http://mdn.io/css/:dir) will help us mitigate this.
 @mixin rs-rtl($root-selector: null) {
-  @if ($root-selector) {
-    @at-root {
-      #{$root-selector}[dir="rtl"] &,
-      [dir="rtl"] #{$root-selector} & {
-        @content;
-      }
-    }
-  } @else {
-    [dir="rtl"] &,
-    &[dir="rtl"] {
-      @content;
-    }
+  [dir="rtl"] &,
+  &[dir="rtl"] {
+    @content;
   }
 }
 
