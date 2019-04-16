@@ -70,7 +70,7 @@
     @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
     @include rs-states(text-primary-on-dark);
   } @else {
-    @include rs-button-ink-color(mdc-theme-ink-color-for-fill_(primary, light));
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
     @include rs-states(text-primary-on-light);
   }
 }
