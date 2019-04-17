@@ -1,5 +1,6 @@
 @import './rs-variables';
 @import './rs-functions';
+@import './variables';
 
 @mixin rs-list-type($types...) {
   @each $type in $types {
@@ -21,20 +22,20 @@
 
     }@else if $type == avatar-list {
       --rs-list-item--height: 56px;
+      --rs-list-item--margin-left: 0;
+      --rs-list-item--margin-right: 16px;
       --rs-list-item-graphic--border-radius: 50%;
-      --rs-list-item-graphic--margin-left: 0;
-      --rs-list-item-graphic--margin-right: 16px;
       @include rs-list-graphic-size_(40px);
 
     }@else if $type == non-interactive {
-      color: blue;
+      --rs-list-item--cursor: default;
     }
   }
 
-  $dense: rs-find-list-item($types, dense);
-  $non-interactive: rs-find-list-item($types, non-interactive);
-  $avatar-list: rs-find-list-item($types, avatar-list);
-  $two-line: rs-find-list-item($types, two-line);
+  $dense: find-item($types, dense);
+  $non-interactive: find-item($types, non-interactive);
+  $avatar-list: find-item($types, avatar-list);
+  $two-line: find-item($types, two-line);
 
   @if ($two-line and $dense) or ($avatar-list and $dense) {
     --rs-list-item--height: 60px;
@@ -45,6 +46,27 @@
     @include rs-list-graphic-size_(36px);
   }
 }
+
+@mixin rs-list-divider-type($types...) {
+  @each $type in $types {
+    @if $type == inset {
+      --rs-list-divider--margin-left: 72px;
+      --rs-list-divider--margin-right: 0;
+      --rs-list-divider--width: calc(100% - #{$rs-list-text-offset});
+
+    }@else if $type == padded {
+      --rs-list-divider--margin: 0 #{$rs-list-side-padding};
+    }
+  }
+
+  $padded: find-item($types, padded);
+  $inset: find-item($types, inset);
+
+  @if $padded and $inset {
+    --rs-list-divider--width: calc(100% - #{$rs-list-text-offset} - #{$rs-list-side-padding});
+  }
+}
+
 
 @mixin rs-list-typography($distanceTop, $distanceBottom, $target) {
   @include rs-list-typography-baseline-top($distanceTop, $target, before);
