@@ -134,7 +134,8 @@
 }
 
 @mixin rs-list-item-shape-radius($radius, $rtl-reflexive: false) {
-  @include rs-shape-radius($radius, $rtl-reflexive);
+  --rs-list-item--border-radius: #{rs-shape-radius($radius)};
+  --rs-list-item_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
 }
 
 @mixin rs-list-divider-color($color) {

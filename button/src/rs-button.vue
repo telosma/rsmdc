@@ -50,6 +50,11 @@ export default {
   border-style: var(--rs-button--border-style);
   transition: var(--rs-button--transition);
 
+  [dir="rtl"] &,
+  &[dir="rtl"] {
+    border-radius: var(--rs-button_rtl--border-radius, rs-shape-rtl-radius(medium, false));
+  }
+
   &:hover {
     box-shadow: var(--rs-button_hover--box-shadow);
   }

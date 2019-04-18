@@ -61,9 +61,11 @@ export default {
   color: var(--rs-list--color);
   height: var(--rs-list-item--height, 48px);
   align-items: var(--rs-list-item--align-items, center);
+  border-radius: var(--rs-list-item--border-radius);
 
   [dir="rtl"] &,
   &[dir="rtl"] {
+    border-radius: var(--rs-list-item_rtl--border-radius);
     margin-left: var(--rs-list-item--margin-left);
     margin-right: var(--rs-list-item--margin-right);
   }

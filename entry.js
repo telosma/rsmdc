@@ -1,5 +1,7 @@
 import Vue from 'vue-custom'
 import wrap from '@vue/web-component-wrapper'
+import button from './button/src/rs-button.vue'
+import buttonIcon from './button/src/rs-button-icon.vue'
 import radio from './radio/src/rs-radio.vue'
 import listGroup from './list/src/rs-list-group.vue'
 import listDivider from './list/src/rs-list-divider.vue'
@@ -13,6 +15,8 @@ import listItemTextPrimary from './list/src/rs-list-item-text-primary.vue'
 import listItemTextSecondary from './list/src/rs-list-item-text-secondary.vue'
 import menuSurface from './menu-surface/src/rs-menu-surface.vue'
 
+export const Button = wrap(Vue, button)
+export const ButtonIcon = wrap(Vue, buttonIcon)
 export const Radio = wrap(Vue, radio)
 export const ListGroup = wrap(Vue, listGroup)
 export const ListDivider = wrap(Vue, listDivider)

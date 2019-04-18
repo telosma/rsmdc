@@ -46,7 +46,6 @@
   // postcss-bem-linter: define button
   .rs-button {
     @include rs-button-base_($query);
-    @include rs-button-shape-radius(#{$rs-shape-small-component-radius});
   }
 }
 
@@ -92,10 +91,8 @@
 }
 
 @mixin rs-button-shape-radius($radius, $rtl-reflexive: false) {
-  @include rs-shape-radius(
-    rs-shape-resolve-percentage-radius(#{$rs-button-height}, $radius),
-    $rtl-reflexive,
-  );
+  --rs-button--border-radius: #{rs-shape-radius($radius)};
+  --rs-button_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
 }
 
 @mixin rs-button-horizontal-padding($padding) {

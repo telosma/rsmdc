@@ -58,7 +58,7 @@
 }
 
 @mixin rs-menu-surface-shape-radius($radius, $rtl-reflexive: false) {
-  --rs-menu-surface--border-radius: #{rs-shape-radius($radius, $rtl-reflexive)};
+  --rs-menu-surface--border-radius: #{rs-shape-radius($radius)};
   --rs-menu-surface_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
 }
 

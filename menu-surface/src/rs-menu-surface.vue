@@ -19,7 +19,7 @@ export default {
 .rs-menu-surface {
   color: var(--rs-menu-surface--color, $rs-theme-on-surface);
   background-color: var(--rs-menu-surface--background-color, $rs-theme-surface);
-  border-radius: var(--rs-menu-surface--border-radius, rs-shape-radius(medium, false));
+  border-radius: var(--rs-menu-surface--border-radius, rs-shape-radius(medium));
 
   [dir="rtl"] &,
   &[dir="rtl"] {

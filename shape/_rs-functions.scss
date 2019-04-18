@@ -1,4 +1,4 @@
-@function rs-shape-radius($radius, $rtl-reflexive: false) {
+@function rs-shape-radius($radius) {
   @return rs-shape-prop-value($radius);
 }
 
