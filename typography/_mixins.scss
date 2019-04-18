@@ -71,22 +71,3 @@
     overflow: hidden;
   }
 }
-
-@mixin rs-typography-baseline-top($distance) {
-  --rs-typography--display: block;
-  --rs-typography--margin-top: 0;
-  --rs-typography--line-height: normal;
-  --rs-typography_before--vertical-align: 0;
-}
-
-@mixin rs-typography-baseline-bottom($distance) {
-  --rs-typography--margin-bottom: -1 * #{$distance};
-  --rs-typography_after--vertical-align: -1 * #{$distance};
-}
-
-@mixin rs-typography-baseline-strut_($distance) {
-  --rs-typography--display: inline-block;
-  --rs-typography--width: 0;
-  --rs-typography--height: #{$distance};
-  --rs-typography--content: "";
-}

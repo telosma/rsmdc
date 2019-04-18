@@ -62,10 +62,6 @@
     display: inline-flex;
   }
 
-  .rs-list-item__meta {
-    @include rs-rtl-reflexive-property(margin, auto, 0, ".rs-list-item");
-  }
-
   .rs-list-item__text {
     @include rs-typography-overflow-ellipsis($query);
     &[for] {
@@ -80,7 +76,11 @@
   }
 
   .rs-list-item__secondary-text {
-    @include rs-typography(body2, $query);
+    line-height: 1.25rem; // 20sp
+    font-weight: map-get($rs-typography-font-weight-values, regular);
+    letter-spacing: rs-typography-get-letter-spacing_(.25, .875);
+    text-decoration: inherit;
+    text-transform: inherit;
     @include rs-typography-overflow-ellipsis($query);
 
     display: block;
@@ -88,24 +88,9 @@
 
   .rs-list-divider {
     height: 0;
-    margin: 0;
     border: none;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-  }
-
-  .rs-list-divider--padded {
-    margin: 0 $rs-list-side-padding;
-  }
-
-  .rs-list-divider--inset {
-    @include rs-rtl-reflexive-box(margin, left, $rs-list-text-offset, ".rs-list-group");
-
-    width: calc(100% - #{$rs-list-text-offset});
-  }
-
-  .rs-list-divider--inset.rs-list-divider--padded {
-    width: calc(100% - #{$rs-list-text-offset} - #{$rs-list-side-padding});
   }
 
   .rs-list-group__subheader {
@@ -173,7 +158,6 @@
 @mixin rs-list-item-base_ {
   display: flex;
   position: relative;
-  align-items: center;
   justify-content: flex-start;
   padding: 0 $rs-list-side-padding;
   overflow: hidden;

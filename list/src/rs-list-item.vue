@@ -1,34 +1,11 @@
 <template>
-  <li class="rs-list-item" :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled }" v-if="type === 'text'">
-    <span class="rs-list-item__text">
-      <slot></slot>
-    </span>
-  </li>
-  <li class="rs-list-item" :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled }" v-else-if="type === 'meta'">
-    <span class="rs-list-item__meta">
-      <slot></slot>
-    </span>
-  </li>
-  <li class="rs-list-item" :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled }" v-else-if="type === 'graphic'">
-    <span class="rs-list-item__graphic" :role="role">
-      <slot></slot>
-    </span>
-  </li>
-  <li class="rs-list-divider" v-else-if="type === 'divider'"></li>
+  <li class="rs-list-item" :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled }"><slot></slot></li>
 </template>
 <script>
 import { RSRipple } from '../../ripple'
  
 export default {
   props: {
-    type: {
-      type: String,
-      default: 'text'
-    },
-    role: {
-      type: String,
-      default: ''
-    },
     selected: {
       type: String,
       default: ''
@@ -79,16 +56,16 @@ export default {
 
 <style lang="scss">
 @import '../rs-list';
-@import '../rs-variables';
 
 .rs-list-item {
   color: var(--rs-list--color);
   height: var(--rs-list-item--height, 48px);
+  align-items: var(--rs-list-item--align-items, center);
 
   [dir="rtl"] &,
   &[dir="rtl"] {
-    margin-left: var(--rs-list-item-graphic--margin-left);
-    margin-right: var(--rs-list-item-graphic--margin-right);
+    margin-left: var(--rs-list-item--margin-left);
+    margin-right: var(--rs-list-item--margin-right);
   }
 
   &.rs-list-item--selected {
@@ -150,72 +127,6 @@ export default {
       --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity(on-surface, press)});
     }
   }
-
-  > .rs-list-item__graphic {
-    color: var(--rs-list-item-graphic--color, rs-theme-ink-color-for-fill_(icon, $rs-theme-background));
-    background-color: var(--rs-list-item-graphic--background-color, transparent);
-    margin-left: var(--rs-list-item-graphic--margin-left, 0);
-    margin-right: var(--rs-list-item-graphic--margin-right, 32px);
-    width: var(--rs-list-item-graphic--width);
-    height: var(--rs-list-item-graphic--height);
-    border-radius: var(--rs-list-item-graphic--border-radius);
-  }
-
-  > .rs-list-item__meta {
-    color: var(--rs-list-item-meta--color, rs-theme-ink-color-for-fill_(hint, $rs-theme-background));
-  }
-
-  > .rs-text {
-    align-self: var(--rs-list-item-text--align-self);
-  }
-
-  > .rs-list-item__text > .rs-list-item__primary-text {
-    display: var(--rs-list-item-primary-text--dispaly, block);
-    margin-top: var(--rs-list-item-primary-text--margin-top, 0);
-    line-height: var(--rs-list-item-primary-text--line-height, normal);
-    margin-bottom: var(--rs-list-item-primary-text--margin-bottom, -1 * $item-secondary-text-baseline-height);
-
-    &::before {
-      vertical-align: var(--rs-list-item-primary-text_before--vertical-align, 0);
-      display: var(--rs-list-item-primary-text_before--dispaly, inline-block);
-      width: var(--rs-list-item-primary-text_before--width, 0);
-      height: var(--rs-list-item-primary-text_before--height, $item-primary-text-baseline-height);
-      content: var(--rs-list-item-primary-text_before--content, '');
-    }
-
-    &::after {
-      vertical-align: var(--rs-list-item-primary-text_after--vertical-align, -1 * $item-secondary-text-baseline-height);
-      display: var(--rs-list-item-primary-text_after--dispaly, inline-block);
-      width: var(--rs-list-item-primary-text_after--width, 0);
-      height: var(--rs-list-item-primary-text_after--height, $item-secondary-text-baseline-height);
-      content: var(--rs-list-item-primary-text_after--content, '');
-    }
-  }
-
-  > .rs-list-item__text > .rs-list-item__secondary-text {
-    color: var(--rs-list-item-secondary-text--color, rs-theme-ink-color-for-fill_(secondary, $rs-theme-background));
-    display: var(--rs-list-item-primary-text--dispaly, block);
-    margin-top: var(--rs-list-item-primary-text--margin-top, 0);
-    line-height: var(--rs-list-item-primary-text--line-height, normal);
-
-    &::before {
-      vertical-align: var(--rs-list-item-primary-text_before--vertical-align, 0);
-      display: var(--rs-list-item-primary-text_before--dispaly, inline-block);
-      width: var(--rs-list-item-primary-text_before--width, 0);
-      height: var(--rs-list-item-primary-text_before--height, $item-secondary-text-baseline-height);
-      content: var(--rs-list-item-primary-text_before--content, '');
-    }
-  }
 }
-
-.rs-list-divider {
-  $divider-color: if(
-    rs-theme-tone($rs-theme-background) == "dark",
-    $rs-list-divider-color-on-dark-bg,
-    $rs-list-divider-color-on-light-bg
-  );
-  border-bottom-color: var(--rs-list-divider--border-bottom-color, $divider-color);
-}
-
 </style>
 

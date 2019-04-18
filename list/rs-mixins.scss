@@ -14,7 +14,7 @@
       --rs-list-item-secondary-text--font-size: inherit;
       @include rs-list-graphic-size_(20px);
       @include rs-list-typography($dense-item-primary-text-baseline-height, $item-secondary-text-baseline-height, primary);
-      @include rs-list-typography-baseline-bottom($item-secondary-text-baseline-height, secondary, after);
+      @include rs-list-typography-baseline-top($item-secondary-text-baseline-height, secondary, after);
 
     }@else if $type == two-line {
       --rs-list-item--height: 72px;
@@ -29,6 +29,7 @@
 
     }@else if $type == non-interactive {
       --rs-list-item--cursor: default;
+
     }
   }
 
@@ -82,8 +83,9 @@
 }
 
 @mixin rs-list-typography-baseline-bottom($distance, $target, $pseudo) {
-  --rs-list-item-#{$target}-text--margin-bottom: -1 * #{$distance};
-  --rs-list-item-#{$target}-text_after--vertical-align: -1 * #{$distance};
+  $value: -1 * $distance;
+  --rs-list-item-#{$target}-text--margin-bottom: #{$value};
+  --rs-list-item-#{$target}-text_after--vertical-align: #{$value};
   @include rs-list-typography-baseline-strut_($distance, $target, after);
 }
 
