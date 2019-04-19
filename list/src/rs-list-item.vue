@@ -58,10 +58,14 @@ export default {
 @import '../rs-list';
 
 .rs-list-item {
-  color: var(--rs-list--color);
+  color: var(--rs-menu-surface--color, var(--rs-list--color));
   height: var(--rs-list-item--height, 48px);
   align-items: var(--rs-list-item--align-items, center);
   border-radius: var(--rs-list-item--border-radius);
+  cursor: var(--rs-menu-list-item--cursor);
+  user-select: var(--rs-menu-list-item--user-select);
+  padding-left: var(--rs-menu-list-item--padding-left, $rs-list-side-padding);
+  padding-right: var(--rs-menu-list-item--padding-right, $rs-list-side-padding);
 
   [dir="rtl"] &,
   &[dir="rtl"] {
@@ -72,6 +76,7 @@ export default {
 
   &.rs-list-item--selected {
     @include rs-states-selected(primary);
+    --rs-menu-list-item-graphic--display: inline;
 
     &::before {
       opacity: var(--rs-selected_before--opacity);

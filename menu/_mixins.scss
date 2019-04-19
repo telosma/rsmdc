@@ -22,96 +22,42 @@
 
 @import "../feature-targeting/functions";
 @import "../feature-targeting/mixins";
+@import "../theme/variables";
 @import "../rtl/mixins";
 @import "../list/mixins";
 @import "../ripple/mixins";
 @import "./variables";
 
-@mixin rs-menu-core-styles($query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-  $feat-structure: rs-feature-create-target($query, structure);
+@mixin rs-menu-core-styles() {
+  @include rs-ripple-common();
 
-  @include rs-ripple-common($query);
-
-  // Customize the menu-surface and contained list to match the rs-menu styles.
   .rs-menu {
-    @include rs-list-item-meta-ink-color(text-primary-on-background, $query);
-    @include rs-list-item-graphic-ink-color(text-primary-on-background, $query);
+    --rs-menu-list-item-meta--color: #{rs-theme-ink-color-for-fill_(primary, $rs-theme-background)};
+    --rs-menu-list-item-graphic--color: #{rs-theme-ink-color-for-fill_(primary, $rs-theme-background)};
+    --rs-menu-list-divider--margin: 8px 0;
+    --rs-menu-list-item--cursor: pointer;
+    --rs-menu-list-item--user-select: none;
+    --rs-menu-list-item-disabled--cursor: auto;
 
-    @include rs-feature-targets($feat-structure) {
-      min-width: $rs-menu-min-width;
-    }
-
-    .rs-list-divider {
-      @include rs-feature-targets($feat-structure) {
-        margin: 8px 0;
-      }
-    }
-
-    .rs-list-item {
-      @include rs-feature-targets($feat-structure) {
-        cursor: pointer;
-        user-select: none;
-      }
-    }
-
-    .rs-list-item--disabled {
-      @include rs-feature-targets($feat-structure) {
-        cursor: auto;
-      }
-    }
-
-    //stylelint-disable selector-no-qualifying-type
-    a.rs-list-item .rs-list-item__text,
-    a.rs-list-item .rs-list-item__graphic {
-      @include rs-feature-targets($feat-structure) {
-        pointer-events: none;
-      }
-    }
-    // stylelint-enable selector-no-qualifying-type
+    min-width: $rs-menu-min-width;
   }
 
-  // postcss-bem-linter: define menu
   .rs-menu__selection-group {
-    @include rs-feature-targets($feat-structure) {
-      padding: 0;
-      fill: currentColor;
-    }
-
-    .rs-list-item {
-      @include rs-feature-targets($feat-structure) {
-        @include rs-rtl-reflexive-box(padding, left, 56px);
-      }
-    }
-
-    // Extra specificity required to override `display` property on `rs-list-item__graphic`.
-    .rs-menu__selection-group-icon {
-      @include rs-feature-targets($feat-structure) {
-        @include rs-rtl-reflexive-position(left, 16px);
-
-        display: none;
-        position: absolute;
-      }
-    }
-  }
-  // postcss-bem-linter: end
-
-  // stylelint-disable-next-line plugin/selector-bem-pattern
-  .rs-menu-item--selected .rs-menu__selection-group-icon {
-    @include rs-feature-targets($feat-structure) {
-      display: inline;
-    }
+    padding: 0;
+    fill: currentColor;
+    --rs-menu-list-item--padding-left: 56px;
+    --rs-menu-list-item--padding-right: 0;
+    --rs-menu-list-item-graphic--display: none;
+    --rs-menu-list-item-graphic--position: absolute;
+    --rs-menu-list-item-graphic--left: 16px;
+    --rs-menu-list-item-graphic--right: initial;
   }
 }
 
-@mixin rs-menu-width($width, $query: rs-feature-all()) {
-  $feat-structure: rs-feature-create-target($query, color);
-
-  @include rs-feature-targets($feat-structure) {
-    @if unitless($width) {
-      width: $width * $rs-menu-width-base;
-    } @else {
-      width: $width;
-    }
+@mixin rs-menu-width($width) {
+  @if unitless($width) {
+    --rs-menu--width: #{$width * $rs-menu-width-base};
+  } @else {
+    --rs-menu--width: #{$width};
   }
 }

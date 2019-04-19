@@ -11,7 +11,7 @@
     $rs-list-divider-color-on-light-bg
   );
   width: var(--rs-list-divider--width);
-  margin: var(--rs-list-divider--margin, 0);
+  margin: var(--rs-menu-list-divider--margin, var(--rs-list-divider--margin, 0));
   margin-left: var(--rs-list-divider--margin-left, 0);
   margin-right: var(--rs-list-divider--margin-right, 0);
   border-bottom-color: var(--rs-list-divider--border-bottom-color, $divider-color);

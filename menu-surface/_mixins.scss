@@ -29,23 +29,25 @@
 @import "../elevation/mixins";
 @import "../rtl/mixins";
 @import "./variables";
+@import "../menu/variables";
 
 @mixin rs-menu-surface-core-styles() {
 
   .rs-menu-surface {
     @include rs-menu-surface-base_();
     box-shadow: #{rs-elevation(8)};
+    min-width: $rs-menu-min-width;
 
-    // @include rs-rtl-reflexive-property(transform-origin, top left, top right);
+    @include rs-rtl-reflexive-property(transform-origin, top left, top right);
   }
 
   .rs-menu-surface--anchor {
-      position: relative;
-      overflow: visible;
+    position: relative;
+    overflow: visible;
   }
 
   .rs-menu-surface--fixed {
-      position: fixed;
+    position: fixed;
   }
 }
 
@@ -64,45 +66,41 @@
 
 @mixin rs-menu-surface-base_() {
 
-    display: none;
-    position: absolute;
-    box-sizing: border-box;
-    max-width: calc(100vw - #{$rs-menu-surface-min-distance-from-edge});
-    max-height: calc(100vh - #{$rs-menu-surface-min-distance-from-edge});
-    margin: 0;
-    padding: 0;
-    transform: scale(1);
-    transform-origin: top left;
-    opacity: 0;
-    overflow: auto;
-    will-change: transform, opacity;
-    z-index: $rs-menu-surface-z-index;
+  box-sizing: border-box;
+  max-width: calc(100vw - #{$rs-menu-surface-min-distance-from-edge});
+  max-height: calc(100vh - #{$rs-menu-surface-min-distance-from-edge});
+  margin: 0;
+  padding: 0;
+  transform-origin: top left;
+  overflow: auto;
+  will-change: transform, opacity;
+  z-index: $rs-menu-surface-z-index;
 
-    transition:
-      opacity $rs-menu-surface-fade-in-duration linear,
-      transform $rs-menu-surface-scale-duration $rs-animation-deceleration-curve-timing-function;
+  transition:
+    opacity $rs-menu-surface-fade-in-duration linear,
+    transform $rs-menu-surface-scale-duration $rs-animation-deceleration-curve-timing-function;
 
   &:focus {
-      outline: none;
+    outline: none;
   }
 
   // stylelint-disable-next-line selector-max-type
   &--open {
-      display: inline-block;
-      transform: scale(1);
-      opacity: 1;
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--transform: scale(1);
+    --rs-menu-surface--opacity: 1;
   }
 
   &--animating-open {
-      display: inline-block;
-      transform: scale(.8);
-      opacity: 0;
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--transform: scale(.8);
+    --rs-menu-surface--opacity: 0;
   }
 
   &--animating-closed {
-      display: inline-block;
-      opacity: 0;
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--opacity: 0;
 
-      transition: opacity $rs-menu-surface-fade-out-duration linear;
+    transition: opacity $rs-menu-surface-fade-out-duration linear;
   }
 }
