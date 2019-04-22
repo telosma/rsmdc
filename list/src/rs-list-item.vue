@@ -1,5 +1,7 @@
 <template>
-  <li class="rs-list-item" :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled }"><slot></slot></li>
+  <li
+    class="rs-list-item"
+    :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled }"><slot></slot></li>
 </template>
 <script>
 import { RSRipple } from '../../ripple'
@@ -39,16 +41,19 @@ export default {
   },
   mounted() {
     new RSRipple(this.$el)
-    Object.keys(this.$data).forEach(key => {
-      const attr = key
-        .toLowerCase()
-        .replace(/is/, '')
-      this.isEnableAttr(key, attr)
-    })
+    this.checkAttrs()
   },
   methods: {
     isEnableAttr(key, attr) {
       this[key] = this[attr] === attr ? true: false
+    },
+    checkAttrs() {
+      Object.keys(this.$data).forEach(key => {
+        const attr = key
+          .toLowerCase()
+          .replace(/is/, '')
+        this.isEnableAttr(key, attr)
+      })
     }
   }
 }
