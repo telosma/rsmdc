@@ -1,0 +1,141 @@
+//
+// Copyright 2018 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "../elevation/mixins";
+@import "../animation/variables";
+@import "../rtl/mixins";
+@import "../typography/mixins";
+@import "./mixins";
+@import "./variables";
+
+// postcss-bem-linter: define top-app-bar
+.rs-top-app-bar {
+  &__section {
+    display: inline-flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-width: 0;
+    padding: $rs-top-app-bar-section-vertical-padding $rs-top-app-bar-section-horizontal-padding;
+    z-index: 1;
+
+    &--align-start {
+      justify-content: flex-start;
+      order: -1;
+    }
+
+    &--align-end {
+      justify-content: flex-end;
+      order: 1;
+    }
+  }
+
+  &__title {
+    @include rs-typography(headline6);
+    @include rs-rtl-reflexive-box(padding, left, $rs-top-app-bar-title-left-padding);
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  &__action-item,
+  &__navigation-icon {
+    @include rs-top-app-bar-icon_;
+  }
+}
+
+.rs-top-app-bar--short {
+
+  .rs-top-app-bar__section {
+    padding: $rs-top-app-bar-mobile-section-padding;
+  }
+
+  .rs-top-app-bar__title {
+    transition: opacity 200ms $rs-animation-standard-curve-timing-function;
+    opacity: 1;
+  }
+}
+
+.rs-top-app-bar--short-collapsed {
+
+  .rs-top-app-bar__title {
+    display: none;
+  }
+
+  .rs-top-app-bar__action-item {
+    transition: padding 150ms $rs-animation-standard-curve-timing-function;
+  }
+}
+
+.rs-top-app-bar--short-collapsed.rs-top-app-bar--short-has-action-item {
+  width: $rs-top-app-bar-short-collapsed-width * 2;
+
+  .rs-top-app-bar__section--align-end {
+    @include rs-rtl-reflexive-box(padding, right, 12px);
+  }
+}
+
+.rs-top-app-bar--dense {
+  .rs-top-app-bar__section {
+    padding: 0 $rs-top-app-bar-dense-section-horizontal-padding;
+  }
+
+  .rs-top-app-bar__title {
+    @include rs-rtl-reflexive-box(padding, left, $rs-top-app-bar-dense-title-left-padding);
+  }
+}
+
+.rs-top-app-bar--prominent {
+  .rs-top-app-bar__title {
+    align-self: flex-end;
+    padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
+  }
+
+  .rs-top-app-bar__action-item,
+  .rs-top-app-bar__navigation-icon {
+    align-self: flex-start;
+  }
+}
+
+.rs-top-app-bar--fixed-scrolled {
+  --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
+  --rs-top-app-bar--transition: box-shadow 200ms linear;
+}
+
+// Specific styles for prominent and dense styled top app bar
+// stylelint-disable plugin/selector-bem-pattern
+.rs-top-app-bar--dense.rs-top-app-bar--prominent {
+  .rs-top-app-bar__section {
+    padding: 0 $rs-top-app-bar-section-horizontal-padding;
+  }
+
+  .rs-top-app-bar__title {
+    @include rs-rtl-reflexive-box(padding, left, $rs-top-app-bar-title-left-padding);
+
+    padding-bottom: $rs-top-app-bar-prominent-dense-title-bottom-padding;
+  }
+}
+
+
+// Mobile Styles
+@include rs-top-app-bar-mobile-breakpoint_;

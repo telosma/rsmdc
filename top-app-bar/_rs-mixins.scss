@@ -1,0 +1,73 @@
+@import './variables';
+@import './rs-functions';
+@import '../elevation/mixins';
+
+@mixin rs-top-app-bar-type($types...) {
+  @each $type in $types {
+    @if $type == short {
+      --rs-top-app-bar--top: 0;
+      --rs-top-app-bar--right: auto;
+      --rs-top-app-bat--left: 0;
+      --rs-top-app-bar--width: 100%;
+      --rs-top-app-bar--transition: #{width 250ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar_media--transition: #{width 200ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar_rtl--right: 0;
+      --rs-top-app-bar_rtl--left: auto;
+      --rs-top-app-bar-row--height: #{$rs-top-app-bar-mobile-row-height};
+      --rs-top-app-bar-section--padding: #{$rs-top-app-bar-mobile-section-padding};
+
+    }@else if $type == dense {
+      --rs-top-app-bar-row--height: #{$rs-top-app-bar-dense-row-height};
+      --rs-top-app-bar-section--padding: #{0 $rs-top-app-bar-dense-section-horizontal-padding};
+
+
+    }@else if $type == prominent {
+      --rs-top-app-bar-row--height: #{$rs-top-app-bar-prominent-row-height};
+
+    }@else if $type == fixed {
+      --rs-top-app-bar--transition: box-shadow 200ms linear;
+
+    }@else if $type == adjust {
+      --rs-top-app-bar--padding-top: #{$rs-top-app-bar-row-height};
+      --rs-top-app-bar_media--padding-top: #{$rs-top-app-bar-mobile-row-height};
+
+    }@else if $type == collapsed {
+      --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
+      --rs-top-app-bar_media--transition: #{width 250ms $rs-animation-standard-curve-timing-function};
+
+    }
+  }
+
+  $short: find-item($types, short);
+  $collapsed: find-item($types, collapsed);
+  $prominent: find-item($types, prominent);
+  $adjust: fins-item($types, adjust);
+  $dense: find-item($types, dense);
+
+  @if $short and $collapsed {
+    --rs-rop-app-bar--width: #{$rs-top-app-bar-short-collapsed-width};
+    --rs-top-app-bar--transition: #{width 300ms $rs-animation-standard-curve-timing-function};
+    --rs-top-app-bar-title--display: none;
+    --rs-top-app-bar-actionItem--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+  }
+  @if $prominent and $dense {
+    $height: $rs-top-app-bar-dense-row-height * 2;
+    --rs-top-app-bar-row--height: #{$height};
+    --rs-top-app-bar--padding: 0 #{$rs-top-app-bar-section-horizontal-padding};
+  }
+  @if $adjust and $dense {
+    --rs-top-app-bar--padding-top: #{$rs-top-app-bar-dense-row-height};
+  }
+  @if $adjust and $prominent {
+    --rs-top-app-bar--padding-top: #{$rs-top-app-bar-prominent-row-height};
+  }
+  @if $adjust and $short {
+    --rs-top-app-bar--padding-top: #{$rs-top-app-bar-mobile-row-height};
+  }
+  @if $adjust and $dense and $prominent {
+    $height: $rs-top-app-bar-dense-row-height * 2;
+    --rs-top-app-bar--padding-top: #{$height};
+  }
+
+}
+
