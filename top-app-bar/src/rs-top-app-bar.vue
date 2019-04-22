@@ -60,6 +60,8 @@
   .rs-top-app-bar {
     transition: var(--rs-top-app-bar_media--transition);
     padding-top: var(--rs-top-app-bar_media--padding-top);
+    padding-right: var(--rs-top-app-bar_media--padding-right);
+    padding-left: var(--rs-top-app-bar_media--padding-left);
   }
 
   .rs-top-app-bar__row {

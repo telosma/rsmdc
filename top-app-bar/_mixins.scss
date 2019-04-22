@@ -58,31 +58,9 @@
     @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
   }
   $radius: 0 0 $radius 0;
-
-  $selector: if(&, "&.rs-top-app-bar--short-collapsed", ".rs-top-app-bar--short-collapsed");
-
   --rs-top-app-bar--border-radius: #{rs-shape-resolve-percentage-radius($rs-top-app-bar-dense-row-height, $radius)};
 }
 
-@mixin rs-top-app-bar-mobile-breakpoint_($mobile-breakpoint: $rs-top-app-bar-mobile-breakpoint) {
-  @media (max-width: $mobile-breakpoint) {
-
-    .rs-top-app-bar--short-collapsed {
-
-      .rs-top-app-bar__section--align-end {
-        @include rs-rtl-reflexive-box(padding, right, $rs-top-app-bar-short-collapsed-right-icon-padding);
-      }
-    }
-
-    .rs-top-app-bar--prominent {
-      .rs-top-app-bar__title {
-        padding-bottom: $rs-top-app-bar-prominent-mobile-title-bottom-padding;
-      }
-    }
-  }
-}
-
-//
 
 // Applies styles to the different types of icons that can exist in top-app-bars.
 // Both .rs-top-app-bar__icon and .rs-top-app-bar__navigation-icon share all styles except for

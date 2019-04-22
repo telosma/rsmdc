@@ -26,61 +26,17 @@
 @import "../typography/mixins";
 @import "./mixins";
 @import "./variables";
+@import "./rs-mixins";
 
 // postcss-bem-linter: define top-app-bar
 .rs-top-app-bar {
-  &__section {
-    display: inline-flex;
-    flex: 1 1 auto;
-    align-items: center;
-    min-width: 0;
-    padding: $rs-top-app-bar-section-vertical-padding $rs-top-app-bar-section-horizontal-padding;
-    z-index: 1;
-
-    &--align-start {
-      justify-content: flex-start;
-      order: -1;
-    }
-
-    &--align-end {
-      justify-content: flex-end;
-      order: 1;
-    }
-  }
-
-  &__title {
-    @include rs-typography(headline6);
-    @include rs-rtl-reflexive-box(padding, left, $rs-top-app-bar-title-left-padding);
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  &__action-item,
+    &__action-item,
   &__navigation-icon {
     @include rs-top-app-bar-icon_;
   }
 }
 
-.rs-top-app-bar--short {
-
-  .rs-top-app-bar__section {
-    padding: $rs-top-app-bar-mobile-section-padding;
-  }
-
-  .rs-top-app-bar__title {
-    transition: opacity 200ms $rs-animation-standard-curve-timing-function;
-    opacity: 1;
-  }
-}
-
 .rs-top-app-bar--short-collapsed {
-
-  .rs-top-app-bar__title {
-    display: none;
-  }
 
   .rs-top-app-bar__action-item {
     transition: padding 150ms $rs-animation-standard-curve-timing-function;
@@ -95,21 +51,8 @@
   }
 }
 
-.rs-top-app-bar--dense {
-  .rs-top-app-bar__section {
-    padding: 0 $rs-top-app-bar-dense-section-horizontal-padding;
-  }
-
-  .rs-top-app-bar__title {
-    @include rs-rtl-reflexive-box(padding, left, $rs-top-app-bar-dense-title-left-padding);
-  }
-}
 
 .rs-top-app-bar--prominent {
-  .rs-top-app-bar__title {
-    align-self: flex-end;
-    padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
-  }
 
   .rs-top-app-bar__action-item,
   .rs-top-app-bar__navigation-icon {
@@ -121,21 +64,3 @@
   --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
   --rs-top-app-bar--transition: box-shadow 200ms linear;
 }
-
-// Specific styles for prominent and dense styled top app bar
-// stylelint-disable plugin/selector-bem-pattern
-.rs-top-app-bar--dense.rs-top-app-bar--prominent {
-  .rs-top-app-bar__section {
-    padding: 0 $rs-top-app-bar-section-horizontal-padding;
-  }
-
-  .rs-top-app-bar__title {
-    @include rs-rtl-reflexive-box(padding, left, $rs-top-app-bar-title-left-padding);
-
-    padding-bottom: $rs-top-app-bar-prominent-dense-title-bottom-padding;
-  }
-}
-
-
-// Mobile Styles
-@include rs-top-app-bar-mobile-breakpoint_;
