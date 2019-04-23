@@ -46,11 +46,8 @@
 }
 
 @mixin rs-top-app-bar-icon-ink-color($color) {
-  .rs-top-app-bar__action-item,
-  .rs-top-app-bar__navigation-icon {
-    @include rs-theme-prop(color, $color);
-    @include rs-states($color);
-  }
+  --rs-top-app-bar-actionItem--color: #{$color};
+  --rs-top-app-bar-navigationIcon--color: #{$color};
 }
 
 @mixin rs-top-app-bar-short-shape-radius($radius) {
@@ -61,10 +58,6 @@
   --rs-top-app-bar--border-radius: #{rs-shape-resolve-percentage-radius($rs-top-app-bar-dense-row-height, $radius)};
 }
 
-
-// Applies styles to the different types of icons that can exist in top-app-bars.
-// Both .rs-top-app-bar__icon and .rs-top-app-bar__navigation-icon share all styles except for
-// horizontal padding.
 @mixin rs-top-app-bar-icon_() {
   @include rs-ripple-surface;
   @include rs-ripple-radius-unbounded;
@@ -82,7 +75,6 @@
   outline: none;
   background-color: transparent;
   fill: currentColor;
-  color: inherit;
   text-decoration: none;
   cursor: pointer;
 }

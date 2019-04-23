@@ -7,6 +7,15 @@
     </div>
   </header>
 </template> 
+<script>
+import { RSTopAppBar } from '../index'
+export default {
+  mounted() {
+    // new RSTopAppBar(this.$el)
+  }
+}
+</script>
+
 <style lang="scss">
 @import '../rs-top-app-bar';
 @import '../variables';

@@ -28,35 +28,11 @@
 @import "./variables";
 @import "./rs-mixins";
 
-// postcss-bem-linter: define top-app-bar
-.rs-top-app-bar {
-    &__action-item,
-  &__navigation-icon {
-    @include rs-top-app-bar-icon_;
-  }
-}
-
-.rs-top-app-bar--short-collapsed {
-
-  .rs-top-app-bar__action-item {
-    transition: padding 150ms $rs-animation-standard-curve-timing-function;
-  }
-}
-
 .rs-top-app-bar--short-collapsed.rs-top-app-bar--short-has-action-item {
   width: $rs-top-app-bar-short-collapsed-width * 2;
 
   .rs-top-app-bar__section--align-end {
     @include rs-rtl-reflexive-box(padding, right, 12px);
-  }
-}
-
-
-.rs-top-app-bar--prominent {
-
-  .rs-top-app-bar__action-item,
-  .rs-top-app-bar__navigation-icon {
-    align-self: flex-start;
   }
 }
 

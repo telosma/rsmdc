@@ -27,6 +27,7 @@ import { cssClasses, strings } from './constants';
 import { RSFixedTopAppBarFoundation } from './fixed/foundation';
 import { RSShortTopAppBarFoundation } from './short/foundation';
 import { RSTopAppBarFoundation } from './standard/foundation';
+import { connectableObservableDescriptor } from "../../../Library/Caches/typescript/3.3/node_modules/rxjs/internal/observable/ConnectableObservable";
 var RSTopAppBar = /** @class */ (function (_super) {
     tslib_1.__extends(RSTopAppBar, _super);
     function RSTopAppBar() {
