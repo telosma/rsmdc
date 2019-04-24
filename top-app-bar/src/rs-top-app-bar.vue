@@ -1,7 +1,7 @@
 <template>
   <header class="rs-top-app-bar">
     <div class="rs-top-app-bar__row">
-      <div class="rs-top-app-bar__section">
+      <div class="rs-top-app-bar__section" ref="slotContainer">
         <slot></slot>
       </div>
     </div>
@@ -11,7 +11,14 @@
 import { RSTopAppBar } from '../index'
 export default {
   mounted() {
-    // new RSTopAppBar(this.$el)
+    new RSTopAppBar(this.$el)
+    // this.$nextTick().then(this.fixSlot.bind(this))
+  },
+  methods: {
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
+    }
   }
 }
 </script>
@@ -45,7 +52,6 @@ export default {
     right: var(--rs-top-app-bar_rtl--right);
     left: var(--rs-top-app-bar_rtl--left);
   }
-
 }
 
 .rs-top-app-bar__row {
@@ -65,6 +71,21 @@ export default {
   padding: var(--rs-top-app-bar-section--padding, $rs-top-app-bar-section-vertical-padding $rs-top-app-bar-section-horizontal-padding);
 }
 
+h1,
+h2 {
+  @include rs-typography(headline6);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 1;
+  padding-right: 0;
+  transition: var(--rs-top-app-bar-title--transition);
+  opacity: var(--rs-top-app-bar-title--opacity);
+  display: var(--rs-top-app-bar-title--display);
+  padding-left: var(--rs-top-app-bar-title--padding-left, $rs-top-app-bar-title-left-padding);
+  padding-bottom: var(--rs-top-app-bar-title--padding-bottom);
+}
+
 @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
   .rs-top-app-bar {
     transition: var(--rs-top-app-bar_media--transition);
@@ -77,7 +98,7 @@ export default {
     height: $rs-top-app-bar-mobile-row-height;
   }
 
-  .rs-top-app-bar__section {
+  .rs-top-app-bar__row > .rs-top-app-bar__section {
     padding: $rs-top-app-bar-mobile-section-padding;
   }
 }

@@ -21,7 +21,6 @@ import topAppBarTitle from './top-app-bar/src/rs-top-app-bar-title.vue'
 import topAppBarNavigationIcon from './top-app-bar/src/rs-top-app-bar-navigation-icon.vue'
 import topAppBarActionItem from './top-app-bar/src/rs-top-app-bar-action-item.vue'
 
-
 export const Button = wrap(Vue, button)
 export const ButtonIcon = wrap(Vue, buttonIcon)
 export const Radio = wrap(Vue, radio)

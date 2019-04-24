@@ -104,3 +104,8 @@
   }
 }
 
+@mixin rs-top-app-bar-icon-image($path) {
+  --rs-top-app-bar-actionItem--background-image: #{$path};
+  --rs-top-app-bar-navigationIcon--background-image: #{$path};
+}
+

@@ -11,16 +11,14 @@ export default {
 <style lang="scss">
 @import '../mixins';
 
-:host {
-  align-self: var(--rs-top-app-bar-navigationIcon--align-self);
-  margin-left: var(--rs-top-app-bar-navigationIcon--margin-left);
-  margin-right: var(--rs-top-app-bar-navigationIcon--margin-right);
-  order: var(--rs-top-app-bar-navigationIcon--order);
-}
-
 .rs-top-app-bar__navigation-icon {
   @include rs-top-app-bar-icon_;
   color: var(--rs-top-app-bar-navigationIcon--color, inherit);
+
+  background-image: var(--rs-top-app-bar-navigationIcon--background-image);
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: center;
 
   &::before {
     background-color: $rs-theme-on-primary;

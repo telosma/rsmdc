@@ -35,7 +35,7 @@ export default {
       }
     },
     hostElement() {
-      if (!this.hasObserver) {
+      if(!this.hasObserver) {
         const observer = new MutationObserver(mutations => {
           this.hostElement = mutations[0].target
           this.isOpen = this.getHostElementCustomProperty('--_rs-menu-open') ? this.getHostElementCustomProperty('--_rs-menu-open') : false
