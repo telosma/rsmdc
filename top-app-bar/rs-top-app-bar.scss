@@ -28,14 +28,6 @@
 @import "./variables";
 @import "./rs-mixins";
 
-.rs-top-app-bar--short-collapsed.rs-top-app-bar--short-has-action-item {
-  width: $rs-top-app-bar-short-collapsed-width * 2;
-
-  .rs-top-app-bar__section--align-end {
-    @include rs-rtl-reflexive-box(padding, right, 12px);
-  }
-}
-
 .rs-top-app-bar--fixed-scrolled {
   --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
   --rs-top-app-bar--transition: box-shadow 200ms linear;

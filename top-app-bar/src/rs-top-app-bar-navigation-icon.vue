@@ -1,15 +1,31 @@
 <template>
-  <i class="rs-top-app-bar__navigation-icon" tabindex="0">
+  <span class="rs-top-app-bar__navigation-icon" tabindex="0">
     <slot></slot>
-  </i>
+  </span>
 </template>
 <script>
 export default {
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.topAppBar) {
+      window.__rsmdc.topAppBar = {
+        navigations: [],
+        titles: [],
+        items: [],
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 @import '../mixins';
+
+:host {
+  align-self: var(--rs-top-app-bar-navigationIcon--align-self);
+}
 
 .rs-top-app-bar__navigation-icon {
   @include rs-top-app-bar-icon_;

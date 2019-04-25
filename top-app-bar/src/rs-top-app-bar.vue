@@ -10,9 +10,79 @@
 <script>
 import { RSTopAppBar } from '../index'
 export default {
+  data() {
+    return {
+      el: '',
+      host: '',
+      scrollTop: 0,
+      windowScrollTop: 0,
+      topLimit: -128
+    }
+  },
+  watch: {
+    el() {
+      this.host = this.el.parentNode.host
+    }
+  },
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.topAppBar) {
+      window.__rsmdc.topAppBar = {
+        navigations: [],
+        titles: [],
+        items: [],
+      }
+    }
+  },
   mounted() {
-    new RSTopAppBar(this.$el)
-    // this.$nextTick().then(this.fixSlot.bind(this))
+    this.$nextTick().then(this.fixSlot.bind(this))
+    this.el = this.$el
+
+    window.onscroll = () => {
+      let top = window.pageYOffset
+      const diff = this.windowScrollTop - top
+
+      if(top < this.windowScrollTop) {
+
+        if(this.scrollTop === 0) {
+          this.windowScrollTop = top
+        } else {
+          const scrollTopHarf = this.topLimit / 2
+          const startTopPosition = this.scrollTop === this.topLimit ? scrollTopHarf : this.scrollTop + diff
+          this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
+          this.el.style.top = `${this.scrollTop}px`
+          this.windowScrollTop = top
+        }
+
+      } else {
+        const moving = this.scrollTop + diff
+        const startTopPosition = -top > this.topLimit 
+          ? -top : moving < this.topLimit 
+          ? this.topLimit : moving
+        this.scrollTop = startTopPosition
+        this.el.style.top = `${this.scrollTop}px`
+        this.windowScrollTop = top    
+
+
+
+
+        // if(-top > this.topLimit) {
+        //   // this.scrollTop = -top
+        //   this.el.style.top = `${this.scrollTop}px`
+        //   this.windowScrollTop = top    
+        // } else {
+        //   const startTopPosition = this.scrollTop + diff
+        //   this.scrollTop = startTopPosition< this.topLimit ? this.topLimit : startTopPosition
+        //   // this.scrollTop = this.scrollTop + diff
+        //   // this.scrollTop = this.scrollTop < this.topLimit ? this.topLimit : this.scrollTop
+        //   this.el.style.top = `${this.scrollTop}px`
+        //   this.windowScrollTop = top    
+        // }
+
+      }
+    }
   },
   methods: {
     fixSlot() {
@@ -46,7 +116,7 @@ export default {
   left: var(--rs-top-app-bar--left, 0);
   transition: var(--rs-top-app-bar--transition);
   padding-top: var(--rs-top-app-bar--padding-top);
-  box-shadow: var(--rs-top-app--box-shadow);
+  box-shadow: var(--rs-top-app-bar--box-shadow);
 
   &[dir="rtl"] {
     right: var(--rs-top-app-bar_rtl--right);
@@ -63,27 +133,31 @@ export default {
 }
 
 .rs-top-app-bar__section {
+  $padding: $rs-top-app-bar-section-vertical-padding $rs-top-app-bar-section-horizontal-padding;
+
   display: inline-flex;
   flex: 1 1 auto;
   align-items: center;
   min-width: 0;
   z-index: 1;
-  padding: var(--rs-top-app-bar-section--padding, $rs-top-app-bar-section-vertical-padding $rs-top-app-bar-section-horizontal-padding);
+  padding: var(--rs-top-app-bar-section--padding, $padding);
 }
 
-h1,
-h2 {
+::slotted(h1),
+::slotted(h2) {
   @include rs-typography(headline6);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   z-index: 1;
   padding-right: 0;
+  margin: 0; // override h1 h2 default style
   transition: var(--rs-top-app-bar-title--transition);
   opacity: var(--rs-top-app-bar-title--opacity);
   display: var(--rs-top-app-bar-title--display);
   padding-left: var(--rs-top-app-bar-title--padding-left, $rs-top-app-bar-title-left-padding);
   padding-bottom: var(--rs-top-app-bar-title--padding-bottom);
+  align-self: var(--rs-top-app-bar-title--align-self);
 }
 
 @media (max-width: $rs-top-app-bar-mobile-breakpoint) {

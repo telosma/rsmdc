@@ -17,7 +17,6 @@ import menuSurface from './menu-surface/src/rs-menu-surface.vue'
 import menu from './menu/src/rs-menu.vue'
 import menuListGroup from './menu/src/rs-menu-list-group.vue'
 import topAppBar from './top-app-bar/src/rs-top-app-bar.vue'
-import topAppBarTitle from './top-app-bar/src/rs-top-app-bar-title.vue'
 import topAppBarNavigationIcon from './top-app-bar/src/rs-top-app-bar-navigation-icon.vue'
 import topAppBarActionItem from './top-app-bar/src/rs-top-app-bar-action-item.vue'
 
@@ -38,6 +37,5 @@ export const MenuSurface = wrap(Vue, menuSurface)
 export const Menu = wrap(Vue, menu)
 export const MenuListGroup = wrap(Vue, menuListGroup)
 export const TopAppBar = wrap(Vue, topAppBar)
-export const TopAppBarTitle = wrap(Vue, topAppBarTitle)
 export const TopAppBarNavigationIcon = wrap(Vue, topAppBarNavigationIcon)
 export const TopAppBarActionItem = wrap(Vue, topAppBarActionItem)
