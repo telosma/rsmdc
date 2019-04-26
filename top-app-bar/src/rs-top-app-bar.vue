@@ -1,14 +1,18 @@
 <template>
-  <header class="rs-top-app-bar">
-    <div class="rs-top-app-bar__row">
-      <div class="rs-top-app-bar__section" ref="slotContainer">
-        <slot></slot>
+  <div>
+    <header class="rs-top-app-bar"
+      :class="{ 'rs-top-app-bar--fixed-scrolled' : isScrolled && isFixed, 'rs-top-app-bar--short-collapsed' : isScrolled && isShort, 'rs-top-app-bar--has-action-item' : (isScrolled && isShort && hasActionItem) || (isCollapsed && hasActionItem) }"
+      :style="'--rs-top-app-'">
+      <div class="rs-top-app-bar__row">
+        <div class="rs-top-app-bar__section" ref="slotContainer">
+          <slot></slot>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+    <div class="content"></div>
+  </div>
 </template> 
 <script>
-import { RSTopAppBar } from '../index'
 export default {
   data() {
     return {
@@ -16,12 +20,24 @@ export default {
       host: '',
       scrollTop: 0,
       windowScrollTop: 0,
-      topLimit: -128
+      topLimit: -128,
+      isScrolled: false,
+      isFixed: false,
+      isShort: false,
+      isCollapsed: false,
+      hasActionItem: false,
+      lastChild: ''
     }
   },
   watch: {
     el() {
-      this.host = this.el.parentNode.host
+      this.host = this.el.parentNode.parentNode.host
+    },
+    host() {
+      this.isFixed = this.getElementProperty(this.host, '--rs-top-app-bar__fixed') ? true : false
+      this.isShort = this.getElementProperty(this.host, '--rs-top-app-bar__short') ? true : false
+      this.isCollapsed = this.getElementProperty(this.host, '--rs-top-app-bar__collapsed') ? true : false
+      this.hasObserver = true
     }
   },
   created() {
@@ -38,23 +54,37 @@ export default {
   },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
-    this.el = this.$el
+    this.el = this.$el.querySelector('.rs-top-app-bar')
+
+    const slotChildren = this.$el.querySelector('.rs-top-app-bar__section').childNodes
+    this.lastChild = Array.from(slotChildren).pop()
+  
+    this.hasActionItem = this.lastChild.nodeName === 'H1' ? false : this.lastChild.nodeName === 'H2' ? false : true
+    if(this.hasActionItem) {
+      const actionItemLengh = Array.from(this.lastChild.childNodes).filter(child => child.nodeType === 1).length
+      const withCollapsedWidth = (56 * actionItemLengh) + 56 - 12 + 4
+      this.$el.style.cssText = `--rs-top-app-bar__collapsed--width: ${withCollapsedWidth}px;`
+    }
 
     window.onscroll = () => {
       let top = window.pageYOffset
       const diff = this.windowScrollTop - top
+      this.isScrolled = top > 0
+
+      if(this.isFixed || this.isShort) { return }
 
       if(top < this.windowScrollTop) {
 
         if(this.scrollTop === 0) {
           this.windowScrollTop = top
-        } else {
-          const scrollTopHarf = this.topLimit / 2
-          const startTopPosition = this.scrollTop === this.topLimit ? scrollTopHarf : this.scrollTop + diff
-          this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
-          this.el.style.top = `${this.scrollTop}px`
-          this.windowScrollTop = top
+          return
         }
+
+        const scrollTopHarf = this.topLimit / 2
+        const startTopPosition = this.scrollTop === this.topLimit ? scrollTopHarf : this.scrollTop + diff
+        this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
+        this.el.style.top = `${this.scrollTop}px`
+        this.windowScrollTop = top
 
       } else {
         const moving = this.scrollTop + diff
@@ -64,23 +94,6 @@ export default {
         this.scrollTop = startTopPosition
         this.el.style.top = `${this.scrollTop}px`
         this.windowScrollTop = top    
-
-
-
-
-        // if(-top > this.topLimit) {
-        //   // this.scrollTop = -top
-        //   this.el.style.top = `${this.scrollTop}px`
-        //   this.windowScrollTop = top    
-        // } else {
-        //   const startTopPosition = this.scrollTop + diff
-        //   this.scrollTop = startTopPosition< this.topLimit ? this.topLimit : startTopPosition
-        //   // this.scrollTop = this.scrollTop + diff
-        //   // this.scrollTop = this.scrollTop < this.topLimit ? this.topLimit : this.scrollTop
-        //   this.el.style.top = `${this.scrollTop}px`
-        //   this.windowScrollTop = top    
-        // }
-
       }
     }
   },
@@ -88,15 +101,23 @@ export default {
     fixSlot() {
       this.$refs.slotContainer.innerHTML = ''
       this.$refs.slotContainer.append(document.createElement('slot'))
+    },
+    getElementProperty(el, prop) {
+      const style = window.getComputedStyle(el)
+      const value = String(style.getPropertyValue(prop)).trim()
+      return value
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../rs-top-app-bar';
+@import '../mixins';
 @import '../variables';
 @import '../../theme/variables';
+@import '../../typography/mixins';
+@import '../../elevation/mixins';
+@import '../../animation/variables';
 
 .rs-top-app-bar {
   display: flex;
@@ -122,6 +143,31 @@ export default {
     right: var(--rs-top-app-bar_rtl--right);
     left: var(--rs-top-app-bar_rtl--left);
   }
+
+  &.rs-top-app-bar--fixed-scrolled {
+    --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
+    --rs-top-app-bar--transition: box-shadow 200ms linear;
+  }
+
+  &.rs-top-app-bar--short-collapsed {
+    @include rs-top-app-bar-short-shape-radius(24px);
+    --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width, #{$rs-top-app-bar-short-collapsed-width});
+    --rs-top-app-bar--transition: #{width 300ms $rs-animation-standard-curve-timing-function};
+
+    --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
+    --rs-top-app-bar_media--transition: #{width 250ms $rs-animation-standard-curve-timing-function};
+    --rs-top-app-bar__collapsed--padding-right: 12px;
+    --rs-top-app-bar__collapsed--padding-left: 0;
+    --rs-top-app-bar__collapsed--margin-left: 0;
+
+    --rs-top-app-bar-title--display: none;
+    --rs-top-app-bar-actionItem--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+    --rs-top-app-bar-actionItem--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
+  }
+
+  &.rs-top-app-bar--has-action-item {
+    --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width);
+  }
 }
 
 .rs-top-app-bar__row {
@@ -141,17 +187,20 @@ export default {
   min-width: 0;
   z-index: 1;
   padding: var(--rs-top-app-bar-section--padding, $padding);
+  padding-right: var(--rs-top-app-bar__collapsed--padding-right, $rs-top-app-bar-section-horizontal-padding);
 }
 
 ::slotted(h1),
 ::slotted(h2) {
   @include rs-typography(headline6);
+  
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   z-index: 1;
   padding-right: 0;
   margin: 0; // override h1 h2 default style
+  color: var(--rs-top-app-bar-title--color, $rs-theme-on-primary);
   transition: var(--rs-top-app-bar-title--transition);
   opacity: var(--rs-top-app-bar-title--opacity);
   display: var(--rs-top-app-bar-title--display);
@@ -175,6 +224,10 @@ export default {
   .rs-top-app-bar__row > .rs-top-app-bar__section {
     padding: $rs-top-app-bar-mobile-section-padding;
   }
+}
+
+.content {
+  padding-top: var(--rs-top-app-bar-content--padding-top, $rs-top-app-bar-row-height);
 }
 
 </style>

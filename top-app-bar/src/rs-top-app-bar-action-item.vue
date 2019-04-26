@@ -33,8 +33,7 @@ export default {
       const slotChildren = this.$refs.slotContainer.querySelector('slot').assignedNodes()
       const elements = Array.from(slotChildren).filter(child => child.nodeType === 1)
       this.setTabIndex(elements)
-    })
-    
+    })    
   },
   methods: {
     setTabIndex(elements) {
@@ -55,14 +54,12 @@ export default {
 @import '../variables';
 
 :host {
-  margin-left: auto;
+  margin-left: var(--rs-top-app-bar__collapsed--margin-left, auto);
   margin-right: 0;
   align-self: var(--rs-top-app-bar-actionItem--align-self);
 }
 
 .action-items {
-  --rs-top-app-bar__collapsed--width: #{$rs-top-app-bar-short-collapsed-width * 2};
-  --rs-top-app-bar__collapsed-actionItems--padding-right: 12px;
   display: flex;
   justify-content: center;
   padding-right: var(--rs-top-app-bar-actionItem--padding-right);

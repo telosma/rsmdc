@@ -27,8 +27,3 @@
 @import "./mixins";
 @import "./variables";
 @import "./rs-mixins";
-
-.rs-top-app-bar--fixed-scrolled {
-  --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
-  --rs-top-app-bar--transition: box-shadow 200ms linear;
-}

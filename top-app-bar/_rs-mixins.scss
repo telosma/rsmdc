@@ -2,10 +2,14 @@
 @import './mixins';
 @import './rs-functions';
 @import '../elevation/mixins';
+@import "../animation/variables";
 
 @mixin rs-top-app-bar-type($types...) {
   @each $type in $types {
     @if $type == short {
+      --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-mobile-row-height};
+      
+      --rs-top-app-bar__short: true;
       --rs-top-app-bar--top: 0;
       --rs-top-app-bar--right: auto;
       --rs-top-app-bat--left: 0;
@@ -18,12 +22,15 @@
       --rs-top-app-bar-section--padding: #{$rs-top-app-bar-mobile-section-padding};
       --rs-top-app-bar-title--transition: #{opacity 200ms $rs-animation-standard-curve-timing-function};
       --rs-top-app-bar-title--opacity: 1;
-      --rs-top-app-bar-title--display: none;
     }@else if $type == dense {
+      --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-dense-row-height};
+      
       --rs-top-app-bar-row--height: #{$rs-top-app-bar-dense-row-height};
       --rs-top-app-bar-section--padding: #{0 $rs-top-app-bar-dense-section-horizontal-padding};
       --rs-top-app-bar-title--padding-left: #{$rs-top-app-bar-dense-title-left-padding};
     }@else if $type == prominent {
+      --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-prominent-row-height};
+
       --rs-top-app-bar-row--height: #{$rs-top-app-bar-prominent-row-height};
       --rs-top-app-bar--padding-bottom: #{$rs-top-app-bar-prominent-mobile-title-bottom-padding};
       --rs-top-app-bar-title--align-self: flex-end;
@@ -31,16 +38,19 @@
       --rs-top-app-bar-actionItem--align-self: flex-start;
       --rs-top-app-bar-navigationIcon--align-self: flex-start;
     }@else if $type == fixed {
+      --rs-top-app-bar__fixed: true;
       --rs-top-app-bar--transition: box-shadow 200ms linear;
     }@else if $type == adjust {
       --rs-top-app-bar--padding-top: #{$rs-top-app-bar-row-height};
       --rs-top-app-bar_media--padding-top: #{$rs-top-app-bar-mobile-row-height};
     }@else if $type == collapsed {
+      --rs-top-app-bar__collapsed: true;
       @include rs-top-app-bar-short-shape-radius(24px);
       --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
       --rs-top-app-bar_media--transition: #{width 250ms $rs-animation-standard-curve-timing-function};
       --rs-top-app-bar__collapsed--padding-right: #{$rs-top-app-bar-short-collapsed-right-icon-padding};
       --rs-top-app-bar__collapsed--padding-left: 0;
+      --rs-top-app-bar__collapsed--margin-left: 0;
       --rs-top-app-bar-actionItem--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
     }
   }
@@ -52,7 +62,7 @@
   $dense: find-item($types, dense);
 
   @if $short and $collapsed {
-    --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width, $rs-top-app-bar-short-collapsed-width);
+    --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width, #{$rs-top-app-bar-short-collapsed-width});
     --rs-top-app-bar-actionItem--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
     --rs-top-app-bar--transition: #{width 300ms $rs-animation-standard-curve-timing-function};
     --rs-top-app-bar-title--display: none;
@@ -60,24 +70,41 @@
   }
   @if $prominent and $dense {
     $height: $rs-top-app-bar-dense-row-height * 2;
+    --rs-top-app-bar-content--padding-top: #{$height};
+    
     --rs-top-app-bar-row--height: #{$height};
     --rs-top-app-bar-section--padding: 0 #{$rs-top-app-bar-section-horizontal-padding};
     --rs-top-app-bar-title--padding-bottom: #{$rs-top-app-bar-prominent-dense-title-bottom-padding};
     --rs-top-app-bar-title--padding-left: #{$rs-top-app-bar-title-left-padding};
   }
-  // @if $adjust and $dense {
-  //   --rs-top-app-bar--padding-top: #{$rs-top-app-bar-dense-row-height};
-  // }
-  // @if $adjust and $prominent {
-  //   --rs-top-app-bar--padding-top: #{$rs-top-app-bar-prominent-row-height};
-  // }
-  // @if $adjust and $short {
-  //   --rs-top-app-bar--padding-top: #{$rs-top-app-bar-mobile-row-height};
-  // }
-  // @if $adjust and $dense and $prominent {
-  //   $height: $rs-top-app-bar-dense-row-height * 2;
-  //   --rs-top-app-bar--padding-top: #{$height};
-  // }
+}
+
+@mixin rs-top-app-bar-content($types...) {
+
+  @if (length($types) > 0) {
+    @each $type in $types {
+      @if $type == short {
+        padding-top: $rs-top-app-bar-mobile-row-height;
+      }@else if $type == dense {
+        padding-top: $rs-top-app-bar-dense-row-height;
+      }@else if $type == prominent {
+        padding-top: $rs-top-app-bar-prominent-row-height;
+      }@else {
+        padding-top: $rs-top-app-bar-row-height;
+      }
+    }
+  
+    $short: find-item($types, short);
+    $prominent: find-item($types, prominent);
+    $dense: find-item($types, dense);
+  
+    @if $prominent and $dense {
+      $height: $rs-top-app-bar-dense-row-height * 2;
+      padding-top: #{$height};
+    }  
+  }@else {
+    padding-top: $rs-top-app-bar-row-height;
+  }
 }
 
 @mixin rs-top-app-bar-icon-image($path) {

@@ -33,7 +33,7 @@
 //
 
 @mixin rs-top-app-bar-ink-color($color) {
-  --rs-top-app-bar--color: #{$color};
+  --rs-top-app-bar-title--color: #{$color};
 }
 
 @mixin rs-top-app-bar-fill-color($color) {
