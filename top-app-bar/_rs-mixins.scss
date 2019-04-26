@@ -107,8 +107,10 @@
   }
 }
 
-@mixin rs-top-app-bar-icon-image($path) {
+@mixin rs-top-app-bar-action-image($path) {
   --rs-top-app-bar-actionItem--background-image: #{$path};
-  --rs-top-app-bar-navigationIcon--background-image: #{$path};
 }
 
+@mixin rs-top-app-bar-nav-image($path) {
+  --rs-top-app-bar-navigationIcon--background-image: #{$path};
+}

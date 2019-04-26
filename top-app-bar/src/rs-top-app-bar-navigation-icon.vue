@@ -1,5 +1,5 @@
 <template>
-  <span class="rs-top-app-bar__navigation-icon" tabindex="0">
+  <span class="rs-top-app-bar__navigation-icon" tabindex="0" ref="slotContainer">
     <slot></slot>
   </span>
 </template>
@@ -16,6 +16,15 @@ export default {
         items: [],
       }
     }
+  },
+  mounted() {
+    this.$nextTick().then(this.fixSlot.bind(this))
+  },
+  methods: {
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
+    }
   }
 }
 </script>
@@ -27,7 +36,7 @@ export default {
   align-self: var(--rs-top-app-bar-navigationIcon--align-self);
 }
 
-.rs-top-app-bar__navigation-icon {
+::slotted(*) {
   @include rs-top-app-bar-icon_;
   color: var(--rs-top-app-bar-navigationIcon--color, inherit);
 
@@ -35,25 +44,27 @@ export default {
   background-repeat: no-repeat;
   background-size: 24px;
   background-position: center;
+}
 
-  &::before {
-    background-color: $rs-theme-on-primary;
-    content: '';
-  }
-  &::after {
-    background-color: $rs-theme-on-primary;
-    content: '';
-    transition: opacity 150ms linear;
-  }
-  
-  &:hover::before {
-    opacity: 0.08;
-  }
-  &:active::after,
-  &:focus::before {
-    transition-duration: 75ms;
-    opacity: 0.24;
-  }
+::slotted(*)::before {
+  background-color: $rs-theme-on-primary;
+  content: '';
+}
+
+::slotted(*)::after {
+  background-color: $rs-theme-on-primary;
+  content: '';
+  transition: opacity 150ms linear;
+}
+
+::slotted(*:hover)::before {
+  opacity: 0.08;
+}
+
+::slotted(*:active)::after,
+::slotted(*:focus)::before {
+  transition-duration: 75ms;
+  opacity: 0.24;
 }
 
 </style>
