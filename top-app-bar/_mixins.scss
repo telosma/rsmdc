@@ -59,9 +59,6 @@
 }
 
 @mixin rs-top-app-bar-icon_() {
-  @include rs-ripple-surface;
-  @include rs-ripple-radius-unbounded;
-
   display: flex;
   position: relative;
   flex-shrink: 0;

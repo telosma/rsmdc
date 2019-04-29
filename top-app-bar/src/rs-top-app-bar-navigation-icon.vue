@@ -4,7 +4,7 @@
   </span>
 </template>
 <script>
-import { RSRipple } from '../../ripple';
+import { RSRipple } from '../../ripple'
 
 export default {
   created() {
@@ -42,7 +42,6 @@ export default {
 
 <style lang="scss">
 @import '../mixins';
-@import '../../ripple/mixins';
 @import '../../ripple/rs-mixins';
 
 :host {

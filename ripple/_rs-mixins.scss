@@ -1,4 +1,5 @@
 @import "./variables";
+@import "../theme/mixins";
 
 @mixin rs-ripple-surface-slotted() {
   ::slotted(*) {
@@ -85,4 +86,3 @@
     height: var(--rs-ripple-fg-size, $radius);
   }
 }
-
