@@ -100,88 +100,62 @@
 }
 
 @mixin rs-ripple-surface($query: rs-feature-all()) {
-  $feat-animation: rs-feature-create-target($query, animation);
-  $feat-structure: rs-feature-create-target($query, structure);
+  --rs-ripple-fg-size: 0;
+  --rs-ripple-left: 0;
+  --rs-ripple-top: 0;
+  --rs-ripple-fg-scale: 1;
+  --rs-ripple-fg-translate-end: 0;
+  --rs-ripple-fg-translate-start: 0;
 
-  @include rs-feature-targets($feat-structure) {
-    --rs-ripple-fg-size: 0;
-    --rs-ripple-left: 0;
-    --rs-ripple-top: 0;
-    --rs-ripple-fg-scale: 1;
-    --rs-ripple-fg-translate-end: 0;
-    --rs-ripple-fg-translate-start: 0;
-
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    will-change: transform, opacity;
-  }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 
   &::before,
   &::after {
-    @include rs-feature-targets($feat-structure) {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0;
-      pointer-events: none;
-      content: "";
-    }
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    content: "";
   }
 
   &::before {
-    @include rs-feature-targets($feat-animation) {
-      // Also transition background-color to avoid unnatural color flashes when toggling activated/selected state
-      transition:
-        opacity $rs-states-wash-duration linear,
-        background-color $rs-states-wash-duration linear;
-    }
+    transition:
+      opacity $rs-states-wash-duration linear,
+      background-color $rs-states-wash-duration linear;
 
-    @include rs-feature-targets($feat-structure) {
-      z-index: 1; // Ensure that the ripple wash for hover/focus states is displayed on top of positioned child elements
-    }
+    z-index: 1; // Ensure that the ripple wash for hover/focus states is displayed on top of positioned child elements
   }
 
-  // Common styles for upgraded surfaces (some of these depend on custom properties set via JS or other mixins)
-
   &.rs-ripple-upgraded::before {
-    @include rs-feature-targets($feat-structure) {
-      transform: scale(var(--rs-ripple-fg-scale, 1));
-    }
+    transform: scale(var(--rs-ripple-fg-scale, 1));
   }
 
   &.rs-ripple-upgraded::after {
-    @include rs-feature-targets($feat-structure) {
-      top: 0;
-      /* @noflip */
-      left: 0;
-      transform: scale(0);
-      transform-origin: center center;
-    }
+    top: 0;
+    /* @noflip */
+    left: 0;
+    transform: scale(0);
+    transform-origin: center center;
   }
 
   &.rs-ripple-upgraded--unbounded::after {
-    @include rs-feature-targets($feat-structure) {
-      top: var(--rs-ripple-top, 0);
-      /* @noflip */
-      left: var(--rs-ripple-left, 0);
-    }
+    top: var(--rs-ripple-top, 0);
+    /* @noflip */
+    left: var(--rs-ripple-left, 0);
   }
 
   &.rs-ripple-upgraded--foreground-activation::after {
-    @include rs-feature-targets($feat-animation) {
-      animation:
-        rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
-        rs-ripple-fg-opacity-in $rs-ripple-fade-in-duration forwards;
-    }
+    animation:
+      rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
+      rs-ripple-fg-opacity-in $rs-ripple-fade-in-duration forwards;
   }
 
   &.rs-ripple-upgraded--foreground-deactivation::after {
-    @include rs-feature-targets($feat-animation) {
-      animation: rs-ripple-fg-opacity-out $rs-ripple-fade-out-duration;
-    }
+    animation: rs-ripple-fg-opacity-out $rs-ripple-fade-out-duration;
 
-    @include rs-feature-targets($feat-structure) {
-      // Retain transform from rs-ripple-fg-radius-in activation
-      transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
-    }
+    // Retain transform from rs-ripple-fg-radius-in activation
+    transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
   }
 }
 

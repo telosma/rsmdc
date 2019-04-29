@@ -1,0 +1,88 @@
+@import "./variables";
+
+@mixin rs-ripple-surface-slotted() {
+  ::slotted(*) {
+    --rs-ripple-fg-size: 0;
+    --rs-ripple-left: 0;
+    --rs-ripple-top: 0;
+    --rs-ripple-fg-scale: 1;
+    --rs-ripple-fg-translate-end: 0;
+    --rs-ripple-fg-translate-start: 0;
+  
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    will-change: transform, opacity;
+  }
+
+  ::slotted(*)::before,
+  ::slotted(*)::after {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    content: "";
+  }
+
+  ::slotted(*)::before {
+    transition:
+      opacity $rs-states-wash-duration linear,
+      background-color $rs-states-wash-duration linear;
+    z-index: 1; // Ensure that the ripple wash for hover/focus states is displayed on top of positioned child elements
+  }
+
+  ::slotted(.rs-ripple-upgraded)::before {
+    transform: scale(var(--rs-ripple-fg-scale, 1));
+  }
+
+  ::slotted(.rs-ripple-upgraded)::after {
+    top: 0;
+    /* @noflip */
+    left: 0;
+    transform: scale(0);
+    transform-origin: center center;
+  }
+
+  ::slotted(.rs-ripple-upgraded--unbounded)::after {
+    top: var(--rs-ripple-top, 0);
+    /* @noflip */
+    left: var(--rs-ripple-left, 0);
+  }
+
+  ::slotted(.rs-ripple-upgraded--foreground-activation)::after {
+    animation:
+      rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
+      rs-ripple-fg-opacity-in $rs-ripple-fade-in-duration forwards;
+  }
+
+  ::slotted(.rs-ripple-upgraded--foreground-deactivation)::after {
+    animation: rs-ripple-fg-opacity-out $rs-ripple-fade-out-duration;
+
+    // Retain transform from rs-ripple-fg-radius-in activation
+    transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
+  }
+}
+
+@mixin rs-ripple-radius-unbounded-slotted($radius: 100%) {
+  ::slotted(*)::before,
+  ::slotted(*)::after {
+    top: calc(50% - #{$radius / 2});
+    /* @noflip */
+    left: calc(50% - #{$radius / 2});
+    width: $radius;
+    height: $radius;
+  }
+
+  ::slotted(.rs-ripple-upgraded)::before,
+  ::slotted(.rs-ripple-upgraded)::after {
+    top: var(--rs-ripple-top, calc(50% - #{$radius / 2}));
+    /* @noflip */
+    left: var(--rs-ripple-left, calc(50% - #{$radius / 2}));
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
+  }
+
+  ::slotted(.rs-ripple-upgraded)::after {
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
+  }
+}
+
