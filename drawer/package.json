@@ -1,0 +1,22 @@
+{
+  "name": "@rsmdc/drawer",
+  "version": "0.0.1",
+  "description": "The Material Components Web drawer component",
+  "license": "MIT",
+  "keywords": [
+    "material components",
+    "material design",
+    "navigation",
+    "drawer"
+  ],
+  "main": "index.js",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
+  "dependencies": {
+    "focus-trap": "^4.0.2",
+    "tslib": "^1.9.3"
+  }
+}

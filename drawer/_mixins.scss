@@ -1,0 +1,145 @@
+//
+// Copyright 2017 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "../theme/mixins";
+@import "../list/mixins";
+@import "../ripple/mixins";
+@import "../shape/mixins";
+@import "./variables";
+
+@mixin rs-drawer-activated-overlay-color($color) {
+  :not(.rs-list--non-interactive) > .rs-list-item {
+    @include rs-states-activated($color);
+  }
+}
+
+@mixin rs-drawer-border-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-divider-opacity);
+
+  @include rs-theme-prop(border-color, $value);
+}
+
+@mixin rs-drawer-item-shape-radius($radius, $rtl-reflexive: true) {
+  @include rs-list-item-shape-radius($radius, $rtl-reflexive);
+}
+
+@mixin rs-drawer-shape-radius($radius) {
+  @if length($radius) > 2 {
+    @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
+  } @else if length($radius) == 2 {
+    $radius: 0 nth($radius, 1) nth($radius, 2) 0;
+  } @else {
+    $radius: 0 $radius $radius 0;
+  }
+
+  @include rs-shape-radius($radius, $rtl-reflexive: true);
+}
+
+@mixin rs-drawer-divider-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-divider-opacity);
+
+  @include rs-list-divider-color($value);
+}
+
+@mixin rs-drawer-title-ink-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-title-ink-opacity);
+
+  .rs-drawer__title {
+    @include rs-theme-prop(color, $value);
+  }
+}
+
+@mixin rs-drawer-subtitle-ink-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-subtitle-ink-opacity);
+
+  @include rs-list-group-subheader-ink-color($value);
+
+  .rs-drawer__subtitle {
+    @include rs-theme-prop(color, $value);
+  }
+}
+
+@mixin rs-drawer-fill-color-accessible($color) {
+  $accessibleColor: rs-theme-accessible-ink-color($color);
+
+  @include rs-drawer-title-ink-color($accessibleColor);
+  @include rs-drawer-subtitle-ink-color($accessibleColor);
+  @include rs-drawer-item-text-ink-color($accessibleColor);
+  @include rs-drawer-item-icon-ink-color($accessibleColor);
+  @include rs-drawer-surface-fill-color($color);
+}
+
+@mixin rs-drawer-item-icon-ink-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-item-inactive-icon-ink-opacity);
+
+  @include rs-list-item-graphic-ink-color($value);
+}
+
+@mixin rs-drawer-item-activated-icon-ink-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-item-active-icon-ink-opacity);
+
+  .rs-list-item--activated {
+    @include rs-list-item-graphic-ink-color($value);
+  }
+}
+
+@mixin rs-drawer-item-activated-text-ink-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-item-active-text-ink-opacity);
+
+  .rs-list-item--activated {
+    @include rs-list-item-primary-text-ink-color($value);
+  }
+}
+
+@mixin rs-drawer-item-text-ink-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-item-inactive-text-ink-opacity);
+
+  .rs-list-item {
+    @include rs-list-item-primary-text-ink-color($value);
+  }
+}
+
+@mixin rs-drawer-surface-fill-color($color) {
+  $value: rs-theme-prop-value($color);
+
+  @include rs-theme-prop(background-color, $value);
+}
+
+@mixin rs-drawer-scrim-fill-color($color) {
+  $value: rgba(rs-theme-prop-value($color), $rs-drawer-modal-scrim-opacity);
+
+  + .rs-drawer-scrim {
+    @include rs-theme-prop(background-color, $value);
+  }
+}
+
+@mixin rs-drawer-z-index($value) {
+  z-index: $value;
+}
+
+@mixin rs-drawer-width($width) {
+  width: $width;
+
+  &.rs-drawer--open:not(.rs-drawer--closing) + .rs-drawer-app-content {
+    @include rs-rtl-reflexive-box(margin, left, $width);
+  }
+}
