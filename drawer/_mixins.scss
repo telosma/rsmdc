@@ -24,18 +24,16 @@
 @import "../list/mixins";
 @import "../ripple/mixins";
 @import "../shape/mixins";
+@import "../shape/rs-functions";
 @import "./variables";
 
 @mixin rs-drawer-activated-overlay-color($color) {
-  :not(.rs-list--non-interactive) > .rs-list-item {
-    @include rs-states-activated($color);
-  }
+  @include rs-states-activated($color);
 }
 
 @mixin rs-drawer-border-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-divider-opacity);
-
-  @include rs-theme-prop(border-color, $value);
+  --rs-drawer--border-color: #{$value};
 }
 
 @mixin rs-drawer-item-shape-radius($radius, $rtl-reflexive: true) {
@@ -50,32 +48,25 @@
   } @else {
     $radius: 0 $radius $radius 0;
   }
-
-  @include rs-shape-radius($radius, $rtl-reflexive: true);
+  --rs-drawer--border-radius: #{rs-shape-radius($radius)};
+  --rs-drawer_rtl--border-radius: #{rs-shape-rtl-radius($radius, true)};
 }
 
 @mixin rs-drawer-divider-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-divider-opacity);
-
   @include rs-list-divider-color($value);
 }
 
 @mixin rs-drawer-title-ink-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-title-ink-opacity);
-
-  .rs-drawer__title {
-    @include rs-theme-prop(color, $value);
-  }
+  --rs-drawer-title--color: #{$value};
 }
 
 @mixin rs-drawer-subtitle-ink-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-subtitle-ink-opacity);
+  --rs-drawer-subtitle--color: #{$value};
 
   @include rs-list-group-subheader-ink-color($value);
-
-  .rs-drawer__subtitle {
-    @include rs-theme-prop(color, $value);
-  }
 }
 
 @mixin rs-drawer-fill-color-accessible($color) {
@@ -120,26 +111,23 @@
 
 @mixin rs-drawer-surface-fill-color($color) {
   $value: rs-theme-prop-value($color);
-
-  @include rs-theme-prop(background-color, $value);
+  --rs-drawer--background-color: #{$value};
 }
 
 @mixin rs-drawer-scrim-fill-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-modal-scrim-opacity);
-
-  + .rs-drawer-scrim {
-    @include rs-theme-prop(background-color, $value);
-  }
+  --rs-drawer-scrim--background-color: #{$value};
 }
 
 @mixin rs-drawer-z-index($value) {
-  z-index: $value;
+  --rs-drawer--z-index: #{$value};
 }
 
 @mixin rs-drawer-width($width) {
-  width: $width;
+  --rs-drawer--width: #{$width};
 
-  &.rs-drawer--open:not(.rs-drawer--closing) + .rs-drawer-app-content {
-    @include rs-rtl-reflexive-box(margin, left, $width);
+  + * {
+    --rs-drawer-app-content--margin-left: #{$width};
+    --rs-drawer-app-content--margin-right: 0;
   }
 }

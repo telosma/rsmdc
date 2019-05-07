@@ -33,31 +33,13 @@
 // postcss-bem-linter: define drawer
 
 .rs-drawer {
-  @include rs-drawer-title-ink-color($rs-drawer-title-ink-color);
-  @include rs-drawer-subtitle-ink-color($rs-drawer-subtitle-ink-color);
-  @include rs-drawer-border-color($rs-drawer-divider-color);
-  @include rs-drawer-surface-fill-color($rs-drawer-surface-fill-color);
   @include rs-drawer-item-icon-ink-color($rs-drawer-item-inactive-ink-color);
   @include rs-drawer-item-text-ink-color($rs-drawer-item-inactive-ink-color);
   @include rs-drawer-item-activated-icon-ink-color($rs-drawer-item-activated-ink-color);
   @include rs-drawer-item-activated-text-ink-color($rs-drawer-item-activated-ink-color);
   @include rs-drawer-shape-radius(large);
-  @include rs-drawer-item-shape-radius(4px);
-  @include rs-drawer-z-index($rs-drawer-z-index);
   @include rs-drawer-width($rs-drawer-width);
 
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  box-sizing: border-box;
-  height: 100%;
-  transition-property: transform;
-  transition-timing-function: $rs-animation-standard-curve-timing-function;
-  /* @noflip */
-  border-right-width: 1px;
-  /* @noflip */
-  border-right-style: solid;
-  overflow: hidden;
 
   @include rs-rtl {
     /* @noflip */
@@ -93,6 +75,7 @@
   // postcss-bem-linter: ignore
   .rs-list-group__subheader {
     @include rs-typography(body2);
+
     @include rs-typography-baseline-top(24px);
 
     margin: 0;
@@ -112,57 +95,9 @@
   }
 }
 
-.rs-drawer--animate {
-  transform: translateX(-100%);
 
-  @include rs-rtl {
-    transform: translateX(100%);
-  }
-}
 
-.rs-drawer--opening {
-  transform: translateX(0);
-  transition-duration: $rs-drawer-animation-enter;
 
-  // Required to level the specificity with animate class.
-  @include rs-rtl {
-    transform: translateX(0);
-  }
-}
 
-.rs-drawer--closing {
-  transform: translateX(-100%);
-  transition-duration: $rs-drawer-animation-exit;
-
-  @include rs-rtl {
-    transform: translateX(100%);
-  }
-}
-
-.rs-drawer__header {
-  flex-shrink: 0;
-  box-sizing: border-box;
-  min-height: 64px; // same as $rs-top-app-bar-row-height
-  padding: 0 $rs-drawer-surface-padding 4px;
-}
-
-.rs-drawer__title {
-  @include rs-typography(headline6);
-  @include rs-typography-baseline-top(36px);
-  @include rs-typography-baseline-bottom(20px);
-}
-
-.rs-drawer__subtitle {
-  @include rs-typography(body2);
-  @include rs-typography-baseline-top(20px);
-
-  margin-bottom: 0;
-}
-
-.rs-drawer__content {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
 
 // postcss-bem-linter: end

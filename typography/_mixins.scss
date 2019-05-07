@@ -71,3 +71,74 @@
     overflow: hidden;
   }
 }
+
+@mixin rs-typography-baseline-top($distance, $slot: false, $selector: '*') {
+  @if $slot {
+    ::slotted(#{$selector}) {
+      display: block;
+      margin-top: 0;
+      /* @alternate */
+      line-height: normal;
+    }
+  }@else {
+    display: block;
+    margin-top: 0;
+    /* @alternate */
+    line-height: normal;
+
+    &::before {
+      @include rs-typography-baseline-top-strut_($distance);
+    }
+  }
+}
+
+@mixin rs-typography-baseline-top-strut_($distance, $slot: false, $selector: '*') {
+  @if $slot {
+    ::slotted(#{$selector})::before {
+      display: inline-block;
+      width: 0;
+      height: $distance;
+      content: "";
+      vertical-align: 0;
+    }
+  }@else {
+    display: inline-block;
+    width: 0;
+    height: $distance;
+    content: "";
+    vertical-align: 0;
+  }
+}
+
+@mixin rs-typography-baseline-bottom($distance, $slot: false, $selector: '*') {
+  @if $slot {
+    ::slotted(#{$selector}) {
+      margin-bottom: -1 * $distance;
+    }
+  }@else {
+    margin-bottom: -1 * $distance;
+
+    &::after {
+      @include mdc-typography-baseline-bottom-strut_($distance);
+      vertical-align: -1 * $distance;
+    }
+  }
+}
+
+@mixin rs-typography-baseline-bottom-strut_($distance, $slot: false, $selector: '*') {
+  @if $slot {
+    ::slotted(#{$selector})::after {
+      display: inline-block;
+      width: 0;
+      height: $distance;
+      content: "";
+      vertical-align: -1 * $distance;
+    }
+  }@else {
+    display: inline-block;
+    width: 0;
+    height: $distance;
+    content: "";
+    vertical-align: -1 * $distance;
+  }
+}

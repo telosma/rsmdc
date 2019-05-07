@@ -1,0 +1,31 @@
+@import '../rtl/mixins';
+
+@mixin rs-drawer-app-content() {
+  margin-left: var(--rs-drawer-app-content--margin-left, 0);
+  margin-right: var(--rs-drawer-app-content--margin-right, 0);
+  position: relative;
+}
+
+@mixin rs-drawer-type($type) {
+  @if $type == 'modal' {
+    @include rs-drawer-scrim-fill-color($rs-drawer-modal-scrim-color);    
+    --rs-drawer--left: 0;
+    --rs-drawer--right: auto;
+    --rs-drawer--display: none;
+    --rs-drawer--position: fixed;
+    --rs-drawer--box-shadow: rs-elevation($rs-drawer-modal-elevation);
+    --rs-drawer__open--display: flex;
+    --rs-drawer__modal: true;
+  }@else if $type == 'dismissible' {
+    --rs-drawer--left: 0;
+    --rs-drawer--right: auto;
+    --rs-drawer--display: none;
+    --rs-drawer--position: absolute;
+    --rs-drawer__open--display: flex;
+    --rs-drawer__dismissible: true;
+
+    + * {
+      @include rs-drawer-app-content();
+    }
+  }
+}
