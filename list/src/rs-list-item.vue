@@ -1,7 +1,7 @@
 <template>
   <li
     class="rs-list-item"
-    :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled, '-drawer': isDrawer, '-first': isFirstChild, '-last': isLastChild }"
+    :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled, '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
     ref="slotContainer">
     <slot></slot>
   </li>
@@ -127,22 +127,22 @@ export default {
     margin-right: var(--rs-list-item--margin-right);
   }
 
-  &:not(.-drawer) {
+  &:not(.-rs-drawer) {
     @include rs-list-ripple;
   }
 
-  &.-drawer {
+  &.-rs-drawer {
     @include rs-typography(subtitle2);
     --rs-list-item__drawer--height: calc(48px - 2 * #{$rs-drawer-list-item-spacing});
     --rs-list-item__drawer--margin: #{($rs-drawer-list-item-spacing * 2) 8px};
     --rs-list-item__drawer--padding: #{0 $rs-drawer-surface-padding / 2};
   }
 
-  &.-first {
+  &.-rs-first {
     margin-top: 2px;
   }
 
-  &.-last {
+  &.-rs-last {
     margin-bottom: 0;
   }
 

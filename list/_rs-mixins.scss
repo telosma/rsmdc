@@ -76,6 +76,17 @@
   }
 }
 
+@mixin rs-list-graphic-type($type, $image) {
+  --rs-list-item-graphic--background-image: #{$image};
+  @if $type == 'circle' {
+    --rs-list-item-graphic--background-size: 40px;
+  }@else if $type == 'rectangle' {
+    --rs-list-item-graphic--background-size: 56px;
+  }@else if $type == 'square' {
+    --rs-list-item-graphic--background-size: 100px 56px;
+  }
+}
+
 @mixin rs-list-typography($distanceTop, $distanceBottom, $target) {
   @include rs-list-typography-baseline-top($distanceTop, $target, before);
   @include rs-list-typography-baseline-bottom($distanceBottom, $target, after);

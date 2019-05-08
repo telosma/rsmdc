@@ -66,13 +66,6 @@
   .rs-list-divider {
     margin: 3px 0 4px 0;
   }
-
-  // Prevents list item children from being included in the click target.
-  // postcss-bem-linter: ignore
-  .rs-list-item__text,
-  .rs-list-item__graphic {
-    pointer-events: none;
-  }
 }
 
 // postcss-bem-linter: end

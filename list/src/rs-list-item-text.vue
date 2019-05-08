@@ -1,8 +1,30 @@
 <template>
-  <span class="rs-list-item__text" ref="slotContainer"><slot></slot></span>
+  <span class="rs-list-item__text" :class="{ '-rs-drawer': isDrawer }" ref="slotContainer"><slot></slot></span>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      el: '',
+      host: '',
+      drawerHost: '',
+      isDrawer: false,
+    }
+  },
+  watch: {
+    el() {
+      this.host = this.el.parentNode.host
+      if(this.host && this.host.parentNode && this.host.parentNode.parentNode) {
+        this.drawerHost = this.host.parentNode.parentNode.parentNode
+      }
+    },
+    drawerHost() {
+      if(!this.drawerHost) { return }
+      if(this.drawerHost.shadowRoot) {
+        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer') ? true : false
+      }
+    }
+  },
   created() {
     if(!window.__rsmdc) {
       window.__rsmdc = {}
@@ -29,6 +51,7 @@ export default {
             el.classList.add('-rs-secondary')
           }
         })
+        this.el = this.$el
       })
   },
   methods: {
@@ -59,6 +82,10 @@ export default {
   &[for] {
     pointer-events: none;
   }
+}
+
+.-rs-drawer {
+  pointer-events: none;
 }
 
 ::slotted(.-rs-primary) {
