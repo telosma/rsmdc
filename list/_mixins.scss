@@ -31,19 +31,7 @@
 
 
 @mixin rs-list-core-styles() {
-  @include rs-list-without-ripple;
   @include rs-list-ripple;
-}
-
-@mixin rs-list-without-ripple() {
-
-  .rs-list-divider {
-    height: 0;
-    border: none;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-  }
-
 }
 
 @mixin rs-list-ripple {
