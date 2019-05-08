@@ -30,6 +30,10 @@
     }@else if $type == non-interactive {
       --rs-list-item--cursor: default;
 
+    }@else if $type == group {
+      --rs-list--padding: 0;
+      --rs-list__group-divider_rtl--margin-left: 0;
+      --rs-list__group-divider_rtl--margin-right: 72px;
     }
   }
 
@@ -53,6 +57,8 @@
     @if $type == inset {
       --rs-list-divider--margin-left: 72px;
       --rs-list-divider--margin-right: 0;
+      --rs-list-divider_rtl--margin-left: var(--rs-list__group-divider_rtl--margin-left);
+      --rs-list-divider_rtl--margin-right: var(--rs-list__group-divider_rtl--margin-right);
       --rs-list-divider--width: calc(100% - #{$rs-list-text-offset});
 
     }@else if $type == padded {
@@ -69,20 +75,20 @@
 }
 
 @mixin rs-list-text-type($type) {
-  @if $type == 'primary' {
+  @if $type == primary {
     --_rs-list-text-primary: true;
-  }@else if $type == 'secondary' {
+  }@else if $type == secondary {
     --_rs-list-text-secondary: true;
   }
 }
 
 @mixin rs-list-graphic-type($type, $image) {
   --rs-list-item-graphic--background-image: #{$image};
-  @if $type == 'circle' {
+  @if $type == circle {
     --rs-list-item-graphic--background-size: 40px;
-  }@else if $type == 'rectangle' {
+  }@else if $type == rectangle {
     --rs-list-item-graphic--background-size: 56px;
-  }@else if $type == 'square' {
+  }@else if $type == square {
     --rs-list-item-graphic--background-size: 100px 56px;
   }
 }

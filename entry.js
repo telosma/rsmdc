@@ -3,7 +3,7 @@ import wrap from '@vue/web-component-wrapper'
 import button from './button/src/rs-button.vue'
 import buttonIcon from './button/src/rs-button-icon.vue'
 import radio from './radio/src/rs-radio.vue'
-import listGroup from './list/src/rs-list-group.vue'
+// import listGroup from './list/src/rs-list-group.vue'
 import listDivider from './list/src/rs-list-divider.vue'
 import listSubheader from './list/src/rs-list-subheader.vue'
 import list from './list/src/rs-list.vue'
@@ -24,7 +24,7 @@ import drawer from './drawer/src/rs-drawer.vue'
 export const Button = wrap(Vue, button)
 export const ButtonIcon = wrap(Vue, buttonIcon)
 export const Radio = wrap(Vue, radio)
-export const ListGroup = wrap(Vue, listGroup)
+// export const ListGroup = wrap(Vue, listGroup)
 export const ListDivider = wrap(Vue, listDivider)
 export const ListSubheader = wrap(Vue, listSubheader)
 export const List = wrap(Vue, list)
