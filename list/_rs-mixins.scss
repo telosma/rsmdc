@@ -68,6 +68,13 @@
   }
 }
 
+@mixin rs-list-text-type($type) {
+  @if $type == 'primary' {
+    --_rs-list-text-primary: true;
+  }@else if $type == 'secondary' {
+    --_rs-list-text-secondary: true;
+  }
+}
 
 @mixin rs-list-typography($distanceTop, $distanceBottom, $target) {
   @include rs-list-typography-baseline-top($distanceTop, $target, before);

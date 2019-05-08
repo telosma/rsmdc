@@ -89,7 +89,7 @@
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-item-active-icon-ink-opacity);
 
   .rs-list-item--activated {
-    @include rs-list-item-graphic-ink-color($value);
+  @include rs-list-item-graphic-ink-color($value);
   }
 }
 
@@ -103,10 +103,7 @@
 
 @mixin rs-drawer-item-text-ink-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-item-inactive-text-ink-opacity);
-
-  .rs-list-item {
-    @include rs-list-item-primary-text-ink-color($value);
-  }
+  --rs-drawer-list-item--color: #{$value};
 }
 
 @mixin rs-drawer-surface-fill-color($color) {

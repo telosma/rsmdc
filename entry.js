@@ -11,8 +11,8 @@ import listItem from './list/src/rs-list-item.vue'
 import listItemGraphic from './list/src/rs-list-item-graphic.vue'
 import listItemMeta from './list/src/rs-list-item-meta.vue'
 import listItemText from './list/src/rs-list-item-text.vue'
-import listItemTextPrimary from './list/src/rs-list-item-text-primary.vue'
-import listItemTextSecondary from './list/src/rs-list-item-text-secondary.vue'
+// import listItemTextPrimary from './list/src/rs-list-item-text-primary.vue'
+// import listItemTextSecondary from './list/src/rs-list-item-text-secondary.vue'
 import menuSurface from './menu-surface/src/rs-menu-surface.vue'
 import menu from './menu/src/rs-menu.vue'
 import menuListGroup from './menu/src/rs-menu-list-group.vue'
@@ -32,8 +32,8 @@ export const ListItem = wrap(Vue, listItem)
 export const ListItemGraphic = wrap(Vue, listItemGraphic)
 export const ListItemMeta = wrap(Vue, listItemMeta)
 export const ListItemText = wrap(Vue, listItemText)
-export const ListItemTextPrimary = wrap(Vue, listItemTextPrimary)
-export const ListItemTextSecondary = wrap(Vue, listItemTextSecondary)
+// export const ListItemTextPrimary = wrap(Vue, listItemTextPrimary)
+// export const ListItemTextSecondary = wrap(Vue, listItemTextSecondary)
 export const MenuSurface = wrap(Vue, menuSurface)
 export const Menu = wrap(Vue, menu)
 export const MenuListGroup = wrap(Vue, menuListGroup)

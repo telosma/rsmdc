@@ -53,26 +53,6 @@
   }
 
   // postcss-bem-linter: ignore
-  .rs-list-item {
-    @include rs-typography(subtitle2);
-
-    height: calc(48px - 2 * #{$rs-drawer-list-item-spacing});
-    // To accomodate margin conflict.
-    margin: ($rs-drawer-list-item-spacing * 2) 8px;
-    padding: 0 $rs-drawer-surface-padding / 2;
-  }
-
-  // postcss-bem-linter: ignore
-  .rs-list-item:nth-child(1) {
-    margin-top: 2px;
-  }
-
-  // postcss-bem-linter: ignore
-  .rs-list-item:nth-last-child(1) {
-    margin-bottom: 0;
-  }
-
-  // postcss-bem-linter: ignore
   .rs-list-group__subheader {
     @include rs-typography(body2);
 
@@ -94,10 +74,5 @@
     pointer-events: none;
   }
 }
-
-
-
-
-
 
 // postcss-bem-linter: end

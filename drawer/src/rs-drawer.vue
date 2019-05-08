@@ -31,6 +31,7 @@ export default {
     }
     if(!window.__rsmdc.drawer) {
       window.__rsmdc.drawer = {
+        drawers: [],
         lists: [],
       }
     }
@@ -38,6 +39,8 @@ export default {
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el.querySelector('.rs-drawer')
+
+    window.__rsmdc.drawer.drawers.push(this.el)
   },
   methods: {
     fixSlot() {

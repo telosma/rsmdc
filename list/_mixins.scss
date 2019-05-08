@@ -30,30 +30,12 @@
 @import "./variables";
 
 
-@mixin rs-list-core-styles($query: rs-feature-all()) {
-  @include rs-list-without-ripple($query);
-  @include rs-list-ripple($query);
+@mixin rs-list-core-styles() {
+  @include rs-list-without-ripple;
+  @include rs-list-ripple;
 }
 
-@mixin rs-list-without-ripple($query: rs-feature-all()) {
-  .rs-list {
-    @include rs-list-base_($query);
-  }
-
-  .rs-list-item {
-    @include rs-list-item-base_;
-  }
-
-  .rs-list-item--selected,
-  .rs-list-item--activated {
-    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
-    @include rs-list-item-graphic-ink-color($rs-theme-primary);
-  }
-
-  .rs-list-item--disabled {
-    @include rs-list-item-primary-text-ink-color(rs-theme-ink-color-for-fill_(disabled, $rs-theme-background));
-  }
-
+@mixin rs-list-without-ripple() {
   .rs-list-item__graphic {
     flex-shrink: 0;
     align-items: center;
@@ -61,15 +43,9 @@
     fill: currentColor;
   }
 
-  .rs-list-item__text {
-    @include rs-typography-overflow-ellipsis($query);
-    &[for] {
-      pointer-events: none;
-    }
-  }
 
   .rs-list-item__primary-text {
-    @include rs-typography-overflow-ellipsis($query);
+    @include rs-typography-overflow-ellipsis;
 
     display: block;
   }
@@ -80,7 +56,7 @@
     letter-spacing: rs-typography-get-letter-spacing_(.25, .875);
     text-decoration: inherit;
     text-transform: inherit;
-    @include rs-typography-overflow-ellipsis($query);
+    @include rs-typography-overflow-ellipsis;
 
     display: block;
   }
@@ -97,19 +73,14 @@
     $rs-list-subheader-leading: map-get(map-get($rs-typography-styles, body1), line-height);
     $rs-list-subheader-margin: ($rs-list-subheader-virtual-height - $rs-list-subheader-leading) / 2;
 
-    @include rs-typography(subtitle1, $query);
+    @include rs-typography(subtitle1);
 
     margin: $rs-list-subheader-margin $rs-list-side-padding;
   }
 }
 
-@mixin rs-list-ripple($query: rs-feature-all()) {
-  @include rs-ripple-common($query);
-
-  .rs-list-item:not(.rs-list-item--disabled) {
-    @include rs-ripple-surface($query);
-    @include rs-ripple-radius-bounded($query: $query);
-  }
+@mixin rs-list-ripple {
+  @include rs-ripple-common;
 }
 
 @mixin rs-list-item-primary-text-ink-color($color) {
@@ -145,8 +116,8 @@
   --rs-list-group-subheader--color: #{$color};
 }
 
-@mixin rs-list-base_($query: rs-feature-all()) {
-  @include rs-typography(subtitle1, $query);
+@mixin rs-list-base_ {
+  @include rs-typography(subtitle1);
 
   padding-right: 0;
   padding-left: 0;

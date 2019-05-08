@@ -1,5 +1,5 @@
 <template>
-  <ul class="rs-list">
+  <ul class="rs-list" ref="slotContainer">
     <slot></slot>
   </ul>
 </template>
@@ -13,14 +13,31 @@ export default {
       default: ''
     }
   },
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.list) {
+      window.__rsmdc.list = {
+        lists: [],
+        items: [],
+      }
+    }
+  },
   mounted() {
+    this.$nextTick().then(this.fixSlot.bind(this))
     new RSList(this.$el)
+  },
+  methods: {
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
+    }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../rs-list';
 @import '../mixins';
 @import "../../typography/mixins";
 
