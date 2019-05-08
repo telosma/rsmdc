@@ -7,7 +7,7 @@
 }
 
 @mixin rs-drawer-type($type) {
-  @if $type == 'modal' {
+  @if $type == modal {
     @include rs-drawer-scrim-fill-color($rs-drawer-modal-scrim-color);    
     --rs-drawer--left: 0;
     --rs-drawer--right: auto;
@@ -16,7 +16,7 @@
     --rs-drawer--box-shadow: rs-elevation($rs-drawer-modal-elevation);
     --rs-drawer__open--display: flex;
     --rs-drawer__modal: true;
-  }@else if $type == 'dismissible' {
+  }@else if $type == dismissible {
     --rs-drawer--left: 0;
     --rs-drawer--right: auto;
     --rs-drawer--display: none;
