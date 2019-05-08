@@ -53,19 +53,8 @@
   }
 
   // postcss-bem-linter: ignore
-  .rs-list-group__subheader {
-    @include rs-typography(body2);
-
-    @include rs-typography-baseline-top(24px);
-
-    margin: 0;
-    padding: 0 $rs-drawer-surface-padding;
-  }
-
-  // postcss-bem-linter: ignore
   .rs-list-divider {
     margin: 3px 0 4px 0;
   }
 }
 
-// postcss-bem-linter: end

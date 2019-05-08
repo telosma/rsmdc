@@ -65,8 +65,6 @@
 @mixin rs-drawer-subtitle-ink-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-subtitle-ink-opacity);
   --rs-drawer-subtitle--color: #{$value};
-
-  @include rs-list-group-subheader-ink-color($value);
 }
 
 @mixin rs-drawer-fill-color-accessible($color) {
