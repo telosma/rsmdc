@@ -37,23 +37,6 @@
 
 @mixin rs-list-without-ripple() {
 
-  .rs-list-item__primary-text {
-    @include rs-typography-overflow-ellipsis;
-
-    display: block;
-  }
-
-  .rs-list-item__secondary-text {
-    line-height: 1.25rem; // 20sp
-    font-weight: map-get($rs-typography-font-weight-values, regular);
-    letter-spacing: rs-typography-get-letter-spacing_(.25, .875);
-    text-decoration: inherit;
-    text-transform: inherit;
-    @include rs-typography-overflow-ellipsis;
-
-    display: block;
-  }
-
   .rs-list-divider {
     height: 0;
     border: none;
@@ -61,15 +44,6 @@
     border-bottom-style: solid;
   }
 
-  .rs-list-group__subheader {
-    $rs-list-subheader-virtual-height: 3rem;
-    $rs-list-subheader-leading: map-get(map-get($rs-typography-styles, body1), line-height);
-    $rs-list-subheader-margin: ($rs-list-subheader-virtual-height - $rs-list-subheader-leading) / 2;
-
-    @include rs-typography(subtitle1);
-
-    margin: $rs-list-subheader-margin $rs-list-side-padding;
-  }
 }
 
 @mixin rs-list-ripple {
