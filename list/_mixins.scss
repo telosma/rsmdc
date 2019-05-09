@@ -39,7 +39,7 @@
 }
 
 @mixin rs-list-item-primary-text-ink-color($color) {
-  --rs-list--color: #{$color};
+  --rs-list--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
 }
 
 @mixin rs-list-item-secondary-text-ink-color($color) {
@@ -51,7 +51,7 @@
 }
 
 @mixin rs-list-item-graphic-ink-color($color) {
-  --rs-list-item-graphic--color: #{$color};
+  --rs-list-item-graphic--color: var(--rs-drawer-list-item__activated-graphic--color, #{$color});
 }
 
 @mixin rs-list-item-meta-ink-color($color) {

@@ -20,6 +20,8 @@ import topAppBar from './top-app-bar/src/rs-top-app-bar.vue'
 import topAppBarNavigationIcon from './top-app-bar/src/rs-top-app-bar-navigation-icon.vue'
 import topAppBarActionItem from './top-app-bar/src/rs-top-app-bar-action-item.vue'
 import drawer from './drawer/src/rs-drawer.vue'
+import drawerHeader from './drawer/src/rs-drawer-header.vue'
+import drawerContent from './drawer/src/rs-drawer-content.vue'
 
 export const Button = wrap(Vue, button)
 export const ButtonIcon = wrap(Vue, buttonIcon)
@@ -41,3 +43,5 @@ export const TopAppBar = wrap(Vue, topAppBar)
 export const TopAppBarNavigationIcon = wrap(Vue, topAppBarNavigationIcon)
 export const TopAppBarActionItem = wrap(Vue, topAppBarActionItem)
 export const Drawer = wrap(Vue, drawer)
+export const DrawerHeader = wrap(Vue, drawerHeader)
+export const DrawerContent = wrap(Vue, drawerContent)

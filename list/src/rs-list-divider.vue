@@ -19,7 +19,7 @@ export default {
     drawerHost() {
       if(!this.drawerHost) { return }
       if(this.drawerHost.shadowRoot) {
-        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer') ? true : false
+        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer__content') ? true : false
       }
     }
   },

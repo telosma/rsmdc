@@ -21,7 +21,7 @@ export default {
     drawerHost() {
       if(!this.drawerHost) { return }
       if(this.drawerHost.shadowRoot) {
-        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer') ? true : false
+        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer__content') ? true : false
       }
     }
   },
@@ -84,9 +84,9 @@ export default {
   }
 }
 
-.-rs-drawer {
-  pointer-events: none;
-}
+// .-rs-drawer {
+//   pointer-events: none;
+// }
 
 ::slotted(.-rs-primary) {
   @include rs-typography-overflow-ellipsis;

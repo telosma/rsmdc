@@ -32,24 +32,4 @@
 
 // postcss-bem-linter: define drawer
 
-.rs-drawer {
-  @include rs-drawer-item-icon-ink-color($rs-drawer-item-inactive-ink-color);
-  @include rs-drawer-item-text-ink-color($rs-drawer-item-inactive-ink-color);
-  @include rs-drawer-item-activated-icon-ink-color($rs-drawer-item-activated-ink-color);
-  @include rs-drawer-item-activated-text-ink-color($rs-drawer-item-activated-ink-color);
-  @include rs-drawer-shape-radius(large);
-  @include rs-drawer-width($rs-drawer-width);
-
-
-  @include rs-rtl {
-    /* @noflip */
-    border-right-width: 0;
-    /* @noflip */
-    border-left-width: 1px;
-    /* @noflip */
-    border-right-style: none;
-    /* @noflip */
-    border-left-style: solid;
-  }
-}
 

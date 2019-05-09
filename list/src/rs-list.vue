@@ -7,6 +7,16 @@
 import { RSList } from '../index'
 
 export default {
+  data() {
+    return {
+      el: '',
+      host: ''
+    }
+  },
+  watch: {
+    el() {
+    }
+  },
   props: {
     type: {
       type: String,
@@ -27,6 +37,8 @@ export default {
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
     new RSList(this.$el)
+    this.el = this.$el
+    window.__rsmdc.list.lists.push(this.el)
   },
   methods: {
     fixSlot() {

@@ -2,7 +2,8 @@
   <li
     class="rs-list-item"
     :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled, '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
-    ref="slotContainer">
+    ref="slotContainer"
+    tabindex="0">
     <slot></slot>
   </li>
 </template>
@@ -41,12 +42,16 @@ export default {
   watch: {
     el() {
       this.host = this.el.parentNode.host
+      this.listHost = this.host.parentNode
       this.drawerHost = this.host.parentNode.parentNode
+    },
+    listHost() {
+      const aa = window.__rsmdc.list.lists.filter(list => list.isSameNode(this.listHost))
     },
     drawerHost() {
       if(this.drawerHost.shadowRoot) {
         this.listHost = this.host.parentNode
-        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer') ? true : false
+        this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer__content') ? true : false
         const listItems = Array.from(this.listHost.childNodes).filter(child => child.nodeType == 1)
         const itemIndex = listItems.findIndex(item => item.isSameNode(this.host))
         this.isFirstChild = itemIndex === 0 ? true : false
@@ -77,8 +82,9 @@ export default {
   mounted() {
     new RSRipple(this.$el)
     this.checkAttrs()
-    this.el = this.$el
     this.$nextTick().then(this.fixSlot.bind(this))
+    this.el = this.$el
+    window.__rsmdc.list.items.push(this.el)
   },
   methods: {
     fixSlot() {
@@ -109,7 +115,7 @@ export default {
 
 .rs-list-item {
   @include rs-list-item-base_;
-  color: var(--rs-menu-surface--color, var(--rs-drawer-list-item--color, var(--rs-list--color)));
+  color: var(--rs-menu-surface--color, var(--rs-list--color));
   height: var(--rs-list-item__drawer--height, var(--rs-list-item--height, 48px));
   align-items: var(--rs-list-item--align-items, center);
   border-radius: var(--rs-list-item--border-radius);

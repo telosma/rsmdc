@@ -57,14 +57,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../rs-drawer';
+@import '../mixins';
 @import '../variables';
 @import '../../animation/variables';
 @import '../../animation/functions';
-@import '../../typography/mixins';
-@import '../../typography/variables';
 @import '../../theme/mixins';
 @import '../../shape/rs-functions';
+@import '../../rtl/mixins';
 
 
 :host {
@@ -72,6 +71,24 @@ export default {
 }
 
 .rs-drawer {
+  @include rs-drawer-item-icon-ink-color($rs-drawer-item-inactive-ink-color);
+  @include rs-drawer-item-text-ink-color($rs-drawer-item-inactive-ink-color);
+  @include rs-drawer-item-activated-icon-ink-color($rs-drawer-item-activated-ink-color);
+  @include rs-drawer-item-activated-text-ink-color($rs-drawer-item-activated-ink-color);
+  @include rs-drawer-item-shape-radius(4px);
+  @include rs-drawer-width($rs-drawer-width);
+
+  @include rs-rtl {
+    /* @noflip */
+    border-right-width: 0;
+    /* @noflip */
+    border-left-width: 1px;
+    /* @noflip */
+    border-right-style: none;
+    /* @noflip */
+    border-left-style: solid;
+  }
+
   flex-direction: column;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -161,39 +178,5 @@ export default {
     opacity: 0;
   }
 }
-
-::slotted(h3) {
-  @include rs-typography(headline6);
-  flex-shrink: 0;
-  box-sizing: border-box;
-  color: var(--rs-drawer-title--color, rgba(rs-theme-prop-value($rs-drawer-title-ink-color), $rs-drawer-title-ink-opacity));
-  //min-height: 64px; // same as $rs-top-app-bar-row-height
-  padding: 0 $rs-drawer-surface-padding;
-}
-
-@include rs-typography-baseline-top(36px, true, h3);
-@include rs-typography-baseline-top-strut_(36px, true, h3);
-@include rs-typography-baseline-bottom(20px, true, h3);
-@include rs-typography-baseline-bottom-strut_(20px, true, h3);
-
-::slotted(h6) {
-  @include rs-typography(body2);
-
-  padding: 0 $rs-drawer-surface-padding 4px;
-  margin-bottom: 0;
-  color: var(--rs-drawer-subtitle--color, rgba(rs-theme-prop-value($rs-drawer-subtitle-ink-color), $rs-drawer-subtitle-ink-opacity));
-}
-
-@include rs-typography-baseline-top(20px, true, h6);
-@include rs-typography-baseline-top-strut_(20px, true, h6);
-
-::slotted(:not(h3)),
-::slotted(:not(h6)) {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
 </style>
 
