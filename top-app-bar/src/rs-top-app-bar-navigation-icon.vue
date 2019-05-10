@@ -1,5 +1,5 @@
 <template>
-  <span class="rs-top-app-bar__navigation-icon" tabindex="0" ref="slotContainer">
+  <span class="rs-top-app-bar__navigation-icon" tabindex="0" ref="slotContainer" @click="toggle">
     <slot></slot>
   </span>
 </template>
@@ -7,6 +7,31 @@
 import { RSRipple } from '../../ripple'
 
 export default {
+  data() {
+    return {
+      el: '',
+      host: '',
+      drawerOpen: '',
+      hasDrawer: false,
+    }
+  },
+  watch: {
+    el() {
+      this.host = this.el.parentNode.host
+    },
+    host() {
+      window.__rsmdc.topAppBar.navigations.push({
+        el: this.el,
+        host: this.host
+      })
+
+      this.hasDrawer = this.getElementProperty(this.host, '--_rs-drawer') === 'true' ? true : false
+      this.drawerOpen = this.getElementProperty(this.host, '--_rs-drawer-open') === 'true' ? true : false
+    },
+    drawerOpen() {
+      this.host.style.cssText = `--_rs-drawer-open: ${this.drawerOpen};`
+    }
+  },
   created() {
     if(!window.__rsmdc) {
       window.__rsmdc = {}
@@ -30,11 +55,23 @@ export default {
         ripple.unbounded = true
       })
     })
+    this.el = this.$el
   },
   methods: {
     fixSlot() {
       this.$refs.slotContainer.innerHTML = ''
       this.$refs.slotContainer.append(document.createElement('slot'))
+    },
+    getElementProperty(el, prop) {
+      const style = window.getComputedStyle(el)
+      const value = String(style.getPropertyValue(prop)).trim()
+      return value
+    },
+    toggle() {
+      if(!this.hasDrawer) { return }
+
+      const drawerOpen = this.getElementProperty(this.host, '--_rs-drawer-open') === 'true' ? false : true
+      this.host.style.cssText = `--_rs-drawer-open: ${drawerOpen};`
     }
   }
 }

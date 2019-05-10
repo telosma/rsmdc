@@ -6,6 +6,12 @@
   position: relative;
 }
 
+@mixin rs-drawer-permanent-content() {
+  display: flex;
+  // height: 100vh;
+  height: 100%;
+}
+
 @mixin rs-drawer-type($type) {
   @if $type == modal {
     @include rs-drawer-scrim-fill-color($rs-drawer-modal-scrim-color);    
@@ -13,9 +19,19 @@
     --rs-drawer--right: auto;
     --rs-drawer--display: none;
     --rs-drawer--position: fixed;
-    --rs-drawer--box-shadow: rs-elevation($rs-drawer-modal-elevation);
+    --rs-drawer--box-shadow: #{rs-elevation($rs-drawer-modal-elevation)};
     --rs-drawer__open--display: flex;
     --rs-drawer__modal: true;
+
+    &.-open {
+
+      @at-root {
+        html {
+          color: green;
+        }
+
+      }
+    }
   }@else if $type == dismissible {
     --rs-drawer--left: 0;
     --rs-drawer--right: auto;
@@ -28,4 +44,9 @@
       @include rs-drawer-app-content();
     }
   }
+}
+
+@mixin rs-drawer-toggle($state: false) {
+  --_rs-drawer: true;
+  --_rs-drawer-open: #{$state};
 }

@@ -1,9 +1,12 @@
 <template>
-  <div>
-    <div class="rs-drawer" ref="slotContainer">
+  <div class="rs-drawer-content">
+    <div
+      class="rs-drawer"
+      :class="{ 'rs-drawer--open': isOpen, 'rs-drawer--opening': isOpening, 'rs-drawer--animate': isAnimate, 'rs-drawer--closing' : isClosing }"
+      ref="slotContainer">
       <slot></slot>
     </div>
-    <div :class="{ 'rs-drawer-scrim': isModal }"></div>
+    <div :class="{ 'rs-drawer-scrim': isModal }" @click="closeOverLay"></div>
   </div>
 </template>
 <script>
@@ -12,17 +15,55 @@ export default {
     return {
       el: '',
       host: '',
+      hostParent: '',
       isModal: false,
-      isDismissible: false
+      isDismissible: false,
+      isOpen: false,
+      isOpening: false,
+      isAnimate: false,
+      isClosing: false
     }
   },
   watch: {
     el() {
-      this.host = this.el.parentNode.parentNode.host
+      this.host = this.el.parentNode.host
+      this.hostParent = this.host.parentNode
+      const observer = new MutationObserver(mutations => {
+        const target = mutations[0].target
+        const isOpen = Array.from(target.classList).findIndex(cls => cls === 'rs-drawer--open') > -1 ? true : false
+        const body = window.document.querySelector('body')
+        if(this.isModal && isOpen) {
+          body.style.overflow = 'hidden'
+        } else {
+          body.style.overflow = 'auto'
+        }
+      })
+      observer.observe(this.el, {
+        attributes: true,
+        childList: true,
+        subtree: true
+      })
     },
     host() {
       this.isModal = this.getElementProperty(this.host, '--rs-drawer__modal') ? true : false
       this.isDismissible = this.getElementProperty(this.host, '--rs-drawer__dismissible') ? true : false
+
+      const observer = new MutationObserver(mutations => {
+        const target = mutations[0].target
+        const isOpen = this.getElementProperty(target, '--_rs-drawer-open') ? true : false
+        if(isOpen) {
+          this.openDrawer()
+        }
+      })
+
+      const appBarNav = window.__rsmdc.topAppBar.navigations.filter(nav => this.getElementProperty(nav.host, '--_rs-drawer') === 'true')
+      const { host } = appBarNav[0]
+      observer.observe(host, {
+        attributes: true,
+      })
+      if(this.getElementProperty(host, '--_rs-drawer-open') === 'true') {
+        this.openDrawer()
+      }
     }
   },
   created() {
@@ -32,13 +73,14 @@ export default {
     if(!window.__rsmdc.drawer) {
       window.__rsmdc.drawer = {
         drawers: [],
+        drawerParents: [],
         lists: [],
       }
     }
   },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
-    this.el = this.$el.querySelector('.rs-drawer')
+    this.el = this.$el
 
     window.__rsmdc.drawer.drawers.push(this.el)
   },
@@ -51,6 +93,31 @@ export default {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
       return value
+    },
+    closeOverLay() {
+      this.isClosing = true
+      setTimeout(() => {
+        this.isOpen = false
+        this.isClosing = false
+      }, 200)
+      const body = window.document.querySelector('body')
+      body.style.overflow = 'auto'
+    },
+    openDrawer() {
+      new Promise(resolve => {
+        this.isOpen = true
+        this.isOpening = true
+        this.isAnimate = true
+        resolve()
+      }).then(() => {
+        setTimeout(() => {
+          this.isAnimate = false
+        }, 1)
+      }).then(() => {
+        setTimeout(() => {
+          this.isOpening = false
+        }, 250)
+      })
     }
   }
 }
@@ -68,6 +135,14 @@ export default {
 
 :host {
   --rs-drawer-list-item--border-radius: 4px;
+
+  position: fixed;
+  z-index: 10;
+  height: 100%;
+}
+
+.rs-drawer-content {
+  height: 100%;
 }
 
 .rs-drawer {
@@ -76,7 +151,6 @@ export default {
   @include rs-drawer-item-activated-icon-ink-color($rs-drawer-item-activated-ink-color);
   @include rs-drawer-item-activated-text-ink-color($rs-drawer-item-activated-ink-color);
   @include rs-drawer-item-shape-radius(4px);
-  @include rs-drawer-width($rs-drawer-width);
 
   @include rs-rtl {
     /* @noflip */
@@ -98,7 +172,7 @@ export default {
   border-right-width: 1px;
   border-right-style: solid;
   overflow: hidden;
-  width: var(--rs-drawer--width);
+  width: var(--rs-drawer--width, $rs-drawer-width);
   border-color: var(--rs-drawer--border-color, rgba(rs-theme-prop-value($rs-drawer-divider-color), $rs-drawer-divider-opacity));
   background-color: var(--rs-drawer--background-color, $rs-drawer-surface-fill-color);
   z-index: var(--rs-drawer--z-index, $rs-drawer-z-index);
@@ -159,6 +233,7 @@ export default {
   transition-property: opacity;
   transition-timing-function: $rs-animation-standard-curve-timing-function;
   z-index: $rs-drawer-z-index - 1;
+  background-color: var(--rs-drawer-scrim--background-color);
 
   .rs-drawer--open + & {
     display: block;
