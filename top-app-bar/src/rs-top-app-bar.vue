@@ -90,6 +90,7 @@ export default {
           this.scrollTop = this.scrollTop === 0 
             ? startTopPosition : this.scrollTop >= top
             ? top : this.scrollTop + diff
+          this.scrollTop = this.scrollTop < 0 ? 0 : this.scrollTop
           this.el.style.top = `${this.scrollTop}px`
         } else {
           this.scrollTop = 0
