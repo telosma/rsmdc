@@ -12,7 +12,6 @@ export default {
     if(!window.__rsmdc.drawer) {
       window.__rsmdc.drawer = {
         drawers: [],
-        lists: [],
       }
     }
   },
@@ -30,7 +29,7 @@ export default {
 
 <style lang="scss">
 
- .rs-drawer__content {
+ :host {
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
