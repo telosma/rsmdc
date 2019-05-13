@@ -109,15 +109,8 @@
 }
 
 @mixin rs-top-app-bar-with-drawer($drawerType: default) {
-  --rs-top-app-bar_-drawer: true;
-
   @if $drawerType == permanent {
-    position: relative;
-    width: 100%;
-    margin-left: var(--rs-drawer-app-content--margin-left, $rs-drawer-width);
-  }@else {
-    position: relative;
-    width: 100%;
+    --rs-app-layout-content--margin-left: #{$rs-drawer-width};
   }
 }
 
