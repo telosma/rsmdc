@@ -46,6 +46,11 @@ export default {
     host() {
       this.isModal = this.getElementProperty(this.host, '--rs-drawer__modal') ? true : false
       this.isDismissible = this.getElementProperty(this.host, '--rs-drawer__dismissible') ? true : false
+      window.__rsmdc.drawer.drawers.push({
+        host: this.host,
+        isModal: this.isModal,
+        isDismissible: this.isDismissible
+      })
     }
   },
   created() {
@@ -54,17 +59,13 @@ export default {
     }
     if(!window.__rsmdc.drawer) {
       window.__rsmdc.drawer = {
-        drawers: [],
-        drawerParents: [],
-        lists: [],
+        drawers: []
       }
     }
   },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el
-
-    window.__rsmdc.drawer.drawers.push(this.el)
   },
   methods: {
     fixSlot() {
@@ -104,7 +105,11 @@ export default {
         this.addStyleToBody('--rs-app-layout-content--margin-left', '')
       }
       if(this.isModal) {
-        this.addStyleToBody('overflow', 'auto')
+        const modalDrawers = window.__rsmdc.drawer.drawers.filter(drawer => drawer.isModal === true)
+        const openedModals = modalDrawers.filter(drawer => drawer.host.opened === true)
+        if(openedModals.length === 0) {
+          this.addStyleToBody('overflow', 'auto')
+        }
       }
       this.isClosing = true
       setTimeout(() => {
