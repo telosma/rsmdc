@@ -114,7 +114,7 @@ export default {
     },
     addStyleToBody(prop, value) {
       const body = window.document.querySelector('body')
-      body.style.cssText = `${prop}: ${value}`
+      body.style.setProperty(prop, value)
     },
     clickOverlay() {
       this.$emit('change')
