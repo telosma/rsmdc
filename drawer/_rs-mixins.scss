@@ -1,15 +1,7 @@
 @import '../rtl/mixins';
 
-@mixin rs-drawer-app-content() {
-  margin-left: var(--rs-drawer-app-content--margin-left, 0);
-  margin-right: var(--rs-drawer-app-content--margin-right, 0);
-  position: relative;
-}
-
-@mixin rs-drawer-permanent-content() {
-  display: flex;
-  // height: 100vh;
-  height: 100%;
+@mixin rs-drawer-opened-content() {
+  --rs-app-layout-content--margin-left: var(--rs-drawer--width, 256px);
 }
 
 @mixin rs-drawer-type($type) {
@@ -29,14 +21,5 @@
     --rs-drawer--position: absolute;
     --rs-drawer__open--display: flex;
     --rs-drawer__dismissible: true;
-
-    + * {
-      @include rs-drawer-app-content();
-    }
   }
-}
-
-@mixin rs-drawer-toggle($state: false) {
-  --_rs-drawer: true;
-  --_rs-drawer-open: #{$state};
 }

@@ -113,9 +113,6 @@
 
 @mixin rs-drawer-width($width) {
   --rs-drawer--width: #{$width};
-
-  + * {
-    --rs-drawer-app-content--margin-left: #{$width};
-    --rs-drawer-app-content--margin-right: 0;
-  }
+  --rs-app-layout-content--margin-left: #{$width};
+  --rs-app-layout-content--margin-right: 0;
 }
