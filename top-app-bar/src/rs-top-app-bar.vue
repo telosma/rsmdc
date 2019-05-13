@@ -39,11 +39,14 @@ export default {
       this.hostParent = this.host.parentNode
     },
     host() {
+      const appBarHeight = 56
+      const withProminentHeight = 128
+
       this.isFixed = this.getElementProperty(this.host, '--rs-top-app-bar__fixed') ? true : false
       this.isShort = this.getElementProperty(this.host, '--rs-top-app-bar__short') ? true : false
       this.isCollapsed = this.getElementProperty(this.host, '--rs-top-app-bar__collapsed') ? true : false
       this.isProminent = this.getElementProperty(this.host, '--rs-top-app-bar__prominent') ? true : false
-      this.topLimit = this.isProminent ? -256 : -128
+      this.topLimit = this.isProminent ? -(withProminentHeight * 2) : -(appBarHeight * 2)
     },
     hostParent() {
       this.isDrawer = this.getElementProperty(this.hostParent, '--rs-top-app-bar_-drawer') ? true : false
@@ -63,6 +66,10 @@ export default {
     }
   },
   mounted() {
+    const appBarHeight = 56
+    const appBarPadding = 12
+    const withCollapsedPadding = 4
+
     this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el.querySelector('.rs-top-app-bar')
 
@@ -72,7 +79,7 @@ export default {
     this.hasActionItem = this.lastChild.nodeName === 'H1' ? false : this.lastChild.nodeName === 'H2' ? false : true
     if(this.hasActionItem) {
       const actionItemLengh = Array.from(this.lastChild.childNodes).filter(child => child.nodeType === 1).length
-      const withCollapsedWidth = (56 * actionItemLengh) + 56 - 12 + 4
+      const withCollapsedWidth = (appBarHeight * actionItemLengh) + appBarHeight - appBarPadding + withCollapsedPadding 
       this.$el.style.cssText = `--rs-top-app-bar__collapsed--width: ${withCollapsedWidth}px;`
     }
 
