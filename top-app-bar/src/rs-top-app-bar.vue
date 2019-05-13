@@ -2,7 +2,7 @@
   <div>
     <header class="rs-top-app-bar"
       :class="{ 'rs-top-app-bar--fixed-scrolled' : isScrolled && isFixed, 'rs-top-app-bar--short-collapsed' : isScrolled && isShort, 'rs-top-app-bar--has-action-item' : (isScrolled && isShort && hasActionItem) || (isCollapsed && hasActionItem), '-rs-drawer': isDrawer }"
-      :style="'--rs-top-app-'">
+      :style="{ 'top': top }">
       <div class="rs-top-app-bar__row">
         <div class="rs-top-app-bar__section" ref="slotContainer">
           <slot></slot>
@@ -21,6 +21,7 @@ export default {
       hostParent: '',
       lastChild: '',
       topLimit: '',
+      top: 0,
       scrollTop: 0,
       windowScrollTop: 0,
       isDrawer: false,
@@ -45,11 +46,6 @@ export default {
       this.topLimit = this.isProminent ? -256 : -128
     },
     hostParent() {
-      window.__rsmdc.topAppBar.topAppBars.push({
-        el: this.el,
-        host: this.host,
-        hostParent: this.hostParent
-      })
       this.isDrawer = this.getElementProperty(this.hostParent, '--rs-top-app-bar_-drawer') ? true : false
     }
   },
@@ -72,7 +68,7 @@ export default {
 
     const slotChildren = this.$el.querySelector('.rs-top-app-bar__section').childNodes
     this.lastChild = Array.from(slotChildren).pop()
-  
+
     this.hasActionItem = this.lastChild.nodeName === 'H1' ? false : this.lastChild.nodeName === 'H2' ? false : true
     if(this.hasActionItem) {
       const actionItemLengh = Array.from(this.lastChild.childNodes).filter(child => child.nodeType === 1).length
@@ -94,7 +90,7 @@ export default {
             ? startTopPosition : this.scrollTop >= top
             ? top : this.scrollTop + diff
           this.scrollTop = this.scrollTop < 0 ? 0 : this.scrollTop
-          this.el.style.top = `${this.scrollTop}px`
+          this.top = `${this.scrollTop}px`
         } else {
           this.scrollTop = 0
         }
@@ -111,7 +107,7 @@ export default {
           const scrollTopHarf = this.topLimit / 2
           const startTopPosition = this.scrollTop === this.topLimit ? scrollTopHarf : this.scrollTop + diff
           this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
-          this.el.style.top = `${this.scrollTop}px`
+          this.top = `${this.scrollTop}px`
           this.windowScrollTop = top
 
         } else {
@@ -120,7 +116,7 @@ export default {
             ? -top : moving < this.topLimit 
             ? this.topLimit : moving
           this.scrollTop = startTopPosition
-          this.el.style.top = `${this.scrollTop}px`
+          this.top = `${this.scrollTop}px`
           this.windowScrollTop = top    
         }
       }
@@ -139,7 +135,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
 @import '../mixins';
 @import '../variables';
@@ -160,7 +155,7 @@ export default {
   border-radius: var(--rs-top-app-bar--border-radius);
 
   // types
-  width: var(--rs-top-app-bar--width, 100%);
+  width: var(--rs-top-app-bar--width);
   position: var(--rs-top-app-bar--position, fixed);
   top: var(--rs-top-app-bar--top, 0);
   right: var(--rs-top-app-bar--right, 0);
@@ -168,6 +163,7 @@ export default {
   transition: var(--rs-top-app-bar--transition);
   padding-top: var(--rs-top-app-bar--padding-top);
   box-shadow: var(--rs-top-app-bar--box-shadow);
+  margin-left: var(--rs-app-layout-content--margin-left);
 
   &[dir="rtl"] {
     right: var(--rs-top-app-bar_rtl--right);
@@ -205,7 +201,7 @@ export default {
     &.rs-top-app-bar--fixed-scrolled,
     &.rs-top-app-bar--short-collapsed {
       position: fixed;
-      margin-left: var(--rs-drawer-app-content--margin-left, $rs-drawer-width);
+      margin-left: var(--rs-app-layout-content--margin-left, $rs-drawer-width);
     }
   }
 }
@@ -271,4 +267,3 @@ export default {
 }
 
 </style>
-

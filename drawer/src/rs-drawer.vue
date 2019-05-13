@@ -77,8 +77,12 @@ export default {
       return value
     },
     openDrawer() {
+      if(this.isDismissible) {
+        const width = this.getElementProperty(this.el.querySelector('.rs-drawer'), 'width')
+        this.addStyleToBody('--rs-app-layout-content--margin-left', width)
+      }
       if(this.isModal) {
-        this.switchBodyOverflow()
+        this.addStyleToBody('overflow', 'hidden')
       }
       new Promise(resolve => {
         this.isOpen = true
@@ -96,8 +100,11 @@ export default {
       })
     },
     closeDrawer() {
+      if(this.isDismissible) {
+        this.addStyleToBody('--rs-app-layout-content--margin-left', '')
+      }
       if(this.isModal) {
-        this.switchBodyOverflow()
+        this.addStyleToBody('overflow', 'auto')
       }
       this.isClosing = true
       setTimeout(() => {
@@ -105,13 +112,9 @@ export default {
         this.isClosing = false
       }, 200)
     },
-    switchBodyOverflow() {
+    addStyleToBody(prop, value) {
       const body = window.document.querySelector('body')
-      if(this.isVisibled) {
-        body.style.overflow = 'hidden'
-      } else {
-        body.style.overflow = 'auto'
-      }
+      body.style.cssText = `${prop}: ${value}`
     },
     clickOverlay() {
       this.$emit('change')
