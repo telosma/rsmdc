@@ -45,6 +45,11 @@ export default {
       this.topLimit = this.isProminent ? -256 : -128
     },
     hostParent() {
+      window.__rsmdc.topAppBar.topAppBars.push({
+        el: this.el,
+        host: this.host,
+        hostParent: this.hostParent
+      })
       this.isDrawer = this.getElementProperty(this.hostParent, '--rs-top-app-bar_-drawer') ? true : false
     }
   },
@@ -74,8 +79,6 @@ export default {
       const withCollapsedWidth = (56 * actionItemLengh) + 56 - 12 + 4
       this.$el.style.cssText = `--rs-top-app-bar__collapsed--width: ${withCollapsedWidth}px;`
     }
-
-    window.__rsmdc.topAppBar.topAppBars.push(this.el)
 
     window.onscroll = () => {
       let top = window.pageYOffset

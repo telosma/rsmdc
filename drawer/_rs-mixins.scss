@@ -22,16 +22,6 @@
     --rs-drawer--box-shadow: #{rs-elevation($rs-drawer-modal-elevation)};
     --rs-drawer__open--display: flex;
     --rs-drawer__modal: true;
-
-    &.-open {
-
-      @at-root {
-        html {
-          color: green;
-        }
-
-      }
-    }
   }@else if $type == dismissible {
     --rs-drawer--left: 0;
     --rs-drawer--right: auto;

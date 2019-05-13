@@ -3,14 +3,21 @@
     <div
       class="rs-drawer"
       :class="{ 'rs-drawer--open': isOpen, 'rs-drawer--opening': isOpening, 'rs-drawer--animate': isAnimate, 'rs-drawer--closing' : isClosing }"
+      :opened="opened"
       ref="slotContainer">
       <slot></slot>
     </div>
-    <div :class="{ 'rs-drawer-scrim': isModal }" @click="closeOverLay"></div>
+    <div :class="{ 'rs-drawer-scrim': isModal }" @click="clickOverlay"></div>
   </div>
 </template>
 <script>
 export default {
+  props: {
+    opened: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       el: '',
@@ -25,45 +32,20 @@ export default {
     }
   },
   watch: {
+    opened() {
+      if(this.opened) {
+        this.openDrawer()
+      } else {
+        this.closeDrawer()
+      }
+    },
     el() {
       this.host = this.el.parentNode.host
       this.hostParent = this.host.parentNode
-      const observer = new MutationObserver(mutations => {
-        const target = mutations[0].target
-        const isOpen = Array.from(target.classList).findIndex(cls => cls === 'rs-drawer--open') > -1 ? true : false
-        const body = window.document.querySelector('body')
-        if(this.isModal && isOpen) {
-          body.style.overflow = 'hidden'
-        } else {
-          body.style.overflow = 'auto'
-        }
-      })
-      observer.observe(this.el, {
-        attributes: true,
-        childList: true,
-        subtree: true
-      })
     },
     host() {
       this.isModal = this.getElementProperty(this.host, '--rs-drawer__modal') ? true : false
       this.isDismissible = this.getElementProperty(this.host, '--rs-drawer__dismissible') ? true : false
-
-      const observer = new MutationObserver(mutations => {
-        const target = mutations[0].target
-        const isOpen = this.getElementProperty(target, '--_rs-drawer-open') ? true : false
-        if(isOpen) {
-          this.openDrawer()
-        }
-      })
-
-      const appBarNav = window.__rsmdc.topAppBar.navigations.filter(nav => this.getElementProperty(nav.host, '--_rs-drawer') === 'true')
-      const { host } = appBarNav[0]
-      observer.observe(host, {
-        attributes: true,
-      })
-      if(this.getElementProperty(host, '--_rs-drawer-open') === 'true') {
-        this.openDrawer()
-      }
     }
   },
   created() {
@@ -94,16 +76,10 @@ export default {
       const value = String(style.getPropertyValue(prop)).trim()
       return value
     },
-    closeOverLay() {
-      this.isClosing = true
-      setTimeout(() => {
-        this.isOpen = false
-        this.isClosing = false
-      }, 200)
-      const body = window.document.querySelector('body')
-      body.style.overflow = 'auto'
-    },
     openDrawer() {
+      if(this.isModal) {
+        this.switchBodyOverflow()
+      }
       new Promise(resolve => {
         this.isOpen = true
         this.isOpening = true
@@ -118,6 +94,27 @@ export default {
           this.isOpening = false
         }, 250)
       })
+    },
+    closeDrawer() {
+      if(this.isModal) {
+        this.switchBodyOverflow()
+      }
+      this.isClosing = true
+      setTimeout(() => {
+        this.isOpen = false
+        this.isClosing = false
+      }, 200)
+    },
+    switchBodyOverflow() {
+      const body = window.document.querySelector('body')
+      if(this.isVisibled) {
+        body.style.overflow = 'hidden'
+      } else {
+        body.style.overflow = 'auto'
+      }
+    },
+    clickOverlay() {
+      this.$emit('change')
     }
   }
 }
