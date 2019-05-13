@@ -5,16 +5,6 @@
 </template>
 <script>
 export default {
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.drawer) {
-      window.__rsmdc.drawer = {
-        drawers: [],
-      }
-    }
-  },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
   },

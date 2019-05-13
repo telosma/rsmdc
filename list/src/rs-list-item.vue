@@ -45,12 +45,8 @@ export default {
       this.listHost = this.host.parentNode
       this.drawerHost = this.host.parentNode.parentNode
     },
-    listHost() {
-      const aa = window.__rsmdc.list.lists.filter(list => list.isSameNode(this.listHost))
-    },
     drawerHost() {
       if(this.drawerHost.shadowRoot) {
-        this.listHost = this.host.parentNode
         this.isDrawer = this.drawerHost.shadowRoot.querySelector('.rs-drawer__content') ? true : false
         const listItems = Array.from(this.listHost.childNodes).filter(child => child.nodeType == 1)
         const itemIndex = listItems.findIndex(item => item.isSameNode(this.host))
@@ -68,23 +64,11 @@ export default {
       this.isEnableAttr('isDisabled', 'disabled')
     }
   },
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.list) {
-      window.__rsmdc.list = {
-        lists: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     new RSRipple(this.$el)
     this.checkAttrs()
     this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el
-    window.__rsmdc.list.items.push(this.el)
   },
   methods: {
     fixSlot() {

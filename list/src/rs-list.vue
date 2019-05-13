@@ -4,41 +4,9 @@
   </ul>
 </template>
 <script>
-import { RSList } from '../index'
-
 export default {
-  data() {
-    return {
-      el: '',
-      host: ''
-    }
-  },
-  watch: {
-    el() {
-    }
-  },
-  props: {
-    type: {
-      type: String,
-      default: ''
-    }
-  },
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.list) {
-      window.__rsmdc.list = {
-        lists: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
-    new RSList(this.$el)
-    this.el = this.$el
-    window.__rsmdc.list.lists.push(this.el)
   },
   methods: {
     fixSlot() {

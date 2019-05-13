@@ -25,17 +25,6 @@ export default {
       }
     }
   },
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.list) {
-      window.__rsmdc.list = {
-        lists: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     this.el = this.$el
     this.$nextTick().then(this.fixSlot.bind(this))

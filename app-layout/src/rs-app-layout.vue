@@ -5,15 +5,8 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      el: '',
-      host: ''
-    }
-  },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
-    this.el = this.$el
   },
   methods: {
     fixSlot() {

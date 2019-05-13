@@ -7,18 +7,6 @@
 import { RSRipple } from '../../ripple'
 
 export default {
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.topAppBar) {
-      window.__rsmdc.topAppBar = {
-        navigations: [],
-        titles: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     this.$nextTick()
     .then(this.fixSlot.bind(this))

@@ -5,17 +5,6 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      el: '',
-      host: ''
-    }
-  },
-  watch: {
-    el() {
-      this.host = this.el.parentNode.host
-    }
-  },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
   },

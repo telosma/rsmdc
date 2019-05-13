@@ -7,35 +7,6 @@
 import { RSRipple } from '../../ripple'
 
 export default {
-  data() {
-    return {
-      el: '',
-      host: '',
-    }
-  },
-  watch: {
-    el() {
-      this.host = this.el.parentNode.host
-    },
-    host() {
-      window.__rsmdc.topAppBar.navigations.push({
-        el: this.el,
-        host: this.host
-      })
-    }
-  },
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.topAppBar) {
-      window.__rsmdc.topAppBar = {
-        navigations: [],
-        titles: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     this.$nextTick()
     .then(this.fixSlot.bind(this))
@@ -47,7 +18,6 @@ export default {
         ripple.unbounded = true
       })
     })
-    this.el = this.$el
   },
   methods: {
     fixSlot() {

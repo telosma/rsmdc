@@ -5,17 +5,6 @@
 </template>
 <script>
 export default {
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.list) {
-      window.__rsmdc.list = {
-        lists: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
   },
@@ -59,8 +48,6 @@ export default {
 
 @include rs-typography-baseline-top(20px, true, h6);
 @include rs-typography-baseline-top-strut_(20px, true, h6);
-
-
 
 </style>
 

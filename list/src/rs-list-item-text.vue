@@ -25,17 +25,6 @@ export default {
       }
     }
   },
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.list) {
-      window.__rsmdc.list = {
-        lists: [],
-        items: [],
-      }
-    }
-  },
   mounted() {
     this.$nextTick()
       .then(this.fixSlot.bind(this))
@@ -83,10 +72,6 @@ export default {
     pointer-events: none;
   }
 }
-
-// .-rs-drawer {
-//   pointer-events: none;
-// }
 
 ::slotted(.-rs-primary) {
   @include rs-typography-overflow-ellipsis;

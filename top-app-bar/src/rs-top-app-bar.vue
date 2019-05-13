@@ -71,10 +71,7 @@ export default {
     }
     if(!window.__rsmdc.topAppBar) {
       window.__rsmdc.topAppBar = {
-        topAppBars: [],
-        navigations: [],
-        titles: [],
-        items: [],
+        topAppBars: []
       }
     }
   },
