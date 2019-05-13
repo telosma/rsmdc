@@ -7,15 +7,6 @@
 import { RSRipple } from '../../ripple'
 
 export default {
-  data() {
-    return {
-      item: {
-        index: 0,
-        el: '',
-        host: '',
-      }
-    }
-  },
   created() {
     if(!window.__rsmdc) {
       window.__rsmdc = {}
@@ -39,7 +30,7 @@ export default {
         const ripple = new RSRipple(el)
         ripple.unbounded = true
       })
-    })    
+    })
   },
   methods: {
     setTabIndex(elements) {
@@ -61,6 +52,7 @@ export default {
 @import '../../ripple/rs-mixins';
 
 :host {
+  --_rs-top-app-bar-action-item: true;
   margin-left: var(--rs-top-app-bar__collapsed--margin-left, auto);
   margin-right: 0;
   align-self: var(--rs-top-app-bar-actionItem--align-self);

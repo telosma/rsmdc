@@ -50,6 +50,19 @@ export default {
     },
     hostParent() {
       this.isDrawer = this.getElementProperty(this.hostParent, '--rs-top-app-bar_-drawer') ? true : false
+    },
+    lastChild() { 
+      const appBarHeight = 56
+      const appBarPadding = 12
+      const withCollapsedPadding = 4
+
+      this.hasActionItem = this.getElementProperty(this.lastChild, '--_rs-top-app-bar-action-item') === 'true' ? true : false
+
+      if(this.hasActionItem) {
+        const actionItemLengh = Array.from(this.lastChild.childNodes).filter(child => child.nodeType === 1).length
+        const withCollapsedWidth = (appBarHeight * actionItemLengh) + appBarHeight - appBarPadding + withCollapsedPadding 
+        this.$el.style.cssText = `--rs-top-app-bar__collapsed--width: ${withCollapsedWidth}px;`
+      }
     }
   },
   created() {
@@ -66,22 +79,11 @@ export default {
     }
   },
   mounted() {
-    const appBarHeight = 56
-    const appBarPadding = 12
-    const withCollapsedPadding = 4
-
     this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el.querySelector('.rs-top-app-bar')
 
     const slotChildren = this.$el.querySelector('.rs-top-app-bar__section').childNodes
     this.lastChild = Array.from(slotChildren).pop()
-
-    this.hasActionItem = this.lastChild.nodeName === 'H1' ? false : this.lastChild.nodeName === 'H2' ? false : true
-    if(this.hasActionItem) {
-      const actionItemLengh = Array.from(this.lastChild.childNodes).filter(child => child.nodeType === 1).length
-      const withCollapsedWidth = (appBarHeight * actionItemLengh) + appBarHeight - appBarPadding + withCollapsedPadding 
-      this.$el.style.cssText = `--rs-top-app-bar__collapsed--width: ${withCollapsedWidth}px;`
-    }
 
     window.onscroll = () => {
       let top = window.pageYOffset
