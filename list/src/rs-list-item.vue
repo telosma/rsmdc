@@ -1,7 +1,7 @@
 <template>
   <li
     class="rs-list-item"
-    :class="{ 'rs-list-item--selected': isSelected, 'rs-list-item--activated': isActivated, 'rs-list-item--disabled': isDisabled, '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
+    :class="{ 'rs-list-item--selected': selected, 'rs-list-item--activated': activated, 'rs-list-item--disabled': disabled, '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
     ref="slotContainer"
     tabindex="0">
     <slot></slot>
@@ -13,16 +13,16 @@ import { RSRipple } from '../../ripple'
 export default {
   props: {
     selected: {
-      type: String,
-      default: ''
+      type: Boolean,
+      default: false
     },
     activated: {
-      type: String,
-      default: ''
+      type: Boolean,
+      default: false
     },
     disabled: {
-      type: String,
-      default: ''
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -32,9 +32,6 @@ export default {
       listHost: '',
       drawerHost: '',
       isDrawer: false,
-      isSelected: false,
-      isActivated: false,
-      isDisabled: false,
       isFirstChild: false,
       isLastChild: false
     }
@@ -54,19 +51,9 @@ export default {
         this.isLastChild = itemIndex === listItems.length - 1 ? true : false
       }
     },
-    isSelected() {
-      this.isEnableAttr('isSelected', 'selected')
-    },
-    isActivated() {
-      this.isEnableAttr('isActivated', 'activated')
-    },
-    isDisabled() {
-      this.isEnableAttr('isDisabled', 'disabled')
-    }
   },
   mounted() {
     new RSRipple(this.$el)
-    this.checkAttrs()
     this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el
   },
@@ -74,17 +61,6 @@ export default {
     fixSlot() {
       this.$refs.slotContainer.innerHTML = ''
       this.$refs.slotContainer.append(document.createElement('slot'))
-    },
-    isEnableAttr(key, attr) {
-      this[key] = this[attr] === attr ? true: false
-    },
-    checkAttrs() {
-      Object.keys(this.$data).forEach(key => {
-        const attr = key
-          .toLowerCase()
-          .replace(/is/, '')
-        this.isEnableAttr(key, attr)
-      })
     }
   }
 }
@@ -141,25 +117,25 @@ export default {
     @include rs-list-item-primary-text-ink-color($rs-theme-primary);
     @include rs-list-item-graphic-ink-color($rs-theme-primary);
     --rs-menu-list-item-graphic--display: inline;
-
-    &::before {
-      opacity: var(--rs-selected_before--opacity);
-    }
   }
 
   &.rs-list-item--activated {
     @include rs-states-activated(primary);
     @include rs-list-item-primary-text-ink-color($rs-theme-primary);
     @include rs-list-item-graphic-ink-color($rs-theme-primary);
-
-    &::before {
-      opacity: var(--rs-activated_before--opacity);
-    }
   }
 
   &.rs-list-item:not(.rs-list-item--disabled) {
     @include rs-ripple-surface;
     @include rs-ripple-radius-bounded;
+
+    &.rs-list-item--selected::before {
+      opacity: var(--rs-selected_before--opacity);
+    }
+
+    &.rs-list-item--activated::before {
+      opacity: var(--rs-activated_before--opacity);
+    }
   }
 
   &.rs-list-item--disabled {
