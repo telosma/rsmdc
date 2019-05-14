@@ -9,7 +9,7 @@
 rs-button style
 ---
 */
-@mixin rs-button-type($type, $dense: flat) {
+@mixin rs-button-type($type, $dense: normal) {
   @if $type == outlined {
     @include rs-button--outlined_;
     @include rs-button-outline-width(2px);
