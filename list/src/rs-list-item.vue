@@ -1,9 +1,13 @@
 <template>
   <li
     class="rs-list-item"
-    :class="{ 'rs-list-item--selected': selected, 'rs-list-item--activated': activated, 'rs-list-item--disabled': disabled, '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
-    ref="slotContainer"
-    tabindex="0">
+    :class="{ 'rs-list-item--selected': selected,
+      'rs-list-item--activated': activated, 
+      'rs-list-item--disabled': disabled,
+      '-rs-drawer': isDrawer,
+      '-rs-first': isFirstChild,
+      '-rs-last': isLastChild }"
+    ref="slotContainer">
     <slot></slot>
   </li>
 </template>
