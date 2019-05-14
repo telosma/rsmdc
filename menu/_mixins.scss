@@ -20,17 +20,18 @@
 // THE SOFTWARE.
 //
 
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
-@import "../theme/variables";
-@import "../rtl/mixins";
-@import "../list/mixins";
-@import "../ripple/mixins";
 @import "./variables";
+@import "../theme/variables";
+@import "../theme/mixins";
+@import "../shape/mixins";
+@import "../shape/rs-functions";
+@import "../animation/variables";
+@import "../elevation/mixins";
+@import "../rtl/mixins";
+@import "../ripple/mixins";
 
 @mixin rs-menu-core-styles() {
   @include rs-ripple-common();
-
 
   .rs-menu__selection-group {
     padding: 0;
@@ -49,5 +50,59 @@
     --rs-menu--width: #{$width * $rs-menu-width-base};
   } @else {
     --rs-menu--width: #{$width};
+  }
+}
+
+@mixin rs-menu-surface-ink-color($color) {
+  --rs-menu-surface--color: #{$color};
+}
+
+@mixin rs-menu-surface-fill-color($color) {
+  --rs-menu-surface--background-color: #{$color};
+}
+
+@mixin rs-menu-surface-shape-radius($radius, $rtl-reflexive: false) {
+  --rs-menu-surface--border-radius: #{rs-shape-radius($radius)};
+  --rs-menu-surface_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
+}
+
+@mixin rs-menu-surface-base_() {
+
+  box-sizing: border-box;
+  max-width: calc(100vw - #{$rs-menu-surface-min-distance-from-edge});
+  max-height: calc(100vh - #{$rs-menu-surface-min-distance-from-edge});
+  margin: 0;
+  padding: 0;
+  transform-origin: top left;
+  overflow: auto;
+  will-change: transform, opacity;
+  z-index: $rs-menu-surface-z-index;
+
+  transition:
+    opacity $rs-menu-surface-fade-in-duration linear,
+    transform $rs-menu-surface-scale-duration $rs-animation-deceleration-curve-timing-function;
+
+  &:focus {
+    outline: none;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  &--open {
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--transform: scale(1);
+    --rs-menu-surface--opacity: 1;
+  }
+
+  &--animating-open {
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--transform: scale(.8);
+    --rs-menu-surface--opacity: 0;
+  }
+
+  &--animating-closed {
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--opacity: 0;
+
+    transition: opacity $rs-menu-surface-fade-out-duration linear;
   }
 }

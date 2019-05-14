@@ -10,7 +10,6 @@ import listItem from './list/src/rs-list-item.vue'
 import listItemGraphic from './list/src/rs-list-item-graphic.vue'
 import listItemMeta from './list/src/rs-list-item-meta.vue'
 import listItemText from './list/src/rs-list-item-text.vue'
-import menuSurface from './menu-surface/src/rs-menu-surface.vue'
 import menu from './menu/src/rs-menu.vue'
 import menuListGroup from './menu/src/rs-menu-list-group.vue'
 import topAppBar from './top-app-bar/src/rs-top-app-bar.vue'
@@ -32,7 +31,6 @@ export const ListItem = wrap(Vue, listItem)
 export const ListItemGraphic = wrap(Vue, listItemGraphic)
 export const ListItemMeta = wrap(Vue, listItemMeta)
 export const ListItemText = wrap(Vue, listItemText)
-export const MenuSurface = wrap(Vue, menuSurface)
 export const Menu = wrap(Vue, menu)
 export const MenuListGroup = wrap(Vue, menuListGroup)
 export const TopAppBar = wrap(Vue, topAppBar)

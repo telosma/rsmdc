@@ -1,94 +1,72 @@
 <template>
-  <div class="rs-menu rs-menu-surface">
+  <div
+    class="rs-menu rs-menu-surface"
+    :class="{ 'rs-menu-surface--open' : opened, 'rs-menu-surface--animating-open': animatingOpen, 'rs-menu-surface--animating-closed': animatingClosed }">
     <slot></slot>
   </div>
 </template>
 <script>
-import { RSMenu } from '../index'
 
 export default {
+  props: {
+    opened: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      menu: {
-        el: '',
-        component: '',
-        index: 0,
-      },
-      isOpen: false,
-      hasObserver: false,
-      hostElement: '',
-      allMenus: []
+      el: '',
+      animatingOpen: false,
+      animatingClosed: false,
     }
   },
   watch: {
-    allMenus() {
-      if(!this.hostElement) {
-        this.hostElement = this.getHostElement()
-        this.isOpen = this.getHostElementCustomProperty('--_rs-menu-open') ? this.getHostElementCustomProperty('--_rs-menu-open') : false
-      }
-    },
-    isOpen() {
-      if(this.isOpen !== this.menu.component.open) {
-        this.menu.component.open = !this.menu.component.open
+    opened() {
+      if(this.opened) {
+        this.openMenu()
       } else {
-        this.isOpen = true
-      }
-    },
-    hostElement() {
-      if(!this.hasObserver) {
-        const observer = new MutationObserver(mutations => {
-          this.hostElement = mutations[0].target
-          this.isOpen = this.getHostElementCustomProperty('--_rs-menu-open') ? this.getHostElementCustomProperty('--_rs-menu-open') : false
-        })
-        observer.observe(this.hostElement, {
-          attributes: true
-        })
-        this.hasObserver = true
+        this.closeMenu()
       }
     }
   },
   mounted() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {
-        menus: {
-          eles: [],
-          mutations: ''
-        }
-      }
-    }
-
-    const menu = new RSMenu(this.$el)
-    this.menu.component = menu
-    this.menu.el = this.$el
-    this.menu.index = window.__rsmdc.menus.eles.length
-
-    window.__rsmdc.menus.eles.push(this.menu)
-    this.allMenus = window.__rsmdc.menus
+    this.el = this.$el
   },
   methods: {
-    getHostElement() {
-      const self = this.allMenus.eles.filter(menu => menu.index === this.menu.index)
-      const host = self[0].el.parentNode.host
-      return host
+    openMenu() {
+      this.animatingOpen = true
+      setTimeout(() => {
+        this.animatingOpen = false
+      }, 10)
     },
-    getHostElementCustomProperty(prop) {
-      const style = window.getComputedStyle(this.hostElement)
-      const value = String(style.getPropertyValue(prop)).trim()
-      return value
+    closeMenu() {
+      this.animatingClosed = true
+      setTimeout(() => {
+        this.animatingClosed = false
+      }, 10)
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../rs-menu';
-@import '../../menu-surface/rs-menu-surface';
+@import '../mixins';
 
 :host {
   position: absolute;
 }
+@include rs-ripple-common();
 
 .rs-menu {
+  --rs-menu-list-item-meta--color: #{rs-theme-ink-color-for-fill_(primary, $rs-theme-background)};
+  --rs-menu-list-item-graphic--color: #{rs-theme-ink-color-for-fill_(primary, $rs-theme-background)};
+  --rs-menu-list-divider--margin: 8px 0;
+  --rs-menu-list-item--cursor: pointer;
+  --rs-menu-list-item--user-select: none;
+  --rs-menu-list-item-disabled--cursor: auto;
+
+  min-width: $rs-menu-min-width;
   width: var(--rs-menu--width);
 
   &.rs-menu-surface {
@@ -106,7 +84,13 @@ export default {
   }
 }
 
+.rs-menu-surface {
+  @include rs-menu-surface-base_();
+  box-shadow: #{rs-elevation(8)};
+  min-width: $rs-menu-min-width;
 
+  @include rs-rtl-reflexive-property(transform-origin, top left, top right);
+}
 
 </style>
 
