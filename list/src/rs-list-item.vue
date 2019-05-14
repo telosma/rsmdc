@@ -127,6 +127,7 @@ export default {
     @include rs-states-activated(primary);
     @include rs-list-item-primary-text-ink-color($rs-theme-primary);
     @include rs-list-item-graphic-ink-color($rs-theme-primary);
+    --rs-menu-list-item-graphic--display: inline;
   }
 
   &.rs-list-item:not(.rs-list-item--disabled) {

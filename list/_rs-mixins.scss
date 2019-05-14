@@ -29,11 +29,6 @@
 
     }@else if $type == non-interactive {
       --rs-list-item--cursor: default;
-
-    }@else if $type == group {
-      --rs-list--padding: 0;
-      --rs-list__group-divider_rtl--margin-left: 0;
-      --rs-list__group-divider_rtl--margin-right: 72px;
     }
   }
 
