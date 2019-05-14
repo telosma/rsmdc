@@ -1,13 +1,3 @@
-@mixin rs-menu-open() {
-  --_rs-menu-open: true;
-}
-
-@mixin rs-menu-close() {
-  --rs-menu-surface--display: none;
-  --rs-menu-surface--transform: scale(1);
-  --rs-menu-surface--opacity: 0;
-}
-
 @mixin rs-menu-anchor() {
   position: relative;
   overflow: visible;

@@ -20,8 +20,6 @@
 // THE SOFTWARE.
 //
 
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
 @import "../theme/mixins";
 @import "../shape/mixins";
 @import "../shape/rs-functions";
@@ -31,25 +29,6 @@
 @import "./variables";
 @import "../menu/variables";
 
-@mixin rs-menu-surface-core-styles() {
-
-  .rs-menu-surface {
-    @include rs-menu-surface-base_();
-    box-shadow: #{rs-elevation(8)};
-    min-width: $rs-menu-min-width;
-
-    @include rs-rtl-reflexive-property(transform-origin, top left, top right);
-  }
-
-  .rs-menu-surface--anchor {
-    position: relative;
-    overflow: visible;
-  }
-
-  .rs-menu-surface--fixed {
-    position: fixed;
-  }
-}
 
 @mixin rs-menu-surface-ink-color($color) {
   --rs-menu-surface--color: #{$color};

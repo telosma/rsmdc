@@ -3,16 +3,6 @@
     <slot></slot>
   </div>
 </template>
-<script>
-import { RSMenuSurface } from '../index'
-
-export default {
-  mounted() {
-    new RSMenuSurface(this.$el)
-  }
-}
-</script>
-
 <style lang="scss">
 @import '../rs-menu-surface';
 
