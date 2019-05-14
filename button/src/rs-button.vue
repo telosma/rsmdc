@@ -1,5 +1,5 @@
 <template>
-  <button class="rs-button" :disabled="isEnableDisabled">
+  <button class="rs-button" :disabled="disabled" ref="slotContainer">
     <slot></slot>
   </button>
 </template>
@@ -9,27 +9,18 @@ import { RSRipple } from '../../ripple'
 export default {
   props: {
     disabled: {
-      type: String,
-      default: ''
-    }
-  },
-  data() {
-    return {
-      isEnableDisabled: false
-    }
-  },
-  watch: {
-    disabled: function() {
-      this.isDisabled()
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
+    this.$nextTick().then(this.fixSlot.bind(this))
     new RSRipple(this.$el)
-    this.isDisabled()
   },
   methods: {
-    isDisabled() {
-      this.isEnableDisabled = this.disabled === 'disabled' ? true : false 
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
     }
   }
 }
