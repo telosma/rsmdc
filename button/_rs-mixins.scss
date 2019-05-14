@@ -4,11 +4,6 @@
 @import '../shape/variables';
 @import '../ripple/variables';
 
-/*
----
-rs-button style
----
-*/
 @mixin rs-button-type($type, $dense: normal) {
   @if $type == outlined {
     @include rs-button--outlined_;
@@ -29,22 +24,28 @@ rs-button style
 
   @if $type == dense or $dense == dense {
     @include rs-button--dense_;
-  } @else {
-    @include rs-button__icon-contained_;
-  }
-}
-/*
----
-rs-button-icon position
----
-*/
-@mixin rs-button-icon-position($position: left, $type: false) {
-  @if $type == true and $position == right {
-    @include rs-button__icon-contained-trailing_;
-  }@else if $position == right {
-    @include rs-button__icon-trailing_;
   }
 }
 
+@mixin rs-button-padding-right($padding) {
+  --rs-button--padding-right: #{$padding};
+}
 
+@mixin rs-button-padding-left($padding) {
+  --rs-button--padding-left: #{$padding};
+}
 
+@mixin rs-button-padding-top($padding) {
+  --rs-button--padding-top: #{$padding};
+}
+
+@mixin rs-button-padding-bottom($padding) {
+  --rs-button--padding-top: #{$padding};
+}
+
+@mixin rs-button-icon($url, $position: left, $size: 18px, $repeat: no-repeat) {
+  --rs-button--background-image: #{$url};
+  --rs-button--background-size: #{$size};
+  --rs-button--background-position: #{$position};
+  --rs-button--background-repeat: #{$repeat};
+}

@@ -20,8 +20,6 @@
 // THE SOFTWARE.
 //
 @import "../elevation/mixins";
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
 @import "../ripple/mixins";
 @import "../rtl/mixins";
 @import "../theme/functions";
@@ -30,35 +28,7 @@
 @import "../shape/mixins";
 @import "../shape/functions";
 @import "./variables";
-@import './rs-functions';
-
-
-
-@mixin rs-button-core-styles($query: rs-feature-all()) {
-  @include rs-button-without-ripple($query);
-  @include rs-button-ripple($query);
-}
-
-@mixin rs-button-without-ripple($query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-  $feat-structure: rs-feature-create-target($query, structure);
-
-  // postcss-bem-linter: define button
-  .rs-button {
-    @include rs-button-base_($query);
-  }
-}
-
-@mixin rs-button-ripple($query: rs-feature-all()) {
-  @include rs-ripple-common($query);
-
-  .rs-button {
-    @include rs-ripple-surface($query);
-    @include rs-ripple-radius-bounded($query: $query);
-  }
-
-}
-
+@import "./rs-functions";
 
 @mixin rs-button-filled-accessible($container-fill-color) {
   $fill-tone: rs-theme-tone($container-fill-color);
@@ -82,10 +52,6 @@
   --rs-button_not_disabled--border-color: #{$color};
 }
 
-@mixin rs-button-icon-color($color) {
-  --rs-button-icon_not_disabled--color: #{$color};
-}
-
 @mixin rs-button-ink-color($color) {
   --rs-button_not_disabled--color: #{$color};
 }
@@ -96,7 +62,8 @@
 }
 
 @mixin rs-button-horizontal-padding($padding) {
-  --rs-button--padding: 0 #{$padding} 0 #{$padding};
+  --rs-button--padding-right: #{$padding};
+  --rs-button--padding-left: #{$padding};
 }
 
 @mixin rs-button-outline-width(
@@ -110,100 +77,14 @@
   --rs-button--border-width: #{$outline-width};
 }
 
-@mixin rs-button-base_($query) {
-  $feat-color: rs-feature-create-target($query, color);
-  $feat-structure: rs-feature-create-target($query, structure);
-
-  @include rs-typography(button, $query);
-  
-  @include rs-button-horizontal-padding($rs-button-horizontal-padding);
-
-  @include rs-feature-targets($feat-structure) {
-    display: inline-flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    min-width: 64px;
-    height: $rs-button-height;
-    border: none;
-    outline: none;
-    /* @alternate */
-    line-height: inherit;
-    user-select: none;
-    -webkit-appearance: none;
-    overflow: hidden;
-    vertical-align: middle;
-  }
-
-  &::-moz-focus-inner {
-    @include rs-feature-targets($feat-structure) {
-      padding: 0;
-      border: 0;
-    }
-  }
-
-  // postcss-bem-linter: ignore
-  &:active {
-    @include rs-feature-targets($feat-structure) {
-      outline: none;
-    }
-  }
-
-  &:hover {
-    @include rs-feature-targets($feat-structure) {
-      cursor: pointer;
-    }
-  }
-
-  &:disabled {
-    @include rs-feature-targets($feat-color) {
-      @include rs-theme-prop(background-color, transparent);
-
-      color: $rs-button-disabled-ink-color;
-    }
-
-    @include rs-feature-targets($feat-structure) {
-      cursor: default;
-      pointer-events: none;
-    }
-  }
-}
-
-@mixin rs-button__icon_ {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  font-size: 18px;
-  vertical-align: top;
-}
-
-@mixin rs-button__icon-trailing_ {
-  --rs-button-label_-icon--margin-left: 8px;
-  --rs-button-label_-icon--margin-right: 0px;
-}
-
-@mixin rs-button__icon-svg_ {
-  fill: currentColor;
-}
-
-@mixin rs-button__icon-contained_ {
-  --rs-button-icon--margin-left: -4px;
-  --rs-button-icon--margin-right: 8px;
-}
-
-@mixin rs-button__icon-contained-trailing_ {
-  --rs-button-label_-icon--margin-left: 8px;
-  --rs-button-label_-icon--margin-right: -4px;
-}
-
 @mixin rs-button--outlined_() {
   --rs-button--border-style: solid;
   --rs-button_disabled--border-color: #{$rs-button-disabled-ink-color};
 }
 
 @mixin rs-button--filled_() {
-  --rs-button--padding: #{$rs-button-contained-horizontal-padding};
+  --rs-button--padding-right: #{$rs-button-contained-horizontal-padding};
+  --rs-button--padding-left: #{$rs-button-contained-horizontal-padding};
   --rs-button_disabled--background-color: #{rgba(rs-theme-prop-value(on-surface), .12)};
   --rs-button_disabled--color: #{$rs-button-disabled-ink-color};
 }

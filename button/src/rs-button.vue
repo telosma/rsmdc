@@ -35,28 +35,68 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../rs-button';
+@import '../../ripple/mixins';
+@import '../../typography/mixins';
+@import '../../theme/mixins';
+@import '../../shape/functions';
+@import '../variables';
+
+@include rs-ripple-common;
 
 .rs-button {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+  @include rs-typography(button);
+
   // base
-  padding: var(--rs-button--padding, 0 $rs-button-horizontal-padding 0 $rs-button-horizontal-padding);
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 64px;
+  height: $rs-button-height;
+  border: none;
+  outline: none;
+  /* @alternate */
+  line-height: inherit;
+  user-select: none;
+  -webkit-appearance: none;
+  overflow: hidden;
+  vertical-align: middle;
   border-radius: var(--rs-button--border-radius, 4px);
   font-size: var(--rs-button--font-size, 0.875rem);
   box-shadow: var(--rs-button--box-shadow, none);
   height: var(--rs-button--height, 36px);
+  padding-right: var(--rs-button--padding-right, $rs-button-horizontal-padding);
+  padding-left: var(--rs-button--padding-left, $rs-button-horizontal-padding);
+  padding-top: var(--rs-button--padding-top, 0);
+  padding-bottom: var(--rs-button--padding-bottom, 0);
 
   // button-type
   border-width: var(--rs-button--border-width);
   border-style: var(--rs-button--border-style);
   transition: var(--rs-button--transition);
 
+  // icon
+  background-repeat: var(--rs-button--background-repeat);
+  background-image: var(--rs-button--background-image);
+  background-position: var(--rs-button--background-position);
+  background-size: var(--rs-button--background-size);
+
   [dir="rtl"] &,
   &[dir="rtl"] {
     border-radius: var(--rs-button_rtl--border-radius, rs-shape-rtl-radius(medium, false));
   }
 
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
   &:hover {
     box-shadow: var(--rs-button_hover--box-shadow);
+    cursor: pointer;
   }
 
   &:focus {
@@ -64,7 +104,8 @@ export default {
   }
 
   &:active {
-   box-shadow: var(--rs-button_active--box-shadow, none);
+    box-shadow: var(--rs-button_active--box-shadow, none);
+    outline: none;
   }
 
   &:not(:disabled) {
@@ -78,6 +119,8 @@ export default {
     background-color: var(--rs-button_disabled--background-color, transparent);
     color: var(--rs-button_disabled--color, $rs-button-disabled-ink-color);
     border-color: var(--rs-button_disabled--border-color);
+    cursor: default;
+    pointer-events: none;    
   }
 
   &::before{
