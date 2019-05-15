@@ -21,8 +21,6 @@
 //
 
 @import "../animation/functions";
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
 @import "../ripple/mixins";
 @import "../ripple/variables";
 @import "../theme/mixins";
@@ -30,165 +28,126 @@
 @import "./functions";
 @import "./variables";
 
-@mixin rs-radio-core-styles($query: rs-feature-all()) {
-  @include rs-radio-without-ripple($query);
-  @include rs-radio-ripple($query);
+@mixin rs-radio-core-styles() {
+  @include rs-radio-without-ripple;
+  @include rs-radio-ripple;
 }
 
-// This API is intended for use by frameworks that may want to separate the ripple-related styles from the other
-// radio styles. It is recommended that most users use `rs-radio-core-styles` instead.
-@mixin rs-radio-without-ripple($query: rs-feature-all()) {
-  // postcss-bem-linter: define radio
-
-  $feat-animation: rs-feature-create-target($query, animation);
-  $feat-color: rs-feature-create-target($query, color);
-  $feat-structure: rs-feature-create-target($query, structure);
-
+@mixin rs-radio-without-ripple() {
   .rs-radio {
 
-    @include rs-feature-targets($feat-structure) {
-      display: inline-block;
-      position: relative;
-      flex: 0 0 auto;
-      box-sizing: border-box;
-      width: $rs-radio-touch-area;
-      height: $rs-radio-touch-area;
-      padding: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
-      cursor: pointer;
-      /* @alternate */
-      will-change: opacity, transform, border-color, color;
-    }
+    display: inline-block;
+    position: relative;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: $rs-radio-touch-area;
+    height: $rs-radio-touch-area;
+    padding: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
+    cursor: pointer;
+    /* @alternate */
+    will-change: opacity, transform, border-color, color;
 
     // Container for radio circles and ripple.
     &__background {
-      @include rs-feature-targets($feat-structure) {
-        display: inline-block;
-        position: absolute;
-        left: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
-        box-sizing: border-box;
-        width: $rs-radio-ui-pct;
-        height: $rs-radio-ui-pct;
-      }
+      display: inline-block;
+      position: absolute;
+      left: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
+      box-sizing: border-box;
+      width: $rs-radio-ui-pct;
+      height: $rs-radio-ui-pct;
 
       &::before {
-        @include rs-feature-targets($feat-structure) {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          transform: scale(0, 0);
-          border-radius: 50%;
-          opacity: 0;
-          pointer-events: none;
-          content: "";
-        }
-
-        @include rs-feature-targets($feat-animation) {
-          transition: rs-radio-exit(opacity), rs-radio-exit(transform);
-        }
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scale(0, 0);
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+        content: "";
+        transition: rs-radio-exit(opacity), rs-radio-exit(transform);
       }
     }
 
     &__outer-circle {
-      @include rs-feature-targets($feat-structure) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        border-width: 2px;
-        border-style: solid;
-        border-radius: 50%;
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-width: 2px;
+      border-style: solid;
+      border-radius: 50%;
 
-      @include rs-feature-targets($feat-animation) {
-        transition: rs-radio-exit(border-color);
-      }
+      transition: rs-radio-exit(border-color);
     }
 
     &__inner-circle {
-      @include rs-feature-targets($feat-structure) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        transform: scale(0, 0);
-        border-width: 10px;
-        border-style: solid;
-        border-radius: 50%;
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      transform: scale(0, 0);
+      border-width: 10px;
+      border-style: solid;
+      border-radius: 50%;
 
-      @include rs-feature-targets($feat-animation) {
-        transition:
-          rs-radio-exit(transform),
-          rs-radio-exit(border-color);
-      }
+      transition:
+        rs-radio-exit(transform),
+        rs-radio-exit(border-color);
     }
 
     &__native-control {
-      @include rs-feature-targets($feat-structure) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        opacity: 0;
-        cursor: inherit;
-        z-index: 1;
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      cursor: inherit;
+      z-index: 1;
     }
   }
 
   .rs-radio__native-control:checked,
   .rs-radio__native-control:disabled {
     + .rs-radio__background {
-      @include rs-feature-targets($feat-animation) {
-        transition:
-          rs-radio-enter(opacity),
-          rs-radio-enter(transform);
-      }
+      transition:
+        rs-radio-enter(opacity),
+        rs-radio-enter(transform);
 
       .rs-radio__outer-circle {
-        @include rs-feature-targets($feat-animation) {
-          transition: rs-radio-enter(border-color);
-        }
+        transition: rs-radio-enter(border-color);
       }
 
       .rs-radio__inner-circle {
-        @include rs-feature-targets($feat-animation) {
-          transition:
-            rs-radio-enter(transform),
-            rs-radio-enter(border-color);
-        }
+        transition:
+          rs-radio-enter(transform),
+          rs-radio-enter(border-color);
       }
     }
   }
 
   .rs-radio--disabled {
-    @include rs-feature-targets($feat-structure) {
-      cursor: default;
-      pointer-events: none;
-    }
+    cursor: default;
+    pointer-events: none;
   }
 
   .rs-radio__native-control:checked {
     + .rs-radio__background {
       .rs-radio__inner-circle {
-        @include rs-feature-targets($feat-structure) {
-          transform: scale(.5);
-        }
+        transform: scale(.5);
 
-        @include rs-feature-targets($feat-animation) {
-          transition:
-            rs-radio-enter(transform),
-            rs-radio-enter(border-color);
-        }
+        transition:
+          rs-radio-enter(transform),
+          rs-radio-enter(border-color);
       }
     }
   }
@@ -196,36 +155,26 @@
   .rs-radio__native-control:disabled,
   [aria-disabled="true"] .rs-radio__native-control {
     + .rs-radio__background {
-      @include rs-feature-targets($feat-structure) {
-        cursor: default;
-      }
+      cursor: default;
 
       .rs-radio__outer-circle {
-        @include rs-feature-targets($feat-color) {
-          border-color: $rs-radio-circle-color;
-        }
+        border-color: $rs-radio-circle-color;
       }
 
       .rs-radio__inner-circle {
-        @include rs-feature-targets($feat-color) {
-          border-color: $rs-radio-circle-color;
-        }
+        border-color: $rs-radio-circle-color;
       }
     }
   }
 
   .rs-radio__native-control:focus {
     + .rs-radio__background::before {
-      @include rs-feature-targets($feat-structure) {
-        transform: scale(2, 2);
-        opacity: map-get($rs-ripple-dark-ink-opacities, focus);
-      }
+      transform: scale(2, 2);
+      opacity: map-get($rs-ripple-dark-ink-opacities, focus);
 
-      @include rs-feature-targets($feat-animation) {
-        transition:
-          rs-radio-enter(opacity),
-          rs-radio-enter(transform);
-      }
+      transition:
+        rs-radio-enter(opacity),
+        rs-radio-enter(transform);
     }
   }
 
@@ -234,21 +183,17 @@
 
 // This API is intended for use by frameworks that may want to separate the ripple-related styles from the other
 // radio styles. It is recommended that most users use `rs-radio-core-styles` instead.
-@mixin rs-radio-ripple($query: rs-feature-all()) {
-  $feat-structure: rs-feature-create-target($query, structure);
-
-  @include rs-ripple-common($query);
+@mixin rs-radio-ripple() {
+  @include rs-ripple-common();
 
   .rs-radio {
-    @include rs-ripple-surface($query);
-    @include rs-ripple-radius-unbounded($query: $query);
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-unbounded;
     @include rs-states($rs-radio-baseline-theme-color);
 
     &.rs-ripple-upgraded--background-focused {
       .rs-radio__background::before {
-        @include rs-feature-targets($feat-structure) {
-          content: none;
-        }
+        content: none;
       }
     }
   }
