@@ -146,7 +146,6 @@ export default {
 @import '../variables';
 @import '../../drawer/variables';
 @import '../../theme/variables';
-@import '../../typography/mixins';
 @import '../../elevation/mixins';
 @import '../../animation/variables';
 
@@ -230,25 +229,6 @@ export default {
   z-index: 1;
   padding: var(--rs-top-app-bar-section--padding, $padding);
   padding-right: var(--rs-top-app-bar__collapsed--padding-right, $rs-top-app-bar-section-horizontal-padding);
-}
-
-::slotted(h1),
-::slotted(h2) {
-  @include rs-typography(headline6);
-  
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  z-index: 1;
-  padding-right: 0;
-  margin: 0; // override h1 h2 default style
-  color: var(--rs-top-app-bar-title--color, $rs-theme-on-primary);
-  transition: var(--rs-top-app-bar-title--transition);
-  opacity: var(--rs-top-app-bar-title--opacity);
-  display: var(--rs-top-app-bar-title--display);
-  padding-left: var(--rs-top-app-bar-title--padding-left, $rs-top-app-bar-title-left-padding);
-  padding-bottom: var(--rs-top-app-bar-title--padding-bottom);
-  align-self: var(--rs-top-app-bar-title--align-self);
 }
 
 @media (max-width: $rs-top-app-bar-mobile-breakpoint) {

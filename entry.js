@@ -12,6 +12,7 @@ import listItemMeta from './list/src/rs-list-item-meta.vue'
 import listItemText from './list/src/rs-list-item-text.vue'
 import menu from './menu/src/rs-menu.vue'
 import topAppBar from './top-app-bar/src/rs-top-app-bar.vue'
+import topAppBarTitle from './top-app-bar/src/rs-top-app-bar-title.vue'
 import topAppBarNavigationIcon from './top-app-bar/src/rs-top-app-bar-navigation-icon.vue'
 import topAppBarActionItem from './top-app-bar/src/rs-top-app-bar-action-item.vue'
 import drawer from './drawer/src/rs-drawer.vue'
@@ -34,6 +35,7 @@ export const ListItemMeta = wrap(Vue, listItemMeta)
 export const ListItemText = wrap(Vue, listItemText)
 export const Menu = wrap(Vue, menu)
 export const TopAppBar = wrap(Vue, topAppBar)
+export const TopAppBarTitle = wrap(Vue, topAppBarTitle)
 export const TopAppBarNavigationIcon = wrap(Vue, topAppBarNavigationIcon)
 export const TopAppBarActionItem = wrap(Vue, topAppBarActionItem)
 export const Drawer = wrap(Vue, drawer)
