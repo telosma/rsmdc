@@ -253,35 +253,27 @@
 }
 
 @mixin rs-ripple-radius-unbounded($radius: 100%, $query: rs-feature-all()) {
-  $feat-struture: rs-feature-create-target($query, structure);
-
   &::before,
   &::after {
-    @include rs-feature-targets($feat-struture) {
-      top: calc(50% - #{$radius / 2});
-      /* @noflip */
-      left: calc(50% - #{$radius / 2});
-      width: $radius;
-      height: $radius;
-    }
+    top: calc(50% - #{$radius / 2});
+    /* @noflip */
+    left: calc(50% - #{$radius / 2});
+    width: $radius;
+    height: $radius;
   }
 
   &.rs-ripple-upgraded::before,
   &.rs-ripple-upgraded::after {
-    @include rs-feature-targets($feat-struture) {
-      top: var(--rs-ripple-top, calc(50% - #{$radius / 2}));
-      /* @noflip */
-      left: var(--rs-ripple-left, calc(50% - #{$radius / 2}));
-      width: var(--rs-ripple-fg-size, $radius);
-      height: var(--rs-ripple-fg-size, $radius);
-    }
+    top: var(--rs-ripple-top, calc(50% - #{$radius / 2}));
+    /* @noflip */
+    left: var(--rs-ripple-left, calc(50% - #{$radius / 2}));
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
   }
 
   &.rs-ripple-upgraded::after {
-    @include rs-feature-targets($feat-struture) {
-      width: var(--rs-ripple-fg-size, $radius);
-      height: var(--rs-ripple-fg-size, $radius);
-    }
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
   }
 }
 
