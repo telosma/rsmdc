@@ -31,75 +31,61 @@
 @import "./keyframes";
 @import "./variables";
 
-@mixin rs-ripple-core-styles($query: rs-feature-all()) {
+@mixin rs-ripple-core-styles() {
   // postcss-bem-linter: define ripple-surface
-
-  $feat-structure: rs-feature-create-target($query, structure);
-
   .rs-ripple-surface {
-    @include rs-ripple-surface($query: $query);
-    @include rs-states($query: $query);
-    @include rs-ripple-radius-bounded($query: $query);
+    @include rs-ripple-surface;
+    @include rs-states;
+    @include rs-ripple-radius-bounded;
 
-    @include rs-feature-targets($feat-structure) {
-      position: relative;
-      outline: none;
-      overflow: hidden;
-    }
+    position: relative;
+    outline: none;
+    overflow: hidden;
 
     &[data-rs-ripple-is-unbounded] {
-      @include rs-ripple-radius-unbounded($query: $query);
+      @include rs-ripple-radius-unbounded;
 
-      @include rs-feature-targets($feat-structure) {
-        overflow: visible;
-      }
+      overflow: visible;
     }
 
     &--primary {
-      @include rs-states(primary, $query: $query);
+      @include rs-states(primary);
     }
 
     &--accent {
-      @include rs-states(secondary, $query: $query);
+      @include rs-states(secondary);
     }
   }
 
   // postcss-bem-linter: end
 }
 
-@mixin rs-ripple-common($query: rs-feature-all()) {
-  $feat-animation: rs-feature-create-target($query, animation);
-  $feat-structure: rs-feature-create-target($query, structure);
-
+@mixin rs-ripple-common() {
   // Ensure that styles needed by any component using MDC Ripple are emitted, but only once.
   // (Every component using MDC Ripple imports these mixins, but doesn't necessarily import
   // rs-ripple.scss.)
-  @include rs-feature-targets($feat-animation) {
-    @include rs-base-emit-once("rs-ripple/common/animation") {
-      @include rs-ripple-keyframes_;
-    }
+  @include rs-base-emit-once("rs-ripple/common/animation") {
+    @include rs-ripple-keyframes_;
   }
 
-  @include rs-feature-targets($feat-structure) {
-    @include rs-base-emit-once("rs-ripple/common/structure") {
-      // Styles used to detect buggy behavior of CSS custom properties in Edge.
-      // See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
-      // This is included in _mixins.scss rather than rs-ripple.scss so that it will be
-      // present for other components which rely on ripple as well as rs-ripple itself.
-      .rs-ripple-surface--test-edge-var-bug {
-        --rs-ripple-surface-test-edge-var: 1px solid #000;
+  @include rs-base-emit-once("rs-ripple/common/structure") {
+    // Styles used to detect buggy behavior of CSS custom properties in Edge.
+    // See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
+    // This is included in _mixins.scss rather than rs-ripple.scss so that it will be
+    // present for other components which rely on ripple as well as rs-ripple itself.
+    .rs-ripple-surface--test-edge-var-bug {
+      --rs-ripple-surface-test-edge-var: 1px solid #000;
 
-        visibility: hidden;
+      visibility: hidden;
 
-        &::before {
-          border: var(--rs-ripple-surface-test-edge-var);
-        }
+      &::before {
+        border: var(--rs-ripple-surface-test-edge-var);
       }
     }
   }
 }
 
-@mixin rs-ripple-surface($query: rs-feature-all()) {
+@mixin rs-ripple-surface() {
   --rs-ripple-fg-size: 0;
   --rs-ripple-left: 0;
   --rs-ripple-top: 0;
@@ -229,29 +215,23 @@
   @include rs-states-interactions_($color, $selected-opacity);
 }
 
-@mixin rs-ripple-radius-bounded($radius: 100%, $query: rs-feature-all()) {
-  $feat-struture: rs-feature-create-target($query, structure);
-
+@mixin rs-ripple-radius-bounded($radius: 100%) {
   &::before,
   &::after {
-    @include rs-feature-targets($feat-struture) {
-      top: calc(50% - #{$radius});
-      /* @noflip */
-      left: calc(50% - #{$radius});
-      width: $radius * 2;
-      height: $radius * 2;
-    }
+    top: calc(50% - #{$radius});
+    /* @noflip */
+    left: calc(50% - #{$radius});
+    width: $radius * 2;
+    height: $radius * 2;
   }
 
   &.rs-ripple-upgraded::after {
-    @include rs-feature-targets($feat-struture) {
-      width: var(--rs-ripple-fg-size, $radius);
-      height: var(--rs-ripple-fg-size, $radius);
-    }
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
   }
 }
 
-@mixin rs-ripple-radius-unbounded($radius: 100%, $query: rs-feature-all()) {
+@mixin rs-ripple-radius-unbounded($radius: 100%) {
   &::before,
   &::after {
     top: calc(50% - #{$radius / 2});

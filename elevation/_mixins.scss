@@ -20,15 +20,10 @@
 // THE SOFTWARE.
 //
 
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
 @import "../theme/variables";
 @import "./variables";
 
-@mixin rs-elevation-core-styles($query: rs-feature-all()) {
-  $feat-animation: rs-feature-create-target($query, animation);
-  $feat-structure: rs-feature-create-target($query, structure);
-
+@mixin rs-elevation-core-styles() {
   @for $z-value from 0 through 24 {
     .rs-elevation--z#{$z-value} {
       @include rs-elevation($z-value, $query: $query);
@@ -36,13 +31,8 @@
   }
 
   .rs-elevation-transition {
-    @include rs-feature-targets($feat-animation) {
-      transition: rs-elevation-transition-value();
-    }
-
-    @include rs-feature-targets($feat-structure) {
-      will-change: $rs-elevation-property;
-    }
+    transition: rs-elevation-transition-value();
+    will-change: $rs-elevation-property;
   }
 }
 

@@ -20,33 +20,23 @@
 // THE SOFTWARE.
 //
 
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
 @import "./variables";
 
-@mixin rs-theme-core-styles($query: rs-feature-all()) {
-  $feat-color: rs-feature-create-target($query, color);
-
+@mixin rs-theme-core-styles() {
   :root {
-    @include rs-feature-targets($feat-color) {
-      @each $style in map-keys($rs-theme-property-values) {
-        --rs-theme-#{$style}: #{map-get($rs-theme-property-values, $style)};
-      }
+    @each $style in map-keys($rs-theme-property-values) {
+      --rs-theme-#{$style}: #{map-get($rs-theme-property-values, $style)};
     }
   }
 
   @each $style in map-keys($rs-theme-property-values) {
     @if $style != "background" and $style != "surface" {
       .rs-theme--#{$style} {
-        @include rs-feature-targets($feat-color) {
-          @include rs-theme-prop(color, $style, true);
-        }
+        @include rs-theme-prop(color, $style, true);
       }
     } @else {
       .rs-theme--#{$style} {
-        @include rs-feature-targets($feat-color) {
-          @include rs-theme-prop(background-color, $style);
-        }
+        @include rs-theme-prop(background-color, $style);
       }
     }
   }
@@ -54,9 +44,7 @@
   // CSS rules for using primary and secondary (plus light/dark variants) as background colors.
   @each $style in ("primary", "secondary") {
     .rs-theme--#{$style}-bg {
-      @include rs-feature-targets($feat-color) {
-        @include rs-theme-prop(background-color, $style, true);
-      }
+      @include rs-theme-prop(background-color, $style, true);
     }
   }
 }

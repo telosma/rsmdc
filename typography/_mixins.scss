@@ -20,56 +20,42 @@
 // THE SOFTWARE.
 //
 
-@import "../feature-targeting/functions";
-@import "../feature-targeting/mixins";
 @import "./variables";
 
-@mixin rs-typography-core-styles($query: rs-feature-all()) {
+@mixin rs-typography-core-styles() {
   .rs-typography {
-    @include rs-typography-base($query: $query);
+    @include rs-typography-base;
   }
 
   @each $style in map-keys($rs-typography-styles) {
     .rs-typography--#{$style} {
-      @include rs-typography($style, $query: $query);
+      @include rs-typography($style);
     }
   }
 }
 
 @mixin rs-typography-base($query: rs-feature-all()) {
-  $feat-typography: rs-feature-create-target($query, typography);
-
-  @include rs-feature-targets($feat-typography) {
-    @each $key, $value in $rs-typography-base {
-      #{$key}: $value;
-    }
+  @each $key, $value in $rs-typography-base {
+    #{$key}: $value;
   }
 }
 
-@mixin rs-typography($style, $query: rs-feature-all()) {
-  $feat-typography: rs-feature-create-target($query, typography);
+@mixin rs-typography($style) {
   $style-props: map-get($rs-typography-styles, $style);
 
   @if not map-has-key($rs-typography-styles, $style) {
     @error "Invalid style specified! #{$style} doesn't exist. Choose one of #{map-keys($rs-typography-styles)}";
   }
-
-  @include rs-feature-targets($feat-typography) {
-    @each $key, $value in $style-props {
-      #{$key}: $value;
-    }
+  @each $key, $value in $style-props {
+    #{$key}: $value;
   }
 }
 
 // Element must be `display: block` or `display: inline-block` for this to work.
-@mixin rs-typography-overflow-ellipsis($query: rs-feature-all()) {
-  $feat-structure: rs-feature-create-target($query, structure);
-
-  @include rs-feature-targets($feat-structure) {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+@mixin rs-typography-overflow-ellipsis() {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @mixin rs-typography-baseline-top($distance, $slot: false, $selector: '*') {
