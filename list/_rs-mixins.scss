@@ -69,14 +69,6 @@
   }
 }
 
-@mixin rs-list-text-type($type) {
-  @if $type == primary {
-    --_rs-list-text-primary: true;
-  }@else if $type == secondary {
-    --_rs-list-text-secondary: true;
-  }
-}
-
 @mixin rs-list-graphic-type($type, $image) {
   --rs-list-item-graphic--background-image: #{$image};
   @if $type == circle {
