@@ -56,7 +56,7 @@ export default {
       const appBarPadding = 12
       const withCollapsedPadding = 4
 
-      this.hasActionItem = this.getElementProperty(this.lastChild, '--_rs-top-app-bar-action-item') === 'true' ? true : false
+      this.hasActionItem = this.getElementProperty(this.lastChild, '--_rs-top-app-bar-actions') === 'true' ? true : false
 
       if(this.hasActionItem) {
         const actionItemLengh = Array.from(this.lastChild.childNodes).filter(child => child.nodeType === 1).length

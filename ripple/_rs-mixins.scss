@@ -2,7 +2,7 @@
 @import "../theme/mixins";
 
 @mixin rs-ripple-surface-slotted() {
-  ::slotted(*) {
+  ::slotted(i) {
     --rs-ripple-fg-size: 0;
     --rs-ripple-left: 0;
     --rs-ripple-top: 0;
@@ -14,8 +14,8 @@
     will-change: transform, opacity;
   }
 
-  ::slotted(*)::before,
-  ::slotted(*)::after {
+  ::slotted(i)::before,
+  ::slotted(i)::after {
     position: absolute;
     border-radius: 50%;
     opacity: 0;
@@ -23,7 +23,7 @@
     content: "";
   }
 
-  ::slotted(*)::before {
+  ::slotted(i)::before {
     transition:
       opacity $rs-states-wash-duration linear,
       background-color $rs-states-wash-duration linear;
@@ -63,8 +63,8 @@
 }
 
 @mixin rs-ripple-radius-unbounded-slotted($radius: 100%) {
-  ::slotted(*)::before,
-  ::slotted(*)::after {
+  ::slotted(i)::before,
+  ::slotted(i)::after {
     top: calc(50% - #{$radius / 2});
     /* @noflip */
     left: calc(50% - #{$radius / 2});

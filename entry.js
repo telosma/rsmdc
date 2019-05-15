@@ -15,7 +15,8 @@ import listItemTextSecondary from './list/src/rs-list-text-secondary.vue'
 import menu from './menu/src/rs-menu.vue'
 import topAppBar from './top-app-bar/src/rs-top-app-bar.vue'
 import topAppBarTitle from './top-app-bar/src/rs-top-app-bar-title.vue'
-import topAppBarNavigationIcon from './top-app-bar/src/rs-top-app-bar-navigation-icon.vue'
+import topAppBarNav from './top-app-bar/src/rs-top-app-bar-nav.vue'
+import topAppBarActions from './top-app-bar/src/rs-top-app-bar-actions.vue'
 import topAppBarActionItem from './top-app-bar/src/rs-top-app-bar-action-item.vue'
 import drawer from './drawer/src/rs-drawer.vue'
 import drawerHeader from './drawer/src/rs-drawer-header.vue'
@@ -40,7 +41,8 @@ export const ListItemTextSecondary = wrap(Vue, listItemTextSecondary)
 export const Menu = wrap(Vue, menu)
 export const TopAppBar = wrap(Vue, topAppBar)
 export const TopAppBarTitle = wrap(Vue, topAppBarTitle)
-export const TopAppBarNavigationIcon = wrap(Vue, topAppBarNavigationIcon)
+export const TopAppBarNav = wrap(Vue, topAppBarNav)
+export const TopAppBarActions = wrap(Vue, topAppBarActions)
 export const TopAppBarActionItem = wrap(Vue, topAppBarActionItem)
 export const Drawer = wrap(Vue, drawer)
 export const DrawerHeader = wrap(Vue, drawerHeader)
