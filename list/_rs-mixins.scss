@@ -106,3 +106,8 @@
   --rs-list-item-#{$target}-text_#{$pseudo}--height: #{$distance};
   --rs-list-item-#{$target}-text_#{$pseudo}--content: "";
 }
+
+@mixin rs-list-item-status-fill-color($color) {
+  --rs-list-item_selected--background-color: #{$color};
+  --rs-list-item_activated--background-color: #{$color};
+}

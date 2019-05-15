@@ -1,12 +1,10 @@
 <template>
   <li
     class="rs-list-item"
-    :class="{ 'rs-list-item--selected': selected,
-      'rs-list-item--activated': activated, 
-      'rs-list-item--disabled': disabled,
-      '-rs-drawer': isDrawer,
-      '-rs-first': isFirstChild,
-      '-rs-last': isLastChild }"
+    :class="{ '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
+    :selected="selected"
+    :disabled="disabled"
+    :activated="activated"
     ref="slotContainer">
     <slot></slot>
   </li>
@@ -116,39 +114,14 @@ export default {
     margin-bottom: 0;
   }
 
-  &.rs-list-item--selected {
-    @include rs-states-selected(primary);
-    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
-    @include rs-list-item-graphic-ink-color($rs-theme-primary);
-    --rs-menu-list-item-graphic--display: inline;
-  }
-
-  &.rs-list-item--activated {
-    @include rs-states-activated(primary);
-    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
-    @include rs-list-item-graphic-ink-color($rs-theme-primary);
-    --rs-menu-list-item-graphic--display: inline;
-  }
-
-  &.rs-list-item:not(.rs-list-item--disabled) {
-    @include rs-ripple-surface;
-    @include rs-ripple-radius-bounded;
-
-    &.rs-list-item--selected::before {
-      opacity: var(--rs-selected_before--opacity);
-    }
-
-    &.rs-list-item--activated::before {
-      opacity: var(--rs-activated_before--opacity);
-    }
-  }
-
-  &.rs-list-item--disabled {
+  &[disabled] {
     @include rs-list-item-primary-text-ink-color(rs-theme-ink-color-for-fill_(disabled, $rs-theme-background));
   }
 
   // ripple
   &:not(.rs-list-item--disabled) {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-bounded;
     cursor: var(--rs-list-item--cursor, pointer);
 
     &::before{
@@ -191,5 +164,34 @@ export default {
     }
   }
 }
+
+.rs-list-item[selected] {
+  &:not(.rs-list-item--disabled) {
+    @include rs-states-selected($rs-theme-primary);
+    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
+    @include rs-list-item-graphic-ink-color($rs-theme-primary);
+    --rs-menu-list-item-graphic--display: inline;
+
+    &::before {
+      background-color: var(--rs-list-item_selected--background-color, $rs-theme-primary);
+      opacity: var(--rs-selected_before--opacity);
+    }
+  }
+}
+
+.rs-list-item[activated] {
+  &:not(.rs-list-item--disabled) {
+    @include rs-states-activated($rs-theme-primary);
+    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
+    @include rs-list-item-graphic-ink-color($rs-theme-primary);
+    --rs-menu-list-item-graphic--display: inline;
+
+    &::before {
+      background-color: var(--rs-list-item_activated--background-color, $rs-theme-primary);
+      opacity: var(--rs-activated_before--opacity);
+    }
+  }
+}
+
 </style>
 

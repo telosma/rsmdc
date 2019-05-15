@@ -226,7 +226,6 @@
 @mixin rs-states-selected($color) {
   $selected-opacity: rs-states-opacity($color, selected);
   --rs-selected_before--opacity: #{$selected-opacity};
-
   @include rs-states-interactions_($color, $selected-opacity);
 }
 
