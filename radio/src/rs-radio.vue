@@ -1,13 +1,13 @@
 <template>
-  <div class="rs-form-field" @click="updateRadioChecked">
-    <div class="rs-radio" :class="{ 'rs-radio--disabled': isEnableDisabled, '-unchecked': !radio.checked }">
-      <input class="rs-radio__native-control" type="radio" :name="name" :checked="isEnableChecked" :disabled="isEnableDisabled">
+  <div class="rs-form-field">
+    <div class="rs-radio" :class="{ 'rs-radio--disabled': disabled }" @click="updateRadios">
+      <input class="rs-radio__native-control" type="radio" :name="name" :checked="checked" :disabled="disabled">
       <div class="rs-radio__background">
         <div class="rs-radio__outer-circle"></div>
         <div class="rs-radio__inner-circle"></div>
       </div>
     </div>
-    <label :for="name"><slot></slot></label>
+    <label :for="name" ref="slotContainer"><slot></slot></label>
   </div>
 </template>
 <script>
@@ -21,76 +21,67 @@ export default {
       default: 'radio'
     },
     checked: {
-      type: String,
-      default: ''
+      type: Boolean,
+      default: false
     },
     disabled: {
-      type: String,
-      default: ''
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      isEnableChecked: false,
-      isEnableDisabled: false,
-      allRadios: [],
-      radio: {
-        el: '',
-        checked: false
-      }
+      el: '',
+      host: '',
+      isChecked: false
     }
   },
   watch: {
     checked() {
-      this.isChecked()
+      this.isChecked = this.checked
     },
-    disabled() {
-      this.isDisabled()
+    el() {
+      this.host = this.el.parentNode.host
     },
-    allRadios() {
-      if (Object.keys(window.__rsmdc.radios.checkedIndexes).length > 0) {
-        const targetIndex = this.allRadios.findIndex(radio => this.$el.isEqualNode(radio.el))
-        this.radio.checked = window.__rsmdc.radios.checkedIndexes[this.name] === targetIndex ? true : false
+    host() {
+      window.__rsmdc.radio.radios.push(this.host)
+    }
+  },
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.radio) {
+      window.__rsmdc.radio = {
+        radios: []
       }
     }
   },
   mounted() {
-    if (!window.__rsmdc) {
-      window.__rsmdc = {
-        radios: {
-          eles: [],
-          checkedIndexes: {}
-        }
-      }
-    }
-
+    this.$nextTick().then(this.fixSlot.bind(this))
     const formField = new RSFormField(this.$el);
     const radio = new RSRadio(this.$el.querySelector('.rs-radio'));
     formField.input = radio;
 
-    this.isChecked()
-    this.isDisabled()
-
-    this.radio.el = this.$el
-    window.__rsmdc.radios.eles.push(this.radio)
-
-    this.allRadios = window.__rsmdc.radios.eles
+    this.el = this.$el
   },
   methods: {
-    isChecked() {
-      this.isEnableChecked = this.checked === 'checked' ? true : false 
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
     },
-    isDisabled() {
-      this.isEnableDisabled = this.disabled === 'disabled' ? true : false 
-    },
-    updateRadioChecked() {
-      if (this.isEnableDisabled) { return }
+    updateRadios() {
+      if(this.disabled) { return }
 
-      const targetIndex = this.allRadios.findIndex(radio => this.$el.isEqualNode(radio.el))
-      window.__rsmdc.radios.eles[targetIndex].checked = true
-      window.__rsmdc.radios.checkedIndexes[this.name] = targetIndex
-
-      this.allRadios.splice(targetIndex, 1, window.__rsmdc.radios.eles[targetIndex])
+      const radioGroup = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('name') === this.name)
+      radioGroup.forEach(radio => {
+        const el = radio.shadowRoot.querySelector('.rs-radio')
+        if(radio.isSameNode(this.host)) {
+          el.classList.remove('-rs-unchecked')
+        } else {
+          el.classList.add('-rs-unchecked')
+        }
+      })
     }
   }
 }
@@ -100,8 +91,7 @@ export default {
 @import "../../form-field/rs-form-field";
 
   .rs-radio {
-
-    &.-unchecked {
+    &.-rs-unchecked {
       > .rs-radio__native-control:enabled:checked + .rs-radio__background > .rs-radio__outer-circle {
         border-color: var(--rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color, $rs-radio-unchecked-color);
       }
