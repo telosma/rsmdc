@@ -1,7 +1,8 @@
 <template>
   <div
     class="rs-menu rs-menu-surface"
-    :class="{ 'rs-menu-surface--open' : opened, 'rs-menu-surface--animating-open': animatingOpen, 'rs-menu-surface--animating-closed': animatingClosed }">
+    :class="{ 'rs-menu-surface--open' : opened, 'rs-menu-surface--animating-open': animatingOpen, 'rs-menu-surface--animating-closed': animatingClosed }"
+    ref="slotContainer">
     <slot></slot>
   </div>
 </template>
@@ -31,9 +32,14 @@ export default {
     }
   },
   mounted() {
+    this.$nextTick().then(this.fixSlot.bind(this))
     this.el = this.$el
   },
   methods: {
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
+    },
     openMenu() {
       this.animatingOpen = true
       setTimeout(() => {
