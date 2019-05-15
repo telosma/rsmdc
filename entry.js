@@ -16,6 +16,8 @@ import topAppBarNavigationIcon from './top-app-bar/src/rs-top-app-bar-navigation
 import topAppBarActionItem from './top-app-bar/src/rs-top-app-bar-action-item.vue'
 import drawer from './drawer/src/rs-drawer.vue'
 import drawerHeader from './drawer/src/rs-drawer-header.vue'
+import drawerTitle from './drawer/src/rs-drawer-title.vue'
+import drawerSubtitle from './drawer/src/rs-drawer-subtitle.vue'
 import drawerContent from './drawer/src/rs-drawer-content.vue'
 import appLayout from './app-layout/src/rs-app-layout.vue'
 import appLayoutContent from './app-layout/src/rs-app-layout-content.vue'
@@ -36,6 +38,8 @@ export const TopAppBarNavigationIcon = wrap(Vue, topAppBarNavigationIcon)
 export const TopAppBarActionItem = wrap(Vue, topAppBarActionItem)
 export const Drawer = wrap(Vue, drawer)
 export const DrawerHeader = wrap(Vue, drawerHeader)
+export const DrawerTitle = wrap(Vue, drawerTitle)
+export const DrawerSubtitle = wrap(Vue, drawerSubtitle)
 export const DrawerContent = wrap(Vue, drawerContent)
 export const AppLayout = wrap(Vue, appLayout)
 export const AppLayoutContent = wrap(Vue, appLayoutContent)

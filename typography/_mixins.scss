@@ -119,7 +119,7 @@
     margin-bottom: -1 * $distance;
 
     &::after {
-      @include mdc-typography-baseline-bottom-strut_($distance);
+      @include rs-typography-baseline-bottom-strut_($distance);
       vertical-align: -1 * $distance;
     }
   }
