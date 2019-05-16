@@ -2,7 +2,7 @@
   "name": "@rsmdc/rsmdc",
   "main": "dist/rs-elements.common.js",
   "description": "The Material Components for the web all components",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "sideEffects": false,
   "keywords": [
@@ -17,20 +17,20 @@
     "@rsmdc/animation": "^1.0.0",
     "@rsmdc/app-layout": "^1.0.0",
     "@rsmdc/base": "^1.0.0",
-    "@rsmdc/button": "^1.0.2",
+    "@rsmdc/button": "^1.0.5",
     "@rsmdc/dom": "^1.0.2",
-    "@rsmdc/drawer": "^1.0.3",
-    "@rsmdc/elevation": "^1.0.2",
-    "@rsmdc/form-field": "^1.0.2",
-    "@rsmdc/list": "^1.0.2",
-    "@rsmdc/menu": "^1.0.2",
-    "@rsmdc/radio": "^1.0.2",
+    "@rsmdc/drawer": "^1.0.5",
+    "@rsmdc/elevation": "^1.0.5",
+    "@rsmdc/form-field": "^1.0.5",
+    "@rsmdc/list": "^1.0.5",
+    "@rsmdc/menu": "^1.0.5",
+    "@rsmdc/radio": "^1.0.5",
     "@rsmdc/ripple": "^1.0.2",
     "@rsmdc/rtl": "^1.0.2",
     "@rsmdc/shape": "^1.0.2",
     "@rsmdc/theme": "^1.0.2",
-    "@rsmdc/top-app-bar": "^1.0.2",
-    "@rsmdc/typography": "^1.0.2"
+    "@rsmdc/top-app-bar": "^1.0.5",
+    "@rsmdc/typography": "^1.0.5"
   },
   "publishConfig": {
     "access": "public"

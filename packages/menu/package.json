@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/menu",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "The Material Components for the web menu component",
   "license": "MIT",
   "keywords": [
@@ -17,8 +17,8 @@
   "dependencies": {
     "@rsmdc/animation": "^1.0.0",
     "@rsmdc/base": "^1.0.0",
-    "@rsmdc/elevation": "^1.0.2",
-    "@rsmdc/list": "^1.0.2",
+    "@rsmdc/elevation": "^1.0.5",
+    "@rsmdc/list": "^1.0.5",
     "@rsmdc/ripple": "^1.0.2",
     "@rsmdc/rtl": "^1.0.2",
     "@rsmdc/shape": "^1.0.2",

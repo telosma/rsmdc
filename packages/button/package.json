@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/button",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "private": false,
   "license": "MIT",
   "repository": {
@@ -8,12 +8,12 @@
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
   "dependencies": {
-    "@rsmdc/elevation": "^1.0.2",
+    "@rsmdc/elevation": "^1.0.5",
     "@rsmdc/ripple": "^1.0.2",
     "@rsmdc/rtl": "^1.0.2",
     "@rsmdc/shape": "^1.0.2",
     "@rsmdc/theme": "^1.0.2",
-    "@rsmdc/typography": "^1.0.2"
+    "@rsmdc/typography": "^1.0.5"
   },
   "publishConfig": {
     "access": "public"
