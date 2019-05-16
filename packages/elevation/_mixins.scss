@@ -26,7 +26,7 @@
 @mixin rs-elevation-core-styles() {
   @for $z-value from 0 through 24 {
     .rs-elevation--z#{$z-value} {
-      @include rs-elevation($z-value, $query: $query);
+      // @include rs-elevation($z-value);
     }
   }
 

@@ -34,7 +34,7 @@
   }
 }
 
-@mixin rs-typography-base($query: rs-feature-all()) {
+@mixin rs-typography-base() {
   @each $key, $value in $rs-typography-base {
     #{$key}: $value;
   }
