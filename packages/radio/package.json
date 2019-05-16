@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/radio",
   "description": "The Material Components for the web radio component",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "license": "MIT",
   "keywords": [
     "material components",
@@ -15,11 +15,11 @@
     "url": "https://github.com/material-components/material-components-web.git"
   },
   "dependencies": {
-    "@rsmdc/animation": "^1.0.1-beta.1",
-    "@rsmdc/base": "^1.0.1-beta.1",
-    "@rsmdc/form-field": "^1.0.0-beta.1",
-    "@rsmdc/ripple": "^1.0.1-beta.1",
-    "@rsmdc/theme": "^1.0.0-beta.1",
+    "@rsmdc/animation": "^1.0.0",
+    "@rsmdc/base": "^1.0.0",
+    "@rsmdc/form-field": "^1.0.0",
+    "@rsmdc/ripple": "^1.0.0",
+    "@rsmdc/theme": "^1.0.0",
     "tslib": "^1.9.3"
   }
 }

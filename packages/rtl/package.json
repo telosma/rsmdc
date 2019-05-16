@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/rtl",
   "description": "Material Components for the web RTL Scss helpers",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "license": "MIT",
   "keywords": [
     "material components",
