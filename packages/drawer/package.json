@@ -16,8 +16,8 @@
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
   "dependencies": {
-    "@rsmdc/animation": "^1.0.0-beta.1",
-    "@rsmdc/base": "^1.0.0-beta.1",
+    "@rsmdc/animation": "^1.0.0",
+    "@rsmdc/base": "^1.0.0",
     "@rsmdc/elevation": "^1.0.2",
     "@rsmdc/list": "^1.0.2",
     "@rsmdc/ripple": "^1.0.2",
