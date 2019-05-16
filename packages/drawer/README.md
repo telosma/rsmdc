@@ -1,19 +1,17 @@
 # Drawer
 ## example
-### normal drawer
+### default drawer
 ```html
 <x-drawer>
   <drawer-header>
-    <h3>title</h3>
-    <h6>subtitle</h6>
+    <drawer-title>title</drawer-title>
+    <drawer-subtitle>title</drawer-subtitle>
   <drawer-header>
   <drawer-content>
     ...
   <drawer-content>
 </x-drawer>
 ```
-first-child
-
 ### list in drawer
 ```html
 <x-drawer>
@@ -44,11 +42,13 @@ first-child
   </app-layout-content>
 </x-app-layout>
 ```
-required  
-* `x-app-layout`
-* `app-layout-content`
-  * @include rs-top-app-bar-with-drawer(permanent);
-
+```scss
+x-app-layout {
+  > app-layout-content {
+    @include rs-top-app-bar-with-drawer(permanent);
+  }
+}
+```
 ### dismissible drawer with top-app-bar
 ```html
 <x-app-layout>
@@ -63,12 +63,13 @@ required
   </app-layout-content>
 </x-app-layout>
 ```
-required  
-* `x-app-layout`
-* `app-layout-content`
-* `x-drawer`  
-  * @include rs-drawer-type(dismissible);
-  
+```scss
+x-app-layout {
+  > x-drawer {
+    @include rs-drawer-type(dismissible);
+  }
+}
+```
 ### modal drawer with top-app-bar
 ```html
 <x-app-layout>
@@ -83,26 +84,35 @@ required
   </app-layout-content>
 </x-app-layout>
 ```
-required
-* `x-app-layout`
-* `app-layout-content`
-* `x-drawer`  
-  * @include rs-drawer-type(modal);
+```scss
+x-app-layout {
+  > x-drawer {
+    @include rs-drawer-type(modal);
+  }
+}
+```  
 
 ## feature
 ### custom elements
 * `x-drawer`
-  * `drawer-header`
+  * `drawer-header`  
+    * `drawer-title`
+    * `drawer-subtitle`
   * `drawer-content`
 
 if you use drawer with top-app-bar, you must use these custom-elements.
 * `x-app-layout`  
   * `app-layout-content`
 
-### attribute
+### attributes
 * opened
 
 ### mixins
 * rs-drawer-type($type)
 * rs-drawer-width($width)  
-  ...
+  and more...
+
+### drawer types
+* permanent (default)
+* modal
+* dismissible

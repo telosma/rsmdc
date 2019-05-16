@@ -1,6 +1,6 @@
 # Radio
 ## examples
-### normal radio
+### default radio
 ```html
 <x-radio name="example">text</x-radio>
 ```
@@ -11,6 +11,7 @@
 ### attributes
 * name (required)
 * disabled
+* checked
 
 ### mixins
 * rs-radio-ink-color($color)

@@ -1,6 +1,6 @@
 # Button
 ## example
-### normal button
+### default button
 ```html
 <x-button>submit</x-button>
 ```
@@ -8,27 +8,35 @@
 ```html
 <x-button>submit</x-button>
 ```
-required
-* `x-button`
-  * @include rs-button-type(raised);  
-  
+```scss
+x-button {
+  @include rs-button-type(raised);  
+}
+```  
 ### button with icon
 ```html
-<x-button>
-  <button-icon>
-  submit
-</x-button>
+<x-button>submit</x-button>
 ```
-required  
-* `button-icon`
+```scss
+x-button {
+  @include rs-button-icon($url, $position);
+}
+```
 
 ## feature
 ### custom elements
-  * `x-button`
-    * `button-icon` 
+* `x-button`
 
 ### attributes
+* disabled
 ### mixins
 * rs-button-type($type, $dense: normal)
 * rs-button-horizontal-padding($padding)  
-  ...
+* rs-button-icon($url, $position: left, $size: 18px, $repeat: no-repeat)  
+  and more...
+### button types
+* flat (default)
+* raised
+* unelevated
+* outlined
+* dense

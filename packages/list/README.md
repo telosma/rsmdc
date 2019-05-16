@@ -1,8 +1,7 @@
 # List
 
 ## example
-
-normal list
+### default list
 ```html
 <x-list>
   <list-item>
@@ -12,26 +11,23 @@ normal list
   </list-item>
 </x-list>
 ```
-two-line text list
+### two-line text list
 ```html
 <x-list>
   <list-item>
     <list-text>
-      <p>primary</p>
-      <p>secondary</p>
+      <list-primary>primary</list-primary>
+      <list-secondary>secondary</list-senodary>
     </list-text>
   </list-item>
 </x-list>
 ```
-required
-* `x-list`  
-  * @include rs-list-type(two-line);
-* `list-text > p:first-child`
-  * @include rs-list-text-type(primary);
-* `list-text > p:last-child`
-  * @include rs-list-text-type(secondary);
-
-avatar dense list
+```scss
+x-list {
+ @include rs-list-type(two-line);
+}
+```
+### avatar dense list
 ```html
 <x-list>
   <list-item>
@@ -40,41 +36,43 @@ avatar dense list
   </list-item>
 </x-list>
 ```
-required
-* `x-list`
-  * @include rs-list-type(avatar, dense);
-
-group list
-```html
-<x-list>
-  <list-subheader>list1</list-subheader>
-  <list-item>
-    <list-text>text</list-text>
-  </list-item>
-  <list-item>
-    <list-text>text</list-text>
-  </list-item>
-  <list-divider></list-divider>
-  <list-subheader>list2</list-subheader>
-  <list-item>
-    <list-text>text</list-text>
-  </list-item>
-  <list-item>
-    <list-text>text</list-text>
-  </list-item>
-</x-list>
+```scss
+x-list {
+  @include rs-list-type(avatar, dense);
+}
 ```
-required
-* `x-list`
-  * @include rs-list-type(group);
-
+### group list
+```html
+<x-list-group>
+  <x-list>
+    <list-subheader>list1</list-subheader>
+    <list-item>
+      <list-text>text</list-text>
+    </list-item>
+    <list-item>
+      <list-text>text</list-text>
+    </list-item>
+    <list-divider></list-divider>
+    <list-subheader>list2</list-subheader>
+    <list-item>
+      <list-text>text</list-text>
+    </list-item>
+    <list-item>
+      <list-text>text</list-text>
+    </list-item>
+  </x-list>
+</x-list-group>
+```
 ## feature
 ### custom elements
+* `x-list-group`
 * `x-list`
   * `list-item`
-    * `item-graphic`
-    * `item-text`
-    * `item-meta`
+    * `list-graphic`
+    * `list-text`
+      * `list-primary`
+      * `list-secondary`
+    * `list-meta`
   * `list-subheader`
   * `list-divider`
 
@@ -85,5 +83,21 @@ required
 
 ### mixins
 * rs-list-type($types...)
-* rs-list-item-primary-text-color($xolor)  
-...
+* rs-list-item-primary-text-color($color)  
+and more...
+
+### types
+#### list
+* one-line (default)
+* two-line
+* avatar-list
+* dense
+
+#### divider
+* inset
+* padded
+
+#### graphic
+* circle
+* rectangle
+* square
