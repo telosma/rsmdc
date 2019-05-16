@@ -55,6 +55,6 @@
     "not ie <= 8"
   ],
   "workspaces": [
-    "packages/base"
+    "packages/*"
   ]
 }
