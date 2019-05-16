@@ -1,0 +1,36 @@
+{
+  "name": "@rsmdc/rsmdc",
+  "description": "The Material Components for the web all components",
+  "version": "0.0.1-beta.1",
+  "license": "MIT",
+  "main": "./index.js",
+  "sideEffects": false,
+  "keywords": [
+    "material components",
+    "material design",
+    "list"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
+  "dependencies": {
+    "@rsmdc/animation": "^1.0.1-beta.1",
+    "@rsmdc/app-layout": "^0.0.1",
+    "@rsmdc/base": "^1.0.1-beta.1",
+    "@rsmdc/button": "^1.0.0-beta.1",
+    "@rsmdc/dom": "^1.0.1-beta.1",
+    "@rsmdc/drawer": "^1.0.0-beta.1",
+    "@rsmdc/elevation": "^1.0.0-beta.1",
+    "@rsmdc/form-field": "^1.0.0-beta.1",
+    "@rsmdc/list": "^1.0.0-beta.1",
+    "@rsmdc/menu": "^1.0.0-beta.1",
+    "@rsmdc/radio": "^1.0.0-beta.1",
+    "@rsmdc/ripple": "^1.0.1-beta.1",
+    "@rsmdc/rtl": "^1.0.0-beta.1",
+    "@rsmdc/shape": "^1.0.0-beta.1",
+    "@rsmdc/theme": "^1.0.0-beta.1",
+    "@rsmdc/top-app-bar": "^1.0.0-beta.1",
+    "@rsmdc/typography": "^1.0.0-beta.1"
+  }
+}

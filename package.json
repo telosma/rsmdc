@@ -1,10 +1,9 @@
 {
   "name": "rsmdc",
-  "version": "0.0.1",
-  "main": "dist/rs-radio.common.js",
+  "main": "dist/rs-elements.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "cross-env VUE_CLI_CSS_SHADOW_MODE=true vue-cli-service build --target lib --name rs-radio ./entry.js",
+    "build": "cross-env VUE_CLI_CSS_SHADOW_MODE=true vue-cli-service build --target lib --name rs-elements ./entry.js",
     "lint": "vue-cli-service lint"
   },
   "license": "MIT",
