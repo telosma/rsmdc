@@ -51,6 +51,7 @@ module.exports = {
       patterns: []
     }
   },
+  // outputDir: './packages/rsmdc/dist',
   configureWebpack: {
     entry: './entry.js',
     output: {
