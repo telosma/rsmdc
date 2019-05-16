@@ -21,5 +21,8 @@
     "@rsmdc/ripple": "^1.0.0",
     "@rsmdc/theme": "^1.0.0",
     "tslib": "^1.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

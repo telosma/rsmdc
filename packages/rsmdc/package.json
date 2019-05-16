@@ -31,5 +31,8 @@
     "@rsmdc/theme": "^1.0.0",
     "@rsmdc/top-app-bar": "^1.0.0",
     "@rsmdc/typography": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

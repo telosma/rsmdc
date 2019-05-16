@@ -27,5 +27,8 @@
     "@rsmdc/typography": "^1.0.0",
     "focus-trap": "^4.0.2",
     "tslib": "^1.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

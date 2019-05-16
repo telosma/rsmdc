@@ -22,5 +22,6 @@
     "@rsmdc/theme": "^1.0.0",
     "@rsmdc/typography": "^1.0.0",
     "tslib": "^1.9.3"
-  }
+  },
+  "gitHead": "263cf3ff551e4e566a168d345578a56b1650c898"
 }
