@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/dom",
   "description": "DOM manipulation utilities for Material Components for the web",
-  "version": "0.0.1",
+  "version": "1.0.1-beta.1",
   "license": "MIT",
   "main": "./index.js",
   "sideEffects": false,
@@ -13,7 +13,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "rsmdc",
   "dependencies": {
     "tslib": "^1.9.3"
   }

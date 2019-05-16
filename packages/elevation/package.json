@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/elevation",
   "description": "Material Components for the web mixins + CSS Classes for Material Design elevation",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.1",
   "license": "MIT",
   "keywords": [
     "material components",
@@ -12,7 +12,8 @@
     "type": "git",
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
-  "author": "rsmdc",
   "dependencies": {
+    "@rsmdc/animation": "^1.0.1-beta.1",
+    "@rsmdc/theme": "^1.0.0-beta.1"
   }
 }

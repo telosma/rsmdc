@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/drawer",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.1",
   "description": "The Material Components Web drawer component",
   "license": "MIT",
   "keywords": [
@@ -16,6 +16,15 @@
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
   "dependencies": {
+    "@rsmdc/animation": "^1.0.0-beta.1",
+    "@rsmdc/base": "^1.0.0-beta.1",
+    "@rsmdc/elevation": "^1.0.0-beta.1",
+    "@rsmdc/list": "^1.0.1",
+    "@rsmdc/ripple": "^1.0.1-beta.1",
+    "@rsmdc/rtl": "^1.0.0-beta.1",
+    "@rsmdc/shape": "^1.0.0-beta.1",
+    "@rsmdc/theme": "^1.0.0-beta.1",
+    "@rsmdc/typography": "^1.0.0-beta.1",
     "focus-trap": "^4.0.2",
     "tslib": "^1.9.3"
   }

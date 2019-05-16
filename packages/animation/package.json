@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/animation",
   "description": "Animation Variables and Mixins used by Material Components for the web",
-  "version": "0.0.1",
+  "version": "1.0.1-beta.1",
   "license": "MIT",
   "keywords": [
     "material components",
@@ -15,7 +15,6 @@
     "type": "git",
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
-  "author": "rsmdc",
   "dependencies": {
     "tslib": "^1.9.3"
   }

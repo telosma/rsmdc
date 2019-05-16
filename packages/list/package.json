@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/list",
   "description": "The Material Components for the web list component",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.1",
   "license": "MIT",
   "main": "./index.js",
   "sideEffects": false,
@@ -16,6 +16,13 @@
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
   "dependencies": {
+    "@rsmdc/base": "^1.0.1-beta.1",
+    "@rsmdc/dom": "^1.0.1-beta.1",
+    "@rsmdc/ripple": "^1.0.1-beta.1",
+    "@rsmdc/rtl": "^1.0.0-beta.1",
+    "@rsmdc/shape": "^1.0.0-beta.1",
+    "@rsmdc/theme": "^1.0.0-beta.1",
+    "@rsmdc/typography": "^1.0.0-beta.1",
     "tslib": "^1.9.3"
   }
 }
