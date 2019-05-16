@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@rsmdc/base": "^1.0.1-beta.1",
-    "@rsmdc/ripple": "^1.0.1-beta.1",
-    "@rsmdc/rtl": "^1.0.0-beta.1",
-    "@rsmdc/theme": "^1.0.0-beta.1",
-    "@rsmdc/typography": "^1.0.0-beta.1",
+    "@rsmdc/ripple": "^1.0.2",
+    "@rsmdc/rtl": "^1.0.2",
+    "@rsmdc/theme": "^1.0.2",
+    "@rsmdc/typography": "^1.0.2",
     "tslib": "^1.9.3"
   },
   "publishConfig": {
