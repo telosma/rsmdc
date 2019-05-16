@@ -19,8 +19,8 @@ export default {
 
 <style lang="scss">
 @import '../rs-variables';
-@import '../../typography/mixins';
-@import '../../theme/variables';
+@import '@rsmdc/typography/mixins';
+@import '@rsmdc/theme/variables';
 
 .rs-list-item__secondary-text {
   @include rs-typography(body2);

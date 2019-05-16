@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSComponent } from '../base/component';
-import { RSList } from '../list/component';
-import { RSListFoundation } from '../list/foundation';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSList } from '@rsmdc/list/component';
+import { RSListFoundation } from '@rsmdc/list/foundation';
 import { default as createFocusTrap } from 'focus-trap';
 import { RSDismissibleDrawerFoundation } from './dismissible/foundation';
 import { RSModalDrawerFoundation } from './modal/foundation';

@@ -20,12 +20,12 @@
 // THE SOFTWARE.
 //
 
-@import "../animation/variables";
-@import "../ripple/mixins";
-@import "../theme/variables"; // for rs-theme-accessible-ink-color
-@import "../theme/mixins";
-@import "../shape/mixins";
-@import "../shape/functions";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/theme/variables"; // for rs-theme-accessible-ink-color
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
 @import "./variables";
 
 //

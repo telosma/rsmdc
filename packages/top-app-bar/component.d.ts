@@ -20,8 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSComponent } from '../base/component';
-import { RSRippleFactory } from '../ripple/component';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSRippleFactory } from '@rsmdc/ripple/component';
 import { RSTopAppBarBaseFoundation } from './foundation';
 export declare class RSTopAppBar extends RSComponent<RSTopAppBarBaseFoundation> {
     static attachTo(root: Element): RSTopAppBar;

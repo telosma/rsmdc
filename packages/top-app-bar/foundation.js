@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSFoundation } from '../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { cssClasses, numbers, strings } from './constants';
 var RSTopAppBarBaseFoundation = /** @class */ (function (_super) {
     tslib_1.__extends(RSTopAppBarBaseFoundation, _super);

@@ -18,8 +18,8 @@ export default {
 </script>
 <style lang="scss">
 @import '../rs-variables';
-@import '../../typography/mixins';
-@import '../../theme/variables';
+@import '@rsmdc/typography/mixins';
+@import '@rsmdc/theme/variables';
 
 .rs-list-item__primary-text {
   @include rs-typography-overflow-ellipsis;

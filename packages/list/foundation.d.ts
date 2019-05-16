@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSFoundation } from '@material/base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { RSListAdapter } from './adapter';
 import { RSListIndex } from './types';
 export declare class RSListFoundation extends RSFoundation<RSListAdapter> {

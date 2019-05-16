@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export { Corner } from '../menu-surface/constants'; // for backward compatibility
 export * from './component';
 export * from './foundation';
 //# sourceMappingURL=index.js.map

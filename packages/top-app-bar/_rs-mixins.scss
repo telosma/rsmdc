@@ -1,8 +1,8 @@
 @import './variables';
 @import './mixins';
 @import './rs-functions';
-@import '../elevation/mixins';
-@import "../animation/variables";
+@import '@rsmdc/elevation/mixins';
+@import "@rsmdc/animation/variables";
 
 @mixin rs-top-app-bar-type($types...) {
   @each $type in $types {

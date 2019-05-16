@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSFoundation } from '../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { cssClasses, strings } from './constants';
 var ELEMENTS_KEY_ALLOWED_IN = ['input', 'button', 'textarea', 'select'];
 function isNumberArray(selectedIndex) {

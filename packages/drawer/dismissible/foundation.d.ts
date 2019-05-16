@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSFoundation } from '../../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { RSDrawerAdapter } from '../adapter';
 export declare class RSDismissibleDrawerFoundation extends RSFoundation<RSDrawerAdapter> {
     static readonly strings: {

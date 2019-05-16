@@ -144,10 +144,10 @@ export default {
 <style lang="scss">
 @import '../mixins';
 @import '../variables';
-@import '../../drawer/variables';
-@import '../../theme/variables';
-@import '../../elevation/mixins';
-@import '../../animation/variables';
+@import '@rsmdc/drawer/variables';
+@import '@rsmdc/theme/variables';
+@import '@rsmdc/elevation/mixins';
+@import '@rsmdc/animation/variables';
 
 .rs-top-app-bar {
   display: flex;

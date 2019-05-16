@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSFoundation } from '../../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { cssClasses, strings } from '../constants';
 var RSDismissibleDrawerFoundation = /** @class */ (function (_super) {
     tslib_1.__extends(RSDismissibleDrawerFoundation, _super);

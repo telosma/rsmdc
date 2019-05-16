@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSComponent } from '../base/component';
+import { RSComponent } from '@rsmdc/base/component';
 import { RSRippleAdapter } from './adapter';
 import { RSRippleFoundation } from './foundation';
 import { RSRippleAttachOpts, RSRippleCapableSurface } from './types';

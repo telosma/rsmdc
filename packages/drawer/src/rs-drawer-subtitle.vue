@@ -18,8 +18,8 @@ export default {
 </script>
 <style lang="scss">
 @import '../variables';
-@import '../../typography/mixins';
-@import '../../typography/variables';
+@import '@rsmdc/typography/mixins';
+@import '@rsmdc/typography/variables';
 
 $baselineTop: 20px;
 

@@ -20,11 +20,11 @@
 // THE SOFTWARE.
 //
 
-@import "../theme/mixins";
-@import "../list/mixins";
-@import "../ripple/mixins";
-@import "../shape/mixins";
-@import "../shape/rs-functions";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/list/mixins";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/rs-functions";
 @import "./variables";
 
 @mixin rs-drawer-activated-overlay-color($color) {

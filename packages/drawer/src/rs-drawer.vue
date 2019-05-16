@@ -131,11 +131,11 @@ export default {
 <style lang="scss">
 @import '../mixins';
 @import '../variables';
-@import '../../animation/variables';
-@import '../../animation/functions';
-@import '../../theme/mixins';
-@import '../../shape/rs-functions';
-@import '../../rtl/mixins';
+@import '@rsmdc/animation/variables';
+@import '@rsmdc/animation/functions';
+@import '@rsmdc/theme/mixins';
+@import '@rsmdc/shape/rs-functions';
+@import '@rsmdc/rtl/mixins';
 
 
 :host {

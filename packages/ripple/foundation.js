@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSFoundation } from '../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { cssClasses, numbers, strings } from './constants';
 import { getNormalizedEventCoords } from './util';
 // Activation events registered on the root element of each instance for activation

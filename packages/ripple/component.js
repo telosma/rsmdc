@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSComponent } from '../base/component';
-import { ponyfill } from '../dom/index';
+import { RSComponent } from '@rsmdc/base/component';
+import { ponyfill } from '@rsmdc/dom/index';
 import { RSRippleFoundation } from './foundation';
 import * as util from './util';
 var RSRipple = /** @class */ (function (_super) {

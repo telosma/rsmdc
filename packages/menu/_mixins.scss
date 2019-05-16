@@ -21,14 +21,14 @@
 //
 
 @import "./variables";
-@import "../theme/variables";
-@import "../theme/mixins";
-@import "../shape/mixins";
-@import "../shape/rs-functions";
-@import "../animation/variables";
-@import "../elevation/mixins";
-@import "../rtl/mixins";
-@import "../ripple/mixins";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/rs-functions";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/ripple/mixins";
 
 @mixin rs-menu-width($width) {
   @if unitless($width) {

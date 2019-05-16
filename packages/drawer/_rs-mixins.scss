@@ -1,4 +1,4 @@
-@import '../rtl/mixins';
+@import '@rsmdc/rtl/mixins';
 
 @mixin rs-drawer-opened-content() {
   --rs-app-layout-content--margin-left: var(--rs-drawer--width, 256px);

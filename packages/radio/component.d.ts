@@ -20,8 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSComponent } from '../base/component';
-import { RSRipple, RSRippleCapableSurface } from '../ripple/index';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSRipple, RSRippleCapableSurface } from '@rsmdc/ripple/index';
 import { RSRadioFoundation } from './foundation';
 export declare class RSRadio extends RSComponent<RSRadioFoundation> implements RSRippleCapableSurface {
     static attachTo(root: Element): RSRadio;

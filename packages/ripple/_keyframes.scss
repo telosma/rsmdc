@@ -22,7 +22,7 @@
 
 // MDC Ripple keyframes are split into their own file so that _mixins.scss can rely on them.
 
-@import "../animation/variables";
+@import "@rsmdc/animation/variables";
 @import "./variables";
 
 @mixin rs-ripple-keyframes_ {

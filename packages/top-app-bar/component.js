@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSComponent } from '../base/component';
-import { RSRipple } from '../ripple/component';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSRipple } from '@rsmdc/ripple/component';
 import { cssClasses, strings } from './constants';
 import { RSFixedTopAppBarFoundation } from './fixed/foundation';
 import { RSShortTopAppBarFoundation } from './short/foundation';

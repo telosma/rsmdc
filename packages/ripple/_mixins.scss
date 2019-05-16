@@ -20,11 +20,11 @@
 // THE SOFTWARE.
 //
 
-@import "../animation/functions";
-@import "../animation/variables";
-@import "../base/mixins";
-@import "../theme/mixins";
-@import "../theme/variables";
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/base/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/theme/variables";
 @import "./functions";
 @import "./keyframes";
 @import "./variables";

@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSComponent } from '../base/component';
-import { RSRipple, RSRippleFoundation } from '../ripple/index';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSRipple, RSRippleFoundation } from '@rsmdc/ripple/index';
 import { RSRadioFoundation } from './foundation';
 var RSRadio = /** @class */ (function (_super) {
     tslib_1.__extends(RSRadio, _super);

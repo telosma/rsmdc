@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSComponent } from '../base/component';
-import { ponyfill } from '../dom/index';
+import { RSComponent } from '@rsmdc/base/component';
+import { ponyfill } from '@rsmdc/dom/index';
 import { cssClasses, strings } from './constants';
 import { RSListFoundation } from './foundation';
 var RSList = /** @class */ (function (_super) {

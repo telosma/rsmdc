@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSFoundation } from '../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { cssClasses, strings } from './constants';
 var RSFormFieldFoundation = /** @class */ (function (_super) {
     tslib_1.__extends(RSFormFieldFoundation, _super);

@@ -20,8 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSFoundation } from '../base/foundation';
-import { SpecificEventListener } from '../base/types';
+import { RSFoundation } from '@rsmdc/base/foundation';
+import { SpecificEventListener } from '@rsmdc/base/types';
 import { RSTopAppBarAdapter } from './adapter';
 export declare class RSTopAppBarBaseFoundation extends RSFoundation<RSTopAppBarAdapter> {
     static readonly strings: {

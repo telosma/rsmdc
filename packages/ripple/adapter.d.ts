@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { EventType, SpecificEventListener } from '../base/types';
+import { EventType, SpecificEventListener } from '@rsmdc/base/types';
 import { RSRipplePoint } from './types';
 /**
  * Defines the shape of the adapter expected by the foundation.

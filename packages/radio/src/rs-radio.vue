@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { RSFormField } from '../../form-field';
+import { RSFormField } from '@rsmdc/form-field';
 import { RSRadio } from '../index';
 
 export default {
@@ -88,7 +88,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../rs-radio";
-@import "../../form-field/rs-form-field";
+@import "@rsmdc/form-field/rs-form-field";
 
   .rs-radio {
     &.-rs-unchecked {

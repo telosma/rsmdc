@@ -21,10 +21,8 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSComponent } from '../base/component';
-import { RSList, RSListFoundation } from '../list/index';
-import { RSMenuSurfaceFoundation } from '../menu-surface/foundation';
-import { RSMenuSurface } from '../menu-surface/index';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSList, RSListFoundation } from '@rsmdc/list/index';
 import { cssClasses, strings } from './constants';
 import { RSMenuFoundation } from './foundation';
 var RSMenu = /** @class */ (function (_super) {
@@ -36,7 +34,6 @@ var RSMenu = /** @class */ (function (_super) {
         return new RSMenu(root);
     };
     RSMenu.prototype.initialize = function (menuSurfaceFactory, listFactory) {
-        if (menuSurfaceFactory === void 0) { menuSurfaceFactory = function (el) { return new RSMenuSurface(el); }; }
         if (listFactory === void 0) { listFactory = function (el) { return new RSList(el); }; }
         this.menuSurfaceFactory_ = menuSurfaceFactory;
         this.listFactory_ = listFactory;
@@ -55,7 +52,6 @@ var RSMenu = /** @class */ (function (_super) {
         this.handleKeydown_ = function (evt) { return _this.foundation_.handleKeydown(evt); };
         this.handleItemAction_ = function (evt) { return _this.foundation_.handleItemAction(_this.items[evt.detail.index]); };
         this.afterOpenedCallback_ = function () { return _this.handleAfterOpened_(); };
-        this.menuSurface_.listen(RSMenuSurfaceFoundation.strings.OPENED_EVENT, this.afterOpenedCallback_);
         this.listen('keydown', this.handleKeydown_);
         this.listen(RSListFoundation.strings.ACTION_EVENT, this.handleItemAction_);
     };
@@ -64,7 +60,6 @@ var RSMenu = /** @class */ (function (_super) {
             this.list_.destroy();
         }
         this.menuSurface_.destroy();
-        this.menuSurface_.unlisten(RSMenuSurfaceFoundation.strings.OPENED_EVENT, this.afterOpenedCallback_);
         this.unlisten('keydown', this.handleKeydown_);
         this.unlisten(RSListFoundation.strings.ACTION_EVENT, this.handleItemAction_);
         _super.prototype.destroy.call(this);

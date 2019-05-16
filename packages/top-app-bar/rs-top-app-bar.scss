@@ -20,10 +20,10 @@
 // THE SOFTWARE.
 //
 
-@import "../elevation/mixins";
-@import "../animation/variables";
-@import "../rtl/mixins";
-@import "../typography/mixins";
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/typography/mixins";
 @import "./mixins";
 @import "./variables";
 @import "./rs-mixins";

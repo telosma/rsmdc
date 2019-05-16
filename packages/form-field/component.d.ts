@@ -20,8 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSComponent } from '../base/component';
-import { RSRipple } from '../ripple/component';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSRipple } from '@rsmdc/ripple/component';
 import { RSFormFieldFoundation } from './foundation';
 export interface RSFormFieldInput {
     readonly ripple: RSRipple | undefined;

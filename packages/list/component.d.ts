@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSComponent } from '../base/component';
+import { RSComponent } from '@rsmdc/base/component';
 import { RSListFoundation } from './foundation';
 import { RSListIndex } from './types';
 export declare type RSListFactory = (el: Element, foundation?: RSListFoundation) => RSList;

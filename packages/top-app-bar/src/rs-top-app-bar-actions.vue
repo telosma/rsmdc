@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { RSRipple } from '../../ripple'
+import { RSRipple } from '@rsmdc/ripple'
 
 export default {
   mounted() {
@@ -34,7 +34,7 @@ export default {
 <style lang="scss">
 @import '../mixins';
 @import '../variables';
-@import '../../ripple/rs-mixins';
+@import '@rsmdc/ripple/rs-mixins';
 
 :host {
   --_rs-top-app-bar-actions: true;

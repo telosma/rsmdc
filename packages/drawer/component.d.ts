@@ -20,8 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSComponent } from '../base/component';
-import { RSListFactory } from '../list/component';
+import { RSComponent } from '@rsmdc/base/component';
+import { RSListFactory } from '@rsmdc/list/component';
 import { RSDismissibleDrawerFoundation } from './dismissible/foundation';
 import { RSDrawerFocusTrapFactory } from './util';
 export declare class RSDrawer extends RSComponent<RSDismissibleDrawerFoundation> {

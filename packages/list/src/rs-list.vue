@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss">
 @import '../mixins';
-@import "../../typography/mixins";
+@import "@rsmdc/typography/mixins";
 
 .rs-list {
   @include rs-list-base_;

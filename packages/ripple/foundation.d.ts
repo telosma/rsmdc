@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { RSFoundation } from '../base/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
 import { RSRippleAdapter } from './adapter';
 export declare class RSRippleFoundation extends RSFoundation<RSRippleAdapter> {
     static readonly cssClasses: {

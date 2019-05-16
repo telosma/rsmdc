@@ -10,7 +10,7 @@
   </li>
 </template>
 <script>
-import { RSRipple } from '../../ripple'
+import { RSRipple } from '@rsmdc/ripple'
  
 export default {
   props: {
@@ -70,10 +70,10 @@ export default {
 
 <style lang="scss">
 @import '../mixins';
-@import '../../ripple/variables';
-@import '../../ripple/mixins';
-@import '../../typography/mixins';
-@import '../../drawer/variables';
+@import '@rsmdc/ripple/variables';
+@import '@rsmdc/ripple/mixins';
+@import '@rsmdc/typography/mixins';
+@import '@rsmdc/drawer/variables';
 
 .rs-list-item {
   @include rs-list-item-base_;

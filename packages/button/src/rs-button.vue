@@ -4,7 +4,7 @@
   </button>
 </template>
 <script>
-import { RSRipple } from '../../ripple'
+import { RSRipple } from '@rsmdc/ripple'
 
 export default {
   props: {
@@ -26,10 +26,10 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../../ripple/mixins';
-@import '../../typography/mixins';
-@import '../../theme/mixins';
-@import '../../shape/functions';
+@import '@rsmdc/ripple/mixins';
+@import '@rsmdc/typography/mixins';
+@import '@rsmdc/theme/mixins';
+@import '@rsmdc/shape/functions';
 @import '../variables';
 
 @include rs-ripple-common;

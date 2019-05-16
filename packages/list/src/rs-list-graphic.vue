@@ -39,8 +39,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../theme/functions';
-@import '../../theme/variables';
+@import '@rsmdc/theme/functions';
+@import '@rsmdc/theme/variables';
 
 :host {
   position: var(--rs-menu-list-item-graphic--position);

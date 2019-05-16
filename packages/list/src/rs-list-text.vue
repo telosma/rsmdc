@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../typography/mixins';
+@import '@rsmdc/typography/mixins';
 
 :host {
   align-self: var(--rs-list-item-text--align-self);

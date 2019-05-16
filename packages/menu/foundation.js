@@ -21,9 +21,8 @@
  * THE SOFTWARE.
  */
 import * as tslib_1 from "tslib";
-import { RSFoundation } from '../base/foundation';
-import { RSListFoundation } from '../list/foundation';
-import { RSMenuSurfaceFoundation } from '../menu-surface/foundation';
+import { RSFoundation } from '@rsmdc/base/foundation';
+import { RSListFoundation } from '@rsmdc/list/foundation';
 import { cssClasses, strings } from './constants';
 var RSMenuFoundation = /** @class */ (function (_super) {
     tslib_1.__extends(RSMenuFoundation, _super);
@@ -83,7 +82,6 @@ var RSMenuFoundation = /** @class */ (function (_super) {
         }
     };
     RSMenuFoundation.prototype.handleItemAction = function (listItem) {
-        var _this = this;
         var index = this.adapter_.getElementIndex(listItem);
         if (index < 0) {
             return;
@@ -91,12 +89,6 @@ var RSMenuFoundation = /** @class */ (function (_super) {
         this.adapter_.notifySelected({ index: index });
         this.adapter_.closeSurface();
         // Wait for the menu to close before adding/removing classes that affect styles.
-        this.closeAnimationEndTimerId_ = setTimeout(function () {
-            var selectionGroup = _this.getSelectionGroup_(listItem);
-            if (selectionGroup) {
-                _this.handleSelectionGroup_(selectionGroup, index);
-            }
-        }, RSMenuSurfaceFoundation.numbers.TRANSITION_CLOSE_DURATION);
     };
     /**
      * Handles toggling the selected classes in a selection group when a selection is made.

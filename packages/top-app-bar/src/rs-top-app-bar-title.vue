@@ -18,8 +18,8 @@ export default {
 </script>
 <style lang="scss">
 @import '../variables';
-@import '../../theme/variables';
-@import '../../typography/mixins';
+@import '@rsmdc/theme/variables';
+@import '@rsmdc/typography/mixins';
 
 .rs-top-app-bar__title {
   @include rs-typography(headline6);

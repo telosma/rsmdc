@@ -39,11 +39,11 @@ export default {
 
 <style lang="scss">
 @import '../variables';
-@import '../../drawer/variables';
-@import '../../typography/mixins';
-@import '../../typography/variables';
-@import '../../theme/mixins';
-@import '../../theme/variables';
+@import '@rsmdc/drawer/variables';
+@import '@rsmdc/typography/mixins';
+@import '@rsmdc/typography/variables';
+@import '@rsmdc/theme/mixins';
+@import '@rsmdc/theme/variables';
 
 .rs-list-group__subheader {
   $rs-list-subheader-virtual-height: 3rem;
