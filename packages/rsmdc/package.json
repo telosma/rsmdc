@@ -3,12 +3,10 @@
   "description": "The Material Components for the web all components",
   "version": "0.0.1-beta.1",
   "license": "MIT",
-  "main": "./index.js",
   "sideEffects": false,
   "keywords": [
     "material components",
-    "material design",
-    "list"
+    "material design"
   ],
   "repository": {
     "type": "git",
