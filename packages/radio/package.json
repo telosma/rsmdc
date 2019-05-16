@@ -10,7 +10,6 @@
   ],
   "main": "./index.js",
   "sideEffects": false,
-  "types": "./rs.radio.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/material-components/material-components-web.git"
