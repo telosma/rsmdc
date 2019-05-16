@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/radio",
   "description": "The Material Components for the web radio component",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "MIT",
   "keywords": [
     "material components",

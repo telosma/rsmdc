@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/list",
   "description": "The Material Components for the web list component",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "./index.js",
   "sideEffects": false,
