@@ -32,7 +32,7 @@ module.exports = {
           return options
         })
     config.resolve.alias
-      .set('vue-custom', path.resolve(__dirname, 'node_modules/vue'));
+      .set('vue-custom', path.resolve(__dirname, 'node_modules/vue'))
   },
   css: {
     modules: true,
@@ -51,7 +51,6 @@ module.exports = {
       patterns: []
     }
   },
-  // outputDir: './packages/rsmdc/dist',
   configureWebpack: {
     entry: './entry.js',
     output: {

@@ -8,7 +8,7 @@
     "material design",
     "checkbox"
   ],
-  "main": "./index.js",
+  "main": "./dist/rs-elements.common.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
