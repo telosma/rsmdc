@@ -26,7 +26,7 @@
 $rs-checkbox-mark-color: rs-theme-prop-value(on-primary) !default;
 $rs-checkbox-border-color: rgba(rs-theme-prop-value(on-surface), .54) !default;
 $rs-checkbox-disabled-color: rgba(rs-theme-prop-value(on-surface), .26) !default;
-$rs-checkbox-baseline-theme-color: secondary !default;
+$rs-checkbox-baseline-theme-color: rs-theme-prop-value(secondary) !default;
 
 $rs-checkbox-touch-area: 40px !default;
 $rs-checkbox-size: 18px !default;

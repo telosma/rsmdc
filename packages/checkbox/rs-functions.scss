@@ -1,0 +1,7 @@
+@function rs-checkbox-animation-name($uid, $fade) {
+  @if $fade == in {
+    @return rs-checkbox-fade-in-background-#{$uid};
+  }@else {
+    @return rs-checkbox-fade-out-background-#{$uid};
+  }
+}
