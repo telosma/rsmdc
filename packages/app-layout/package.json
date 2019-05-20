@@ -2,6 +2,7 @@
   "name": "@rsmdc/app-layout",
   "version": "1.0.0",
   "license": "MIT",
+  "main": "./dist/rs-elements.common.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rsmdc/rsmdc.git"

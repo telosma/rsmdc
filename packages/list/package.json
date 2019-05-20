@@ -3,7 +3,8 @@
   "description": "The Material Components for the web list component",
   "version": "1.0.5",
   "license": "MIT",
-  "main": "./index.js",
+  "main": "./dist/rs-elements.common.js",
+  "module": "./index.js",
   "sideEffects": false,
   "types": "./types.d.ts",
   "keywords": [

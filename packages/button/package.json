@@ -3,6 +3,7 @@
   "version": "1.0.5",
   "private": false,
   "license": "MIT",
+  "main": "./dist/rs-elements.common.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rsmdc/rsmdc.git"
