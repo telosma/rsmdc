@@ -64,8 +64,99 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../rs-checkbox';
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/rtl/mixins";
 @import '@rsmdc/form-field/rs-form-field';
+@import "../functions";
+@import "../keyframes";
+@import "../variables";
+
+@mixin rs-checkbox__child--cover-parent_ {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin rs-checkbox--disabled_ {
+  --rs-checkbox__diabled--cursor: default;
+  pointer-events: none;
+}
+
+@mixin rs-checkbox--anim_ {
+  $rs-checkbox-indeterminate-change-duration_: 500ms;
+
+  // stylelint-disable selector-max-type
+
+  &-unchecked-checked,
+  &-unchecked-indeterminate,
+  &-checked-unchecked,
+  &-indeterminate-unchecked {
+    .rs-checkbox__background {
+      animation-duration: $rs-checkbox-transition-duration * 2;
+      animation-timing-function: linear;
+    }
+  }
+
+  &-unchecked-checked {
+    .rs-checkbox__checkmark-path {
+      // Instead of delaying the animation, we simply multiply its length by 2 and begin the
+      // animation at 50% in order to prevent a flash of styles applied to a checked checkmark
+      // as the background is fading in before the animation begins.
+      animation: rs-checkbox-unchecked-checked-checkmark-path $rs-checkbox-transition-duration * 2 linear 0s;
+      transition: none;
+    }
+  }
+
+  &-unchecked-indeterminate {
+    .rs-checkbox__mixedmark {
+      animation: rs-checkbox-unchecked-indeterminate-mixedmark $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+  }
+
+  &-checked-unchecked {
+    .rs-checkbox__checkmark-path {
+      animation: rs-checkbox-checked-unchecked-checkmark-path $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+  }
+
+  &-checked-indeterminate {
+    .rs-checkbox__checkmark {
+      animation: rs-checkbox-checked-indeterminate-checkmark $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+
+    .rs-checkbox__mixedmark {
+      animation: rs-checkbox-checked-indeterminate-mixedmark $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+  }
+
+  &-indeterminate-checked {
+    .rs-checkbox__checkmark {
+      animation: rs-checkbox-indeterminate-checked-checkmark $rs-checkbox-indeterminate-change-duration_ linear 0s;
+      transition: none;
+    }
+
+    .rs-checkbox__mixedmark {
+      animation: rs-checkbox-indeterminate-checked-mixedmark $rs-checkbox-indeterminate-change-duration_ linear 0s;
+      transition: none;
+    }
+  }
+
+  &-indeterminate-unchecked {
+    .rs-checkbox__mixedmark {
+      // stylelint-disable-next-line declaration-colon-space-after
+      animation:
+        rs-checkbox-indeterminate-unchecked-mixedmark $rs-checkbox-indeterminate-change-duration_ * .6 linear 0s;
+      transition: none;
+    }
+  }
+}
 
 @include rs-ripple-common();
 @include rs-checkbox-mark-keyframes_;
@@ -325,14 +416,11 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   border-color: var(--rs-checkbox-background-mixedmark--border-color, $rs-checkbox-mark-color);
 }
   
-
 @media screen and (-ms-high-contrast: active) {
   .rs-checkbox__mixedmark {
     margin: 0 1px; // Extra horizontal space around mixedmark symbol.
   }
 }
-
-
 </style>
 
 
