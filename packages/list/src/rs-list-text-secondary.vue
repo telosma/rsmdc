@@ -25,7 +25,7 @@ export default {
 .rs-list-item__secondary-text {
   @include rs-typography(body2);
   @include rs-typography-overflow-ellipsis;
-  color: var(--rs-list-item-secondary-text--color, rs-theme-ink-color-for-fill_(secondary, $rs-theme-background));
+  color: var(--rs-list-color, var(--rs-list-item-secondary-text--color, rs-theme-ink-color-for-fill_(secondary, $rs-theme-background)));
   display: var(--rs-list-item-secondary-text--dispaly, block);
   margin-top: var(--rs-list-item-secondary-text--margin-top, 0);
   line-height: var(--rs-list-item-secondary-text--line-height, normal);

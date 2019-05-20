@@ -1,9 +1,3 @@
-@import './mixins';
-@import '@rsmdc/theme/variables';
-@import '@rsmdc/elevation/variables';
-@import '@rsmdc/shape/variables';
-@import '@rsmdc/ripple/variables';
-
 @mixin rs-button-type($type, $dense: normal) {
   @if $type == outlined {
     @include rs-button--outlined_;

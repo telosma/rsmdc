@@ -23,6 +23,7 @@ export default {
 
 .rs-list-item__primary-text {
   @include rs-typography-overflow-ellipsis;
+  color: var(--rs-list--color, var(--rs-list-item-primary-text--color));
   display: var(--rs-list-item-primary-text--dispaly, block);
   margin-top: var(--rs-list-item-primary-text--margin-top, 0);
   line-height: var(--rs-list-item-primary-text--line-height, normal);

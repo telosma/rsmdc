@@ -32,7 +32,6 @@ export default {
 <style lang="scss">
 @import '../variables';
 @import '@rsmdc/theme/variables';
-@import '@rsmdc/theme/functions';
 
 .rs-list-divider {
   $divider-color: if(

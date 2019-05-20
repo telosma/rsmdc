@@ -69,14 +69,25 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../mixins';
+@import '../variables';
 @import '@rsmdc/ripple/variables';
 @import '@rsmdc/ripple/mixins';
 @import '@rsmdc/typography/mixins';
 @import '@rsmdc/drawer/variables';
 
+:host([activated]),
+:host([selected]) {
+  --rs-list-item-primary-text--color: #{$rs-theme-primary};
+  --rs-list-item-graphic--color: #{$rs-theme-primary};
+}
+
 .rs-list-item {
-  @include rs-list-item-base_;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  padding: 0 $rs-list-side-padding;
+  overflow: hidden;
+
   color: var(--rs-menu-surface--color, var(--rs-list--color));
   height: var(--rs-list-item__drawer--height, var(--rs-list-item--height, 48px));
   align-items: var(--rs-list-item--align-items, center);
@@ -95,8 +106,12 @@ export default {
     margin-right: var(--rs-list-item--margin-right);
   }
 
+  &:focus {
+    outline: none;
+  }
+
   &:not(.-rs-drawer) {
-    @include rs-list-ripple;
+    @include rs-ripple-common;
   }
 
   &.-rs-drawer {
@@ -115,11 +130,11 @@ export default {
   }
 
   &[disabled] {
-    @include rs-list-item-primary-text-ink-color(rs-theme-ink-color-for-fill_(disabled, $rs-theme-background));
+    --rs-list--color: #{rs-theme-ink-color-for-fill_(disabled, $rs-theme-background)};
   }
 
   // ripple
-  &:not(.rs-list-item--disabled) {
+  &:not([disabled]) {
     @include rs-ripple-surface;
     @include rs-ripple-radius-bounded;
     cursor: var(--rs-list-item--cursor, pointer);
@@ -166,10 +181,8 @@ export default {
 }
 
 .rs-list-item[selected] {
-  &:not(.rs-list-item--disabled) {
+  &:not([disabled]) {
     @include rs-states-selected($rs-theme-primary);
-    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
-    @include rs-list-item-graphic-ink-color($rs-theme-primary);
     --rs-menu-list-item-graphic--display: inline;
 
     &::before {
@@ -180,10 +193,9 @@ export default {
 }
 
 .rs-list-item[activated] {
-  &:not(.rs-list-item--disabled) {
+  &:not([disabled]) {
     @include rs-states-activated($rs-theme-primary);
-    @include rs-list-item-primary-text-ink-color($rs-theme-primary);
-    @include rs-list-item-graphic-ink-color($rs-theme-primary);
+    --rs-list--color: #{$rs-theme-primary};
     --rs-menu-list-item-graphic--display: inline;
 
     &::before {

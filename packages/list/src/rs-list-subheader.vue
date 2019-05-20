@@ -42,7 +42,6 @@ export default {
 @import '@rsmdc/drawer/variables';
 @import '@rsmdc/typography/mixins';
 @import '@rsmdc/typography/variables';
-@import '@rsmdc/theme/mixins';
 @import '@rsmdc/theme/variables';
 
 .rs-list-group__subheader {

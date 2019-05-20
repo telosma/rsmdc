@@ -18,11 +18,18 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../mixins';
 @import "@rsmdc/typography/mixins";
+@import "@rsmdc/theme/variables";
 
 .rs-list {
-  @include rs-list-base_;
+  @include rs-typography(subtitle1);
+
+  padding-right: 0;
+  padding-left: 0;
+  line-height: map-get(map-get($rs-typography-styles, body1), line-height);
+  margin: 0;
+  list-style-type: none;
+
   padding-top: var(--rs-list--padding-top, 8px);
   padding-bottom: var(--rs-list--padding-bottom, 8px);
   font-size: var(--rs-list--font-size);

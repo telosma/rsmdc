@@ -131,12 +131,6 @@ export default {
 <style lang="scss">
 @import '../mixins';
 @import '../variables';
-@import '@rsmdc/animation/variables';
-@import '@rsmdc/animation/functions';
-@import '@rsmdc/theme/mixins';
-@import '@rsmdc/shape/rs-functions';
-@import '@rsmdc/rtl/mixins';
-
 
 :host {
   --rs-drawer-list-item--border-radius: 4px;

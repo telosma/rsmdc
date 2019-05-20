@@ -27,16 +27,8 @@
 @import "@rsmdc/typography/variables";
 @import "./variables";
 
-
-@mixin rs-list-core-styles() {
-  @include rs-list-ripple;
-}
-
-@mixin rs-list-ripple {
-  @include rs-ripple-common;
-}
-
 @mixin rs-list-item-primary-text-ink-color($color) {
+  --rs-list-item-primary-text--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
   --rs-list--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
 }
 
@@ -67,28 +59,6 @@
 
 @mixin rs-list-group-subheader-ink-color($color) {
   --rs-list-group-subheader--color: #{$color};
-}
-
-@mixin rs-list-base_ {
-  @include rs-typography(subtitle1);
-
-  padding-right: 0;
-  padding-left: 0;
-  line-height: map-get(map-get($rs-typography-styles, body1), line-height);
-  margin: 0;
-  list-style-type: none;
-}
-
-@mixin rs-list-item-base_ {
-  display: flex;
-  position: relative;
-  justify-content: flex-start;
-  padding: 0 $rs-list-side-padding;
-  overflow: hidden;
-
-  &:focus {
-    outline: none;
-  }
 }
 
 @mixin rs-list-graphic-size_($size) {
