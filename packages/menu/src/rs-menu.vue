@@ -57,7 +57,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../mixins';
+@import "../variables";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/shape/rs-functions";
+@import '@rsmdc/ripple/mixins';
+@import "@rsmdc/rtl/mixins";
 
 :host {
   position: absolute;
@@ -91,11 +97,47 @@ export default {
 }
 
 .rs-menu-surface {
-  @include rs-menu-surface-base_();
+  @include rs-rtl-reflexive-property(transform-origin, top left, top right);
+  box-sizing: border-box;
+  max-width: calc(100vw - #{$rs-menu-surface-min-distance-from-edge});
+  max-height: calc(100vh - #{$rs-menu-surface-min-distance-from-edge});
+  margin: 0;
+  padding: 0;
+  transform-origin: top left;
+  overflow: auto;
+  will-change: transform, opacity;
+  z-index: $rs-menu-surface-z-index;
+  transition:
+    opacity $rs-menu-surface-fade-in-duration linear,
+    transform $rs-menu-surface-scale-duration $rs-animation-deceleration-curve-timing-function;
+
   box-shadow: #{rs-elevation(8)};
   min-width: $rs-menu-min-width;
 
-  @include rs-rtl-reflexive-property(transform-origin, top left, top right);
+
+  &:focus {
+    outline: none;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  &--open {
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--transform: scale(1);
+    --rs-menu-surface--opacity: 1;
+  }
+
+  &--animating-open {
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--transform: scale(.8);
+    --rs-menu-surface--opacity: 0;
+  }
+
+  &--animating-closed {
+    --rs-menu-surface--display: inline-block;
+    --rs-menu-surface--opacity: 0;
+
+    transition: opacity $rs-menu-surface-fade-out-duration linear;
+  }
 }
 
 </style>

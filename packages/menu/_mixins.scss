@@ -21,14 +21,7 @@
 //
 
 @import "./variables";
-@import "@rsmdc/theme/variables";
-@import "@rsmdc/theme/mixins";
-@import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/rs-functions";
-@import "@rsmdc/animation/variables";
-@import "@rsmdc/elevation/mixins";
-@import "@rsmdc/rtl/mixins";
-@import "@rsmdc/ripple/mixins";
 
 @mixin rs-menu-width($width) {
   @if unitless($width) {
@@ -49,45 +42,4 @@
 @mixin rs-menu-surface-shape-radius($radius, $rtl-reflexive: false) {
   --rs-menu-surface--border-radius: #{rs-shape-radius($radius)};
   --rs-menu-surface_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
-}
-
-@mixin rs-menu-surface-base_() {
-
-  box-sizing: border-box;
-  max-width: calc(100vw - #{$rs-menu-surface-min-distance-from-edge});
-  max-height: calc(100vh - #{$rs-menu-surface-min-distance-from-edge});
-  margin: 0;
-  padding: 0;
-  transform-origin: top left;
-  overflow: auto;
-  will-change: transform, opacity;
-  z-index: $rs-menu-surface-z-index;
-
-  transition:
-    opacity $rs-menu-surface-fade-in-duration linear,
-    transform $rs-menu-surface-scale-duration $rs-animation-deceleration-curve-timing-function;
-
-  &:focus {
-    outline: none;
-  }
-
-  // stylelint-disable-next-line selector-max-type
-  &--open {
-    --rs-menu-surface--display: inline-block;
-    --rs-menu-surface--transform: scale(1);
-    --rs-menu-surface--opacity: 1;
-  }
-
-  &--animating-open {
-    --rs-menu-surface--display: inline-block;
-    --rs-menu-surface--transform: scale(.8);
-    --rs-menu-surface--opacity: 0;
-  }
-
-  &--animating-closed {
-    --rs-menu-surface--display: inline-block;
-    --rs-menu-surface--opacity: 0;
-
-    transition: opacity $rs-menu-surface-fade-out-duration linear;
-  }
 }
