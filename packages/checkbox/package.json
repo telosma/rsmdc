@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/checkbox",
   "description": "The Material Components for the web checkbox component",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "license": "MIT",
   "keywords": [
     "material components",

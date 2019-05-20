@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/list",
   "description": "The Material Components for the web list component",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT",
   "main": "./dist/rs-elements.common.js",
   "module": "./index.js",
