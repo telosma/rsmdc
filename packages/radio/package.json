@@ -8,7 +8,7 @@
     "material design",
     "radio"
   ],
-  "main": "dist/rs-elements.common.js",
+  "main": "./dist/rs-elements.common.js",
   "module": "./index.js",
   "sideEffects": false,
   "repository": {
