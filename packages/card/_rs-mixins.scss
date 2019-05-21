@@ -1,0 +1,21 @@
+@mixin rs-card-type($type) {
+  @if $type == outlined {
+    --rs-card--box-shadow: #{rs-elevation(0)};
+    @include rs-card-outline($rs-card-outline-color);
+  }
+}
+
+@mixin rs-card-actions-type($type, $buttonType) {
+  @if $type == full-bleed {
+    --rs-card-actions__full-bleed: true;
+    --rs-card-actions--padding: 0;
+  }
+}
+
+@mixin rs-card-media-type($type) {
+  @if $type == square {
+    @include rs-card-media-aspect-ratio(1, 1);
+  }@else if $type == 16-9 {
+    @include rs-card-media-aspect-ratio(16, 9);
+  }
+}
