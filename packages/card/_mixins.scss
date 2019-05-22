@@ -36,8 +36,17 @@
 @mixin rs-card-shape-radius($radius, $rtl-reflexive: false) {
   --rs-card--border-radius: #{rs-shape-radius($radius)};
   --rs-card_rtl--border-radius: #{rs-shape-radius($radius)};
+
+  --rs-card-contents--border-top-left-radius: #{rs-shape-radius($radius)};
+  --rs-card-contents--border-top-right-radius: #{rs-shape-radius($radius)};
+  --rs-card-contents_rtl--border-top-left-radius: #{rs-shape-radius($radius)};
+  --rs-card-contents_rtl--border-top-right-radius: #{rs-shape-radius($radius)};
+  --rs-card-media--border-top-left-radius: #{rs-shape-radius($radius)};
+  --rs-card-media--border-top-right-radius: #{rs-shape-radius($radius)};
+  --rs-card-media_rtl--border-top-left-radius: #{rs-shape-radius($radius)};
+  --rs-card-media_rtl--border-top-right-radius: #{rs-shape-radius($radius)};
 }
 
 @mixin rs-card-media-aspect-ratio($x, $y) {
-  --rs-card-media_before--margin-top: #{percentage($y / $x)};
+  --rs-card-media--padding-top: #{percentage($y / $x)};
 }

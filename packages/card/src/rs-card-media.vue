@@ -19,6 +19,7 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "@rsmdc/shape/functions";
 
 .rs-card__media {
   position: relative; // Child element `__media-content` has `position: absolute`
@@ -26,21 +27,20 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-  &::before {
-    display: block;
-    content: "";
-    margin-top: var(--rs-card-media_before--margin-top);
-  }
-
-  &:first-child {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-  }
+  background-image: var(--rs-card-media--background-image);
+  padding-top: var(--rs-card-media--padding-top);
+  border-top-left-radius: var(--rs-card-media--border-top-left-radius, rs-shape-prop-value(medium));
+  border-top-right-radius: var(--rs-card-media--border-top-right-radius, rs-shape-prop-value(medium));
 
   &:last-child {
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
+  }
+
+  &[dir="rtl"],
+  [dir="rtl"] & {
+    border-top-left-radius: var(--rs-card-media_rtl--border-top-left-radius, rs-shape-prop-value(medium));
+    border-top-right-radius: var(--rs-card-media_rtl--border-top-right-radius, rs-shape-prop-value(medium));
   }
 }
 
@@ -51,5 +51,6 @@ export default {
   bottom: 0;
   left: 0;
   box-sizing: border-box;
+  color: var(--rs-card-media-content--color);
 }
 </style>
