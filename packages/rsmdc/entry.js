@@ -12,6 +12,14 @@ import listDivider from '../list/src/rs-list-divider.vue'
 import listSubheader from '../list/src/rs-list-subheader.vue'
 import listGroup from '../list/src/rs-list-group.vue'
 import list from '../list/src/rs-list.vue'
+import cardActions from '../card/src/rs-card-actions.vue'
+import cardMedia from '../card/src/rs-card-media.vue'
+import cardDescription from '../card/src/rs-card-description.vue'
+import cardSubtitle from '../card/src/rs-card-subtitle.vue'
+import cardTitle from '../card/src/rs-card-title.vue'
+import cardHeader from '../card/src/rs-card-header.vue'
+import cardContents from '../card/src/rs-card-contents.vue'
+import card from '../card/src/rs-card.vue'
 import topAppBarActionItem from '../top-app-bar/src/rs-top-app-bar-action-item.vue'
 import topAppBarActions from '../top-app-bar/src/rs-top-app-bar-actions.vue'
 import topAppBarTitle from '../top-app-bar/src/rs-top-app-bar-title.vue'
@@ -39,6 +47,14 @@ export const ListDivider = wrap(Vue, listDivider)
 export const ListSubheader = wrap(Vue, listSubheader)
 export const ListGroup = wrap(Vue, listGroup)
 export const List = wrap(Vue, list)
+export const CardActions = wrap(Vue, cardActions)
+export const CardMedia = wrap(Vue, cardMedia)
+export const CardDescription = wrap(Vue, cardDescription)
+export const CardSubtitle = wrap(Vue, cardSubtitle)
+export const CardTitle = wrap(Vue, cardTitle)
+export const CardHeader = wrap(Vue, cardHeader)
+export const CardContents = wrap(Vue, cardContents)
+export const Card = wrap(Vue, card)
 export const TopAppBarActionItem = wrap(Vue, topAppBarActionItem)
 export const TopAppBarActions = wrap(Vue, topAppBarActions)
 export const TopAppBarTitle = wrap(Vue, topAppBarTitle)
