@@ -1,11 +1,6 @@
 <template>
-  <div class="rs-card__actions">
-    <div class="rs-card__action-buttons rs-card__action" ref="slotContainer">
-      <slot></slot>
-    </div>
-    <div class="rs-card__action-buttons" ref="slotContainer">
-      <slot></slot>
-    </div>
+  <div class="rs-card__actions" ref="slotContainer">
+    <slot></slot>
   </div>
 </template>
 <script>
@@ -39,21 +34,7 @@ export default {
   padding: var(--rs-card-actions--padding, 8px);
 }
 
-.rs-card__action-icons {
-  @include rs-card-actions-layout_;
-  @include rs-theme-prop(color, text-icon-on-background);
-
-  flex-grow: 1;
-  justify-content: flex-end;
-}
-
-.rs-card__action-buttons {
-  @include rs-card-actions-layout_;
-  + .rs-card__action-icons {
-    @include rs-rtl-reflexive-box(margin, left, 16px);
-  }
-}
-
+// .rs-card__action
 ::slotted(*) {
   @include rs-card-actions-layout_(inline-flex);
 
@@ -61,16 +42,15 @@ export default {
   cursor: pointer;
   user-select: none;
 }
-
 ::slotted(*:focus) {
   outline: none;
 }
 
+// .rs-card__action--button
 ::slotted(.-rs-button) {
   @include rs-rtl-reflexive-box(margin, right, 8px);
   padding: 0 8px;
 }
-
 ::slotted(.-rs-button.-rs-full-bleed) {
   justify-content: space-between;
   width: 100%;
@@ -86,16 +66,20 @@ export default {
     text-align: right;
   }
 }
-
-::slotted(.-rs-button:last-child) {
-  @include rs-rtl-reflexive-box(margin, right, 0);
+::slotted(.-rs-button.-rs-last) {
+  @include rs-rtl-reflexive-box(margin, right, 16px);
 }
 
+// .rs-card__action-icon
 ::slotted(.-rs-icon) {
+  @include rs-theme-prop(color, text-icon-on-background);
   margin: -6px 0;
   padding: 12px;
 }
-
+::slotted(.-rs-icon.-rs-first) {
+  margin-right: 0;
+  margin-left: auto;
+}
 ::slotted(.-rs-icon:not(:disabled)) {
   @include rs-theme-prop(color, text-icon-on-background);
 }
