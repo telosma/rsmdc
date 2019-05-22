@@ -19,11 +19,12 @@ export default {
 <style lang="scss">
 @import '@rsmdc/typography/mixins';
 @import '@rsmdc/theme/variables';
+@import '@rsmdc/theme/variables';
 
 .rs-card__description {
   @include rs-typography(body2);
   padding: 0 1rem 8px;
-  color: var(--rs-card-description--color, $rs-theme-secondary);
+  color: var(--rs-card-description--color, rs-theme-ink-color-for-fill_(secondary, $rs-theme-background));
 }
 </style>
 

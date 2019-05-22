@@ -22,6 +22,7 @@ export default {
 .rs-card__title {
   @include rs-typography(headline6);
   margin: 0;
+  color: var(--rs-card-title--color);
 }
 </style>
 

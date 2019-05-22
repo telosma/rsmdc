@@ -19,3 +19,27 @@
     @include rs-card-media-aspect-ratio(16, 9);
   }
 }
+
+@mixin rs-card-media-image($url) {
+  --rs-card-media--background-image: #{$url};
+}
+
+@mixin rs-card-size($width) {
+  --rs-card--width: #{$width};
+}
+
+@mixin rs-card-media-content-ink-color($color) {
+  --rs-card-media-content--color: #{$color};
+}
+
+@mixin rs-card-title-ink-color($color) {
+  --rs-card-title--color: #{$color};
+}
+
+@mixin rs-card-subtitle-ink-color($color) {
+  --rs-card-subtitle--color: #{$color};
+}
+
+@mixin rs-card-description-ink-color($color) {
+  --rs-card-description--color: #{$color};
+}

@@ -19,23 +19,24 @@ export default {
 <style lang="scss">
 @import "@rsmdc/elevation/mixins";
 @import "@rsmdc/theme/variables";
-@import "@rsmdc/shape/rs-functions";
+@import "@rsmdc/shape/functions";
 
 .rs-card {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  width: var(--rs-card--width);
 
   background-color: var(--rs-card--background-color, $rs-theme-surface);
   box-shadow: var(--rs-card--box-shadow, rs-elevation(1));
-  border-radius: var(--rs-card--border-radius, rs-shape-radius(medium));
+  border-radius: var(--rs-card--border-radius, rs-shape-prop-value(medium));
   border-width: var(--rs-card--border-width);
   border-style: var(--rs-card--border-style);
   border-color: var(--rs-card--border-color);
 
   &[rtl]
   [rtl] & {
-    border-radius: var(--rs-card_rtl--border-radius, rs-shape-radius(medium));
+    border-radius: var(--rs-card_rtl--border-radius, rs-shape-prop-value(medium));
   }
  }
 </style>
