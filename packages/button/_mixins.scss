@@ -22,74 +22,25 @@
 @import "@rsmdc/elevation/mixins";
 @import "@rsmdc/ripple/mixins";
 @import "@rsmdc/rtl/mixins";
-@import "@rsmdc/theme/functions";
-@import "@rsmdc/theme/mixins";
-@import "@rsmdc/typography/mixins";
-@import "@rsmdc/shape/mixins";
+@import "@rsmdc/theme/variables";
 @import "@rsmdc/shape/functions";
 @import "./variables";
 @import "./rs-functions";
 
-@mixin rs-button-filled-accessible($container-fill-color) {
-  $fill-tone: rs-theme-tone($container-fill-color);
 
-  @include rs-button-container-fill-color($container-fill-color);
-  
-  @if ($fill-tone == "dark") {
-    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
-    @include rs-states(text-primary-on-dark);
-  } @else {
-    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
-    @include rs-states(text-primary-on-light);
-  }
-}
-
-@mixin rs-button-container-fill-color($color) {
-  --rs-button_not_disabled--background-color: #{$color};
-}
-
-@mixin rs-button-outline-color($color) {
-  --rs-button_not_disabled--border-color: #{$color};
-}
-
-@mixin rs-button-ink-color($color) {
-  --rs-button_not_disabled--color: #{$color};
-}
-
-@mixin rs-button-shape-radius($radius, $rtl-reflexive: false) {
-  --rs-button--border-radius: #{rs-shape-radius($radius)};
-  --rs-button_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
-}
-
-@mixin rs-button-horizontal-padding($padding) {
-  --rs-button--padding-right: #{$padding};
-  --rs-button--padding-left: #{$padding};
-}
-
-@mixin rs-button-outline-width(
-  $outline-width,
-  $padding: $rs-button-contained-horizontal-padding,
-) {
-  $padding-value: max($padding - $outline-width, 0);
-
-  @include rs-button-horizontal-padding($padding-value);
-
-  --rs-button--border-width: #{$outline-width};
-}
-
-@mixin rs-button--outlined_() {
+@mixin rs-button--outlined_ {
   --rs-button--border-style: solid;
   --rs-button_disabled--border-color: #{$rs-button-disabled-ink-color};
 }
 
-@mixin rs-button--filled_() {
+@mixin rs-button--filled_ {
   --rs-button--padding-right: #{$rs-button-contained-horizontal-padding};
   --rs-button--padding-left: #{$rs-button-contained-horizontal-padding};
   --rs-button_disabled--background-color: #{rgba(rs-theme-prop-value(on-surface), .12)};
   --rs-button_disabled--color: #{$rs-button-disabled-ink-color};
 }
 
-@mixin rs-button--raised_() {
+@mixin rs-button--raised_ {
   --rs-button--box-shadow: #{rs-elevation(2)};
   --rs-button_hover--box-shadow: #{rs-elevation(4)};
   --rs-button_focus--box-shadow:  #{rs-elevation(4)};
@@ -98,8 +49,34 @@
   --rs-button--transition: #{rs-elevation-transition-value()};
 }
 
-@mixin rs-button--dense_() {
+@mixin rs-button--dense_ {
   --rs-button--height: #{$rs-dense-button-height};
   --rs-button--font-size: .8125rem; // 13sp  
   --rs-button--border-radius: #{rs-shape-resolve-percentage-radius(#{$rs-dense-button-height}, #{$rs-shape-small-component-radius})};  //from @mixin rs-button-shape-radius
+}
+
+@mixin rs-button_ {
+  --rs-button--justify-content: center;
+  --rs-button--min-width: 64px;
+  --rs-button--height: #{$rs-button-height};
+  --rs-button--box-shadow: none;
+  --rs-button--border-radius: 4px;
+  --rs-button--font-size: 0.875rem;
+  --rs-button--padding-right: #{$rs-button-horizontal-padding};
+  --rs-button--padding-left: #{$rs-button-horizontal-padding};
+  --rs-button--padding-top: 0;
+  --rs-button--padding-bottom: 0;
+  --rs-button--display: inline-flex;
+
+  --rs-button_rtl--border-radius: #{rs-shape-rtl-radius(medium, false)};
+
+  --rs-button_moz-focus-inner--padding: 0;
+  --rs-button_moz-focus-inner--border: 0;
+
+  --rs-button_active--box-shadow: none;
+
+  --rs-button_not_disabled--background-color: transparent;
+  --rs-button_not_disabled--color: #{$rs-theme-primary};
+
+  --rs-button_not_disabled--border-color: none;
 }

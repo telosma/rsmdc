@@ -1,25 +1,99 @@
-@mixin rs-button-type($type, $dense: normal) {
-  @if $type == outlined {
+/* change button type  */
+@mixin rs-button-type($type: flat, $option: none) {
+  @if $type == flat {
+    @include rs-button_;
+  }@else if $type == outlined {
+    @include rs-button_;
     @include rs-button--outlined_;
     @include rs-button-outline-width(2px);
     @include rs-button-outline-color($rs-theme-primary);
-  }
 
-  @if $type == raised or $type == unelevated {
+  }@else if $type == raised {
+    @include rs-button_;
+    @include rs-button--raised_;
+    @include rs-button--filled_;
+    @include rs-button-container-fill-color($rs-theme-primary);
+    @include rs-button-ink-color($rs-theme-on-primary);
+    @include rs-states(on-primary);
+
+  }@else if $type == icon {
+    @include rs-button-icon_;
+
+  }@else if $type == fab {
+    @include rs-fab_;
+
+  }@else if $type == dense {
+    @include rs-button_;
+    @include rs-button--dense_;
+
+  }@else if $type == unelevated {
+    @include rs-button_;
     @include rs-button--filled_;
     @include rs-button-container-fill-color($rs-theme-primary);
     @include rs-button-ink-color($rs-theme-on-primary);
     @include rs-states(on-primary);
   }
 
-  @if $type == raised {
-    @include rs-button--raised_;
-  }
-
-  @if $type == dense or $dense == dense {
+  @if $option == dense {
     @include rs-button--dense_;
+
+  }@else if $option == mini {
+    @include rs-fab--mini_;
+
+  }@else if $option == extended {
+    @include rs-fab--extended_;
+
   }
 }
+
+/* change button text color and ripple color  */
+@mixin rs-button-filled-accessible($container-fill-color) {
+  $fill-tone: rs-theme-tone($container-fill-color);
+
+  @include rs-button-container-fill-color($container-fill-color);
+  
+  @if ($fill-tone == "dark") {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
+    @include rs-states(text-primary-on-dark);
+  } @else {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
+    @include rs-states(text-primary-on-light);
+  }
+}
+
+@mixin rs-button-container-fill-color($color) {
+  --rs-button_not_disabled--background-color: #{$color};
+}
+
+@mixin rs-button-outline-color($color) {
+  --rs-button_not_disabled--border-color: #{$color};
+}
+
+@mixin rs-button-ink-color($color) {
+  --rs-button_not_disabled--color: #{$color};
+}
+
+@mixin rs-button-shape-radius($radius, $rtl-reflexive: false) {
+  --rs-button--border-radius: #{rs-shape-radius($radius)};
+  --rs-button_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
+}
+
+@mixin rs-button-horizontal-padding($padding) {
+  --rs-button--padding-right: #{$padding};
+  --rs-button--padding-left: #{$padding};
+}
+
+@mixin rs-button-outline-width(
+  $outline-width,
+  $padding: $rs-button-contained-horizontal-padding,
+) {
+  $padding-value: max($padding - $outline-width, 0);
+
+  @include rs-button-horizontal-padding($padding-value);
+
+  --rs-button--border-width: #{$outline-width};
+}
+
 
 @mixin rs-button-padding-right($padding) {
   --rs-button--padding-right: #{$padding};
