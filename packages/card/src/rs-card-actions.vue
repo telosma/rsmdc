@@ -73,7 +73,7 @@ export default {
 
 // .rs-card__action--button
 ::slotted(.-rs-button) {
-  @include rs-rtl-reflexive-box(margin, right, 8px);
+  margin-right: var(--rs-card-actions_slotted-button--margin-right, 8px);
 }
 ::slotted(.-rs-button.-rs-full-bleed) {
   justify-content: space-between;

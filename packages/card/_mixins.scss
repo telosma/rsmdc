@@ -1,0 +1,9 @@
+
+@import "@rsmdc/theme/variables";
+@import "./variables";
+
+@mixin rs-card-outlined_ ($color, $thickness: $rs-card-outline-width) {
+  --rs-card--border-width: #{$thickness};
+  --rs-card--border-style: solid;
+  --rs-card--border-color: #{rs-theme-prop-value($color)};
+}

@@ -1,20 +1,33 @@
 @import "@rsmdc/shape/mixins";
-@import "./variables";
+@import "./mixins";
 
+/* Change card type. */
 @mixin rs-card-type($type) {
   @if $type == outlined {
     --rs-card--box-shadow: #{rs-elevation(0)};
-    @include rs-card-outline($rs-card-outline-color);
+    @include rs-card-outlined_($rs-card-outline-color);
   }
 }
 
-@mixin rs-card-actions-type($type, $buttonType) {
+/* Change card-actions type. Usually, you use this mixin when only one button. (Extend button width)  */
+@mixin rs-card-actions-type($type) {
   @if $type == full-bleed {
     --rs-card-actions__full-bleed: true;
     --rs-card-actions--padding: 0;
+    --rs-card-actions_slotted-button--margin-right: 0;
+    --rs-button--width: 100%;
+    > * {
+      width: 100%;
+    }
   }
 }
 
+/* Change card width. */
+@mixin rs-card-size($width) {
+  --rs-card--width: #{$width};
+}
+
+/* Change card-media size. Always use this mixin when you use card-media.*/
 @mixin rs-card-media-type($type) {
   @if $type == square {
     @include rs-card-media-aspect-ratio(1, 1);
@@ -23,40 +36,42 @@
   }
 }
 
+/* Change card-media size. */
+@mixin rs-card-media-aspect-ratio($x, $y) {
+  --rs-card-media--padding-top: #{percentage($y / $x)};
+}
+
+/* Set card-media image. */
 @mixin rs-card-media-image($url) {
   --rs-card-media--background-image: #{$url};
 }
 
-@mixin rs-card-size($width) {
-  --rs-card--width: #{$width};
-}
-
+/* Change text color in card-media. */
 @mixin rs-card-media-content-ink-color($color) {
   --rs-card-media-content--color: #{$color};
 }
 
+/* Change card-title text color. */
 @mixin rs-card-title-ink-color($color) {
   --rs-card-title--color: #{$color};
 }
 
+/* Change card-subtitle text color. */
 @mixin rs-card-subtitle-ink-color($color) {
   --rs-card-subtitle--color: #{$color};
 }
 
+/* Change card-description text color. */
 @mixin rs-card-description-ink-color($color) {
   --rs-card-description--color: #{$color};
 }
 
+/* Change card background-color. */
 @mixin rs-card-fill-color($color) {
   --rs-card--background-color: #{$color};
 }
 
-@mixin rs-card-outline($color, $thickness: $rs-card-outline-width) {
-  --rs-card--border-width: $thickness;
-  --rs-card--border-style: solid;
-  --rs-card--border-color: rs-theme-prop-value($color);
-}
-
+/* Change card radius. */
 @mixin rs-card-shape-radius($radius, $rtl-reflexive: false) {
   --rs-card--border-radius: #{rs-shape-radius($radius)};
   --rs-card_rtl--border-radius: #{rs-shape-radius($radius)};
@@ -69,8 +84,4 @@
   --rs-card-media--border-top-right-radius: #{rs-shape-radius($radius)};
   --rs-card-media_rtl--border-top-left-radius: #{rs-shape-radius($radius)};
   --rs-card-media_rtl--border-top-right-radius: #{rs-shape-radius($radius)};
-}
-
-@mixin rs-card-media-aspect-ratio($x, $y) {
-  --rs-card-media--padding-top: #{percentage($y / $x)};
 }
