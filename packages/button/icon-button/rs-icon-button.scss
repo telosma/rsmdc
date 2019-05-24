@@ -22,9 +22,6 @@
 
 // postcss-bem-linter: define icon-button
 
-@import "@rsmdc/ripple/common";
-@import "@rsmdc/ripple/mixins";
-@import "@rsmdc/theme/mixins";
 @import "./variables";
 
 @mixin rs-button-icon_ {

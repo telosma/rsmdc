@@ -80,3 +80,9 @@
 
   --rs-button_not_disabled--border-color: none;
 }
+
+@mixin rs-button-fab-fixed-bottom {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}

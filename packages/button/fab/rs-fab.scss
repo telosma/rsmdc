@@ -18,12 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@import "@rsmdc/ripple/common";
-@import "@rsmdc/ripple/mixins";
-@import "@rsmdc/ripple/variables";
-@import "@rsmdc/typography/mixins";
-@import "./mixins";
-@import "./rs-mixins";
 @import "./variables";
 
 @mixin rs-fab_ {
@@ -69,7 +63,7 @@
 }
 
 @mixin rs-fab--extended_ {
-  @include rs-fab-extended-shape-radius(50%);
+  @include rs-button-fab-extended-shape-radius(50%);
   @include rs-button-horizontal-padding($rs-fab-extended-label-padding);
 
   --rs-button--width: auto;
