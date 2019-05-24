@@ -1,4 +1,3 @@
-//
 // Copyright 2016 Google Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,9 +17,36 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
 
-@import "./icon-button/rs-icon-button";
-@import "./fab/rs-fab";
-@import "./mixins";
-@import "./rs-mixins";
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/elevation/variables";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/ripple/variables";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import "@rsmdc/rtl/mixins";
+@import "./variables";
+
+@mixin rs-fab-container-color($color) {
+  --rs-button--background-color: #{$color};
+}
+
+@mixin rs-fab-icon-size($width, $height: $width) {
+  --rs-button--background-size: #{$size};
+}
+
+@mixin rs-button-fab-extended-fluid {
+  --rs-button--width: 100%;
+}
+
+@mixin rs-fab-shape-radius($radius, $rtl-reflexive: false) {
+  --rs-button--border-radius: #{rs-shape-prop-value($radius)};
+}
+
+@mixin rs-fab-extended-shape-radius($radius) {
+  --rs-button--border-radius: #{rs-shape-resolve-percentage-radius($rs-fab-extended-height, $radius)};
+  --rs-button_rtl--border-radius: #{rs-shape-resolve-percentage-radius($rs-fab-extended-height, $radius)};
+}

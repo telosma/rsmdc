@@ -1,5 +1,5 @@
 //
-// Copyright 2016 Google Inc.
+// Copyright 2018 Google Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,10 @@
 // THE SOFTWARE.
 //
 
-@import "./icon-button/rs-icon-button";
-@import "./fab/rs-fab";
-@import "./mixins";
-@import "./rs-mixins";
+$rs-fab-extended-icon-padding: 12px !default;
+$rs-fab-extended-label-padding: 20px !default;
+$rs-fab-height: 56px !default;
+$rs-fab-mini-height: 40px !default;
+$rs-fab-extended-height: 48px !default;
+$rs-fab-icon-enter-delay_: 90ms;
+$rs-fab-icon-enter-duration_: 180ms;

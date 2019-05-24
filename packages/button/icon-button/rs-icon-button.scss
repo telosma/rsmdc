@@ -1,0 +1,59 @@
+//
+// Copyright 2018 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+// postcss-bem-linter: define icon-button
+
+@import "@rsmdc/ripple/common";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/theme/mixins";
+@import "./variables";
+
+@mixin rs-button-icon_ {
+  $padding: $rs-icon-button-size / 2;
+  $width: $rs-icon-button-size + $padding * 2;
+  $height: $rs-icon-button-size + $padding * 2;
+  $font-size: max($width, $height);
+
+  --rs-button__icon: true;
+  --rs-button--width: #{$width};
+  --rs-button--height: #{$height};
+  --rs-button--padding: #{$padding};
+  --rs-button--font-size: #{$font-size};
+  --rs-button--display: inline-block;
+  --rs-button--background-color: transparent;
+  --rs-button--fill: currentColor;
+  --rs-button--color: inherit;
+  --rs-button--text-decoration: none;
+  --rs-button--cursor: pointer;
+  --rs-button--background-size: #{$rs-icon-button-size};
+
+  --rs-button_disabled--color: #{rs-theme-ink-color-for-fill_(disabled, light)};
+  --rs-button_disabled--opacity: 0.38;
+
+  // ripple
+  --rs-ripple_before--background-color: #{$rs-theme-on-surface};
+  --rs-ripple_after--background-color: #{$rs-theme-on-surface};
+  --rs-ripple_hover_before--opacity: #{rs-states-opacity(on-surface, focus)};
+  --rs-upgraded_-background-focused_before--opacity: #{rs-states-opacity(on-surface, focus)};
+  --rs-ripple_not-upgraded_active_after--opacity: #{rs-states-opacity(on-surface, press)};
+  --rs-ripple-upgraded--rs-ripple-fg-opacity: #{rs-states-opacity(on-surface, press)};
+}

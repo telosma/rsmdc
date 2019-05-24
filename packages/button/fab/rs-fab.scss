@@ -1,0 +1,81 @@
+// Copyright 2016 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+@import "@rsmdc/ripple/common";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/ripple/variables";
+@import "@rsmdc/typography/mixins";
+@import "./mixins";
+@import "./rs-mixins";
+@import "./variables";
+
+@mixin rs-fab_ {
+  --rs-button__fab: true;
+  --rs-button--fill: currentColor;
+  --rs-button--cursor: pointer;
+  --rs-button--moz-appearance: none;
+  --rs-button--box-shadow: #{rs-elevation(6)};
+  --rs-button--border-radius: #{rs-shape-prop-value(50%)};
+  --rs-button--width: #{$rs-fab-height};
+  --rs-button--height: #{$rs-fab-height};
+  --rs-button--color: #{$rs-theme-on-secondary};
+  --rs-button_not_disabled--color: #{$rs-theme-on-secondary};
+  --rs-button--background-color: #{$rs-theme-secondary};
+  --rs-button_not_disabled--background-color: #{$rs-theme-secondary};
+  --rs-button--background-size: 24px;
+  --rs-button--transition: 
+    box-shadow #{$rs-elevation-transition-duration} #{$rs-elevation-transition-timing-function},
+    opacity 15ms linear 30ms,
+    #{rs-animation-enter(transform, $rs-fab-icon-enter-duration_ + $rs-fab-icon-enter-delay_)}
+  ;
+  --rs-button--padding-right: 0;
+  --rs-button--padding-left: 0;
+  --rs-button--padding-top: 0;
+  --rs-button--padding-bottom: 0;
+  --rs-button_hover--box-shadow: #{rs-elevation(8)};
+  --rs-button_focus--box-shadow: #{rs-elevation(8)};
+  --rs-button_active--box-shadow: #{rs-elevation(12)};
+  --rs-button_focus--outline: none;
+
+  // ripple
+  --rs-ripple_before--background-color: #{$rs-theme-on-secondary};
+  --rs-ripple_after--background-color: #{$rs-theme-on-secondary};
+  --rs-ripple_hover_before--opacity: #{rs-states-opacity(on-secondary, focus)};
+  --rs-upgraded_-background-focused_before--opacity: #{rs-states-opacity(on-secondary, focus)};
+  --rs-ripple_not-upgraded_active_after--opacity: #{rs-states-opacity(on-secondary, press)};
+  --rs-ripple-upgraded--rs-ripple-fg-opacity: #{rs-states-opacity(on-secondary, press)};
+}
+
+@mixin rs-fab--mini_ {
+  --rs-button--width: #{$rs-fab-mini-height};
+  --rs-button--height: #{$rs-fab-mini-height};
+}
+
+@mixin rs-fab--extended_ {
+  @include rs-fab-extended-shape-radius(50%);
+  @include rs-button-horizontal-padding($rs-fab-extended-label-padding);
+
+  --rs-button--width: auto;
+  --rs-button--max-width: 100%;
+  --rs-button--height: #{$rs-fab-extended-height};
+  --rs-button--justify-content: flex-start;
+  --rs-button--text-overflow: ellipsis;
+  --rs-button--white-space: nowrap;
+}
