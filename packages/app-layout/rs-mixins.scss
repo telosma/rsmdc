@@ -1,3 +1,4 @@
+/* Set contents position in app-layout. Usually, you use this mixin when use rsmdc-drawer and its type is permanent. */
 @mixin rs-app-layout-type($drawerType) {
   @if $drawerType == permanent {
     --rs-app-layout--display: flex;
