@@ -6,12 +6,36 @@
 <script>
 export default {
   mounted() {
-    this.$nextTick().then(this.fixSlot.bind(this))
+    this.$nextTick()
+      .then(this.fixSlot.bind(this))
+      .then(() => {
+        const slotChildren = Array.from(this.$el.querySelector('slot').assignedNodes()).filter(node => node.nodeType === 1)
+        const icons = []
+        const buttons = []
+        slotChildren.forEach(child => {
+          const isIcon = this.getElementProperty(child, '--rs-button__icon') === 'true' ? true : false
+          if(isIcon) {
+            child.classList.add('-rs-icon')
+            icons.push(child)
+          } else {
+            child.classList.add('-rs-button')
+            buttons.push(child)
+          }
+        })
+        if(icons.length === 0 || buttons.length === 0) { return }
+        icons.shift().classList.add('-rs-first')
+        buttons.pop().classList.add('-rs-last')
+      })
   },
   methods: {
     fixSlot() {
       this.$refs.slotContainer.innerHTML = ''
       this.$refs.slotContainer.append(document.createElement('slot'))
+    },
+    getElementProperty(el, prop) {
+      const style = window.getComputedStyle(el)
+      const value = String(style.getPropertyValue(prop)).trim()
+      return value
     }
   }
 }
@@ -19,6 +43,7 @@ export default {
 <style lang="scss">
 @import '@rsmdc/rtl/mixins';
 @import '@rsmdc/theme/mixins';
+@import '@rsmdc/theme/variables';
 
 @mixin rs-card-actions-layout_($display: flex) {
   display: $display;
@@ -49,7 +74,6 @@ export default {
 // .rs-card__action--button
 ::slotted(.-rs-button) {
   @include rs-rtl-reflexive-box(margin, right, 8px);
-  padding: 0 8px;
 }
 ::slotted(.-rs-button.-rs-full-bleed) {
   justify-content: space-between;
@@ -71,18 +95,13 @@ export default {
 }
 
 // .rs-card__action-icon
-::slotted(.-rs-icon) {
-  @include rs-theme-prop(color, text-icon-on-background);
+::slotted(.-rs-icon:not(:disabled)) {
+  --re-button_not_disabled--color: #{rs-theme-ink-color-for-fill_(icon, $rs-theme-background)};
   margin: -6px 0;
-  padding: 12px;
 }
 ::slotted(.-rs-icon.-rs-first) {
   margin-right: 0;
   margin-left: auto;
 }
-::slotted(.-rs-icon:not(:disabled)) {
-  @include rs-theme-prop(color, text-icon-on-background);
-}
-
 </style>
 
