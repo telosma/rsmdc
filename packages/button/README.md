@@ -29,6 +29,7 @@ x-button {
 
 ### attributes
 * disabled
+* exited
 ### mixins
 * rs-button-type($type, $dense: normal)
 * rs-button-horizontal-padding($padding)  
@@ -40,3 +41,5 @@ x-button {
 * unelevated
 * outlined
 * dense
+* icon
+* fab
