@@ -24,46 +24,8 @@
 @import "@rsmdc/animation/variables";
 @import "./mixins";
 
-// postcss-bem-linter: define tab-indicator
-
-.rs-tab-indicator {
-  @include rs-tab-indicator-underline-color(primary);
-  @include rs-tab-indicator-underline-height(2px);
-  @include rs-tab-indicator-icon-color(secondary);
-  @include rs-tab-indicator-icon-height(34px);
-
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.rs-tab-indicator__content {
-  transform-origin: left;
-  opacity: 0;
-}
-
-.rs-tab-indicator__content--underline {
-  align-self: flex-end;
-  width: 100%;
-}
-
-.rs-tab-indicator__content--icon {
-  align-self: center;
-  margin: 0 auto;
-}
-
 .rs-tab-indicator--active > .rs-tab-indicator__content {
   opacity: 1;
-}
-
-// Slide by default
-.rs-tab-indicator > .rs-tab-indicator__content {
-  transition: 250ms transform $rs-animation-standard-curve-timing-function;
 }
 
 // --no-transition is applied in cases where styles need to be applied immediately to set up a transition

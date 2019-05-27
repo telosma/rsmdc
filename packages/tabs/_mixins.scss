@@ -20,35 +20,3 @@
 // THE SOFTWARE.
 //
 
-@import "@rsmdc/ripple/mixins";
-@import "@rsmdc/theme/mixins";
-
-// Public mixins
-
-@mixin rs-tab-text-label-color($color) {
-  .rs-tab__text-label {
-    @include rs-theme-prop(color, $color);
-  }
-}
-
-@mixin rs-tab-icon-color($color) {
-  .rs-tab__icon {
-    @include rs-theme-prop(color, $color);
-  }
-}
-
-@mixin rs-tab-states-color($color) {
-  .rs-tab__ripple {
-    @include rs-states($color);
-  }
-}
-
-@mixin rs-tab-ink-color($color) {
-  @include rs-tab-icon-color($color);
-  @include rs-tab-states-color($color);
-  @include rs-tab-text-label-color($color);
-}
-
-@mixin rs-tab-fixed-width($width) {
-  flex: 0 1 $width;
-}

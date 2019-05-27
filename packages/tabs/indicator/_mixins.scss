@@ -23,25 +23,10 @@
 
 @import "@rsmdc/theme/mixins";
 
-@mixin rs-tab-indicator-surface {
-  position: relative;
-}
-
-@mixin rs-tab-indicator-underline-color($color) {
-  > .rs-tab-indicator__content--underline {
-    @include rs-theme-prop(background-color, $color);
-  }
-}
-
-@mixin rs-tab-indicator-underline-height($height) {
-  > .rs-tab-indicator__content--underline {
-    height: $height;
-  }
-}
-
 @mixin rs-tab-indicator-underline-top-corner-radius($radius) {
+  --rs-tab-indicator-content--border-top-left-radius: #{$radius};
   > .rs-tab-indicator__content--underline {
-    border-top-left-radius: $radius;
+    
     border-top-right-radius: $radius;
   }
 }

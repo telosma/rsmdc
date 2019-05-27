@@ -13,3 +13,34 @@
     --rs-tab-scroller--justify-content: center;
   }
 }
+
+// Change tab text color.
+@mixin rs-tab-text-label-color($color) {
+  --rs-tab-text-label--color: #{$color};
+}
+
+// Change tab state color.
+@mixin rs-tab-states-color($color) {
+  @include rs-states($color);
+}
+
+// Change tab text and state color.
+@mixin rs-tab-ink-color($color) {
+  @include rs-tab-states-color($color);
+  @include rs-tab-text-label-color($color);
+}
+
+// Sets the fixed width of the tab.
+@mixin rs-tab-fixed-width($width) {
+  --rs-tab--flex: 0 1 #{$width};
+}
+
+// Change tab underline color.
+@mixin rs-tab-indicator-underline-color($color) {
+  --rs-tab-indicator-content--background-color: #{$color};
+}
+
+// Change tab underline tickness.
+@mixin rs-tab-indicator-underline-height($height) {
+  --rs-tab-indicator-content--height: #{$height};
+}
