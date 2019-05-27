@@ -49,10 +49,6 @@
   @include rs-tab-text-label-color($color);
 }
 
-@mixin rs-tab-parent-positioning {
-  position: relative;
-}
-
 @mixin rs-tab-fixed-width($width) {
   flex: 0 1 $width;
 }

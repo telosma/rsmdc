@@ -1,0 +1,15 @@
+// Change tab-bar width.
+@mixin rs-tab-bar-width($width) {
+  --rs-tab-bar--width: #{$width};
+}
+
+// Set tab-bar position. (Default position is align-start.)
+@mixin rs-tab-bar-position($position) {
+  @if $position == align-start {
+    --rs-tab-scroller--justify-content: flex-start;
+  }@else if $position == align-end {
+    --rs-tab-scroller--justify-content: flex-end;
+  }@else if $position == align-center {
+    --rs-tab-scroller--justify-content: center;
+  }
+}

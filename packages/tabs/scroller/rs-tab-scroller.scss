@@ -24,59 +24,6 @@
 @import "@rsmdc/animation/variables";
 @import "@rsmdc/tab/mixins";
 
-// postcss-bem-linter: define tab-scroller
-.rs-tab-scroller {
-  overflow-y: hidden;
-}
-
-// Selector for test element used to feature-detect horizontal scrollbar height
-.rs-tab-scroller__test {
-  position: absolute;
-  top: -9999px;
-  width: 100px;
-  height: 100px;
-  overflow-x: scroll;
-}
-
-.rs-tab-scroller__scroll-area {
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  overflow-x: hidden;
-}
-
-.rs-tab-scroller__scroll-area,
-.rs-tab-scroller__test {
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-// This modifier class will be added in JS after computing the OS scrollbar size in order to hide the scrollbar.
-.rs-tab-scroller__scroll-area--scroll {
-  overflow-x: scroll;
-}
-
-.rs-tab-scroller__scroll-content {
-  @include rs-tab-parent-positioning;
-
-  display: flex;
-  flex: 1 0 auto;
-  transform: none;
-  will-change: transform;
-}
-
-.rs-tab-scroller--align-start .rs-tab-scroller__scroll-content {
-  justify-content: flex-start;
-}
-
-.rs-tab-scroller--align-end .rs-tab-scroller__scroll-content {
-  justify-content: flex-end;
-}
-
-.rs-tab-scroller--align-center .rs-tab-scroller__scroll-content {
-  justify-content: center;
-}
-
 .rs-tab-scroller--animating .rs-tab-scroller__scroll-area {
   -webkit-overflow-scrolling: auto;
 }
