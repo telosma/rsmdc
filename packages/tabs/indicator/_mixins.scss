@@ -25,8 +25,8 @@
 
 @mixin rs-tab-indicator-underline-top-corner-radius($radius) {
   --rs-tab-indicator-content--border-top-left-radius: #{$radius};
+  --rs-tab-indicator-content--border-top-left-radius: #{$radius};
   > .rs-tab-indicator__content--underline {
-    
     border-top-right-radius: $radius;
   }
 }

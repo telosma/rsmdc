@@ -5,7 +5,7 @@
         <slot></slot>
       </span>
       <span class="rs-tab-indicator">
-        <span class="rs-tab-indicator__content rs-tab-indicator__content--underline" aria-hidden="true"/>
+        <span class="rs-tab-indicator__content" aria-hidden="true"/>
       </span>
     </span>
     <span class="rs-tab__ripple" />
@@ -70,8 +70,6 @@ export default {
 }
 
 .rs-tab-indicator {
-  @include rs-tab-indicator-underline-color(primary);
-  @include rs-tab-indicator-underline-height(2px);
   @include rs-tab-indicator-icon-color(secondary);
   @include rs-tab-indicator-icon-height(34px);
 
@@ -83,6 +81,12 @@ export default {
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  align-self: flex-end;
+  width: 100%;
+  transition: 250ms transform $rs-animation-standard-curve-timing-function;
+
+  background-color: var(--rs-tab-indicator-content--background-color, $rs-theme-primary);
+  height: var(--rs-tab-indicator-content--height, 2px);
 }
 
 .rs-tab-indicator__content {
