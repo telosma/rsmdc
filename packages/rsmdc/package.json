@@ -19,6 +19,7 @@
     "@rsmdc/base": "^1.0.0",
     "@rsmdc/button": "^1.0.7",
     "@rsmdc/card": "^1.0.7",
+    "@rsmdc/checkbox": "^1.0.6",
     "@rsmdc/dom": "^1.0.2",
     "@rsmdc/drawer": "^1.0.6",
     "@rsmdc/elevation": "^1.0.5",
