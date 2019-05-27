@@ -1,7 +1,7 @@
 @import "@rsmdc/shape/mixins";
 @import "./mixins";
 
-/* Change card type. */
+// Change card type.
 @mixin rs-card-type($type) {
   @if $type == outlined {
     --rs-card--box-shadow: #{rs-elevation(0)};
@@ -9,7 +9,7 @@
   }
 }
 
-/* Change card-actions type. Usually, you use this mixin when only one button. (Extend button width)  */
+// Change card-actions type. Usually, you use this mixin when only one button. (Extend button width)
 @mixin rs-card-actions-type($type) {
   @if $type == full-bleed {
     --rs-card-actions__full-bleed: true;
@@ -22,12 +22,12 @@
   }
 }
 
-/* Change card width. */
+// Change card width.
 @mixin rs-card-size($width) {
   --rs-card--width: #{$width};
 }
 
-/* Change card-media size. Always use this mixin when you use card-media.*/
+// Change card-media size. Always use this mixin when you use card-media.
 @mixin rs-card-media-type($type) {
   @if $type == square {
     @include rs-card-media-aspect-ratio(1, 1);
@@ -36,42 +36,42 @@
   }
 }
 
-/* Change card-media size. */
+// Change card-media size.
 @mixin rs-card-media-aspect-ratio($x, $y) {
   --rs-card-media--padding-top: #{percentage($y / $x)};
 }
 
-/* Set card-media image. */
+// Set card-media image.
 @mixin rs-card-media-image($url) {
   --rs-card-media--background-image: #{$url};
 }
 
-/* Change text color in card-media. */
+// Change text color in card-media.
 @mixin rs-card-media-content-ink-color($color) {
   --rs-card-media-content--color: #{$color};
 }
 
-/* Change card-title text color. */
+// Change card-title text color.
 @mixin rs-card-title-ink-color($color) {
   --rs-card-title--color: #{$color};
 }
 
-/* Change card-subtitle text color. */
+// Change card-subtitle text color.
 @mixin rs-card-subtitle-ink-color($color) {
   --rs-card-subtitle--color: #{$color};
 }
 
-/* Change card-description text color. */
+// Change card-description text color.
 @mixin rs-card-description-ink-color($color) {
   --rs-card-description--color: #{$color};
 }
 
-/* Change card background-color. */
+// Change card background-color.
 @mixin rs-card-fill-color($color) {
   --rs-card--background-color: #{$color};
 }
 
-/* Change card radius. */
+// Change card radius.
 @mixin rs-card-shape-radius($radius, $rtl-reflexive: false) {
   --rs-card--border-radius: #{rs-shape-radius($radius)};
   --rs-card_rtl--border-radius: #{rs-shape-radius($radius)};
