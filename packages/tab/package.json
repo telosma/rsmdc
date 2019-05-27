@@ -16,13 +16,13 @@
   "sideEffects": false,
   "dependencies": {
     "@rsmdc/animation": "^1.0.0",
-    "@rsmdc/base": "^1.0.0",
-    "@rsmdc/dom": "^1.0.1",
-    "@rsmdc/elevation": "^1.0.0",
-    "@rsmdc/ripple": "^1.0.1",
-    "@rsmdc/rtl": "^0.42.0",
-    "@rsmdc/theme": "^1.0.0",
-    "@rsmdc/typography": "^1.0.0",
+    "@rsmdc/base": "^1.0.1",
+    "@rsmdc/dom": "^1.0.2",
+    "@rsmdc/elevation": "^1.0.5",
+    "@rsmdc/ripple": "^1.0.2",
+    "@rsmdc/rtl": "^1.0.2",
+    "@rsmdc/theme": "^1.0.2",
+    "@rsmdc/typography": "^1.0.5",
     "tslib": "^1.9.3"
   },
   "publishConfig": {
