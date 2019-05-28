@@ -38,16 +38,16 @@
 }
 
 // Change tab underline color.
-@mixin rs-tab-indicator-underline-color($color) {
+@mixin rs-tab-indicator-color($color) {
   --rs-tab-indicator--background-color: #{$color};
 }
 
 // Change tab underline tickness.
-@mixin rs-tab-indicator-underline-height($height) {
+@mixin rs-tab-indicator-height($height) {
   --rs-tab-indicator--height: #{$height};
 }
 
-// Change tab underline width.
-@mixin rs-tab-indicator-underline-width($width) {
-  --rs-tab-indicator--width: #{$width};
+// Set tab underline to tab contents width.
+@mixin rs-tab-indicator-width-fixed-contents {
+  --rs-tab-indicator__fixed-contents: true;
 }
