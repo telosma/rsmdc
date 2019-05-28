@@ -20,56 +20,6 @@
 // THE SOFTWARE.
 //
 
-@import "@rsmdc/ripple/common";
-@import "@rsmdc/ripple/mixins";
-@import "@rsmdc/rtl/mixins";
-@import "@rsmdc/typography/mixins";
-@import "./indicator/mixins";
-@import "./mixins";
-@import "./variables";
-
-.rs-tab--min-width {
-  flex: 0 1 auto;
-}
-
-// .rs-tab__icon {
-//   width: $rs-tab-icon-size;
-//   height: $rs-tab-icon-size;
-//   opacity: $rs-tab-icon-opacity;
-//   font-size: $rs-tab-icon-size;
-// }
-
-.rs-tab--stacked {
-  height: $rs-tab-stacked-height;
-}
-
-.rs-tab--stacked .rs-tab__content {
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-// .rs-tab--stacked .rs-tab__icon {
-//   padding-top: 12px;
-// }
-
-.rs-tab--stacked .rs-tab__text-label {
-  padding-bottom: 16px;
-}
-
-.rs-tab--active {
-  @include rs-tab-text-label-color(primary);
-  @include rs-tab-icon-color(primary);
-
-  .rs-tab__text-label,
-  .rs-tab__icon {
-    transition-delay: 100ms;
-    opacity: 1;
-  }
-}
-
-.rs-tab:not(.rs-tab--stacked) .rs-tab__icon + .rs-tab__text-label {
-  @include rs-rtl-reflexive-box(padding, left, 8px);
-}
+@import "./rs-mixins";
 
 // postcss-bem-linter: end
