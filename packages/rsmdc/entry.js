@@ -1,7 +1,10 @@
 import Vue from 'vue-custom'
 import wrap from '@vue/web-component-wrapper'
 import button from '../button/src/rs-button.vue'
+import checkbox from '../checkbox/src/rs-checkbox.vue'
 import radio from '../radio/src/rs-radio.vue'
+import tab from '../tabs/src/rs-tab.vue'
+import tabBar from '../tabs/src/rs-tab-bar.vue'
 import listTextPrimary from '../list/src/rs-list-text-primary.vue'
 import listTextSecondary from '../list/src/rs-list-text-secondary.vue'
 import listText from '../list/src/rs-list-text.vue'
@@ -33,10 +36,12 @@ import drawerHeader from '../drawer/src/rs-drawer-header.vue'
 import drawer from '../drawer/src/rs-drawer.vue'
 import appLayoutContent from '../app-layout/src/rs-app-layout-content.vue'
 import appLayout from '../app-layout/src/rs-app-layout.vue'
-import checkbox from '../checkbox/src/rs-checkbox.vue'
 
 export const Button = wrap(Vue, button)
 export const Radio = wrap(Vue, radio)
+export const Checkbox = wrap(Vue, checkbox)
+export const Tab = wrap(Vue, tab)
+export const TabBar = wrap(Vue, tabBar)
 export const ListTextPrimary = wrap(Vue, listTextPrimary)
 export const ListTextSecondary = wrap(Vue, listTextSecondary)
 export const ListText = wrap(Vue, listText)
@@ -68,4 +73,3 @@ export const Drawer = wrap(Vue, drawer)
 export const Menu = wrap(Vue, menu)
 export const AppLayoutContent = wrap(Vue, appLayoutContent)
 export const AppLayout = wrap(Vue, appLayout)
-export const Checkbox = wrap(Vue, checkbox)
