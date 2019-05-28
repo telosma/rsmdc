@@ -1,7 +1,7 @@
 <template>
   <button class="rs-tab" :class="{ '-rs-activated': areaSelected }" role="tab">
     <span class="rs-tab__content">
-      <span class="rs-tab__text-label" ref="slotContainer">
+      <span class="rs-tab__text-label" :class="{ '-rs-no-text': hasText }" ref="slotContainer">
         <slot></slot>
       </span>
     </span>
@@ -22,8 +22,18 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      hasText: false
+    }
+  },
   mounted() {
-    this.$nextTick().then(this.fixSlot.bind(this))
+    this.$nextTick()
+      .then(this.fixSlot.bind(this))
+      .then(() => {
+        const texts = Array.from(this.$el.querySelector('slot').assignedNodes())
+        this.hasText = texts.length === 0 ? true : false
+      })
     new RSRipple(this.$el.querySelector('.rs-tab__ripple'))
   },
   methods: {
@@ -59,7 +69,7 @@ export default {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  height: $rs-tab-height;
+  height: var(--rs-tab--height, $rs-tab-height);
   padding: 0 24px;
   border: none;
   outline: none;
@@ -104,10 +114,35 @@ export default {
 .rs-tab__content {
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
   height: inherit;
   pointer-events: none;
+
+  align-items: var(--rs-tab--align-items, center);
+
+  &::before {
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    content: var(--rs-tab-content_before--content);
+    background-image: var(--rs-tab-content_before--background-image);
+    position: var(--rs-tab-content_before--position);
+    top: var(--rs-tab-content_before--top);
+  }
+
+  &::after {
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    content: var(--rs-tab-content_after--content);
+    background-image: var(--rs-tab-content_after--background-image);
+  }
 }
 
 .rs-tab__text-label {
@@ -116,7 +151,16 @@ export default {
   line-height: 1;
   transition: 150ms color linear, 150ms opacity linear;
   z-index: 2;
+
   color: var(--rs-tab-text-label--color, $rs-theme-on-surface);
+  padding-right: var(--rs-tab-text-label--padding-right);
+  padding-left: var(--rs-tab-text-label--padding-left);
+  margin-bottom: var(--rs-tab-text-label--margin-bottom);
+
+  &.-rs-no-text {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 .rs-tab__ripple {

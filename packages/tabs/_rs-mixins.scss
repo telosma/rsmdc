@@ -1,4 +1,5 @@
 @import "@rsmdc/ripple/mixins";
+@import "./variables";
 
 // Change tab-bar width.
 @mixin rs-tab-bar-width($width) {
@@ -50,4 +51,26 @@
 // Set tab underline to tab contents width.
 @mixin rs-tab-indicator-width-fixed-contents {
   --rs-tab-indicator__fixed-contents: true;
+}
+
+// Set tab icon.
+@mixin rs-tab-icon-image($url, $position: left) {
+  --rs-tab-content_before--background-image: #{$url};
+  --rs-tab-content_after--background-image: #{$url};
+
+  @if $position == left {
+    --rs-tab-content_before--content: '';
+    --rs-tab-text-label--padding-left: 8px;
+  }@else if $position == right {
+    --rs-tab-content_after--content: '';
+    --rs-tab-text-label--padding-right: 8px;
+  }@else if $position == center {
+    --rs-tab--height: #{$rs-tab-stacked-height};
+    --rs-tab--align-items: flex-end;
+    --rs-tab-content_before--position: absolute;
+    --rs-tab-content_before--top: 12px;
+    --rs-tab-content_before--content: '';
+    --rs-tab-text-label--margin-bottom: 16px;
+  }
+
 }
