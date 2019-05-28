@@ -15,7 +15,9 @@ export default {
     return {
       el: '',
       host: '',
-      scrollLeft: 0
+      isFixedContents: false,
+      scrollLeft: 0,
+      leftPosition: 0
     }
   },
   watch: {
@@ -24,33 +26,68 @@ export default {
     },
     host() {
       this.leftPosition = this.host.getBoundingClientRect().left
+      this.isFixedContents = this.getElementProperty(this.host, '--rs-tab-indicator__fixed-contents') ? true : false
     }
   },
   mounted() {
     this.$nextTick()
     .then(this.fixSlot.bind(this))
     .then(() => {
-      const slotChildren = Array.from(this.$el.querySelector('slot').assignedNodes()).filter(node => node.nodeType === 1)
-      slotChildren.forEach((child, i) => {
-        child.addEventListener('click', () => {
-          const width = this.getElementProperty(child, 'width')
-          const indicator = this.$el.querySelector('.rs-tab-indicator')
-          const scrollArea = this.$el.querySelector('.rs-tab-scroller__scroll-area')
-          const rect = child.getBoundingClientRect()
-          const indicatorLeft = rect.left - this.leftPosition + scrollArea.scrollLeft
-          indicator.style.setProperty('width', width)
+      const tabs = Array.from(this.$el.querySelector('slot').assignedNodes()).filter(node => node.nodeType === 1)
+      const indicator = this.$el.querySelector('.rs-tab-indicator')
+      const scrollArea = this.$el.querySelector('.rs-tab-scroller__scroll-area')
+
+      tabs.forEach((tab, i) => {
+        const contentParent = tab.shadowRoot.querySelector('.rs-tab')
+        const content = tab.shadowRoot.querySelector('.rs-tab__content')
+        const tabLeftPosition = tab.getBoundingClientRect().left
+        const left = tabLeftPosition - this.leftPosition + scrollArea.scrollLeft
+
+        const contentParentWidth = parseInt(this.getElementProperty(contentParent, 'width').replace('px', ''))
+        const contentWidth = parseInt(this.getElementProperty(content, 'width').replace('px', ''))
+        const calculateWidth = (contentParentWidth - contentWidth) / 2
+        
+        const indicatorLeft = this.isFixedContents
+          ? left + calculateWidth : left
+        const indicatorWidth = this.isFixedContents
+          ? this.getElementProperty(content, 'width') : this.getElementProperty(tab, 'width')
+
+        const isActivated = tab.getAttribute('activated')
+            ? true : tab.getAttribute('activated') === ''
+            ? true : false
+
+        if(isActivated) {
+          tab.setAttribute('area-selected', true)
+          indicator.style.setProperty('left', `${indicatorLeft}px`)
+          indicator.style.setProperty('--rs-tab-indicator--width', indicatorWidth)
+        }
+
+        // event (move indicator and tab)
+        tab.addEventListener('click', () => {
+
+
+          indicator.style.setProperty('--rs-tab-indicator--width', indicatorWidth)
           indicator.style.setProperty('left', `${indicatorLeft}px`)
 
-          if(i === 0 || i === slotChildren.length-1) { return }
+          tabs.forEach((ch, n) => {
+            if(i === n) {
+              ch.setAttribute('area-selected', true)
+            } else {
+              ch.removeAttribute('area-selected')
+            }
+          })
 
-          const scrollAreaWidth = parseInt(this.getElementProperty(scrollArea, 'width').replace('px', ''))
-          const childWidth = parseInt(this.getElementProperty(child, 'width').replace('px', ''))
-          const rightElRect = slotChildren[i+1].getBoundingClientRect()
-          const leftElRect = slotChildren[i-1].getBoundingClientRect()
+
+          // if(i === 0 || i === tabs.length-1) { return }
+
+          // const scrollAreaWidth = parseInt(this.getElementProperty(scrollArea, 'width').replace('px', ''))
+          // const tabWidth = parseInt(this.getElementProperty(tab, 'width').replace('px', ''))
+          // const rightElRect = tabs[i+1].getBoundingClientRect()
+          // const leftElRect = tabs[i-1].getBoundingClientRect()
 
           // if(scrollAreaWidth < rightElRect.right) {
           //   console.log(1)
-          //   const width = parseInt(this.getElementProperty(slotChildren[i+1], 'width').replace('px', '')) / 2
+          //   const width = parseInt(this.getElementProperty(tabs[i+1], 'width').replace('px', '')) / 2
           //   this.scrollLeft += rightElRect.right - scrollAreaWidth
           //   this.scrollLeft = scrollAreaWidth
           //   console.log(this.scrollLeft)
@@ -62,7 +99,7 @@ export default {
           //   })
           // } else if(0 > leftElRect.left) {
           //   console.log(2)
-          //   const width = parseInt(this.getElementProperty(slotChildren[i-1], 'width').replace('px', '')) / 2
+          //   const width = parseInt(this.getElementProperty(tabs[i-1], 'width').replace('px', '')) / 2
           //   this.scrollLeft = leftElRect.left + scrollAreaWidth
           //   console.log(this.scrollLeft)
           //   console.log(leftElRect.left + scrollAreaWidth)
@@ -74,6 +111,7 @@ export default {
           // }
         })
       })
+      indicator.classList.remove('-rs-no-animating')
     })
     this.el = this.$el
   },
@@ -83,6 +121,7 @@ export default {
       this.$refs.slotContainer.append(document.createElement('slot'))
       const div = document.createElement('div')
       div.classList.add('rs-tab-indicator')
+      div.classList.add('-rs-no-animating')
       this.$refs.slotContainer.append(div)
     },
     getElementProperty(el, prop) {
@@ -133,9 +172,14 @@ export default {
   transition: 
     left 0.2s ease-in-out,
     width 0.2s ease-in-out;
-  width: var(--rs-tab-indicator--width, 100px);
+  width: var(--rs-tab-indicator--width);
   height: var(--rs-tab-indicator--height, 2px);
   background-color: var(--rs-tab-indicator--background-color, $rs-theme-primary);
+
+  // first rendering only 
+  &.-rs-no-animating {
+    transition: none;
+  }
 }
 </style>
 

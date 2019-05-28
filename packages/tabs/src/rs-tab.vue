@@ -1,5 +1,5 @@
 <template>
-  <button class="rs-tab" role="tab">
+  <button class="rs-tab" :class="{ '-rs-activated': areaSelected }" role="tab">
     <span class="rs-tab__content">
       <span class="rs-tab__text-label" ref="slotContainer">
         <slot></slot>
@@ -16,59 +16,25 @@ export default {
     activated: {
       type: Boolean,
       default: false
-    }
-  },
-  data() {
-    return {
-      el: '',
-      host: ''
-    }
-  },
-  watch: {
-    activated() {
-      this.toggleActivated(this.activated, this.el)
     },
-    el() {
-      this.host = this.el.parentNode.host
-    },
-    host() {
-      this.toggleActivated(this.activated, this.el, this.host)
-      window.__rsmdc.tab.tabs.push(this.host)
-    }
-  },
-  created() {
-    if(!window.__rsmdc) {
-      window.__rsmdc = {}
-    }
-    if(!window.__rsmdc.tab) {
-      window.__rsmdc.tab = {
-        tabs: []
-      }
+    areaSelected: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
     new RSRipple(this.$el.querySelector('.rs-tab__ripple'))
-    this.el = this.$el
   },
   methods: {
     fixSlot() {
       this.$refs.slotContainer.innerHTML = ''
       this.$refs.slotContainer.append(document.createElement('slot'))
     },
-    updateTabs() {
-      const tabs = window.__rsmdc.tab.tabs
-      tabs.forEach(tab => {
-        const el = tab.shadowRoot.querySelector('.rs-tab')
-        this.toggleActivated(tab.isEqualNode(this.host), el, this.host)
-      })
-    },
-    toggleActivated(conditions, el, host) {
-      if(conditions) {
-        el.classList.add('-rs-activated')
-      } else {
-        el.classList.remove('-rs-activated')
-      }
+    getElementProperty(el, prop) {
+      const style = window.getComputedStyle(el)
+      const value = String(style.getPropertyValue(prop)).trim()
+      return value
     }
   }
 }
@@ -83,19 +49,7 @@ export default {
 @include rs-ripple-common;
 
 :host {
-  position: relative;
-}
-
-:host([activated])::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  transition: 250ms transform $rs-animation-standard-curve-timing-function;
-  height: var(--rs-tab-indicator--height, 2px);
-  width: var(--rs-tab-indicator--width, 100%);
+  flex: var(--rs-tab--flex, 1 0 auto);
 }
 
 .rs-tab {
@@ -115,12 +69,31 @@ export default {
   cursor: pointer;
   -webkit-appearance: none;
   z-index: 1;
-
-  flex: var(--rs-tab--flex, 1 0 auto);
+  width: 100%;
+  margin: auto;
 }
 
 // activated tab
 .-rs-activated {
+
+  > .rs-tab__ripple {
+
+    &:hover::before {
+      opacity: rs-states-opacity(primary, focus);
+    }
+
+    &:focus::before {
+      background-color: var(--rs-ripple_before--background-color, $rs-theme-primary);
+      content: var(--rs-ripple_before--content, '');
+      opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(primary, focus));
+    }
+
+    &:focus::after {
+      background-color: var(--rs-ripple_after--background-color, $rs-theme-primary);
+      content: var(--rs-ripple_after--content, '');
+    }
+  }
+
   .rs-tab__text-label {
     color: var(--rs-tab-text-label--color, $rs-theme-primary);
     transition-delay: 100ms;
@@ -149,7 +122,6 @@ export default {
 .rs-tab__ripple {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
-  @include rs-states(primary);
 
   position: absolute;
   top: 0;
