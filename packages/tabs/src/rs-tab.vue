@@ -5,9 +5,6 @@
         <slot></slot>
       </span>
     </span>
-    <!-- <span class="rs-tab-indicator">
-      <span class="rs-tab-indicator__content rs-tab-indicator__content--underline" aria-hidden="true"/>
-    </span> -->
     <span class="rs-tab__ripple" />
   </button>
 </template>
@@ -147,41 +144,6 @@ export default {
   transition: 150ms color linear, 150ms opacity linear;
   z-index: 2;
   color: var(--rs-tab-text-label--color, $rs-theme-on-surface);
-}
-
-.rs-tab-indicator {
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  align-self: flex-end;
-  width: 100%;
-
-  &.rs-tab-indicator--fade > .rs-tab-indicator__content {
-    transition: 150ms opacity linear;
-  }
-
-  &.rs-tab-indicator--active.rs-tab-indicator--fade > .rs-tab-indicator__content {
-    transition-delay: 100ms;
-  }
-}
-
-.rs-tab-indicator__content {
-  transform-origin: left;
-  opacity: 0;
-
-  &.rs-tab-indicator__content--underline {
-    align-self: flex-end;
-    width: 100%;
-
-    height: var(--rs-tab-indicator-content--height, 2px);
-    background-color: var(--rs-tab-indicator-content--background-color, $rs-theme-primary);
-    border-top-left-radius: var(--rs-tab-indicator-content--border-top-left-radius);
-    border-top-right-radius: var(--rs-tab-indicator-content--border-top-right-radius);
-  }
 }
 
 .rs-tab__ripple {

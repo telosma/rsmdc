@@ -93,8 +93,6 @@ export default {
   }
 }
 </script>
-
-
 <style lang="scss">
 @import "@rsmdc/animation/variables";
 @import "@rsmdc/theme/variables";
@@ -115,11 +113,6 @@ export default {
   &::-webkit-scrollbar {
     display: none;
   }
-
-  // &.rs-tab-scroller__scroll-area--scroll {
-  //   overflow-x: scroll;
-  // }
-
 }
 
 .rs-tab-scroller__scroll-content {
@@ -144,15 +137,5 @@ export default {
   height: var(--rs-tab-indicator--height, 2px);
   background-color: var(--rs-tab-indicator--background-color, $rs-theme-primary);
 }
-
-// .rs-tab-scroller--animating .rs-tab-scroller__scroll-area {
-//   -webkit-overflow-scrolling: auto;
-// }
-
-// .rs-tab-scroller--animating .rs-tab-scroller__scroll-content {
-//   transition: 250ms transform $rs-animation-standard-curve-timing-function;
-// }
-
-
 </style>
 
