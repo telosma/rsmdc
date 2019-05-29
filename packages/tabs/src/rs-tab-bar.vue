@@ -15,9 +15,12 @@ export default {
     return {
       el: '',
       host: '',
+      tabs: [],
+      indicator: '',
+      scrollArea: '',
       isFixedContents: false,
       scrollLeft: 0,
-      leftPosition: 0
+      leftPosition: 0,
     }
   },
   watch: {
@@ -27,55 +30,46 @@ export default {
     host() {
       this.leftPosition = this.host.getBoundingClientRect().left
       this.isFixedContents = this.getElementProperty(this.host, '--rs-tab-indicator__fixed-contents') ? true : false
+    },
+    indicator() {
+      this.indicator.classList.remove('-rs-no-animating')
     }
   },
   mounted() {
     this.$nextTick()
     .then(this.fixSlot.bind(this))
     .then(() => {
-      const tabs = Array.from(this.$el.querySelector('slot').assignedNodes()).filter(node => node.nodeType === 1)
-      const indicator = this.$el.querySelector('.rs-tab-indicator')
-      const scrollArea = this.$el.querySelector('.rs-tab-scroller__scroll-area')
+      this.tabs = Array.from(this.$el.querySelector('slot').assignedNodes()).filter(node => node.nodeType === 1)
+      this.scrollArea = this.$el.querySelector('.rs-tab-scroller__scroll-area')
+      this.indicator = this.$el.querySelector('.rs-tab-indicator')
 
-      tabs.forEach((tab, i) => {
-        const contentParent = tab.shadowRoot.querySelector('.rs-tab')
-        const content = tab.shadowRoot.querySelector('.rs-tab__content')
-        const tabLeftPosition = tab.getBoundingClientRect().left
-        const left = tabLeftPosition - this.leftPosition + scrollArea.scrollLeft
-
-        const contentParentWidth = parseInt(this.getElementProperty(contentParent, 'width').replace('px', ''))
-        const contentWidth = parseInt(this.getElementProperty(content, 'width').replace('px', ''))
-        const calculateWidth = (contentParentWidth - contentWidth) / 2
-        
-        const indicatorLeft = this.isFixedContents
-          ? left + calculateWidth : left
-        const indicatorWidth = this.isFixedContents
-          ? this.getElementProperty(content, 'width') : this.getElementProperty(tab, 'width')
+      this.tabs.forEach((tab, i) => {
+        const indicatorLeft = this.defineIndicatorPosition(tab)
+        const indicatorWidth = this.defineIndicatorWidth(tab)
 
         const isActivated = tab.getAttribute('activated')
-            ? true : tab.getAttribute('activated') === ''
-            ? true : false
+          ? true : tab.getAttribute('activated') === ''
+          ? true : false
 
         if(isActivated) {
+          this.activeTab = tab
           tab.setAttribute('area-selected', true)
-          indicator.style.setProperty('left', `${indicatorLeft}px`)
-          indicator.style.setProperty('--rs-tab-indicator--width', indicatorWidth)
+          this.setIndicatorStyle(indicatorLeft, indicatorWidth)
         }
 
-        // event (move indicator and tab)
+        // event (move indicator to active tab)
         tab.addEventListener('click', () => {
+          this.setIndicatorStyle(indicatorLeft, indicatorWidth)
 
-
-          indicator.style.setProperty('--rs-tab-indicator--width', indicatorWidth)
-          indicator.style.setProperty('left', `${indicatorLeft}px`)
-
-          tabs.forEach((ch, n) => {
+          this.tabs.forEach((ch, n) => {
             if(i === n) {
               ch.setAttribute('area-selected', true)
             } else {
               ch.removeAttribute('area-selected')
             }
           })
+
+          
 
 
           // if(i === 0 || i === tabs.length-1) { return }
@@ -111,9 +105,26 @@ export default {
           // }
         })
       })
-      indicator.classList.remove('-rs-no-animating')
     })
     this.el = this.$el
+    const resizeObserver = new ResizeObserver(() => {
+      this.tabs.forEach((tab) => {
+        const indicatorLeft = this.defineIndicatorPosition(tab)
+        const indicatorWidth = this.defineIndicatorWidth(tab)
+
+        const isActivated = tab.getAttribute('area-selected') ? true : false
+
+        if(isActivated) {
+          tab.setAttribute('area-selected', true)
+          this.setIndicatorStyle(indicatorLeft, indicatorWidth)
+        }
+
+        tab.addEventListener('click', () => {
+          this.setIndicatorStyle(indicatorLeft, indicatorWidth)
+        })
+      })
+    })
+    resizeObserver.observe(this.$el)
   },
   methods: {
     fixSlot() {
@@ -128,6 +139,27 @@ export default {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
       return value
+    },
+    defineIndicatorWidth(tab) {
+      const content = tab.shadowRoot.querySelector('.rs-tab__content')
+
+      return this.isFixedContents ? this.getElementProperty(content, 'width') : this.getElementProperty(tab, 'width')
+    },
+    defineIndicatorPosition(tab) {
+      const contentParent = tab.shadowRoot.querySelector('.rs-tab')
+      const content = tab.shadowRoot.querySelector('.rs-tab__content')
+      const tabLeftPosition = tab.getBoundingClientRect().left
+      const left = tabLeftPosition - this.leftPosition + this.scrollArea.scrollLeft
+
+      const contentParentWidth = parseInt(this.getElementProperty(contentParent, 'width').replace('px', ''))
+      const contentWidth = parseInt(this.getElementProperty(content, 'width').replace('px', ''))
+      const calculateWidth = (contentParentWidth - contentWidth) / 2
+      
+      return this.isFixedContents ? left + calculateWidth : left
+    },
+    setIndicatorStyle(position, width) {
+      this.indicator.style.setProperty('left', `${position}px`)
+      this.indicator.style.setProperty('--rs-tab-indicator--width', width)
     }
   }
 }
@@ -164,7 +196,6 @@ export default {
 }
 
 .rs-tab-indicator {
-  height: 2px;
   pointer-events: none;
   position: absolute;
   bottom: 0;
