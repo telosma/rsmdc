@@ -1,0 +1,29 @@
+@import "@rsmdc/form-field/rs-mixins";
+@import "@rsmdc/ripple/mixins";
+
+// Change radio unchecked line color.
+@mixin rs-radio-unchecked-stroke-color($color) {
+  --rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color: #{$color};
+}
+
+// Change radio checked line color.
+@mixin rs-radio-checked-stroke-color($color) {
+  --rs-radio-nativeControl_enabled_checked_-background-outerCircle--border-color: #{$color};
+}
+
+// Change radio checked mark color.
+@mixin rs-radio-ink-color($color) {
+  --rs-radio-nativeControl_enabled_-background-innerCircle--border-color: #{$color};
+}
+
+// Change radio states color.
+@mixin rs-radio-states-color($color) {
+  @include rs-states($color);
+}
+
+// Change radio label position. Usually, you use this mixin when change label position to left. 
+@mixin rs-radio-label-position($position: right) {
+  @if $position == left {
+    @include rs-form-field-label-left_;
+  }
+}

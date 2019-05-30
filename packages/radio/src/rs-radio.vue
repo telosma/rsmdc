@@ -96,12 +96,11 @@ export default {
 @import "../functions";
 @import "../variables";
 
-@include rs-ripple-common();
+@include rs-ripple-common;
 
 .rs-radio {
   @include rs-ripple-surface;
   @include rs-ripple-radius-unbounded;
-  @include rs-states($rs-radio-baseline-theme-color);
 
   display: inline-block;
   position: relative;
