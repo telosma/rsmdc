@@ -2,7 +2,7 @@
   <button
     class="rs-button"
     :class="{ '-rs-button': !isIcon && !isFab, '-rs-icon': isIcon, '-rs-fab': isFab }"
-    :disabled="disabled" ref="slotContainer">
+    :disabled="disabled" :exited="isExited" ref="slotContainer">
     <slot></slot>
   </button>
 </template>
@@ -16,8 +16,8 @@ export default {
       default: false
     },
     exited: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: 'initial'
     }
   },
   data() {
@@ -26,7 +26,8 @@ export default {
       host: '',
       ripple: '',
       isIcon: false,
-      isFab: false
+      isFab: false,
+      isExited: false
     }
   },
   watch: {
@@ -36,16 +37,13 @@ export default {
     host() {
       this.isFab = this.getElementProperty(this.host, '--rs-button__fab') ? true : false
       this.isIcon = this.getElementProperty(this.host, '--rs-button__icon') ? true : false
+      this.isExited = this.exited === 'initial' ? false : true
       if(this.isIcon) {
         this.ripple.unbounded = true
       }
     },
     exited() {
-      if(this.exited) {
-        this.el.classList.add('-rs-fab-exited')
-      }else {
-        this.el.classList.remove('-rs-fab-exited')
-      }
+      this.isExited = this.exited === 'initial' ? false : true
     }
   },
   mounted() {
@@ -127,7 +125,7 @@ export default {
   background-position: var(--rs-button--background-position);
   background-size: var(--rs-button--background-size);
 
-  &.-rs-fab-exited {
+  &[exited] {
     transform: scale(0);
     transition:
       opacity 15ms linear 150ms,
