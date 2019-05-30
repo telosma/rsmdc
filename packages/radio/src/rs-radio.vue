@@ -1,13 +1,13 @@
 <template>
   <div class="rs-form-field">
     <div class="rs-radio" @click="updateRadios" :disabled="disabled">
-      <input class="rs-radio__native-control" type="radio" :name="name" :checked="checked" :disabled="disabled">
+      <input class="rs-radio__native-control" type="radio" :id="id" :name="name" :checked="checked" :disabled="disabled">
       <div class="rs-radio__background">
         <div class="rs-radio__outer-circle"></div>
         <div class="rs-radio__inner-circle"></div>
       </div>
     </div>
-    <label :for="name" ref="slotContainer"><slot></slot></label>
+    <label :for="id" ref="slotContainer"><slot></slot></label>
   </div>
 </template>
 <script>
@@ -16,6 +16,10 @@ import { RSRadio } from '../index';
 
 export default {
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: 'radio'
