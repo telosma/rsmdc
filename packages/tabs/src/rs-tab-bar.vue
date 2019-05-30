@@ -69,40 +69,46 @@ export default {
             }
           })
 
-          
+          const scrollAreaWidth = parseInt(this.getElementProperty(this.scrollArea, 'width').replace('px', ''))
+          const tabRightPosition = tab.getBoundingClientRect().right
+          const tabLeftPosition = tab.getBoundingClientRect().left
 
 
-          // if(i === 0 || i === tabs.length-1) { return }
+          if(i === 0 || i === this.tabs.length-1) {
+            if(tabRightPosition > scrollAreaWidth) {
+              this.scrollArea.scrollTo({
+                top: 0,
+                left: tabRightPosition,
+                behavior: 'smooth'
+              })
+            } else if(tabLeftPosition < 0) {
+              this.scrollArea.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+              })
+            }
+          } else {
+            const rightTabWidth = parseInt(this.getElementProperty(this.tabs[i+1], 'width').replace('px', '')) / 3
+            const leftTabWidth = parseInt(this.getElementProperty(this.tabs[i-1], 'width').replace('px', '')) / 3
+            const rightViewPosition = tabRightPosition + rightTabWidth
+            const leftViewPosition = tabLeftPosition - leftTabWidth
 
-          // const scrollAreaWidth = parseInt(this.getElementProperty(scrollArea, 'width').replace('px', ''))
-          // const tabWidth = parseInt(this.getElementProperty(tab, 'width').replace('px', ''))
-          // const rightElRect = tabs[i+1].getBoundingClientRect()
-          // const leftElRect = tabs[i-1].getBoundingClientRect()
-
-          // if(scrollAreaWidth < rightElRect.right) {
-          //   console.log(1)
-          //   const width = parseInt(this.getElementProperty(tabs[i+1], 'width').replace('px', '')) / 2
-          //   this.scrollLeft += rightElRect.right - scrollAreaWidth
-          //   this.scrollLeft = scrollAreaWidth
-          //   console.log(this.scrollLeft)
-          //   console.log(rightElRect.right - scrollAreaWidth)
-          //   scrollArea.scrollTo({
-          //     top: 0,
-          //     left: rightElRect.right - scrollAreaWidth,
-          //     behavior: 'smooth'
-          //   })
-          // } else if(0 > leftElRect.left) {
-          //   console.log(2)
-          //   const width = parseInt(this.getElementProperty(tabs[i-1], 'width').replace('px', '')) / 2
-          //   this.scrollLeft = leftElRect.left + scrollAreaWidth
-          //   console.log(this.scrollLeft)
-          //   console.log(leftElRect.left + scrollAreaWidth)
-          //   scrollArea.scrollTo({
-          //     top: 0,
-          //     left: leftElRect.left + scrollAreaWidth,
-          //     behavior: 'smooth'
-          //   })
-          // }
+            if(rightViewPosition > scrollAreaWidth) {
+              const diff = rightViewPosition - scrollAreaWidth
+              this.scrollArea.scrollTo({
+                top: 0,
+                left: diff + this.scrollArea.scrollLeft,
+                behavior: 'smooth'
+              })
+            } else if(leftViewPosition < 0) {
+              this.scrollArea.scrollTo({
+                top: 0,
+                left: this.scrollArea.scrollLeft + leftViewPosition,
+                behavior: 'smooth'
+              })
+            }
+          }
         })
       })
     })
