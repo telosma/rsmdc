@@ -12,7 +12,6 @@
     "type": "git",
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
-  "main": "index.js",
   "sideEffects": false,
   "dependencies": {
     "@rsmdc/animation": "^1.0.0",

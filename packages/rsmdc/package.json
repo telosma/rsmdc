@@ -30,6 +30,7 @@
     "@rsmdc/ripple": "^1.0.2",
     "@rsmdc/rtl": "^1.0.2",
     "@rsmdc/shape": "^1.0.2",
+    "@rsmdc/tabs": "^1.0.1",
     "@rsmdc/theme": "^1.0.2",
     "@rsmdc/top-app-bar": "^1.0.6",
     "@rsmdc/typography": "^1.0.5"
