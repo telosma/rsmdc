@@ -51,7 +51,6 @@ export default {
           ? true : false
 
         if(isActivated) {
-          this.activeTab = tab
           tab.setAttribute('area-selected', true)
           this.setIndicatorStyle(indicatorLeft, indicatorWidth)
         }

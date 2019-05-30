@@ -3,7 +3,7 @@ import wrap from '@vue/web-component-wrapper'
 import button from '../button/src/rs-button.vue'
 import checkbox from '../checkbox/src/rs-checkbox.vue'
 import radio from '../radio/src/rs-radio.vue'
-import tab from '../tabs/src/rs-tab.vue'
+import tabItem from '../tabs/src/rs-tab-item.vue'
 import tabBar from '../tabs/src/rs-tab-bar.vue'
 import listTextPrimary from '../list/src/rs-list-text-primary.vue'
 import listTextSecondary from '../list/src/rs-list-text-secondary.vue'
@@ -40,7 +40,7 @@ import appLayout from '../app-layout/src/rs-app-layout.vue'
 export const Button = wrap(Vue, button)
 export const Radio = wrap(Vue, radio)
 export const Checkbox = wrap(Vue, checkbox)
-export const Tab = wrap(Vue, tab)
+export const TabItem = wrap(Vue, tabItem)
 export const TabBar = wrap(Vue, tabBar)
 export const ListTextPrimary = wrap(Vue, listTextPrimary)
 export const ListTextSecondary = wrap(Vue, listTextSecondary)
