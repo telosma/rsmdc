@@ -419,7 +419,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     rs-checkbox-transition-exit(transform);
   border-color: var(--rs-checkbox-background-mixedmark--border-color, $rs-checkbox-mark-color);
 }
-  
+
 @media screen and (-ms-high-contrast: active) {
   .rs-checkbox__mixedmark {
     margin: 0 1px; // Extra horizontal space around mixedmark symbol.
