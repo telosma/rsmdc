@@ -18,19 +18,13 @@
 }
 
 // Change tab text color.
-@mixin rs-tab-text-label-color($color) {
+@mixin rs-tab-ink-color($color) {
   --rs-tab-text-label--color: #{$color};
 }
 
 // Change tab state color.
 @mixin rs-tab-states-color($color) {
   @include rs-states($color);
-}
-
-// Change tab text and state color.
-@mixin rs-tab-ink-color($color) {
-  @include rs-tab-states-color($color);
-  @include rs-tab-text-label-color($color);
 }
 
 // Sets the fixed width of the tab.
