@@ -39,12 +39,17 @@
     order: var(--rs-form-field-label--order, 0);
     margin-right: var(--rs-form-field-label--margin-right, auto);
     padding-left: var(--rs-form-field-label--padding-left, $rs-form-field-item-spacing);
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;  
   }
 
   @include rs-rtl {
     > label {
       margin-left: var(--rs-form-field-label--margin-left, auto);
       padding-right: var(--rs-form-field-label--padding-right, $rs-form-field-item-spacing);
+      cursor: pointer;
+      white-space: nowrap;
     }
   }
 }
