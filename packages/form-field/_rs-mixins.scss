@@ -1,6 +1,6 @@
 @import "./rs-variables";
 
-@mixin rs-form-field-label-left_ {
+@mixin rs-form-field-label-left {
   --rs-form-field-label--order: -1;
   --rs-form-field-label--margin-left: auto;
   --rs-form-field-label--padding-right: #{$rs-form-field-item-spacing};

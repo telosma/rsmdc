@@ -24,6 +24,6 @@
 // Change radio label position. Usually, you use this mixin when change label position to left. 
 @mixin rs-radio-label-position($position: right) {
   @if $position == left {
-    @include rs-form-field-label-left_;
+    @include rs-form-field-label-left;
   }
 }
