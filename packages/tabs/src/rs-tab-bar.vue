@@ -46,7 +46,6 @@ export default {
       this.tabs.forEach((tab, i) => {
         const indicatorLeft = this.defineIndicatorPosition(tab)
         const indicatorWidth = this.defineIndicatorWidth(tab)
-
         const isActivated = tab.getAttribute('activated')
           ? true : tab.getAttribute('activated') === ''
           ? true : false
@@ -59,8 +58,11 @@ export default {
 
         // event (move indicator to active tab)
         tab.addEventListener('click', () => {
-          this.setIndicatorStyle(indicatorLeft, indicatorWidth)
+          const scrollAreaWidth = parseInt(this.getElementProperty(this.scrollArea, 'width').replace('px', ''))
+          const tabRightPosition = tab.getBoundingClientRect().right
+          const tabLeftPosition = tab.getBoundingClientRect().left
 
+          this.setIndicatorStyle(indicatorLeft, indicatorWidth)
           this.tabs.forEach((ch, n) => {
             if(i === n) {
               ch.setAttribute('area-selected', true)
@@ -69,24 +71,12 @@ export default {
             }
           })
 
-          const scrollAreaWidth = parseInt(this.getElementProperty(this.scrollArea, 'width').replace('px', ''))
-          const tabRightPosition = tab.getBoundingClientRect().right
-          const tabLeftPosition = tab.getBoundingClientRect().left
-
-
           if(i === 0 || i === this.tabs.length-1) {
             if(tabRightPosition > scrollAreaWidth) {
-              this.scrollArea.scrollTo({
-                top: 0,
-                left: tabRightPosition,
-                behavior: 'smooth'
-              })
+              const left = tabRightPosition + this.scrollArea.scrollLeft
+              this.setScrollPosition(this.scrollArea, left)
             } else if(tabLeftPosition < 0) {
-              this.scrollArea.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-              })
+              this.setScrollPosition(this.scrollArea, 0)
             }
           } else {
             const rightTabWidth = parseInt(this.getElementProperty(this.tabs[i+1], 'width').replace('px', '')) / 3
@@ -96,17 +86,11 @@ export default {
 
             if(rightViewPosition > scrollAreaWidth) {
               const diff = rightViewPosition - scrollAreaWidth
-              this.scrollArea.scrollTo({
-                top: 0,
-                left: diff + this.scrollArea.scrollLeft,
-                behavior: 'smooth'
-              })
+              const left = diff + this.scrollArea.scrollLeft
+              this.setScrollPosition(this.scrollArea, left)
             } else if(leftViewPosition < 0) {
-              this.scrollArea.scrollTo({
-                top: 0,
-                left: this.scrollArea.scrollLeft + leftViewPosition,
-                behavior: 'smooth'
-              })
+              const left = this.scrollArea.scrollLeft + leftViewPosition
+              this.setScrollPosition(this.scrollArea, left)
             }
           }
         })
@@ -114,10 +98,9 @@ export default {
     })
     this.el = this.$el
     const resizeObserver = new ResizeObserver(() => {
-      this.tabs.forEach((tab) => {
+      this.tabs.forEach(tab => {
         const indicatorLeft = this.defineIndicatorPosition(tab)
         const indicatorWidth = this.defineIndicatorWidth(tab)
-
         const isActivated = tab.getAttribute('area-selected') ? true : false
 
         if(isActivated) {
@@ -166,6 +149,13 @@ export default {
     setIndicatorStyle(position, width) {
       this.indicator.style.setProperty('left', `${position}px`)
       this.indicator.style.setProperty('--rs-tab-indicator--width', width)
+    },
+    setScrollPosition(scrollArea, left) {
+      scrollArea.scrollTo({
+        top: 0,
+        left: left,
+        behavior: 'smooth'
+      })
     }
   }
 }
