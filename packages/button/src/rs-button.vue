@@ -1,9 +1,12 @@
 <template>
   <button
     class="rs-button"
-    :class="{ '-rs-button': !isIcon && !isFab, '-rs-icon': isIcon, '-rs-fab': isFab }"
-    :disabled="disabled" :exited="isExited" ref="slotContainer">
-    <slot></slot>
+    :class="{ '-rs-icon': hasIcon, '-rs-fab': isFab, '-rs-no-text': !hasText }"
+    :disabled="disabled" :exited="isExited">
+    <span class="rs-button__label" ref="slotContainer">
+      <slot></slot>
+    </span>
+    <span class="rs-button__ripple" />
   </button>
 </template>
 <script>
@@ -25,9 +28,10 @@ export default {
       el: '',
       host: '',
       ripple: '',
-      isIcon: false,
+      hasText: true,
+      hasIcon: false,
       isFab: false,
-      isExited: false
+      isExited: false,
     }
   },
   watch: {
@@ -36,19 +40,26 @@ export default {
     },
     host() {
       this.isFab = this.getElementProperty(this.host, '--rs-button__fab') ? true : false
-      this.isIcon = this.getElementProperty(this.host, '--rs-button__icon') ? true : false
+      this.hasIcon = this.getElementProperty(this.host, '--rs-button__icon') ? true : false
       this.isExited = this.exited === 'initial' ? false : true
-      if(this.isIcon) {
-        this.ripple.unbounded = true
-      }
     },
     exited() {
       this.isExited = this.exited === 'initial' ? false : true
+    },
+    hasText() {
+      if(!this.hasText && !this.isFab) {
+        this.ripple.unbounded = true
+      }
     }
   },
   mounted() {
-    this.$nextTick().then(this.fixSlot.bind(this))
-    this.ripple = new RSRipple(this.$el)
+    this.$nextTick()
+      .then(this.fixSlot.bind(this))
+      .then(() => {
+        const texts = Array.from(this.$el.querySelector('slot').assignedNodes())
+        this.hasText = texts.length > 0 ? true : false
+      })
+    this.ripple = new RSRipple(this.$el.querySelector('.rs-button__ripple'))
     this.el = this.$el
   },
   methods: {
@@ -70,15 +81,14 @@ export default {
 @import '@rsmdc/theme/mixins';
 @import '@rsmdc/shape/functions';
 @import '../variables';
+@import '../icon-button/rs-icon-button';
 
 @include rs-ripple-common;
 
 .rs-button {
-  @include rs-ripple-surface;
   @include rs-typography(button);
-  @include rs-ripple-radius-bounded;
 
-  // base
+// base
   position: relative;
   align-items: center;
   box-sizing: border-box;
@@ -90,19 +100,19 @@ export default {
   -webkit-appearance: none;
   overflow: hidden;
   vertical-align: middle;
-  border-radius: var(--rs-button--border-radius);
-  font-size: var(--rs-button--font-size);
-  box-shadow: var(--rs-button--box-shadow);
-  height: var(--rs-button--height);
+  border-radius: var(--rs-button--border-radius, 4px);
+  font-size: var(--rs-button--font-size, 0.875rem);
+  box-shadow: var(--rs-button--box-shadow, none);
+  height: var(--rs-button--height, $rs-button-height);
   padding: var(--rs-button--padding);
-  padding-right: var(--rs-button--padding-right);
-  padding-left: var(--rs-button--padding-left);
-  padding-top: var(--rs-button--padding-top);
-  padding-bottom: var(--rs-button--padding-bottom);
+  padding-right: var(--rs-button--padding-right, $rs-button-horizontal-padding);
+  padding-left: var(--rs-button--padding-left, $rs-button-horizontal-padding);
+  padding-top: var(--rs-button--padding-top, 0);
+  padding-bottom: var(--rs-button--padding-bottom, 0);
 
   // button type
-  justify-content: var(--rs-button--justify-content);
-  display: var(--rs-button--display);
+  justify-content: var(--rs-button--justify-content, center);
+  display: var(--rs-button--display, inline-flex);
   border-width: var(--rs-button--border-width);
   border-style: var(--rs-button--border-style);
   transition: var(--rs-button--transition);
@@ -113,17 +123,11 @@ export default {
   color: var(--rs-button--color);
   background-color: var(--rs-button--background-color);
   width: var(--rs-button--width);
-  min-width: var(--rs-button--min-width);
+  min-width: var(--rs-button--min-width, 64px);
   max-width: var(--rs-button--max-width);
   text-decoration: var(--rs-button--text-decoration);
   text-overflow: var(--rs-button--text-overflow);
   white-space: var(--rs-button--white-space);
-
-  // icon
-  background-repeat: var(--rs-button--background-repeat);
-  background-image: var(--rs-button--background-image);
-  background-position: var(--rs-button--background-position);
-  background-size: var(--rs-button--background-size);
 
   &[exited] {
     transform: scale(0);
@@ -133,22 +137,28 @@ export default {
     opacity: 0;
   }
 
-  &.-rs-icon {
+  &.-rs-icon.-rs-no-text:not(.-rs-fab) {
     @include rs-ripple-radius-unbounded;
+    @include rs-button-icon_;
+
+    &::before {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   [dir="rtl"] &,
   &[dir="rtl"] {
-    border-radius: var(--rs-button_rtl--border-radius);
+    border-radius: var(--rs-button_rtl--border-radius, rs-shape-rtl-radius(medium, false));
   }
 
   &::-moz-focus-inner {
-    padding: var(--rs-button_moz-focus-inner--padding);
-    border: var(-rs-button_moz-focus-inner--border);
+    padding: var(--rs-button_moz-focus-inner--padding, 0);
+    border: var(-rs-button_moz-focus-inner--border, 0);
   }
 
   &:hover {
-    box-shadow: var(--rs-button_hover--box-shadow);
+    box-shadow: var(--rs-button_hover--box-shadow, none);
     cursor: pointer;
   }
 
@@ -163,9 +173,9 @@ export default {
   }
 
   &:not(:disabled) {
-    background-color: var(--rs-button_not_disabled--background-color);
-    color: var(--rs-button_not_disabled--color);
-    border-color: var(--rs-button_not_disabled--border-color);
+    background-color: var(--rs-button_not_disabled--background-color, transparent);
+    color: var(--rs-button_not_disabled--color, $rs-theme-primary);
+    border-color: var(--rs-button_not_disabled--border-color, none);
   }
 
   &:disabled {
@@ -176,6 +186,74 @@ export default {
     color: var(--rs-button_disabled--color, $rs-button-disabled-ink-color);
     border-color: var(--rs-button_disabled--border-color);
     opacity: var(--rs-button_disabled--opacity);
+  }
+
+  &::before {
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-image: var(--rs-button_before--background-image);
+    content: var(--rs-button_before--content);
+  }
+
+  &.-rs-no-text::before,
+  &:not(.-rs-no-text).-rs-fab::before {
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+  }
+
+  &:not(.-rs-no-text)::before {
+    width: 18px;
+    height: 18px;
+    background-size: 18px;
+  }
+
+  &::after {
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-image: var(--rs-button_after--background-image);
+    content: var(--rs-button_after--content);
+  }
+
+  &.-rs-no-text::after,
+  &:not(.-rs-no-text).-rs-fab::after {
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+  }
+
+  &:not(.-rs-no-text)::after {
+    width: 18px;
+    height: 18px;
+    background-size: 18px;
+  }
+}
+
+.rs-button__label {
+  padding-right: var(--rs-button-label--padding-right);
+  padding-left: var(--rs-button-label--padding-left);
+
+  .-rs-no-text & {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.rs-button__ripple {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .-rs-icon.-rs-no-text:not(.-rs-fab) & {
+    border-radius: 50%;
   }
 
   &::before{
@@ -197,9 +275,13 @@ export default {
     opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity(primary, focus));
   }
 
-  &.rs-ripple-upgraded--background-focused::before {
-    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
-    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(primary, focus));
+  :focus &  {
+    &:hover::before,
+    &::before {
+      background-color: var(--rs-ripple_before--background-color, $rs-theme-primary);
+      transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
+      opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(primary, focus));
+    }
   }
 
   &:not(.rs-ripple-upgraded) {
@@ -216,7 +298,6 @@ export default {
   &.rs-ripple-upgraded {
     --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity(primary, press)});
   }
-
 }
 </style>
 

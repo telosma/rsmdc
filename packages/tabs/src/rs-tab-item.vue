@@ -1,7 +1,7 @@
 <template>
   <button class="rs-tab" :class="{ '-rs-activated': areaSelected }" role="tab">
     <span class="rs-tab__content">
-      <span class="rs-tab__text-label" :class="{ '-rs-no-text': hasText }" ref="slotContainer">
+      <span class="rs-tab__text-label" :class="{ '-rs-no-text': !hasText }" ref="slotContainer">
         <slot></slot>
       </span>
     </span>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      hasText: false
+      hasText: true
     }
   },
   mounted() {
@@ -32,7 +32,7 @@ export default {
       .then(this.fixSlot.bind(this))
       .then(() => {
         const texts = Array.from(this.$el.querySelector('slot').assignedNodes())
-        this.hasText = texts.length === 0 ? true : false
+        this.hasText = texts.length > 0 ? true : false
       })
     new RSRipple(this.$el.querySelector('.rs-tab__ripple'))
   },

@@ -6,38 +6,31 @@
 
 /* Change button type. Always use this mixin when rsmdc-button. */
 @mixin rs-button-type($type: flat, $option: none) {
-  @if $type == flat {
-    @include rs-button_;
-  }@else if $type == outlined {
-    @include rs-button_;
+  @if $type == outlined {
     @include rs-button--outlined_;
     @include rs-button-outline-width(2px);
     @include rs-button-outline-color($rs-theme-primary);
 
   }@else if $type == raised {
-    @include rs-button_;
     @include rs-button--raised_;
     @include rs-button--filled_;
     @include rs-button-container-fill-color($rs-theme-primary);
     @include rs-button-ink-color($rs-theme-on-primary);
     @include rs-states(on-primary);
 
-  }@else if $type == icon {
-    @include rs-button-icon_;
-
   }@else if $type == fab {
     @include rs-fab_;
 
   }@else if $type == dense {
-    @include rs-button_;
     @include rs-button--dense_;
 
   }@else if $type == unelevated {
-    @include rs-button_;
     @include rs-button--filled_;
     @include rs-button-container-fill-color($rs-theme-primary);
     @include rs-button-ink-color($rs-theme-on-primary);
     @include rs-states(on-primary);
+  }@else if $type == dense {
+    @include rs-button--dense_;
   }
 
   @if $option == dense {
@@ -133,11 +126,26 @@
 }
 
 /* Set icon to button. */
-@mixin rs-button-icon-image($url, $position: left, $size: 18px, $repeat: no-repeat) {
-  --rs-button--background-image: #{$url};
-  --rs-button--background-size: #{$size};
-  --rs-button--background-position: #{$position};
-  --rs-button--background-repeat: #{$repeat};
+@mixin rs-button-icon-image($url) {
+  --rs-button__icon: true;
+  --rs-button_before--background-image: #{$url};
+  --rs-button_after--background-image: #{$url};
+  --rs-button_before--content: '';
+  --rs-button-label--padding-left: 8px;
+}
+
+@mixin rs-button-icon-position($position: left) {
+  @if $position == left {
+    --rs-button_before--content: '';
+    --rs-button-label--padding-left: 8px;
+    --rs-button_after--content: none;
+    --rs-button-label--padding-right: 0;
+  }@else if $position == right {
+    --rs-button_after--content: '';
+    --rs-button-label--padding-right: 8px;
+    --rs-button_before--content: none;
+    --rs-button-label--padding-left: 0;
+  }
 }
 
 /* Extend button width to parent element width. Usually, you use this mixin when button type is fab. */
