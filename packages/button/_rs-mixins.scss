@@ -4,7 +4,7 @@
 @import "./fab/rs-fab";
 @import "./icon-button/rs-icon-button";
 
-/* Change button type. Always use this mixin when rsmdc-button. */
+// Change button type. Always use this mixin when rsmdc-button.
 @mixin rs-button-type($type: flat, $option: none) {
   @if $type == outlined {
     @include rs-button--outlined_;
@@ -45,7 +45,7 @@
   }
 }
 
-/* Change button text color and ripple color. (Ripple color changes to dark base or light base by setting color.) */
+// Change button text color and ripple color. (Ripple color changes to dark base or light base by setting color.) 
 @mixin rs-button-filled-accessible($container-fill-color) {
   $fill-tone: rs-theme-tone($container-fill-color);
 
@@ -60,40 +60,40 @@
   }
 }
 
-/* Change button background-color. */
+// Change button background-color. 
 @mixin rs-button-container-fill-color($color) {
   --rs-button_not_disabled--background-color: #{$color};
 }
 
-/* Change button border-color. Usually, you use this mixin when button type is outlined. */
+// Change button border-color. Usually, you use this mixin when button type is outlined. 
 @mixin rs-button-outline-color($color) {
   --rs-button_not_disabled--border-color: #{$color};
 }
 
-/* Change button text color. */
+// Change button text color. 
 @mixin rs-button-ink-color($color) {
   --rs-button_not_disabled--color: #{$color};
 }
 
-/* Change button radius. */
+// Change button radius. 
 @mixin rs-button-shape-radius($radius, $rtl-reflexive: false) {
   --rs-button--border-radius: #{rs-shape-radius($radius)};
   --rs-button_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
 }
 
-/* Change button radius by percentage. Usually, you use this mixin when button type is outlined. */
+// Change button radius by percentage. Usually, you use this mixin when button type is outlined. 
 @mixin rs-button-fab-extended-shape-radius($radius) {
   --rs-button--border-radius: #{rs-shape-resolve-percentage-radius($rs-fab-extended-height, $radius)};
   --rs-button_rtl--border-radius: #{rs-shape-resolve-percentage-radius($rs-fab-extended-height, $radius)};
 }
 
-/* Change button padding-right and left. */
+// Change button padding-right and left. 
 @mixin rs-button-horizontal-padding($padding) {
   --rs-button--padding-right: #{$padding};
   --rs-button--padding-left: #{$padding};
 }
 
-/* Change button border-width. Usually, you use this mixin when button type is outlined. */
+// Change button border-width. Usually, you use this mixin when button type is outlined. 
 @mixin rs-button-outline-width(
   $outline-width,
   $padding: $rs-button-contained-horizontal-padding,
@@ -105,27 +105,27 @@
   --rs-button--border-width: #{$outline-width};
 }
 
-/* Change button padding-right. Usually, you use this mixin when set icon to button. */
+// Change button padding-right. Usually, you use this mixin when set icon to button. 
 @mixin rs-button-padding-right($padding) {
   --rs-button--padding-right: #{$padding};
 }
 
-/* Change button padding-left. */
+// Change button padding-left. 
 @mixin rs-button-padding-left($padding) {
   --rs-button--padding-left: #{$padding};
 }
 
-/* Change button padding-top. */
+// Change button padding-top. 
 @mixin rs-button-padding-top($padding) {
   --rs-button--padding-top: #{$padding};
 }
 
-/* Change button padding-bottom. */
+// Change button padding-bottom. 
 @mixin rs-button-padding-bottom($padding) {
   --rs-button--padding-top: #{$padding};
 }
 
-/* Set icon to button. */
+// Set icon to button. 
 @mixin rs-button-icon-image($url) {
   --rs-button__icon: true;
   --rs-button_before--background-image: #{$url};
@@ -148,12 +148,12 @@
   }
 }
 
-/* Extend button width to parent element width. Usually, you use this mixin when button type is fab. */
+// Extend button width to parent element width. Usually, you use this mixin when button type is fab. 
 @mixin rs-button-fab-extended-fluid {
   --rs-button--width: 100%;
 }
 
-/* Change button ripple color. */
+// Change button ripple color. 
 @mixin rs-button-states-color($color) {
   @include rs-states($color);
 }
