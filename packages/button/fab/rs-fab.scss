@@ -22,6 +22,7 @@
 
 @mixin rs-fab_ {
   --rs-button__fab: true;
+  --rs-button--min-width: auto;
   --rs-button--fill: currentColor;
   --rs-button--cursor: pointer;
   --rs-button--moz-appearance: none;
@@ -51,7 +52,7 @@
   // ripple
   --rs-ripple_before--background-color: #{$rs-theme-on-secondary};
   --rs-ripple_after--background-color: #{$rs-theme-on-secondary};
-  --rs-ripple_hover_before--opacity: #{rs-states-opacity(on-secondary, focus)};
+  --rs-ripple_hover_before--opacity: #{rs-states-opacity(on-secondary, hover)};
   --rs-upgraded_-background-focused_before--opacity: #{rs-states-opacity(on-secondary, focus)};
   --rs-ripple_not-upgraded_active_after--opacity: #{rs-states-opacity(on-secondary, press)};
   --rs-ripple-upgraded--rs-ripple-fg-opacity: #{rs-states-opacity(on-secondary, press)};
