@@ -1,0 +1,5 @@
+@import "@rsmdc/animation/variables";
+
+@function rs-line-ripple-transition-value($property) {
+  @return #{$property} 180ms $rs-animation-standard-curve-timing-function;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@rsmdc/notched-outline",
+  "description": "The Material Components for the web notched-outline component",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "material components",
+    "material design",
+    "notchedoutline",
+    "notched outline"
+  ],
+  "main": "index.js",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@rsmdc/animation": "^1.0.0",
+    "@rsmdc/base": "^1.0.1",
+    "@rsmdc/floating-label": "^1.0.0",
+    "@rsmdc/rtl": "^1.0.2",
+    "@rsmdc/shape": "^1.0.2",
+    "@rsmdc/theme": "^1.0.2",
+    "tslib": "^1.9.3"
+  }
+}

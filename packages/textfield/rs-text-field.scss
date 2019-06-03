@@ -1,0 +1,256 @@
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/floating-label/rs-floating-label";
+@import "@rsmdc/line-ripple/rs-line-ripple";
+@import "@rsmdc/notched-outline/rs-notched-outline";
+@import "@rsmdc/ripple/common";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/typography/variables";
+@import "./functions";
+@import "./helper-text/rs-text-field-helper-text";
+@import "./character-counter/rs-text-field-character-counter";
+@import "./icon/rs-text-field-icon";
+@import "./mixins";
+@import "./variables";
+
+// postcss-bem-linter: define text-field
+
+.rs-text-field {
+  @include rs-ripple-surface;
+  // Text Field intentionally omits press ripple, so each state needs to be specified individually.
+  @include rs-states-base-color($rs-text-field-ink-color);
+  @include rs-states-hover-opacity(rs-states-opacity($rs-text-field-ink-color, hover));
+  @include rs-states-focus-opacity(rs-states-opacity($rs-text-field-ink-color, focus));
+  @include rs-ripple-radius-bounded;
+
+  // Shape
+  @include rs-text-field-shape-radius(small);
+
+  // Colors
+  @include rs-text-field-label-color($rs-text-field-label);
+  @include rs-text-field-ink-color($rs-text-field-ink-color);
+  @include rs-text-field-caret-color(primary);
+  @include rs-text-field-bottom-line-color($rs-text-field-bottom-line-idle);
+  @include rs-text-field-hover-bottom-line-color($rs-text-field-bottom-line-hover);
+  @include rs-text-field-line-ripple-color_(primary);
+  @include rs-text-field-fullwidth-bottom-line-color($rs-text-field-fullwidth-bottom-line-color);
+  @include rs-text-field-helper-text-color($rs-text-field-helper-text-color);
+  @include rs-text-field-character-counter-color($rs-text-field-helper-text-color);
+  @include rs-text-field-icon-color($rs-text-field-icon-color);
+  @include rs-text-field-fill-color($rs-text-field-background);
+
+  // Floating Label
+  @include rs-text-field-floating-label_;
+
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  height: $rs-text-field-height;
+  overflow: hidden;
+  /* @alternate */
+  will-change: opacity, transform, color;
+}
+
+.rs-text-field__input {
+  @include rs-typography(subtitle1);
+
+  align-self: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px 16px 6px;
+  transition: rs-text-field-transition(opacity);
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  background: none;
+  appearance: none;
+
+  &::placeholder {
+    transition: rs-text-field-transition(opacity, $duration: 67ms);
+    opacity: 0;
+    color: $rs-text-field-placeholder-ink-color;
+  }
+
+  // Override the placeholder styles in IE with important rule to improve specificity.
+  // stylelint-disable-next-line selector-no-vendor-prefix
+  &:-ms-input-placeholder {
+    color: $rs-text-field-placeholder-ink-color !important;
+  }
+
+  // Always show placeholder for text fields that has no label and show only on focused state when label is present.
+  .rs-text-field--fullwidth &::placeholder,
+  .rs-text-field--no-label &::placeholder,
+  .rs-text-field--focused &::placeholder {
+    transition-delay: 40ms;
+    transition-duration: 110ms;
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // Remove red outline on firefox
+  &:invalid {
+    box-shadow: none;
+  }
+
+  // Keep Chrome autofill behind the notched outline
+  &:-webkit-autofill {
+    z-index: auto !important;
+  }
+
+  // Vertically center aligns the text input placeholder and value for only filled variant.
+  .rs-text-field--no-label:not(.rs-text-field--outlined):not(.rs-text-field--textarea) & {
+    padding: 16px;
+  }
+}
+// stylelint-disable-next-line plugin/selector-bem-pattern
+// Move label when text-field gets auto-filled in Chrome.
+.rs-text-field__input:-webkit-autofill + .rs-floating-label {
+  transform: translateY(-50%) scale(.75);
+  cursor: auto;
+}
+
+.rs-text-field--outlined {
+  @include rs-text-field-outlined_;
+}
+
+.rs-text-field--outlined.rs-text-field--focused {
+  @include rs-text-field-outlined-focused_;
+}
+
+.rs-text-field--outlined.rs-text-field--disabled {
+  @include rs-text-field-outlined-disabled_;
+}
+
+.rs-text-field--outlined.rs-text-field--dense {
+  @include rs-text-field-outlined-dense_;
+}
+
+.rs-text-field--with-leading-icon {
+  @include rs-text-field-with-leading-icon_;
+}
+
+.rs-text-field--with-leading-icon.rs-text-field--outlined {
+  @include rs-text-field-outlined-with-leading-icon_;
+}
+
+.rs-text-field--with-leading-icon.rs-text-field--outlined.rs-text-field--dense {
+  @include rs-text-field-outlined-dense-with-leading-icon_;
+}
+
+.rs-text-field--with-trailing-icon {
+  @include rs-text-field-with-trailing-icon_;
+}
+
+.rs-text-field--with-leading-icon.rs-text-field--with-trailing-icon {
+  @include rs-text-field-with-both-icons_;
+}
+
+// stylelint-disable plugin/selector-bem-pattern
+.rs-text-field--with-leading-icon.rs-text-field--dense .rs-text-field__icon,
+.rs-text-field--with-trailing-icon.rs-text-field--dense .rs-text-field__icon {
+  bottom: 16px;
+  transform: scale(.8);
+}
+// stylelint-enable plugin/selector-bem-pattern
+
+.rs-text-field--with-leading-icon.rs-text-field--dense {
+  @include rs-text-field-dense-with-leading-icon_;
+}
+
+.rs-text-field--with-trailing-icon.rs-text-field--dense {
+  @include rs-text-field-dense-with-trailing-icon_;
+}
+
+.rs-text-field--with-leading-icon.rs-text-field--with-trailing-icon.rs-text-field--dense {
+  @include rs-text-field-dense-with-both-icons_;
+}
+
+.rs-text-field--dense {
+  @include rs-text-field-dense_;
+}
+
+@include rs-required-text-field-label-asterisk_ {
+  margin-left: 1px;
+  content: "*";
+}
+
+.rs-text-field--textarea {
+  @include rs-text-field-textarea_;
+}
+
+.rs-text-field--fullwidth {
+  @include rs-text-field-fullwidth_;
+}
+
+.rs-text-field--fullwidth.rs-text-field--invalid {
+  @include rs-text-field-fullwidth-invalid_;
+}
+
+// postcss-bem-linter: define text-field-helper-text
+// stylelint-disable plugin/selector-bem-pattern
+.rs-text-field-helper-line {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  .rs-text-field--dense + & {
+    margin-bottom: 4px;
+  }
+
+  .rs-text-field + & {
+    padding-right: $rs-text-field-helper-line-padding;
+    padding-left: $rs-text-field-helper-line-padding;
+  }
+}
+// stylelint-enable plugin/selector-bem-pattern
+// postcss-bem-linter: end
+
+// rs-form-field tweaks to align text field label correctly
+// stylelint-disable selector-max-type
+.rs-form-field > .rs-text-field + label {
+  align-self: flex-start;
+}
+// stylelint-enable selector-max-type
+
+.rs-text-field--focused {
+  @include rs-text-field-focused_;
+}
+
+.rs-text-field--textarea.rs-text-field--focused {
+  @include rs-text-field-textarea-stroke-color(primary);
+}
+
+.rs-text-field--invalid {
+  @include rs-text-field-invalid_;
+}
+
+.rs-text-field--textarea.rs-text-field--invalid {
+  @include rs-text-field-textarea-invalid_;
+}
+
+.rs-text-field--outlined.rs-text-field--invalid {
+  @include rs-text-field-outlined-invalid_;
+}
+
+.rs-text-field--disabled {
+  @include rs-text-field-disabled_;
+}
+
+.rs-text-field--textarea.rs-text-field--disabled {
+  @include rs-text-field-textarea-disabled_;
+}
+
+@include rs-floating-label-shake-keyframes(text-field-dense, $rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+@include rs-floating-label-shake-keyframes(text-field-outlined, $rs-text-field-outlined-label-position-y);
+@include rs-floating-label-shake-keyframes(text-field-outlined-dense, $rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon, $rs-text-field-outlined-label-position-y, $rs-text-field-outlined-with-leading-icon-label-position-x);
+@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon-dense, $rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
+@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon-rtl, $rs-text-field-outlined-label-position-y, -$rs-text-field-outlined-with-leading-icon-label-position-x);
+@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon-dense-rtl, $rs-text-field-outlined-dense-label-position-y, -$rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
+@include rs-floating-label-shake-keyframes(textarea, $rs-text-field-textarea-label-position-y, 0%);

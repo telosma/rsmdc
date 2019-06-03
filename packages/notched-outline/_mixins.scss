@@ -1,0 +1,62 @@
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import "@rsmdc/rtl/mixins";
+@import "./variables";
+
+@mixin rs-notched-outline-color($color) {
+  .rs-notched-outline__leading,
+  .rs-notched-outline__notch,
+  .rs-notched-outline__trailing {
+    @include rs-theme-prop(border-color, $color);
+  }
+}
+
+@mixin rs-notched-outline-stroke-width($width) {
+  .rs-notched-outline__leading,
+  .rs-notched-outline__notch,
+  .rs-notched-outline__trailing {
+    border-width: $width;
+  }
+}
+
+@mixin rs-notched-outline-shape-radius($radius, $rtl-reflexive: false) {
+  $radius: rs-shape-prop-value($radius);
+
+  .rs-notched-outline__leading {
+    @include rs-shape-radius(rs-shape-mask-radius($radius, 1 0 0 1), $rtl-reflexive: true);
+
+    @if ($radius > $rs-notched-outline-leading-width) {
+      width: $radius;
+    }
+  }
+
+  @if ($radius > $rs-notched-outline-leading-width) {
+    .rs-notched-outline__notch {
+      max-width: calc(100% - #{$radius} * 2);
+    }
+  }
+
+  .rs-notched-outline__trailing {
+    @include rs-shape-radius(rs-shape-mask-radius($radius, 0 1 1 0), $rtl-reflexive: true);
+  }
+}
+
+@mixin rs-notched-outline-floating-label-float-position($positionY, $positionX: 0%, $scale: .75) {
+  @include rs-floating-label-float-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1);
+
+  .rs-floating-label--float-above {
+    font-size: ($scale * 1rem);
+  }
+
+  // Two selectors to ensure we select the appropriate class when applied from this component or a parent component.
+  &.rs-notched-outline--upgraded,
+  .rs-notched-outline--upgraded {
+    @include rs-floating-label-float-position($positionY, $positionX, $scale);
+
+    // stylelint-disable-next-line no-descending-specificity
+    .rs-floating-label--float-above {
+      font-size: 1rem;
+    }
+  }
+}
