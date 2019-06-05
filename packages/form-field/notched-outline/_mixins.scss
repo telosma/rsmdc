@@ -5,58 +5,36 @@
 @import "./variables";
 
 @mixin rs-notched-outline-color($color) {
-  .rs-notched-outline__leading,
-  .rs-notched-outline__notch,
-  .rs-notched-outline__trailing {
-    @include rs-theme-prop(border-color, $color);
-  }
+  --rs-notched-outline-leading--border-color: #{$color};
+  --rs-notched-outline-notch--border-color: #{$color};
+  --rs-notched-outline-trailing--border-color: #{$color};
 }
 
 @mixin rs-notched-outline-stroke-width($width) {
-  .rs-notched-outline__leading,
-  .rs-notched-outline__notch,
-  .rs-notched-outline__trailing {
-    border-width: $width;
-  }
+  --rs-notched-outline-leading--border-width: #{$width};
+  --rs-notched-outline-notch--border-width: #{$width};
+  --rs-notched-outline-trailing--border-width: #{$width};
 }
 
 @mixin rs-notched-outline-shape-radius($radius, $rtl-reflexive: false) {
   $radius: rs-shape-prop-value($radius);
 
-  .rs-notched-outline__leading {
-    @include rs-shape-radius(rs-shape-mask-radius($radius, 1 0 0 1), $rtl-reflexive: true);
-
-    @if ($radius > $rs-notched-outline-leading-width) {
-      width: $radius;
-    }
-  }
+  --rs-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
+  --rs-notched-outline-leading_rtl--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
+  --rs-notched-outline-trailing--border-radius: #{rs-shape-mask-radius($radius, 0 1 1 0)};
+  --rs-notched-outline-trailing_rtl--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
 
   @if ($radius > $rs-notched-outline-leading-width) {
-    .rs-notched-outline__notch {
-      max-width: calc(100% - #{$radius} * 2);
-    }
-  }
-
-  .rs-notched-outline__trailing {
-    @include rs-shape-radius(rs-shape-mask-radius($radius, 0 1 1 0), $rtl-reflexive: true);
+    --rs-notched-outline-leading--width: #{$radius};
+    --rs-notched-outline-notch--max-width: #{calc(100% - $radius * 2)};
   }
 }
 
 @mixin rs-notched-outline-floating-label-float-position($positionY, $positionX: 0%, $scale: .75) {
-  @include rs-floating-label-float-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1);
-
-  .rs-floating-label--float-above {
-    font-size: ($scale * 1rem);
-  }
-
-  // Two selectors to ensure we select the appropriate class when applied from this component or a parent component.
-  &.rs-notched-outline--upgraded,
-  .rs-notched-outline--upgraded {
-    @include rs-floating-label-float-position($positionY, $positionX, $scale);
-
-    // stylelint-disable-next-line no-descending-specificity
-    .rs-floating-label--float-above {
-      font-size: 1rem;
-    }
-  }
+  --rs-form-label__float__above--transform: #{rs-form-label-float-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
+  --rs-form-label_rtl__float__above--transform: #{rs-form-label-float-rtl-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
+  --rs-form-label__float__above--font-size: (#{$scale} * 1rem);
+  --rs-notched-outline__upgraded-label__float__above--transform: #{rs-form-label-float-position($positionY, $positionX, $scale)};
+  --rs-notched-outline__upgraded-label_right__float__above--transform: #{rs-form-label-float-rtl-position($positionY, $positionX, $scale)};
+  --rs-notched-outline__upgraded-label__float__above--font-size: 1rem
 }
