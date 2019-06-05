@@ -1,7 +1,4 @@
-@import "@rsmdc/theme/mixins";
-@import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/functions";
-@import "@rsmdc/rtl/mixins";
 @import "./variables";
 
 @mixin rs-notched-outline-color($color) {
@@ -34,7 +31,7 @@
   --rs-notched-outline-trailing_not_disabled_focus--border-width: #{$width};
 }
 
-@mixin rs-notched-outline-shape-radius($radius, $rtl-reflexive: false) {
+@mixin rs-notched-outline-shape-radius($radius) {
   $radius: rs-shape-prop-value($radius);
 
   --rs-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
