@@ -42,7 +42,6 @@
 
 @mixin rs-text-field-invalid_ {
   @include rs-text-field-line-ripple-color($rs-text-field-error);
-  @include rs-text-field-label-color($rs-text-field-error);
   @include rs-text-field-helper-text-validation-color($rs-text-field-error);
 
   &.rs-text-field--with-trailing-icon {
@@ -61,8 +60,6 @@
 }
 
 @mixin rs-text-field-focused_ {
-  @include rs-text-field-label-color($rs-text-field-focused-label-color);
-
   @include rs-required-text-field-label-asterisk_ {
     @include rs-theme-prop(color, $rs-text-field-error);
   }
@@ -94,39 +91,6 @@
     .rs-floating-label::after,
     .rs-notched-outline .rs-floating-label::after {
       @content;
-    }
-  }
-}
-
-@mixin rs-text-field-floating-label_ {
-  .rs-floating-label {
-    @include rs-rtl-reflexive-position(left, $rs-text-field-label-offset);
-
-    top: 18px;
-    pointer-events: none;
-  }
-
-  &--textarea {
-    .rs-floating-label {
-      @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
-    }
-  }
-
-  &--outlined {
-    .rs-floating-label {
-      @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
-
-      top: 17px;
-    }
-
-    &--with-leading-icon {
-      .rs-floating-label {
-        @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width));
-
-        &--float-above {
-          @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width) + $rs-notched-outline-padding);
-        }
-      }
     }
   }
 }

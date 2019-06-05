@@ -15,13 +15,6 @@
 @import "./mixins";
 @import "./variables";
 
-// postcss-bem-linter: define text-field
-.rs-floating-label {
-  //label
-  @include rs-text-field-floating-label_;
-  @include rs-text-field-label-color($rs-text-field-label);
-}
-
 .rs-line-ripple {
   //lineripple
   @include rs-text-field-line-ripple-color_(primary);
@@ -141,12 +134,3 @@
 .rs-text-field--textarea.rs-text-field--disabled {
   @include rs-text-field-textarea-disabled_;
 }
-
-@include rs-floating-label-shake-keyframes(text-field-dense, $rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
-@include rs-floating-label-shake-keyframes(text-field-outlined, $rs-text-field-outlined-label-position-y);
-@include rs-floating-label-shake-keyframes(text-field-outlined-dense, $rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
-@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon, $rs-text-field-outlined-label-position-y, $rs-text-field-outlined-with-leading-icon-label-position-x);
-@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon-dense, $rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon-rtl, $rs-text-field-outlined-label-position-y, -$rs-text-field-outlined-with-leading-icon-label-position-x);
-@include rs-floating-label-shake-keyframes(text-field-outlined-leading-icon-dense-rtl, $rs-text-field-outlined-dense-label-position-y, -$rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-@include rs-floating-label-shake-keyframes(textarea, $rs-text-field-textarea-label-position-y, 0%);
