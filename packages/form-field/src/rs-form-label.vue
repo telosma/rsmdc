@@ -96,7 +96,7 @@ export default {
     overflow: hidden;
     will-change: transform;
 
-    color: var(--rs-form-label--color);
+    color: var(--rs-form-label--color, $rs-text-field-ink-color);
 
     :focus &,
     &:focus {

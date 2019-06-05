@@ -20,36 +20,32 @@
 // THE SOFTWARE.
 //
 
+@import "@rsmdc/animation/variables";
 @import "@rsmdc/rtl/mixins";
 @import "@rsmdc/theme/mixins";
+@import "@rsmdc/theme/variables";
 @import "@rsmdc/typography/mixins";
 @import "./rs-mixins";
 @import "./rs-variables";
+@import "./mixins";
+@import "./variables";
 
 // stylelint-disable selector-max-type
 .rs-form-field {
-  @include rs-typography(body2);
-  @include rs-theme-prop(color, text-primary-on-background);
 
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
 
-  > label {
-    order: var(--rs-form-field-label--order, 0);
-    margin-right: var(--rs-form-field-label--margin-right, auto);
-    padding-left: var(--rs-form-field-label--padding-left, $rs-form-field-item-spacing);
-    cursor: pointer;
-    white-space: nowrap;
-    text-overflow: ellipsis;  
+  &.-text {
+
   }
 
-  @include rs-rtl {
-    > label {
-      margin-left: var(--rs-form-field-label--margin-left, auto);
-      padding-right: var(--rs-form-field-label--padding-right, $rs-form-field-item-spacing);
-      cursor: pointer;
-      white-space: nowrap;
-    }
+  &.-textarea {
+
   }
+
+  &.-select {
+
+  } 
 }
