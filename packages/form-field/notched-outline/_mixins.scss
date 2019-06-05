@@ -10,10 +10,22 @@
   --rs-notched-outline-trailing--border-color: #{$color};
 }
 
+@mixin rs-notched-outline-focus-color($color) {
+  --rs-notched-outline-leading_not_disabled_focus--border-color: #{$color};
+  --rs-notched-outline-notch_not_disabled_focus--border-color: #{$color};
+  --rs-notched-outline-trailing_not_disabled_focus--border-color: #{$color};
+}
+
 @mixin rs-notched-outline-stroke-width($width) {
   --rs-notched-outline-leading--border-width: #{$width};
   --rs-notched-outline-notch--border-width: #{$width};
   --rs-notched-outline-trailing--border-width: #{$width};
+}
+
+@mixin rs-notched-outline-stroke-focus-width($width) {
+  --rs-notched-outline-leading_not_disabled_focus--border-width: #{$width};
+  --rs-notched-outline-notch_not_disabled_focus--border-width: #{$width};
+  --rs-notched-outline-trailing_not_disabled_focus--border-width: #{$width};
 }
 
 @mixin rs-notched-outline-shape-radius($radius, $rtl-reflexive: false) {
