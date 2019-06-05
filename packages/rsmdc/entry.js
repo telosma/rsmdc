@@ -34,13 +34,10 @@ import drawerTitle from '../drawer/src/rs-drawer-title.vue'
 import drawerSubtitle from '../drawer/src/rs-drawer-subtitle.vue'
 import drawerHeader from '../drawer/src/rs-drawer-header.vue'
 import drawer from '../drawer/src/rs-drawer.vue'
-// import fieldAction from '../textfield/src/rs-field-action.vue'
-// import fieldCounter from '../textfield/src/rs-field-counter.vue'
-// import fieldErrorText from '../textfield/src/rs-field-error-text.vue'
-// import fieldHelperText from '../textfield/src/rs-field-helper-text.vue'
-// import fieldLabel from '../textfield/src/rs-field-label.vue'
-// import textAreaField from '../textfield/src/rs-textarea-field.vue'
-// import textField from '../textfield/src/rs-text-field.vue'
+import formError from '../form-field/src/rs-form-error.vue'
+import formHelper from '../form-field/src/rs-form-helper.vue'
+import formLabel from '../form-field/src/rs-form-label.vue'
+import formField from '../form-field/src/rs-form-field.vue'
 import appLayoutContent from '../app-layout/src/rs-app-layout-content.vue'
 import appLayout from '../app-layout/src/rs-app-layout.vue'
 
@@ -78,12 +75,9 @@ export const DrawerSubtitle = wrap(Vue, drawerSubtitle)
 export const DrawerHeader = wrap(Vue, drawerHeader)
 export const Drawer = wrap(Vue, drawer)
 export const Menu = wrap(Vue, menu)
-// export const FieldAction = wrap(Vue, fieldAction)
-// export const FieldCounter = wrap(Vue, fieldCounter)
-// export const FieldErrorText = wrap(Vue, fieldErrorText)
-// export const FieldHelperText = wrap(Vue, fieldHelperText)
-// export const FieldLabel = wrap(Vue, fieldLabel)
-// export const TextAreaField = wrap(Vue, textAreaField)
-// export const TextField = wrap(Vue, textField)
+export const FormError = wrap(Vue, formError)
+export const FormHelper = wrap(Vue, formHelper)
+export const FormField = wrap(Vue, formField)
+export const FormLabel = wrap(Vue, formLabel)
 export const AppLayoutContent = wrap(Vue, appLayoutContent)
 export const AppLayout = wrap(Vue, appLayout)
