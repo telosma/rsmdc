@@ -149,10 +149,6 @@
     @include rs-text-field-hover-outline-color($rs-text-field-error);
     @include rs-text-field-focused-outline-color($rs-text-field-error);
   }
-
-  &[focus] {
-    @include rs-notched-outline-stroke-width(2px);
-  }
 }
 
 @mixin rs-text-field-with-leading-icon_ {
@@ -238,12 +234,6 @@
   --rs-textarea-field_disabled--background-color: #{$rs-textarea-disabled-background};
 }
 
-@mixin rs-text-field-textarea-invalid_ {
-  @include rs-text-field-outline-color($rs-text-field-error);
-  @include rs-text-field-hover-outline-color($rs-text-field-error);
-  @include rs-text-field-focused-outline-color($rs-text-field-error);
-}
-
 @mixin rs-text-field-textarea_ {
   @include rs-text-field-outline-color($rs-text-field-outlined-idle-border);
   @include rs-text-field-hover-outline-color($rs-text-field-outlined-hover-border);
@@ -260,10 +250,6 @@
   height: auto;
   transition: none;
   overflow: visible;
-
-  &[focus] {
-    @include rs-notched-outline-stroke-width(2px);
-  }
 }
 
 @mixin rs-text-field_ {

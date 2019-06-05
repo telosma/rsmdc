@@ -123,10 +123,6 @@
   @include rs-text-field-invalid_;
 }
 
-.rs-text-field--textarea.rs-text-field--invalid {
-  @include rs-text-field-textarea-invalid_;
-}
-
 .rs-text-field--disabled {
   @include rs-text-field-disabled_;
 }
