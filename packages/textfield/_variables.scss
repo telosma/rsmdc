@@ -1,4 +1,4 @@
-$rs-text-field-error: error !default;
+$rs-text-field-error: $rs-theme-error !default;
 $rs-text-field-fullwidth-bottom-line-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
 $rs-text-field-disabled-border: rgba(rs-theme-prop-value(on-surface), .06) !default;
 $rs-text-field-disabled-icon: rgba(rs-theme-prop-value(on-surface), .3) !default;
