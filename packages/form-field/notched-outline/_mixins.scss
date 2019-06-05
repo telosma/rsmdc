@@ -10,6 +10,12 @@
   --rs-notched-outline-trailing--border-color: #{$color};
 }
 
+@mixin rs-notched-outline-hover-color($color) {
+  --rs-notched-outline-leading_not_disabled_hover--border-color: #{$color};
+  --rs-notched-outline-notch_not_disabled_hover--border-color: #{$color};
+  --rs-notched-outline-trailing_not_disabled_hover--border-color: #{$color};
+}
+
 @mixin rs-notched-outline-focus-color($color) {
   --rs-notched-outline-leading_not_disabled_focus--border-color: #{$color};
   --rs-notched-outline-notch_not_disabled_focus--border-color: #{$color};
