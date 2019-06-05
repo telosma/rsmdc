@@ -14,8 +14,6 @@
 
 
 @mixin rs-text-field-disabled_ {
-  //helper text
-  @include rs-text-field-helper-text-color_($rs-text-field-disabled-helper-text-color);
   //counter
   @include rs-text-field-character-counter-color_($rs-text-field-disabled-helper-text-color);
   //action

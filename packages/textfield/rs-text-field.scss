@@ -20,11 +20,6 @@
   @include rs-text-field-line-ripple-color_(primary);
 }
 
-.rs-helper {
-  // Colors  //helper
-  @include rs-text-field-helper-text-color($rs-text-field-helper-text-color);
-}
-
 .rs-counter {
   //counter
   @include rs-text-field-character-counter-color($rs-text-field-helper-text-color);
@@ -84,25 +79,6 @@
   margin-left: 1px;
   content: "*";
 }
-
-// postcss-bem-linter: define text-field-helper-text
-// stylelint-disable plugin/selector-bem-pattern
-.rs-text-field-helper-line {
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-
-  .rs-text-field--dense + & {
-    margin-bottom: 4px;
-  }
-
-  .rs-text-field + & {
-    padding-right: $rs-text-field-helper-line-padding;
-    padding-left: $rs-text-field-helper-line-padding;
-  }
-}
-// stylelint-enable plugin/selector-bem-pattern
-// postcss-bem-linter: end
 
 // rs-form-field tweaks to align text field label correctly
 // stylelint-disable selector-max-type
