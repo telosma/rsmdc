@@ -8,7 +8,9 @@
       </div>
       <div class="rs-notched-outline__trailing" />
     </div>
-  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline }" for="" v-else></label>
+  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline }" for="" ref="slotContainer" v-else>
+    <slot></slot>
+  </label>
 </template>
 <script>
 export default {
@@ -41,13 +43,15 @@ export default {
 @import "@rsmdc/theme/mixins";
 @import "@rsmdc/theme/variables";
 @import "@rsmdc/typography/mixins";
-@import "../notched-outline/mixins";
-@import "../notched-outline/variables";
-@import "../rs-mixins";
-@import "../rs-variables";
 @import "../rs-functions";
-@import "../mixins";
-@import "../variables";
+@import "../rs-variables";
+@import "../floating-label/mixins";
+@import "../floating-label/variables";
+@import "../notched-outline/variables";
+
+@import "../../textfield/variables";
+@import "../../textfield/icon/variables";
+
 
 @include rs-form-label-float-shake-keyframes(standard, $rs-floating-label-position-y);
 @include rs-form-label-float-shake-keyframes(text-field-dense, $rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
@@ -347,5 +351,3 @@ export default {
   }
 }
 </style>
-
-

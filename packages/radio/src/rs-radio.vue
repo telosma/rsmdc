@@ -1,14 +1,11 @@
 <template>
-  <!-- <div class="rs-form-field"> -->
-    <div class="rs-radio" @click="updateRadios(), clickRadio()" :disabled="disabled">
-      <input class="rs-radio__native-control" type="radio" :id="id" :name="name" :checked="checked" :disabled="disabled">
-      <div class="rs-radio__background">
-        <div class="rs-radio__outer-circle"></div>
-        <div class="rs-radio__inner-circle"></div>
-      </div>
+  <div class="rs-radio" @click="updateRadios(), clickRadio()" :disabled="disabled">
+    <input class="rs-radio__native-control" type="radio" :id="id" :name="name" :checked="checked" :disabled="disabled">
+    <div class="rs-radio__background">
+      <div class="rs-radio__outer-circle"></div>
+      <div class="rs-radio__inner-circle"></div>
     </div>
-    <!-- <label :for="id" ref="slotContainer" @click="clickRadio"><slot></slot></label>
-  </div> -->
+  </div>
 </template>
 <script>
 import { RSRipple } from '@rsmdc/ripple'
@@ -61,7 +58,7 @@ export default {
     }
   },
   mounted() {
-    const ripple = new RSRipple(this.$el.querySelector('.rs-radio'))
+    const ripple = new RSRipple(this.$el)
     ripple.unbounded = true
 
     this.el = this.$el
@@ -180,7 +177,7 @@ export default {
 }
 
 .rs-radio__native-control {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
