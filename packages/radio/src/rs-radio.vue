@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-form-field">
+  <!-- <div class="rs-form-field"> -->
     <div class="rs-radio" @click="updateRadios(), clickRadio()" :disabled="disabled">
       <input class="rs-radio__native-control" type="radio" :id="id" :name="name" :checked="checked" :disabled="disabled">
       <div class="rs-radio__background">
@@ -7,12 +7,11 @@
         <div class="rs-radio__inner-circle"></div>
       </div>
     </div>
-    <label :for="id" ref="slotContainer" @click="clickRadio"><slot></slot></label>
-  </div>
+    <!-- <label :for="id" ref="slotContainer" @click="clickRadio"><slot></slot></label>
+  </div> -->
 </template>
 <script>
-import { RSFormField } from '@rsmdc/form-field';
-import { RSRadio } from '../index';
+import { RSRipple } from '@rsmdc/ripple'
 
 export default {
   props: {
@@ -62,10 +61,8 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick().then(this.fixSlot.bind(this))
-    const formField = new RSFormField(this.$el);
-    const radio = new RSRadio(this.$el.querySelector('.rs-radio'));
-    formField.input = radio;
+    const ripple = new RSRipple(this.$el.querySelector('.rs-radio'))
+    ripple.unbounded = true
 
     this.el = this.$el
   },
