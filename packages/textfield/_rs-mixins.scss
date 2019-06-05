@@ -1,0 +1,124 @@
+@mixin rs-text-field-shape-radius($radius) {
+  $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
+  --rs-text-field--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
+  --rs-text-field_rtl--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
+  // outline
+  @include rs-notched-outline-shape-radius($radius);
+}
+
+@mixin rs-textarea-field-shape-radius($radius) {
+  @include rs-notched-outline-shape-radius($radius);
+}
+
+@mixin rs-text-field-ink-color($color) {
+  --rs-text-field_not_disabled-input--color: #{$color};
+}
+
+@mixin rs-text-field-fill-color($color) {
+  --rs-text-field_not_disabled--background-color: #{$color};
+  --rs-textarea-field_not_disabled--background-color: #{$color};
+}
+
+@mixin rs-text-field-textarea-stroke-color($color) {
+  &:not(.rs-text-field--disabled) {
+    @include rs-notched-outline-color($color);
+  }
+}
+
+@mixin rs-text-field-textarea-fill-color($color) {
+  --rs-textarea-field_not_disabled--background-color: #{$color};
+}
+
+@mixin rs-text-field-fullwidth-bottom-line-color($color) {
+  --rs-text-field_not_disabled_not__textarea--border-bottom-color: #{$color};
+}
+
+@mixin rs-text-field-bottom-line-color($color) {
+  --rs-text-field_not_disabled_not__outlined_not__textarea-input--border-bottom-color: #{$color};
+}
+
+@mixin rs-text-field-hover-bottom-line-color($color) {
+  --rs-text-field_not_disabled_not__outlined_not__textarea-input_hover--border-bottom-color: #{$color};
+}
+
+@mixin rs-text-field-line-ripple-color($color) {
+  &:not(.rs-text-field--disabled) {
+    @include rs-line-ripple-color($color);
+  }
+}
+
+@mixin rs-text-field-label-color($color) {
+
+  &:not(.rs-text-field--disabled) {
+    @include rs-floating-label-ink-color($color);
+  }
+}
+
+@mixin rs-text-field-outline-color($color) {
+  @include rs-notched-outline-color($color);
+}
+
+@mixin rs-text-field-hover-outline-color($color) {
+  &:not(.rs-text-field--disabled) {
+    &:not(:focus) {
+      .rs-text-field__input:hover ~,
+      .rs-text-field__icon:hover ~ {
+        .rs-notched-outline {
+          @include rs-notched-outline-color($color);
+        }
+      }
+    }
+  }
+}
+
+@mixin rs-text-field-focused-outline-color($color) {
+  &:not(.rs-text-field--disabled) {
+    &.rs-text-field--focused {
+      @include rs-notched-outline-color($color);
+    }
+  }
+}
+
+@mixin rs-text-field-caret-color($color) {
+  --rs-text-field-input--caret-color: #{$color};
+}
+
+@mixin rs-text-field-outline-shape-radius($radius, $rtl-reflexive: false) {
+  $resolved-radius: rs-shape-resolve-percentage-radius($rs-text-field-height, $radius);
+
+  .rs-notched-outline {
+    @include rs-notched-outline-shape-radius($resolved-radius, $rtl-reflexive);
+  }
+
+  $radius-pixels: rs-shape-prop-value($resolved-radius);
+
+  @if ($radius-pixels > $rs-notched-outline-leading-width) {
+    .rs-text-field__input {
+      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, 0);
+    }
+
+    + .rs-text-field-helper-line {
+      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, $radius-pixels);
+    }
+  }
+}
+
+@mixin rs-text-field-type($types...) {
+  @each $type in $types {
+    @if $type == fullwidth {
+      @include rs-text-field-fullwidth_;
+    }@else if $type == outlined {
+      @include rs-text-field-outlined_;
+    }@else if $type == dense {
+      @include rs-text-field-dense_;
+    }
+  }
+
+  $dense: find-item($types, dense);
+  $outlined: find-item($types, outlined);
+
+  @if $dense and $outlined {
+    @include rs-text-field-outlined-dense_;
+  }
+
+}

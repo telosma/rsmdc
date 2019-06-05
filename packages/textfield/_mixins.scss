@@ -12,114 +12,28 @@
 @import "./variables";
 @import "./functions";
 
-@mixin rs-text-field-shape-radius($radius, $rtl-reflexive: false) {
-  @if length($radius) > 2 {
-    @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
-  }
-
-  $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
-
-  @include rs-shape-radius(rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius), $rtl-reflexive);
-}
-
-@mixin rs-text-field-textarea-shape-radius($radius, $rtl-reflexive: false) {
-  @include rs-notched-outline-shape-radius($radius, $rtl-reflexive);
-}
-
-@mixin rs-text-field-ink-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-ink-color_($color);
-  }
-}
-
-@mixin rs-text-field-fill-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-fill-color_($color);
-  }
-}
-
-@mixin rs-text-field-textarea-stroke-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-textarea-stroke-color_($color);
-  }
-}
-
-@mixin rs-text-field-textarea-fill-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-textarea-fill-color_($color);
-  }
-}
-
-@mixin rs-text-field-fullwidth-bottom-line-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-fullwidth-bottom-line-color_($color);
-  }
-}
-
-@mixin rs-text-field-bottom-line-color($color) {
-  &:not(.rs-text-field--disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) {
-    @include rs-text-field-bottom-line-color_($color);
-  }
-}
-
-@mixin rs-text-field-hover-bottom-line-color($color) {
-  &:not(.rs-text-field--disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) {
-    @include rs-text-field-hover-bottom-line-color_($color);
-  }
-}
-
-@mixin rs-text-field-line-ripple-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-line-ripple-color_($color);
-  }
-}
-
-@mixin rs-text-field-label-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-label-ink-color_($color);
-  }
-}
-
-@mixin rs-text-field-outline-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-notched-outline-color($color);
-  }
-}
-
-@mixin rs-text-field-hover-outline-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-hover-outline-color_($color);
-  }
-}
-
-@mixin rs-text-field-focused-outline-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-focused-outline-color_($color);
-  }
-}
-
-@mixin rs-text-field-caret-color($color) {
-  .rs-text-field__input {
-    @include rs-theme-prop(caret-color, $color);
-  }
-}
-
-// Private mixins
-
-// Baseline
 
 @mixin rs-text-field-disabled_ {
-  @include rs-text-field-bottom-line-color_($rs-text-field-disabled-border);
-  @include rs-text-field-ink-color_($rs-text-field-disabled-ink-color);
-  @include rs-text-field-label-ink-color_($rs-text-field-disabled-label-color);
+  //helper text
   @include rs-text-field-helper-text-color_($rs-text-field-disabled-helper-text-color);
+  //counter
   @include rs-text-field-character-counter-color_($rs-text-field-disabled-helper-text-color);
+  //action
   @include rs-text-field-icon-color_($rs-text-field-disabled-icon);
-  @include rs-text-field-fullwidth-bottom-line-color_($rs-text-field-fullwidth-bottom-line-color);
-  @include rs-text-field-fill-color_($rs-text-field-disabled-background);
+
+  &:not(.rs-text-field--textarea) {
+    border-bottom-color: $rs-text-field-fullwidth-bottom-line-color;
+  }
+
+  background-color: $rs-text-field-disabled-background;
 
   border-bottom: none;
   pointer-events: none;
+
+  .rs-text-field__input {
+    color: $rs-text-field-disabled-ink-color;
+    border-bottom-color: $rs-text-field-disabled-border;
+  }
 
   .rs-floating-label {
     cursor: default;
@@ -127,12 +41,9 @@
 }
 
 @mixin rs-text-field-invalid_ {
-  @include rs-text-field-bottom-line-color($rs-text-field-error);
-  @include rs-text-field-hover-bottom-line-color($rs-text-field-error);
   @include rs-text-field-line-ripple-color($rs-text-field-error);
   @include rs-text-field-label-color($rs-text-field-error);
   @include rs-text-field-helper-text-validation-color($rs-text-field-error);
-  @include rs-text-field-caret-color($rs-text-field-error);
 
   &.rs-text-field--with-trailing-icon {
     &:not(.rs-text-field--with-leading-icon) {
@@ -187,26 +98,6 @@
   }
 }
 
-@mixin rs-text-field-outline-shape-radius($radius, $rtl-reflexive: false) {
-  $resolved-radius: rs-shape-resolve-percentage-radius($rs-text-field-height, $radius);
-
-  .rs-notched-outline {
-    @include rs-notched-outline-shape-radius($resolved-radius, $rtl-reflexive);
-  }
-
-  $radius-pixels: rs-shape-prop-value($resolved-radius);
-
-  @if ($radius-pixels > $rs-notched-outline-leading-width) {
-    .rs-text-field__input {
-      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, 0);
-    }
-
-    + .rs-text-field-helper-line {
-      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, $radius-pixels);
-    }
-  }
-}
-
 @mixin rs-text-field-floating-label_ {
   .rs-floating-label {
     @include rs-rtl-reflexive-position(left, $rs-text-field-label-offset);
@@ -241,24 +132,10 @@
 }
 
 // Outlined
-
 @mixin rs-text-field-outlined-disabled_ {
-  @include rs-notched-outline-color($rs-text-field-outlined-disabled-border);
-  @include rs-text-field-fill-color_(transparent);
-
-  .rs-text-field__input {
-    border-bottom: none;
-  }
-}
-
-@mixin rs-text-field-outlined-invalid_ {
-  @include rs-text-field-outline-color($rs-text-field-error);
-  @include rs-text-field-hover-outline-color($rs-text-field-error);
-  @include rs-text-field-focused-outline-color($rs-text-field-error);
-}
-
-@mixin rs-text-field-outlined-focused_ {
-  @include rs-notched-outline-stroke-width(2px);
+  --rs-text-field_disabled--background-color: transparent;
+  --rs-text-field-input_disabled--border-bottom: none;
+  --rs-text-field-input--border-bottom: none;
 }
 
 @mixin rs-text-field-outlined-dense_ {
@@ -281,50 +158,38 @@
 }
 
 @mixin rs-text-field-outlined_ {
+  //notched
+  @include rs-states-base-color(transparent);
   @include rs-text-field-outline-color($rs-text-field-outlined-idle-border);
   @include rs-text-field-hover-outline-color($rs-text-field-outlined-hover-border);
   @include rs-text-field-focused-outline-color(primary);
   @include rs-floating-label-shake-animation(text-field-outlined);
   @include rs-text-field-outline-shape-radius(small);
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y);
-  @include rs-states-base-color(transparent);
-  @include rs-text-field-fill-color(transparent);
+  @include rs-text-field-outlined-disabled_;
 
-  border: none;
-  overflow: visible;
+  --rs-text-field_not_disabled--background-color: transparent;
+  --rs-textarea-field_not_disabled--background-color: transparent;
+  --rs-text-field--border: none;
+  --rs-text-field--overflow: visible;
+  --rs-text-field-input--display: flex;
+  --rs-text-field-input--padding: 12px 16px 14px;
+  --rs-text-field-input--border: none !important;  // FF adds unwanted border in HC mode on windows.
+  --rs-text-field-input--background-color: transparent;
+  --rs-text-field-input--z-index: 1;
+  --rs-text-field--icon--z-index: 2; 
 
-  .rs-text-field__input {
-    display: flex;
-    padding: 12px 16px 14px;
-    border: none !important;  // FF adds unwanted border in HC mode on windows.
-    background-color: transparent;
-    z-index: 1;
+  &[invalid] {
+    //notched
+    @include rs-text-field-outline-color($rs-text-field-error);
+    @include rs-text-field-hover-outline-color($rs-text-field-error);
+    @include rs-text-field-focused-outline-color($rs-text-field-error);
   }
 
-  .rs-text-field__icon {
-    z-index: 2;
-  }
-}
-
-@mixin rs-text-field-hover-outline-color_($color) {
-  &:not(.rs-text-field--focused) {
-    // stylelint-disable-next-line selector-combinator-space-after
-    .rs-text-field__input:hover ~,
-    .rs-text-field__icon:hover ~ {
-      .rs-notched-outline {
-        @include rs-notched-outline-color($color);
-      }
-    }
+  &[focus] {
+    @include rs-notched-outline-stroke-width(2px);
   }
 }
-
-@mixin rs-text-field-focused-outline-color_($color) {
-  &.rs-text-field--focused {
-    @include rs-notched-outline-color($color);
-  }
-}
-
-// Icons
 
 @mixin rs-text-field-with-leading-icon_ {
   @include rs-text-field-icon-horizontal-position_(left, $rs-text-field-icon-position, $rs-text-field-icon-padding);
@@ -392,33 +257,21 @@
 
 // Full Width
 @mixin rs-text-field-fullwidth_ {
-  width: 100%;
-
-  &:not(.rs-text-field--textarea) {
-    @include rs-states-base-color(transparent);
-    @include rs-text-field-fill-color(transparent);
-
-    display: block;
-
-    .rs-text-field__input {
-      padding: 0;
-    }
-  }
-
-  &.rs-text-field--textarea .rs-text-field__input {
-    resize: vertical;
-  }
-}
-
-@mixin rs-text-field-fullwidth-invalid_ {
-  @include rs-text-field-fullwidth-bottom-line-color($rs-text-field-error);
+  --rs-text-field--width: 100%;
+  --rs-text-field_not_disabled--background-color: transparent;
+  --rs-text-field-input_placeholder--transition-delay: 40ms;
+  --rs-text-field-input_placeholder--transition-duration: 110ms;
+  --rs-text-field-input_placeholder--opacity: 1;
+  --rs-text-field_invalid--border-bottom-color: $rs-text-field-error;
+  --rs-text-field_not__textarea--display: block;
+  --rs-text-field_not__textarea-input--padding: 0;
+  --rs-text-field_not__textarea-input--resize: vertical;
 }
 
 // Textarea
 @mixin rs-text-field-textarea-disabled_ {
   @include rs-text-field-outlined-disabled_;
-  /* @alternate */
-  @include rs-text-field-textarea-fill-color_($rs-textarea-disabled-background);
+  --rs-textarea-field_disabled--background-color: #{$rs-textarea-disabled-background};
 }
 
 @mixin rs-text-field-textarea-invalid_ {
@@ -428,27 +281,163 @@
 }
 
 @mixin rs-text-field-textarea_ {
-  // Note: The refactor to add the filled textarea style will result in a lot of the specificity issues that the
-  // textarea has being resolved by using the same --outlined variant class as the text field.
   @include rs-text-field-outline-color($rs-text-field-outlined-idle-border);
   @include rs-text-field-hover-outline-color($rs-text-field-outlined-hover-border);
   @include rs-text-field-focused-outline-color(primary);
   @include rs-floating-label-shake-animation(text-field-outlined);
   @include rs-text-field-outline-shape-radius(small);
   @include rs-states-base-color(transparent);
-  @include rs-text-field-fill-color(transparent);
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y, 0%);
   @include rs-text-field-character-counter-position(16px, 13px);
 
-  $padding-inset: 16px;
-
+  background-color: var(--rs-textarea-field_not_disabled--background-color, transparent);
   display: inline-flex;
   width: auto;
   height: auto;
   transition: none;
   overflow: visible;
 
-  .rs-text-field__input {
+  &[focus] {
+    @include rs-notched-outline-stroke-width(2px);
+  }
+}
+
+@mixin rs-text-field_ {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  height: $rs-text-field-height;
+  overflow: hidden;
+  will-change: opacity, transform, color;
+
+  &:not(.rs-text-field--textarea) {
+    @include rs-states-base-color(transparent);
+    display: var(--rs-text-field_not__textarea--display, block);
+
+    &::before{
+      background-color: var(--rs-ripple_before--background-color, transparent);
+      content: var(--rs-ripple_before--content, '');
+    }
+  
+    &::after {
+      background-color: var(--rs-ripple_after--background-color, transparent);
+      content: var(--rs-ripple_after--content, '');
+    }
+  }
+
+  width: var(--rs-text-field--width);
+  border-radius: var(--rs-text-field--border-radius, 4px);
+  background-color: var(--rs-text-field_not_disabled--background-color, $rs-text-field-background);
+
+  [dir="rtl"] &,
+  &[dir="rtl"] {
+    border-radius: var(--rs-text-field_rtl--border-radius, rs-shape-rtl-radius(small, false));
+  }
+
+  &::before{
+    background-color: var(--rs-ripple_before--background-color, $rs-text-field-ink-color);
+    content: var(--rs-ripple_before--content, '');
+  }
+
+  &::after {
+    background-color: var(--rs-ripple_after--background-color, $rs-text-field-ink-color);
+    content: var(--rs-ripple_after--content, '');
+  }
+
+  &:hover::before {
+    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity($rs-text-field-ink-color, hover));
+  }
+
+  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
+    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
+    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity($rs-text-field-ink-color, focus));
+  }
+
+  &.rs-ripple-upgraded--background-focused::before {
+    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
+    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity($rs-text-field-ink-color, focus));
+  }
+}
+
+@mixin rs-text-field-input_ {
+  @include rs-typography(subtitle1);
+  align-self: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px 16px 6px;
+  transition: rs-text-field-transition(opacity);
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  background: none;
+  appearance: none;
+  caret-color: var(--rs-text-field-input--caret-color, $rs-theme-primary);
+
+  .rs-text-field--textarea & {
+    resize: var(--rs-text-field_not__textarea-input--resize);
+  }
+
+  :not(.rs-text-field--textarea) & {
+    padding: var(--rs-text-field_not__textarea-input--padding);
+  }
+
+  :not([disabled]) & {
+    color: var(--rs-text-field_not_disabled-input--color, $rs-text-field-ink-color);
+  }
+
+  :not([disabled]):not(.rs-text-field--outlined):not(.rs-text-field--textarea) & {
+    border-bottom-color: var(--rs-text-field_not_disabled_not__outlined_not__textarea-input--border-bottom-color, $rs-text-field-bottom-line-idle);
+  }
+
+  :not([disabled]):not(.rs-text-field--outlined):not(.rs-text-field--textarea) &:hover {
+    border-bottom-color: var(--rs-text-field_not_disabled_not__outlined_not__textarea-input_hover--border-bottom-color, $rs-text-field-bottom-line-hover);
+  }
+
+  &::placeholder {
+    transition: rs-text-field-transition(opacity, $duration: 67ms);
+    color: $rs-text-field-placeholder-ink-color;
+    opacity: var(--rs-text-field-input_placeholder--opacity, 0);
+    transition-delay: var(--rs-text-field-input_placeholder--transition-delay);
+    transition-duration: var(--rs-text-field-input_placeholder--transition-duration);
+  }
+
+  &:-ms-input-placeholder {
+    color: $rs-text-field-placeholder-ink-color !important;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[invalid] {
+    box-shadow: none;
+    border-bottom-color: $rs-text-field-error;
+    caret-color: $rs-text-field-error;
+    border-bottom-color: $rs-text-field-error;
+  }
+
+  &.rs-text-field--no-label::placeholder, 
+  &:focus::placeholder {
+    transition-delay: 40ms;
+    transition-duration: 110ms;
+    opacity: 1;
+  }
+
+  &:-webkit-autofill {
+    z-index: auto !important;
+  }
+
+  :not(.rs-text-field--outlined):not(.rs-text-field--textarea) &.rs-text-field--no-label {
+    padding: 16px;
+  }
+
+  .rs-text-field--textarea & {
+    $padding-inset: 16px;
+
     align-self: auto;
     box-sizing: border-box;
     height: auto;
@@ -456,70 +445,5 @@
     padding: 0 $padding-inset $padding-inset;
     border: none;
   }
-
-  .rs-text-field-character-counter + .rs-text-field__input {
-    margin-bottom: 28px; // Leaves space for character counter if it exists.
-    padding-bottom: 0;
-  }
-
-  .rs-floating-label {
-    top: 17px;
-    bottom: auto;
-    width: auto;
-    pointer-events: none;
-  }
-
-  &.rs-text-field--focused {
-    @include rs-text-field-outlined-focused_;
-  }
 }
 
-// Customization
-
-@mixin rs-text-field-ink-color_($color) {
-  .rs-text-field__input {
-    @include rs-theme-prop(color, $color);
-  }
-}
-
-@mixin rs-text-field-fill-color_($color) {
-  @include rs-theme-prop(background-color, $color);
-}
-
-@mixin rs-text-field-textarea-stroke-color_($color) {
-  @include rs-notched-outline-color($color);
-}
-
-@mixin rs-text-field-textarea-fill-color_($color) {
-  @include rs-theme-prop(background-color, $color);
-}
-
-@mixin rs-text-field-fullwidth-bottom-line-color_($color) {
-  &:not(.rs-text-field--textarea) {
-    @include rs-theme-prop(border-bottom-color, $color);
-  }
-}
-
-@mixin rs-text-field-bottom-line-color_($color) {
-  .rs-text-field__input {
-    @include rs-theme-prop(border-bottom-color, $color);
-  }
-}
-
-@mixin rs-text-field-hover-bottom-line-color_($color) {
-  .rs-text-field__input:hover {
-    @include rs-theme-prop(border-bottom-color, $color);
-  }
-}
-
-@mixin rs-text-field-line-ripple-color_($color) {
-  .rs-line-ripple {
-    @include rs-line-ripple-color($color);
-  }
-}
-
-@mixin rs-text-field-label-ink-color_($color) {
-  .rs-floating-label {
-    @include rs-floating-label-ink-color($color);
-  }
-}
