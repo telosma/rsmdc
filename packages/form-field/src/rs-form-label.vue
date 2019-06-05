@@ -159,11 +159,6 @@ export default {
   }
 }
 
-
-
-
-
-
 .rs-notched-outline {
 
   &[disabled] {
