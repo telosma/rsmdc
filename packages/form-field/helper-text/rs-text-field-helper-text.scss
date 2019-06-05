@@ -4,17 +4,35 @@
 
 // postcss-bem-linter: define text-field-helper-text
 
-.rs-text-field-helper-text {
+@mixin rs-form-field-line-host_ {
+  //.rs-text-field--dense + &
+  margin-bottom: var(--rs-form-field-line--margin-bottom);
+}
+
+@mixin rs-form-field-line_ {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  //.rs-text-field + &
+  padding-right: var(--rs-form-field-line--padding-right);
+  padding-left: var(--rs-form-field-line--padding-left);
+
+  // padding-right: $rs-text-field-helper-line-padding;
+  // padding-left: $rs-text-field-helper-line-padding;
+}
+
+@mixin rs-form-field-helper_ {
   @include rs-typography(caption);
   @include rs-typography-baseline-top(16px);
-
   margin: 0;
-  transition: rs-text-field-transition(opacity);
-  opacity: 0;
-  will-change: opacity;
 }
 
 .rs-text-field-helper-text--persistent {
+  transition: rs-text-field-transition(opacity);
+  opacity: 0;
+  will-change: opacity;
+
   transition: none;
   opacity: 1;
   will-change: initial;

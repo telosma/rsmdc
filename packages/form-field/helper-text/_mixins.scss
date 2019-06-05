@@ -1,25 +1,34 @@
-@mixin rs-text-field-helper-text-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-helper-text-color_($color);
-  }
+@import "@rsmdc/typography/mixins";
+
+
+@mixin rs-form-field-line-host_ {
+  //.rs-text-field--dense + &
+  margin-bottom: var(--rs-form-field-line--margin-bottom);
+  position: absolute;
+  bottom: -16px;
 }
 
-@mixin rs-text-field-helper-text-validation-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-helper-text-validation-color_($color);
-  }
+@mixin rs-form-field-line_ {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-right: $rs-text-field-helper-line-padding;
+  padding-left: $rs-text-field-helper-line-padding;
 }
 
-// Private mixins
-
-@mixin rs-text-field-helper-text-color_($color) {
-  + .rs-text-field-helper-line .rs-text-field-helper-text {
-    @include rs-theme-prop(color, $color);
-  }
+@mixin rs-form-field-helper_ {
+  @include rs-typography(caption);
+  @include rs-typography-baseline-top(16px);
+  white-space: nowrap;
+  margin: 0;
 }
 
-@mixin rs-text-field-helper-text-validation-color_($color) {
-  &.rs-text-field--invalid + .rs-text-field-helper-line .rs-text-field-helper-text--validation-msg {
-    @include rs-theme-prop(color, $color);
-  }
+.rs-text-field-helper-text--persistent {
+  transition: rs-text-field-transition(opacity);
+  opacity: 0;
+  will-change: opacity;
+
+  transition: none;
+  opacity: 1;
+  will-change: initial;
 }
