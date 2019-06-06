@@ -44,8 +44,7 @@ export default {
     updateRadios() {
       const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('id') === this.name)
       radios.forEach(radio => {
-        radio._wrapper.$children[0].updateRadios()
-        radio._wrapper.$children[0].clickRadio()
+        radio.shadowRoot.querySelector('.rs-radio').click()
       })
     }
   }

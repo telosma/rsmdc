@@ -71,7 +71,14 @@ export default {
     },
     updateRadios() {
       if(this.disabled) { return }
+
+      // for label clicking (Todo: fix ripple style)
       this.activateRipple()
+      this.el.querySelector('.rs-radio__native-control').focus()
+      this.host.addEventListener('blur', () => {
+        this.deactivateRipple()
+      })
+
       const radioGroup = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('name') === this.name)
       radioGroup.forEach(radio => {
         if(radio.isEqualNode(this.host)) {
