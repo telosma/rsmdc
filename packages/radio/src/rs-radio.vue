@@ -1,6 +1,6 @@
 <template>
   <div class="rs-radio" @click="updateRadios(), clickRadio()" :disabled="disabled">
-    <input class="rs-radio__native-control" type="radio" :id="id" :name="name" :checked="checked" :disabled="disabled">
+    <input class="rs-radio__native-control" :class="{ '-checked': isChecked }" type="radio" :id="id" :name="name" :disabled="disabled">
     <div class="rs-radio__background">
       <div class="rs-radio__outer-circle"></div>
       <div class="rs-radio__inner-circle"></div>
@@ -33,12 +33,13 @@ export default {
     return {
       el: '',
       host: '',
+      ripple: '',
       isChecked: false
     }
   },
   watch: {
     checked() {
-      this.isChecked = this.checked
+      this.isChecked = this.checked ? true : false
     },
     el() {
       this.host = this.el.parentNode.host
@@ -58,10 +59,10 @@ export default {
     }
   },
   mounted() {
-    const ripple = new RSRipple(this.$el)
-    ripple.unbounded = true
-
+    this.ripple = new RSRipple(this.$el)
+    this.ripple.unbounded = true
     this.el = this.$el
+    this.isChecked = this.checked ? true : false
   },
   methods: {
     fixSlot() {
@@ -70,19 +71,25 @@ export default {
     },
     updateRadios() {
       if(this.disabled) { return }
-
+      this.activateRipple()
       const radioGroup = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('name') === this.name)
       radioGroup.forEach(radio => {
-        const el = radio.shadowRoot.querySelector('.rs-radio')
-        if(radio.isSameNode(this.host)) {
-          el.classList.remove('-rs-unchecked')
+        if(radio.isEqualNode(this.host)) {
+          this.isChecked = true
         } else {
-          el.classList.add('-rs-unchecked')
+          radio._wrapper.$children[0].isChecked = false
+          radio._wrapper.$children[0].deactivateRipple()
         }
       })
     },
     clickRadio() {
       this.$emit('change')
+    },
+    activateRipple() {
+      this.ripple.activate()
+    },
+    deactivateRipple() {
+      this.ripple.deactivate()
     }
   }
 }
@@ -117,16 +124,6 @@ export default {
   &[disabled] {
     cursor: default;
     pointer-events: none;
-  }
-
-  &.-rs-unchecked {
-    > .rs-radio__native-control:enabled:checked + .rs-radio__background > .rs-radio__outer-circle {
-      border-color: var(--rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color, $rs-radio-unchecked-color);
-    }
-
-    > .rs-radio__native-control:enabled + .rs-radio__background > .rs-radio__inner-circle {
-      border-color: #fff;
-    }
   }
   
   // ripple
@@ -188,26 +185,26 @@ export default {
   cursor: inherit;
   z-index: 1;
 
-  &:checked + .rs-radio__background,
+  &.-checked + .rs-radio__background,
   &:disabled + .rs-radio__background {
     transition:
       rs-radio-enter(opacity),
       rs-radio-enter(transform);
   }
 
-  &:checked + .rs-radio__background > .rs-radio__outer-circle,
+  &.-checked + .rs-radio__background > .rs-radio__outer-circle,
   &:disabled + .rs-radio__background > .rs-radio__outer-circle {
     transition: rs-radio-enter(border-color);
   }
 
-  &:checked + .rs-radio__background > .rs-radio__inner-circle,
+  &.-checked + .rs-radio__background > .rs-radio__inner-circle,
   &:disabled + .rs-radio__background > .rs-radio__inner-circle {
     transition:
       rs-radio-enter(transform),
       rs-radio-enter(border-color);
   }
 
-  &:checked + .rs-radio__background > .rs-radio__inner-circle {
+  &.-checked + .rs-radio__background > .rs-radio__inner-circle {
     transform: scale(.5);
 
     transition:
@@ -215,16 +212,24 @@ export default {
       rs-radio-enter(border-color);
   }
 
-  &:enabled:checked + .rs-radio__background > .rs-radio__outer-circle {
+  &:enabled.-checked + .rs-radio__background > .rs-radio__outer-circle {
     border-color: var(--rs-radio-nativeControl_enabled_checked_-background-outerCircle--border-color, $rs-theme-secondary);
   }
 
-  &:enabled + .rs-radio__background > .rs-radio__inner-circle {
+  &:enabled.-checked + .rs-radio__background > .rs-radio__inner-circle {
     border-color: var(--rs-radio-nativeControl_enabled_-background-innerCircle--border-color, $rs-theme-secondary);
   }
 
-  &:enabled:not(:checked) + .rs-radio__background > .rs-radio__outer-circle {
+  &:enabled:not(.-checked) + .rs-radio__background > .rs-radio__outer-circle {
     border-color: var(--rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color, $rs-radio-unchecked-color);
+  }
+
+  &:enabled:not(.-checked) + .rs-radio__background > .rs-radio__inner-circle {
+    border-color: transparent;
+  }
+
+  &:not(:disabled) + .rs-radio__background > .rs-radio__inner-circle {
+    transform: scale(.5);
   }
 
   &:disabled + .rs-radio__background ,
