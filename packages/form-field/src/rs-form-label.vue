@@ -2,18 +2,25 @@
   <div class="rs-notched-outline" v-if="isTextAreaLabel || isOutline">
     <div class="rs-notched-outline__leading" />
       <div class="rs-notched-outline__notch">
-        <label for="" class="rs-form-label -float" ref="slotContainer">
+        <label :for="name" class="rs-form-label -float" ref="slotContainer">
           <slot></slot>
         </label>
       </div>
       <div class="rs-notched-outline__trailing" />
     </div>
-  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline }" for="" ref="slotContainer" v-else>
+  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline }" :for="name" 
+    ref="slotContainer" @click="updateRadios" v-else>
     <slot></slot>
   </label>
 </template>
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       isTextFiledLabel: false,
@@ -33,6 +40,13 @@ export default {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
       return value
+    },
+    updateRadios() {
+      const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('id') === this.name)
+      radios.forEach(radio => {
+        radio._wrapper.$children[0].updateRadios()
+        radio._wrapper.$children[0].clickRadio()
+      })
     }
   }
 }
