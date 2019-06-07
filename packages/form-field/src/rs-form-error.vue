@@ -47,13 +47,6 @@ export default {
 
 .rs-form-field-line {
   @include rs-form-field-line_;
-
-  &.-radio {
-    padding-left: $rs-form-field-label-radio-padding-left;
-  }
-  &.-radio.-left {
-    padding-left: $rs-form-field-label-radio-left-padding-left;
-  }
 }
 
 .rs-form-field-error {

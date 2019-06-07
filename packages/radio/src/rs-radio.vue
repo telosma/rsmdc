@@ -65,10 +65,6 @@ export default {
     this.isChecked = this.checked ? true : false
   },
   methods: {
-    fixSlot() {
-      this.$refs.slotContainer.innerHTML = ''
-      this.$refs.slotContainer.append(document.createElement('slot'))
-    },
     updateRadios() {
       if(this.disabled) { return }
 

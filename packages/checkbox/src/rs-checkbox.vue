@@ -1,5 +1,4 @@
 <template>
-  <div class="rs-form-field">
     <div class="rs-checkbox" :disabled="disabled" @click="clickCheckBox">
       <input type="checkbox" class="rs-checkbox__native-control" :id="id" :name="name"
         :checked="checked" :disabled="disabled" :indeterminate="indeterminate">
@@ -10,14 +9,9 @@
         <div class="rs-checkbox__mixedmark"></div>
       </div>
     </div>
-    <label :for="id" ref="slotContainer" @click="clickCheckBox">
-      <slot></slot>
-    </label>
-  </div>
 </template>
 <script>
-import { RSFormField } from '@rsmdc/form-field'
-import { RSCheckbox } from '../index'
+import { RSRipple } from '@rsmdc/ripple'
 
 export default {
   props: {
@@ -44,27 +38,21 @@ export default {
   },
   data() {
     return {
-      checkbox: ''
+      el: ''
     }
   },
   watch: {
     indeterminate() {
-      this.checkbox.indeterminate = this.indeterminate
+      this.el.indeterminate = this.indeterminate
     }
   },
   mounted() {
-    this.$nextTick().then(this.fixSlot.bind(this))
-    const checkbox = new RSCheckbox(this.$el.querySelector('.rs-checkbox'));
-    const formField = new RSFormField(this.$el);
-    formField.input = checkbox
-    this.checkbox = checkbox
-    this.checkbox.indeterminate = this.indeterminate
+    this.ripple = new RSRipple(this.$el)
+    this.ripple.unbounded = true
+    this.el = this.$el
+    this.el.indeterminate = this.indeterminate
   },
   methods: {
-    fixSlot() {
-      this.$refs.slotContainer.innerHTML = ''
-      this.$refs.slotContainer.append(document.createElement('slot'))
-    },
     clickCheckBox() {
       this.$emit('change')
     }
