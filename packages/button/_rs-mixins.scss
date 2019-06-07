@@ -105,26 +105,6 @@
   --rs-button--border-width: #{$outline-width};
 }
 
-// Change button padding-right. Usually, you use this mixin when set icon to button. 
-@mixin rs-button-padding-right($padding) {
-  --rs-button--padding-right: #{$padding};
-}
-
-// Change button padding-left. 
-@mixin rs-button-padding-left($padding) {
-  --rs-button--padding-left: #{$padding};
-}
-
-// Change button padding-top. 
-@mixin rs-button-padding-top($padding) {
-  --rs-button--padding-top: #{$padding};
-}
-
-// Change button padding-bottom. 
-@mixin rs-button-padding-bottom($padding) {
-  --rs-button--padding-top: #{$padding};
-}
-
 // Set icon to button. 
 @mixin rs-button-icon-image($url) {
   --rs-button__icon: true;
