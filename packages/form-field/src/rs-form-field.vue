@@ -84,6 +84,9 @@ export default {
         })
 
         const labelPosition = items.findIndex(item => item.isEqualNode(this.label.parentNode.host))
+        if(labelPosition > 0) {
+          this.label.parentNode.host.setAttribute('label-position', 'right')
+        }
         if(labelPosition > 0 && this.helperText) {
           this.helperText.parentNode.host.setAttribute('label-position', 'right')
         }

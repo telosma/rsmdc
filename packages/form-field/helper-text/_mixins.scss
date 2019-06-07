@@ -12,8 +12,8 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding-right: $rs-text-field-helper-line-padding;
-  padding-left: $rs-text-field-helper-line-padding;
+  padding-right: var(--rs-form-field-line--padding-right, $rs-text-field-helper-line-padding);
+  padding-left: var(--rs-form-field-line--padding-left, $rs-text-field-helper-line-padding);
 }
 
 @mixin rs-form-field-helper_ {

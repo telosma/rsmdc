@@ -9,19 +9,6 @@
   margin-bottom: var(--rs-form-field-line--margin-bottom);
 }
 
-@mixin rs-form-field-line_ {
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-
-  //.rs-text-field + &
-  padding-right: var(--rs-form-field-line--padding-right);
-  padding-left: var(--rs-form-field-line--padding-left);
-
-  // padding-right: $rs-text-field-helper-line-padding;
-  // padding-left: $rs-text-field-helper-line-padding;
-}
-
 @mixin rs-form-field-helper_ {
   @include rs-typography(caption);
   @include rs-typography-baseline-top(16px);

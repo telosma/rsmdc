@@ -8,7 +8,7 @@
       </div>
       <div class="rs-notched-outline__trailing" />
     </div>
-  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline }" :for="name" 
+  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline, '-left': labelPosition === 'left' }" :for="name" 
     ref="slotContainer" @click="updateRadios" :disabled="disabled" v-else>
     <slot></slot>
   </label>
@@ -23,6 +23,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    labelPosition: {
+      type: String,
+      default: 'left'
     }
   },
   data() {
@@ -98,8 +102,8 @@ export default {
   &.-left {
     margin-right: 0;
     padding-left: 0;
-    margin-left: var(--rs-form-field-label--margin-left, auto);
-    padding-right: var(--rs-form-field-label--padding-right, $rs-form-field-item-spacing);
+    margin-left: var(--rs-form-field-label__left--margin-left, auto);
+    padding-right: var(--rs-form-field-label__left--padding-right, $rs-form-field-item-spacing);
   }
 
   &.-float {
