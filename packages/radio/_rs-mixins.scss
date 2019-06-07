@@ -27,3 +27,11 @@
     @include rs-form-field-label-left;
   }
 }
+
+// Change radio line, mark and states color.
+@mixin rs-radio-fill-color-accessible($color) {
+  @include rs-radio-unchecked-stroke-color($color);
+  @include rs-radio-checked-stroke-color($color);
+  @include rs-radio-ink-color($color);
+  @include rs-radio-states-color($color);
+}
