@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-form-field-line" :class="{ '-radio': type === 'radio', '-left': labelPosition === 'left' }" :visible="isVisible">
+  <div class="rs-form-field-line -helper" :class="{ '-radio': type === 'radio', '-left': labelPosition === 'left' }">
     <p class="rs-form-field-helper" ref="slotContainer">
       <slot></slot>
     </p>
@@ -8,10 +8,6 @@
 <script>
 export default {
   props: {
-    visible: {
-      type: String,
-      default: 'initial'
-    },
     type: {
       type: String,
       default: 'textfield'
@@ -19,17 +15,6 @@ export default {
     labelPosition: {
       type: String,
       default: 'left'
-    }
-  },
-  data() {
-    return {
-      isVisible: false,
-
-    }
-  },
-  watch: {
-    visible() {
-
     }
   },
   mounted() {

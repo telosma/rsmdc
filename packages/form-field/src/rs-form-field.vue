@@ -5,14 +5,40 @@
 </template>
 <script>
 export default {
+  props: {
+    error: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       radio: '',
       checkbox: '',
       textField: '',
       label: '',
-      helper: '',
-      error: ''
+      helperText: '',
+      errorText: '',
+      isError: ''
+    }
+  },
+  watch: {
+    error() {
+      this.isError = this.error ? true : false
+    },
+    isError() {
+      if(this.error && this.errorText) {
+        this.errorText.parentNode.host.removeAttribute('hidden')
+      }
+      if(this.error && this.helperText) {
+        this.helperText.parentNode.host.setAttribute('hidden', true)
+      }
+      if(!this.error && this.errorText) {
+        this.errorText.parentNode.host.setAttribute('hidden', true)
+      }
+      if(!this.error && this.helperText) {
+        this.helperText.parentNode.host.removeAttribute('hidden')
+      }
     }
   },
   mounted() {
@@ -27,29 +53,29 @@ export default {
           if(!this.label) {
             this.label = item.shadowRoot.querySelector('.rs-form-label')
           }
-          if(!this.helper) {
-            this.helper = item.shadowRoot.querySelector('.rs-form-field-line')
+          if(!this.helperText) {
+            this.helperText = item.shadowRoot.querySelector('.-helper')
           }
-
+          if(!this.errorText) {
+            this.errorText = item.shadowRoot.querySelector('.-error')
+          }
         })
-        this.radio = this.radio.parentNode.host
-        this.label = this.label.parentNode.host
-        this.helper = this.helper.parentNode.host
 
-        
-
-        const labelPosition = items.findIndex(item => item.isEqualNode(this.label))
-
-        if(labelPosition > 0) {
-          this.helper.setAttribute('label-position', 'right')
+        const labelPosition = items.findIndex(item => item.isEqualNode(this.label.parentNode.host))
+        if(labelPosition > 0 && this.helperText) {
+          this.helperText.parentNode.host.setAttribute('label-position', 'right')
+        }
+        if(labelPosition > 0 && this.errorText) {
+          this.errorText.parentNode.host.setAttribute('label-position', 'right')
         }
 
-        if(this.radio) {
-          this.helper.setAttribute('type', 'radio')
+        if(this.radio && this.helperText) {
+          this.helperText.parentNode.host.setAttribute('type', 'radio')
         }
-
-
-        
+        if(this.radio && this.errorText) {
+          this.errorText.parentNode.host.setAttribute('type', 'radio')
+        }
+        this.isError = this.error ? true : false
       })
   },
   methods: {
