@@ -8,7 +8,7 @@
       </div>
       <div class="rs-notched-outline__trailing" />
     </div>
-  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline, '-left': labelPosition === 'left' }" :for="name" 
+  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
     ref="slotContainer" @click="updateControllers" :disabled="disabled" v-else>
     <slot></slot>
   </label>
@@ -16,10 +16,6 @@
 <script>
 export default {
   props: {
-    id: {
-      type: String,
-      default: ''
-    },
     name: {
       type: String,
       default: ''
@@ -28,11 +24,15 @@ export default {
       type: Boolean,
       default: false
     },
-    labelPosition: {
+    dataId: {
       type: String,
-      default: 'left'
+      default: ''
     },
-    type: {
+    dataFormindex: {
+      type: Number,
+      default: 0
+    },
+    dataType: {
       type: String,
       default: ''
     }
@@ -58,20 +58,20 @@ export default {
       return value
     },
     updateControllers() {
-      if(this.type === 'radio') {
+      if(this.dataType === 'radio') {
         this.updateRadios()
-      } else if(this.type == 'checkbox') {
+      } else if(this.dataType == 'checkbox') {
         this.updateCheckbox()
       }
     },
     updateRadios() {
-      const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('id') === this.id)
+      const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('data-id') === this.dataId)
       radios.forEach(radio => {
         radio.shadowRoot.querySelector('.rs-radio').click()
       })
     },
     updateCheckbox() {
-      const checkboxes = window.__rsmdc.checkbox.checkboxes.filter(checkbox => checkbox.getAttribute('id') === this.id)
+      const checkboxes = window.__rsmdc.checkbox.checkboxes.filter(checkbox => checkbox.getAttribute('data-id') === this.dataId)
       checkboxes.forEach(checkbox => {
         checkbox.shadowRoot.querySelector('.rs-checkbox').click()
       })

@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-form-field-line -helper" :class="{ '-left': labelPosition === 'left' }">
+  <div class="rs-form-field-line -helper">
     <p class="rs-form-field-helper" ref="slotContainer">
       <slot></slot>
     </p>
@@ -8,13 +8,9 @@
 <script>
 export default {
   props: {
-    type: {
+    dataType: {
       type: String,
       default: 'textfield'
-    },
-    labelPosition: {
-      type: String,
-      default: 'left'
     }
   },
   mounted() {

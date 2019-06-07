@@ -1,6 +1,6 @@
 <template>
   <div class="rs-radio" @click="updateRadios" :disabled="disabled">
-    <input class="rs-radio__native-control" :class="{ '-checked': isChecked }" type="radio" :id="id" :name="name" :disabled="disabled">
+    <input class="rs-radio__native-control" :class="{ '-checked': isChecked }" type="radio" :data-id="dataId" :name="name" :disabled="disabled">
     <div class="rs-radio__background">
       <div class="rs-radio__outer-circle"></div>
       <div class="rs-radio__inner-circle"></div>
@@ -12,10 +12,6 @@ import { RSRipple } from '@rsmdc/ripple'
 
 export default {
   props: {
-    id: {
-      type: String,
-      default: ''
-    },
     name: {
       type: String,
       default: 'radio'
@@ -27,6 +23,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    dataId: {
+      type: String,
+      default: ''
     }
   },
   data() {

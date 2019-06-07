@@ -14,11 +14,31 @@ export default {
       type: String,
       default: ''
     },
+    maxlength: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    autocomplete: {
+      type: String,
+      default: ''
+    },
     error: {
       type: Boolean,
       default: false
     },
+    countable: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    equired: {
       type: Boolean,
       default: false
     }
@@ -101,25 +121,23 @@ export default {
         })
 
         const labelPosition = items.findIndex(item => item.isEqualNode(this.label.parentNode.host))
-        if(labelPosition > 0) {
-          this.label.parentNode.host.setAttribute('label-position', 'right')
-        }
+        this.label.parentNode.host.setAttribute('data-formindex', labelPosition)
 
         if(this.radio && this.label) {
-          this.label.parentNode.host.setAttribute('type', 'radio')
+          this.label.parentNode.host.setAttribute('data-type', 'radio')
         } 
         if(this.checkbox && this.label) {
-          this.label.parentNode.host.setAttribute('type', 'checkbox')
+          this.label.parentNode.host.setAttribute('data-type', 'checkbox')
         } 
 
         if(this.id && this.radio) {
-          this.radio.parentNode.host.setAttribute('id', this.id)
+          this.radio.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.checkbox) {
-          this.checkbox.parentNode.host.setAttribute('id', this.id)
+          this.checkbox.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.label) {
-          this.label.parentNode.host.setAttribute('id', this.id)
+          this.label.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.name && this.radio) {
           this.radio.parentNode.host.setAttribute('name', this.name)

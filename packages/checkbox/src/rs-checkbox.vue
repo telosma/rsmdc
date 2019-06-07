@@ -1,6 +1,6 @@
 <template>
     <div class="rs-checkbox" :disabled="disabled" @click="updateCheckbox">
-      <input type="checkbox" class="rs-checkbox__native-control" :class="{ '-checked': isChecked }" :id="id" :name="name"
+      <input type="checkbox" class="rs-checkbox__native-control" :class="{ '-checked': isChecked }" :data-id="dataId" :name="name"
         :disabled="disabled" :indeterminate="isIndeterminate">
       <div class="rs-checkbox__background">
         <svg class="rs-checkbox__checkmark" viewBox="0 0 24 24">
@@ -15,10 +15,6 @@ import { RSCheckbox } from '../index'
 
 export default {
   props: {
-    id: {
-      type: String,
-      default: ''
-    },
     name: {
       type: String,
       default: ''
@@ -34,6 +30,10 @@ export default {
     indeterminate: {
       type: Boolean,
       default: false
+    },
+    dataId: {
+      type: String,
+      default: ''
     }
   },
   data() {
