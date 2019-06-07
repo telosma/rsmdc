@@ -99,7 +99,7 @@ export default {
       this.host.addEventListener('blur', () => {
         this.deactivateRipple()
       })
-      
+
       this.isIndeterminate = false
       this.isChecked = !this.isChecked
       this.passChangeEvent()
@@ -410,8 +410,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   box-sizing: border-box;
   width: $rs-checkbox-ui-pct;
   height: $rs-checkbox-ui-pct;
-  // border-color is overridden by the rs-checkbox-unmarked-stroke-color() mixin
-  border: $rs-checkbox-border-width solid currentColor;
+  border: $rs-checkbox-border-width solid;
   border-radius: 2px;
   background-color: transparent;
   pointer-events: none;
@@ -419,6 +418,8 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   transition:
     rs-checkbox-transition-exit(background-color),
     rs-checkbox-transition-exit(border-color);
+
+  border-color: var(--rs-checkbox-background--border-color, currentColor);
 
   &::before {
     @include rs-checkbox__child--cover-parent_;

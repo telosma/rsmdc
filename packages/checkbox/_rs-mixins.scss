@@ -4,20 +4,12 @@
 @import "./variables";
 @import "./rs-functions";
 
-// Change checkbox states color and box color.
-@mixin rs-checkbox-container-colors(
-  $unmarked-stroke-color: $rs-checkbox-border-color,
-  $unmarked-fill-color: transparent,
-  $marked-stroke-color: $rs-checkbox-baseline-theme-color,
-  $marked-fill-color: $rs-checkbox-baseline-theme-color,
-  $generate-keyframes: true
-) {
-  --rs-checkbox-nativecontrol_enabled_not_checked_not_indeterminate_-background--border-color: #{$unmarked-stroke-color};
-  --rs-checkbox-nativecontrol_enabled_not_checked_not_indeterminate_-background--background-color: #{$unmarked-fill-color};
-  --rs-checkbox-nativecontrol_enabled_checked_-background--border-color: #{$marked-stroke-color};
-  --rs-checkbox-nativecontrol_enabled_checked_-background--background-color: #{$marked-fill-color};
-  --rs-checkbox-nativecontrol_enabled_indeterminate_-background--border-color: #{$marked-stroke-color};
-  --rs-checkbox-nativecontrol_enabled_indeterminate_-background--background-color: #{$marked-fill-color};
+// Change checkbox checked states color and box color.
+@mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) {
+  --rs-checkbox-nativecontrol_enabled_checked_-background--border-color: #{$color};
+  --rs-checkbox-nativecontrol_enabled_checked_-background--background-color: #{$color};
+  --rs-checkbox-nativecontrol_enabled_indeterminate_-background--border-color: #{$color};
+  --rs-checkbox-nativecontrol_enabled_indeterminate_-background--background-color: #{$color};
 
   @if $generate-keyframes {
     $uid: rs-checkbox-container-keyframes-uid_();
@@ -27,6 +19,11 @@
     --rs-checkbox__animchecked-nativecontrol_enabled_-background--animation-name: #{$fade-in-animation};
     --rs-checkbox__animunchekced-nativecontrol_enabled_-background--animation-name: #{$fade-out-animation};
   }
+}
+
+// Change unchecked checkbox line.
+@mixin rs-checkbox-unchecked-stroke-color($color) {
+  --rs-checkbox-background--border-color: #{$color};
 }
 
 // Change checkmark color.
@@ -45,4 +42,10 @@
   @if $position == left {
     @include rs-form-field-label-left;
   }
+}
+
+// Change checkbox line and states color.
+@mixin rs-checkbox-fill-color-accessible($color) {
+  @include rs-checkbox-checked-container-colors($color);
+  @include rs-checkbox-focus-indicator-color($color);
 }
