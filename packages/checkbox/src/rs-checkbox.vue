@@ -1,7 +1,7 @@
 <template>
     <div class="rs-checkbox" :disabled="disabled" @click="updateCheckbox">
-      <input type="checkbox" class="rs-checkbox__native-control" :id="id" :name="name"
-        :checked="checked" :disabled="disabled" :indeterminate="indeterminate">
+      <input type="checkbox" class="rs-checkbox__native-control" :class="{ '-checked': isChecked }" :id="id" :name="name"
+        :disabled="disabled" :indeterminate="isIndeterminate">
       <div class="rs-checkbox__background">
         <svg class="rs-checkbox__checkmark" viewBox="0 0 24 24">
           <path class="rs-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-import { RSRipple } from '@rsmdc/ripple'
+import { RSCheckbox } from '../index'
 
 export default {
   props: {
@@ -40,18 +40,38 @@ export default {
     return {
       el: '',
       host:'',
-      ripple: ''
+      checkbox: '',
+      isChecked: false,
+      isDisabled: false,
+      isIndeterminate: false
     }
   },
   watch: {
+    checked() {
+      this.isChecked = this.checked
+    },
     indeterminate() {
-      this.el.indeterminate = this.indeterminate
+      this.isIndeterminate = this.indeterminate
     },
     el() {
       this.host = this.el.parentNode.host
     },
     host() {
       window.__rsmdc.checkbox.checkboxes.push(this.host)
+    },
+    isChecked() {
+      if(this.isChecked) {
+        this.checkbox.checked = true
+      } else {
+        this.checkbox.checked = false
+      }
+    },
+    isIndeterminate() {
+      if(this.isIndeterminate) {
+        this.checkbox.indeterminate = true
+      } else {
+        this.checkbox.indeterminate = false
+      }
     }
   },
   created() {
@@ -65,31 +85,36 @@ export default {
     }
   },
   mounted() {
-    this.ripple = new RSRipple(this.$el)
-    this.ripple.unbounded = true
+    this.checkbox = new RSCheckbox(this.$el)
+    this.isIndeterminate = this.indeterminate
     this.el = this.$el
-    this.el.indeterminate = this.indeterminate
+    this.isChecked = this.checked ? true : false
   },
   methods: {
     updateCheckbox() {
-      console.log(1)
       if(this.disabled) { return }
-      // for label clicking (Todo: fix ripple style)
+      // for label clicking
       this.activateRipple()
       this.el.querySelector('.rs-checkbox__native-control').focus()
       this.host.addEventListener('blur', () => {
         this.deactivateRipple()
       })
+      
+      this.isIndeterminate = false
+      this.isChecked = !this.isChecked
       this.passChangeEvent()
     },
     passChangeEvent() {
       this.$emit('change')
     },
     activateRipple() {
-      this.ripple.activate()
+      this.checkbox.ripple.activate()
+      setTimeout(() => {
+        this.el.classList.add('rs-ripple-upgraded--foreground-deactivation')
+      }, 200)
     },
     deactivateRipple() {
-      this.ripple.deactivate()
+      this.checkbox.ripple.deactivate()
     }
   }
 }
@@ -112,7 +137,7 @@ export default {
 }
 
 @mixin rs-checkbox--disabled_ {
-  --rs-checkbox__diabled--cursor: default;
+  --rs-checkbox__disabled--cursor: default;
   pointer-events: none;
 }
 
@@ -189,7 +214,7 @@ export default {
   }
 }
 
-@include rs-ripple-common();
+@include rs-ripple-common;
 @include rs-checkbox-mark-keyframes_;
 
 $fade-in-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-uid_(), in);
@@ -209,7 +234,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   padding: ($rs-checkbox-touch-area - $rs-checkbox-size) / 2;
   line-height: 0;
   white-space: nowrap;
-  cursor: var(--rs-checkbox__diabled--cursor, pointer);
+  cursor: var(--rs-checkbox__disabled--cursor, pointer);
   vertical-align: bottom;
 
   &[disabled] {
@@ -311,7 +336,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     @include rs-checkbox--disabled_;
   }
 
-  &:disabled:not(:checked):not(:indeterminate) ~ .rs-checkbox__background {
+  &:disabled:not(:checked):not([indeterminate]) ~ .rs-checkbox__background {
     border-color: var(--rs-checkbox-nativecontrol_disabled_not_checked_not_indeterminate_-background--border-color, $rs-checkbox-disabled-color);
   }
   &:disabled:checked ~ .rs-checkbox__background {
@@ -319,7 +344,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     background-color: var(--rs-checkbox-nativecontrol_checked_-background--background-color, $rs-checkbox-disabled-color);
   }
 
-  &:disabled:indeterminate ~ .rs-checkbox__background {
+  &:disabled[indeterminate] ~ .rs-checkbox__background {
     border-color: var(--rs-checkbox-nativecontrol_disabled_indeterminate_-background--border-color, transparent);
     background-color: var(--rs-checkbox-nativecontrol_disabled_indeterminate_-background--background-color, $rs-checkbox-disabled-color);
   }
@@ -337,7 +362,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     }
   }
 
-  &:indeterminate ~ .rs-checkbox__background {
+  &[indeterminate] ~ .rs-checkbox__background {
     .rs-checkbox__checkmark {
       transform: rotate(45deg);
       opacity: 0;
@@ -353,7 +378,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   }
 
   &:checked ~ .rs-checkbox__background,
-  &:indeterminate ~ .rs-checkbox__background {
+  &[indeterminate] ~ .rs-checkbox__background {
     transition:
       rs-checkbox-transition-enter(border-color),
       rs-checkbox-transition-enter(background-color);
@@ -367,7 +392,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     border-color: var(--rs-checkbox-nativecontrol_enabled_checked_-background--border-color, $rs-checkbox-baseline-theme-color);
     background-color: var(--rs-checkbox-nativecontrol_enabled_checked_-background--background-color, $rs-checkbox-baseline-theme-color);
   }
-  &:enabled:indeterminate ~ .rs-checkbox__background {
+  &:enabled[indeterminate] ~ .rs-checkbox__background {
     border-color: var(--rs-checkbox-nativecontrol_enabled_indeterminate_-background--border-color, $rs-checkbox-baseline-theme-color);
     background-color: var(--rs-checkbox-nativecontrol_enabled_indeterminate_-background--background-color, $rs-checkbox-baseline-theme-color);
   }
@@ -453,5 +478,3 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   }
 }
 </style>
-
-

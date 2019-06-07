@@ -68,7 +68,7 @@ export default {
     updateRadios() {
       if(this.disabled) { return }
 
-      // for label clicking (Todo: fix ripple style)
+      // for label clicking
       this.activateRipple()
       this.el.querySelector('.rs-radio__native-control').focus()
       this.host.addEventListener('blur', () => {
@@ -91,6 +91,9 @@ export default {
     },
     activateRipple() {
       this.ripple.activate()
+      setTimeout(() => {
+        this.el.classList.add('rs-ripple-upgraded--foreground-deactivation')
+      }, 200)
     },
     deactivateRipple() {
       this.ripple.deactivate()
