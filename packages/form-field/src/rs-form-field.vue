@@ -52,11 +52,17 @@ export default {
       if(this.isDisabled && this.radio) {
         this.radio.parentNode.host.setAttribute('disabled', true)
       }
+      if(this.isDisabled && this.checkbox) {
+        this.checkbox.parentNode.host.setAttribute('disabled', true)
+      }
       if(this.isDisabled && this.label) {
         this.label.parentNode.host.setAttribute('disabled', true)
       }
       if(!this.isDisabled && this.radio) {
         this.radio.parentNode.host.removeAttribute('disabled')
+      }
+      if(!this.isDisabled && this.checkbox) {
+        this.checkbox.parentNode.host.removeAttribute('disabled')
       }
       if(!this.isDisabled && this.label) {
         this.label.parentNode.host.removeAttribute('disabled')
@@ -71,6 +77,9 @@ export default {
         items.forEach(item => {
           if(!this.radio) {
             this.radio = item.shadowRoot.querySelector('.rs-radio')
+          }
+          if(!this.checkbox) {
+            this.checkbox = item.shadowRoot.querySelector('.rs-checkbox')
           }
           if(!this.label) {
             this.label = item.shadowRoot.querySelector('.rs-form-label')
@@ -87,19 +96,14 @@ export default {
         if(labelPosition > 0) {
           this.label.parentNode.host.setAttribute('label-position', 'right')
         }
-        if(labelPosition > 0 && this.helperText) {
-          this.helperText.parentNode.host.setAttribute('label-position', 'right')
-        }
-        if(labelPosition > 0 && this.errorText) {
-          this.errorText.parentNode.host.setAttribute('label-position', 'right')
-        }
 
-        if(this.radio && this.helperText) {
-          this.helperText.parentNode.host.setAttribute('type', 'radio')
-        }
-        if(this.radio && this.errorText) {
-          this.errorText.parentNode.host.setAttribute('type', 'radio')
-        }
+        if(this.radio && this.label) {
+          this.label.parentNode.host.setAttribute('type', 'radio')
+        } 
+        if(this.checkbox && this.label) {
+          this.label.parentNode.host.setAttribute('type', 'checkbox')
+        } 
+
         this.isError = this.error ? true : false
         this.isDisabled = this.disabled ? true : false
       })

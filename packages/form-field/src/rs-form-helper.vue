@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-form-field-line -helper" :class="{ '-radio': type === 'radio', '-left': labelPosition === 'left' }">
+  <div class="rs-form-field-line -helper" :class="{ '-left': labelPosition === 'left' }">
     <p class="rs-form-field-helper" ref="slotContainer">
       <slot></slot>
     </p>

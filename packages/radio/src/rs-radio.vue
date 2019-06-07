@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-radio" @click="updateRadios(), clickRadio()" :disabled="disabled">
+  <div class="rs-radio" @click="updateRadios" :disabled="disabled">
     <input class="rs-radio__native-control" :class="{ '-checked': isChecked }" type="radio" :id="id" :name="name" :disabled="disabled">
     <div class="rs-radio__background">
       <div class="rs-radio__outer-circle"></div>
@@ -84,8 +84,9 @@ export default {
           radio._wrapper.$children[0].deactivateRipple()
         }
       })
+      this.passChangeEvent()
     },
-    clickRadio() {
+    passChangeEvent() {
       this.$emit('change')
     },
     activateRipple() {

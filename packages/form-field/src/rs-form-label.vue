@@ -9,7 +9,7 @@
       <div class="rs-notched-outline__trailing" />
     </div>
   <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline, '-left': labelPosition === 'left' }" :for="name" 
-    ref="slotContainer" @click="updateRadios" :disabled="disabled" v-else>
+    ref="slotContainer" @click="updateControllers" :disabled="disabled" v-else>
     <slot></slot>
   </label>
 </template>
@@ -27,6 +27,10 @@ export default {
     labelPosition: {
       type: String,
       default: 'left'
+    },
+    type: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -49,10 +53,23 @@ export default {
       const value = String(style.getPropertyValue(prop)).trim()
       return value
     },
+    updateControllers() {
+      if(this.type === 'radio') {
+        this.updateRadios()
+      } else if(this.type == 'checkbox') {
+        this.updateCheckbox()
+      }
+    },
     updateRadios() {
       const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('id') === this.name)
       radios.forEach(radio => {
         radio.shadowRoot.querySelector('.rs-radio').click()
+      })
+    },
+    updateCheckbox() {
+      const checkboxes = window.__rsmdc.checkbox.checkboxes.filter(checkbox => checkbox.getAttribute('id') === this.name)
+      checkboxes.forEach(checkbox => {
+        checkbox.shadowRoot.querySelector('.rs-checkbox').click()
       })
     }
   }
@@ -101,9 +118,9 @@ export default {
 
   &.-left {
     margin-right: 0;
-    padding-left: 0;
     margin-left: var(--rs-form-field-label__left--margin-left, auto);
     padding-right: var(--rs-form-field-label__left--padding-right, $rs-form-field-item-spacing);
+    padding-left: var(--rs-form-field-label__left--padding-left, $rs-form-field-item-spacing);
   }
 
   &.-float {

@@ -1,5 +1,5 @@
 <template>
-    <div class="rs-checkbox" :disabled="disabled" @click="clickCheckBox">
+    <div class="rs-checkbox" :disabled="disabled" @click="updateCheckbox">
       <input type="checkbox" class="rs-checkbox__native-control" :id="id" :name="name"
         :checked="checked" :disabled="disabled" :indeterminate="indeterminate">
       <div class="rs-checkbox__background">
@@ -38,12 +38,30 @@ export default {
   },
   data() {
     return {
-      el: ''
+      el: '',
+      host:'',
+      ripple: ''
     }
   },
   watch: {
     indeterminate() {
       this.el.indeterminate = this.indeterminate
+    },
+    el() {
+      this.host = this.el.parentNode.host
+    },
+    host() {
+      window.__rsmdc.checkbox.checkboxes.push(this.host)
+    }
+  },
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.checkbox) {
+      window.__rsmdc.checkbox = {
+        checkboxes: []
+      }
     }
   },
   mounted() {
@@ -53,8 +71,25 @@ export default {
     this.el.indeterminate = this.indeterminate
   },
   methods: {
-    clickCheckBox() {
+    updateCheckbox() {
+      console.log(1)
+      if(this.disabled) { return }
+      // for label clicking (Todo: fix ripple style)
+      this.activateRipple()
+      this.el.querySelector('.rs-checkbox__native-control').focus()
+      this.host.addEventListener('blur', () => {
+        this.deactivateRipple()
+      })
+      this.passChangeEvent()
+    },
+    passChangeEvent() {
       this.$emit('change')
+    },
+    activateRipple() {
+      this.ripple.activate()
+    },
+    deactivateRipple() {
+      this.ripple.deactivate()
     }
   }
 }
