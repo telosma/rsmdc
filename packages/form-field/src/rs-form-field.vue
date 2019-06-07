@@ -6,6 +6,14 @@
 <script>
 export default {
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    },
     error: {
       type: Boolean,
       default: false
@@ -103,6 +111,25 @@ export default {
         if(this.checkbox && this.label) {
           this.label.parentNode.host.setAttribute('type', 'checkbox')
         } 
+
+        if(this.id && this.radio) {
+          this.radio.parentNode.host.setAttribute('id', this.id)
+        }
+        if(this.id && this.checkbox) {
+          this.checkbox.parentNode.host.setAttribute('id', this.id)
+        }
+        if(this.id && this.label) {
+          this.label.parentNode.host.setAttribute('id', this.id)
+        }
+        if(this.name && this.radio) {
+          this.radio.parentNode.host.setAttribute('name', this.name)
+        }
+        if(this.name && this.checkbox) {
+          this.checkbox.parentNode.host.setAttribute('name', this.name)
+        }
+        if(this.name && this.label) {
+          this.label.parentNode.host.setAttribute('name', this.name)
+        }
 
         this.isError = this.error ? true : false
         this.isDisabled = this.disabled ? true : false

@@ -16,6 +16,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: ''
@@ -61,13 +65,15 @@ export default {
       }
     },
     updateRadios() {
-      const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('id') === this.name)
+      const radios = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('id') === this.id)
+      console.log(radios)
       radios.forEach(radio => {
         radio.shadowRoot.querySelector('.rs-radio').click()
       })
     },
     updateCheckbox() {
-      const checkboxes = window.__rsmdc.checkbox.checkboxes.filter(checkbox => checkbox.getAttribute('id') === this.name)
+      const checkboxes = window.__rsmdc.checkbox.checkboxes.filter(checkbox => checkbox.getAttribute('id') === this.id)
+      console.log(checkboxes)
       checkboxes.forEach(checkbox => {
         checkbox.shadowRoot.querySelector('.rs-checkbox').click()
       })
