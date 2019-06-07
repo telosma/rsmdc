@@ -2,14 +2,14 @@
   <div class="rs-notched-outline" v-if="isTextAreaLabel || isOutline">
     <div class="rs-notched-outline__leading" />
       <div class="rs-notched-outline__notch">
-        <label :for="name" class="rs-form-label -float" ref="slotContainer">
+        <label :for="name" class="rs-form-label -float" ref="slotContainer" :disabled="disabled">
           <slot></slot>
         </label>
       </div>
       <div class="rs-notched-outline__trailing" />
     </div>
   <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline }" :for="name" 
-    ref="slotContainer" @click="updateRadios" v-else>
+    ref="slotContainer" @click="updateRadios" :disabled="disabled" v-else>
     <slot></slot>
   </label>
 </template>
@@ -19,6 +19,10 @@ export default {
     name: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -85,6 +89,11 @@ export default {
   color: var(--rs-form-label--color, text-primary-on-background);
   margin-right: var(--rs-form-field-label--margin-right, auto);
   padding-left: var(--rs-form-field-label--padding-left, $rs-form-field-item-spacing);
+
+  [disabled] &,
+  &[disabled] {
+    cursor: default;
+  }
 
   &.-left {
     margin-right: 0;

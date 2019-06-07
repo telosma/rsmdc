@@ -9,6 +9,10 @@ export default {
     error: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -19,25 +23,43 @@ export default {
       label: '',
       helperText: '',
       errorText: '',
-      isError: ''
+      isError: '',
+      isDisabled: ''
     }
   },
   watch: {
     error() {
       this.isError = this.error ? true : false
     },
+    disabled() {
+      this.isDisabled = this.disabled ? true : false
+    },
     isError() {
-      if(this.error && this.errorText) {
+      if(this.isError && this.errorText) {
         this.errorText.parentNode.host.removeAttribute('hidden')
       }
-      if(this.error && this.helperText) {
+      if(this.isError && this.helperText) {
         this.helperText.parentNode.host.setAttribute('hidden', true)
       }
-      if(!this.error && this.errorText) {
+      if(!this.isError && this.errorText) {
         this.errorText.parentNode.host.setAttribute('hidden', true)
       }
-      if(!this.error && this.helperText) {
+      if(!this.isError && this.helperText) {
         this.helperText.parentNode.host.removeAttribute('hidden')
+      }
+    },
+    isDisabled() {
+      if(this.isDisabled && this.radio) {
+        this.radio.parentNode.host.setAttribute('disabled', true)
+      }
+      if(this.isDisabled && this.label) {
+        this.label.parentNode.host.setAttribute('disabled', true)
+      }
+      if(!this.isDisabled && this.radio) {
+        this.radio.parentNode.host.removeAttribute('disabled')
+      }
+      if(!this.isDisabled && this.label) {
+        this.label.parentNode.host.removeAttribute('disabled')
       }
     }
   },
@@ -76,6 +98,7 @@ export default {
           this.errorText.parentNode.host.setAttribute('type', 'radio')
         }
         this.isError = this.error ? true : false
+        this.isDisabled = this.disabled ? true : false
       })
   },
   methods: {
