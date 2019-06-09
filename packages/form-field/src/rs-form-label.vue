@@ -199,10 +199,16 @@ export default {
 
     &.-textarea {
       @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
+
+      top: 17px;
+      bottom: auto;
+      width: auto;
+      pointer-events: none;
     }
 
     &.-outlined {
       @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
+      
       top: 17px;
     }
 
