@@ -1,5 +1,5 @@
 @mixin rs-form-field-character-counter-color($color) {
-  --rs-form-field-character-counter_not_disabled--color: #{color};
+  --rs-form-field-character-counter_not_disabled--color: #{$color};
 }
 
 @mixin rs-form-field-character-counter-position($xOffset, $yOffset) {
