@@ -83,6 +83,9 @@ export default {
       if(this.isDisabled && this.checkbox) {
         this.checkbox.parentNode.host.setAttribute('disabled', true)
       }
+      if(this.isDisabled && this.textField) {
+        this.textField.parentNode.host.setAttribute('disabled', true)
+      }
       if(this.isDisabled && this.label) {
         this.label.parentNode.host.setAttribute('disabled', true)
       }
@@ -91,6 +94,9 @@ export default {
       }
       if(!this.isDisabled && this.checkbox) {
         this.checkbox.parentNode.host.removeAttribute('disabled')
+      }
+      if(!this.isDisabled && this.textField) {
+        this.textField.parentNode.host.removeAttribute('disabled')
       }
       if(!this.isDisabled && this.label) {
         this.label.parentNode.host.removeAttribute('disabled')
@@ -108,6 +114,9 @@ export default {
           }
           if(!this.checkbox) {
             this.checkbox = item.shadowRoot.querySelector('.rs-checkbox')
+          }    
+          if(!this.textField) {
+            this.textField = item.shadowRoot.querySelector('.-textfield')
           }
           if(!this.label) {
             this.label = item.shadowRoot.querySelector('.rs-form-label')
@@ -128,6 +137,9 @@ export default {
         } 
         if(this.checkbox && this.label) {
           this.label.parentNode.host.setAttribute('data-type', 'checkbox')
+        } 
+        if(this.textField && this.label) {
+          this.label.parentNode.host.setAttribute('data-type', 'textfield')
         } 
 
         if(this.id && this.radio) {

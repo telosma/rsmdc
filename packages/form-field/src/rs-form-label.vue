@@ -8,7 +8,7 @@
       </div>
       <div class="rs-notched-outline__trailing" />
     </div>
-  <label class="rs-form-label" :class="{ '-float': isTextFiledLabel && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
+  <label class="rs-form-label" :class="{ '-float': dataType === 'textfield' && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
     ref="slotContainer" @click="updateControllers" :disabled="disabled" v-else>
     <slot></slot>
   </label>
@@ -29,7 +29,8 @@ export default {
       default: false
     },
     invalid: {
-
+      type: Boolean,
+      default: false
     },
     dataId: {
       type: String,

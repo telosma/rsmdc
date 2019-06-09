@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-text-field" ref="slotContainer">
+  <div class="rs-text-field -textfield" ref="slotContainer">
     <input type="text" class="rs-text-field__input"
       :value="value" :maxLength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
     <div class="rs-line-ripple" />
