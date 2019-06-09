@@ -40,6 +40,7 @@ export default {
 </script>
 <style lang="scss">
 @import "@rsmdc/theme/mixins";
+@import "../character-counter/mixins";
 @import "../helper-text/mixins";
 @import "../helper-text/rs-variables";
 @import "../../textfield/variables";
