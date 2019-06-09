@@ -1,0 +1,30 @@
+@import "@rsmdc/typography/mixins";
+
+@mixin rs-text-field-character-counter_ {
+  @include rs-typography(caption);
+  @include rs-typography-baseline-top(16px);
+
+  margin-left: auto;
+  margin-right: 0;
+  padding-left: 16px;
+  padding-right: 0;
+  white-space: nowrap;
+
+  :not([disabled]) &,
+  &:not([disabled]) {
+    color: var(--rs-text-field-character-counter_not_disabled--color, $rs-text-field-helper-text-color);
+  }
+
+  [disabled] &,
+  &[disabled] {
+    color: $rs-text-field-disabled-helper-text-color;
+  }
+
+  [dir="rtl"] &,
+  &[dir="rtl"] {
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 16px;
+  }
+}
