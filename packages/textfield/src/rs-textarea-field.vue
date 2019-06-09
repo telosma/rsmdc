@@ -12,7 +12,7 @@ export default {
       type: String,
       default: ''
     },
-    maxLength: {
+    maxlength: {
       type: Number,
       default: 0
     },
