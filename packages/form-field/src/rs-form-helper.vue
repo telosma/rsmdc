@@ -3,7 +3,7 @@
     <p class="rs-form-field-helper" ref="slotContainer">
       <slot></slot>
     </p>
-    <div class="rs-form-field-character-counter">{{ `${textLength} / ${maxength}` }}</div>
+    <div class="rs-form-field-character-counter">{{ `${textlength} / ${maxlength}` }}</div>
   </div>
 </template>
 <script>
@@ -41,6 +41,7 @@ export default {
 <style lang="scss">
 @import "@rsmdc/theme/mixins";
 @import "../character-counter/mixins";
+@import "../character-counter/rs-variables";
 @import "../helper-text/mixins";
 @import "../helper-text/rs-variables";
 @import "../../textfield/variables";
