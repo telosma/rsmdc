@@ -4,22 +4,10 @@
   }
 }
 
-@mixin rs-text-field-helper-text-validation-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-helper-text-validation-color_($color);
-  }
-}
-
 // Private mixins
 
 @mixin rs-text-field-helper-text-color_($color) {
   + .rs-text-field-helper-line .rs-text-field-helper-text {
-    @include rs-theme-prop(color, $color);
-  }
-}
-
-@mixin rs-text-field-helper-text-validation-color_($color) {
-  &.rs-text-field--invalid + .rs-text-field-helper-line .rs-text-field-helper-text--validation-msg {
     @include rs-theme-prop(color, $color);
   }
 }

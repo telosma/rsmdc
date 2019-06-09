@@ -33,21 +33,6 @@
   }
 }
 
-// todo: replace function rs-form-label-float-position and rs-form-label-float-rtl-position
-@mixin rs-floating-label-float-position($positionY, $positionX: 0%, $scale: .75) {
-  .rs-floating-label--float-above {
-    @if $positionX > 0 or $positionX < 0 {
-      transform: translateY(-1 * $positionY) translateX(-1 * $positionX) scale($scale);
-
-      @include rs-rtl {
-        transform: translateY(-1 * $positionY) translateX($positionX) scale($scale);
-      }
-    } @else {
-      transform: translateY(-1 * $positionY) scale($scale);
-    }
-  }
-}
-
 // todo replace @function rs-form-label-float-shake-animation($modifier)
 @mixin rs-floating-label-shake-animation($modifier) {
   .rs-floating-label--shake {
