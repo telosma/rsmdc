@@ -10,7 +10,6 @@
 @import "@rsmdc/typography/variables";
 @import "./functions";
 @import "./helper-text/rs-text-field-helper-text";
-@import "./character-counter/rs-text-field-character-counter";
 @import "./icon/rs-text-field-icon";
 @import "./mixins";
 @import "./variables";
@@ -18,11 +17,6 @@
 .rs-line-ripple {
   //lineripple
   @include rs-text-field-line-ripple-color_(primary);
-}
-
-.rs-counter {
-  //counter
-  @include rs-text-field-character-counter-color($rs-text-field-helper-text-color);
 }
 
 .rs-action {

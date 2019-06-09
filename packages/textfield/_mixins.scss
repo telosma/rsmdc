@@ -14,8 +14,6 @@
 
 
 @mixin rs-text-field-disabled_ {
-  //counter
-  @include rs-text-field-character-counter-color_($rs-text-field-disabled-helper-text-color);
   //action
   @include rs-text-field-icon-color_($rs-text-field-disabled-icon);
 
@@ -240,7 +238,6 @@
   @include rs-text-field-outline-shape-radius(small);
   @include rs-states-base-color(transparent);
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y, 0%);
-  @include rs-text-field-character-counter-position(16px, 13px);
 
   background-color: var(--rs-textarea-field_not_disabled--background-color, transparent);
   display: inline-flex;
@@ -248,6 +245,19 @@
   height: auto;
   transition: none;
   overflow: visible;
+
+  > .rs-text-field__input {
+    $padding-inset: 16px;
+
+    align-self: auto;
+    box-sizing: border-box;
+    height: auto;
+    margin: $padding-inset/2 1px 1px 0;
+    padding: 0 $padding-inset $padding-inset;
+    border: none;
+
+    resize: var(--rs-text-field_not__textarea-input--resize);
+  }
 }
 
 @mixin rs-text-field_ {
@@ -260,6 +270,10 @@
   height: $rs-text-field-height;
   overflow: hidden;
   will-change: opacity, transform, color;
+
+  width: var(--rs-text-field--width);
+  border-radius: var(--rs-text-field--border-radius, 4px);
+  background-color: var(--rs-text-field_not_disabled--background-color, $rs-text-field-background);
 
   &:not(.rs-text-field--textarea) {
     @include rs-states-base-color(transparent);
@@ -276,15 +290,12 @@
     }
   }
 
-  width: var(--rs-text-field--width);
-  border-radius: var(--rs-text-field--border-radius, 4px);
-  background-color: var(--rs-text-field_not_disabled--background-color, $rs-text-field-background);
-
   [dir="rtl"] &,
   &[dir="rtl"] {
     border-radius: var(--rs-text-field_rtl--border-radius, rs-shape-rtl-radius(small, false));
   }
 
+  // ripple
   &::before{
     background-color: var(--rs-ripple_before--background-color, $rs-text-field-ink-color);
     content: var(--rs-ripple_before--content, '');
@@ -324,10 +335,6 @@
   background: none;
   appearance: none;
   caret-color: var(--rs-text-field-input--caret-color, $rs-theme-primary);
-
-  .rs-text-field--textarea & {
-    resize: var(--rs-text-field_not__textarea-input--resize);
-  }
 
   :not(.rs-text-field--textarea) & {
     padding: var(--rs-text-field_not__textarea-input--padding);
@@ -381,17 +388,6 @@
 
   :not(.rs-text-field--outlined):not(.rs-text-field--textarea) &.rs-text-field--no-label {
     padding: 16px;
-  }
-
-  .rs-text-field--textarea & {
-    $padding-inset: 16px;
-
-    align-self: auto;
-    box-sizing: border-box;
-    height: auto;
-    margin: $padding-inset/2 1px 1px 0;
-    padding: 0 $padding-inset $padding-inset;
-    border: none;
   }
 }
 
