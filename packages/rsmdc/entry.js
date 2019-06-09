@@ -34,6 +34,7 @@ import drawerTitle from '../drawer/src/rs-drawer-title.vue'
 import drawerSubtitle from '../drawer/src/rs-drawer-subtitle.vue'
 import drawerHeader from '../drawer/src/rs-drawer-header.vue'
 import drawer from '../drawer/src/rs-drawer.vue'
+import textField from '../textfield/src/rs-text-field.vue'
 import formError from '../form-field/src/rs-form-error.vue'
 import formHelper from '../form-field/src/rs-form-helper.vue'
 import formLabel from '../form-field/src/rs-form-label.vue'
@@ -75,6 +76,7 @@ export const DrawerSubtitle = wrap(Vue, drawerSubtitle)
 export const DrawerHeader = wrap(Vue, drawerHeader)
 export const Drawer = wrap(Vue, drawer)
 export const Menu = wrap(Vue, menu)
+export const TextField = wrap(Vue, textField)
 export const FormError = wrap(Vue, formError)
 export const FormHelper = wrap(Vue, formHelper)
 export const FormField = wrap(Vue, formField)

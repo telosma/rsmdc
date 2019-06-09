@@ -2,7 +2,6 @@
   <div class="rs-text-field" ref="slotContainer">
     <input type="text" class="rs-text-field__input"
       :value="value" :maxLength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
-    <slot></slot>
     <div class="rs-line-ripple" />
   </div>
 </template>
@@ -46,7 +45,7 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick().then(this.fixSlot.bind(this))
+    // this.$nextTick().then(this.fixSlot.bind(this))
   },
   methods: {
     fixSlot() {
@@ -63,22 +62,24 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../mixins";
+@import "@rsmdc/line-ripple/rs-line-ripple";
 
 
 .rs-text-field {
   @include rs-text-field_;
-
-  &[disabled] {
-    @include rs-text-field-disabled_;
-  }
-
-  &[invalid] {
-    @include rs-text-field-invalid_;
-  }
 }
 
 .rs-text-field__input {
   @include rs-text-field-input_;
+}
+
+.rs-line-ripple {
+  @include rs-text-field-line-ripple-color(primary);
+
+  [invlaid] & {
+    @include rs-text-field-line-ripple-color($rs-text-field-error);
+  }
 }
 
 </style>

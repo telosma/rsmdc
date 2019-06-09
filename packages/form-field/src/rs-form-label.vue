@@ -2,7 +2,7 @@
   <div class="rs-notched-outline" v-if="isTextAreaLabel || isOutline">
     <div class="rs-notched-outline__leading" />
       <div class="rs-notched-outline__notch">
-        <label :for="name" class="rs-form-label -float" ref="slotContainer" :disabled="disabled">
+        <label :for="name" class="rs-form-label -float" ref="slotContainer" :disabled="disabled" :required="required">
           <slot></slot>
         </label>
       </div>
@@ -23,6 +23,13 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    invalid: {
+
     },
     dataId: {
       type: String,
@@ -145,7 +152,21 @@ export default {
     overflow: hidden;
     will-change: transform;
 
+    top: var(--rs-form-label__float--top);
+    font-size: var(--rs-form-label__float--font-size);
     color: var(--rs-form-label--color, $rs-text-field-ink-color);
+
+    &:-webkit-autofill {
+      transform: translateY(-50%) scale(.75);
+      cursor: auto;
+    }
+
+    &[required]::after {
+      margin-left: 1px;
+      content: "*";
+      --rs-form-label__float_required_after--color: #{$rs-text-field-error};
+      color: var(--rs-form-label__float_required_after--color);
+    }
 
     :focus &,
     &:focus {
@@ -154,6 +175,11 @@ export default {
 
     [invalid] &,
     &[invalid] {
+      color: $rs-text-field-error;
+    }
+
+    [invalid] &[required]::after,
+    &[invalid][required]::after {
       color: $rs-text-field-error;
     }
 
@@ -182,7 +208,12 @@ export default {
     }
 
     .-shake {
-      animation: rs-form-label-float-shake-animation(standard);
+      animation: var(--rs-form-label__shake--animation, rs-form-label-float-shake-animation(standard));
+    }
+
+    [dir="rtl"] &.-shake,
+    &[dir="rtl"].-shake {
+      animation: var(--rs-form-label__shake_rtl--animation);
     }
 
     &.-above.-right {
@@ -210,6 +241,7 @@ export default {
       @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
       
       top: 17px;
+      height: var(--rs-text-field__outlined--height);
     }
 
     &.-outlined.-icon {
@@ -294,7 +326,6 @@ export default {
 .rs-notched-outline__leading {
   @include rs-rtl-reflexive-property(border, 1px solid, none);
   width: var(--rs-notched-outline-leading--width, $rs-notched-outline-leading-width);
-  border-color: var(--rs-notched-outline-leading--border-color);
   border-width: var(--rs-notched-outline-leading--border-width);
   border-radius: var(--rs-notched-outline-leading--border-radius, 4px);
 
@@ -306,6 +337,11 @@ export default {
   [disabled] &,
   &[disabled] {
     border-color: $rs-text-field-outlined-disabled-border;
+  }
+
+  :not([disabled]) &,
+  &:not([disabled]) {
+    border-color: var(--rs-notched-outline-leading_not_disabled--border-color, $rs-text-field-outlined-idle-border);
   }
 
   :not([disabled]):hover &,
@@ -326,6 +362,7 @@ export default {
   &[invalid]:hover,
   [invalid]:focus &,
   &[invalid]:focus{
+    color: $rs-text-field-error;
     border-color: $rs-text-field-error;
   }
 }
@@ -335,11 +372,15 @@ export default {
   width: auto;
   max-width: calc(100% - #{$rs-notched-outline-leading-width} * 2);
   border-width: var(--rs-notched-outline-notch--border-width);
-  border-color: var(--rs-notched-outline-notch--border-color);
 
   [disabled] &,
   &[disabled] {
     border-color: $rs-text-field-outlined-disabled-border;
+  }
+
+  :not([disabled]) &,
+  &:not([disabled]) {
+    border-color: var(--rs-notched-outline-notch_not_disabled--border-color, $rs-text-field-outlined-idle-border);
   }
 
   :not([disabled]):hover &,
@@ -360,6 +401,7 @@ export default {
   &[invalid]:hover,
   [invalid]:focus &,
   &[invalid]:focus{
+    color: $rs-text-field-error;
     border-color: $rs-text-field-error;
   }
 }
@@ -369,7 +411,6 @@ export default {
   flex-grow: 1;
   max-width: var(--rs-notched-outline-notch--max-width);
   border-width: var(--rs-notched-outline-trailing--border-width);
-  border-color: var(--rs-notched-outline-trailing--border-color);
   border-radius: var(--rs-notched-outline-trailing--border-radius, 4px);
 
   [dir="rtl"] &,
@@ -380,6 +421,11 @@ export default {
   [disabled] &,
   &[disabled] {
     border-color: $rs-text-field-outlined-disabled-border;
+  }
+
+  :not([disabled]) &,
+  &:not([disabled]) {
+    border-color: var(--rs-notched-outline-trailing_not_disabled--border-color, $rs-text-field-outlined-idle-border);
   }
 
   :not([disabled]):hover &,
@@ -400,6 +446,7 @@ export default {
   &[invalid]:hover,
   [invalid]:focus &,
   &[invalid]:focus {
+    color: $rs-text-field-error;
     border-color: $rs-text-field-error;
   }
 }
