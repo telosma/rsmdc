@@ -38,7 +38,7 @@ export default {
       type: Boolean,
       default: false
     },
-    equired: {
+    required: {
       type: Boolean,
       default: false
     }
