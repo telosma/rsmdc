@@ -1,6 +1,5 @@
 @import "@rsmdc/typography/mixins";
 
-
 @mixin rs-form-field-line-host_ {
   width: 100%;
   //.rs-text-field--dense + &
@@ -13,8 +12,8 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding-right: var(--rs-form-field-line--padding-right, $rs-text-field-helper-line-padding);
-  padding-left: var(--rs-form-field-line--padding-left, $rs-text-field-helper-line-padding);
+  padding-right: var(--rs-form-field-line--padding-right, $rs-form-field-helper-line-padding);
+  padding-left: var(--rs-form-field-line--padding-left, $rs-form-field-helper-line-padding);
 }
 
 @mixin rs-form-field-helper_ {
@@ -22,14 +21,4 @@
   @include rs-typography-baseline-top(16px);
   white-space: nowrap;
   margin: 0;
-}
-
-.rs-text-field-helper-text--persistent {
-  transition: rs-text-field-transition(opacity);
-  opacity: 0;
-  will-change: opacity;
-
-  transition: none;
-  opacity: 1;
-  will-change: initial;
 }

@@ -1,1 +1,6 @@
+@import "@rsmdc/theme/variables";
+
 $rs-form-field-item-spacing: 4px;
+$rs-form-field-error: $rs-theme-error !default;
+$rs-form-field-disabled-helper-text-color: rgba(rs-theme-prop-value(on-surface), .37) !default;
+$rs-form-field-helper-text-color: rgba(rs-theme-prop-value(on-surface), .6) !default;

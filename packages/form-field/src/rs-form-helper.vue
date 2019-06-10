@@ -31,10 +31,10 @@ export default {
 </script>
 <style lang="scss">
 @import "@rsmdc/theme/mixins";
+@import "../rs-variables";
 @import "../helper-text/mixins";
 @import "../helper-text/rs-variables";
-@import "../../textfield/variables";
-@import "../../textfield/functions";
+@import "../helper-text/rs-functions";
 
 :host {
   @include rs-form-field-line-host_;
@@ -42,27 +42,27 @@ export default {
 }
 
 :host([data-type="textfield"]) {
-  bottom: $rs-text-field-helper-text-bottom;
+  bottom: $rs-form-field-helper-text-bottom;
 }
 
 .rs-form-field-line {
   @include rs-form-field-line_;
 
   &:not(.-disabled) {
-    color: var(--rs-form-field-line_not__disabled--color, $rs-text-field-helper-text-color);
+    color: var(--rs-form-field-line_not__disabled--color, $rs-form-field-helper-text-color);
   }
 
   &.-disabled {
-    color: $rs-text-field-disabled-helper-text-color;
+    color: $rs-form-field-disabled-helper-text-color;
   }
 }
 
 .rs-form-field-helper {
   @include rs-form-field-helper_;
   color: inherit;
-  opacity: var(--rs-text-field-helper--opacity, 1);
-  transition: var(--rs-text-field-helper--transition, rs-text-field-transition(opacity));
-  will-change: var(--rs-text-field-helper--will-change, opacity);
+  opacity: 1;
+  transition: rs-form-field-transition(opacity);
+  will-change: opacity;
 }
 
 </style>

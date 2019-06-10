@@ -187,11 +187,11 @@ export default {
     }
 
     &.-invalid {
-      color: $rs-text-field-error;
+      color: $rs-form-field-error;
     }
 
     &.-invalid.-required::after {
-      color: $rs-text-field-error;
+      color: $rs-form-field-error;
     }
 
     .-disabled &,
@@ -365,8 +365,8 @@ export default {
   &[invalid]:hover,
   [invalid]:focus &,
   &[invalid]:focus{
-    color: $rs-text-field-error;
-    border-color: $rs-text-field-error;
+    color: $rs-form-field-error;
+    border-color: $rs-form-field-error;
   }
 }
 
@@ -404,8 +404,8 @@ export default {
   &[invalid]:hover,
   [invalid]:focus &,
   &[invalid]:focus{
-    color: $rs-text-field-error;
-    border-color: $rs-text-field-error;
+    color: $rs-form-field-error;
+    border-color: $rs-form-field-error;
   }
 }
 
@@ -449,8 +449,8 @@ export default {
   &[invalid]:hover,
   [invalid]:focus &,
   &[invalid]:focus {
-    color: $rs-text-field-error;
-    border-color: $rs-text-field-error;
+    color: $rs-form-field-error;
+    border-color: $rs-form-field-error;
   }
 }
 </style>

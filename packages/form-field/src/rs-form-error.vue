@@ -31,10 +31,10 @@ export default {
 </script>
 <style lang="scss">
 @import "@rsmdc/theme/mixins";
+@import "../rs-variables";
 @import "../helper-text/mixins";
 @import "../helper-text/rs-variables";
-@import "../../textfield/variables";
-@import "../../textfield/functions";
+@import "../helper-text/rs-functions";
 
 :host {
   @include rs-form-field-line-host_;
@@ -42,7 +42,7 @@ export default {
 }
 
 :host([data-type="textfield"]) {
-  bottom: $rs-text-field-helper-text-bottom;
+  bottom: $rs-form-field-helper-text-bottom;
 }
 
 .rs-form-field-line {
@@ -52,6 +52,6 @@ export default {
 .rs-form-field-error {
   @include rs-form-field-helper_;
   opacity: 1;
-  color: $rs-text-field-error;
+  color: $rs-form-field-error;
 }
 </style>
