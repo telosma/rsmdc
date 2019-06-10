@@ -113,7 +113,7 @@ export default {
         this.checkbox.parentNode.host.removeAttribute('disabled')
       }
       if(!this.isDisabled && this.textField) {
-        this.textField.classList.temove('-disabled')
+        this.textField.classList.remove('-disabled')
       }
       if(!this.isDisabled && this.label) {
         this.label.classList.remove('-disabled')
