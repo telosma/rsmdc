@@ -52,7 +52,8 @@ export default {
       helperText: '',
       errorText: '',
       isError: '',
-      isDisabled: ''
+      isDisabled: '',
+      isRequired: ''
     }
   },
   watch: {
@@ -74,6 +75,19 @@ export default {
       }
       if(!this.isError && this.helperText) {
         this.helperText.parentNode.host.removeAttribute('hidden')
+      }
+
+      if(this.isError && this.label) {
+        this.label.classList.add('-invalid')
+      }
+      if(!this.isError && this.label) {
+        this.label.classList.remove('-invalid')
+      }
+      if(this.isError && this.textField) {
+        this.textField.classList.add('-invalid')
+      }
+      if(!this.isError && this.textField) {
+        this.textField.classList.remove('-invalid')
       }
     },
     isDisabled() {
@@ -100,6 +114,14 @@ export default {
       }
       if(!this.isDisabled && this.label) {
         this.label.parentNode.host.removeAttribute('disabled')
+      }
+    },
+    isRequired() {
+      if(this.isRequired && this.label) {
+        this.label.classList.add('-required')
+      }
+      if(!this.isRequired && this.label) {
+        this.label.classList.remove('-required')
       }
     }
   },
@@ -144,6 +166,9 @@ export default {
         if(this.textField && this.helperText) {
           this.helperText.parentNode.host.setAttribute('data-type', 'textfield')
         } 
+        if(this.textField && this.errorText) {
+          this.errorText.parentNode.host.setAttribute('data-type', 'textfield')
+        } 
 
         if(this.id && this.radio) {
           this.radio.parentNode.host.setAttribute('data-id', this.id)
@@ -167,8 +192,9 @@ export default {
           this.label.parentNode.host.setAttribute('name', this.name)
         }
 
-        this.isError = this.error ? true : false
-        this.isDisabled = this.disabled ? true : false
+        this.isError = this.error
+        this.isDisabled = this.disabled
+        this.isRequired = this.required
       })
   },
   methods: {
@@ -191,10 +217,6 @@ export default {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
-
-  &.-text {
-
-  }
 
   &.-textarea {
 

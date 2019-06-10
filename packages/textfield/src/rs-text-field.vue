@@ -2,15 +2,14 @@
   <div>
     <div class="rs-text-field -textfield" ref="slotContainer" @click="activateTextField">
       <input type="text" class="rs-text-field__input" v-model="inputText"
-        :value="value" :maxLength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
+        :value="value" :maxlength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
       <div class="rs-line-ripple" />
     </div>
-    <div class="rs-text-field-character-counter">{{ `${inputText.length} / ${maxlength}` }}</div>
+    <div class="rs-text-field-character-counter" v-if="countable">{{ `${inputText.length} / ${maxlength}` }}</div>
   </div>
 </template>
 <script>
 import { RSRipple } from '@rsmdc/ripple'
-
 import { RSLineRipple } from '../../line-ripple/index'
 
 export default {
@@ -118,19 +117,20 @@ export default {
     },
     activateRipple() {
       this.lineRipple.activate()
-      this.$el.classList.add('rs-ripple-upgraded--background-focused')
+      this.el.querySelector('.rs-text-field').classList.add('rs-ripple-upgraded--background-focused')
     },
     deactivateRipple() {
       this.lineRipple.deactivate()
-      this.$el.classList.remove('rs-ripple-upgraded--background-focused')
+      this.el.querySelector('.rs-text-field').classList.remove('rs-ripple-upgraded--background-focused')
     },
     changeLabelStyle(state) {
       if(state == 'activate') {
         // float form label to above and focus
         this.formLabels.forEach(formLabel => {
           const label = formLabel.shadowRoot.querySelector('.rs-form-label')
-          label.classList.add('-above')
+          label.classList.add('-floatabove')
           label.classList.add('-focus')
+          label.classList.remove('-shake')
         })
       } else {
         // remove label focus ( and if textfield does not input anyting, sink label)
@@ -138,8 +138,12 @@ export default {
           const label = formLabel.shadowRoot.querySelector('.rs-form-label')
           label.classList.remove('-focus')
           if(this.inputText.length === 0) {
-            label.classList.remove('-above')
-          }      
+            label.classList.remove('-floatabove')
+          }
+          // only error
+          if(this.inputText.length > 0 && label.classList.contains('-invalid')) {
+            label.classList.add('-shake')
+          }     
         })
       }
     }
@@ -164,7 +168,7 @@ export default {
 .rs-line-ripple {
   @include rs-text-field-line-ripple-color(primary);
 
-  [invlaid] & {
+  .-invalid & {
     @include rs-text-field-line-ripple-color($rs-text-field-error);
   }
 }

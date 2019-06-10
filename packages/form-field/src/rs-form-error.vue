@@ -41,6 +41,10 @@ export default {
   z-index: 2;
 }
 
+:host([data-type="textfield"]) {
+  bottom: -20px;
+}
+
 .rs-form-field-line {
   @include rs-form-field-line_;
 }

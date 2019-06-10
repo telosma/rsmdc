@@ -24,14 +24,6 @@ export default {
       type: Boolean,
       default: false
     },
-    required: {
-      type: Boolean,
-      default: false
-    },
-    invalid: {
-      type: Boolean,
-      default: false
-    },
     dataId: {
       type: String,
       default: ''
@@ -184,10 +176,9 @@ export default {
       cursor: auto;
     }
 
-    &[required]::after {
+    &.-required::after {
       margin-left: 1px;
       content: "*";
-      --rs-form-label__float_required_after--color: #{$rs-text-field-error};
       color: var(--rs-form-label__float_required_after--color);
     }
     
@@ -195,13 +186,11 @@ export default {
       color: var(--rs-form-label__float__focus--color, $rs-text-field-focused-label-color);
     }
 
-    [invalid] &,
-    &[invalid] {
+    &.-invalid {
       color: $rs-text-field-error;
     }
 
-    [invalid] &[required]::after,
-    &[invalid][required]::after {
+    &.-invalid.-required::after {
       color: $rs-text-field-error;
     }
 
@@ -218,18 +207,18 @@ export default {
       text-align: right;
     }
 
-    &.-above {
+    &.-floatabove {
       cursor: auto;
       font-size: var(--rs-form-label__float__above--font-size);
       transform: var(--rs-form-label__float__above--transform, rs-form-label-float-position($rs-floating-label-position-y));
     }
 
-    [dir="rtl"] &.-above,
-    &[dir="rtl"].-above {
+    [dir="rtl"] &.-floatabove,
+    &[dir="rtl"].-floatabove {
       transform: var(--rs-form-label_rtl__float__above--transform);
     }
 
-    .-shake {
+    &.-shake {
       animation: var(--rs-form-label__shake--animation, rs-form-label-float-shake-animation(standard));
     }
 
@@ -238,16 +227,8 @@ export default {
       animation: var(--rs-form-label__shake_rtl--animation);
     }
 
-    &.-above.-right {
+    &.-floatabove.-right {
       transform: rs-form-label-float-rtl-position($rs-floating-label-position-y);
-    }
-
-    &.-text {
-      --rs-form-label--color: #{$rs-text-field-label};
-      @include rs-rtl-reflexive-position(left, $rs-text-field-label-offset);
-
-      top: 18px;
-      pointer-events: none;
     }
 
     &.-textarea {
@@ -269,7 +250,7 @@ export default {
     &.-outlined.-icon {
       @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width));
     }
-    &.-outlined.-icon.-above {
+    &.-outlined.-icon.-floatabove {
       @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width) + $rs-notched-outline-padding);
     }
   }
@@ -301,12 +282,12 @@ export default {
     max-width: 100%;
   }
 
-  > .rs-form-label.-float.-above {
+  > .rs-form-label.-float.-floatabove {
     text-overflow: clip;
   }
 
   &.rs-notched-outline--upgraded {
-    .rs-form-label.-float.-above {
+    .rs-form-label.-float.-floatabove {
       max-width: calc(100% / .75);
 
       transform: var(--rs-notched-outline__upgraded-label__float__above--transform);

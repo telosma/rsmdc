@@ -316,15 +316,11 @@
     outline: none;
   }
 
-  &[invalid] {
+  .-invalid & {
     box-shadow: none;
     border-bottom-color: $rs-text-field-error;
     caret-color: $rs-text-field-error;
     border-bottom-color: $rs-text-field-error;
-  }
-
-  &[invalid]:not([disabled]) {
-    color: $rs-text-field-error;
   }
 
   &.rs-text-field--no-label::placeholder, 
