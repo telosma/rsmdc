@@ -140,23 +140,7 @@
   @include rs-text-field-icon-horizontal-position-two-icons_($rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding, $rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding);
 }
 
-// Full Width
-@mixin rs-text-field-fullwidth_ {
-  --rs-text-field--width: 100%;
-  --rs-text-field_not__textarea_not_disabled--background-color: transparent;
-  --rs-text-field-input_placeholder--transition-delay: 40ms;
-  --rs-text-field-input_placeholder--transition-duration: 110ms;
-  --rs-text-field-input_placeholder--opacity: 1;
-  --rs-text-field_not__textarea--display: block;
-  --rs-text-field-input_not__textarea--padding-top: 0;
-  --rs-text-field-input_not__textarea--padding-bottom: 0;
-  --rs-text-field-input_not__textarea--padding-right: 0;
-  --rs-text-field-input_not__textarea--padding-left: 0;
-  --rs-text-field_not__textarea-input--resize: vertical;
-}
-
 // Textarea
-
 @mixin rs-text-field-textarea_ {
   @include rs-states-base-color(transparent);
 

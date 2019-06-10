@@ -145,6 +145,9 @@ export default {
 @import "../character-counter/mixins";
 @import "@rsmdc/line-ripple/rs-line-ripple";
 
+:host {
+  width: var(--rs-text-field_host--width);
+}
 
 .rs-text-field {
   @include rs-text-field_;

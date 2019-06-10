@@ -106,7 +106,19 @@
 @mixin rs-text-field-type($types...) {
   @each $type in $types {
     @if $type == fullwidth {
-      @include rs-text-field-fullwidth_;
+      --rs-form-field--width: 100%;
+      --rs-text-field_host--width: 100%;
+      --rs-text-field--width: 100%;
+      --rs-text-field_not__textarea--display: block;
+      --rs-text-field-input_placeholder--transition-delay: 40ms;
+      --rs-text-field-input_placeholder--transition-duration: 110ms;
+      // --rs-text-field_not__textarea_not_disabled--background-color: transparent;
+      // no label
+      // --rs-text-field-input_placeholder--opacity: 1;
+      // --rs-text-field-input_not__textarea--padding-top: 0;
+      // --rs-text-field-input_not__textarea--padding-bottom: 0;
+      // --rs-text-field-input_not__textarea--padding-right: 0;
+      // --rs-text-field-input_not__textarea--padding-left: 0;
     }@else if $type == outlined {
       @include rs-text-field-outlined_;
     }@else if $type == dense {
