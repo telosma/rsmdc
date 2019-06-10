@@ -84,7 +84,7 @@ export default {
         this.checkbox.parentNode.host.setAttribute('disabled', true)
       }
       if(this.isDisabled && this.textField) {
-        this.textField.parentNode.host.setAttribute('disabled', true)
+        this.textField.parentNode.parentNode.host.setAttribute('disabled', true)
       }
       if(this.isDisabled && this.label) {
         this.label.parentNode.host.setAttribute('disabled', true)
@@ -96,7 +96,7 @@ export default {
         this.checkbox.parentNode.host.removeAttribute('disabled')
       }
       if(!this.isDisabled && this.textField) {
-        this.textField.parentNode.host.removeAttribute('disabled')
+        this.textField.parentNode.parentNode.host.removeAttribute('disabled')
       }
       if(!this.isDisabled && this.label) {
         this.label.parentNode.host.removeAttribute('disabled')
@@ -152,7 +152,7 @@ export default {
           this.checkbox.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.textField) {
-          this.textField.parentNode.host.setAttribute('data-id', this.id)
+          this.textField.parentNode.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.label) {
           this.label.parentNode.host.setAttribute('data-id', this.id)

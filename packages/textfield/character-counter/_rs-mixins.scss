@@ -1,8 +1,8 @@
-@mixin rs-form-field-character-counter-color($color) {
-  --rs-form-field-character-counter_not_disabled--color: #{$color};
+@mixin rs-text-field-character-counter-color($color) {
+  --rs-text-field-character-counter_not_disabled--color: #{$color};
 }
 
-@mixin rs-form-field-character-counter-position($xOffset, $yOffset) {
-  --rs-form-field-character-counter--right: #{$xOffset};
-  --rs-form-field-character-counter--bottom: #{$yOffset};
+@mixin rs-text-field-character-counter-position($xOffset, $yOffset) {
+  --rs-text-field-character-counter--right: #{$xOffset};
+  --rs-text-field-character-counter--bottom: #{$yOffset};
 }

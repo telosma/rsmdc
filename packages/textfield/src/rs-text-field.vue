@@ -1,8 +1,11 @@
 <template>
-  <div class="rs-text-field -textfield" ref="slotContainer" @click="activateTextField">
-    <input type="text" class="rs-text-field__input" v-model="inputText"
-      :value="value" :maxLength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
-    <div class="rs-line-ripple" />
+  <div>
+    <div class="rs-text-field -textfield" ref="slotContainer" @click="activateTextField">
+      <input type="text" class="rs-text-field__input" v-model="inputText"
+        :value="value" :maxLength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
+      <div class="rs-line-ripple" />
+    </div>
+    <div class="rs-text-field-character-counter">{{ `${inputText.length} / ${maxlength}` }}</div>
   </div>
 </template>
 <script>
@@ -12,7 +15,15 @@ import { RSLineRipple } from '../../line-ripple/index'
 
 export default {
   props: {
+    countable: {
+      type: Boolean,
+      default: false
+    },
     maxlength: {
+      type: Number,
+      default: 0
+    },
+    textlength: {
       type: Number,
       default: 0
     },
@@ -74,7 +85,7 @@ export default {
     }
   },
   mounted() {
-    const ripple = new RSRipple(this.$el)
+    const ripple = new RSRipple(this.$el.querySelector('.rs-text-field'))
     this.lineRipple = new RSLineRipple(this.$el.querySelector('.rs-line-ripple'))
     this.el = this.$el
     // this.$nextTick().then(this.fixSlot.bind(this))
@@ -138,6 +149,7 @@ export default {
 
 <style lang="scss">
 @import "../mixins";
+@import "../character-counter/mixins";
 @import "@rsmdc/line-ripple/rs-line-ripple";
 
 
@@ -157,4 +169,14 @@ export default {
   }
 }
 
+.rs-text-field-character-counter {
+  @include rs-text-field-character-counter_;
+
+  //for textarea
+  // margin-bottom: 28px; // Leaves space for character counter if it exists.
+  // padding-bottom: 0;
+  // position: absolute;
+  // bottom: var(--rs-text-field-character-counter--bottom, 13px);
+  // right: var(--rs-text-field-character-counter--right, 16px);
+}
 </style>

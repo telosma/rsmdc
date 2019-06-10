@@ -3,7 +3,6 @@
     <p class="rs-form-field-helper" ref="slotContainer">
       <slot></slot>
     </p>
-    <div class="rs-form-field-character-counter">{{ `${textlength} / ${maxlength}` }}</div>
   </div>
 </template>
 <script>
@@ -12,14 +11,6 @@ export default {
     dataType: {
       type: String,
       default: 'textfield'
-    },
-    maxlength: {
-      type: Number,
-      default: 0
-    },
-    textlength: {
-      type: Number,
-      default: 0
     }
   },
   mounted() {
@@ -40,8 +31,6 @@ export default {
 </script>
 <style lang="scss">
 @import "@rsmdc/theme/mixins";
-@import "../character-counter/mixins";
-@import "../character-counter/rs-variables";
 @import "../helper-text/mixins";
 @import "../helper-text/rs-variables";
 @import "../../textfield/variables";
@@ -76,15 +65,4 @@ export default {
   will-change: var(--rs-text-field-helper--will-change, opacity);
 }
 
-.rs-form-field-character-counter {
-  @include rs-form-field-character-counter_;
-
-
-  // for textarea
-  // margin-bottom: 28px; // Leaves space for character counter if it exists.
-  // padding-bottom: 0;
-  // position: absolute;
-  // bottom: var(--rs-form-field-character-counter--bottom, 13px);
-  // right: var(--rs-form-field-character-counter--right, 16px);
-}
 </style>

@@ -2,6 +2,7 @@
 
 
 @mixin rs-form-field-line-host_ {
+  width: 100%;
   //.rs-text-field--dense + &
   margin-bottom: var(--rs-form-field-line--margin-bottom);
   position: absolute;

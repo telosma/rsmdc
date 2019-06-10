@@ -1,6 +1,6 @@
 @import "@rsmdc/typography/mixins";
 
-@mixin rs-form-field-character-counter_ {
+@mixin rs-text-field-character-counter_ {
   @include rs-typography(caption);
   @include rs-typography-baseline-top(16px);
 
@@ -10,14 +10,21 @@
   padding-right: 0;
   white-space: nowrap;
 
+  position: absolute;
+  bottom: var(--rs-text-field-character-counter--bottom, 20px);
+  right: var(--rs-text-field-character-counter--right, 16px);
+
+  right: 16px;
+  bottom: -20px;
+
   :not([disabled]) &,
   &:not([disabled]) {
-    color: var(--rs-form-field-character-counter_not_disabled--color, $rs-form-field-helper-text-color);
+    color: var(--rs-text-field-character-counter_not_disabled--color, $rs-text-field-helper-text-color);
   }
 
   [disabled] &,
   &[disabled] {
-    color: $rs-form-field-disabled-helper-text-color;
+    color: $rs-text-field-disabled-helper-text-color;
   }
 
   [dir="rtl"] &,
