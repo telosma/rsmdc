@@ -18,16 +18,6 @@
   right: 16px;
   bottom: $rs-text-field-character-counter-bottom;
 
-  :not([disabled]) &,
-  &:not([disabled]) {
-    color: var(--rs-text-field-character-counter_not_disabled--color, $rs-text-field-helper-text-color);
-  }
-
-  [disabled] &,
-  &[disabled] {
-    color: $rs-text-field-disabled-helper-text-color;
-  }
-
   [dir="rtl"] &,
   &[dir="rtl"] {
     margin-left: 0;

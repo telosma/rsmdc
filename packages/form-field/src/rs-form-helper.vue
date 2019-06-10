@@ -45,16 +45,16 @@ export default {
   bottom: $rs-text-field-helper-text-bottom;
 }
 
-:host(:not([disabled])) {
-  color: var(--rs-text-field-helper--color, $rs-text-field-helper-text-color);
-}
-
-:host([disabled]) {
-  color: $rs-text-field-disabled-helper-text-color;
-}
-
 .rs-form-field-line {
   @include rs-form-field-line_;
+
+  &:not(.-disabled) {
+    color: var(--rs-form-field-line_not__disabled--color, $rs-text-field-helper-text-color);
+  }
+
+  &.-disabled {
+    color: $rs-text-field-disabled-helper-text-color;
+  }
 }
 
 .rs-form-field-helper {

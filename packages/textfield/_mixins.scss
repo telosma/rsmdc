@@ -205,17 +205,26 @@
   &:not(.rs-text-field--textarea) {
     display: var(--rs-text-field_not__textarea--display, block);
 
-    &:not([disabled]) {
+    &:not(.-disabled) {
       background-color: var(--rs-text-field_not__textarea_not_disabled--background-color, $rs-text-field-background);
     }
   }
 
   &.-disabled {
+    pointer-events: none;
     border-bottom: none;
     background-color: var(--rs-text-field_disabled--background-color, $rs-text-field-disabled-background);
   }
 
-  &:not(.rs-text-field--textarea)[disabled] {
+  &.-disabled + .rs-text-field-character-counter {
+    color: $rs-text-field-disabled-helper-text-color;
+  }
+
+  &:not(.-disabled) + .rs-text-field-character-counter {
+    color: var(--rs-text-field_not__disabled-character-counter--color, $rs-text-field-helper-text-color);
+  }
+
+  &:not(.rs-text-field--textarea).-disabled {
     border-bottom-color: $rs-text-field-fullwidth-bottom-line-color;
   }
 
@@ -268,11 +277,6 @@
   caret-color: var(--rs-text-field-input--caret-color, $rs-theme-primary);
   border-bottom: 1px solid;
 
-  .-disabled & {
-    color: $rs-text-field-disabled-ink-color;
-    border-bottom-color: $rs-text-field-disabled-border;
-  }
-
   .-invalid & {
     box-shadow: none;
     border-bottom-color: $rs-text-field-error;
@@ -303,6 +307,13 @@
   .-invalid:not(.-disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) &,
   .-invalid:not(.-disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) &:hover {
     border-bottom-color: $rs-text-field-error;
+  }
+
+  .-disabled &,
+  .-disabled:not(.rs-text-field--outlined):not(.rs-text-field--textarea) &,
+  .-disabled:not(.rs-text-field--outlined):not(.rs-text-field--textarea) &:hover {
+    color: $rs-text-field-disabled-ink-color;
+    border-bottom-color: $rs-text-field-disabled-border;
   }
 
   &::placeholder {

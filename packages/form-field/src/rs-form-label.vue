@@ -136,8 +136,8 @@ export default {
   margin-right: var(--rs-form-field-label--margin-right, auto);
   padding-left: var(--rs-form-field-label--padding-left, $rs-form-field-item-spacing);
 
-  [disabled] &,
-  &[disabled] {
+  .-disabled &,
+  &.-disabled {
     cursor: default;
   }
 
@@ -194,8 +194,8 @@ export default {
       color: $rs-text-field-error;
     }
 
-    [disabled] &,
-    &[disabled] {
+    .-disabled &,
+    &.-disabled {
       color: $rs-text-field-disabled-label-color;
     }
 
