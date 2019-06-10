@@ -188,7 +188,6 @@
 @mixin rs-text-field_ {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
-  @include rs-states-base-color(transparent);
 
   display: inline-flex;
   position: relative;
@@ -203,16 +202,6 @@
 
   &:not(.rs-text-field--textarea) {
     display: var(--rs-text-field_not__textarea--display, block);
-
-    &::before{
-      background-color: var(--rs-ripple_before--background-color, transparent);
-      content: var(--rs-ripple_before--content, '');
-    }
-  
-    &::after {
-      background-color: var(--rs-ripple_after--background-color, transparent);
-      content: var(--rs-ripple_after--content, '');
-    }
 
     &:not([disabled]) {
       background-color: var(--rs-text-field_not__textarea_not_disabled--background-color, $rs-text-field-background);
@@ -270,7 +259,6 @@
   width: 100%;
   height: 100%;
   transition: rs-text-field-transition(opacity);
-  border-bottom: 1px solid;
   border-radius: 0;
   background: none;
   appearance: none;
@@ -284,6 +272,7 @@
   padding-bottom: var(--rs-text-field-input--padding-bottom, 6px);
   padding-right: var(--rs-text-field-input--padding-right, 16px);
   padding-left: var(--rs-text-field-input--padding-left, 16px);
+  border-bottom: 1px solid;
 
   [disabled] &,
   &[disabled] {
