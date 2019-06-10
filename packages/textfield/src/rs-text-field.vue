@@ -1,6 +1,6 @@
 <template>
-  <div class="rs-text-field -textfield" ref="slotContainer" @click="activateRipple">
-    <input type="text" class="rs-text-field__input"
+  <div class="rs-text-field -textfield" ref="slotContainer" @click="activateTextField">
+    <input type="text" class="rs-text-field__input" v-model="inputText"
       :value="value" :maxLength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
     <div class="rs-line-ripple" />
   </div>
@@ -31,13 +31,19 @@ export default {
     disabled: {
       type: String,
       default: 'initial'
+    },
+    dataId: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
       el: '',
       host: '',
+      inputText: '',
       lineRipple: '',
+      formLabels: [],
       isRequired: false,
       isDisabled: false,
       textLength: 0
@@ -52,6 +58,19 @@ export default {
     },
     el() {
       this.host = this.el.parentNode.host
+    },
+    host() {
+      window.__rsmdc.textfield.textfields.push(this.host)
+    }
+  },
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.textfield) {
+      window.__rsmdc.textfield = {
+        textfields: []
+      }
     }
   },
   mounted() {
@@ -70,17 +89,48 @@ export default {
       const value = String(style.getPropertyValue(prop)).trim()
       return value
     },
+    activateTextField() {
+      if(this.formLabels.length === 0) {
+        this.formLabels = window.__rsmdc.formfield.formLabels.filter(formLabel => formLabel.getAttribute('data-id') === this.dataId)
+      }
+      this.changeLabelStyle('activate')
+      this.activateRipple()
+
+      this.el.querySelector('.rs-text-field__input').focus()
+      this.host.addEventListener('blur', () => {
+        this.deactivateTextField()
+      })
+    },
+    deactivateTextField() {
+      this.changeLabelStyle('deactivate')
+      this.deactivateRipple()
+    },
     activateRipple() {
       this.lineRipple.activate()
       this.$el.classList.add('rs-ripple-upgraded--background-focused')
-      this.el.querySelector('.rs-text-field__input').focus()
-      this.host.addEventListener('blur', () => {
-        this.deactivateRipple()
-      })
     },
     deactivateRipple() {
       this.lineRipple.deactivate()
       this.$el.classList.remove('rs-ripple-upgraded--background-focused')
+    },
+    changeLabelStyle(state) {
+      if(state == 'activate') {
+        // float form label to above and focus
+        this.formLabels.forEach(formLabel => {
+          const label = formLabel.shadowRoot.querySelector('.rs-form-label')
+          label.classList.add('-above')
+          label.classList.add('-focus')
+        })
+      } else {
+        // remove label focus ( and if textfield does not input anyting, sink label)
+        this.formLabels.forEach(formLabel => {
+          const label = formLabel.shadowRoot.querySelector('.rs-form-label')
+          label.classList.remove('-focus')
+          if(this.inputText.length === 0) {
+            label.classList.remove('-above')
+          }      
+        })
+      }
     }
   }
 }

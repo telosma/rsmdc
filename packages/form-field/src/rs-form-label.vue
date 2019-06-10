@@ -6,8 +6,8 @@
           <slot></slot>
         </label>
       </div>
-      <div class="rs-notched-outline__trailing" />
-    </div>
+    <div class="rs-notched-outline__trailing" />
+  </div>
   <label class="rs-form-label" :class="{ '-float': dataType === 'textfield' && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
     ref="slotContainer" @click="updateControllers" :disabled="disabled" v-else>
     <slot></slot>
@@ -47,13 +47,34 @@ export default {
   },
   data() {
     return {
+      el: '',
+      host: '',
       isTextFiledLabel: false,
       isTextAreaLabel: false,
       isOutline: false
     }
   },
+  watch: {
+    el() {
+      this.host = this.el.parentNode.host
+    },
+    host() {
+      window.__rsmdc.formfield.formLabels.push(this.host)
+    }
+  },
+  created() {
+    if(!window.__rsmdc) {
+      window.__rsmdc = {}
+    }
+    if(!window.__rsmdc.formfield) {
+      window.__rsmdc.formfield = {
+        formLabels: []
+      }
+    }
+  },
   mounted() {
     this.$nextTick().then(this.fixSlot.bind(this))
+    this.el = this.$el
   },
   methods: {
     fixSlot() {
@@ -68,7 +89,7 @@ export default {
     updateControllers() {
       if(this.dataType === 'radio') {
         this.updateRadios()
-      } else if(this.dataType == 'checkbox') {
+      } else if(this.dataType === 'checkbox') {
         this.updateCheckbox()
       }
     },
@@ -141,9 +162,10 @@ export default {
     margin: 0;
     padding: 0;
     cursor: text;
-
+    pointer-events: none;
     position: absolute;
-    left: 0;
+    left: 16px;
+    right: auto;
     transform-origin: left top;
     transition:
       transform $rs-floating-label-transition-duration $rs-animation-standard-curve-timing-function,
@@ -153,9 +175,9 @@ export default {
     overflow: hidden;
     will-change: transform;
 
-    top: var(--rs-form-label__float--top);
     font-size: var(--rs-form-label__float--font-size);
     color: var(--rs-form-label--color, $rs-text-field-ink-color);
+    top: var(--rs-form-label__float--top, 18px);
 
     &:-webkit-autofill {
       transform: translateY(-50%) scale(.75);
@@ -168,10 +190,9 @@ export default {
       --rs-form-label__float_required_after--color: #{$rs-text-field-error};
       color: var(--rs-form-label__float_required_after--color);
     }
-
-    :focus &,
-    &:focus {
-      color: var(--rs-form-label_focus--color, $rs-text-field-focused-label-color);
+    
+    &.-focus {
+      color: var(--rs-form-label__float__focus--color, $rs-text-field-focused-label-color);
     }
 
     [invalid] &,

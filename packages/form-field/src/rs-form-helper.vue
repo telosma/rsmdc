@@ -52,6 +52,10 @@ export default {
   z-index: 1;
 }
 
+:host([data-type="textfield"]) {
+  bottom: -20px;
+}
+
 :host(:not([disabled])) {
   color: var(--rs-text-field-helper--color, $rs-text-field-helper-text-color);
 }

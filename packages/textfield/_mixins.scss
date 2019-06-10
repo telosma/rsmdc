@@ -40,10 +40,10 @@
   --rs-form-label_rtl__float__above--transform: #{rs-form-label-float-rtl-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
   --rs-form-label__shake--animation: #{rs-form-label-float-shake-animation(text-field-dense)};
 
-  --rs-text-field-input--padding-top: 12px;
-  --rs-text-field-input--padding-bottom: 0;
-  --rs-text-field-input--padding-right: 12px;
-  --rs-text-field-input--padding-left: 12px;
+  --rs-text-field-input_not__textarea--padding-top: 12px;
+  --rs-text-field-input_not__textarea--padding-bottom: 0;
+  --rs-text-field-input_not__textarea--padding-right: 12px;
+  --rs-text-field-input_not__textarea--padding-left: 12px;
   --rs-form-label__float--font-size: .813rem;
   --rs-form-label__float__above--font-size: .813rem;
 }
@@ -52,10 +52,10 @@
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
   --rs-form-label__shake--animation: #{rs-form-label-float-shake-animation(text-field-outlined-dense)};
   --rs-text-field__outlined--height: 48px;
-  --rs-text-field-input--padding-top: 12px;
-  --rs-text-field-input--padding-bottom: 7px;
-  --rs-text-field-input--padding-right: 12px;
-  --rs-text-field-input--padding-left: 12px;
+  --rs-text-field-input_not__textarea--padding-top: 12px;
+  --rs-text-field-input_not__textarea--padding-bottom: 7px;
+  --rs-text-field-input_not__textarea--padding-right: 12px;
+  --rs-text-field-input_not__textarea--padding-left: 12px;
   --rs-form-label__float--top: 14px;
   --rs-form-label__float--top: 14px;
 
@@ -71,10 +71,10 @@
   --rs-text-field--border: none;
   --rs-text-field--overflow: visible;
   --rs-text-field-input--display: flex;
-  --rs-text-field-input--padding-top: 12px;
-  --rs-text-field-input--padding-bottom: 14px;
-  --rs-text-field-input--padding-right: 12px;
-  --rs-text-field-input--padding-left: 12px;
+  --rs-text-field-input_not__textarea--padding-top: 12px;
+  --rs-text-field-input_not__textarea--padding-bottom: 14px;
+  --rs-text-field-input_not__textarea--padding-right: 12px;
+  --rs-text-field-input_not__textarea--padding-left: 12px;
   --rs-text-field-input--border: none !important;  // FF adds unwanted border in HC mode on windows.
   --rs-text-field-input--background-color: transparent;
   --rs-text-field-input--z-index: 1;
@@ -149,7 +149,10 @@
   --rs-text-field-input_placeholder--opacity: 1;
   --rs-text-field_invalid--border-bottom-color: #{$rs-text-field-error};
   --rs-text-field_not__textarea--display: block;
-  --rs-text-field_not__textarea-input--padding: 0;
+  --rs-text-field-input_not__textarea--padding-top: 0;
+  --rs-text-field-input_not__textarea--padding-bottom: 0;
+  --rs-text-field-input_not__textarea--padding-right: 0;
+  --rs-text-field-input_not__textarea--padding-left: 0;
   --rs-text-field_not__textarea-input--resize: vertical;
 }
 
@@ -197,7 +200,7 @@
 
   width: var(--rs-text-field--width);
   border: var(--rs-text-field--border);
-  border-radius: var(--rs-text-field--border-radius, 4px);
+  border-radius: var(--rs-text-field--border-radius, 4px 4px 0 0);
   overflow: var(--rs-text-field--overflow, hidden);
 
   &:not(.rs-text-field--textarea) {
@@ -268,10 +271,6 @@
   background-color: var(--rs-text-field-input--background-color);
   border: var(--rs-text-field-input--border, none);
   caret-color: var(--rs-text-field-input--caret-color, $rs-theme-primary);
-  padding-top: var(--rs-text-field-input--padding-top, 20px);
-  padding-bottom: var(--rs-text-field-input--padding-bottom, 6px);
-  padding-right: var(--rs-text-field-input--padding-right, 16px);
-  padding-left: var(--rs-text-field-input--padding-left, 16px);
   border-bottom: 1px solid;
 
   [disabled] &,
@@ -281,7 +280,10 @@
   }
 
   :not(.rs-text-field--textarea) & {
-    padding: var(--rs-text-field_not__textarea-input--padding);
+    padding-top: var(--rs-text-field-input_not__textarea--padding-top, 20px);
+    padding-bottom: var(--rs-text-field-input_not__textarea--padding-bottom, 6px);
+    padding-right: var(--rs-text-field-input_not__textarea--padding-right, 16px);
+    padding-left: var(--rs-text-field-input_not__textarea--padding-left, 16px);
     resize: var(--rs-text-field_not__textarea-input--resize);
   }
 

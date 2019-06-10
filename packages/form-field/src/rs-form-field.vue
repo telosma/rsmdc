@@ -141,12 +141,18 @@ export default {
         if(this.textField && this.label) {
           this.label.parentNode.host.setAttribute('data-type', 'textfield')
         } 
+        if(this.textField && this.helperText) {
+          this.helperText.parentNode.host.setAttribute('data-type', 'textfield')
+        } 
 
         if(this.id && this.radio) {
           this.radio.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.checkbox) {
           this.checkbox.parentNode.host.setAttribute('data-id', this.id)
+        }
+        if(this.id && this.textField) {
+          this.textField.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.label) {
           this.label.parentNode.host.setAttribute('data-id', this.id)
