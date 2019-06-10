@@ -1,13 +1,3 @@
 @mixin rs-text-field-helper-text-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-text-field-helper-text-color_($color);
-  }
-}
-
-// Private mixins
-
-@mixin rs-text-field-helper-text-color_($color) {
-  + .rs-text-field-helper-line .rs-text-field-helper-text {
-    @include rs-theme-prop(color, $color);
-  }
+  --rs-form-field-line_not__disabled--color: #{$color};
 }
