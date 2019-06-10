@@ -42,7 +42,7 @@ export default {
 }
 
 :host([data-type="textfield"]) {
-  bottom: -20px;
+  bottom: $rs-text-field-helper-text-bottom;
 }
 
 .rs-form-field-line {

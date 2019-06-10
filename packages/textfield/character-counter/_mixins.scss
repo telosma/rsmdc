@@ -1,4 +1,5 @@
 @import "@rsmdc/typography/mixins";
+@import "../rs-variables";
 
 @mixin rs-text-field-character-counter_ {
   @include rs-typography(caption);
@@ -15,7 +16,7 @@
   right: var(--rs-text-field-character-counter--right, 16px);
 
   right: 16px;
-  bottom: -20px;
+  bottom: $rs-text-field-character-counter-bottom;
 
   :not([disabled]) &,
   &:not([disabled]) {
