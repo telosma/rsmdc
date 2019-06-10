@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="rs-text-field -textfield" ref="slotContainer" @click="activateTextField">
-      <input type="text" class="rs-text-field__input" v-model="inputText"
-        :value="value" :maxlength="maxLength" :placeholder="placeholder" :autocomplete="autocomplete" :required="isRequired" :disabled="isDisabled">
+      <input type="text" class="rs-text-field__input" v-model="value"
+        :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent">
       <div class="rs-line-ripple" />
     </div>
-    <div class="rs-text-field-character-counter" v-if="countable">{{ `${inputText.length} / ${maxlength}` }}</div>
+    <div class="rs-text-field-character-counter" v-if="countable">{{ `${value.length} / ${maxlength}` }}</div>
   </div>
 </template>
 <script>
@@ -22,10 +22,6 @@ export default {
       type: Number,
       default: 0
     },
-    textlength: {
-      type: Number,
-      default: 0
-    },
     placeholder: {
       type: String,
       default: ''
@@ -34,15 +30,11 @@ export default {
       type: String,
       default: ''
     },
-    required: {
-      type: String,
-      default: 'initial'
-    },
-    disabled: {
-      type: String,
-      default: 'initial'
-    },
     dataId: {
+      type: String,
+      default: ''
+    },
+    value: {
       type: String,
       default: ''
     }
@@ -51,20 +43,19 @@ export default {
     return {
       el: '',
       host: '',
-      inputText: '',
       lineRipple: '',
       formLabels: [],
-      isRequired: false,
-      isDisabled: false,
-      textLength: 0
     }
   },
   watch: {
-    disabled() {
-      
-    },
-    required() {
-
+    dataId() {
+      if(this.value.length === 0) { return }
+      // if textfield has value, float form label.
+      this.formLabels = window.__rsmdc.formfield.formLabels.filter(formLabel => formLabel.getAttribute('data-id') === this.dataId)
+      this.formLabels.forEach(formLabel => {
+        const label = formLabel.shadowRoot.querySelector('.rs-form-label')
+        label.classList.add('-floatabove')
+      })
     },
     el() {
       this.host = this.el.parentNode.host
@@ -87,17 +78,15 @@ export default {
     const ripple = new RSRipple(this.$el.querySelector('.rs-text-field'))
     this.lineRipple = new RSLineRipple(this.$el.querySelector('.rs-line-ripple'))
     this.el = this.$el
-    // this.$nextTick().then(this.fixSlot.bind(this))
   },
   methods: {
-    fixSlot() {
-      this.$refs.slotContainer.innerHTML = ''
-      this.$refs.slotContainer.append(document.createElement('slot'))
-    },
     getElementProperty(el, prop) {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
       return value
+    },
+    passChangeEvent(event) {
+      this.$emit('change', event.target.value)
     },
     activateTextField() {
       if(this.formLabels.length === 0) {
@@ -137,11 +126,11 @@ export default {
         this.formLabels.forEach(formLabel => {
           const label = formLabel.shadowRoot.querySelector('.rs-form-label')
           label.classList.remove('-focus')
-          if(this.inputText.length === 0) {
+          if(this.value.length === 0) {
             label.classList.remove('-floatabove')
           }
           // only error
-          if(this.inputText.length > 0 && label.classList.contains('-invalid')) {
+          if(this.value.length > 0 && label.classList.contains('-invalid')) {
             label.classList.add('-shake')
           }     
         })
