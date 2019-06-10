@@ -2,13 +2,13 @@
   <div class="rs-notched-outline" v-if="isTextAreaLabel || isOutline">
     <div class="rs-notched-outline__leading" />
       <div class="rs-notched-outline__notch">
-        <label :for="name" class="rs-form-label -float" ref="slotContainer" :disabled="disabled" :required="required">
+        <label :for="name" class="rs-form-label -floatinglabel" ref="slotContainer" :disabled="disabled" :required="required">
           <slot></slot>
         </label>
       </div>
     <div class="rs-notched-outline__trailing" />
   </div>
-  <label class="rs-form-label" :class="{ '-float': dataType === 'textfield' && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
+  <label class="rs-form-label" :class="{ '-floatinglabel': dataType === 'textfield' && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
     ref="slotContainer" @click="updateControllers" :disabled="disabled" v-else>
     <slot></slot>
   </label>
@@ -116,15 +116,15 @@ export default {
 @import "../../textfield/icon/variables";
 
 
-@include rs-form-label-float-shake-keyframes(standard, $rs-floating-label-position-y);
-@include rs-form-label-float-shake-keyframes(text-field-dense, $rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
-@include rs-form-label-float-shake-keyframes(text-field-outlined, $rs-text-field-outlined-label-position-y);
-@include rs-form-label-float-shake-keyframes(text-field-outlined-dense, $rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
-@include rs-form-label-float-shake-keyframes(text-field-outlined-leading-icon, $rs-text-field-outlined-label-position-y, $rs-text-field-outlined-with-leading-icon-label-position-x);
-@include rs-form-label-float-shake-keyframes(text-field-outlined-leading-icon-dense, $rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-@include rs-form-label-float-shake-keyframes(text-field-outlined-leading-icon-rtl, $rs-text-field-outlined-label-position-y, -$rs-text-field-outlined-with-leading-icon-label-position-x);
-@include rs-form-label-float-shake-keyframes(text-field-outlined-leading-icon-dense-rtl, $rs-text-field-outlined-dense-label-position-y, -$rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-@include rs-form-label-float-shake-keyframes(textarea, $rs-text-field-textarea-label-position-y, 0%);
+@include rs-form-label-floatinglabel-shake-keyframes(standard, $rs-floating-label-position-y);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-dense, $rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-outlined, $rs-text-field-outlined-label-position-y);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-outlined-dense, $rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-outlined-leading-icon, $rs-text-field-outlined-label-position-y, $rs-text-field-outlined-with-leading-icon-label-position-x);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-outlined-leading-icon-dense, $rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-outlined-leading-icon-rtl, $rs-text-field-outlined-label-position-y, -$rs-text-field-outlined-with-leading-icon-label-position-x);
+@include rs-form-label-floatinglabel-shake-keyframes(text-field-outlined-leading-icon-dense-rtl, $rs-text-field-outlined-dense-label-position-y, -$rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
+@include rs-form-label-floatinglabel-shake-keyframes(textarea, $rs-text-field-textarea-label-position-y, 0%);
 
 .rs-form-label {
   @include rs-typography(body2);
@@ -148,7 +148,7 @@ export default {
     padding-left: var(--rs-form-field-label__left--padding-left, $rs-form-field-item-spacing);
   }
 
-  &.-float {
+  &.-floatinglabel {
     // To override label default style.
     @include rs-typography(subtitle1);
     margin: 0;
@@ -167,9 +167,9 @@ export default {
     overflow: hidden;
     will-change: transform;
 
-    font-size: var(--rs-form-label__float--font-size);
-    color: var(--rs-form-label--color, $rs-text-field-ink-color);
-    top: var(--rs-form-label__float--top, 18px);
+    font-size: var(--rs-form-label__floatinglabel--font-size);
+    color: var(--rs-form-label__floatinglabel--color, $rs-text-field-ink-color);
+    top: var(--rs-form-label__floatinglabel--top, 18px);
 
     &:-webkit-autofill {
       transform: translateY(-50%) scale(.75);
@@ -179,11 +179,11 @@ export default {
     &.-required::after {
       margin-left: 1px;
       content: "*";
-      color: var(--rs-form-label__float_required_after--color);
+      color: var(--rs-form-label__floatinglabel_required_after--color);
     }
     
     &.-focus {
-      color: var(--rs-form-label__float__focus--color, $rs-text-field-focused-label-color);
+      color: var(--rs-form-label__floatinglabel__focus--color, $rs-text-field-focused-label-color);
     }
 
     &.-invalid {
@@ -209,26 +209,26 @@ export default {
 
     &.-floatabove {
       cursor: auto;
-      font-size: var(--rs-form-label__float__above--font-size);
-      transform: var(--rs-form-label__float__above--transform, rs-form-label-float-position($rs-floating-label-position-y));
+      font-size: var(--rs-form-label__floatinglabel__floatabove--font-size);
+      transform: var(--rs-form-label__floatinglabel__floatabove--transform, rs-form-label-floatinglabel-position($rs-floating-label-position-y));
     }
 
     [dir="rtl"] &.-floatabove,
     &[dir="rtl"].-floatabove {
-      transform: var(--rs-form-label_rtl__float__above--transform);
+      transform: var(--rs-form-label_rtl__floatinglabel__floatabove--transform);
     }
 
     &.-shake {
-      animation: var(--rs-form-label__shake--animation, rs-form-label-float-shake-animation(standard));
+      animation: var(--rs-form-label__floatinglabel__shake--animation, rs-form-label-floattinglabel-shake-animation(standard));
     }
 
     [dir="rtl"] &.-shake,
     &[dir="rtl"].-shake {
-      animation: var(--rs-form-label__shake_rtl--animation);
+      animation: var(--rs-form-label__floatinglabel__shake_rtl--animation);
     }
 
     &.-floatabove.-right {
-      transform: rs-form-label-float-rtl-position($rs-floating-label-position-y);
+      transform: rs-form-label-floatinglabel-rtl-position($rs-floating-label-position-y);
     }
 
     &.-textarea {
@@ -244,7 +244,7 @@ export default {
       @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
       
       top: 17px;
-      height: var(--rs-text-field__outlined--height);
+      height: var(--rs-text-field__floatinglabel__outlined--height);
     }
 
     &.-outlined.-icon {
@@ -274,7 +274,7 @@ export default {
     text-align: right;
   }
 
-  > .rs-form-label.-float {
+  > .rs-form-label.-floatinglabel {
     display: inline-block;
     position: relative;
     top: 17px;
@@ -282,22 +282,22 @@ export default {
     max-width: 100%;
   }
 
-  > .rs-form-label.-float.-floatabove {
+  > .rs-form-label.-floatinglabel.-floatabove {
     text-overflow: clip;
   }
 
   &.rs-notched-outline--upgraded {
-    .rs-form-label.-float.-floatabove {
+    .rs-form-label.-floatinglabel.-floatabove {
       max-width: calc(100% / .75);
 
-      transform: var(--rs-notched-outline__upgraded-label__float__above--transform);
-      font-size: var(--rs-notched-outline__upgraded-label__float__above--font-size);
+      transform: var(--rs-notched-outline__upgraded-label__floatinglabel__floatabove--transform);
+      font-size: var(--rs-notched-outline__upgraded-label__floatinglabel__floatabove--font-size);
     }
   }
 
   [dir="rtl"] &.rs-notched-outline--upgraded,
   &[dir="rtl"].rs-notched-outline--upgraded {
-    transform: var(--rs-notched-outline__upgraded-label_right__float__above--transform);
+    transform: var(--rs-notched-outline__upgraded-label_right__floatinglabel__floatabove--transform);
   }
 
   &.rs-notched-outline--notched {

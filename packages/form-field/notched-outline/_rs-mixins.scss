@@ -46,10 +46,10 @@
 }
 
 @mixin rs-notched-outline-floating-label-float-position($positionY, $positionX: 0%, $scale: .75) {
-  --rs-form-label__float__above--transform: #{rs-form-label-float-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
-  --rs-form-label_rtl__float__above--transform: #{rs-form-label-float-rtl-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
-  --rs-form-label__float__above--font-size: (#{$scale} * 1rem);
-  --rs-notched-outline__upgraded-label__float__above--transform: #{rs-form-label-float-position($positionY, $positionX, $scale)};
-  --rs-notched-outline__upgraded-label_right__float__above--transform: #{rs-form-label-float-rtl-position($positionY, $positionX, $scale)};
-  --rs-notched-outline__upgraded-label__float__above--font-size: 1rem
+  --rs-form-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
+  --rs-form-label_rtl__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
+  --rs-form-label__floatinglabel__floatabove--font-size: (#{$scale} * 1rem);
+  --rs-notched-outline__upgraded-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($positionY, $positionX, $scale)};
+  --rs-notched-outline__upgraded-label_right__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($positionY, $positionX, $scale)};
+  --rs-notched-outline__upgraded-label__floatinglabel__floatabove--font-size: 1rem
 }

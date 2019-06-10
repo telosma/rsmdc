@@ -1,4 +1,4 @@
-@function rs-form-label-float-position($positionY, $positionX: 0%, $scale: .75) {
+@function rs-form-label-floatinglabel-position($positionY, $positionX: 0%, $scale: .75) {
   @if $positionX > 0 or $positionX < 0 {
     @return translateY(-1 * $positionY) translateX(-1 * $positionX) scale($scale);
   } @else {
@@ -6,7 +6,7 @@
   }
 }
 
-@function rs-form-label-float-rtl-position($positionY, $positionX: 0%, $scale: .75) {
+@function rs-form-label-floatinglabel-rtl-position($positionY, $positionX: 0%, $scale: .75) {
   @if $positionX > 0 or $positionX < 0 {
     @return translateY(-1 * $positionY) translateX($positionX) scale($scale);
   } @else {
@@ -14,6 +14,6 @@
   }
 }
 
-@function rs-form-label-float-shake-animation($modifier) {
+@function rs-form-label-floattinglabel-shake-animation($modifier) {
   @return rs-form-label-shake-float-above-#{$modifier} 250ms 1;
 }

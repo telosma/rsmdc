@@ -77,7 +77,7 @@ export default {
 
 :host {
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y, 0%);
-  --rs-form-label__shake--animation: #{rs-form-label-float-shake-animation(text-field-outlined)};
+  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined)};
 }
 
 </style>
