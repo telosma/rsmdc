@@ -40,10 +40,10 @@
   --rs-form-label__floatinglabel_rtl__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
   --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-dense)};
 
-  --rs-text-field-input_not__textarea--padding-top: 12px;
-  --rs-text-field-input_not__textarea--padding-bottom: 0;
-  --rs-text-field-input_not__textarea--padding-right: 12px;
-  --rs-text-field-input_not__textarea--padding-left: 12px;
+  --rs-text-field-form_not__textarea-form--padding-top: 12px;
+  --rs-text-field-form_not__textarea-input--padding-bottom: 0;
+  --rs-text-field-form_not__textarea-input--padding-right: 12px;
+  --rs-text-field-form_not__textarea-input--padding-left: 12px;
   --rs-form-label__floatinglabel--color--font-size: .813rem;
   --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size: .813rem;
 }
@@ -52,10 +52,10 @@
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
   --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-dense)};
   --rs-form-label__floatinglabel__outlined--height: 48px;
-  --rs-text-field-input_not__textarea--padding-top: 12px;
-  --rs-text-field-input_not__textarea--padding-bottom: 7px;
-  --rs-text-field-input_not__textarea--padding-right: 12px;
-  --rs-text-field-input_not__textarea--padding-left: 12px;
+  --rs-text-field-form_not__textarea-form--padding-top: 12px;
+  --rs-text-field-form_not__textarea-input--padding-bottom: 7px;
+  --rs-text-field-form_not__textarea-input--padding-right: 12px;
+  --rs-text-field-form_not__textarea-input--padding-left: 12px;
   --rs-form-label__floatinglabel--top: 14px;
   --rs-form-label__floatinglabel--top: 14px;
   --rs-text-field-icon--top: 12px;
@@ -151,7 +151,7 @@
   }
 }
 
-@mixin rs-text-field_ {
+@mixin rs-text-field-form_ {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
 
@@ -161,52 +161,41 @@
   height: $rs-text-field-height;
   will-change: opacity, transform, color;
 
-  width: var(--rs-text-field--width);
-  overflow: var(--rs-text-field--overflow, hidden);
-  border: var(--rs-text-field--border, none);
-  border-radius: var(--rs-text-field--border-radius, 4px 4px 0 0);
+  width: var(--rs-text-field-form--width);
+  overflow: var(--rs-text-field-form--overflow, hidden);
+  border: var(--rs-text-field-form--border, none);
+  border-radius: var(--rs-text-field-form--border-radius, 4px 4px 0 0);
 
   &:not(.rs-text-field--textarea) {
-    display: var(--rs-text-field_not__textarea--display, block);
-    
-    &.-disabled {
-      border-bottom-color: var(--rs-text-field_not__textarea__disabled--border-bottom-color, $rs-text-field-fullwidth-bottom-line-color);
-    }
-    &:not(.-disabled) {
-      background-color: var(--rs-text-field_not__textarea_not__disabled--background-color, $rs-text-field-background);
-    }
+    display: var(--rs-text-field-form_not__textarea--display, block);
   }
 
-  &.-disabled {
+  .-disabled & {
     pointer-events: none;
-    border-bottom: var(--rs-text-field__disabled--border-bottom, none);
+    border-bottom: var(--rs-text-field__disabled-form--border-bottom, none);
     border-color: $rs-text-field-outlined-disabled-border;
-    background-color: var(--rs-text-field_disabled--background-color, $rs-text-field-disabled-background);
+    background-color: var(--rs-text-field__disabled-form--background-color, $rs-text-field-disabled-background);
   }
 
-  &:not(.-disabled) {
-    border-color: var(--rs-text-field--border-color, $rs-text-field-outlined-idle-border);
+  .-disabled &:not(.rs-text-field--textarea) {
+    border-bottom-color: var(--rs-text-field__disabled-form_not__textarea--border-bottom-color, $rs-text-field-fullwidth-bottom-line-color);
+  } 
+
+
+  :not(.-disabled) & {
+    border-color: var(--rs-text-field_not__disabled-form--border-color, $rs-text-field-outlined-idle-border);
   }
 
-  &:not(.-disabled):hover {
-    border-color: var(--rs-text-field_hover--border-color, $rs-text-field-outlined-hover-border);
+  :not(.-disabled):hover & {
+    border-color: var(--rs-text-field_not__disabled_hover-form--border-color, $rs-text-field-outlined-hover-border);
   }
 
-  &.-disabled + .rs-text-field-character-counter {
-    color: $rs-text-field-disabled-helper-text-color;
-  }
-
-  &:not(.-disabled) + .rs-text-field-character-counter {
-    color: var(--rs-text-field_not__disabled-character-counter--color, $rs-text-field-helper-text-color);
-  }
-
-  &.-invalid,
-  &.-invalid:hover {
-    border-color: $rs-text-field-error;
-  }
+  :not(.-disabled) &:not(.rs-text-field--textarea) {
+    background-color: var(--rs-text-field_not__disabled-form_not__textarea--background-color, $rs-text-field-background);
+  } 
 
   &[dir="rtl"] {
-    border-radius: var(--rs-text-field_rtl--border-radius, rs-shape-rtl-radius(small, false));
+    border-radius: var(--rs-text-field_rt-form--border-radius, rs-shape-rtl-radius(small, false));
   }
 
   // ripple
@@ -246,12 +235,12 @@
   background: none;
   appearance: none;
 
-  z-index: var(--rs-text-field-input--z-index);
-  display: var(--rs-text-field-input--display);
-  background-color: var(--rs-text-field-input--background-color);
-  border: var(--rs-text-field-input--border, none);
-  caret-color: var(--rs-text-field-input--caret-color, $rs-theme-primary);
-  border-bottom: var(--rs-text-field-input--border-bottom, 1px solid);
+  z-index: var(--rs-text-field-form-input--z-index);
+  display: var(--rs-text-field-form-input--display);
+  background-color: var(--rs-text-field-form-input--background-color);
+  border: var(--rs-text-field-form-input--border, none);
+  caret-color: var(--rs-text-field-form-input--caret-color, $rs-theme-primary);
+  border-bottom: var(--rs-text-field-form-input--border-bottom, 1px solid);
 
   .-invalid & {
     box-shadow: none;
@@ -260,34 +249,34 @@
   }
 
   :not(.rs-text-field--textarea) & {
-    padding-top: var(--rs-text-field-input_not__textarea--padding-top, 20px);
-    padding-bottom: var(--rs-text-field-input_not__textarea--padding-bottom, 6px);
-    padding-right: var(--rs-text-field-input_not__textarea--padding-right, 16px);
-    padding-left: var(--rs-text-field-input_not__textarea--padding-left, 16px);
-    resize: var(--rs-text-field_not__textarea-input--resize);
+    padding-top: var(--rs-text-field-form_not__textarea-form--padding-top, 20px);
+    padding-bottom: var(--rs-text-field-form_not__textarea-input--padding-bottom, 6px);
+    padding-right: var(--rs-text-field-form_not__textarea-input--padding-right, 16px);
+    padding-left: var(--rs-text-field-form_not__textarea-input--padding-left, 16px);
+    resize: var(--rs-text-field-form_not__textarea-input--resize);
   }
 
   :not(.-disabled) & {
-    background-color: var(--rs-text-field_not_disabled--background-color);
-    color: var(--rs-text-field_not_disabled-input--color, $rs-text-field-ink-color);
+    background-color: var(--rs-text-field_not__disabled-form-input--background-color);
+    color: var(--rs-text-field_not__disabled-form-input--color, $rs-text-field-ink-color);
   }
 
-  :not(.-disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) & {
-    border-bottom-color: var(--rs-text-field_not_disabled_not__outlined_not__textarea-input--border-bottom-color, $rs-text-field-bottom-line-idle);
+  :not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) & {
+    border-bottom-color: var(--rs-text-field_not__disabled_not__outlined-form_not__textarea-input--border-bottom-color, $rs-text-field-bottom-line-idle);
   }
 
-  :not(.-disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) &:hover {
-    border-bottom-color: var(--rs-text-field_not_disabled_not__outlined_not__textarea-input_hover--border-bottom-color, $rs-text-field-bottom-line-hover);
+  :not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) &:hover {
+    border-bottom-color: var(--rs-text-field_not__disabled_not__outlined-form_not__textarea-input_hover--border-bottom-color, $rs-text-field-bottom-line-hover);
   }
 
-  .-invalid:not(.-disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) &,
-  .-invalid:not(.-disabled):not(.rs-text-field--outlined):not(.rs-text-field--textarea) &:hover {
+  .-invalid:not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) &,
+  .-invalid:not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) &:hover {
     border-bottom-color: $rs-text-field-error;
   }
 
   .-disabled &,
-  .-disabled:not(.rs-text-field--outlined):not(.rs-text-field--textarea) &,
-  .-disabled:not(.rs-text-field--outlined):not(.rs-text-field--textarea) &:hover {
+  .-disabled:not(.-outlined):not(.rs-text-field--textarea) &,
+  .-disabled:not(.-outlined):not(.rs-text-field--textarea) &:hover {
     color: $rs-text-field-disabled-ink-color;
     border-bottom-color: $rs-text-field-disabled-border;
   }
@@ -295,9 +284,9 @@
   &::placeholder {
     transition: rs-text-field-transition(opacity, $duration: 67ms);
     color: $rs-text-field-placeholder-ink-color;
-    opacity: var(--rs-text-field-input_placeholder--opacity, 0);
-    transition-delay: var(--rs-text-field-input_placeholder--transition-delay);
-    transition-duration: var(--rs-text-field-input_placeholder--transition-duration);
+    opacity: var(--rs-text-field-form-input_placeholder--opacity, 0);
+    transition-delay: var(--rs-text-field-form-input_placeholder--transition-delay);
+    transition-duration: var(--rs-text-field-form-input_placeholder--transition-duration);
   }
 
   &:-ms-input-placeholder {
@@ -319,7 +308,7 @@
     z-index: auto !important;
   }
 
-  :not(.rs-text-field--outlined):not(.rs-text-field--textarea) &.rs-text-field--no-label {
+  :not(.-outlined):not(.rs-text-field--textarea) &.rs-text-field--no-label {
     padding: 16px;
   }
 }

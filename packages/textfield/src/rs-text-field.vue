@@ -1,6 +1,6 @@
 <template>
-  <div class="text-field">
-    <div class="rs-text-field" ref="slotContainer" @click="activateTextField">
+  <div class="rs-text-field">
+    <div class="rs-text-field__form" ref="slotContainer" @click="activateTextField">
       <input type="text" class="rs-text-field__input" v-model="value"
         :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent">
       <div class="rs-line-ripple" />
@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    const ripple = new RSRipple(this.$el.querySelector('.rs-text-field'))
+    const ripple = new RSRipple(this.$el.querySelector('.rs-text-field__form'))
     this.lineRipple = new RSLineRipple(this.$el.querySelector('.rs-line-ripple'))
     this.el = this.$el
   },
@@ -117,11 +117,11 @@ export default {
     },
     activateRipple() {
       this.lineRipple.activate()
-      this.el.querySelector('.rs-text-field').classList.add('rs-ripple-upgraded--background-focused')
+      this.el.querySelector('.rs-text-field__form').classList.add('rs-ripple-upgraded--background-focused')
     },
     deactivateRipple() {
       this.lineRipple.deactivate()
-      this.el.querySelector('.rs-text-field').classList.remove('rs-ripple-upgraded--background-focused')
+      this.el.querySelector('.rs-text-field__form').classList.remove('rs-ripple-upgraded--background-focused')
     },
     changeLabelStyle(state) {
       if(state == 'activate') {
@@ -171,8 +171,8 @@ export default {
   width: var(--rs-text-field_host--width);
 }
 
-.rs-text-field {
-  @include rs-text-field_;
+.rs-text-field__form {
+  @include rs-text-field-form_;
 }
 
 .rs-text-field__input {

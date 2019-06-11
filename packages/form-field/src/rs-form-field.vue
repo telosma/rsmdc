@@ -167,7 +167,7 @@ export default {
             this.checkbox = item.shadowRoot.querySelector('.rs-checkbox')
           }    
           if(!this.textField) {
-            this.textField = item.shadowRoot.querySelector('.text-field')
+            this.textField = item.shadowRoot.querySelector('.rs-text-field')
           }
           if(!this.label) {
             this.label = item.shadowRoot.querySelector('.rs-form-label')
