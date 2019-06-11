@@ -218,7 +218,7 @@ export default {
     }
 
     .-shake & {
-      animation: var(--rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation, rs-form-label-floattinglabel-shake-animation(standard));
+      animation: var(--rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation, rs-form-label-floatinglabel-shake-animation(standard));
     }
 
     [dir="rtl"].-shake & {
