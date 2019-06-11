@@ -419,7 +419,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     rs-checkbox-transition-exit(background-color),
     rs-checkbox-transition-exit(border-color);
 
-  border-color: var(--rs-checkbox-background--border-color, currentColor);
+  border-color: var(--rs-checkbox-background--border-color, $rs-checkbox-border-color);
 
   &::before {
     @include rs-checkbox__child--cover-parent_;
