@@ -1,17 +1,14 @@
 <template>
-  <div class="rs-notched-outline" v-if="isTextAreaLabel || isOutline">
+  <div class="rs-notched-outline" @click="setLabelWidth">
     <div class="rs-notched-outline__leading" />
       <div class="rs-notched-outline__notch">
-        <label :for="name" class="rs-form-label -floatinglabel" ref="slotContainer" :disabled="disabled" :required="required">
+        <label class="rs-form-label" :class="{ '-floatinglabel': dataType === 'textfield', '-left': dataFormindex === 0 }" :for="name" 
+          ref="slotContainer" @click="updateControllers" :disabled="disabled">
           <slot></slot>
         </label>
       </div>
     <div class="rs-notched-outline__trailing" />
   </div>
-  <label class="rs-form-label" :class="{ '-floatinglabel': dataType === 'textfield' && !isOutline, '-left': dataFormindex === 0 }" :for="name" 
-    ref="slotContainer" @click="updateControllers" :disabled="disabled" v-else>
-    <slot></slot>
-  </label>
 </template>
 <script>
 export default {
@@ -42,8 +39,7 @@ export default {
       el: '',
       host: '',
       isTextFiledLabel: false,
-      isTextAreaLabel: false,
-      isOutline: false
+      isTextAreaLabel: false
     }
   },
   watch: {
@@ -77,6 +73,11 @@ export default {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
       return value
+    },
+    setLabelWidth() {
+      const labelWidth = this.getElementProperty(this.el.querySelector('.rs-form-label'), 'width')
+      const width = parseInt(labelWidth.replace('px', '')) * 0.75 + 8
+      this.el.querySelector('.rs-notched-outline__notch').style.setProperty('--rs-notched-outline__outlined-notch--width', `${width}px`)
     },
     updateControllers() {
       if(this.dataType === 'radio') {
@@ -132,20 +133,19 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  color: var(--rs-form-label--color, text-primary-on-background);
-  margin-right: var(--rs-form-field-label--margin-right, auto);
-  padding-left: var(--rs-form-field-label--padding-left, $rs-form-field-item-spacing);
+  color: var(--rs-notched-outline-leading-notch-form-label--color, text-primary-on-background);
+  margin-right: var(--rs-notched-outline-leading-notch-form-label--margin-right, auto);
+  padding-left: var(--rs-notched-outline-leading-notch-form-label--padding-left, $rs-form-field-item-spacing);
 
-  .-disabled &,
-  &.-disabled {
+  .-disabled & {
     cursor: default;
   }
 
   &.-left {
     margin-right: 0;
-    margin-left: var(--rs-form-field-label__left--margin-left, auto);
-    padding-right: var(--rs-form-field-label__left--padding-right, $rs-form-field-item-spacing);
-    padding-left: var(--rs-form-field-label__left--padding-left, $rs-form-field-item-spacing);
+    margin-left: var(--rs-notched-outline-leading-notch-form-label__left--margin-left, auto);
+    padding-right: var(--rs-notched-outline-leading-notch-form-label__left--padding-right, $rs-form-field-item-spacing);
+    padding-left: var(--rs-notched-outline-leading-notch-form-label__left--padding-left, $rs-form-field-item-spacing);
   }
 
   &.-floatinglabel {
@@ -167,30 +167,30 @@ export default {
     overflow: hidden;
     will-change: transform;
 
-    font-size: var(--rs-form-label__floatinglabel--font-size);
-    color: var(--rs-form-label__floatinglabel--color, $rs-text-field-ink-color);
-    top: var(--rs-form-label__floatinglabel--top, 18px);
+    font-size: var(--rs-notched-outline-leading-notch-form-label__floatinglabel--font-size);
+    color: var(--rs-notched-outline-leading-notch-form-label__floatinglabel--color, $rs-text-field-label);
+    top: var(--rs-notched-outline-leading-notch-form-label__floatinglabel--top, 18px);
 
     &:-webkit-autofill {
       transform: translateY(-50%) scale(.75);
       cursor: auto;
     }
 
-    &.-required::after {
+    .-required &::after {
       margin-left: 1px;
       content: "*";
-      color: var(--rs-form-label__floatinglabel_required_after--color);
+      color: var(--rs-notched-outline__required-leading-notch-form-label__floatinglabel_after--color);
     }
     
-    &.-focus {
-      color: var(--rs-form-label__floatinglabel__focus--color, $rs-text-field-focused-label-color);
+    .-focus & {
+      color: var(--rs-notched-outline__focus-leading-notch-form-label__floatinglabel--color, $rs-text-field-focused-label-color);
     }
 
-    &.-invalid {
+    .-invalid & {
       color: $rs-form-field-error;
     }
 
-    &.-invalid.-required::after {
+    .-invalid.-required &::after {
       color: $rs-form-field-error;
     }
 
@@ -207,31 +207,29 @@ export default {
       text-align: right;
     }
 
-    &.-floatabove {
+    .-floatabove & {
       cursor: auto;
-      font-size: var(--rs-form-label__floatinglabel__floatabove--font-size);
-      transform: var(--rs-form-label__floatinglabel__floatabove--transform, rs-form-label-floatinglabel-position($rs-floating-label-position-y));
+      font-size: var(--rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size);
+      transform: var(--rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--transform, rs-form-label-floatinglabel-position($rs-floating-label-position-y));
     }
 
-    [dir="rtl"] &.-floatabove,
-    &[dir="rtl"].-floatabove {
-      transform: var(--rs-form-label_rtl__floatinglabel__floatabove--transform);
+    [dir="rtl"].-floatabove & {
+      transform: var(--rs-notched-outline_rtl__floatabove-leading-notch-form-label__floatinglabel--transform);
     }
 
-    &.-shake {
-      animation: var(--rs-form-label__floatinglabel__shake--animation, rs-form-label-floattinglabel-shake-animation(standard));
+    .-shake & {
+      animation: var(--rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation, rs-form-label-floattinglabel-shake-animation(standard));
     }
 
-    [dir="rtl"] &.-shake,
-    &[dir="rtl"].-shake {
-      animation: var(--rs-form-label__floatinglabel__shake_rtl--animation);
+    [dir="rtl"].-shake & {
+      animation: var(--rs-notched-outline_rtl__shake-leading-notch-form-label__floatinglabel--animation);
     }
 
-    &.-floatabove.-right {
+    .-floatabove.-right & {
       transform: rs-form-label-floatinglabel-rtl-position($rs-floating-label-position-y);
     }
 
-    &.-textarea {
+    .-textarea & {
       @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
 
       top: 17px;
@@ -240,75 +238,58 @@ export default {
       pointer-events: none;
     }
 
-    &.-outlined {
-      @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
-      
-      top: 17px;
-      height: var(--rs-text-field__floatinglabel__outlined--height);
+    .-outlined & {
+      height: var(--rs-notched-outline__outlined-leading-notch-form-label__floatinglabel--height);
     }
 
-    &.-outlined.-icon {
+    .-outlined.-floatabove & {
+      display: inline-block;
+      position: relative;
+      top: 1px;
+      left: 4px;
+      max-width: 130%;
+    }
+
+    .-outlined.-icon & {
       @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width));
     }
-    &.-outlined.-icon.-floatabove {
+
+    .-outlined.-icon.-floatabove &{
       @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width) + $rs-notched-outline-padding);
     }
   }
 }
 
 .rs-notched-outline {
-  display: flex;
-  position: absolute;
-  right: 0;
-  left: 0;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  /* @noflip */
-  text-align: left;
-  pointer-events: none;
+  &.-outlined {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    /* @noflip */
+    text-align: left;
+    pointer-events: none;
+  }
 
-  [dir="rtl"] &
-  & [dit="rtl"] {
+  &.-outlined[dit="rtl"] {
     text-align: right;
   }
 
-  > .rs-form-label.-floatinglabel {
-    display: inline-block;
+  &.-outlined.rs-notched-outline--upgraded[dir="rtl"] {
+    transform: var(--rs-notched-outline__outlined__upgraded_rtl--transform);
+  }
+
+  &.-outlined.-floatabove .rs-notched-outline__notch {
     position: relative;
-    top: 17px;
-    bottom: auto;
-    max-width: 100%;
+    border-top-color: #fff;
   }
 
-  > .rs-form-label.-floatinglabel.-floatabove {
-    text-overflow: clip;
-  }
-
-  &.rs-notched-outline--upgraded {
-    .rs-form-label.-floatinglabel.-floatabove {
-      max-width: calc(100% / .75);
-
-      transform: var(--rs-notched-outline__upgraded-label__floatinglabel__floatabove--transform);
-      font-size: var(--rs-notched-outline__upgraded-label__floatinglabel__floatabove--font-size);
-    }
-  }
-
-  [dir="rtl"] &.rs-notched-outline--upgraded,
-  &[dir="rtl"].rs-notched-outline--upgraded {
-    transform: var(--rs-notched-outline__upgraded-label_right__floatinglabel__floatabove--transform);
-  }
-
-  &.rs-notched-outline--notched {
-    .rs-notched-outline__notch {
-      @include rs-rtl-reflexive-box(padding, right, 8px);
-
-      border-top: none;
-    }
-  }
-
-  &.rs-notched-outline--no-label {
+  &.-outlined.rs-notched-outline--no-label {
     .rs-notched-outline__notch {
       padding: 0;
     }
@@ -318,137 +299,116 @@ export default {
 .rs-notched-outline__leading,
 .rs-notched-outline__notch,
 .rs-notched-outline__trailing {
-  box-sizing: border-box;
-  height: 100%;
-  transition: border $rs-notched-outline-transition-duration $rs-animation-standard-curve-timing-function;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  pointer-events: none;
+
+  .-outlined & {
+    box-sizing: border-box;
+    height: 100%;
+    transition: border $rs-notched-outline-transition-duration $rs-animation-standard-curve-timing-function;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    pointer-events: none;
+  }
 }
 
 .rs-notched-outline__leading {
-  @include rs-rtl-reflexive-property(border, 1px solid, none);
-  width: var(--rs-notched-outline-leading--width, $rs-notched-outline-leading-width);
-  border-width: var(--rs-notched-outline-leading--border-width);
-  border-radius: var(--rs-notched-outline-leading--border-radius, 4px);
 
-  [dir="rtl"] &,
-  &[dir="rtl"] {
-    border-radius: var(--rs-notched-outline-leading_rtl--border-radius, 4px);
+  .-outlined & {
+    width: var(--rs-notched-outline__outlined-leading--width, $rs-notched-outline-leading-width);
+    border: solid;
+    border-right: none;
+    border-width: var(--rs-notched-outline__outlined-leading--border-width, 1px);
+    border-radius: var(--rs-notched-outline__outlined-leading--border-radius, 4px 0 0 4px);
   }
 
-  [disabled] &,
-  &[disabled] {
+  .-outlined[dir="rtl"] {
+    border-radius: var( --rs-notched-outline__outlined_rtl-leading--border-radius, 4px);
+  }
+
+  .-outlined.-disabled & {
     border-color: $rs-text-field-outlined-disabled-border;
   }
 
-  :not([disabled]) &,
-  &:not([disabled]) {
-    border-color: var(--rs-notched-outline-leading_not_disabled--border-color, $rs-text-field-outlined-idle-border);
+  .-outlined:not(.-disabled) & {
+    border-color: var(--rs-notched-outline__outlined_not_disabled--border-color, $rs-text-field-outlined-idle-border);
   }
 
-  :not([disabled]):hover &,
-  &:not([disabled]):hover {
-    border-width: 1px;
-    border-color: var(--rs-notched-outline-leading_not_disabled_hover--border-color, rs-text-field-outlined-hover-border);
+  .-outlined:not(.-disabled).-focus & {
+    border-width: var(--rs-notched-outline__outlined_not_disabled__focus-leading--border-width, 2px);
+    border-color: var(--rs-notched-outline__outlined_not_disabled__focus-leading--border-color, $rs-theme-primary);
   }
 
-  :not([disabled]):focus &,
-  &:not([disabled]):focus {
-    border-width: var(--rs-notched-outline-leading_not_disabled_focus--border-width, 2px);
-    border-color: var(--rs-notched-outline-leading_not_disabled_focus--border-color, $rs-theme-primary);
-  }
-
-  [invalid] &,
-  &[invalid],
-  [invalid]:hover &,
-  &[invalid]:hover,
-  [invalid]:focus &,
-  &[invalid]:focus{
+  .-outlined.-invalid &,
+  .-outlined.-invalid.-focus & {
     color: $rs-form-field-error;
     border-color: $rs-form-field-error;
   }
 }
 
 .rs-notched-outline__notch {
-  flex: 0 0 auto;
-  width: auto;
-  max-width: calc(100% - #{$rs-notched-outline-leading-width} * 2);
-  border-width: var(--rs-notched-outline-notch--border-width);
+  .-outlined & {
+    flex: 0 0 auto;
+    width: var(--rs-notched-outline__outlined-notch--width);
+    max-width: calc(100% - #{$rs-notched-outline-leading-width} * 2);
+    border-width: var( --rs-notched-outline__outlined-notch--border-width, 1px);
+  }
 
-  [disabled] &,
-  &[disabled] {
+  .-outlined.-disabled & {
     border-color: $rs-text-field-outlined-disabled-border;
   }
 
-  :not([disabled]) &,
-  &:not([disabled]) {
-    border-color: var(--rs-notched-outline-notch_not_disabled--border-color, $rs-text-field-outlined-idle-border);
+  .-outlined:not(.-disabled) & {
+    border-color: var(--rs-notched-outline__outlined_not__disabled-notch--border-color, $rs-text-field-outlined-idle-border);
   }
 
-  :not([disabled]):hover &,
-  &:not([disabled]):hover {
-    border-width: 1px;
-    border-color: var(--rs-notched-outline-notch_not_disabled_hover--border-color, rs-text-field-outlined-hover-border);
+  .-outlined:not(.-disabled).-focus & {
+    border-width: var(--rs-notched-outline__outlined_not__disabled__focus-notch--border-width, 2px);
+    border-color: var(--rs-notched-outline__outlined_not__disabled__focus-notch--border-color, $rs-theme-primary);
+    border-top-color: #fff;
   }
 
-  :not([disabled]):focus &,
-  &:not([disabled]):focus {
-    border-width: var(--rs-notched-outline-notch_not_disabled_focus--border-width, 2px);
-    border-color: var(--rs-notched-outline-notch_not_disabled_focus--border-color, $rs-theme-primary);
-  }
-
-  [invalid] &,
-  &[invalid],
-  [invalid]:hover &,
-  &[invalid]:hover,
-  [invalid]:focus &,
-  &[invalid]:focus{
+  .-outlined.-invalid & {
     color: $rs-form-field-error;
     border-color: $rs-form-field-error;
+  }
+
+  .-outlined.-invalid.-floatabove &,
+  .-outlined.-invalid.-floatabove.-focus & {
+    color: $rs-form-field-error;
+    border-color: $rs-form-field-error;
+    // todo
+    border-top-color: #fff;
   }
 }
 
 .rs-notched-outline__trailing {
-  @include rs-rtl-reflexive-property(border, none, 1px solid);
-  flex-grow: 1;
-  max-width: var(--rs-notched-outline-notch--max-width);
-  border-width: var(--rs-notched-outline-trailing--border-width);
-  border-radius: var(--rs-notched-outline-trailing--border-radius, 4px);
 
-  [dir="rtl"] &,
-  &[dir="rtl"] {
-    border-radius: var(--rs-notched-outline-trailing_rtl--border-radius, 4px);
+  .-outlined & {
+    flex-grow: 1;
+    border-left: none;
+    border-right: solid;
+    max-width: var(--rs-notched-outline__outlined-trailing--max-width);
+    border-width: var(--rs-notched-outline__outlined-trailing--border-width, 1px);
+    border-radius: var(--rs-notched-outline__outlined-trailing--border-radius, 0 4px 4px 0);
   }
 
-  [disabled] &,
-  &[disabled] {
+  .-outlined.-disabled & {
     border-color: $rs-text-field-outlined-disabled-border;
   }
-
-  :not([disabled]) &,
-  &:not([disabled]) {
-    border-color: var(--rs-notched-outline-trailing_not_disabled--border-color, $rs-text-field-outlined-idle-border);
+  .-outlined:not(.-disabled) & {
+    border-color: var(--rs-notched-outline__outlined_not__disabled--border-color, $rs-text-field-outlined-idle-border);
   }
 
-  :not([disabled]):hover &,
-  &:not([disabled]):hover {
-    border-width: 1px;
-    border-color: var(--rs-notched-outline-notch_not_disabled_hover--border-color, $rs-text-field-outlined-hover-border);
+  .-outlined:not(.-disabled).-focus & {
+    border-width: var(--rs-notched-outline__outlined_not__disabled__focus-trailing--border-width, 2px);
+    border-color: var(--rs-notched-outline__outlined_not__disabled__focus-trailing--border-color, $rs-theme-primary);
   }
 
-  :not([disabled]):focus &,
-  &:not([disabled]):focus {
-    border-width: var(--rs-notched-outline-trailing_not_disabled_focus--border-width, 2px);
-    border-color: var(--rs-notched-outline-trailing_not_disabled_focus--border-color, $rs-theme-primary);
+  .-outlined[dir="rtl"] & {
+    border-radius: var(--rs-notched-outline__outlined-trailing_rtl--border-radius, 4px);
   }
 
-  [invalid] &,
-  &[invalid],
-  [invalid]:hover &,
-  &[invalid]:hover,
-  [invalid]:focus &,
-  &[invalid]:focus {
+  .-outlined.-invalid &,
+  .-outlined.-invalid.-focus & {
     color: $rs-form-field-error;
     border-color: $rs-form-field-error;
   }

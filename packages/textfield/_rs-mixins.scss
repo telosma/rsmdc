@@ -120,7 +120,28 @@
       // --rs-text-field-input_not__textarea--padding-right: 0;
       // --rs-text-field-input_not__textarea--padding-left: 0;
     }@else if $type == outlined {
-      @include rs-text-field-outlined_;
+      --rs-text-field__outlined: true;
+      --rs-text-field--border: 1px solid;
+      --rs-text-field--border-radius: 4px;
+      --rs-text-field-input--border-bottom: none;
+      --rs-text-field__disabled--border-bottom: 1px solid;
+      --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined)};
+      --rs-text-field_not__textarea__disabled--border-bottom-color: #{$rs-text-field-outlined-disabled-border};
+      --rs-ripple_before--background-color: transparent;
+      --rs-text-field_disabled--background-color: transparent;
+      --rs-text-field_not__textarea_not__disabled--background-color: transparent;
+      --rs-textarea-field_not_disabled--background-color: transparent;
+      --rs-text-field_not__disabled-input--background-color: transparent;
+      // --rs-text-field--overflow: visible;
+      --rs-text-field-input--display: flex;
+      --rs-text-field-input_not__textarea--padding-top: 12px;
+      --rs-text-field-input_not__textarea--padding-bottom: 14px;
+      --rs-text-field-input_not__textarea--padding-right: 12px;
+      --rs-text-field-input_not__textarea--padding-left: 12px;
+      --rs-text-field-input--border: none !important;  // FF adds unwanted border in HC mode on windows.
+      --rs-text-field-input--background-color: transparent;
+      --rs-text-field-input--z-index: 1;
+      --rs-text-field--icon--z-index: 2;
     }@else if $type == dense {
       @include rs-text-field-dense_;
     }

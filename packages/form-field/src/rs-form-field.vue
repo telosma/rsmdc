@@ -45,6 +45,8 @@ export default {
   },
   data() {
     return {
+      el: '',
+      host: '',
       radio: '',
       checkbox: '',
       textField: '',
@@ -53,10 +55,17 @@ export default {
       errorText: '',
       isError: '',
       isDisabled: '',
-      isRequired: ''
+      isRequired: '',
+      isOutlined: ''
     }
   },
   watch: {
+    el() {
+      this.host = this.el.parentNode.host
+    },
+    host() {
+      this.isOutlined = this.getElementProperty(this.host, '--rs-text-field__outlined')
+    },
     error() {
       this.isError = this.error ? true : false
     },
@@ -129,6 +138,20 @@ export default {
       if(!this.isRequired && this.label) {
         this.label.classList.remove('-required')
       }
+    },
+    isOutlined() {
+      if(this.isOutlined && this.textField) {
+        this.textField.querySelector('.rs-line-ripple').classList.add('-none')
+      }
+      if(!this.isOutlined && this.textField) {
+        this.textField.querySelector('.rs-line-ripple').classList.remove('-none')
+      }
+      if(this.isOutlined && this.label) {
+        this.label.classList.add('-outlined')
+      }
+      if(!this.isOutlined && this.label) {
+        this.label.classList.remove('-outlined')
+      }
     }
   },
   mounted() {
@@ -147,7 +170,7 @@ export default {
             this.textField = item.shadowRoot.querySelector('.-textfield')
           }
           if(!this.label) {
-            this.label = item.shadowRoot.querySelector('.rs-form-label')
+            this.label = item.shadowRoot.querySelector('.rs-notched-outline')
           }
           if(!this.helperText) {
             this.helperText = item.shadowRoot.querySelector('.-helper')
@@ -201,6 +224,7 @@ export default {
         this.isError = this.error
         this.isDisabled = this.disabled
         this.isRequired = this.required
+        this.el = this.$el
       })
   },
   methods: {

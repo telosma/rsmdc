@@ -44,7 +44,7 @@ export default {
       el: '',
       host: '',
       lineRipple: '',
-      formLabels: [],
+      formLabels: []
     }
   },
   watch: {
@@ -116,7 +116,8 @@ export default {
       if(state == 'activate') {
         // float form label to above and focus
         this.formLabels.forEach(formLabel => {
-          const label = formLabel.shadowRoot.querySelector('.rs-form-label')
+          const label = formLabel.shadowRoot.querySelector('.rs-notched-outline')
+          label.click()
           label.classList.add('-floatabove')
           label.classList.add('-focus')
           label.classList.remove('-shake')
@@ -124,7 +125,7 @@ export default {
       } else {
         // remove label focus ( and if textfield does not input anyting, sink label)
         this.formLabels.forEach(formLabel => {
-          const label = formLabel.shadowRoot.querySelector('.rs-form-label')
+          const label = formLabel.shadowRoot.querySelector('.rs-notched-outline')
           label.classList.remove('-focus')
           if(this.value.length === 0) {
             label.classList.remove('-floatabove')
@@ -162,6 +163,10 @@ export default {
 
   .-invalid & {
     @include rs-text-field-line-ripple-color($rs-text-field-error);
+  }
+
+  &.-none {
+    display: none;
   }
 }
 

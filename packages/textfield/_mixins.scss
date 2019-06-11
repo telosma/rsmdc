@@ -36,49 +36,29 @@
 }
 
 @mixin rs-text-field-dense_ {
-  --rs-form-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
-  --rs-form-label_rtl__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-dense)};
+  --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--transform: #{rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
+  --rs-notched-outline_rtl__floatabove-leading-notch-form-label__floatinglabel--transform: #{rs-form-label-floatinglabel-rtl-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
+  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-dense)};
 
   --rs-text-field-input_not__textarea--padding-top: 12px;
   --rs-text-field-input_not__textarea--padding-bottom: 0;
   --rs-text-field-input_not__textarea--padding-right: 12px;
   --rs-text-field-input_not__textarea--padding-left: 12px;
-  --rs-form-label__floatinglabel--font-size: .813rem;
-  --rs-form-label__floatinglabel__floatabove--font-size: .813rem;
+  --rs-notched-outline-leading-notch-form-label__floatinglabel--font-size: .813rem;
+  --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size: .813rem;
 }
 
 @mixin rs-text-field-outlined-dense_ {
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-dense)};
-  --rs-text-field__floatinglabel__outlined--height: 48px;
+  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-dense)};
+  --rs-notched-outline__outlined-leading-notch-form-label__floatinglabel--height: 48px;
   --rs-text-field-input_not__textarea--padding-top: 12px;
   --rs-text-field-input_not__textarea--padding-bottom: 7px;
   --rs-text-field-input_not__textarea--padding-right: 12px;
   --rs-text-field-input_not__textarea--padding-left: 12px;
-  --rs-form-label__floatinglabel--top: 14px;
-  --rs-form-label__floatinglabel--top: 14px;
-
-
+  --rs-notched-outline-leading-notch-form-label__floatinglabel--top: 14px;
+  --rs-notched-outline-leading-notch-form-label__floatinglabel--top: 14px;
   --rs-text-field-icon--top: 12px;
-}
-
-@mixin rs-text-field-outlined_ {
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined)};
-  --rs-text-field_not__textarea_not_disabled--background-color: transparent;
-  --rs-text-field_disabled--background-color: transparent;
-  --rs-textarea-field_not_disabled--background-color: transparent;
-  --rs-text-field--border: none;
-  --rs-text-field--overflow: visible;
-  --rs-text-field-input--display: flex;
-  --rs-text-field-input_not__textarea--padding-top: 12px;
-  --rs-text-field-input_not__textarea--padding-bottom: 14px;
-  --rs-text-field-input_not__textarea--padding-right: 12px;
-  --rs-text-field-input_not__textarea--padding-left: 12px;
-  --rs-text-field-input--border: none !important;  // FF adds unwanted border in HC mode on windows.
-  --rs-text-field-input--background-color: transparent;
-  --rs-text-field-input--z-index: 1;
-  --rs-text-field--icon--z-index: 2;
 }
 
 @mixin rs-text-field-with-leading-icon_ {
@@ -100,9 +80,9 @@
 @mixin rs-text-field-outlined-with-leading-icon_ {
   @include rs-text-field-icon-horizontal-position_(left, $rs-text-field-icon-position, $rs-text-field-icon-padding);
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y, 32px);
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon)};
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon)};
-  --rs-form-label__floatinglabel__shake_rtl--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon-rtl)};
+  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon)};
+  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon)};
+  --rs-notched-outline_rtl__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon-rtl)};
 
   .rs-floating-label {
     @include rs-rtl-reflexive-position(left, $rs-text-field-icon-padding - $rs-notched-outline-leading-width);
@@ -111,8 +91,8 @@
 
 @mixin rs-text-field-outlined-dense-with-leading-icon_ {
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon-dense)};
-  --rs-form-label__floatinglabel__shake_rtl--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon-dense-rtl)};
+  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon-dense)};
+  --rs-notched-outline_rtl__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floattinglabel-shake-animation(text-field-outlined-leading-icon-dense-rtl)};
 
   .rs-floating-label {
     @include rs-rtl-reflexive-position(left, $rs-text-field-dense-icon-padding - $rs-notched-outline-leading-width);
@@ -182,22 +162,34 @@
   will-change: opacity, transform, color;
 
   width: var(--rs-text-field--width);
-  border: var(--rs-text-field--border);
-  border-radius: var(--rs-text-field--border-radius, 4px 4px 0 0);
   overflow: var(--rs-text-field--overflow, hidden);
+  border: var(--rs-text-field--border, none);
+  border-radius: var(--rs-text-field--border-radius, 4px 4px 0 0);
 
   &:not(.rs-text-field--textarea) {
     display: var(--rs-text-field_not__textarea--display, block);
 
+    &.-disabled {
+      border-bottom-color: var(--rs-text-field_not__textarea__disabled--border-bottom-color, $rs-text-field-fullwidth-bottom-line-color);
+    }
     &:not(.-disabled) {
-      background-color: var(--rs-text-field_not__textarea_not_disabled--background-color, $rs-text-field-background);
+      background-color: var(--rs-text-field_not__textarea_not__disabled--background-color, $rs-text-field-background);
     }
   }
 
   &.-disabled {
     pointer-events: none;
-    border-bottom: none;
+    border-bottom: var(--rs-text-field__disabled--border-bottom, none);
+    border-color: $rs-text-field-outlined-disabled-border;
     background-color: var(--rs-text-field_disabled--background-color, $rs-text-field-disabled-background);
+  }
+
+  &:not(.-disabled) {
+    border-color: var(--rs-text-field--border-color, $rs-text-field-outlined-idle-border);
+  }
+
+  &:not(.-disabled):hover {
+    border-color: var(--rs-text-field_hover--border-color, $rs-text-field-outlined-hover-border);
   }
 
   &.-disabled + .rs-text-field-character-counter {
@@ -208,11 +200,11 @@
     color: var(--rs-text-field_not__disabled-character-counter--color, $rs-text-field-helper-text-color);
   }
 
-  &:not(.rs-text-field--textarea).-disabled {
-    border-bottom-color: $rs-text-field-fullwidth-bottom-line-color;
+  &.-invalid,
+  &.-invalid:hover {
+    border-color: $rs-text-field-error;
   }
 
-  [dir="rtl"] &,
   &[dir="rtl"] {
     border-radius: var(--rs-text-field_rtl--border-radius, rs-shape-rtl-radius(small, false));
   }
@@ -259,7 +251,7 @@
   background-color: var(--rs-text-field-input--background-color);
   border: var(--rs-text-field-input--border, none);
   caret-color: var(--rs-text-field-input--caret-color, $rs-theme-primary);
-  border-bottom: 1px solid;
+  border-bottom: var(--rs-text-field-input--border-bottom, 1px solid);
 
   .-invalid & {
     box-shadow: none;

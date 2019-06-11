@@ -1,6 +1,6 @@
 @import "./rs-variables";
 
 @mixin rs-form-field-label-padding($padding) {
-  --rs-form-field-label--padding-left: #{$padding};
-  --rs-form-field-label__left--padding-right: #{$padding};
+  --rs-notched-outline-leading-notch-form-label--padding-left: #{$padding};
+  --rs-notched-outline-leading-notch-form-label__left--padding-right: #{$padding};
 }
