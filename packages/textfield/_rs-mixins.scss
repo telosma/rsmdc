@@ -123,8 +123,8 @@
       // --rs-text-field-input_not__textarea--padding-left: 0;
     }@else if $type == outlined {
       --rs-text-field__outlined: true;
-      --rs-text-field--border: 1px solid;
-      --rs-text-field--border-radius: 4px;
+      // --rs-text-field--border: 1px solid;
+      // --rs-text-field--border-radius: 4px;
       --rs-text-field-input--border-bottom: none;
       --rs-text-field__disabled--border-bottom: 1px solid;
       --rs-text-field_not__textarea__disabled--border-bottom-color: #{$rs-text-field-outlined-disabled-border};

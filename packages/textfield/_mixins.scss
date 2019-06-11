@@ -13,7 +13,7 @@
 @import "./functions";
 
 @import "./rs-mixins";
-@import "../form-field/notched-outline/rs-mixins";
+@import "./notched-outline/rs-mixins";
 
 
 // todo: fix icon
@@ -36,28 +36,28 @@
 }
 
 @mixin rs-text-field-dense_ {
-  --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--transform: #{rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
-  --rs-notched-outline_rtl__floatabove-leading-notch-form-label__floatinglabel--transform: #{rs-form-label-floatinglabel-rtl-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
-  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-dense)};
+  --rs-form-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
+  --rs-form-label__floatinglabel_rtl__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
+  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-dense)};
 
   --rs-text-field-input_not__textarea--padding-top: 12px;
   --rs-text-field-input_not__textarea--padding-bottom: 0;
   --rs-text-field-input_not__textarea--padding-right: 12px;
   --rs-text-field-input_not__textarea--padding-left: 12px;
-  --rs-notched-outline-leading-notch-form-label__floatinglabel--font-size: .813rem;
+  --rs-form-label__floatinglabel--color--font-size: .813rem;
   --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size: .813rem;
 }
 
 @mixin rs-text-field-outlined-dense_ {
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
-  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-dense)};
-  --rs-notched-outline__outlined-leading-notch-form-label__floatinglabel--height: 48px;
+  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-dense)};
+  --rs-form-label__floatinglabel__outlined--height: 48px;
   --rs-text-field-input_not__textarea--padding-top: 12px;
   --rs-text-field-input_not__textarea--padding-bottom: 7px;
   --rs-text-field-input_not__textarea--padding-right: 12px;
   --rs-text-field-input_not__textarea--padding-left: 12px;
-  --rs-notched-outline-leading-notch-form-label__floatinglabel--top: 14px;
-  --rs-notched-outline-leading-notch-form-label__floatinglabel--top: 14px;
+  --rs-form-label__floatinglabel--top: 14px;
+  --rs-form-label__floatinglabel--top: 14px;
   --rs-text-field-icon--top: 12px;
 }
 
@@ -80,9 +80,9 @@
 @mixin rs-text-field-outlined-with-leading-icon_ {
   @include rs-text-field-icon-horizontal-position_(left, $rs-text-field-icon-position, $rs-text-field-icon-padding);
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y, 32px);
-  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon)};
-  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon)};
-  --rs-notched-outline_rtl__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-rtl)};
+  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon)};
+  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon)};
+  --rs-form-label__floatinglabel_rtl__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-rtl)};
 
   .rs-floating-label {
     @include rs-rtl-reflexive-position(left, $rs-text-field-icon-padding - $rs-notched-outline-leading-width);
@@ -91,8 +91,8 @@
 
 @mixin rs-text-field-outlined-dense-with-leading-icon_ {
   @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-  --rs-notched-outline__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-dense)};
-  --rs-notched-outline_rtl__shake-leading-notch-form-label__floatinglabel--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-dense-rtl)};
+  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-dense)};
+  --rs-form-label__floatinglabel_rtl__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-dense-rtl)};
 
   .rs-floating-label {
     @include rs-rtl-reflexive-position(left, $rs-text-field-dense-icon-padding - $rs-notched-outline-leading-width);
@@ -168,7 +168,7 @@
 
   &:not(.rs-text-field--textarea) {
     display: var(--rs-text-field_not__textarea--display, block);
-
+    
     &.-disabled {
       border-bottom-color: var(--rs-text-field_not__textarea__disabled--border-bottom-color, $rs-text-field-fullwidth-bottom-line-color);
     }

@@ -141,10 +141,10 @@ export default {
     },
     isOutlined() {
       if(this.isOutlined && this.textField) {
-        this.textField.querySelector('.rs-line-ripple').classList.add('-none')
+        this.textField.classList.add('-outlined')
       }
       if(!this.isOutlined && this.textField) {
-        this.textField.querySelector('.rs-line-ripple').classList.remove('-none')
+        this.textField.classList.temove('-outlined')
       }
       if(this.isOutlined && this.label) {
         this.label.classList.add('-outlined')
@@ -167,10 +167,10 @@ export default {
             this.checkbox = item.shadowRoot.querySelector('.rs-checkbox')
           }    
           if(!this.textField) {
-            this.textField = item.shadowRoot.querySelector('.-textfield')
+            this.textField = item.shadowRoot.querySelector('.text-field')
           }
           if(!this.label) {
-            this.label = item.shadowRoot.querySelector('.rs-notched-outline')
+            this.label = item.shadowRoot.querySelector('.rs-form-label')
           }
           if(!this.helperText) {
             this.helperText = item.shadowRoot.querySelector('.-helper')
@@ -206,7 +206,7 @@ export default {
           this.checkbox.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.textField) {
-          this.textField.parentNode.parentNode.host.setAttribute('data-id', this.id)
+          this.textField.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.label) {
           this.label.parentNode.host.setAttribute('data-id', this.id)
