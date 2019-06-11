@@ -3,8 +3,8 @@
 
 @mixin rs-notched-outline-color($color) {
   --rs-notched-outline__outlined_not_disabled--border-color: #{$color};
-  --rs-notched-outline__outlined_not__disabled-notch--border-color: #{$color};
-  --rs-notched-outline__outlined_not__disabled--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled-notched-outline-notch--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled-notched-outline-trailing--border-color: #{$color};
 }
 
 @mixin rs-notched-outline-hover-color($color) {
@@ -14,35 +14,35 @@
 }
 
 @mixin rs-notched-outline-focus-color($color) {
-  --rs-notched-outline__outlined_not_disabled__focus-leading--border-color: #{$color};
-  --rs-notched-outline__outlined_not__disabled__focus-notch--border-color: #{$color};
-  --rs-notched-outline__outlined_not__disabled__focus-trailing--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled__focus-notched-outline-leading--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled__focus-notched-outline-notch--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled__focus-notched-outline-trailing--border-color: #{$color};
 }
 
 // todo
 @mixin rs-notched-outline-stroke-width($width) {
-  --rs-notched-outline__outlined-leading--border-width: #{$width};
-   --rs-notched-outline__outlined-notch--border-width: #{$width};
-  --rs-notched-outline__outlined-trailing--border-width: #{$width};
+  --rs-text-field__outlined-notched-outline-leading--border-width: #{$width};
+   --rs-text-field__outlined-notched-outline-notch--border-width: #{$width};
+  --rs-text-field__outlined-notched-outline-trailing--border-width: #{$width};
 }
 
 @mixin rs-notched-outline-stroke-focus-width($width) {
-  --rs-notched-outline__outlined_not_disabled__focus-leading--border-width: #{$width};
-  --rs-notched-outline__outlined_not__disabled__focus-notch--border-width: #{$width};
-  --rs-notched-outline__outlined_not__disabled__focus-trailing--border-width: #{$width};
+  --rs-text-field__outlined_not__disabled__focus-notched-outline-leading--border-width: #{$width};
+  --rs-text-field__outlined_not__disabled__focus-notched-outline-notch--border-width: #{$width};
+  --rs-text-field__outlined_not__disabled__focus-notched-outline-trailing--border-width: #{$width};
 }
 
 @mixin rs-notched-outline-shape-radius($radius) {
   $radius: rs-shape-prop-value($radius);
 
-  --rs-notched-outline__outlined-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
-   --rs-notched-outline__outlined_rtl-leading--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
-  --rs-notched-outline__outlined-trailing--border-radius: #{rs-shape-mask-radius($radius, 0 1 1 0)};
-  --rs-notched-outline__outlined-trailing_rtl--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
+  --rs-text-field__outlined-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
+   --rs-text-field__outlined_rtl-notched-outline-leading--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
+  --rs-text-field__outlined-notched-outline-trailing--border-radius: #{rs-shape-mask-radius($radius, 0 1 1 0)};
+  --rs-text-field__outlined_rtl-notched-outline-trailing--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
 
   @if ($radius > $rs-notched-outline-leading-width) {
-    --rs-notched-outline__outlined-leading--width: #{$radius};
-    --rs-notched-outline__outlined-trailing--max-width: #{calc(100% - $radius * 2)};
+    --rs-text-field__outlined-notched-outline-leading--width: #{$radius};
+    --rs-text-field__outlined-notched-outline-trailing--max-width: #{calc(100% - $radius * 2)};
   }
 }
 
@@ -51,6 +51,6 @@
   --rs-form-label__floatinglabel_rtl__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
   --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size: (#{$scale} * 1rem);
   --rs-notched-outline__upgraded-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($positionY, $positionX, $scale)};
-  --rs-notched-outline__outlined__upgraded_rtl--transform: #{rs-form-label-floatinglabel-rtl-position($positionY, $positionX, $scale)};
+  --rs-text-field__outlined_rtl-notched-outline--transform: #{rs-form-label-floatinglabel-rtl-position($positionY, $positionX, $scale)};
   --rs-notched-outline__upgraded-label__floatinglabel__floatabove--font-size: 1rem
 }
