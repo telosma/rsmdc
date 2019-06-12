@@ -17,6 +17,7 @@
 
 // Change text-field input container color.
 @mixin rs-text-field-fill-color($color) {
+  @include rs-states-base-color($color);
   --rs-text-field_not__disabled-form-inputarea--background-color: #{$color};
   --rs-text-field_not__disabled-form__textarea--background-color: #{$color};
 }
