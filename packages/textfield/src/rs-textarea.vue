@@ -228,13 +228,11 @@ export default {
 
 .rs-text-field-character-counter {
   @include rs-text-field-character-counter_;
-
-  //for textarea
-  // margin-bottom: 28px; // Leaves space for character counter if it exists.
-  // padding-bottom: 0;
-  // position: absolute;
-  // bottom: var(--rs-text-field-character-counter--bottom, 13px);
-  // right: var(--rs-text-field-character-counter--right, 16px);
+  
+  padding-bottom: 0;
+  position: absolute;
+  bottom: var(--rs-text-field-character-counter--bottom, 13px);
+  right: var(--rs-text-field-character-counter--right, 16px);
 }
 
 .rs-notched-outline {
