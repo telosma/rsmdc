@@ -106,6 +106,7 @@
 @mixin rs-text-field-type($types...) {
   @each $type in $types {
     @if $type == fullwidth {
+      --rs-form-field_host--width: 100%;
       --rs-form-field--width: 100%;
       --rs-text-field_host--width: 100%;
       --rs-text-field-form--width: 100%;

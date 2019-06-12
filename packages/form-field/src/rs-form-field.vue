@@ -270,6 +270,13 @@ export default {
 </script>
 <style lang="scss">
 
+:host {
+  display: inline-block;
+  height: 100%;
+  margin-bottom: 22px;
+  width: var(--rs-form-field_host--width);
+}
+
 .rs-form-field {
   position: relative;
   display: inline-flex;
@@ -277,11 +284,6 @@ export default {
   vertical-align: middle;
 
   width: var(--rs-form-field--width);
-
-  &.-textarea {
-
-  }
-
   &.-select {
 
   } 
