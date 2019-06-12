@@ -50,6 +50,7 @@ export default {
       radio: '',
       checkbox: '',
       textField: '',
+      textArea: '',
       label: '',
       helperText: '',
       errorText: '',
@@ -98,6 +99,12 @@ export default {
       if(!this.isError && this.textField) {
         this.textField.classList.remove('-invalid')
       }
+      if(this.isError && this.textArea) {
+        this.textArea.classList.add('-invalid')
+      }
+      if(!this.isError && this.textArea) {
+        this.textArea.classList.remove('-invalid')
+      }
     },
     isDisabled() {
       if(this.isDisabled && this.radio) {
@@ -108,6 +115,9 @@ export default {
       }
       if(this.isDisabled && this.textField) {
         this.textField.classList.add('-disabled')
+      }
+      if(this.isDisabled && this.textArea) {
+        this.textArea.classList.add('-disabled')
       }
       if(this.isDisabled && this.label) {
         this.label.classList.add('-disabled')
@@ -123,6 +133,9 @@ export default {
       }
       if(!this.isDisabled && this.textField) {
         this.textField.classList.remove('-disabled')
+      }
+      if(!this.isDisabled && this.textArea) {
+        this.textArea.classList.remove('-disabled')
       }
       if(!this.isDisabled && this.label) {
         this.label.classList.remove('-disabled')
@@ -169,6 +182,9 @@ export default {
           if(!this.textField) {
             this.textField = item.shadowRoot.querySelector('.rs-text-field')
           }
+          if(!this.textArea) {
+            this.textArea = item.shadowRoot.querySelector('.rs-text-field.-textarea')
+          }
           if(!this.label) {
             this.label = item.shadowRoot.querySelector('.rs-form-label')
           }
@@ -192,11 +208,20 @@ export default {
         if(this.textField && this.label) {
           this.label.parentNode.host.setAttribute('data-type', 'textfield')
         } 
+        if(this.textArea && this.label) {
+          this.label.parentNode.host.setAttribute('data-type', 'textarea')
+        } 
         if(this.textField && this.helperText) {
           this.helperText.parentNode.host.setAttribute('data-type', 'textfield')
         } 
+        if(this.textArea && this.helperText) {
+          this.helperText.parentNode.host.setAttribute('data-type', 'textarea')
+        } 
         if(this.textField && this.errorText) {
           this.errorText.parentNode.host.setAttribute('data-type', 'textfield')
+        }
+        if(this.textArea && this.errorText) {
+          this.errorText.parentNode.host.setAttribute('data-type', 'textarea')
         } 
 
         if(this.id && this.radio) {
@@ -207,6 +232,9 @@ export default {
         }
         if(this.id && this.textField) {
           this.textField.parentNode.host.setAttribute('data-id', this.id)
+        }
+        if(this.id && this.textArea) {
+          this.textArea.parentNode.host.setAttribute('data-id', this.id)
         }
         if(this.id && this.label) {
           this.label.parentNode.host.setAttribute('data-id', this.id)

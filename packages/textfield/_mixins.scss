@@ -120,37 +120,6 @@
   @include rs-text-field-icon-horizontal-position-two-icons_($rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding, $rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding);
 }
 
-// Textarea
-@mixin rs-text-field-textarea_ {
-  @include rs-states-base-color(transparent);
-
-  display: inline-flex;
-  width: auto;
-  height: auto;
-  transition: none;
-  overflow: visible;
-
-  &[disabled] {
-    background-color: $rs-textarea-disabled-background;
-    border-bottom: none;
-  }
-
-  &:not([disabled]) {
-    background-color: var(--rs-textarea-field_not_disabled--background-color, transparent);
-  }
-
-  > .rs-text-field__input {
-    $padding-inset: 16px;
-
-    align-self: auto;
-    box-sizing: border-box;
-    height: auto;
-    margin: $padding-inset/2 1px 1px 0;
-    padding: 0 $padding-inset $padding-inset;
-    border: none;
-  }
-}
-
 @mixin rs-text-field-form_ {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
@@ -253,7 +222,6 @@
     padding-bottom: var(--rs-text-field-form_not__textarea-input--padding-bottom, 6px);
     padding-right: var(--rs-text-field-form_not__textarea-input--padding-right, 16px);
     padding-left: var(--rs-text-field-form_not__textarea-input--padding-left, 16px);
-    resize: var(--rs-text-field-form_not__textarea-input--resize);
   }
 
   :not(.-disabled) & {

@@ -1,5 +1,5 @@
 <template>
-  <label class="rs-form-label" :class="{ '-floatinglabel': dataType === 'textfield', '-left': dataFormindex === 0 }" :for="name" 
+  <label class="rs-form-label" :class="{ '-floatinglabel': dataType === 'textfield' || dataType === 'textarea', '-textarea': dataType === 'textarea', '-left': dataFormindex === 0 }" :for="name" 
     ref="slotContainer" @click="updateControllers" :disabled="disabled">
     <slot></slot>
   </label>
@@ -31,9 +31,7 @@ export default {
   data() {
     return {
       el: '',
-      host: '',
-      isTextFiledLabel: false,
-      isTextAreaLabel: false
+      host: ''
     }
   },
   watch: {
@@ -216,13 +214,9 @@ export default {
       transform: rs-form-label-floatinglabel-rtl-position($rs-floating-label-position-y);
     }
 
-    &.-textarea {
-      // @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
-
-      top: 17px;
+    &.-floatabove.-textarea {
+      top: 3px;
       bottom: auto;
-      width: auto;
-      pointer-events: none;
     }
 
     &.-outlined {

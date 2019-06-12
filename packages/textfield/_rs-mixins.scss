@@ -18,7 +18,7 @@
 
 @mixin rs-text-field-fill-color($color) {
   --rs-text-field_not__disabled-form-input--background-color: #{$color};
-  --rs-textarea-field_not_disabled--background-color: #{$color};
+  --rs-text-field_not_disabled-form__textarea--background-color: #{$color};
 }
 
 @mixin rs-text-field-textarea-stroke-color($color) {
@@ -28,7 +28,7 @@
 }
 
 @mixin rs-text-field-textarea-fill-color($color) {
-  --rs-textarea-field_not_disabled--background-color: #{$color};
+  --rs-text-field_not_disabled-form__textarea--background-color: #{$color};
 }
 
 @mixin rs-text-field-fullwidth-bottom-line-color($color) {
@@ -130,7 +130,7 @@
       --rs-ripple_before--background-color: transparent;
       --rs-text-field__disabled-form--background-color: transparent;
       --rs-text-field_not__disabled-form_not__textarea--background-color: transparent;
-      --rs-textarea-field_not_disabled--background-color: transparent;
+      --rs-text-field_not_disabled-form__textarea--background-color: transparent;
       --rs-text-field_not__disabled-input--background-color: transparent;
       --rs-text-field-form-input--display: flex;
       --rs-text-field-form_not__textarea-form--padding-top: 12px;
