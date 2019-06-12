@@ -175,7 +175,6 @@ export default {
 @import "../mixins";
 @import "../character-counter/mixins";
 @import "@rsmdc/notched-outline/mixins";
-@import "@rsmdc/line-ripple/rs-line-ripple";
 
 .rs-text-field__form.rs-text-field--textarea {
   @include rs-text-field-form_;
@@ -213,18 +212,6 @@ export default {
 
 .rs-text-field__input {
   @include rs-text-field-input_;
-}
-
-.rs-line-ripple {
-  @include rs-text-field-line-ripple-color(primary);
-
-  .-invalid & {
-    @include rs-text-field-line-ripple-color($rs-text-field-error);
-  }
-
-  .-outlined & {
-    display: none;
-  }
 }
 
 .rs-text-field-character-counter {
