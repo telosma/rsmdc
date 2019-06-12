@@ -90,17 +90,12 @@ export default {
 </script>
 <style lang="scss">
 @import "@rsmdc/animation/variables";
-@import "@rsmdc/rtl/mixins";
-@import "@rsmdc/theme/mixins";
+@import "@rsmdc/textfield/variables";
+@import "@rsmdc/textfield/icon/variables";
 @import "@rsmdc/theme/variables";
-@import "@rsmdc/typography/mixins";
+@import "../mixins";
 @import "../rs-functions";
-@import "../rs-variables";
-@import "../floating-label/mixins";
-@import "../floating-label/variables";
 
-@import "../../textfield/variables";
-@import "../../textfield/icon/variables";
 
 
 @include rs-form-label-floatinglabel-shake-keyframes(standard, $rs-floating-label-position-y);

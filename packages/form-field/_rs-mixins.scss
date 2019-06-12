@@ -1,6 +1,23 @@
 @import "./rs-variables";
 
+// Change padding between label and controllers.
 @mixin rs-form-field-label-padding($padding) {
   --rs-form-label--padding-left: #{$padding};
   --rs-form-label__left--padding-right: #{$padding};
+}
+
+// Change label ink color.
+@mixin rs-form-field-label-ink-color($color) {
+  --rs-form-label--color: #{$color};
+  --rs-form-label__floatinglabel--color: #{$color};
+}
+
+// Change label focus ink color. (Only -floatinglabel)
+@mixin rs-form-field-focus-label-ink-color($color) {
+  --rs-form-label__floatinglabel__focus--color: #{$color};
+}
+
+// Change helper text ink color.
+@mixin rs-text-field-helper-text-ink-color($color) {
+  --rs-form-field-line_not__disabled--color: #{$color};
 }

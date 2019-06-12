@@ -192,7 +192,7 @@ export default {
   }
 
   :not(.-disabled) & {
-    background-color: var(--rs-text-field_not_disabled-form__textarea--background-color, transparent);
+    background-color: var(--rs-text-field_not__disabled-form__textarea--background-color, transparent);
   }
 
   &::before {

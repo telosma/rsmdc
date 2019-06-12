@@ -1,14 +1,29 @@
-@import "@rsmdc/rtl/mixins";
 @import "@rsmdc/theme/mixins";
+@import "@rsmdc/typography/mixins";
 @import "./variables";
+@import "./rs-variables";
 
-@mixin rs-floating-label-ink-color($color) {
-  @include rs-theme-prop(color, $color);
+@mixin rs-form-field-line-host_ {
+  width: 100%;
+  //.rs-text-field--dense + &
+  margin-bottom: var(--rs-form-field-line--margin-bottom);
+  position: absolute;
+  bottom: -16px;
 }
 
-// Used for textarea in case of scrolling
-@mixin rs-floating-label-fill-color($color) {
-  @include rs-theme-prop(background-color, $color);
+@mixin rs-form-field-line_ {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-right: var(--rs-form-field-line--padding-right, $rs-form-field-helper-line-padding);
+  padding-left: var(--rs-form-field-line--padding-left, $rs-form-field-helper-line-padding);
+}
+
+@mixin rs-form-field-helper_ {
+  @include rs-typography(caption);
+  @include rs-typography-baseline-top(16px);
+  white-space: nowrap;
+  margin: 0;
 }
 
 @mixin rs-form-label-floatinglabel-shake-keyframes($modifier, $positionY, $positionX: 0%, $scale: .75) {

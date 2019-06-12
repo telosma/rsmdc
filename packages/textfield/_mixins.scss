@@ -119,6 +119,7 @@
   background: none;
   appearance: none;
   border: none;
+  line-height: var(--rs-text-field-form-input--line-height, 1.75rem);
   z-index: var(--rs-text-field-form-input--z-index);
   display: var(--rs-text-field-form-input--display);
   background-color: var(--rs-text-field-form-input--background-color);

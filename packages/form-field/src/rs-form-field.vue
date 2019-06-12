@@ -293,9 +293,6 @@ export default {
   vertical-align: middle;
 
   width: var(--rs-form-field--width);
-  &.-select {
-
-  } 
 }
 </style>
 

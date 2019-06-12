@@ -30,11 +30,9 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "@rsmdc/theme/mixins";
+@import "../mixins";
+@import "../rs-functions";
 @import "../rs-variables";
-@import "../helper-text/mixins";
-@import "../helper-text/rs-variables";
-@import "../helper-text/rs-functions";
 
 :host {
   @include rs-form-field-line-host_;

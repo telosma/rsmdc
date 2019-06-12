@@ -226,6 +226,11 @@ export default {
     border-bottom-color: $rs-text-field-error;
   }
 
+  :not(.-disabled) & {
+    border-radius: var(--rs-text-field-form-inputarea--border-radius);
+    background-color: var(--rs-text-field_not__disabled-form-inputarea--background-color);
+  }
+
   :not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) & {
     border-bottom-color: var(--rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea--border-bottom-color, $rs-text-field-bottom-line-idle);
   }

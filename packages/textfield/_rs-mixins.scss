@@ -1,3 +1,4 @@
+// Change text-field and textarea border-radius.
 @mixin rs-text-field-shape-radius($radius) {
   $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
   --rs-text-field-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
@@ -6,77 +7,45 @@
   @include rs-notched-outline-shape-radius($radius);
 }
 
-@mixin rs-textarea-field-shape-radius($radius) {
-  @include rs-notched-outline-shape-radius($radius);
-}
-
+// Change text-field input ink color.
 @mixin rs-text-field-ink-color($color) {
   --rs-text-field_not__disabled-form-input--color: #{$color};
 }
 
+// Change text-field input container color.
 @mixin rs-text-field-fill-color($color) {
-  --rs-text-field_not__disabled-form-input--background-color: #{$color};
-  --rs-text-field_not_disabled-form__textarea--background-color: #{$color};
+  --rs-text-field_not__disabled-form-inputarea--background-color: #{$color};
+  --rs-text-field_not__disabled-form__textarea--background-color: #{$color};
 }
 
-@mixin rs-text-field-textarea-stroke-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-notched-outline-color($color);
-  }
+// Change text-field and textarea outline color.
+@mixin rs-text-field-stroke-color($color) {
+  @include rs-notched-outline-color($color);
 }
 
-@mixin rs-text-field-textarea-fill-color($color) {
-  --rs-text-field_not_disabled-form__textarea--background-color: #{$color};
+// Change text-field and textarea hover outline color.
+@mixin rs-text-field-hover-outline-color($color) {
+  @include rs-notched-outline-hover-color($color);
 }
 
-@mixin rs-text-field-fullwidth-bottom-line-color($color) {
-  --rs-text-field_not_disabled_not__textarea--border-bottom-color: #{$color};
+// Change text-field and textarea focus outline color.
+@mixin rs-text-field-focused-outline-color($color) {
+  @include rs-notched-outline-focus-color($color);
 }
 
+// Change text-field bottom color.
 @mixin rs-text-field-bottom-line-color($color) {
   --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea--border-bottom-color: #{$color};
 }
 
+// Change text-field bottom hover color.
 @mixin rs-text-field-hover-bottom-line-color($color) {
   --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea_hover--border-bottom-color: #{$color};
 }
 
+
 @mixin rs-text-field-line-ripple-color($color) {
-  &:not(.rs-text-field--disabled) {
-    @include rs-line-ripple-color($color);
-  }
-}
-
-@mixin rs-text-field-label-color($color) {
-
-  &:not(.rs-text-field--disabled) {
-    @include rs-floating-label-ink-color($color);
-  }
-}
-
-@mixin rs-text-field-outline-color($color) {
-  @include rs-notched-outline-color($color);
-}
-
-@mixin rs-text-field-hover-outline-color($color) {
-  &:not(.rs-text-field--disabled) {
-    &:not(:focus) {
-      .rs-text-field__input:hover ~,
-      .rs-text-field__icon:hover ~ {
-        .rs-notched-outline {
-          @include rs-notched-outline-color($color);
-        }
-      }
-    }
-  }
-}
-
-@mixin rs-text-field-focused-outline-color($color) {
-  &:not(.rs-text-field--disabled) {
-    &.rs-text-field--focused {
-      @include rs-notched-outline-color($color);
-    }
-  }
+  @include rs-line-ripple-color($color);
 }
 
 @mixin rs-text-field-caret-color($color) {
@@ -103,6 +72,7 @@
   }
 }
 
+// Change text-field type.
 @mixin rs-text-field-type($types...) {
   @each $type in $types {
     @if $type == fullwidth {
@@ -113,23 +83,14 @@
       --rs-text-field-form_not__textarea--display: block;
       --rs-text-field-form-input_placeholder--transition-delay: 40ms;
       --rs-text-field-form-input_placeholder--transition-duration: 110ms;
-      // --rs-text-field_not__textarea_not_disabled--background-color: transparent;
-      // no label
-      // --rs-text-field-form-input_placeholder--opacity: 1;
-      // --rs-text-field-form_not__textarea-form--padding-top: 0;
-      // --rs-text-field-form_not__textarea-input--padding-bottom: 0;
-      // --rs-text-field-form_not__textarea-input--padding-right: 0;
-      // --rs-text-field-form_not__textarea-inputarea-input--padding-left: 0;
     }@else if $type == outlined {
       --rs-text-field__outlined: true;
-      // --rs-text-field-form--border: 1px solid;
-      // --rs-text-field-form--border-radius: 4px;
       --rs-text-field-form-input--border-bottom: none;
       --rs-text-field__disabled-form_not__textarea--border-bottom-color: #{$rs-text-field-outlined-disabled-border};
       --rs-ripple_before--background-color: transparent;
       --rs-text-field__disabled-form--background-color: transparent;
       --rs-text-field_not__disabled-form_not__textarea--background-color: transparent;
-      --rs-text-field_not_disabled-form__textarea--background-color: transparent;
+      --rs-text-field_not__disabled-form__textarea--background-color: transparent;
       --rs-text-field_not__disabled-input--background-color: transparent;
       --rs-text-field-form-input--display: flex;
       --rs-text-field-form_not__textarea-form--padding-top: 12px;
@@ -153,6 +114,7 @@
   }
 }
 
+// Set leading icon inside text-field.
 @mixin rs-text-field-icon-image($url) {
   --rs-text-field__icon: true;
   --rs-text-field-form-inputarea_before--background-image: #{$url};
@@ -160,6 +122,12 @@
   --rs-text-field-form_not__textarea-inputarea-input--padding-left: 48px;
 }
 
+// Set icon to text-field action.
 @mixin rs-text-field-action-icon-image($url) {
   --rs-text-field-trailing-icon--background-image: #{$url};
+}
+
+// Change text-field and textarea line height.
+@mixin rs-text-field-line-height($height) {
+  --rs-text-field-form-input--line-height: #{$height};
 }

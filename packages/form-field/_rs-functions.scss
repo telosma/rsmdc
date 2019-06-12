@@ -1,3 +1,9 @@
+@import "@rsmdc/animation/variables";
+
+@function rs-form-field-transition($property, $duration: 150ms) {
+  @return #{$property} #{$duration} $rs-animation-standard-curve-timing-function;
+}
+
 @function rs-form-label-floatinglabel-position($positionY, $positionX: 0%, $scale: .75) {
   @if $positionX > 0 or $positionX < 0 {
     @return translateY(-1 * $positionY) translateX(-1 * $positionX) scale($scale);
