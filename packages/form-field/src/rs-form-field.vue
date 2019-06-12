@@ -68,10 +68,10 @@ export default {
       this.isOutlined = this.getElementProperty(this.host, '--rs-text-field__outlined')
     },
     error() {
-      this.isError = this.error ? true : false
+      this.isError = this.error
     },
     disabled() {
-      this.isDisabled = this.disabled ? true : false
+      this.isDisabled = this.disabled
     },
     isError() {
       if(this.isError && this.errorText) {

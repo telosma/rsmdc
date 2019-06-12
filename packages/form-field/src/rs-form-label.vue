@@ -230,12 +230,14 @@ export default {
       max-width: 130%;
     }
 
-    &.-outlined.-icon {
-      // @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width));
+    &.-icon {
+      left: 48px;
+      top: 18px;
     }
 
     &.-outlined.-icon.-floatabove {
-      // @include rs-rtl-reflexive-position(left, ($rs-text-field-icon-padding - $rs-notched-outline-leading-width) + $rs-notched-outline-padding);
+      left: 16px;
+      top: 2px;
     }
   }
 }

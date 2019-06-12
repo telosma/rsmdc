@@ -1,8 +1,10 @@
 <template>
   <div class="rs-text-field">
     <div class="rs-text-field__form" ref="slotContainer" @click="activateTextField">
-      <input type="text" class="rs-text-field__input" v-model="value"
-        :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent">
+      <div class="rs-text-field__inputarea">
+        <input :type="type" class="rs-text-field__input" v-model="value"
+          :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent">
+      </div>
       <div class="rs-line-ripple" />
     </div>
     <div class="rs-notched-outline">
@@ -42,6 +44,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   },
   data() {
@@ -49,17 +55,23 @@ export default {
       el: '',
       host: '',
       lineRipple: '',
-      formLabels: []
+      formLabels: [],
+      hasIcon: ''
     }
   },
   watch: {
     dataId() {
-      if(this.value.length === 0) { return }
-      // if textfield has value, float form label.
       this.formLabels = window.__rsmdc.formfield.formLabels.filter(formLabel => formLabel.getAttribute('data-id') === this.dataId)
+
+      // if textfield has value, float form label. And if text field has icon, add class '-icon'.
       this.formLabels.forEach(formLabel => {
         const label = formLabel.shadowRoot.querySelector('.rs-form-label')
-        label.classList.add('-floatabove')
+        if(this.value.length > 0) { 
+          label.classList.add('-floatabove')
+        }
+        if(this.hasIcon) {
+          label.classList.add('-icon')
+        }
       })
     },
     el() {
@@ -67,6 +79,7 @@ export default {
     },
     host() {
       window.__rsmdc.textfield.textfields.push(this.host)
+      this.hasIcon = this.getElementProperty(this.host, '--rs-text-field__icon')
     }
   },
   created() {
@@ -75,7 +88,8 @@ export default {
     }
     if(!window.__rsmdc.textfield) {
       window.__rsmdc.textfield = {
-        textfields: []
+        textfields: [],
+        textareas: []
       }
     }
   },
@@ -174,6 +188,26 @@ export default {
 
 .rs-text-field__form {
   @include rs-text-field-form_;
+}
+
+.rs-text-field__inputarea {
+  position: relative;
+  height: 100%;
+
+  &::before {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    background-image: var(--rs-text-field-form-inputarea_before--background-image);
+    content: var(--rs-text-field-form-inputarea_before--content, none);
+  }
 }
 
 .rs-text-field__input {

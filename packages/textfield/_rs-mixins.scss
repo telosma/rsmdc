@@ -120,7 +120,7 @@
       // --rs-text-field-form_not__textarea-form--padding-top: 0;
       // --rs-text-field-form_not__textarea-input--padding-bottom: 0;
       // --rs-text-field-form_not__textarea-input--padding-right: 0;
-      // --rs-text-field-form_not__textarea-input--padding-left: 0;
+      // --rs-text-field-form_not__textarea-inputarea-input--padding-left: 0;
     }@else if $type == outlined {
       --rs-text-field__outlined: true;
       // --rs-text-field-form--border: 1px solid;
@@ -136,7 +136,7 @@
       --rs-text-field-form_not__textarea-form--padding-top: 12px;
       --rs-text-field-form_not__textarea-input--padding-bottom: 14px;
       --rs-text-field-form_not__textarea-input--padding-right: 12px;
-      --rs-text-field-form_not__textarea-input--padding-left: 16px;
+      --rs-text-field-form_not__textarea-inputarea-input--padding-left: 16px;
       --rs-text-field-form-input--border: none !important;  // FF adds unwanted border in HC mode on windows.
       --rs-text-field-form-input--background-color: transparent;
       --rs-text-field-form-input--z-index: 1;
@@ -152,5 +152,11 @@
   @if $dense and $outlined {
     @include rs-text-field-outlined-dense_;
   }
+}
 
+@mixin rs-text-field-icon-image($url) {
+  --rs-text-field__icon: true;
+  --rs-text-field-form-inputarea_before--background-image: #{$url};
+  --rs-text-field-form-inputarea_before--content: '';
+  --rs-text-field-form_not__textarea-inputarea-input--padding-left: 48px;
 }
