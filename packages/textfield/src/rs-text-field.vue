@@ -281,10 +281,10 @@ export default {
 }
 
 .rs-line-ripple {
-  @include rs-text-field-line-ripple-color(primary);
+  @include rs-line-ripple-color(primary);
 
   .-invalid & {
-    @include rs-text-field-line-ripple-color($rs-text-field-error);
+    @include rs-line-ripple-color($rs-text-field-error);
   }
 
   .-outlined & {
