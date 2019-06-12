@@ -54,17 +54,22 @@ export default {
     return {
       el: '',
       host: '',
-      formLabels: []
+      formLabels: [],
+      labelPosition: ''
     }
   },
   watch: {
     dataId() {
-      if(this.value.length === 0) { return }
-      // if textfield has value, float form label.
       this.formLabels = window.__rsmdc.formfield.formLabels.filter(formLabel => formLabel.getAttribute('data-id') === this.dataId)
+      // if textfield has value, float form label.
       this.formLabels.forEach(formLabel => {
         const label = formLabel.shadowRoot.querySelector('.rs-form-label')
-        label.classList.add('-floatabove')
+        if(this.value.length > 0) { 
+          label.classList.add('-floatabove')
+        }
+        if(this.labelPosition) {
+          label.style.setProperty('--rs-form-label__textarea__floatinglabel--left', this.labelPosition)
+        }
       })
     },
     el() {
@@ -72,6 +77,7 @@ export default {
     },
     host() {
       window.__rsmdc.textfield.textareas.push(this.host)
+      this.labelPosition = this.getElementProperty(this.host, '--rs-form-label__textarea__floatinglabel--left')
     }
   },
   created() {
@@ -168,13 +174,8 @@ export default {
 <style lang="scss">
 @import "../mixins";
 @import "../character-counter/mixins";
-@import "../notched-outline/mixins";
+@import "@rsmdc/notched-outline/mixins";
 @import "@rsmdc/line-ripple/rs-line-ripple";
-
-:host {
-  @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-label-position-y, 0%);
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined)};
-}
 
 .rs-text-field__form.rs-text-field--textarea {
   @include rs-text-field-form_;

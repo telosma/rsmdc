@@ -20,7 +20,7 @@
 </template>
 <script>
 import { RSRipple } from '@rsmdc/ripple'
-import { RSLineRipple } from '../../line-ripple/index'
+import { RSLineRipple } from "@rsmdc/line-ripple";
 
 export default {
   props: {
@@ -59,7 +59,8 @@ export default {
       host: '',
       lineRipple: '',
       formLabels: [],
-      hasIcon: ''
+      hasIcon: '',
+      labelPosition: ''
     }
   },
   watch: {
@@ -75,6 +76,9 @@ export default {
         if(this.hasIcon) {
           label.classList.add('-icon')
         }
+        if(this.labelPosition) {
+          label.style.setProperty('--rs-form-label__outlined__floatinglabel--left', this.labelPosition)
+        }
       })
     },
     el() {
@@ -83,6 +87,7 @@ export default {
     host() {
       window.__rsmdc.textfield.textfields.push(this.host)
       this.hasIcon = this.getElementProperty(this.host, '--rs-text-field__icon')
+      this.labelPosition = this.getElementProperty(this.host, '--rs-form-label__outlined__floatinglabel--left')
     }
   },
   created() {
@@ -195,7 +200,7 @@ export default {
 <style lang="scss">
 @import "../mixins";
 @import "../character-counter/mixins";
-@import "../notched-outline/mixins";
+@import "@rsmdc/notched-outline/mixins";
 @import "@rsmdc/line-ripple/rs-line-ripple";
 
 :host {

@@ -220,7 +220,12 @@ export default {
     }
 
     &.-outlined {
+      left: var(--rs-form-label__outlined__floatinglabel--left, 16px);
       height: var(--rs-form-label__floatinglabel__outlined--height);
+    }
+
+    &.-textarea {
+      left: var(--rs-form-label__textarea__floatinglabel--left, 16px);
     }
 
     &.-outlined.-floatabove {

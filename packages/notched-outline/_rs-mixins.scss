@@ -1,55 +1,54 @@
 @import "@rsmdc/shape/functions";
 
+// Change outline color.
 @mixin rs-notched-outline-color($color) {
-  --rs-notched-outline__outlined_not_disabled--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled-notched-outline-leading--border-color: #{$color};
   --rs-text-field__outlined_not__disabled-notched-outline-notch--border-color: #{$color};
   --rs-text-field__outlined_not__disabled-notched-outline-trailing--border-color: #{$color};
 }
 
+// Change outline hover color.
 @mixin rs-notched-outline-hover-color($color) {
-  --rs-notched-outline-leading_not_disabled_hover--border-color: #{$color};
-  --rs-notched-outline-notch_not_disabled_hover--border-color: #{$color};
-  --rs-notched-outline-trailing_not_disabled_hover--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled_hover-notched-outline-leading--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled_hover-notched-outline-notch--border-color: #{$color};
+  --rs-text-field__outlined_not__disabled_hover-notched-outline-trailing--border-color: #{$color};
 }
 
+// Change outline focus color.
 @mixin rs-notched-outline-focus-color($color) {
   --rs-text-field__outlined_not__disabled__focus-notched-outline-leading--border-color: #{$color};
   --rs-text-field__outlined_not__disabled__focus-notched-outline-notch--border-color: #{$color};
   --rs-text-field__outlined_not__disabled__focus-notched-outline-trailing--border-color: #{$color};
 }
 
-// todo
+// Change outline width.
 @mixin rs-notched-outline-stroke-width($width) {
   --rs-text-field__outlined-notched-outline-leading--border-width: #{$width};
-   --rs-text-field__outlined-notched-outline-notch--border-width: #{$width};
+  --rs-text-field__outlined-notched-outline-leading--border-top-width: #{$width};
+  --rs-text-field__outlined-notched-outline-leading--border-bottom-width: #{$width};
+  --rs-text-field__outlined-notched-outline-notch--border-width: #{$width};
   --rs-text-field__outlined-notched-outline-trailing--border-width: #{$width};
 }
 
+// Change outline focus width.
 @mixin rs-notched-outline-stroke-focus-width($width) {
   --rs-text-field__outlined_not__disabled__focus-notched-outline-leading--border-width: #{$width};
   --rs-text-field__outlined_not__disabled__focus-notched-outline-notch--border-width: #{$width};
   --rs-text-field__outlined_not__disabled__focus-notched-outline-trailing--border-width: #{$width};
 }
 
+// Change outline radius.
 @mixin rs-notched-outline-shape-radius($radius) {
   $radius: rs-shape-prop-value($radius);
 
+  --rs-form-label__textarea__floatinglabel--left: calc( 4px + #{$radius} );
+  --rs-form-label__outlined__floatinglabel--left: calc( 4px + #{$radius} );
   --rs-text-field__outlined-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
-   --rs-text-field__outlined_rtl-notched-outline-leading--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
+  --rs-text-field__outlined_rtl-notched-outline-leading--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
   --rs-text-field__outlined-notched-outline-trailing--border-radius: #{rs-shape-mask-radius($radius, 0 1 1 0)};
   --rs-text-field__outlined_rtl-notched-outline-trailing--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
 
   @if ($radius > $rs-notched-outline-leading-width) {
     --rs-text-field__outlined-notched-outline-leading--width: #{$radius};
-    --rs-text-field__outlined-notched-outline-trailing--max-width: #{calc(100% - $radius * 2)};
   }
-}
-
-@mixin rs-notched-outline-floating-label-float-position($positionY, $positionX: 0%, $scale: .75) {
-  --rs-form-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
-  --rs-form-label__floatinglabel_rtl__floatabove--transform: #{rs-form-label-floatinglabel-rtl-position($positionY + $rs-notched-outline-label-adjust, $positionX, 1)};
-  --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size: (#{$scale} * 1rem);
-  --rs-notched-outline__upgraded-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($positionY, $positionX, $scale)};
-  --rs-text-field__outlined_rtl-notched-outline--transform: #{rs-form-label-floatinglabel-rtl-position($positionY, $positionX, $scale)};
-  --rs-notched-outline__upgraded-label__floatinglabel__floatabove--font-size: 1rem
 }

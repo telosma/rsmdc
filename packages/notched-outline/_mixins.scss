@@ -40,9 +40,10 @@
     .-outlined & {
       box-sizing: border-box;
       height: 100%;
-      transition: border $rs-notched-outline-transition-duration $rs-animation-standard-curve-timing-function;
-      border-top: 1px solid;
-      border-bottom: 1px solid;
+      border-top: solid;
+      border-bottom: solid;
+      border-top-width: var(--rs-text-field__outlined-notched-outline-leading--border-width, 1px);
+      border-bottom-width: var(--rs-text-field__outlined-notched-outline-leading--border-width, 1px);
       pointer-events: none;
     }
   }
@@ -94,7 +95,7 @@
     border-width: var(--rs-text-field__outlined-notched-outline-notch--border-width, 1px);
   }
 
-  .-outlined.-floatabove & {
+  :not(.-nolabel).-outlined.-floatabove & {
     border-top: none;
   }
 
