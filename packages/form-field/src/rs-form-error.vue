@@ -41,7 +41,8 @@ export default {
   z-index: 2;
 }
 
-:host([data-type="textfield"]) {
+:host([data-type="textfield"]),
+:host([data-type="textarea"]) {
   bottom: $rs-form-field-helper-text-bottom;
 }
 
