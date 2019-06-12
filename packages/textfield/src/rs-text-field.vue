@@ -227,8 +227,11 @@ export default {
   }
 
   :not(.-disabled) & {
-    border-radius: var(--rs-text-field-form-inputarea--border-radius);
     background-color: var(--rs-text-field_not__disabled-form-inputarea--background-color);
+  }
+
+  :not(.-disabled).-outlined & {
+    border-radius: var(--rs-text-field_not__disabled__outlined-form-inputarea--border-radius);
   }
 
   :not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) & {

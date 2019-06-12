@@ -41,8 +41,8 @@
 @mixin rs-notched-outline-shape-radius($radius) {
   $radius: rs-shape-prop-value($radius);
 
-  --rs-text-field-form-inputarea--border-radius: #{$radius};
-  --rs-text-field-form--border-radius: #{$radius};
+  --rs-text-field_not__disabled__outlined-form-inputarea--border-radius: #{$radius};
+  --rs-text-field__outlined-form--border-radius: #{$radius};
   --rs-form-label__textarea__floatinglabel--left: calc( 4px + #{$radius} );
   --rs-form-label__outlined__floatinglabel--left: calc( 4px + #{$radius} );
   --rs-text-field__outlined-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};

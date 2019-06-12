@@ -27,6 +27,10 @@
     display: var(--rs-text-field-form_not__textarea--display, block);
   }
 
+  .-outlined & {
+    border-radius: var(--rs-text-field__outlined-form--border-radius);
+  }
+
   .-disabled & {
     pointer-events: none;
     border-bottom: var(--rs-text-field__disabled-form--border-bottom, none);
@@ -51,7 +55,7 @@
   } 
 
   &[dir="rtl"] {
-    border-radius: var(--rs-text-field_rt-form--border-radius, rs-shape-rtl-radius(small, false));
+    border-radius: var(--rs-text-field_rtl-form--border-radius, rs-shape-rtl-radius(small, false));
   }
 
   // ripple
