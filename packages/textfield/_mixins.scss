@@ -7,7 +7,6 @@
 @import "@rsmdc/typography/variables";
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/functions";
-@import "icon/mixins";
 @import "icon/variables";
 @import "./variables";
 @import "./functions";
@@ -41,37 +40,6 @@
   --rs-text-field-icon--top: 12px;
 }
 
-@mixin rs-text-field-outlined-dense-with-leading-icon_ {
-  @include rs-notched-outline-floating-label-float-position($rs-text-field-outlined-dense-label-position-y, $rs-text-field-outlined-dense-with-leading-icon-label-position-x, $rs-text-field-dense-label-scale);
-  --rs-form-label__floatinglabel__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-dense)};
-  --rs-form-label__floatinglabel_rtl__shake--animation: #{rs-form-label-floatinglabel-shake-animation(text-field-outlined-leading-icon-dense-rtl)};
-
-  .rs-floating-label {
-    @include rs-rtl-reflexive-position(left, $rs-text-field-dense-icon-padding - $rs-notched-outline-leading-width);
-  }
-}
-
-@mixin rs-text-field-with-trailing-icon_ {
-  @include rs-text-field-icon-horizontal-position_(right, $rs-text-field-trailing-icon-position, $rs-text-field-icon-padding);
-
-  // Outlined uses 16px for text alignment when using a trailing icon.
-  &.rs-text-field--outlined {
-    @include rs-text-field-icon-horizontal-position_(right, $rs-text-field-icon-position, $rs-text-field-icon-padding);
-  }
-}
-
-@mixin rs-text-field-dense-with-trailing-icon_ {
-  @include rs-text-field-icon-horizontal-position_(right, $rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding);
-}
-
-@mixin rs-text-field-with-both-icons_ {
-  @include rs-text-field-icon-horizontal-position-two-icons_($rs-text-field-icon-position, $rs-text-field-icon-padding, $rs-text-field-trailing-icon-position, $rs-text-field-icon-padding);
-}
-
-@mixin rs-text-field-dense-with-both-icons_ {
-  @include rs-text-field-icon-horizontal-position-two-icons_($rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding, $rs-text-field-dense-icon-position, $rs-text-field-dense-icon-padding);
-}
-
 @mixin rs-text-field-form_ {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
@@ -101,7 +69,6 @@
   .-disabled &:not(.rs-text-field--textarea) {
     border-bottom-color: var(--rs-text-field__disabled-form_not__textarea--border-bottom-color, $rs-text-field-fullwidth-bottom-line-color);
   } 
-
 
   :not(.-disabled) & {
     border-color: var(--rs-text-field_not__disabled-form--border-color, $rs-text-field-outlined-idle-border);
@@ -214,25 +181,6 @@
   }
 }
 
-
-
-.rs-action {
-  //action
-  @include rs-text-field-icon-color($rs-text-field-icon-color);
-}
-
-.rs-text-field--with-leading-icon.rs-text-field--outlined.rs-text-field--dense {
-  @include rs-text-field-outlined-dense-with-leading-icon_;
-}
-
-.rs-text-field--with-trailing-icon {
-  @include rs-text-field-with-trailing-icon_;
-}
-
-.rs-text-field--with-leading-icon.rs-text-field--with-trailing-icon {
-  @include rs-text-field-with-both-icons_;
-}
-
 // stylelint-disable plugin/selector-bem-pattern
 .rs-text-field--with-leading-icon.rs-text-field--dense .rs-text-field__icon,
 .rs-text-field--with-trailing-icon.rs-text-field--dense .rs-text-field__icon {
@@ -240,11 +188,3 @@
   transform: scale(.8);
 }
 // stylelint-enable plugin/selector-bem-pattern
-
-.rs-text-field--with-trailing-icon.rs-text-field--dense {
-  @include rs-text-field-dense-with-trailing-icon_;
-}
-
-.rs-text-field--with-leading-icon.rs-text-field--with-trailing-icon.rs-text-field--dense {
-  @include rs-text-field-dense-with-both-icons_;
-}

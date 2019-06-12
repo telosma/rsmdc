@@ -1,5 +1,3 @@
-// @import "../form-field/rs-functions";
-
 @mixin rs-text-field-shape-radius($radius) {
   $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
   --rs-text-field-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
