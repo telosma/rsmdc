@@ -1,17 +1,25 @@
-
-
-
-// Change text-field and textarea border-radius.
+// Change text-field border-radius.
 @mixin rs-text-field-shape-radius($radius) {
   $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
   --rs-text-field-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
-  --rs-text-field_rt-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
-  // outline
+  --rs-text-field_rtl-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
+
+  // outlined
+  @include rs-notched-outline-shape-radius($radius);
+}
+
+// Change textarea border-radius.
+@mixin rs-textarea-shape-radius($radius) {
   @include rs-notched-outline-shape-radius($radius);
 }
 
 // Change text-field input ink color.
 @mixin rs-text-field-ink-color($color) {
+  --rs-text-field_not__disabled-form-input--color: #{$color};
+}
+
+// Change textarea input ink color.
+@mixin rs-textarea-ink-color($color) {
   --rs-text-field_not__disabled-form-input--color: #{$color};
 }
 
@@ -22,18 +30,40 @@
   --rs-text-field_not__disabled-form__textarea--background-color: #{$color};
 }
 
-// Change text-field and textarea outline color.
+// Change textarea input container color.
+@mixin rs-textarea-fill-color($color) {
+  @include rs-states-base-color($color);
+  --rs-text-field_not__disabled-form-inputarea--background-color: #{$color};
+  --rs-text-field_not__disabled-form__textarea--background-color: #{$color};
+}
+
+// Change text-field outline color.
 @mixin rs-text-field-stroke-color($color) {
   @include rs-notched-outline-color($color);
 }
 
-// Change text-field and textarea hover outline color.
+// Change text-field hover outline color.
 @mixin rs-text-field-hover-outline-color($color) {
   @include rs-notched-outline-hover-color($color);
 }
 
-// Change text-field and textarea focus outline color.
+// Change text-field focus outline color.
 @mixin rs-text-field-focused-outline-color($color) {
+  @include rs-notched-outline-focus-color($color);
+}
+
+// Change textarea outline color.
+@mixin rs-textarea-stroke-color($color) {
+  @include rs-notched-outline-color($color);
+}
+
+// Change textarea hover outline color.
+@mixin rs-textarea-hover-outline-color($color) {
+  @include rs-notched-outline-hover-color($color);
+}
+
+// Change textarea focus outline color.
+@mixin rs-textarea-focused-outline-color($color) {
   @include rs-notched-outline-focus-color($color);
 }
 
@@ -52,28 +82,9 @@
   @include rs-line-ripple-color($color);
 }
 
+// Change text-field and textarea caret color.
 @mixin rs-text-field-caret-color($color) {
   --rs-text-field-form-input--caret-color: #{$color};
-}
-
-@mixin rs-text-field-outline-shape-radius($radius, $rtl-reflexive: false) {
-  $resolved-radius: rs-shape-resolve-percentage-radius($rs-text-field-height, $radius);
-
-  .rs-notched-outline {
-    @include rs-notched-outline-shape-radius($resolved-radius, $rtl-reflexive);
-  }
-
-  $radius-pixels: rs-shape-prop-value($resolved-radius);
-
-  @if ($radius-pixels > $rs-notched-outline-leading-width) {
-    .rs-text-field__input {
-      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, 0);
-    }
-
-    + .rs-text-field-helper-line {
-      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, $radius-pixels);
-    }
-  }
 }
 
 // Change text-field type.
