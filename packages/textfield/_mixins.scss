@@ -131,6 +131,19 @@
     caret-color: $rs-text-field-error;
   }
 
+  .-nolabel & {
+    padding: 16px;
+    --rs-text-field-form-input_placeholder--opacity: 1;
+  }
+
+  .-nolabel.-outlined & {
+    padding: 12px 16px 14px;
+  }
+
+  .-nolabel.-outlined.-textarea & {
+    padding: 0px 16px 16px;
+  }
+
   :not(.rs-text-field--textarea) & {
     padding-top: var(--rs-text-field-form_not__textarea-form--padding-top, 20px);
     padding-bottom: var(--rs-text-field-form_not__textarea-input--padding-bottom, 6px);
@@ -165,7 +178,6 @@
     outline: none;
   }
 
-  &.rs-text-field--no-label::placeholder, 
   &:focus::placeholder {
     transition-delay: 40ms;
     transition-duration: 110ms;
@@ -174,10 +186,6 @@
 
   &:-webkit-autofill {
     z-index: auto !important;
-  }
-
-  :not(.-outlined):not(.rs-text-field--textarea) &.rs-text-field--no-label {
-    padding: 16px;
   }
 }
 

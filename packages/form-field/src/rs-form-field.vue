@@ -196,8 +196,17 @@ export default {
           }
         })
 
-        const labelPosition = items.findIndex(item => item.isEqualNode(this.label.parentNode.host))
-        this.label.parentNode.host.setAttribute('data-formindex', labelPosition)
+        if(this.label) {
+          const labelPosition = items.findIndex(item => item.isEqualNode(this.label.parentNode.host))
+          this.label.parentNode.host.setAttribute('data-formindex', labelPosition)
+        }
+
+        if(!this.label && this.textField) {
+          this.textField.classList.add('-nolabel')
+        } 
+        if(!this.label && this.textArea) {
+          this.textArea.classList.add('-nolabel')
+        } 
 
         if(this.radio && this.label) {
           this.label.parentNode.host.setAttribute('data-type', 'radio')

@@ -22,8 +22,8 @@ export default {
       default: false
     },
     maxlength: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ''
     },
     placeholder: {
       type: String,
