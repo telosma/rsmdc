@@ -23,7 +23,7 @@
   --rs-text-field-form_not__textarea-form--padding-top: 12px;
   --rs-text-field-form_not__textarea-input--padding-bottom: 0;
   --rs-text-field-form_not__textarea-input--padding-right: 12px;
-  --rs-text-field-form-inputarea-input--padding-left: 12px;
+  --rs-text-field-form_not__textarea-inputarea-input--padding-left: 12px;
   --rs-form-label__floatinglabel--color--font-size: .813rem;
   --rs-notched-outline__floatabove-leading-notch-form-label__floatinglabel--font-size: .813rem;
 }
@@ -35,7 +35,7 @@
   --rs-text-field-form_not__textarea-form--padding-top: 12px;
   --rs-text-field-form_not__textarea-input--padding-bottom: 7px;
   --rs-text-field-form_not__textarea-input--padding-right: 12px;
-  --rs-text-field-form-inputarea-input--padding-left: 12px;
+  --rs-text-field-form_not__textarea-inputarea-input--padding-left: 12px;
   --rs-form-label__floatinglabel--top: 14px;
   --rs-form-label__floatinglabel--top: 14px;
   --rs-text-field-icon--top: 12px;
@@ -173,7 +173,7 @@
     padding-top: var(--rs-text-field-form_not__textarea-form--padding-top, 20px);
     padding-bottom: var(--rs-text-field-form_not__textarea-input--padding-bottom, 6px);
     padding-right: var(--rs-text-field-form_not__textarea-input--padding-right, 16px);
-    padding-left: var(--rs-text-field-form-inputarea-input--padding-left, 16px);
+    padding-left: var(--rs-text-field-form_not__textarea-inputarea-input--padding-left, 16px);
   }
 
   :not(.-disabled) & {

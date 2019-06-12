@@ -66,7 +66,7 @@ export default {
       // if textfield has value, float form label. And if text field has icon, add class '-icon'.
       this.formLabels.forEach(formLabel => {
         const label = formLabel.shadowRoot.querySelector('.rs-form-label')
-        if(this.value.length > 0) { 
+        if(this.value.length > 0 || this.type === 'date') { 
           label.classList.add('-floatabove')
         }
         if(this.hasIcon) {
@@ -153,11 +153,12 @@ export default {
         this.formLabels.forEach(formLabel => {
           const label = formLabel.shadowRoot.querySelector('.rs-form-label')
           label.classList.remove('-focus')
-          if(this.value.length === 0) {
+          if(this.type === 'date' || this.value.length > 0) {
+            label.classList.add('-floatabove')
+            this.el.classList.add('-floatabove')
+          } else {
             label.classList.remove('-floatabove')
             this.el.classList.remove('-floatabove')
-          } else {
-            this.el.classList.add('-floatabove')
           }
           // only error
           if(this.value.length > 0 && label.classList.contains('-invalid')) {
