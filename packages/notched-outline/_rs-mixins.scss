@@ -1,5 +1,4 @@
 @import "@rsmdc/shape/functions";
-@import "./variables";
 
 @mixin rs-notched-outline-color($color) {
   --rs-notched-outline__outlined_not_disabled--border-color: #{$color};

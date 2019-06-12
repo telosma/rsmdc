@@ -1,4 +1,6 @@
-
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/theme/variables";
+@import "./rs-variables";
 @import "./variables";
 
 @mixin rs-notched-outline_ {
@@ -64,11 +66,11 @@
   }
 
   .-outlined:not(.-disabled) & {
-    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-leading--border-color, $rs-text-field-outlined-idle-border);
+    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-leading--border-color, $rs-notched-outline-idle);
   }
 
   .-outlined:not(.-disabled):hover & {
-    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-leading--border-color, $rs-text-field-outlined-hover-border);
+    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-leading--border-color, $rs-notched-outline-border);
   }
 
   .-outlined:not(.-disabled).-focus & {
@@ -79,8 +81,8 @@
   .-outlined.-invalid &,
   .-outlined.-invalid:hover &,
   .-outlined.-invalid.-focus & {
-    color: $rs-text-field-error;
-    border-color: $rs-text-field-error;
+    color: $rs-theme-error;
+    border-color: $rs-theme-error;
   }
 }
 
@@ -101,12 +103,12 @@
   }
 
   .-outlined:not(.-disabled) & {
-    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-notch--border-color, $rs-text-field-outlined-idle-border);
+    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-notch--border-color, $rs-notched-outline-idle);
   }
 
 
   .-outlined:not(.-disabled):hover & {
-    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-notch--border-color, $rs-text-field-outlined-hover-border);
+    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-notch--border-color, $rs-notched-outline-border);
   }
 
   .-outlined:not(.-disabled).-focus & {
@@ -117,8 +119,8 @@
   .-outlined.-invalid &,
   .-outlined.-invalid:hover &,
   .-outlined.-invalid.-focus & {
-    color: $rs-text-field-error;
-    border-color: $rs-text-field-error;
+    color: $rs-theme-error;
+    border-color: $rs-theme-error;
   }
 }
 
@@ -137,11 +139,11 @@
   }
 
   .-outlined:not(.-disabled) & {
-    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-trailing--border-color, $rs-text-field-outlined-idle-border);
+    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-trailing--border-color, $rs-notched-outline-idle);
   }
 
   .-outlined:not(.-disabled):hover & {
-    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-trailing--border-color, $rs-text-field-outlined-hover-border);
+    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-trailing--border-color, $rs-notched-outline-border);
   }
 
   .-outlined:not(.-disabled).-focus & {
@@ -156,7 +158,7 @@
   .-outlined.-invalid &,
   .-outlined.-invalid:hover &,
   .-outlined.-invalid.-focus & {
-    color: $rs-text-field-error;
-    border-color: $rs-text-field-error;
+    color: $rs-theme-error;
+    border-color: $rs-theme-error;
   }
 }
