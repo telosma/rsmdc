@@ -1,9 +1,12 @@
 <template>
   <div class="rs-text-field">
-    <div class="rs-text-field__form" ref="slotContainer" @click="activateTextField">
+    <div class="rs-text-field__form" @click="activateTextField">
       <div class="rs-text-field__inputarea">
         <input :type="type" class="rs-text-field__input" v-model="value"
           :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent">
+        <div class="rs-text-field__action" ref="slotContainer">
+          <slot></slot>
+        </div>
       </div>
       <div class="rs-line-ripple" />
     </div>
@@ -26,8 +29,8 @@ export default {
       default: false
     },
     maxlength: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ''
     },
     placeholder: {
       type: String,
@@ -94,11 +97,23 @@ export default {
     }
   },
   mounted() {
+    this.$nextTick()
+      .then(this.fixSlot.bind(this))
+      .then(() => {
+        const actions = Array.from(this.$el.querySelector('slot').assignedNodes())
+        if(actions.length === 0) {
+          this.$el.querySelector('.rs-text-field__action').classList.add('-none')
+        }
+      })
     const ripple = new RSRipple(this.$el.querySelector('.rs-text-field__form'))
     this.lineRipple = new RSLineRipple(this.$el.querySelector('.rs-line-ripple'))
     this.el = this.$el
   },
   methods: {
+    fixSlot() {
+      this.$refs.slotContainer.innerHTML = ''
+      this.$refs.slotContainer.append(document.createElement('slot'))
+    },
     getElementProperty(el, prop) {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
@@ -192,8 +207,38 @@ export default {
 }
 
 .rs-text-field__inputarea {
+  display: flex;
+  align-items: center;
   position: relative;
   height: 100%;
+  transition: rs-text-field-transition(opacity);
+  border-radius: 0;
+  box-sizing: border-box;
+  border: var(--rs-text-field-form-input--border, none);
+  border-bottom: var(--rs-text-field-form-input--border-bottom, 1px solid);
+
+  .-invalid & {
+    border-bottom-color: $rs-text-field-error;
+  }
+
+  :not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) & {
+    border-bottom-color: var(--rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea--border-bottom-color, $rs-text-field-bottom-line-idle);
+  }
+
+  :not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) &:hover {
+    border-bottom-color: var(--rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea_hover--border-bottom-color, $rs-text-field-bottom-line-hover);
+  }
+
+  .-invalid:not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) &,
+  .-invalid:not(.-disabled):not(.-outlined):not(.rs-text-field--textarea) &:hover {
+    border-bottom-color: $rs-text-field-error;
+  }
+
+  .-disabled &,
+  .-disabled:not(.-outlined):not(.rs-text-field--textarea) &,
+  .-disabled:not(.-outlined):not(.rs-text-field--textarea) &:hover {
+    border-bottom-color: $rs-text-field-disabled-border;
+  }
 
   &::before {
     width: 24px;
@@ -213,6 +258,16 @@ export default {
 
 .rs-text-field__input {
   @include rs-text-field-input_;
+}
+
+.rs-text-field__action {
+  min-width: 24px;
+  height: 24px;
+  margin-right: 16px;
+
+  &.-none {
+    display: none;
+  }
 }
 
 .rs-line-ripple {

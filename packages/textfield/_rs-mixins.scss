@@ -36,11 +36,11 @@
 }
 
 @mixin rs-text-field-bottom-line-color($color) {
-  --rs-text-field_not__disabled_not__outlined-form_not__textarea-input--border-bottom-color: #{$color};
+  --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea--border-bottom-color: #{$color};
 }
 
 @mixin rs-text-field-hover-bottom-line-color($color) {
-  --rs-text-field_not__disabled_not__outlined-form_not__textarea-input_hover--border-bottom-color: #{$color};
+  --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea_hover--border-bottom-color: #{$color};
 }
 
 @mixin rs-text-field-line-ripple-color($color) {
@@ -159,4 +159,8 @@
   --rs-text-field-form-inputarea_before--background-image: #{$url};
   --rs-text-field-form-inputarea_before--content: '';
   --rs-text-field-form_not__textarea-inputarea-input--padding-left: 48px;
+}
+
+@mixin rs-text-field-action-icon-image($url) {
+  --rs-text-field-trailing-icon--background-image: #{$url};
 }
