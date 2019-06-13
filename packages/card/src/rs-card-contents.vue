@@ -30,7 +30,6 @@ export default {
 .rs-card__contents {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
-  @include rs-states;
 
   display: flex;
   flex-direction: column;
