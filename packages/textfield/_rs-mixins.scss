@@ -92,15 +92,7 @@
 // Change text-field type.
 @mixin rs-text-field-type($types...) {
   @each $type in $types {
-    @if $type == fullwidth {
-      --rs-form-field_host--width: 100%;
-      --rs-form-field--width: 100%;
-      --rs-text-field_host--width: 100%;
-      --rs-text-field-form--width: 100%;
-      --rs-text-field-form_not__textarea--display: block;
-      --rs-text-field-form-input_placeholder--transition-delay: 40ms;
-      --rs-text-field-form-input_placeholder--transition-duration: 110ms;
-    }@else if $type == outlined {
+    @if $type == outlined {
       --rs-text-field__outlined: true;
       --rs-text-field-form-input--border-bottom: none;
       --rs-text-field__disabled-form_not__textarea--border-bottom-color: #{$rs-text-field-outlined-disabled-border};

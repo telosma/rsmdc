@@ -18,6 +18,19 @@
 }
 
 // Change helper text ink color.
-@mixin rs-text-field-helper-text-ink-color($color) {
+@mixin rs-form-field-helper-text-ink-color($color) {
   --rs-form-field-line_not__disabled--color: #{$color};
+}
+
+// Change form field type.
+@mixin rs-form-field-type($type) {
+  @if $type == fullwidth {
+    --rs-form-field_host--width: 100%;
+    --rs-form-field--width: 100%;
+    --rs-text-field_host--width: 100%;
+    --rs-text-field-form--width: 100%;
+    --rs-text-field-form_not__textarea--display: block;
+    --rs-text-field-form-input_placeholder--transition-delay: 40ms;
+    --rs-text-field-form-input_placeholder--transition-duration: 110ms;
+  }
 }
