@@ -149,7 +149,7 @@ export default {
     overflow: hidden;
     will-change: transform;
 
-    font-size: var(--rs-form-label__floatinglabel--color--font-size);
+    font-size: var(--rs-form-label__floatinglabel--font-size);
     color: var(--rs-form-label__floatinglabel--color, $rs-text-field-label);
     top: var(--rs-form-label__floatinglabel--top, 18px);
 
@@ -163,7 +163,14 @@ export default {
       content: "*";
       color: var(--rs-form-label__floatinglabel__required_after--color);
     }
-    
+
+    &[dir="rtl"] {
+      right: 0;
+      left: auto;
+      transform-origin: right top;
+      text-align: right;
+    }
+
     &.-focus {
       color: var(--rs-form-label__floatinglabel__focus--color, $rs-text-field-focused-label-color);
     }
@@ -180,25 +187,18 @@ export default {
       color: $rs-text-field-disabled-label-color;
     }
 
-    &[dir="rtl"] {
-      right: 0;
-      left: auto;
-      transform-origin: right top;
-      text-align: right;
-    }
-
     &.-floatabove {
       cursor: auto;
       font-size: var(--rs-form-label__floatinglabel__floatabove--font-size);
       transform: var(--rs-form-label__floatinglabel__floatabove--transform, rs-form-label-floatinglabel-position($rs-floating-label-position-y));
     }
 
-    &[dir="rtl"].-floatabove {
+    &[dir="rtl"].-floatabove.-dense {
       transform: var(--rs-form-label__floatinglabel_rtl__floatabove--transform);
     }
 
     &.-shake {
-      animation: var(--rs-form-label__floatinglabel__shake--animation, rs-form-label-floatinglabel-shake-animation(standard));
+      animation: rs-form-label-floatinglabel-shake-animation(standard);
     }
 
     &[dir="rtl"].-shake {
@@ -226,8 +226,8 @@ export default {
     &.-outlined.-floatabove {
       display: inline-block;
       position: absolute;
-      top: 2px;
       max-width: 130%;
+      top: var(--rs-form-label__floatinglabel__outlined__floatabove--top, 2px);
     }
 
     &.-icon {

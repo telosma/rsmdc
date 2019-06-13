@@ -15,7 +15,7 @@
   display: inline-flex;
   position: relative;
   box-sizing: border-box;
-  height: $rs-text-field-height;
+  height: var(--rs-text-field-form--height, $rs-text-field-height);
   will-change: opacity, transform, color;
 
   width: var(--rs-text-field-form--width);

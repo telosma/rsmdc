@@ -59,8 +59,10 @@ export default {
       host: '',
       lineRipple: '',
       formLabels: [],
-      hasIcon: '',
-      labelPosition: ''
+      labelPosition: '',
+      hasIcon: false,
+      isDense: false,
+      isOutlined: false
     }
   },
   watch: {
@@ -73,11 +75,22 @@ export default {
         if(this.value.length > 0 || this.type === 'date') { 
           label.classList.add('-floatabove')
         }
+        if(this.labelPosition) {
+          label.style.setProperty('--rs-form-label__outlined__floatinglabel--left', this.labelPosition)
+        }
         if(this.hasIcon) {
           label.classList.add('-icon')
         }
-        if(this.labelPosition) {
-          label.style.setProperty('--rs-form-label__outlined__floatinglabel--left', this.labelPosition)
+        if(this.isDense) {
+          const transform = this.getElementProperty(this.host, '--rs-form-label__floatinglabel__floatabove--transform')
+          const fontSize = this.getElementProperty(this.host, '--rs-form-label__floatinglabel--font-size')
+          label.style.setProperty('-rs-form-label__floatinglabel__floatabove--transform', transform)
+          label.style.setProperty('--rs-form-label__floatinglabel--font-size', fontSize)
+          label.style.setProperty('--rs-form-label__floatinglabel__floatabove--font-size', fontSize)
+        }
+        if(this.isDense && this.isOutlined) {
+          const top = this.getElementProperty(this.host, '--rs-form-label__floatinglabel__outlined__floatabove--top')
+          label.style.setProperty('--rs-form-label__floatinglabel__outlined__floatabove--top', top)
         }
       })
     },
@@ -86,8 +99,10 @@ export default {
     },
     host() {
       window.__rsmdc.textfield.textfields.push(this.host)
-      this.hasIcon = this.getElementProperty(this.host, '--rs-text-field__icon')
       this.labelPosition = this.getElementProperty(this.host, '--rs-form-label__outlined__floatinglabel--left')
+      this.hasIcon = this.getElementProperty(this.host, '--rs-text-field__icon')
+      this.isDense = this.getElementProperty(this.host, '--rs-text-field__dense')
+      this.isOutlined = this.getElementProperty(this.host, '--rs-text-field__outlined')
     }
   },
   created() {
