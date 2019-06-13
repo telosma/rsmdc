@@ -90,6 +90,11 @@
   --rs-text-field-form-input--caret-color: #{$color};
 }
 
+// Change textarea caret color.
+@mixin rs-textarea-caret-color($color) {
+  --rs-text-field-form-input--caret-color: #{$color};
+}
+
 // Change text-field type.
 @mixin rs-text-field-type($types...) {
   @each $type in $types {
@@ -150,7 +155,7 @@
   --rs-text-field-trailing-icon--background-image: #{$url};
 }
 
-// Change text-field and textarea line height.
-@mixin rs-text-field-line-height($height) {
+// Change textarea line height.
+@mixin rs-textarea-line-height($height) {
   --rs-text-field-form-input--line-height: #{$height};
 }
