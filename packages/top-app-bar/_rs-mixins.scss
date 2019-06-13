@@ -1,9 +1,12 @@
-@import './variables';
-@import './mixins';
-@import './rs-functions';
-@import '@rsmdc/elevation/mixins';
 @import "@rsmdc/animation/variables";
+@import '@rsmdc/elevation/mixins';
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import './variables';
+@import './rs-functions';
 
+// Change top-app-bar type.
 @mixin rs-top-app-bar-type($types...) {
   @each $type in $types {
     @if $type == short {
@@ -80,44 +83,54 @@
   }
 }
 
-@mixin rs-top-app-bar-content($types...) {
-
-  @if (length($types) > 0) {
-    @each $type in $types {
-      @if $type == short {
-        padding-top: $rs-top-app-bar-mobile-row-height;
-      }@else if $type == dense {
-        padding-top: $rs-top-app-bar-dense-row-height;
-      }@else if $type == prominent {
-        padding-top: $rs-top-app-bar-prominent-row-height;
-      }@else {
-        padding-top: $rs-top-app-bar-row-height;
-      }
-    }
-  
-    $short: find-item($types, short);
-    $prominent: find-item($types, prominent);
-    $dense: find-item($types, dense);
-  
-    @if $prominent and $dense {
-      $height: $rs-top-app-bar-dense-row-height * 2;
-      padding-top: #{$height};
-    }  
-  }@else {
-    padding-top: $rs-top-app-bar-row-height;
-  }
-}
-
 @mixin rs-top-app-bar-with-drawer($drawerType: default) {
   @if $drawerType == permanent {
     --rs-app-layout-content--margin-left: #{$rs-drawer-width};
   }
 }
 
+// Set icon to action-item.
 @mixin rs-top-app-bar-action-image($path) {
   --rs-top-app-bar-actionItem--background-image: #{$path};
 }
 
+// Set icon to nav.
 @mixin rs-top-app-bar-nav-image($path) {
   --rs-top-app-bar-navigationIcon--background-image: #{$path};
+}
+
+// Change title ink color.
+@mixin rs-top-app-bar-title-ink-color($color) {
+  --rs-top-app-bar-title--color: #{$color};
+}
+
+// Change top-app-bar container color.
+@mixin rs-top-app-bar-fill-color($color) {
+  --rs-top-app-bar--background-color: #{$color};
+}
+
+// Change top-app-bar cotainer and title color. (Title color is modified to match container color)
+@mixin rs-top-app-bar-fill-color-accessible($color) {
+  @include rs-top-app-bar-fill-color($color);
+  @include rs-top-app-bar-title-ink-color(rs-theme-accessible-ink-color($color));
+}
+
+// Change icon ink color.
+@mixin rs-top-app-bar-icon-ink-color($color) {
+  --rs-top-app-bar-actionItem--color: #{$color};
+  --rs-top-app-bar-navigationIcon--color: #{$color};
+}
+
+// Change icon ripple color.
+@mixin rs-top-app-bar-icon-states-color($color) {
+  @include rs-states($color);
+}
+
+// Change top-app-bar radius.
+@mixin rs-top-app-bar-short-shape-radius($radius) {
+  @if length($radius) > 1 {
+    @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
+  }
+  $radius: 0 0 $radius 0;
+  --rs-top-app-bar--border-radius: #{rs-shape-resolve-percentage-radius($rs-top-app-bar-dense-row-height, $radius)};
 }
