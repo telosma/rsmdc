@@ -1,5 +1,5 @@
 <template>
-  <hr class="rs-list-divider" :class="{ '-rs-drawer': isDrawer }"></hr>
+  <hr class="rs-list-divider" :class="{ '-drawer': isDrawer }" />
 </template>
 <script>
 export default {
@@ -57,7 +57,7 @@ export default {
   }
 }
 
-.-rs-divider {
+.-drawer {
   margin: 3px 0 4px 0;
 }
 

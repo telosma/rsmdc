@@ -1,7 +1,7 @@
 <template>
   <li
     class="rs-list-item"
-    :class="{ '-rs-drawer': isDrawer, '-rs-first': isFirstChild, '-rs-last': isLastChild }"
+    :class="{ '-drawer': isDrawer, '-first': isFirstChild, '-last': isLastChild }"
     :selected="selected"
     :disabled="disabled"
     :activated="activated"
@@ -109,22 +109,22 @@ export default {
     outline: none;
   }
 
-  &:not(.-rs-drawer) {
+  &:not(.-drawer) {
     @include rs-ripple-common;
   }
 
-  &.-rs-drawer {
+  &.-drawer {
     @include rs-typography(subtitle2);
     --rs-list-item__drawer--height: calc(48px - 2 * #{$rs-drawer-list-item-spacing});
     --rs-list-item__drawer--margin: #{($rs-drawer-list-item-spacing * 2) 8px};
     --rs-list-item__drawer--padding: #{0 $rs-drawer-surface-padding / 2};
   }
 
-  &.-rs-first {
+  &.-first {
     margin-top: 2px;
   }
 
-  &.-rs-last {
+  &.-last {
     margin-bottom: 0;
   }
 

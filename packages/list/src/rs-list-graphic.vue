@@ -1,5 +1,5 @@
 <template>
-  <span class="rs-list-item__graphic" :class="{ '-rs-drawer': isDrawer }" ref="slotContainer">
+  <span class="rs-list-item__graphic" :class="{ '-drawer': isDrawer }" ref="slotContainer">
     <slot></slot>
   </span>
 </template>
@@ -68,10 +68,5 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
 }
-
-// .-rs-drawer {
-//   pointer-events: none;
-// }
-
 </style>
 
