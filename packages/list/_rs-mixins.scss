@@ -79,7 +79,7 @@
       --rs-list-item-graphic--margin-left: 0;
       --rs-list-item-graphic--margin-right: 36px;
       --rs-list-item-secondary-text--font-size: inherit;
-      @include rs-list-graphic-size_(20px);
+      @include rs-list-graphic-size(20px);
       @include rs-list-typography($dense-item-primary-text-baseline-height, $item-secondary-text-baseline-height, primary);
       @include rs-list-typography-baseline-top($item-secondary-text-baseline-height, secondary, after);
 
@@ -92,7 +92,7 @@
       --rs-list-item--margin-left: 0;
       --rs-list-item--margin-right: 16px;
       --rs-list-item-graphic--border-radius: 50%;
-      @include rs-list-graphic-size_(40px);
+      @include rs-list-graphic-size(40px);
 
     }@else if $type == non-interactive {
       --rs-list-item--cursor: default;
@@ -110,7 +110,7 @@
   @if $avatar-list and $dense {
     --rs-list-item-graphic--margin-left: 0;
     --rs-list-item-graphic--margin-right: 20px;
-    @include rs-list-graphic-size_(36px);
+    @include rs-list-graphic-size(36px);
   }
 }
 
@@ -138,8 +138,7 @@
 }
 
 // Change graphic type.
-@mixin rs-list-graphic-type($type, $image) {
-  --rs-list-item-graphic--background-image: #{$image};
+@mixin rs-list-graphic-type($type) {
   @if $type == circle {
     --rs-list-item-graphic--background-size: 40px;
   }@else if $type == rectangle {
@@ -149,8 +148,13 @@
   }
 }
 
+// Set image to graphic.
+@mixin rs-list-graphic-image($image) {
+  --rs-list-item-graphic--background-image: #{$image};
+}
+
 // Change graphic size.
-@mixin rs-list-graphic-size_($size) {
+@mixin rs-list-graphic-size($size) {
   --rs-list-item-graphic--width: #{$size};
   --rs-list-item-graphic--height: #{$size};
 }
