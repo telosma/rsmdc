@@ -25,8 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@rsmdc/ripple/mixins";
 @import '../mixins';
-@import '@rsmdc/ripple/rs-mixins';
 
 @include rs-ripple-common;
 
