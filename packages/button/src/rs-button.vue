@@ -1,8 +1,8 @@
 <template>
   <button
     class="rs-button"
-    :class="{ '-icon': hasIcon, '-fab': isFab, '-no-text': !hasText }"
-    :disabled="disabled" :exited="isExited">
+    :class="{ '-icon': hasIcon, '-fab': isFab, '-no-text': !hasText, '-exited': isExited }"
+    :disabled="disabled">
     <span class="rs-button__label" ref="slotContainer">
       <slot></slot>
     </span>
@@ -19,8 +19,8 @@ export default {
       default: false
     },
     exited: {
-      type: String,
-      default: 'initial'
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -41,10 +41,9 @@ export default {
     host() {
       this.isFab = this.getElementProperty(this.host, '--rs-button__fab') ? true : false
       this.hasIcon = this.getElementProperty(this.host, '--rs-button__icon') ? true : false
-      this.isExited = this.exited === 'initial' ? false : true
     },
     exited() {
-      this.isExited = this.exited === 'initial' ? false : true
+      this.isExited = this.exited
     },
     hasText() {
       if(!this.hasText && !this.isFab) {
@@ -60,6 +59,7 @@ export default {
         this.hasText = texts.length > 0 ? true : false
       })
     this.ripple = new RSRipple(this.$el.querySelector('.rs-button__ripple'))
+    this.isExited = this.exited
     this.el = this.$el
   },
   methods: {
@@ -129,7 +129,7 @@ export default {
   text-overflow: var(--rs-button--text-overflow);
   white-space: var(--rs-button--white-space);
 
-  &[exited] {
+  &.-exited.-fab {
     transform: scale(0);
     transition:
       opacity 15ms linear 150ms,
