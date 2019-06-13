@@ -1,7 +1,7 @@
 <template>
   <button
     class="rs-button"
-    :class="{ '-rs-icon': hasIcon, '-rs-fab': isFab, '-rs-no-text': !hasText }"
+    :class="{ '-icon': hasIcon, '-fab': isFab, '-no-text': !hasText }"
     :disabled="disabled" :exited="isExited">
     <span class="rs-button__label" ref="slotContainer">
       <slot></slot>
@@ -88,7 +88,7 @@ export default {
 .rs-button {
   @include rs-typography(button);
 
-// base
+  // base
   position: relative;
   align-items: center;
   box-sizing: border-box;
@@ -137,7 +137,7 @@ export default {
     opacity: 0;
   }
 
-  &.-rs-icon.-rs-no-text:not(.-rs-fab) {
+  &.-icon.-no-text:not(.-fab) {
     @include rs-ripple-radius-unbounded;
     @include rs-button-icon_;
 
@@ -196,14 +196,14 @@ export default {
     content: var(--rs-button_before--content);
   }
 
-  &.-rs-no-text::before,
-  &:not(.-rs-no-text).-rs-fab::before {
+  &.-no-text::before,
+  &:not(.-no-text).-fab::before {
     width: 24px;
     height: 24px;
     background-size: 24px;
   }
 
-  &:not(.-rs-no-text)::before {
+  &:not(.-no-text)::before {
     width: 18px;
     height: 18px;
     background-size: 18px;
@@ -217,14 +217,14 @@ export default {
     content: var(--rs-button_after--content);
   }
 
-  &.-rs-no-text::after,
-  &:not(.-rs-no-text).-rs-fab::after {
+  &.-no-text::after,
+  &:not(.-no-text).-fab::after {
     width: 24px;
     height: 24px;
     background-size: 24px;
   }
 
-  &:not(.-rs-no-text)::after {
+  &:not(.-no-text)::after {
     width: 18px;
     height: 18px;
     background-size: 18px;
@@ -235,15 +235,19 @@ export default {
   padding-right: var(--rs-button-label--padding-right);
   padding-left: var(--rs-button-label--padding-left);
 
-  .-rs-no-text & {
+  .-no-text & {
     padding-right: 0;
     padding-left: 0;
   }
 }
 
-.rs-button__ripple {
+.rs-ripple-upgraded {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
+  @include rs-ripple-upgraded_($rs-theme-primary, primary);
+}
+
+.rs-button__ripple {
 
   position: absolute;
   top: 0;
@@ -252,27 +256,8 @@ export default {
   height: 100%;
   overflow: hidden;
 
-  .-rs-icon.-rs-no-text:not(.-rs-fab) & {
+  .-icon.-no-text:not(.-fab) & {
     border-radius: 50%;
-  }
-
-  &::before{
-    background-color: var(--rs-ripple_before--background-color, $rs-theme-primary);
-    content: var(--rs-ripple_before--content, '');
-  }
-
-  &::after {
-    background-color: var(--rs-ripple_after--background-color, $rs-theme-primary);
-    content: var(--rs-ripple_after--content, '');
-  }
-
-  &:hover::before {
-    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity(primary, hover));
-  }
-
-  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
-    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
-    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity(primary, focus));
   }
 
   :focus &  {
@@ -282,21 +267,6 @@ export default {
       transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
       opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(primary, focus));
     }
-  }
-
-  &:not(.rs-ripple-upgraded) {
-    &::after {
-      transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
-    }
-
-    &:active::after {
-      transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
-      opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity(primary, press));
-    }
-  }
-
-  &.rs-ripple-upgraded {
-    --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity(primary, press)});
   }
 }
 </style>
