@@ -1,5 +1,6 @@
-@import "../line-ripple/rs-line-ripple";
 @import "../form-field/rs-functions";
+@import "../line-ripple/rs-mixins";
+@import "../notched-outline/rs-mixins";
 
 // Change text-field border-radius.
 @mixin rs-text-field-shape-radius($radius) {
@@ -158,4 +159,15 @@
 // Change textarea line height.
 @mixin rs-textarea-line-height($height) {
   --rs-text-field-form-input--line-height: #{$height};
+}
+
+// Change character counter ink color.
+@mixin rs-text-field-character-counter-ink-color($color) {
+  --rs-text-field_not__disabled-character-counter--color: #{$color};
+}
+
+// Change character counter position.
+@mixin rs-text-field-character-counter-position($xOffset, $yOffset) {
+  --rs-text-field-character-counter--right: #{$xOffset};
+  --rs-text-field-character-counter--bottom: #{$yOffset};
 }

@@ -12,11 +12,8 @@
   white-space: nowrap;
 
   position: absolute;
-  bottom: var(--rs-text-field-character-counter--bottom, 20px);
+  bottom: var(--rs-text-field-character-counter--bottom, $rs-text-field-character-counter-bottom);
   right: var(--rs-text-field-character-counter--right, 16px);
-
-  right: 16px;
-  bottom: $rs-text-field-character-counter-bottom;
 
   [dir="rtl"] &,
   &[dir="rtl"] {
