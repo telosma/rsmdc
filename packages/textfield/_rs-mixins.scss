@@ -1,3 +1,5 @@
+@import "../line-ripple/rs-line-ripple";
+
 // Change text-field border-radius.
 @mixin rs-text-field-shape-radius($radius) {
   $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
@@ -77,7 +79,7 @@
   --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea_hover--border-bottom-color: #{$color};
 }
 
-
+// Change text-field bottom focus color.
 @mixin rs-text-field-line-ripple-color($color) {
   @include rs-line-ripple-color($color);
 }
