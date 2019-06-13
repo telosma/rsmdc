@@ -1,67 +1,26 @@
-// Copyright 2016 Google Inc.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-
-@import "@rsmdc/rtl/mixins";
-@import "@rsmdc/theme/mixins";
-@import "@rsmdc/shape/mixins";
-@import "@rsmdc/ripple/mixins";
-@import "@rsmdc/theme/functions";
-@import "@rsmdc/typography/mixins";
-@import "@rsmdc/typography/variables";
-@import "./variables";
-
-@mixin rs-list-item-primary-text-ink-color($color) {
-  --rs-list-item-primary-text--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
-  --rs-list--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
+@mixin rs-list-typography($distanceTop, $distanceBottom, $target) {
+  @include rs-list-typography-baseline-top($distanceTop, $target, before);
+  @include rs-list-typography-baseline-bottom($distanceBottom, $target, after);
 }
 
-@mixin rs-list-item-secondary-text-ink-color($color) {
-  --rs-list-item-secondary-text--color: #{$color};
+@mixin rs-list-typography-baseline-top($distance, $target, $pseudo) {
+  --rs-list-item-#{$target}-text--display: block;
+  --rs-list-item-#{$target}-text--margin-top: 0;
+  --rs-list-item-#{$target}-text--line-height: normal;
+  --rs-list-item-#{$target}-text_before--vertical-align: 0;
+  @include rs-list-typography-baseline-strut_($distance, $target, before);
 }
 
-@mixin rs-list-item-graphic-fill-color($color) {
-  --rs-list-item-graphic--background-color: #{$color};
+@mixin rs-list-typography-baseline-bottom($distance, $target, $pseudo) {
+  $value: -1 * $distance;
+  --rs-list-item-#{$target}-text--margin-bottom: #{$value};
+  --rs-list-item-#{$target}-text_after--vertical-align: #{$value};
+  @include rs-list-typography-baseline-strut_($distance, $target, after);
 }
 
-@mixin rs-list-item-graphic-ink-color($color) {
-  --rs-list-item-graphic--color: var(--rs-drawer-list-item__activated-graphic--color, #{$color});
-}
-
-@mixin rs-list-item-meta-ink-color($color) {
-  --rs-list-item-meta--color: #{$color};
-}
-
-@mixin rs-list-item-shape-radius($radius, $rtl-reflexive: false) {
-  --rs-list-item--border-radius: #{rs-shape-radius($radius)};
-  --rs-list-item_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
-}
-
-@mixin rs-list-divider-color($color) {
-  --rs-list-divider--border-bottom-color: #{$color};
-}
-
-@mixin rs-list-group-subheader-ink-color($color) {
-  --rs-list-group-subheader--color: #{$color};
-}
-
-@mixin rs-list-graphic-size_($size) {
-  --rs-list-item-graphic--width: #{$size};
-  --rs-list-item-graphic--height: #{$size};
+@mixin rs-list-typography-baseline-strut_($distance, $target, $pseudo) {
+  --rs-list-item-#{$target}-text_#{$pseudo}--display: inline-block;
+  --rs-list-item-#{$target}-text_#{$pseudo}--width: 0;
+  --rs-list-item-#{$target}-text_#{$pseudo}--height: #{$distance};
+  --rs-list-item-#{$target}-text_#{$pseudo}--content: "";
 }

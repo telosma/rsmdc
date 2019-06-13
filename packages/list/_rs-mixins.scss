@@ -1,7 +1,74 @@
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/typography/variables";
 @import './rs-variables';
 @import './rs-functions';
 @import './variables';
 
+// Change text(primary) ink color.
+@mixin rs-list-item-primary-text-ink-color($color) {
+  --rs-list-item-primary-text--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
+  --rs-list--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
+}
+
+// Change secondary ink color.
+@mixin rs-list-item-secondary-text-ink-color($color) {
+  --rs-list-item-secondary-text--color: #{$color};
+}
+
+// Change graphic container color.
+@mixin rs-list-item-graphic-fill-color($color) {
+  --rs-list-item-graphic--background-color: #{$color};
+}
+
+// Change graphic ink color.
+@mixin rs-list-item-graphic-ink-color($color) {
+  --rs-list-item-graphic--color: var(--rs-drawer-list-item__activated-graphic--color, #{$color});
+}
+
+// Change meta ink color.
+@mixin rs-list-item-meta-ink-color($color) {
+  --rs-list-item-meta--color: #{$color};
+}
+
+// Change list-item radius.
+@mixin rs-list-item-shape-radius($radius) {
+  --rs-list-item--border-radius: #{rs-shape-radius($radius)};
+  --rs-list-item_rtl--border-radius: #{rs-shape-rtl-radius($radius)};
+}
+
+// Change divider color.
+@mixin rs-list-divider-color($color) {
+  --rs-list-divider--border-bottom-color: #{$color};
+}
+
+// Change subheader ink color.
+@mixin rs-list-group-subheader-ink-color($color) {
+  --rs-list-group-subheader--color: #{$color};
+}
+
+// Change list-item ripple color.
+@mixin rs-list-item-states-color($color) {
+  @include rs-states($color);
+}
+
+// Change list-item selected and acitivated container and ripple color. (todo)
+@mixin rs-list-item-status-fill-color($color) {
+  --rs-list-item_selected--background-color: #{$color};
+  --rs-list-item_activated--background-color: #{$color};
+}
+
+// Change list-item text(primary), graphic and ripple color.
+@mixin rs-list-fill-color-accessible($color) {
+  @include rs-list-item-primary-text-ink-color($color);
+  @include rs-list-item-graphic-ink-color($color);
+  @include rs-states($color);
+}
+
+// Change list type.
 @mixin rs-list-type($types...) {
   @each $type in $types {
     @if $type == dense {
@@ -47,6 +114,7 @@
   }
 }
 
+// Change divider type.
 @mixin rs-list-divider-type($types...) {
   @each $type in $types {
     @if $type == inset {
@@ -69,6 +137,7 @@
   }
 }
 
+// Change graphic type.
 @mixin rs-list-graphic-type($type, $image) {
   --rs-list-item-graphic--background-image: #{$image};
   @if $type == circle {
@@ -80,34 +149,8 @@
   }
 }
 
-@mixin rs-list-typography($distanceTop, $distanceBottom, $target) {
-  @include rs-list-typography-baseline-top($distanceTop, $target, before);
-  @include rs-list-typography-baseline-bottom($distanceBottom, $target, after);
-}
-
-@mixin rs-list-typography-baseline-top($distance, $target, $pseudo) {
-  --rs-list-item-#{$target}-text--display: block;
-  --rs-list-item-#{$target}-text--margin-top: 0;
-  --rs-list-item-#{$target}-text--line-height: normal;
-  --rs-list-item-#{$target}-text_before--vertical-align: 0;
-  @include rs-list-typography-baseline-strut_($distance, $target, before);
-}
-
-@mixin rs-list-typography-baseline-bottom($distance, $target, $pseudo) {
-  $value: -1 * $distance;
-  --rs-list-item-#{$target}-text--margin-bottom: #{$value};
-  --rs-list-item-#{$target}-text_after--vertical-align: #{$value};
-  @include rs-list-typography-baseline-strut_($distance, $target, after);
-}
-
-@mixin rs-list-typography-baseline-strut_($distance, $target, $pseudo) {
-  --rs-list-item-#{$target}-text_#{$pseudo}--display: inline-block;
-  --rs-list-item-#{$target}-text_#{$pseudo}--width: 0;
-  --rs-list-item-#{$target}-text_#{$pseudo}--height: #{$distance};
-  --rs-list-item-#{$target}-text_#{$pseudo}--content: "";
-}
-
-@mixin rs-list-item-status-fill-color($color) {
-  --rs-list-item_selected--background-color: #{$color};
-  --rs-list-item_activated--background-color: #{$color};
+// Change graphic size.
+@mixin rs-list-graphic-size_($size) {
+  --rs-list-item-graphic--width: #{$size};
+  --rs-list-item-graphic--height: #{$size};
 }

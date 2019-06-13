@@ -20,11 +20,12 @@
 // THE SOFTWARE.
 //
 
-@import "@rsmdc/theme/mixins";
-@import "@rsmdc/list/mixins";
+@import "@rsmdc/list/rs-mixins";
 @import "@rsmdc/ripple/mixins";
+@import "@rsmdc/rtl/mixins";
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/rs-functions";
+@import "@rsmdc/theme/mixins";
 @import "./variables";
 
 @mixin rs-drawer-activated-overlay-color($color) {
@@ -37,7 +38,7 @@
 }
 
 @mixin rs-drawer-item-shape-radius($radius, $rtl-reflexive: true) {
-  @include rs-list-item-shape-radius($radius, $rtl-reflexive);
+  @include rs-list-item-shape-radius($radius);
 }
 
 @mixin rs-drawer-shape-radius($radius) {
