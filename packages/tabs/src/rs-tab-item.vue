@@ -1,7 +1,7 @@
 <template>
-  <button class="rs-tab" :class="{ '-rs-activated': areaSelected }" role="tab">
+  <button class="rs-tab" :class="{ '-activated': areaSelected }" role="tab">
     <span class="rs-tab__content">
-      <span class="rs-tab__text-label" :class="{ '-rs-no-text': !hasText }" ref="slotContainer">
+      <span class="rs-tab__text-label" :class="{ '-no-text': !hasText }" ref="slotContainer">
         <slot></slot>
       </span>
     </span>
@@ -84,7 +84,7 @@ export default {
 }
 
 // activated tab
-.-rs-activated {
+.-activated {
 
   > .rs-tab__ripple {
 
@@ -157,7 +157,7 @@ export default {
   padding-left: var(--rs-tab-text-label--padding-left);
   margin-bottom: var(--rs-tab-text-label--margin-bottom);
 
-  &.-rs-no-text {
+  &.-no-text {
     padding-right: 0;
     padding-left: 0;
   }

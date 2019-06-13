@@ -32,7 +32,7 @@ export default {
       this.isFixedContents = this.getElementProperty(this.host, '--rs-tab-indicator__fixed-contents') ? true : false
     },
     indicator() {
-      this.indicator.classList.remove('-rs-no-animating')
+      this.indicator.classList.remove('-no-animating')
     }
   },
   mounted() {
@@ -120,7 +120,7 @@ export default {
       this.$refs.slotContainer.append(document.createElement('slot'))
       const div = document.createElement('div')
       div.classList.add('rs-tab-indicator')
-      div.classList.add('-rs-no-animating')
+      div.classList.add('-no-animating')
       this.$refs.slotContainer.append(div)
     },
     getElementProperty(el, prop) {
@@ -203,7 +203,7 @@ export default {
   background-color: var(--rs-tab-indicator--background-color, $rs-theme-primary);
 
   // first rendering only 
-  &.-rs-no-animating {
+  &.-no-animating {
     transition: none;
   }
 }
