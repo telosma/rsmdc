@@ -77,7 +77,6 @@ export default {
 
 :host([activated]),
 :host([selected]) {
-  --rs-list-item-primary-text--color: #{$rs-theme-primary};
   --rs-list-item-graphic--color: #{$rs-theme-primary};
 }
 
@@ -133,74 +132,41 @@ export default {
     --rs-list--color: #{rs-theme-ink-color-for-fill_(disabled, $rs-theme-background)};
   }
 
-  // ripple
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+.rs-ripple-upgraded {
   &:not([disabled]) {
     @include rs-ripple-surface;
     @include rs-ripple-radius-bounded;
-    cursor: var(--rs-list-item--cursor, pointer);
-
-    &::before{
-      background-color: var(--rs-ripple_before--background-color, $rs-theme-on-surface);
-      content: var(--rs-ripple_before--content, '');
-    }
-
-    &::after {
-      background-color: var(--rs-ripple_after--background-color, $rs-theme-on-surface);
-      content: var(--rs-ripple_after--content, '');
-    }
-
-    &:hover::before {
-      opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity(on-surface, hover));
-    }
-
-    &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
-      transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
-      opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity(on-surface, focus));
-    }
-
-    &.rs-ripple-upgraded--background-focused::before {
-      transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
-      opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(on-surface, focus));
-    }
-
-    &:not(.rs-ripple-upgraded) {
-      &::after {
-        transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
-      }
-
-      &:active::after {
-        transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
-        opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity(on-surface, press));
-      }
-    }
-
-    &.rs-ripple-upgraded {
-      --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity(on-surface, press)});
-    }
+    @include rs-ripple-upgraded_($rs-theme-on-surface, on-surface);
   }
 }
 
 .rs-list-item[selected] {
   &:not([disabled]) {
+    @include rs-ripple-upgraded_($rs-theme-primary, primary);
     @include rs-states-selected($rs-theme-primary);
     --rs-menu-list-item-graphic--display: inline;
 
+    color: var(--rs-list-item_not_disabled_selected--color, $rs-theme-primary);
     &::before {
       background-color: var(--rs-list-item_selected--background-color, $rs-theme-primary);
-      opacity: var(--rs-selected_before--opacity);
     }
   }
 }
 
 .rs-list-item[activated] {
   &:not([disabled]) {
+    @include rs-ripple-upgraded_($rs-theme-primary, primary);
     @include rs-states-activated($rs-theme-primary);
     --rs-list--color: #{$rs-theme-primary};
     --rs-menu-list-item-graphic--display: inline;
-
+    color: var(--rs-list-item_not_disabled_activated--color, $rs-theme-primary);
     &::before {
       background-color: var(--rs-list-item_activated--background-color, $rs-theme-primary);
-      opacity: var(--rs-activated_before--opacity);
     }
   }
 }

@@ -12,6 +12,8 @@
 @mixin rs-list-item-primary-text-ink-color($color) {
   --rs-list-item-primary-text--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
   --rs-list--color: var(--rs-drawer-list-item__activated--color, var(--rs-drawer-list--color, #{$color}));
+  --rs-list-item_not_disabled_selected--color: #{$color};
+  --rs-list-item_not_disabled_activated--color: #{$color};
 }
 
 // Change secondary ink color.
@@ -53,10 +55,6 @@
 // Change list-item ripple color.
 @mixin rs-list-item-states-color($color) {
   @include rs-states($color);
-}
-
-// Change list-item selected and acitivated container and ripple color. (todo)
-@mixin rs-list-item-status-fill-color($color) {
   --rs-list-item_selected--background-color: #{$color};
   --rs-list-item_activated--background-color: #{$color};
 }
@@ -65,7 +63,7 @@
 @mixin rs-list-fill-color-accessible($color) {
   @include rs-list-item-primary-text-ink-color($color);
   @include rs-list-item-graphic-ink-color($color);
-  @include rs-states($color);
+  @include rs-list-item-states-color($color);
 }
 
 // Change list type.
