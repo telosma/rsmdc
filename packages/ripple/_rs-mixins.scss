@@ -1,88 +1,49 @@
-@import "./variables";
 @import "@rsmdc/theme/mixins";
+@import "./variables";
 
-@mixin rs-ripple-surface-slotted() {
-  ::slotted(i) {
-    --rs-ripple-fg-size: 0;
-    --rs-ripple-left: 0;
-    --rs-ripple-top: 0;
-    --rs-ripple-fg-scale: 1;
-    --rs-ripple-fg-translate-end: 0;
-    --rs-ripple-fg-translate-start: 0;
-  
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    will-change: transform, opacity;
-  }
-
-  ::slotted(i)::before,
-  ::slotted(i)::after {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    content: "";
-  }
-
-  ::slotted(i)::before {
-    transition:
-      opacity $rs-states-wash-duration linear,
-      background-color $rs-states-wash-duration linear;
-    z-index: 1; // Ensure that the ripple wash for hover/focus states is displayed on top of positioned child elements
-  }
-
-  ::slotted(.rs-ripple-upgraded)::before {
-    transform: scale(var(--rs-ripple-fg-scale, 1));
-  }
-
-  ::slotted(.rs-ripple-upgraded)::after {
-    top: 0;
-    /* @noflip */
-    left: 0;
-    transform: scale(0);
-    transform-origin: center center;
-  }
-
-  ::slotted(.rs-ripple-upgraded--unbounded)::after {
-    top: var(--rs-ripple-top, 0);
-    /* @noflip */
-    left: var(--rs-ripple-left, 0);
-  }
-
-  ::slotted(.rs-ripple-upgraded--foreground-activation)::after {
-    animation:
-      rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
-      rs-ripple-fg-opacity-in $rs-ripple-fade-in-duration forwards;
-  }
-
-  ::slotted(.rs-ripple-upgraded--foreground-deactivation)::after {
-    animation: rs-ripple-fg-opacity-out $rs-ripple-fade-out-duration;
-
-    // Retain transform from rs-ripple-fg-radius-in activation
-    transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
+@mixin rs-states-base-color($color) {
+  @if alpha(rs-theme-prop-value($color)) > 0 {
+    $backgroundColor: rs-theme-prop-value($color);
+    --rs-ripple_before--background-color: #{$backgroundColor};
+    --rs-ripple_after--background-color: #{$backgroundColor};
+    --rs-ripple_before--content: '';
+    --rs-ripple_after--content: '';
+  } @else {
+    // If a color with 0 alpha is specified, don't render the ripple pseudo-elements at all.
+    // This avoids unnecessary transitions and overflow.
+    --rs-ripple_before--content: none;
+    --rs-ripple_after--content: none;
   }
 }
 
-@mixin rs-ripple-radius-unbounded-slotted($radius: 100%) {
-  ::slotted(i)::before,
-  ::slotted(i)::after {
-    top: calc(50% - #{$radius / 2});
-    /* @noflip */
-    left: calc(50% - #{$radius / 2});
-    width: $radius;
-    height: $radius;
-  }
+@mixin rs-states-hover-opacity($opacity) {
+  --rs-ripple_hover_before--opacity: #{$opacity};
+}
 
-  ::slotted(.rs-ripple-upgraded)::before,
-  ::slotted(.rs-ripple-upgraded)::after {
-    top: var(--rs-ripple-top, calc(50% - #{$radius / 2}));
-    /* @noflip */
-    left: var(--rs-ripple-left, calc(50% - #{$radius / 2}));
-    width: var(--rs-ripple-fg-size, $radius);
-    height: var(--rs-ripple-fg-size, $radius);
-  }
+@mixin rs-states-focus-opacity($opacity) {
+  --rs-ripple_not-upgraded_focus_before--transition-duration: 75ms;
+  --rs-upgraded_-background-focused_before--transition-duration: 75ms;
+  --rs-ripple_not-upgraded_focus_before--opacity: #{$opacity};
+  --rs-upgraded_-background-focused_before--opacity: #{$opacity};
+}
 
-  ::slotted(.rs-ripple-upgraded)::after {
-    width: var(--rs-ripple-fg-size, $radius);
-    height: var(--rs-ripple-fg-size, $radius);
-  }
+@mixin rs-states-press-opacity($opacity) {
+  --rs-ripple_not-upgraded_after--transition: opacity #{$rs-ripple-fade-out-duration} linear;
+  --rs-ripple_not-upgraded_active_after--transition-duration: #{$rs-ripple-fade-in-duration};
+  --rs-ripple_not-upgraded_active_after--opacity: #{$opacity};
+  --rs-ripple-upgraded--rs-ripple-fg-opacity: #{$opacity};
+}
+
+@mixin rs-states($color: rs-theme-prop-value(on-surface)) {
+  @include rs-states-interactions_($color, 0);
+}
+
+@mixin rs-states-interactions_(
+  $color: rs-theme-prop-value(on-surface),
+  $opacity-modifier: 0
+) {
+  @include rs-states-base-color($color);
+  @include rs-states-hover-opacity(rs-states-opacity($color, hover) + $opacity-modifier);
+  @include rs-states-focus-opacity(rs-states-opacity($color, focus) + $opacity-modifier);
+  @include rs-states-press-opacity(rs-states-opacity($color, press) + $opacity-modifier);
 }

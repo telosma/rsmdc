@@ -1,25 +1,3 @@
-//
-// Copyright 2016 Google Inc.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
-
 @import "@rsmdc/animation/functions";
 @import "@rsmdc/animation/variables";
 @import "@rsmdc/base/mixins";
@@ -28,6 +6,7 @@
 @import "./functions";
 @import "./keyframes";
 @import "./variables";
+@import "./rs-mixins";
 
 @mixin rs-ripple-core-styles() {
   // postcss-bem-linter: define ripple-surface
@@ -83,7 +62,7 @@
   }
 }
 
-@mixin rs-ripple-surface() {
+@mixin rs-ripple-surface {
   --rs-ripple-fg-size: 0;
   --rs-ripple-left: 0;
   --rs-ripple-top: 0;
@@ -143,76 +122,6 @@
   }
 }
 
-@mixin rs-states-base-color($color) {
-  @if alpha(rs-theme-prop-value($color)) > 0 {
-    $backgroundColor: rs-theme-prop-value($color);
-    --rs-ripple_before--background-color: #{$backgroundColor};
-    --rs-ripple_after--background-color: #{$backgroundColor};
-    --rs-ripple_before--content: '';
-    --rs-ripple_after--content: '';
-  } @else {
-    // If a color with 0 alpha is specified, don't render the ripple pseudo-elements at all.
-    // This avoids unnecessary transitions and overflow.
-    --rs-ripple_before--content: none;
-    --rs-ripple_after--content: none;
-  }
-}
-
-@mixin rs-states-hover-opacity($opacity) {
-  --rs-ripple_hover_before--opacity: #{$opacity};
-}
-
-@mixin rs-states-focus-opacity($opacity) {
-  --rs-ripple_not-upgraded_focus_before--transition-duration: 75ms;
-  --rs-upgraded_-background-focused_before--transition-duration: 75ms;
-  --rs-ripple_not-upgraded_focus_before--opacity: #{$opacity};
-  --rs-upgraded_-background-focused_before--opacity: #{$opacity};
-}
-
-@mixin rs-states-press-opacity($opacity) {
-  --rs-ripple_not-upgraded_after--transition: opacity #{$rs-ripple-fade-out-duration} linear;
-  --rs-ripple_not-upgraded_active_after--transition-duration: #{$rs-ripple-fade-in-duration};
-  --rs-ripple_not-upgraded_active_after--opacity: #{$opacity};
-  --rs-ripple-upgraded--rs-ripple-fg-opacity: #{$opacity};
-}
-
-
-
-// Simple mixin for base states which automatically selects opacity values based on whether the ink color is
-// light or dark.
-@mixin rs-states($color: rs-theme-prop-value(on-surface)) {
-  @include rs-states-interactions_($color, 0);
-}
-
-// Simple mixin for activated states which automatically selects opacity values based on whether the ink color is
-// light or dark.
-@mixin rs-states-activated($color) {
-  $activated-opacity: rs-states-opacity($color, activated);
-  --rs-activated_before--opacity: #{$activated-opacity};
-
-  @include rs-states-interactions_($color, $activated-opacity);
-}
-
-
-@mixin rs-states-interactions_(
-  $color: rs-theme-prop-value(on-surface),
-  $opacity-modifier: 0
-) {
-  @include rs-states-base-color($color);
-  @include rs-states-hover-opacity(rs-states-opacity($color, hover) + $opacity-modifier);
-  @include rs-states-focus-opacity(rs-states-opacity($color, focus) + $opacity-modifier);
-  @include rs-states-press-opacity(rs-states-opacity($color, press) + $opacity-modifier);
-}
-
-
-// Simple mixin for selected states which automatically selects opacity values based on whether the ink color is
-// light or dark.
-@mixin rs-states-selected($color) {
-  $selected-opacity: rs-states-opacity($color, selected);
-  --rs-selected_before--opacity: #{$selected-opacity};
-  @include rs-states-interactions_($color, $selected-opacity);
-}
-
 @mixin rs-ripple-radius-bounded($radius: 100%) {
   &::before,
   &::after {
@@ -254,12 +163,56 @@
   }
 }
 
-@mixin rs-states-interactions_(
-  $color: rs-theme-prop-value(on-surface),
-  $opacity-modifier: 0
-) {
-  @include rs-states-base-color($color);
-  @include rs-states-hover-opacity(rs-states-opacity($color, hover) + $opacity-modifier);
-  @include rs-states-focus-opacity(rs-states-opacity($color, focus) + $opacity-modifier);
-  @include rs-states-press-opacity(rs-states-opacity($color, press) + $opacity-modifier);
+@mixin rs-ripple-upgraded_($color, $colorKey) {
+
+  &::before{
+    background-color: var(--rs-ripple_before--background-color, $color);
+    content: var(--rs-ripple_before--content, '');
+  }
+
+  &::after {
+    background-color: var(--rs-ripple_after--background-color, $color);
+    content: var(--rs-ripple_after--content, '');
+  }
+
+  &:hover::before {
+    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity($colorKey, hover));
+  }
+
+  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
+    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
+    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity($colorKey, focus));
+  }
+
+  &.rs-ripple-upgraded--background-focused::before {
+    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
+    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity($colorKey, focus));
+  }
+
+  &:not(.rs-ripple-upgraded) {
+    &::after {
+      transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
+    }
+
+    &:active::after {
+      transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
+      opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity($colorKey, press));
+    }
+  }
+
+  &.rs-ripple-upgraded {
+    --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity($colorKey, press)});
+  }
+}
+
+@mixin rs-states-activated($color) {
+  &::before {
+    opacity: rs-states-opacity($color, activated);
+  }
+}
+
+@mixin rs-states-selected($color) {
+  &::before {
+    opacity: rs-states-opacity($color, selected);
+  }
 }
