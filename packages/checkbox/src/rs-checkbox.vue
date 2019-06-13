@@ -221,10 +221,6 @@ $fade-in-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-u
 $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-uid_(), out);
 
 .rs-checkbox {
-  @include rs-ripple-surface;
-  @include rs-states($rs-checkbox-baseline-theme-color);
-  @include rs-ripple-radius-unbounded;
-
   display: inline-block;
   position: relative;
   flex: 0 0 $rs-checkbox-size;
@@ -271,44 +267,21 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   &.rs-ripple-upgraded--background-focused .rs-checkbox__background::before {
     content: none;
   }
+}
+
+.rs-ripple-upgraded {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-unbounded;
+  @include rs-ripple-upgraded_($rs-checkbox-baseline-theme-color, $rs-checkbox-baseline-theme-color);
 
    &::before{
-    background-color: var(--rs-checkbox-background_before--background-color, var(--rs-ripple_before--background-color, $rs-theme-primary));
+    background-color: var(--rs-checkbox-background_before--background-color, var(--rs-ripple_before--background-color, $rs-checkbox-baseline-theme-color));
     content: var(--rs-ripple_before--content, '');
   }
 
   &::after {
-    background-color: var(--rs-checkbox-background_before--background-color, var(--rs-ripple_after--background-color, $rs-theme-primary));
+    background-color: var(--rs-checkbox-background_before--background-color, var(--rs-ripple_after--background-color, $rs-checkbox-baseline-theme-color));
     content: var(--rs-ripple_after--content, '');
-  }
-
-  &:hover::before {
-    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity(primary, hover));
-  }
-
-  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
-    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
-    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity(primary, focus));
-  }
-
-  &.rs-ripple-upgraded--background-focused::before {
-    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
-    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(primary, focus));
-  }
-
-  &:not(.rs-ripple-upgraded) {
-    &::after {
-      transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
-    }
-
-    &:active::after {
-      transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
-      opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity(primary, press));
-    }
-  }
-
-  &.rs-ripple-upgraded {
-    --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity(primary, press)});
   }
 }
 
