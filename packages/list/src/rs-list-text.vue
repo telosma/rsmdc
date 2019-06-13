@@ -1,5 +1,5 @@
 <template>
-  <div class="rs-list-item__text" :class="{ '-rs-drawer': isDrawer }" ref="slotContainer">
+  <div class="rs-list-item__text" :class="{ '-drawer': isDrawer }" ref="slotContainer">
     <slot></slot>
   </div>
 </template>

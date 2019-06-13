@@ -1,5 +1,5 @@
 <template>
-  <h3 class="rs-list-group__subheader" :class="{ '-rs-drawer': isDrawer }" ref="slotContainer">
+  <h3 class="rs-list-group__subheader" :class="{ '-drawer': isDrawer }" ref="slotContainer">
     <slot></slot>
   </h3>
 </template>
@@ -54,7 +54,7 @@ export default {
   color: var(--rs-list-group-subheader--color, rs-theme-ink-color-for-fill_(primary, $rs-theme-background));
 }
 
-.-rs-drawer {
+.-drawer {
   @include rs-typography(body2);
   @include rs-typography-baseline-top(24px);
   color: var(--rs-drawer-subtitle--color, rgba(rs-theme-prop-value($rs-drawer-subtitle-ink-color), $rs-drawer-subtitle-ink-opacity));
