@@ -15,16 +15,16 @@ export default {
         slotChildren.forEach(child => {
           const isIcon = this.getElementProperty(child, '--rs-button__icon') === 'true' ? true : false
           if(isIcon) {
-            child.classList.add('-rs-icon')
+            child.classList.add('-icon')
             icons.push(child)
           } else {
-            child.classList.add('-rs-button')
+            child.classList.add('-button')
             buttons.push(child)
           }
         })
         if(icons.length === 0 || buttons.length === 0) { return }
-        icons.shift().classList.add('-rs-first')
-        buttons.pop().classList.add('-rs-last')
+        icons.shift().classList.add('-first')
+        buttons.pop().classList.add('-last')
       })
   },
   methods: {
@@ -72,10 +72,10 @@ export default {
 }
 
 // .rs-card__action--button
-::slotted(.-rs-button) {
+::slotted(.-button) {
   margin-right: var(--rs-card-actions_slotted-button--margin-right, 8px);
 }
-::slotted(.-rs-button.-rs-full-bleed) {
+::slotted(.-button.-full-bleed) {
   justify-content: space-between;
   width: 100%;
   height: auto;
@@ -90,16 +90,16 @@ export default {
     text-align: right;
   }
 }
-::slotted(.-rs-button.-rs-last) {
+::slotted(.-button.-last) {
   @include rs-rtl-reflexive-box(margin, right, 16px);
 }
 
 // .rs-card__action-icon
-::slotted(.-rs-icon:not(:disabled)) {
+::slotted(.-icon:not(:disabled)) {
   --re-button_not_disabled--color: #{rs-theme-ink-color-for-fill_(icon, $rs-theme-background)};
   margin: -6px 0;
 }
-::slotted(.-rs-icon.-rs-first) {
+::slotted(.-icon.-first) {
   margin-right: 0;
   margin-left: auto;
 }
