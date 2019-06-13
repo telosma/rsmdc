@@ -1,3 +1,4 @@
+// Change line-ripple color.
 @mixin rs-line-ripple-color($color) {
   --rs-line-ripple--background-color: #{$color};
 }
