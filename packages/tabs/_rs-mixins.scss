@@ -27,14 +27,21 @@
   @include rs-states($color);
 }
 
-// Sets the fixed width of the tab.
-@mixin rs-tab-fixed-width($width) {
-  --rs-tab--flex: 0 1 #{$width};
-}
-
 // Change tab underline color.
 @mixin rs-tab-indicator-color($color) {
   --rs-tab-indicator--background-color: #{$color};
+}
+
+// Change tab text, state and indicator color. 
+@mixin rs-tab-fill-color-accessible($color) {
+  @include rs-tab-ink-color($color);
+  @include rs-tab-states-color($color);
+  @include rs-tab-indicator-color($color);
+}
+
+// Sets the fixed width of the tab.
+@mixin rs-tab-fixed-width($width) {
+  --rs-tab--flex: 0 1 #{$width};
 }
 
 // Change tab underline tickness.
