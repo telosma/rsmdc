@@ -237,10 +237,6 @@ export default {
   border: var(--rs-text-field-form-input--border, none);
   border-bottom: var(--rs-text-field-form-input--border-bottom, 1px solid);
 
-  .-invalid & {
-    border-bottom-color: $rs-text-field-error;
-  }
-
   :not(.-disabled) & {
     background-color: var(--rs-text-field_not__disabled-form-inputarea--background-color);
   }
@@ -262,10 +258,18 @@ export default {
     border-bottom-color: $rs-text-field-error;
   }
 
+  .-disabled & {
+    background-color: $rs-text-field-disabled-background;
+  }
+
   .-disabled &,
   .-disabled:not(.-outlined):not(.rs-text-field--textarea) &,
   .-disabled:not(.-outlined):not(.rs-text-field--textarea) &:hover {
     border-bottom-color: $rs-text-field-disabled-border;
+  }
+
+  .-invalid & {
+    border-bottom-color: $rs-text-field-error;
   }
 
   &::before {
