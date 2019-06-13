@@ -1,7 +1,7 @@
 @import "@rsmdc/base/mixins";
 @import "@rsmdc/theme/mixins";
 @import "./functions";
-@import "./mixins";
+@import "./rs-mixins";
 
 // Line Ripple is intended for use by multiple components, but its styles should only be emitted once when bundled
 @include rs-base-emit-once("rs-line-ripple") {
