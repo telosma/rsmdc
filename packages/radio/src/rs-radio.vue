@@ -89,16 +89,12 @@ export default {
       this.$emit('change')
     },
     triggerRipple() {
-      if(this.isChecked) {
-        this.deactivateRipple()
-      } else {
-        this.activateRipple()
-      }
+      this.activateRipple()
     },
     activateRipple() {
       this.radio.ripple.activate()
       setTimeout(() => {
-        this.el.querySelector('.rs-radio__container').classList.add('rs-ripple-upgraded--foreground-deactivation')
+        this.radio.ripple.deactivate()
       }, 200)
     },
     deactivateRipple() {

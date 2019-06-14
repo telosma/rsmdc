@@ -109,11 +109,10 @@ export default {
       this.$emit('change')
     },
     triggerRipple() {
-      if(this.isChecked) {
+      this.checkbox.ripple.activate()
+      setTimeout(() => {
         this.checkbox.ripple.deactivate()
-      } else {
-        this.checkbox.ripple.activate()
-      }
+      }, 200)
     }
   }
 }
