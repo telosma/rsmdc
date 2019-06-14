@@ -147,7 +147,7 @@ export default {
 .rs-ripple-upgraded {
   @include rs-ripple-surface;
   @include rs-ripple-radius-unbounded;
-  @include rs-ripple-upgraded_($rs-theme-secondary, $rs-theme-secondary);
+  @include rs-ripple-upgraded_($rs-theme-secondary);
 
   &.rs-ripple-upgraded--background-focused {
     .rs-radio__background::before {

@@ -141,13 +141,13 @@ export default {
   &:not([disabled]) {
     @include rs-ripple-surface;
     @include rs-ripple-radius-bounded;
-    @include rs-ripple-upgraded_($rs-theme-on-surface, on-surface);
+    @include rs-ripple-upgraded_($rs-theme-on-surface);
   }
 }
 
 .rs-list-item[selected] {
   &:not([disabled]) {
-    @include rs-ripple-upgraded_($rs-theme-primary, primary);
+    @include rs-ripple-upgraded_($rs-theme-primary);
     @include rs-states-selected($rs-theme-primary);
     --rs-menu-list-item-graphic--display: inline;
 
@@ -160,7 +160,7 @@ export default {
 
 .rs-list-item[activated] {
   &:not([disabled]) {
-    @include rs-ripple-upgraded_($rs-theme-primary, primary);
+    @include rs-ripple-upgraded_($rs-theme-primary);
     @include rs-states-activated($rs-theme-primary);
     --rs-list--color: #{$rs-theme-primary};
     --rs-menu-list-item-graphic--display: inline;

@@ -244,7 +244,7 @@ export default {
 .rs-ripple-upgraded {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
-  @include rs-ripple-upgraded_($rs-theme-primary, primary);
+  @include rs-ripple-upgraded_($rs-theme-primary);
 }
 
 .rs-button__ripple {

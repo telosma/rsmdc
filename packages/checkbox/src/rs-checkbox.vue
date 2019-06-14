@@ -274,9 +274,9 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
 .rs-ripple-upgraded {
   @include rs-ripple-surface;
   @include rs-ripple-radius-unbounded;
-  @include rs-ripple-upgraded_($rs-checkbox-baseline-theme-color, $rs-checkbox-baseline-theme-color);
+  @include rs-ripple-upgraded_($rs-checkbox-baseline-theme-color);
 
-   &::before{
+  &::before{
     background-color: var(--rs-checkbox-background_before--background-color, var(--rs-ripple_before--background-color, $rs-checkbox-baseline-theme-color));
     content: var(--rs-ripple_before--content, '');
   }

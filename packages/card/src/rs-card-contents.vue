@@ -55,6 +55,6 @@ export default {
 .rs-ripple-upgraded {
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
-  @include rs-ripple-upgraded_($rs-theme-on-surface, on-surface)
+  @include rs-ripple-upgraded_($rs-theme-on-surface)
 }
 </style>
