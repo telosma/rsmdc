@@ -1,17 +1,24 @@
 <template>
-  <div class="rs-radio" @click="updateRadios" :disabled="disabled">
-    <input class="rs-radio__native-control" :class="{ '-checked': isChecked }" type="radio" :data-id="dataId" :name="name" :disabled="disabled">
-    <div class="rs-radio__background">
-      <div class="rs-radio__outer-circle"></div>
-      <div class="rs-radio__inner-circle"></div>
+  <div class="rs-radio">
+    <div class="rs-radio__container" @click="updateRadios" :disabled="disabled">
+      <input class="rs-radio__native-control" :class="{ '-checked': isChecked }" type="radio" :id="id" :name="name" :disabled="disabled">
+      <div class="rs-radio__background">
+        <div class="rs-radio__outer-circle"></div>
+        <div class="rs-radio__inner-circle"></div>
+      </div>
     </div>
+    <label class="rs-radio__label" :for="id" @click="triggerRipple">{{ label }}</label>
   </div>
 </template>
 <script>
-import { RSRipple } from '@rsmdc/ripple'
+import { RSRadio } from '../index'
 
 export default {
   props: {
+    label: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: 'radio'
@@ -24,7 +31,7 @@ export default {
       type: Boolean,
       default: false
     },
-    dataId: {
+    id: {
       type: String,
       default: ''
     }
@@ -33,7 +40,7 @@ export default {
     return {
       el: '',
       host: '',
-      ripple: '',
+      radio: '',
       isChecked: false
     }
   },
@@ -59,21 +66,13 @@ export default {
     }
   },
   mounted() {
-    this.ripple = new RSRipple(this.$el)
-    this.ripple.unbounded = true
+    this.radio = new RSRadio(this.$el.querySelector('.rs-radio__container'))
     this.el = this.$el
     this.isChecked = this.checked ? true : false
   },
   methods: {
     updateRadios() {
       if(this.disabled) { return }
-
-      // for label clicking
-      this.activateRipple()
-      this.el.querySelector('.rs-radio__native-control').focus()
-      this.host.addEventListener('blur', () => {
-        this.deactivateRipple()
-      })
 
       const radioGroup = window.__rsmdc.radio.radios.filter(radio => radio.getAttribute('name') === this.name)
       radioGroup.forEach(radio => {
@@ -89,14 +88,21 @@ export default {
     passChangeEvent() {
       this.$emit('change')
     },
+    triggerRipple() {
+      if(this.isChecked) {
+        this.deactivateRipple()
+      } else {
+        this.activateRipple()
+      }
+    },
     activateRipple() {
-      this.ripple.activate()
+      this.radio.ripple.activate()
       setTimeout(() => {
-        this.el.classList.add('rs-ripple-upgraded--foreground-deactivation')
+        this.el.querySelector('.rs-radio__container').classList.add('rs-ripple-upgraded--foreground-deactivation')
       }, 200)
     },
     deactivateRipple() {
-      this.ripple.deactivate()
+      this.radio.ripple.deactivate()
     }
   }
 }
@@ -114,9 +120,13 @@ export default {
 @include rs-ripple-common;
 
 .rs-radio {
-  @include rs-ripple-surface;
-  @include rs-ripple-radius-unbounded;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
 
+.rs-radio__container {
   display: inline-block;
   position: relative;
   flex: 0 0 auto;
@@ -132,52 +142,19 @@ export default {
     cursor: default;
     pointer-events: none;
   }
-  
-  // ripple
-  &::before {
-    background-color: var(--rs-ripple_before--background-color, $rs-theme-secondary);
-    content: var(--rs-ripple_before--content, '');
-  }
+}
 
-  &::after {
-    background-color: var(--rs-ripple_after--background-color, $rs-theme-secondary);
-    content: var(--rs-ripple_after--content, '');
-  }
-
-  &:hover::before {
-    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity($rs-radio-baseline-theme-color, hover));
-  }
-
-  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
-    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
-    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity($rs-radio-baseline-theme-color, focus));
-  }
-
-  &.rs-ripple-upgraded--background-focused::before {
-    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
-    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity($rs-radio-baseline-theme-color, focus));
-  }
-
-  &:not(.rs-ripple-upgraded) {
-    &::after {
-      transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
-    }
-
-    &:active::after {
-      transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
-      opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity($rs-radio-baseline-theme-color, press));
-    }
-  }
-
-  &.rs-ripple-upgraded {
-    --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity($rs-radio-baseline-theme-color, press)});
-  }
+.rs-ripple-upgraded {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-unbounded;
+  @include rs-ripple-upgraded_($rs-theme-secondary, $rs-theme-secondary);
 
   &.rs-ripple-upgraded--background-focused {
     .rs-radio__background::before {
       content: none;
     }
   }
+
 }
 
 .rs-radio__native-control {
@@ -314,6 +291,10 @@ export default {
   transition:
     rs-radio-exit(transform),
     rs-radio-exit(border-color);
+}
+
+.rs-radio__label {
+  @include rs-form-label_;
 }
 
 </style>
