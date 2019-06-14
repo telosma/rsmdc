@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/select.esm.js"></script>
+  <script nomodule src="/build/select.js"></script>
+  <script src="https://cdn.rawgit.com/medialize/sass.js/master/dist/sass.sync.js"></script>
+</head>
+<body>
+  <rs-select class="food-select" label="Pick a Food Group">
+    <option value="" disabled selected></option>
+    <option value="grains">
+      Bread, Cereal, Rice, and Pasta
+    </option>
+    <option value="vegetables">
+      Vegetables
+    </option>
+    <option value="fruit">
+      Fruit
+    </option> 
+  </rs-select>
+</body>
+<style type="text/scss">
+  .food-select {
+    /* @include rs-select-type(outlined); */
+  }
+</style>
+<script>
+  (async function() {
+    const res = await fetch('./mixin.scss')
+    const mixinScss = await res.text()
+    const styleScss = document.querySelector('style[type="text/scss"]').textContent
+    Sass.compile(mixinScss + styleScss, result => {
+      style = document.createElement('style')
+      style.type = 'text/css'
+      style.appendChild(document.createTextNode(result.text))
+      document.head.appendChild(style)
+    })
+  })()
+</script>
+
+</html>
