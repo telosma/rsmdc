@@ -51,3 +51,14 @@
 @mixin rs-floating-label-max-width($max-width) {
   max-width: $max-width;
 }
+
+@mixin rs-form-label_ {
+  @include rs-typography(body2);
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: var(--rs-form-label--color, text-primary-on-background);
+  margin-right: var(--rs-form-label--margin-right, auto);
+  padding-left: var(--rs-form-label--padding-left, $rs-form-field-item-spacing);
+}

@@ -109,14 +109,6 @@ export default {
 @include rs-form-label-floatinglabel-shake-keyframes(textarea, $rs-text-field-textarea-label-position-y, 0%);
 
 .rs-form-label {
-  @include rs-typography(body2);
-  cursor: pointer;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-
-  color: var(--rs-form-label--color, text-primary-on-background);
-  margin-right: var(--rs-form-label--margin-right, auto);
-  padding-left: var(--rs-form-label--padding-left, $rs-form-field-item-spacing);
 
   &.-disabled {
     cursor: default;

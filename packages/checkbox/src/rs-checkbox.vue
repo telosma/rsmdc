@@ -1,20 +1,27 @@
 <template>
-    <div class="rs-checkbox" :disabled="disabled" @click="updateCheckbox">
-      <input type="checkbox" class="rs-checkbox__native-control" :class="{ '-checked': isChecked }" :data-id="dataId" :name="name"
-        :disabled="disabled" :indeterminate="isIndeterminate">
+  <div class="rs-checkbox">
+    <div class="rs-checkbox__container" :disabled="disabled" @click="updateCheckbox">
+      <input type="checkbox" class="rs-checkbox__native-control" :class="{ '-checked': isChecked }"
+      :id="id" :name="name" :disabled="disabled" :indeterminate="isIndeterminate">
       <div class="rs-checkbox__background">
         <svg class="rs-checkbox__checkmark" viewBox="0 0 24 24">
           <path class="rs-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
         </svg>
-        <div class="rs-checkbox__mixedmark"></div>
+        <div class="rs-checkbox__mixedmark" />
       </div>
     </div>
+    <label class="rs-checkbox__label" :for="id" @click="triggerRipple">{{ label }}</label>
+  </div>
 </template>
 <script>
 import { RSCheckbox } from '../index'
 
 export default {
   props: {
+    label: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: ''
@@ -31,7 +38,7 @@ export default {
       type: Boolean,
       default: false
     },
-    dataId: {
+    id: {
       type: String,
       default: ''
     }
@@ -85,7 +92,7 @@ export default {
     }
   },
   mounted() {
-    this.checkbox = new RSCheckbox(this.$el)
+    this.checkbox = new RSCheckbox(this.$el.querySelector('.rs-checkbox__container'))
     this.isIndeterminate = this.indeterminate
     this.el = this.$el
     this.isChecked = this.checked ? true : false
@@ -93,12 +100,6 @@ export default {
   methods: {
     updateCheckbox() {
       if(this.disabled) { return }
-      // for label clicking
-      this.activateRipple()
-      this.el.querySelector('.rs-checkbox__native-control').focus()
-      this.host.addEventListener('blur', () => {
-        this.deactivateRipple()
-      })
 
       this.isIndeterminate = false
       this.isChecked = !this.isChecked
@@ -107,14 +108,12 @@ export default {
     passChangeEvent() {
       this.$emit('change')
     },
-    activateRipple() {
-      this.checkbox.ripple.activate()
-      setTimeout(() => {
-        this.el.classList.add('rs-ripple-upgraded--foreground-deactivation')
-      }, 200)
-    },
-    deactivateRipple() {
-      this.checkbox.ripple.deactivate()
+    triggerRipple() {
+      if(this.isChecked) {
+        this.checkbox.ripple.deactivate()
+      } else {
+        this.checkbox.ripple.activate()
+      }
     }
   }
 }
@@ -134,11 +133,6 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-@mixin rs-checkbox--disabled_ {
-  --rs-checkbox__disabled--cursor: default;
-  pointer-events: none;
 }
 
 @mixin rs-checkbox--anim_ {
@@ -221,6 +215,13 @@ $fade-in-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-u
 $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-uid_(), out);
 
 .rs-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.rs-checkbox__container {
   display: inline-block;
   position: relative;
   flex: 0 0 $rs-checkbox-size;
@@ -230,11 +231,12 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   padding: ($rs-checkbox-touch-area - $rs-checkbox-size) / 2;
   line-height: 0;
   white-space: nowrap;
-  cursor: var(--rs-checkbox__disabled--cursor, pointer);
+  cursor: pointer;
   vertical-align: bottom;
 
-  &[disabled] {
-    @include rs-checkbox--disabled_;
+  [disabled] & {
+    cursor: default;
+    pointer-events: none;
   }
 
   &.rs-checkbox--anim {
@@ -306,7 +308,8 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   }
 
   &:disabled {
-    @include rs-checkbox--disabled_;
+    cursor: default;
+    pointer-events: none;
   }
 
   &:disabled:not(:checked):not([indeterminate]) ~ .rs-checkbox__background {
@@ -444,6 +447,11 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     rs-checkbox-transition-exit(opacity),
     rs-checkbox-transition-exit(transform);
   border-color: var(--rs-checkbox-background-mixedmark--border-color, $rs-checkbox-mark-color);
+}
+
+.rs-checkbox__label {
+  @include rs-form-label_;
+
 }
 
 @media screen and (-ms-high-contrast: active) {
