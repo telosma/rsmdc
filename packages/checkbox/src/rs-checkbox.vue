@@ -10,7 +10,7 @@
         <div class="rs-checkbox__mixedmark" />
       </div>
     </div>
-    <label class="rs-checkbox__label" :for="id" @click="triggerRipple">{{ label }}</label>
+    <label class="rs-checkbox__label" :for="id" @click="triggerRipple" :disabled="disabled">{{ label }}</label>
   </div>
 </template>
 <script>
@@ -233,7 +233,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   cursor: pointer;
   vertical-align: bottom;
 
-  [disabled] & {
+  &[disabled]{
     cursor: default;
     pointer-events: none;
   }
@@ -451,6 +451,10 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
 .rs-checkbox__label {
   @include rs-form-label_;
 
+  &[disabled] {
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 @media screen and (-ms-high-contrast: active) {

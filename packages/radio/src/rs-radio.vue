@@ -7,7 +7,7 @@
         <div class="rs-radio__inner-circle"></div>
       </div>
     </div>
-    <label class="rs-radio__label" :for="id" @click="triggerRipple">{{ label }}</label>
+    <label class="rs-radio__label" :for="id" @click="triggerRipple" :disabled="disabled">{{ label }}</label>
   </div>
 </template>
 <script>
@@ -291,6 +291,11 @@ export default {
 
 .rs-radio__label {
   @include rs-form-label_;
+
+  &[disabled] {
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 </style>
