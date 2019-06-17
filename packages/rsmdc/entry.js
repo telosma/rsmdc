@@ -39,7 +39,6 @@ import textArea from '../textfield/src/rs-textarea.vue'
 import textField from '../textfield/src/rs-text-field.vue'
 import formError from '../form-field/src/rs-form-error.vue'
 import formHelper from '../form-field/src/rs-form-helper.vue'
-import formLabel from '../form-field/src/rs-form-label.vue'
 import formField from '../form-field/src/rs-form-field.vue'
 import appLayoutContent from '../app-layout/src/rs-app-layout-content.vue'
 import appLayout from '../app-layout/src/rs-app-layout.vue'
@@ -84,6 +83,5 @@ export const TextField = wrap(Vue, textField)
 export const FormError = wrap(Vue, formError)
 export const FormHelper = wrap(Vue, formHelper)
 export const FormField = wrap(Vue, formField)
-export const FormLabel = wrap(Vue, formLabel)
 export const AppLayoutContent = wrap(Vue, appLayoutContent)
 export const AppLayout = wrap(Vue, appLayout)
