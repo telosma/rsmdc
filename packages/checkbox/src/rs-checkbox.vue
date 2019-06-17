@@ -218,6 +218,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+  flex-flow: var(--rs-checkbox--flex-flow);
 }
 
 .rs-checkbox__container {

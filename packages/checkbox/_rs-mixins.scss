@@ -49,3 +49,10 @@
   @include rs-checkbox-checked-container-colors($color);
   @include rs-checkbox-focus-indicator-color($color);
 }
+
+// Change checkbox label position.
+@mixin rs-checkbox-label-position($position) {
+  @if $position == left {
+    --rs-checkbox--flex-flow: row-reverse;
+  }
+}

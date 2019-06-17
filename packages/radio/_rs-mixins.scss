@@ -35,3 +35,10 @@
   @include rs-radio-ink-color($color);
   @include rs-radio-states-color($color);
 }
+
+// Change label position.
+@mixin rs-radio-label-position($position) {
+  @if $position == left {
+    --rs-radio--flex-flow: row-reverse;
+  }
+}

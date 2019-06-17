@@ -120,6 +120,7 @@ export default {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+  flex-flow: var(--rs-radio--flex-flow);
 }
 
 .rs-radio__container {
