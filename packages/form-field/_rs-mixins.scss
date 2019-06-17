@@ -14,7 +14,7 @@
 
 // Change label focus ink color. (Only -floatinglabel)
 @mixin rs-form-field-focus-label-ink-color($color) {
-  --rs-form-label__floatinglabel__focus--color: #{$color};
+  --rs-text-field__focus-label--color: #{$color};
 }
 
 // Change helper text ink color.

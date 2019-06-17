@@ -1,12 +1,20 @@
 @import "../form-field/rs-functions";
+@import "../form-field/rs-mixins";
 @import "../line-ripple/rs-mixins";
 @import "../notched-outline/rs-mixins";
 
 // Change text-field border-radius.
 @mixin rs-text-field-shape-radius($radius) {
   $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
+  $calculate-radius: $radius + 4px;
   --rs-text-field-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
   --rs-text-field_rtl-form--border-radius: #{rs-shape-resolve-percentage-radius($rs-text-field-height, $masked-radius)};
+  --rs-text-field__outlined-form--border-radius: #{$radius};
+  --rs-text-field__outlined-form-inputarea--border-radius: #{$radius};
+  --rs-text-field_not__textarea__outlined-form-input--padding-left: #{$radius};
+  --rs-text-field_not__textarea__dense__outlined-form-input--padding-left: #{$radius};
+  --rs-text-field__floatabove__icon-label__outlined--left: #{$calculate-radius};
+  --rs-text-field__floatabove__icon__dense-label__outlined--left: #{$calculate-radius};
 
   // outlined
   @include rs-notched-outline-shape-radius($radius);
@@ -96,50 +104,23 @@
   --rs-text-field-form-input--caret-color: #{$color};
 }
 
+// Change focused color.
+@mixin rs-text-field-focused-color-accessible($color) {
+  @include rs-text-field-focused-outline-color($color);
+  @include rs-textarea-focused-outline-color($color);
+  @include rs-textarea-caret-color($color);
+  @include rs-line-ripple-color($color);
+  @include rs-form-field-focus-label-ink-color($color);
+}
+
 // Change text-field type.
 @mixin rs-text-field-type($types...) {
   @each $type in $types {
     @if $type == outlined {
       --rs-text-field__outlined: true;
-      --rs-text-field-form-input--border-bottom: none;
-      --rs-text-field__disabled-form_not__textarea--border-bottom-color: #{$rs-text-field-outlined-disabled-border};
-      --rs-ripple_before--background-color: transparent;
-      --rs-text-field__disabled-form--background-color: transparent;
-      --rs-text-field_not__disabled-form_not__textarea--background-color: transparent;
-      --rs-text-field_not__disabled-form__textarea--background-color: transparent;
-      --rs-text-field_not__disabled-input--background-color: transparent;
-      --rs-text-field-form-input--display: flex;
-      --rs-text-field-form_not__textarea-form--padding-top: 12px;
-      --rs-text-field-form_not__textarea-input--padding-bottom: 14px;
-      --rs-text-field-form_not__textarea-input--padding-right: 12px;
-      --rs-text-field-form_not__textarea-inputarea-input--padding-left: 16px;
-      --rs-text-field-form-input--border: none !important;  // FF adds unwanted border in HC mode on windows.
-      --rs-text-field-form-input--background-color: transparent;
-      --rs-text-field-form-input--z-index: 1;
-      --rs-text-field--icon--z-index: 2;
     }@else if $type == dense {
       --rs-text-field__dense: true;
-      --rs-form-label__floatinglabel__floatabove--transform: #{rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale)};
-      --rs-form-label__floatinglabel--font-size: .813rem;
-    
-      --rs-text-field-form_not__textarea-form--padding-top: 12px;
-      --rs-text-field-form_not__textarea-input--padding-bottom: 0;
-      --rs-text-field-form_not__textarea-input--padding-right: 12px;
-      --rs-text-field-form_not__textarea-inputarea-input--padding-left: 12px;
     }
-  }
-
-  $dense: find-item($types, dense);
-  $outlined: find-item($types, outlined);
-
-  @if $dense and $outlined {
-    --rs-form-label__floatinglabel__outlined__floatabove--top: 3px;
-    
-    --rs-text-field-form--height: 48px;
-    --rs-text-field-form_not__textarea-form--padding-top: 12px;
-    --rs-text-field-form_not__textarea-input--padding-bottom: 7px;
-    --rs-text-field-form_not__textarea-input--padding-right: 12px;
-    --rs-text-field-form_not__textarea-inputarea-input--padding-left: 12px;
   }
 }
 
@@ -148,7 +129,6 @@
   --rs-text-field__icon: true;
   --rs-text-field-form-inputarea_before--background-image: #{$url};
   --rs-text-field-form-inputarea_before--content: '';
-  --rs-text-field-form_not__textarea-inputarea-input--padding-left: 48px;
 }
 
 // Set icon to text-field action.
