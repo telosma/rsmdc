@@ -1,4 +1,4 @@
-import { Component, Element, Watch, Event, EventEmitter, Prop, h } from '@stencil/core'
+import { Component, Element, Event, EventEmitter, Prop, h, State } from '@stencil/core'
 import {MDCSelect} from '@material/select'
 
 @Component({
@@ -16,41 +16,47 @@ export class RsSelect {
 
   @Prop() label: string
 
-  @Prop() disabled: boolean;
+  @Prop() disabled: boolean
 
-  selectedIndex: number = 0
+  @State() selectedIndex: number = 0
 
-  styleType: string = 'filled'
+  @State() styleType: string = 'filled'
   
   @Event({
     cancelable: false,
     composed: false,
   }) change: EventEmitter
 
-  @Watch('disabled')
-  watchHandler(disabled: boolean) {
+  mdcSelect: MDCSelect
+
+  disconnectedCallback() {
+    this.mdcSelect.destroy()
+    this.mdcSelect = null
+  }
+
+  componentWillRender() {
+    const style = window.getComputedStyle(this.el)
+    this.styleType = style.getPropertyValue('--rs-select-type').trim() || 'filled'
+  }
+
+  componentDidRender() {
     const selectElm = this.el.shadowRoot.querySelector('.mdc-select')
-    if (disabled) {
+    if (this.styleType === 'outlined') {
+      selectElm.classList.add('mdc-select--outlined')
+    } else {
+      selectElm.classList.remove('mdc-select--outlined')
+    }
+    if (this.disabled) {
       selectElm.classList.add('mdc-select--disabled')
     } else {
       selectElm.classList.remove('mdc-select--disabled')
     }
   }
 
-  mdcSelect: MDCSelect
-
   componentDidLoad() {
     const selectElm = this.el.shadowRoot.querySelector('.mdc-select')
     const nativeSelectElm = this.el.shadowRoot.querySelector('.mdc-select__native-control')
     const slotElm = this.el.shadowRoot.querySelector('slot')
-
-    slotElm.addEventListener('slotchange', () => {
-      nativeSelectElm.innerHTML = ''
-      slotElm.assignedElements().forEach(e => {
-        nativeSelectElm.append(e.cloneNode(true))
-      })
-      this.mdcSelect.value = this.value
-    })
 
     this.mdcSelect = new MDCSelect(selectElm)
     this.mdcSelect.listen('MDCSelect:change', () => {
@@ -59,19 +65,13 @@ export class RsSelect {
       this.change.emit({ value: this.value, index: this.selectedIndex})
     })
 
-    const style = window.getComputedStyle(this.el)
-    this.styleType = style.getPropertyValue('--rs-select-type').trim() || 'filled'
-    if (this.styleType === 'outlined') {
-      selectElm.classList.add('mdc-select--outlined')
-    } else {
-      selectElm.classList.remove('mdc-select--outlined')
-    }
-
-    if (this.disabled) {
-      selectElm.classList.add('mdc-select--disabled')
-    } else {
-      selectElm.classList.remove('mdc-select--disabled')
-    }
+    slotElm.addEventListener('slotchange', () => {
+      nativeSelectElm.innerHTML = ''
+      slotElm.assignedElements().forEach(e => {
+        nativeSelectElm.append(e.cloneNode(true))
+      })
+      this.mdcSelect.value = this.value
+    })
   }
 
   render() {
@@ -80,16 +80,20 @@ export class RsSelect {
             <select class="mdc-select__native-control">
             </select>
 
-            <div class="mdc-notched-outline">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch">
-                <label class="mdc-floating-label">{this.label}</label>
-              </div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-
-            <label class="mdc-floating-label">{this.label}</label>
-            <div class="mdc-line-ripple"></div>
+            {(() => {
+              if (this.styleType === 'outlined') {
+                return <div class="mdc-notched-outline">
+                  <div class="mdc-notched-outline__leading"></div>
+                  <div class="mdc-notched-outline__notch">
+                    <label class="mdc-floating-label">{this.label}</label>
+                  </div>
+                  <div class="mdc-notched-outline__trailing"></div>
+                </div>
+              } else {
+                return [<label class="mdc-floating-label">{this.label}</label>,
+                <div class="mdc-line-ripple"></div>]
+              }
+            })()}
 
             <slot />
           </div>

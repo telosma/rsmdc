@@ -34,17 +34,17 @@
 }
 
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__leading {
-  border-color: var(--rs-select_not_disabled__focused--notched-outline--leading--border-color, primary);
+  border-color: var(--rs-select_not_disabled__focused--notched-outline--leading--border-color, mdc-theme-prop-value(primary));
   border-width: var(--rs-select_not_disabled__focused--notched-outline--leading--border-width, 2px);
 }
 
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__notch {
-  border-color: var(--rs-select_not_disabled__focused--notched-outline--notch--border-color, primary);
+  border-color: var(--rs-select_not_disabled__focused--notched-outline--notch--border-color, mdc-theme-prop-value(primary));
   border-width: var(--rs-select_not_disabled__focused--notched-outline--notch--border-width, 2px);
 }
 
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__trailing {
-  border-color: var(--rs-select_not_disabled__focused--notched-outline--trailing--border-color, primary);
+  border-color: var(--rs-select_not_disabled__focused--notched-outline--trailing--border-color, mdc-theme-prop-value(primary));
   border-width: var(--rs-select_not_disabled__focused--notched-outline--trailing--border-width, 2px);
 }
 
@@ -84,5 +84,5 @@
 }
 
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-line-ripple {
-  background-color: var(--rs-select_not_disabled__focused--line-ripple--background-color, primary);
+  background-color: var(--rs-select_not_disabled__focused--line-ripple--background-color, mdc-theme-prop-value(primary));
 }
