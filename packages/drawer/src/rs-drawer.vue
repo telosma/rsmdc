@@ -23,6 +23,7 @@ export default {
       el: '',
       host: '',
       hostParent: '',
+      width: '',
       isModal: false,
       isDismissible: false,
       isOpen: false,
@@ -78,22 +79,27 @@ export default {
       return value
     },
     openDrawer() {
-      if(this.isDismissible) {
-        const width = this.getElementProperty(this.el.querySelector('.rs-drawer'), 'width')
-        this.addStyleToBody('--rs-app-layout-content--margin-left', width)
+      if(!this.width) {
+        this.width = this.getElementProperty(this.el.querySelector('.rs-drawer'), 'width')
       }
       if(this.isModal) {
         this.addStyleToBody('overflow', 'hidden')
       }
       new Promise(resolve => {
-        this.isOpen = true
-        this.isOpening = true
+        if(this.isDismissible) {
+          this.addStyleToBody('--rs-app-layout-content--margin-left', this.width)
+        }
         this.isAnimate = true
+        this.isOpening = true
         resolve()
       }).then(() => {
         setTimeout(() => {
+          this.isOpen = true
+        }, 50)
+      }).then(() => {
+        setTimeout(() => {
           this.isAnimate = false
-        }, 1)
+        }, 50)
       }).then(() => {
         setTimeout(() => {
           this.isOpening = false
