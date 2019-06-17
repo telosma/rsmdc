@@ -95,11 +95,11 @@ export default {
       }).then(() => {
         setTimeout(() => {
           this.isOpen = true
-        }, 40)
+        }, 50)
       }).then(() => {
         setTimeout(() => {
           this.isAnimate = false
-        }, 50)
+        }, 60)
       }).then(() => {
         setTimeout(() => {
           this.isOpening = false
@@ -139,6 +139,7 @@ export default {
 @import '../variables';
 
 :host {
+  --rs-drawer: true;
   --rs-drawer-list-item--border-radius: 4px;
 
   position: fixed;
