@@ -23,11 +23,11 @@
     padding-right: 16px;
   }
 
-  .-disabled & {
+  [disabled] & {
     color: $rs-text-field-disabled-helper-text-color;
   }
 
-  :not(.-disabled) & {
+  :not([disabled]) & {
     color: var(--rs-text-field_not__disabled-character-counter--color, $rs-text-field-helper-text-color);
   }
 }

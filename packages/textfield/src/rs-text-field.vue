@@ -198,7 +198,7 @@ export default {
       if(!labelWidth || !this.isOutlined) { return }
       const percentage = this.isDense ? 0.8 : 0.75
       const width = parseInt(labelWidth.replace('px', '')) * percentage + 8
-      this.el.querySelector('.rs-notched-outline__notch').style.setProperty('--rs-text-field__outlined-notched-outline-notch--width', `${width}px`)
+      this.el.querySelector('.rs-notched-outline__notch').style.setProperty('--rs-text-field-notched-outline-notch--width', `${width}px`)
     }
   }
 }

@@ -4,30 +4,24 @@
 @import "./variables";
 
 @mixin rs-notched-outline_ {
-  .-outlined & {
-    display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    /* @noflip */
-    text-align: left;
-    pointer-events: none;
-  }
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  /* @noflip */
+  text-align: left;
+  pointer-events: none;
 
-  .-outlined[dit="rtl"] & {
+  [dit="rtl"] & {
     text-align: right;
   }
 
-  .-outlined[dir="rtl"] & {
-    transform: var(--rs-text-field__outlined_rtl-notched-outline--transform);
-  }
-
-  .-outlined.rs-notched-outline--no-label & {
+  .rs-notched-outline--no-label & {
     .rs-notched-outline__notch {
       padding: 0;
     }
@@ -36,129 +30,126 @@
   .rs-notched-outline__leading,
   .rs-notched-outline__notch,
   .rs-notched-outline__trailing {
-  
-    .-outlined & {
-      box-sizing: border-box;
-      height: 100%;
-      border-top: solid;
-      border-bottom: solid;
-      border-top-width: var(--rs-text-field__outlined-notched-outline-leading--border-width, 1px);
-      border-bottom-width: var(--rs-text-field__outlined-notched-outline-leading--border-width, 1px);
-      pointer-events: none;
-    }
+    box-sizing: border-box;
+    height: 100%;
+    pointer-events: none;
   }
 }
 
 @mixin rs-notched-outline-leading_ {
-  .-outlined & {
-    width: var(--rs-text-field__outlined-notched-outline-leading--width, $rs-notched-outline-leading-width);
-    border: solid;
-    border-right: none;
-    border-width: var(--rs-text-field__outlined-notched-outline-leading--border-width, 1px);
-    border-radius: var(--rs-text-field__outlined-notched-outline-leading--border-radius, 4px 0 0 4px);
+  border: solid;
+  border-right: none;
+  border-top: solid;
+  border-bottom: solid;
+  width: var(--rs-text-field-notched-outline-leading--width, $rs-notched-outline-leading-width);
+  border-width: var(--rs-text-field-notched-outline-leading--border-width, 1px);
+  border-radius: var(--rs-text-field-notched-outline-leading--border-radius, 4px 0 0 4px);
+  border-top-width: var(--rs-text-field-notched-outline-leading--border-width, 1px);
+  border-bottom-width: var(--rs-text-field-notched-outline-leading--border-width, 1px);
+
+  [dir="rtl"] & {
+    border-radius: var(--rs-text-field_rtl-notched-outline-leading--border-radius, 4px);
   }
 
-  .-outlined[dir="rtl"] & {
-    border-radius: var(--rs-text-field__outlined_rtl-notched-outline-leading--border-radius, 4px);
-  }
-
-  .-outlined.-disabled & {
+  [disabled] & {
     border-color: $rs-text-field-outlined-disabled-border;
   }
 
-  .-outlined:not(.-disabled) & {
-    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-leading--border-color, $rs-notched-outline-idle);
+  :not([disabled]) & {
+    border-color: var(--rs-text-field_not_disabled-notched-outline-leading--border-color, $rs-notched-outline-idle);
   }
 
-  .-outlined:not(.-disabled):hover & {
-    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-leading--border-color, $rs-notched-outline-border);
+  :not([disabled]):hover & {
+    border-color: var(--rs-text-field_not_disabled_hover-notched-outline-leading--border-color, $rs-notched-outline-border);
   }
 
-  .-outlined:not(.-disabled).-focus & {
-    border-width: var(--rs-text-field__outlined_not__disabled__focus-notched-outline-leading--border-width, 2px);
-    border-color: var(--rs-text-field__outlined_not__disabled__focus-notched-outline-leading--border-color, $rs-theme-primary);
+  :not([disabled]).-focus & {
+    border-width: var(--rs-text-field_not_disabled__focus-notched-outline-leading--border-width, 2px);
+    border-color: var(--rs-text-field_not_disabled__focus-notched-outline-leading--border-color, $rs-theme-primary);
   }
 
-  .-outlined.-invalid &,
-  .-outlined.-invalid:hover &,
-  .-outlined.-invalid.-focus & {
+  [invalid] &,
+  [invalid]:hover &,
+  [invalid].-focus & {
     color: $rs-theme-error;
     border-color: $rs-theme-error;
   }
 }
 
 @mixin rs-notched-outline-notch_ {
-  .-outlined & {
-    flex: 0 0 auto;
-    width: var(--rs-text-field__outlined-notched-outline-notch--width);
-    max-width: calc(100% - #{$rs-notched-outline-leading-width} * 2);
-    border-width: var(--rs-text-field__outlined-notched-outline-notch--border-width, 1px);
-  }
+  flex: 0 0 auto;
+  width: var(--rs-text-field-notched-outline-notch--width);
+  max-width: calc(100% - #{$rs-notched-outline-leading-width} * 2);
+  border-top: solid;
+  border-bottom: solid;
+  border-top-width: var(--rs-text-field-notched-outline-notch--border-width, 1.2px);
+  border-bottom-width: var(--rs-text-field-notched-outline-notch--border-width, 1.2px);  
 
-  :not(.-nolabel).-outlined.-floatabove & {
+  :not(.-nolabel).-floatabove & {
     border-top: none;
   }
 
-  .-outlined.-disabled & {
+  [disabled] & {
     border-color: $rs-text-field-outlined-disabled-border;
   }
 
-  .-outlined:not(.-disabled) & {
-    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-notch--border-color, $rs-notched-outline-idle);
+  :not([disabled]) & {
+    border-color: var(--rs-text-field_not_disabled-notched-outline-notch--border-color, $rs-notched-outline-idle);
   }
 
-
-  .-outlined:not(.-disabled):hover & {
-    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-notch--border-color, $rs-notched-outline-border);
+  :not([disabled]):hover & {
+    border-color: var(--rs-text-field_not_disabled_hover-notched-outline-notch--border-color, $rs-notched-outline-border);
   }
 
-  .-outlined:not(.-disabled).-focus & {
-    border-width: var(--rs-text-field__outlined_not__disabled__focus-notched-outline-notch--border-width, 2px);
-    border-color: var(--rs-text-field__outlined_not__disabled__focus-notched-outline-notch--border-color, $rs-theme-primary);
+  :not([disabled]).-focus & {
+    border-width: var(--rs-text-field_not_disabled__focus-notched-outline-notch--border-width, 2px);
+    border-color: var(--rs-text-field_not_disabled__focus-notched-outline-notch--border-color, $rs-theme-primary);
   }
 
-  .-outlined.-invalid &,
-  .-outlined.-invalid:hover &,
-  .-outlined.-invalid.-focus & {
+  [invalid] &,
+  [invalid]:hover &,
+  [invalid].-focus & {
     color: $rs-theme-error;
     border-color: $rs-theme-error;
   }
 }
 
 @mixin rs-notched-outline-trailing_ {
-  .-outlined & {
-    flex-grow: 1;
-    border-left: none;
-    border-right: solid;
-    max-width: var(--rs-text-field__outlined-notched-outline-trailing--max-width);
-    border-width: var(--rs-text-field__outlined-notched-outline-trailing--border-width, 1px);
-    border-radius: var(--rs-text-field__outlined-notched-outline-trailing--border-radius, 0 4px 4px 0);
-  }
+  flex-grow: 1;
+  border-left: none;
+  border-right: solid;
+  border-top: solid;
+  border-bottom: solid;
 
-  .-outlined.-disabled & {
+  border-width: var(--rs-text-field-notched-outline-trailing--border-width, 1px);
+  border-radius: var(--rs-text-field-notched-outline-trailing--border-radius, 0 4px 4px 0);
+  border-top-width: var(--rs-text-field-notched-outline-trailing--border-width, 1px);
+  border-bottom-width: var(--rs-text-field-notched-outline-trailing--border-width, 1px);
+
+  [disabled] & {
     border-color: $rs-text-field-outlined-disabled-border;
   }
 
-  .-outlined:not(.-disabled) & {
-    border-color: var(--rs-text-field__outlined_not__disabled-notched-outline-trailing--border-color, $rs-notched-outline-idle);
+  :not([disabled]) & {
+    border-color: var(--rs-text-field_not_disabled-notched-outline-trailing--border-color, $rs-notched-outline-idle);
   }
 
-  .-outlined:not(.-disabled):hover & {
-    border-color: var(--rs-text-field__outlined_not__disabled_hover-notched-outline-trailing--border-color, $rs-notched-outline-border);
+  :not([disabled]):hover & {
+    border-color: var(--rs-text-field_not_disabled_hover-notched-outline-trailing--border-color, $rs-notched-outline-border);
   }
 
-  .-outlined:not(.-disabled).-focus & {
-    border-width: var(--rs-text-field__outlined_not__disabled__focus-notched-outline-trailing--border-width, 2px);
-    border-color: var(--rs-text-field__outlined_not__disabled__focus-notched-outline-trailing--border-color, $rs-theme-primary);
+  :not([disabled]).-focus & {
+    border-width: var(--rs-text-field_not_disabled__focus-notched-outline-trailing--border-width, 2px);
+    border-color: var(--rs-text-field_not_disabled__focus-notched-outline-trailing--border-color, $rs-theme-primary);
   }
 
-  .-outlined[dir="rtl"] & {
-    border-radius: var(--rs-text-field__outlined_rtl-notched-outline-trailing--border-radius, 4px);
+  [dir="rtl"] & {
+    border-radius: var(-rs-text-field_rtl-notched-outline-trailing--border-radius, 4px);
   }
 
-  .-outlined.-invalid &,
-  .-outlined.-invalid:hover &,
-  .-outlined.-invalid.-focus & {
+  [invalid] &,
+  [invalid]:hover &,
+  [invalid].-focus & {
     color: $rs-theme-error;
     border-color: $rs-theme-error;
   }
