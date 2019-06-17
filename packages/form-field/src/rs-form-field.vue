@@ -14,6 +14,10 @@ export default {
       type: String,
       default: ''
     },
+    label: {
+      type: String,
+      default: ''
+    },
     maxlength: {
       type: String,
       default: ''
@@ -51,7 +55,6 @@ export default {
       checkbox: '',
       textField: '',
       textArea: '',
-      label: '',
       helperText: '',
       errorText: '',
       isError: '',
@@ -63,9 +66,6 @@ export default {
   watch: {
     el() {
       this.host = this.el.parentNode.host
-    },
-    host() {
-      this.isOutlined = this.getElementProperty(this.host, '--rs-text-field__outlined')
     },
     error() {
       this.isError = this.error
@@ -87,84 +87,80 @@ export default {
         this.helperText.parentNode.host.removeAttribute('hidden')
       }
 
-      if(this.isError && this.label) {
-        this.label.classList.add('-invalid')
-      }
-      if(!this.isError && this.label) {
-        this.label.classList.remove('-invalid')
-      }
       if(this.isError && this.textField) {
-        this.textField.classList.add('-invalid')
+        this.textField.parentNode.host.setAttribute('invalid', this.isError)
       }
       if(!this.isError && this.textField) {
-        this.textField.classList.remove('-invalid')
+        this.textField.parentNode.host.setAttribute('invalid', this.isError)
       }
       if(this.isError && this.textArea) {
-        this.textArea.classList.add('-invalid')
+        this.textArea.parentNode.host.setAttribute('invalid', this.isError)
       }
       if(!this.isError && this.textArea) {
-        this.textArea.classList.remove('-invalid')
+        this.textArea.parentNode.host.setAttribute('invalid', this.isError)
       }
     },
     isDisabled() {
       if(this.isDisabled && this.radio) {
         this.radio.parentNode.host.setAttribute('disabled', true)
       }
-      if(this.isDisabled && this.checkbox) {
-        this.checkbox.parentNode.host.setAttribute('disabled', true)
-      }
-      if(this.isDisabled && this.textField) {
-        this.textField.classList.add('-disabled')
-      }
-      if(this.isDisabled && this.textArea) {
-        this.textArea.classList.add('-disabled')
-      }
-      if(this.isDisabled && this.label) {
-        this.label.classList.add('-disabled')
-      }
-      if(this.isDisabled && this.helperText) {
-        this.helperText.classList.add('-disabled')
-      }
       if(!this.isDisabled && this.radio) {
         this.radio.parentNode.host.removeAttribute('disabled')
+      }
+      if(this.isDisabled && this.checkbox) {
+        this.checkbox.parentNode.host.setAttribute('disabled', true)
       }
       if(!this.isDisabled && this.checkbox) {
         this.checkbox.parentNode.host.removeAttribute('disabled')
       }
+      if(this.isDisabled && this.textField) {
+        this.textField.parentNode.host.setAttribute('disabled', this.isDisabled)
+      }
       if(!this.isDisabled && this.textField) {
-        this.textField.classList.remove('-disabled')
+        this.textField.parentNode.host.setAttribute('disabled', this.isDisabled)
+      }
+      if(this.isDisabled && this.textArea) {
+        this.textArea.parentNode.host.setAttribute('disabled', this.isDisabled)
       }
       if(!this.isDisabled && this.textArea) {
-        this.textArea.classList.remove('-disabled')
+        this.textArea.parentNode.host.setAttribute('disabled', this.isDisabled)
       }
-      if(!this.isDisabled && this.label) {
-        this.label.classList.remove('-disabled')
+      
+      if(this.isDisabled && this.helperText) {
+        this.helperText.classList.add('-disabled')
       }
       if(!this.isDisabled && this.helperText) {
         this.helperText.classList.remove('-disabled')
       }
+
     },
     isRequired() {
-      if(this.isRequired && this.label) {
-        this.label.classList.add('-required')
+      if(this.isRequired && this.textField) {
+        this.textField.parentNode.host.setAttribute('required', this.isRequired)
       }
-      if(!this.isRequired && this.label) {
-        this.label.classList.remove('-required')
+      if(!this.isRequired && this.textField) {
+        this.textField.parentNode.host.setAttribute('required', this.isRequired)
+      }
+      if(this.isRequired && this.textArea) {
+        this.textArea.parentNode.host.setAttribute('required', this.isRequired)
+      }
+      if(!this.isRequired && this.textArea) {
+        this.textArea.parentNode.host.setAttribute('required', this.isRequired)
       }
     },
-    isOutlined() {
-      if(this.isOutlined && this.textField) {
-        this.textField.classList.add('-outlined')
-      }
-      if(!this.isOutlined && this.textField) {
-        this.textField.classList.temove('-outlined')
-      }
-      if(this.isOutlined && this.label) {
-        this.label.classList.add('-outlined')
-      }
-      if(!this.isOutlined && this.label) {
-        this.label.classList.remove('-outlined')
-      }
+    textField() {
+      if(!this.textField) { return }
+      const label = this.textField.querySelector('.rs-text-field__label')
+
+      if(!label) { return }
+      this.setLabelWidth(label, this.textField)
+    },
+    textArea() {
+      if(!this.textArea) { return }
+      const label = this.textArea.querySelector('.rs-text-field__label')
+
+      if(!label) { return }
+      this.setLabelWidth(label, this.textArea)
     }
   },
   mounted() {
@@ -185,9 +181,6 @@ export default {
           if(!this.textArea) {
             this.textArea = item.shadowRoot.querySelector('.rs-text-field.-textarea')
           }
-          if(!this.label) {
-            this.label = item.shadowRoot.querySelector('.rs-form-label')
-          }
           if(!this.helperText) {
             this.helperText = item.shadowRoot.querySelector('.-helper')
           }
@@ -196,30 +189,6 @@ export default {
           }
         })
 
-        if(this.label) {
-          const labelPosition = items.findIndex(item => item.isEqualNode(this.label.parentNode.host))
-          this.label.parentNode.host.setAttribute('data-formindex', labelPosition)
-        }
-
-        if(!this.label && this.textField) {
-          this.textField.classList.add('-nolabel')
-        } 
-        if(!this.label && this.textArea) {
-          this.textArea.classList.add('-nolabel')
-        } 
-
-        if(this.radio && this.label) {
-          this.label.parentNode.host.setAttribute('data-type', 'radio')
-        } 
-        if(this.checkbox && this.label) {
-          this.label.parentNode.host.setAttribute('data-type', 'checkbox')
-        } 
-        if(this.textField && this.label) {
-          this.label.parentNode.host.setAttribute('data-type', 'textfield')
-        } 
-        if(this.textArea && this.label) {
-          this.label.parentNode.host.setAttribute('data-type', 'textarea')
-        } 
         if(this.textField && this.helperText) {
           this.helperText.parentNode.host.setAttribute('data-type', 'textfield')
         } 
@@ -234,28 +203,48 @@ export default {
         } 
 
         if(this.id && this.radio) {
-          this.radio.parentNode.host.setAttribute('data-id', this.id)
+          this.radio.parentNode.host.setAttribute('id', this.id)
         }
         if(this.id && this.checkbox) {
-          this.checkbox.parentNode.host.setAttribute('data-id', this.id)
+          this.checkbox.parentNode.host.setAttribute('id', this.id)
         }
         if(this.id && this.textField) {
-          this.textField.parentNode.host.setAttribute('data-id', this.id)
+          this.textField.parentNode.host.setAttribute('id', this.id)
         }
         if(this.id && this.textArea) {
-          this.textArea.parentNode.host.setAttribute('data-id', this.id)
+          this.textArea.parentNode.host.setAttribute('id', this.id)
         }
-        if(this.id && this.label) {
-          this.label.parentNode.host.setAttribute('data-id', this.id)
+        if(this.label && this.radio) {
+          this.radio.parentNode.host.setAttribute('label', this.label)
         }
+        if(this.label && this.checkbox) {
+          this.checkbox.parentNode.host.setAttribute('label', this.label)
+        }
+        if(this.label && this.textField) {
+          this.textField.parentNode.host.setAttribute('label', this.label)
+        }
+        if(this.label && this.textArea) {
+          this.textArea.parentNode.host.setAttribute('label', this.label)
+        }
+        
         if(this.name && this.radio) {
           this.radio.parentNode.host.setAttribute('name', this.name)
         }
         if(this.name && this.checkbox) {
           this.checkbox.parentNode.host.setAttribute('name', this.name)
         }
-        if(this.name && this.label) {
-          this.label.parentNode.host.setAttribute('name', this.name)
+        if(this.name && this.textField) {
+          this.textField.parentNode.host.setAttribute('name', this.name)
+        }
+        if(this.name && this.textArea) {
+          this.textArea.parentNode.host.setAttribute('name', this.name)
+        }
+
+        if(this.id && this.label2) {
+          this.label2.parentNode.host.setAttribute('data-id', this.id)
+        }
+        if(this.name && this.label2) {
+          this.label2.parentNode.host.setAttribute('name', this.name)
         }
 
         this.isError = this.error
@@ -273,6 +262,14 @@ export default {
       const style = window.getComputedStyle(el)
       const value = String(style.getPropertyValue(prop)).trim()
       return value
+    },
+    setLabelWidth(label, textField) {
+      const labelWidth = this.getElementProperty(label, 'width')
+      let width = parseInt(labelWidth.replace('px', '')) * 0.75 + 8
+      if(this.required) {
+        width += 4
+      }
+      textField.style.setProperty('--rs-text-field-notched-outline-notch--width', `${width}px`)
     }
   }
 }

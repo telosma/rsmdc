@@ -81,7 +81,7 @@
   border: none;
   line-height: var(--rs-text-field-form-input--line-height, 1.75rem);
   caret-color: var(--rs-text-field-form-input--caret-color, $rs-theme-primary);
-
+  
   [invalid] & {
     box-shadow: none;
     caret-color: $rs-text-field-error;
@@ -98,8 +98,7 @@
     z-index: 2;
   }
 
-  .-nolabel:not(.-textarea) & {
-    padding: 16px;
+  .-nolabel & {
     --rs-text-field-form-input_placeholder--opacity: 1;
   }
 
@@ -113,6 +112,10 @@
 
   :not(.rs-text-field--textarea) & {
     padding: 20px 16px 6px;
+  }
+
+  :not(.rs-text-field--textarea).-nolabel & {
+    padding: 16px;
   }
 
   :not(.rs-text-field--textarea).-outlined & {

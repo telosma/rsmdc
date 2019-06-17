@@ -50,11 +50,6 @@
   [dir="rtl"] & {
     border-radius: var(--rs-text-field_rtl-notched-outline-leading--border-radius, 4px);
   }
-
-  [disabled] & {
-    border-color: $rs-text-field-outlined-disabled-border;
-  }
-
   :not([disabled]) & {
     border-color: var(--rs-text-field_not_disabled-notched-outline-leading--border-color, $rs-notched-outline-idle);
   }
@@ -66,6 +61,10 @@
   :not([disabled]).-focus & {
     border-width: var(--rs-text-field_not_disabled__focus-notched-outline-leading--border-width, 2px);
     border-color: var(--rs-text-field_not_disabled__focus-notched-outline-leading--border-color, $rs-theme-primary);
+  }
+
+  [disabled] & {
+    border-color: $rs-text-field-outlined-disabled-border;
   }
 
   [invalid] &,
@@ -89,10 +88,6 @@
     border-top: none;
   }
 
-  [disabled] & {
-    border-color: $rs-text-field-outlined-disabled-border;
-  }
-
   :not([disabled]) & {
     border-color: var(--rs-text-field_not_disabled-notched-outline-notch--border-color, $rs-notched-outline-idle);
   }
@@ -104,6 +99,10 @@
   :not([disabled]).-focus & {
     border-width: var(--rs-text-field_not_disabled__focus-notched-outline-notch--border-width, 2px);
     border-color: var(--rs-text-field_not_disabled__focus-notched-outline-notch--border-color, $rs-theme-primary);
+  }
+
+  [disabled] & {
+    border-color: $rs-text-field-outlined-disabled-border;
   }
 
   [invalid] &,
@@ -126,10 +125,6 @@
   border-top-width: var(--rs-text-field-notched-outline-trailing--border-width, 1px);
   border-bottom-width: var(--rs-text-field-notched-outline-trailing--border-width, 1px);
 
-  [disabled] & {
-    border-color: $rs-text-field-outlined-disabled-border;
-  }
-
   :not([disabled]) & {
     border-color: var(--rs-text-field_not_disabled-notched-outline-trailing--border-color, $rs-notched-outline-idle);
   }
@@ -145,6 +140,10 @@
 
   [dir="rtl"] & {
     border-radius: var(-rs-text-field_rtl-notched-outline-trailing--border-radius, 4px);
+  }
+
+  [disabled] & {
+    border-color: $rs-text-field-outlined-disabled-border;
   }
 
   [invalid] &,
