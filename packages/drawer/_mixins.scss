@@ -74,7 +74,9 @@
 }
 
 @mixin rs-drawer-item-text-ink-color($color) {
+  $primary-value: rgba(rs-theme-prop-value($color), $rs-drawer-title-ink-opacity);
   $secondary-value: rgba(rs-theme-prop-value($color), $rs-drawer-subtitle-ink-opacity);
+  @include rs-list-item-primary-text-ink-color($primary-value);
   @include rs-list-item-secondary-text-ink-color($secondary-value);
 }
 

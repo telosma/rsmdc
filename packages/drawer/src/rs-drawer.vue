@@ -95,7 +95,7 @@ export default {
       }).then(() => {
         setTimeout(() => {
           this.isOpen = true
-        }, 50)
+        }, 40)
       }).then(() => {
         setTimeout(() => {
           this.isAnimate = false
@@ -151,10 +151,6 @@ export default {
 }
 
 .rs-drawer {
-  @include rs-drawer-item-icon-ink-color($rs-drawer-item-inactive-ink-color);
-  @include rs-drawer-item-text-ink-color($rs-drawer-item-inactive-ink-color);
-  @include rs-drawer-item-activated-icon-ink-color($rs-drawer-item-activated-ink-color);
-  @include rs-drawer-item-activated-text-ink-color($rs-drawer-item-activated-ink-color);
   @include rs-drawer-item-shape-radius(4px);
 
   @include rs-rtl {
