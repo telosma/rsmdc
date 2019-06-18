@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/form-field",
   "description": "Material Components for the web wrapper for laying out form fields and labels next to one another",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "license": "MIT",
   "keywords": [
     "material components",
