@@ -37,13 +37,6 @@
   --rs-checkbox-background_before--background-color: #{$color};
 }
 
-// Change checkbox label position. Usually, you use this mixin when change label position to left. 
-@mixin rs-chechbox-label-position($position: right) {
-  @if $position == left {
-    @include rs-form-field-label-left;
-  }
-}
-
 // Change checkbox line and states color.
 @mixin rs-checkbox-fill-color-accessible($color) {
   @include rs-checkbox-checked-container-colors($color);

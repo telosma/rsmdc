@@ -21,13 +21,6 @@
   @include rs-states($color);
 }
 
-// Change radio label position. Usually, you use this mixin when change label position to left. 
-@mixin rs-radio-label-position($position: right) {
-  @if $position == left {
-    @include rs-form-field-label-left;
-  }
-}
-
 // Change radio line, mark and states color.
 @mixin rs-radio-fill-color-accessible($color) {
   @include rs-radio-unchecked-stroke-color($color);
