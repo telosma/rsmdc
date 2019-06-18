@@ -18,7 +18,6 @@
     "@rsmdc/base": "^1.0.1-beta.1",
     "@rsmdc/ripple": "^1.0.2",
     "@rsmdc/shape": "^1.0.2",
-    "@rsmdc/textfield": "^1.0.0",
     "@rsmdc/theme": "^1.0.2",
     "@rsmdc/typography": "^1.0.5",
     "tslib": "^1.9.3"
