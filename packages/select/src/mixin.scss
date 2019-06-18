@@ -1,0 +1,64 @@
+@mixin rs-select-type($type) {
+  --rs-select-type: #{$type};
+}
+
+@mixin rs-select-ink-color($color) {
+  --rs-select_not_disabled--native-control--color: #{$color};
+  --rs-select_not_disabled--selected-text--color: #{$color};
+}
+
+@mixin rs-select-container-fill-color($color) {
+  --rs-select_not_disabled--background-color: #{$color};
+}
+
+@mixin rs-select-label-color($color) {
+  --rs-select_not_disabled--floating-label--color: #{$color};
+}
+
+@mixin rs-select-focused-label-color($color) {
+  --rs-select_not_disabled__focused--floating-label--color: #{$color};
+}
+
+@mixin rs-select-bottom-line-color($color) {
+  --rs-select_not_disabled--native-control--border-bottom-color: #{$color};
+  --rs-select_not_disabled--selected-text--border-bottom-color: #{$color};
+}
+
+@mixin rs-select-focused-bottom-line-color($color) {
+  --rs-select_not_disabled__focused--line-ripple--background-color: #{$color};
+}
+
+@mixin rs-select-hover-bottom-line-color($color) {
+  --rs-select_not_disabled--native-control_hover--border-bottom-color: #{$color};
+}
+
+@mixin rs-select-outline-color($color) {
+  --rs-select_not_disabled--notched-outline-leading--border-color: #{$color};
+  --rs-select_not_disabled--notched-outline-notch--border-color: #{$color};
+  --rs-select_not_disabled--notched-outline-trailing--border-color: #{$color};
+}
+
+@mixin rs-select-focused-outline-color($color) {
+  --rs-select_not_disabled__focused--notched-outline--leading--border-color: #{$color};
+  --rs-select_not_disabled__focused--notched-outline--notch--border-color: #{$color};
+  --rs-select_not_disabled__focused--notched-outline--trailing--border-color: #{$color};
+
+  --rs-select_not_disabled__focused--notched-outline--leading--border-width: 1px;
+  --rs-select_not_disabled__focused--notched-outline--notch--border-width: 1px;
+  --rs-select_not_disabled__focused--notched-outline--trailing--border-width: 1px;
+}
+
+@mixin rs-select-hover-outline-color($color) {
+  --rs-select_not_disabled_not_focused--native-control_hover_--notched-outline--leading--border-color: #{$color};
+  --rs-select_not_disabled_not_focused--native-control_hover_--notched-outline--notch--border-color: #{$color};
+  --rs-select_not_disabled_not_focused--native-control_hover_--notched-outline--trailing--border-color: #{$color};
+}
+
+@mixin mdc-select-outline-shape-radius($radius, $rtl-reflexive) {
+  // TODO 
+}
+
+@mixin rs-select-shape-radius($radius, $rtl-reflexive) {
+  // TODO
+}
+
