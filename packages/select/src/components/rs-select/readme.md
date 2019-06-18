@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type     | Default     |
-| --------------- | ---------------- | ----------- | -------- | ----------- |
-| `name`          | `name`           |             | `string` | `undefined` |
-| `selectedIndex` | `selected-index` |             | `number` | `0`         |
-| `value`         | `value`          |             | `string` | `undefined` |
+| Property   | Attribute  | Description | Type      | Default     |
+| ---------- | ---------- | ----------- | --------- | ----------- |
+| `disabled` | `disabled` |             | `boolean` | `undefined` |
+| `label`    | `label`    |             | `string`  | `undefined` |
+| `name`     | `name`     |             | `string`  | `undefined` |
+| `value`    | `value`    |             | `string`  | `undefined` |
 
 
 ## Events
