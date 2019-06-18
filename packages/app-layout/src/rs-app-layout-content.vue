@@ -23,8 +23,8 @@ export default {
 </script>
 
 <style lang="scss">
-
 :host {
+  --rs-app-layout-content: true;
   --rs-top-app-bar_-drawer: true;
 }
 

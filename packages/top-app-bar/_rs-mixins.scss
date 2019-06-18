@@ -83,12 +83,6 @@
   }
 }
 
-@mixin rs-top-app-bar-with-drawer($drawerType: default) {
-  @if $drawerType == permanent {
-    --rs-app-layout-content--margin-left: #{$rs-drawer-width};
-  }
-}
-
 // Set icon to action-item.
 @mixin rs-top-app-bar-action-image($path) {
   --rs-top-app-bar-actionItem--background-image: #{$path};
