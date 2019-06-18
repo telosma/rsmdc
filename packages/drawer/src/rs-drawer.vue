@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../mixins';
+@import '../rs-mixins';
 @import '../variables';
 
 :host {
