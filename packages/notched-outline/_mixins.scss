@@ -81,8 +81,8 @@
   max-width: calc(100% - #{$rs-notched-outline-leading-width} * 2);
   border-top: solid;
   border-bottom: solid;
-  border-top-width: var(--rs-text-field-notched-outline-notch--border-width, 1.1px);
-  border-bottom-width: var(--rs-text-field-notched-outline-notch--border-width, 1.1px);  
+  border-top-width: var(--rs-text-field-notched-outline-notch--border-width, 1px);
+  border-bottom-width: var(--rs-text-field-notched-outline-notch--border-width, 1px);  
 
   :not(.-nolabel).-floatabove & {
     border-top: none;
