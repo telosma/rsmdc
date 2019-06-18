@@ -1,7 +1,7 @@
-@import "../form-field/rs-functions";
-@import "../form-field/rs-mixins";
-@import "../line-ripple/rs-mixins";
-@import "../notched-outline/rs-mixins";
+@import "@rsmdc/form-field/rs-functions";
+@import "@rsmdc/form-field/rs-mixins";
+@import "@rsmdc/line-ripple/rs-mixins";
+@import "@rsmdc/notched-outline/rs-mixins";
 
 // Change text-field border-radius.
 @mixin rs-text-field-shape-radius($radius) {
