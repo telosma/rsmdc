@@ -31,7 +31,7 @@
     "@rsmdc/radio": "^1.0.9",
     "@rsmdc/ripple": "^1.0.2",
     "@rsmdc/rtl": "^1.0.2",
-    "@rsmdc/select": "^0.0.1",
+    "@rsmdc/select": "^1.1.0",
     "@rsmdc/shape": "^1.0.2",
     "@rsmdc/tabs": "^1.0.9",
     "@rsmdc/textfield": "^1.0.0",
