@@ -1,4 +1,5 @@
 @import "@rsmdc/shape/functions";
+@import "./variables";
 
 // Change outline color.
 @mixin rs-notched-outline-color($color) {
@@ -46,7 +47,7 @@
   --rs-text-field-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
   --rs-text-field_rtl-notched-outline-leading--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
   --rs-text-field-notched-outline-trailing--border-radius: #{rs-shape-mask-radius($radius, 0 1 1 0)};
-  -rs-text-field_rtl-notched-outline-trailing--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
+  --rs-text-field_rtl-notched-outline-trailing--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
 
   @if ($radius > $rs-notched-outline-leading-width) {
     --rs-text-field-notched-outline-leading--width: #{$radius};
