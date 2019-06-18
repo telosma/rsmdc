@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/menu",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "The Material Components for the web menu component",
   "license": "MIT",
   "keywords": [
@@ -15,14 +15,14 @@
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
   "dependencies": {
-    "@rsmdc/animation": "^1.0.0",
-    "@rsmdc/base": "^1.0.0",
-    "@rsmdc/elevation": "^1.0.5",
-    "@rsmdc/list": "^1.0.6",
-    "@rsmdc/ripple": "^1.0.2",
-    "@rsmdc/rtl": "^1.0.2",
-    "@rsmdc/shape": "^1.0.2",
-    "@rsmdc/theme": "^1.0.2",
+    "@rsmdc/animation": "^1.1.0",
+    "@rsmdc/base": "^1.1.0",
+    "@rsmdc/elevation": "^1.1.0",
+    "@rsmdc/list": "^1.1.0",
+    "@rsmdc/ripple": "^1.1.0",
+    "@rsmdc/rtl": "^1.1.0",
+    "@rsmdc/shape": "^1.1.0",
+    "@rsmdc/theme": "^1.1.0",
     "tslib": "^1.9.3"
   },
   "publishConfig": {
