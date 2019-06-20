@@ -271,17 +271,22 @@ export default {
 
   &::before {
     width: 24px;
-    height: 24px;
     position: absolute;
     left: 16px;
-    top: 0;
-    bottom: 0;
     margin: auto;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 24px;
+
+    height: var(--rs-text-field-form-inputarea_before--height);
+    font-family: var(--rs-text-field-form-inputarea_before--font-family);
     background-image: var(--rs-text-field-form-inputarea_before--background-image);
-    content: var(--rs-text-field-form-inputarea_before--content, none);
+    font-size: var(--rs-text-field-form-inputarea_before--font-size, 24px);
+    font-weight: var(--rs-text-field-form-inputarea_before--font-weight, 400);
+    display: var(--rs-text-field-form-inputarea_before--display, none);
+    content: var(--rs-text-field-form-inputarea_before--content, '');
+    top: var(--rs-text-field-form-inputarea_before--top, auto);
+    bottom: var(--rs-text-field-form-inputarea_before--bottom, auto);
   }
 
   .-icon.-dense &::before {

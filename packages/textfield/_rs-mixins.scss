@@ -125,15 +125,33 @@
 }
 
 // Set leading icon inside text-field.
-@mixin rs-text-field-icon-image($url) {
+@mixin rs-text-field-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
   --rs-text-field__icon: true;
-  --rs-text-field-form-inputarea_before--background-image: #{$url};
-  --rs-text-field-form-inputarea_before--content: '';
+  --rs-text-field-form-inputarea_before--display: block;
+
+  @if $value == path {
+    --rs-text-field-form-inputarea_before--background-image: #{$icon};
+    --rs-text-field-form-inputarea_before--height: 24px;
+    --rs-text-field-form-inputarea_before--top: 0;
+    --rs-text-field-form-inputarea_before--bottom: 0;
+  }@else {
+    --rs-text-field-form-inputarea_before--font-family: '#{$icon}';
+    --rs-text-field-form-inputarea_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
 }
 
 // Set icon to text-field action.
-@mixin rs-text-field-action-icon-image($url) {
-  --rs-text-field-trailing-icon--background-image: #{$url};
+@mixin rs-text-field-action-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    --rs-text-field-trailing-icon--background-image: #{$icon};
+    --rs-text-field-trailing-icon--height: 24px;
+  }@else {
+    --rs-text-field-trailing-icon--font-family: '#{$icon}';
+    --rs-text-field-trailing-icon_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
 }
 
 // Change textarea line height.
