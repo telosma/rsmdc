@@ -20,7 +20,7 @@ export default {
 <style lang="scss">
 
 :host {
-  --_rs-top-app-bar-actions: true;
+  --rs-top-app-bar-actions: true;
   margin-left: var(--rs-top-app-bar__collapsed--margin-left, auto);
   margin-right: 0;
   align-self: var(--rs-top-app-bar-actionItem--align-self);
