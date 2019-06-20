@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "lerna": "lerna",
+    "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "serve": "vue-cli-service serve",
     "build": "cross-env VUE_CLI_CSS_SHADOW_MODE=true vue-cli-service build --target lib --name rs-elements",
