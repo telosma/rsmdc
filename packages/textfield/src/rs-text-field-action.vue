@@ -12,8 +12,8 @@
   background-size: 20px;
 
   height: var(--rs-text-field-trailing-icon--height);
-  font-family: var(--rs-text-field-trailing-icon--font-family);
   background-image: var(--rs-text-field-trailing-icon--background-image);
+  font-family: var(--rs-text-field-trailing-icon--font-family);
   font-size: var(--rs-text-field-trailing-icon--font-size, 24px);
   font-weight: var(--rs-text-field-trailing-icon--font-weight, 400);
 
