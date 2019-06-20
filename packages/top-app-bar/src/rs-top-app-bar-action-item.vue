@@ -1,6 +1,8 @@
 <template>
-  <span class="rs-top-app-bar__action-item" tabindex="0" ref="slotContainer">
-    <slot></slot>
+  <span class="rs-top-app-bar__action-item" tabindex="0">
+    <span class="rs-top-app-bar__action-label" ref="slotContainer">
+      <slot></slot>
+    </span>
   </span>
 </template>
 <script>
@@ -31,57 +33,37 @@ export default {
 @include rs-ripple-common;
 
 :host {
-  align-self: var(--rs-top-app-bar-navigationIcon--align-self);
+  align-self: var(--rs-top-app-bar-navigation-icon--align-self);
 }
 
 .rs-top-app-bar__action-item {
+  @include rs-top-app-bar-icon_;
+  transition: var(--rs-top-app-bar-action-item--transition);
+  font-family: var(--rs-top-app-bar-action-item--font-family);
+  font-size: var(--rs-top-app-bar-action-item--font-size, 24px);
+  font-weight: var(--rs-top-app-bar-action-item--font-weight, 400);
+  color: var(--rs-top-app-bar-action-item--color, $rs-theme-on-primary);
+}
+
+.rs-ripple-upgraded {
   @include rs-ripple-surface;
   @include rs-ripple-radius-unbounded;
-  @include rs-top-app-bar-icon_;
-  transition: var(--rs-top-app-bar-actionItem--transition);
-  color: var(--rs-top-app-bar-actionItem--color, inherit);
+  @include rs-ripple-upgraded_($rs-theme-on-primary);
+}
 
-  background-image: var(--rs-top-app-bar-actionItem--background-image);
-  background-repeat: no-repeat;
+.rs-top-app-bar__action-label {
+  width: 24px;
   background-size: 24px;
+  background-repeat: no-repeat;
   background-position: center;
 
+  height: var(--rs-top-app-bar-action-label--height);
+  background-image: var(--rs-top-app-bar-action-label--background-image);
+
   &::before {
-    background-color: var(--rs-ripple_before--background-color, $rs-theme-on-primary);
-    content: var(--rs-ripple_before--content, '');
-  }
-
-  &::after {
-    background-color: var(--rs-ripple_after--background-color, $rs-theme-on-primary);
-    content: var(--rs-ripple_after--content, '');
-    transition: opacity 150ms linear;
-  }
-
-  &:hover::before {
-    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity(on-primary, hover));
-  }
-
-  &:not(.rs-ripple-upgraded):focus::before {
-    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
-    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity(on-primary, focus));
-  }
-
-  &.rs-ripple-upgraded--background-focused::before {
-    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
-    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity(on-primary, focus));
-  }
-
-  &:not(.rs-ripple-upgraded)::after {
-    transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
-  }
-
-  &:not(.rs-ripple-upgraded):active::after {
-    transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
-    opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity(on-primary, press));
-  }
-
-  &.rs-ripple-upgraded {
-    --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity(on-primary, press)});
+    content: var(--rs-top-app-bar-action-label_before--content, '');
   }
 }
+
+
 </style>

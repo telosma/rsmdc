@@ -39,8 +39,8 @@
       --rs-top-app-bar--padding-bottom: #{$rs-top-app-bar-prominent-mobile-title-bottom-padding};
       --rs-top-app-bar-title--align-self: flex-end;
       --rs-top-app-bar-title--padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
-      --rs-top-app-bar-actionItem--align-self: flex-start;
-      --rs-top-app-bar-navigationIcon--align-self: flex-start;
+      --rs-top-app-bar-action-item--align-self: flex-start;
+      --rs-top-app-bar-navigation-icon--align-self: flex-start;
     }@else if $type == fixed {
       --rs-top-app-bar__fixed: true;
       --rs-top-app-bar--transition: box-shadow 200ms linear;
@@ -55,7 +55,7 @@
       --rs-top-app-bar__collapsed--padding-right: #{$rs-top-app-bar-short-collapsed-right-icon-padding};
       --rs-top-app-bar__collapsed--padding-left: 0;
       --rs-top-app-bar__collapsed--margin-left: 0;
-      --rs-top-app-bar-actionItem--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
     }
   }
 
@@ -67,10 +67,10 @@
 
   @if $short and $collapsed {
     --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width, #{$rs-top-app-bar-short-collapsed-width});
-    --rs-top-app-bar-actionItem--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
+    --rs-top-app-bar-action-item--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
     --rs-top-app-bar--transition: #{width 300ms $rs-animation-standard-curve-timing-function};
     --rs-top-app-bar-title--display: none;
-    --rs-top-app-bar-actionItem--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+    --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
   }
   @if $prominent and $dense {
     $height: $rs-top-app-bar-dense-row-height * 2;
@@ -84,13 +84,31 @@
 }
 
 // Set icon to action-item.
-@mixin rs-top-app-bar-action-image($path) {
-  --rs-top-app-bar-actionItem--background-image: #{$path};
+@mixin rs-top-app-bar-action-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    --rs-top-app-bar-action-label--background-image: #{$icon};
+    --rs-top-app-bar-action-label--height: 24px;
+  }@else {
+    --rs-top-app-bar-action-item--font-family: '#{$icon}';
+    --rs-top-app-bar-action-label_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
 }
 
 // Set icon to nav.
-@mixin rs-top-app-bar-nav-image($path) {
-  --rs-top-app-bar-navigationIcon--background-image: #{$path};
+@mixin rs-top-app-bar-nav-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    --rs-top-app-bar-navigation-label--background-image: #{$icon};
+    --rs-top-app-bar-navigation-label--height: 24px;
+  }@else {
+    --rs-top-app-bar-navigation-icon--font-family: '#{$icon}';
+    --rs-top-app-bar-navigation-label_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
+
+  --rs-top-app-bar-navigation-icon--background-image: #{$icon};
 }
 
 // Change title ink color.
@@ -111,8 +129,8 @@
 
 // Change icon ink color.
 @mixin rs-top-app-bar-icon-ink-color($color) {
-  --rs-top-app-bar-actionItem--color: #{$color};
-  --rs-top-app-bar-navigationIcon--color: #{$color};
+  --rs-top-app-bar-action-item--color: #{$color};
+  --rs-top-app-bar-navigation-icon--color: #{$color};
 }
 
 // Change icon ripple color.

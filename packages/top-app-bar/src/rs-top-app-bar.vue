@@ -190,8 +190,8 @@ export default {
     --rs-top-app-bar__collapsed--margin-left: 0;
 
     --rs-top-app-bar-title--display: none;
-    --rs-top-app-bar-actionItem--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
-    --rs-top-app-bar-actionItem--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
+    --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+    --rs-top-app-bar-action-item--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
   }
 
   &.rs-top-app-bar--has-action-item {

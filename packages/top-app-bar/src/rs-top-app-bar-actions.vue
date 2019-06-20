@@ -23,13 +23,13 @@ export default {
   --rs-top-app-bar-actions: true;
   margin-left: var(--rs-top-app-bar__collapsed--margin-left, auto);
   margin-right: 0;
-  align-self: var(--rs-top-app-bar-actionItem--align-self);
+  align-self: var(--rs-top-app-bar-action-item--align-self);
 }
 
 .rs-top-app-bar__actions {
   display: flex;
   justify-content: center;
-  padding-right: var(--rs-top-app-bar-actionItem--padding-right);
+  padding-right: var(--rs-top-app-bar-action-item--padding-right);
 }
 
 </style>
