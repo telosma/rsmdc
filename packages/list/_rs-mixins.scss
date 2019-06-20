@@ -147,8 +147,15 @@
 }
 
 // Set image to graphic.
-@mixin rs-list-graphic-image($image) {
-  --rs-list-item-graphic--background-image: #{$image};
+@mixin rs-list-graphic-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    --rs-list-item-graphic--background-image: #{$icon};
+  }@else {
+    --rs-list-item-graphic--font-family: '#{$icon}';
+    --rs-list-item-graphic_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
 }
 
 // Change graphic size.
