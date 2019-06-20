@@ -5,7 +5,7 @@
         <slot></slot>
       </span>
     </span>
-    <span class="rs-tab__ripple" />
+    <span class="rs-tab__ripple" tabindex="0"/>
   </button>
 </template>
 <script>
@@ -187,6 +187,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  outline: none;
 }
 </style>
 
