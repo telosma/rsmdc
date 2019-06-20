@@ -192,8 +192,11 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
 
+    display: var(--rs-button_before--display, none);
+    content: var(--rs-button_before--content, '');
+    font-weight: var(--rs-button_before--font-weight, 400);
+    font-family: var(--rs-button_before--font-family);
     background-image: var(--rs-button_before--background-image);
-    content: var(--rs-button_before--content);
   }
 
   &.-no-text::before,
@@ -201,20 +204,25 @@ export default {
     width: 24px;
     height: 24px;
     background-size: 24px;
+    font-size: var(--rs-button__no-text_before--font-size, 24px);
   }
 
   &:not(.-no-text)::before {
     width: 18px;
     height: 18px;
     background-size: 18px;
+    font-size: var(--rs-button_not__no-text_before--font-size, 18px);
   }
 
   &::after {
     background-repeat: no-repeat;
     background-position: center;
 
+    display: var(--rs-button_after--display, none);
+    content: var(--rs-button_after--content, '');
+    font-weight: var(--rs-button_after--font-weight, 400);
+    font-family: var(--rs-button_after--font-family);
     background-image: var(--rs-button_after--background-image);
-    content: var(--rs-button_after--content);
   }
 
   &.-no-text::after,
@@ -222,12 +230,14 @@ export default {
     width: 24px;
     height: 24px;
     background-size: 24px;
+    font-size: var(--rs-button__no-text_after--font-size, 24px);
   }
 
   &:not(.-no-text)::after {
     width: 18px;
     height: 18px;
     background-size: 18px;
+    font-size: var(--rs-button_not__no-text_after--font-size, 18px);
   }
 }
 

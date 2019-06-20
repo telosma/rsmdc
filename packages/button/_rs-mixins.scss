@@ -106,25 +106,33 @@
 }
 
 // Set icon to button. 
-@mixin rs-button-icon-image($url) {
+@mixin rs-button-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
   --rs-button__icon: true;
-  --rs-button_before--background-image: #{$url};
-  --rs-button_after--background-image: #{$url};
-  --rs-button_before--content: '';
-  --rs-button-label--padding-left: 8px;
+  --rs-button_before--display: block;
+
+  @if $value == path {
+    --rs-button_before--background-image: #{$icon};
+    --rs-button_after--background-image: #{$icon};
+    --rs-button-label--padding-left: 8px;
+  }@else {
+    --rs-button_before--font-family: '#{$icon}';
+    --rs-button_after--font-family: '#{$icon}';
+    --rs-button_before--content: #{unquote('"\\#{$icon-name}"')};
+    --rs-button_after--content: #{unquote('"\\#{$icon-name}"')};
+  }
 }
 
 @mixin rs-button-icon-position($position: left) {
   @if $position == left {
-    --rs-button_before--content: '';
     --rs-button-label--padding-left: 8px;
-    --rs-button_after--content: none;
     --rs-button-label--padding-right: 0;
+    --rs-button_after--display: none;
   }@else if $position == right {
-    --rs-button_after--content: '';
-    --rs-button-label--padding-right: 8px;
-    --rs-button_before--content: none;
     --rs-button-label--padding-left: 0;
+    --rs-button-label--padding-right: 8px;
+    --rs-button_before--display: none;
+    --rs-button_after--display: block;
   }
 }
 
