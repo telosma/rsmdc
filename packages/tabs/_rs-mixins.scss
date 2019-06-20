@@ -20,6 +20,13 @@
 // Change tab text color.
 @mixin rs-tab-ink-color($color) {
   --rs-tab-text-label--color: #{$color};
+  --rs-tab-content--color: #{$color};
+}
+
+// Change tab activate ink color.
+@mixin rs-tab-activated-ink-color($color) {
+  --rs-tab__activated-text-label--color: #{$color};
+  --rs-tab__activated-content--color: #{$color};
 }
 
 // Change tab state color.
@@ -55,30 +62,44 @@
 }
 
 // Set tab icon.
-@mixin rs-tab-icon-image($url) {
-  --rs-tab-content_before--background-image: #{$url};
-  --rs-tab-content_after--background-image: #{$url};
-  --rs-tab-content_before--content: '';
+@mixin rs-tab-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+  --rs-tab-content_before--display: block;
   --rs-tab-text-label--padding-left: 8px;
+
+  @if $value == path {
+    --rs-tab-content_before--top: 10px;
+    --rs-tab-content_before--background-image: #{$icon};
+    --rs-tab-content_after--background-image: #{$icon};
+    --rs-tab-content_before--height: 24px;
+    --rs-tab-content_after--height: 24px;
+  }@else {
+    --rs-tab-content_before--top: 6px;
+    --rs-tab-content_before--font-family: '#{$icon}';
+    --rs-tab-content_after--font-family: '#{$icon}';
+    --rs-tab-content_before--content: #{unquote('"\\#{$icon-name}"')};
+    --rs-tab-content_after--content: #{unquote('"\\#{$icon-name}"')};
+  }
 }
 
 // Change tab icon position.
 @mixin rs-tab-icon-position($position) {
   @if $position == left {
-    --rs-tab-content_before--content: '';
+    --rs-tab-content_before--display: block;
+    --rs-tab-content_after--display: none;
     --rs-tab-text-label--padding-left: 8px;
   }@else if $position == right {
-    --rs-tab-content_before--content: none;
+    --rs-tab-content_before--display: none;
+    --rs-tab-content_after--display: block;
     --rs-tab-text-label--padding-left: 0;
-    --rs-tab-content_after--content: '';
     --rs-tab-text-label--padding-right: 8px;
   }@else if $position == center {
-    --rs-tab-text-label--padding-left: 0;
+    --rs-tab-content_before--display: block;
+    --rs-tab-content_after--display: none;
     --rs-tab--height: #{$rs-tab-stacked-height};
     --rs-tab--align-items: flex-end;
     --rs-tab-content_before--position: absolute;
-    --rs-tab-content_before--top: 12px;
-    --rs-tab-content_before--content: '';
     --rs-tab-text-label--margin-bottom: 16px;
+    --rs-tab-text-label--padding-left: 0;
   }
 }
