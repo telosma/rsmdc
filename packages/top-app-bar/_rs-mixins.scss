@@ -125,6 +125,8 @@
 @mixin rs-top-app-bar-fill-color-accessible($color) {
   @include rs-top-app-bar-fill-color($color);
   @include rs-top-app-bar-title-ink-color(rs-theme-accessible-ink-color($color));
+  @include rs-top-app-bar-icon-ink-color(rs-theme-accessible-ink-color($color));
+  @include rs-top-app-bar-icon-states-color(rs-theme-accessible-ink-color($color));
 }
 
 // Change icon ink color.
