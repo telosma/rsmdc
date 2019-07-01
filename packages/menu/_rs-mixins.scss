@@ -1,4 +1,23 @@
-@mixin rs-menu-anchor() {
-  position: relative;
-  overflow: visible;
+@import "./variables";
+@import "@rsmdc/shape/rs-functions";
+
+@mixin rs-menu-width($width) {
+  @if unitless($width) {
+    --rs-menu--width: #{$width * $rs-menu-width-base};
+  } @else {
+    --rs-menu--width: #{$width};
+  }
+}
+
+@mixin rs-menu-surface-ink-color($color) {
+  --rs-menu-surface--color: #{$color};
+}
+
+@mixin rs-menu-surface-fill-color($color) {
+  --rs-menu-surface--background-color: #{$color};
+}
+
+@mixin rs-menu-surface-shape-radius($radius, $rtl-reflexive: false) {
+  --rs-menu-surface--border-radius: #{rs-shape-radius($radius)};
+  --rs-menu-surface_rtl--border-radius: #{rs-shape-rtl-radius($radius, $rtl-reflexive)};
 }
