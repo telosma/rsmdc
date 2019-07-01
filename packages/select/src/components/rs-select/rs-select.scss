@@ -49,7 +49,7 @@
 }
 
 .mdc-select:not(.mdc-select--disabled):not(.mdc-select--focused) .mdc-select__native-control:hover ~ .mdc-notched-outline .mdc-notched-outline__leading {
-  border-color: var(--rs-select_not_disabled_not_focused--native-control_hover_--notched-outline--leading--border-color $mdc-select-outlined-hover-border);
+  border-color: var(--rs-select_not_disabled_not_focused--native-control_hover_--notched-outline--leading--border-color, $mdc-select-outlined-hover-border);
 }
 
 .mdc-select:not(.mdc-select--disabled):not(.mdc-select--focused) .mdc-select__native-control:hover ~ .mdc-notched-outline .mdc-notched-outline__notch {
@@ -65,7 +65,7 @@
   border-bottom-color: var(--rs-select_not_disabled--native-control--border-bottom-color, $mdc-select-bottom-line-idle-color);
 
   &:hover {
-    border-bottom-color: var(--rs-select_not_disabled--native-control--border-bottom-color, $mdc-select-bottom-line-idle-color);
+    border-bottom-color: var(--rs-select_not_disabled--native-control_hover--border-bottom-color, $mdc-select-bottom-line-idle-color);
   }
 }
 
