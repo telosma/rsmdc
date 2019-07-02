@@ -81,7 +81,7 @@ export default {
 @import '@rsmdc/theme/mixins';
 @import '@rsmdc/shape/functions';
 @import '../variables';
-@import '../icon-button/rs-icon-button';
+@import '../icon-button/variables';
 
 @include rs-ripple-common;
 
@@ -139,12 +139,52 @@ export default {
 
   &.-icon.-no-text:not(.-fab) {
     @include rs-ripple-radius-unbounded;
-    @include rs-button-icon_;
+
+    $padding: $rs-icon-button-size / 2;
+    $width: $rs-icon-button-size + $padding * 2;
+    $height: $rs-icon-button-size + $padding * 2;
+    $font-size: max($width, $height);
+
+    // ripple
+    --rs-ripple_before--background-color: #{$rs-theme-on-surface};
+    --rs-ripple_after--background-color: #{$rs-theme-on-surface};
+    --rs-ripple_hover_before--opacity: #{rs-states-opacity(on-surface, hover)};
+    --rs-upgraded_-background-focused_before--opacity: #{rs-states-opacity(on-surface, focus)};
+    --rs-ripple_not-upgraded_active_after--opacity: #{rs-states-opacity(on-surface, press)};
+    --rs-ripple-upgraded--rs-ripple-fg-opacity: #{rs-states-opacity(on-surface, press)};
+
+    min-width: auto;
+    width: $width;
+    height: $height;
+    padding: $padding;
+    font-size: $font-size;
+    display: inline-flex;
+    background-color: transparent;
+    fill: currentColor;
+    text-decoration: none;
+    cursor: pointer;
 
     &::before {
       width: 24px;
       height: 24px;
     }
+
+    &:not(:disabled) {
+      background-color: transparent;
+    }
+
+    &:not(:disabled)::before {
+      color: var(--rs-button__icon__no-text_not__fab_not_disabled_before--color, $rs-theme-on-surface);
+    }
+
+    &:disabled {
+      opacity: 0.38;
+    }
+
+    &:disabled::before {
+      color: #{rs-theme-ink-color-for-fill_(disabled, light)};
+    }
+
   }
 
   [dir="rtl"] &,
@@ -191,12 +231,17 @@ export default {
   &::before {
     background-repeat: no-repeat;
     background-position: center;
-
+    
+    color: var(--rs-button_before--color, $rs-theme-primary);
     display: var(--rs-button_before--display, none);
     content: var(--rs-button_before--content, '');
     font-weight: var(--rs-button_before--font-weight, 400);
     font-family: var(--rs-button_before--font-family);
     background-image: var(--rs-button_before--background-image);
+  }
+
+  &::before:disabled{
+    color: var(--rs-button_before_disabled--color, $rs-button-disabled-ink-color);
   }
 
   &.-no-text::before,
@@ -218,11 +263,16 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
 
+    color: var(--rs-button_after--color, $rs-theme-primary);
     display: var(--rs-button_after--display, none);
     content: var(--rs-button_after--content, '');
     font-weight: var(--rs-button_after--font-weight, 400);
     font-family: var(--rs-button_after--font-family);
     background-image: var(--rs-button_after--background-image);
+  }
+
+  &::after:disabled{
+    color: var(--rs-button_after_disabled--color, $rs-button-disabled-ink-color);
   }
 
   &.-no-text::after,
