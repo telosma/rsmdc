@@ -10,7 +10,8 @@
   --rs-button--border-radius: #{rs-shape-prop-value(50%)};
   --rs-button--width: #{$rs-fab-height};
   --rs-button--height: #{$rs-fab-height};
-  --rs-button--color: #{$rs-theme-on-secondary};
+  --rs-button_before--color: #{$rs-theme-on-secondary};
+  --rs-button_after--color: #{$rs-theme-on-secondary};
   --rs-button_not_disabled--color: #{$rs-theme-on-secondary};
   --rs-button--background-color: #{$rs-theme-secondary};
   --rs-button_not_disabled--background-color: #{$rs-theme-secondary};

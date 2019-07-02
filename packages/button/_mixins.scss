@@ -17,6 +17,8 @@
   --rs-button--padding-left: #{$rs-button-contained-horizontal-padding};
   --rs-button_disabled--background-color: #{rgba(rs-theme-prop-value(on-surface), .12)};
   --rs-button_disabled--color: #{$rs-button-disabled-ink-color};
+  --rs-button_before_disabled--color: #{$rs-button-disabled-ink-color};
+  --rs-button_after_disabled--color: #{$rs-button-disabled-ink-color};
 }
 
 @mixin rs-button--raised_ {

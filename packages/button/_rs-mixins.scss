@@ -2,7 +2,6 @@
 @import "@rsmdc/theme/mixins";
 @import "./mixins";
 @import "./fab/rs-fab";
-@import "./icon-button/rs-icon-button";
 
 // Change button type. Always use this mixin when rsmdc-button.
 @mixin rs-button-type($type: flat, $option: none) {
@@ -48,14 +47,15 @@
 // Change button text color and ripple color. (Ripple color changes to dark base or light base by setting color.) 
 @mixin rs-button-filled-accessible($container-fill-color) {
   $fill-tone: rs-theme-tone($container-fill-color);
-
   @include rs-button-container-fill-color($container-fill-color);
   
   @if ($fill-tone == "dark") {
     @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
+    @include rs-button-icon-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
     @include rs-states(text-primary-on-dark);
   } @else {
     @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
+    @include rs-button-icon-ink-color(rs-theme-ink-color-for-fill_(primary, light));
     @include rs-states(text-primary-on-light);
   }
 }
@@ -73,6 +73,13 @@
 // Change button text color. 
 @mixin rs-button-ink-color($color) {
   --rs-button_not_disabled--color: #{$color};
+}
+
+// Change icon color.
+@mixin rs-button-icon-ink-color($color) {
+  --rs-button_before--color: #{$color};
+  --rs-button_after--color: #{$color};
+  --rs-button__icon__no-text_not__fab_not_disabled_before--color: #{$color};
 }
 
 // Change button radius. 
