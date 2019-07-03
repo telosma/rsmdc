@@ -41,7 +41,7 @@
 
 // Change tab text, state and indicator color. 
 @mixin rs-tab-fill-color-accessible($color) {
-  @include rs-tab-ink-color($color);
+  @include rs-tab-activated-ink-color($color);
   @include rs-tab-states-color($color);
   @include rs-tab-indicator-color($color);
 }
