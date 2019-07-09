@@ -1,10 +1,9 @@
 // Change label ink color.
 @mixin rs-floating-label-ink-color($color) {
-  --rs-form-label--color: #{$color};
-  --rs-form-label__floatinglabel--color: #{$color};
+  --rs-floating-label--color: #{$color};
 }
 
 // Change label focus ink color. (Only -floatinglabel)
-@mixin rs-floating-label-focus-ink-color($color) {
+@mixin rs-floating-label-focused-ink-color($color) {
   --rs-floating-label__focus--color: #{$color};
 }
