@@ -42,8 +42,8 @@
 @mixin rs-notched-outline-shape-radius($radius) {
   $radius: rs-shape-prop-value($radius);
 
-  --rs-text-field-label__textarea--left: calc( 4px + #{$radius} );
-  --rs-text-field-label__outlined--left: calc( 4px + #{$radius} );
+  --rs-floating-label__textarea--left: calc( 4px + #{$radius} );
+  --rs-floating-label__outlined--left: calc( 4px + #{$radius} );
   --rs-text-field-notched-outline-leading--border-radius: #{rs-shape-mask-radius($radius, 1 0 0 1)};
   --rs-text-field_rtl-notched-outline-leading--border-radius: #{rs-shape-flip-radius(rs-shape-prop-value($radius))};
   --rs-text-field-notched-outline-trailing--border-radius: #{rs-shape-mask-radius($radius, 0 1 1 0)};

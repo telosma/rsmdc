@@ -6,5 +6,5 @@
 
 // Change label focus ink color. (Only -floatinglabel)
 @mixin rs-floating-label-focus-ink-color($color) {
-  --rs-text-field__focus-label--color: #{$color};
+  --rs-floating-label__focus--color: #{$color};
 }

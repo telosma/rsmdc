@@ -61,7 +61,7 @@
   }
 
   .-focus & {
-    color: var(--rs-text-field__focus-label--color, $rs-text-field-focused-label-color);
+    color: var(--rs-floating-label__focus--color, $rs-text-field-focused-label-color);
   }
 
   [invalid] & {
@@ -87,7 +87,7 @@
   }
 
   &.-shake {
-    animation: rs-form-label-floatinglabel-shake-animation(standard);
+    animation: rs-floating-label-shake-animation(standard);
   }
 
   &[dir="rtl"].-shake {
@@ -120,11 +120,11 @@
   }
 
   &.-outlined {
-    left: var(--rs-text-field-label__outlined--left, 16px);
+    left: var(--rs-floating-label__outlined--left, 16px);
   }
 
   &.-textarea {
-    left: var(--rs-text-field-label__textarea--left, 16px);
+    left: var(--rs-floating-label__textarea--left, 16px);
   }
 
   .-floatabove &.-outlined {
@@ -143,11 +143,11 @@
   }
 
   .-floatabove.-icon &.-outlined {
-    left: var(--rs-text-field__floatabove__icon-label__outlined--left, 16px);
+    left: var(--rs-floating-label__floatabove__icon-label__outlined--left, 16px);
   }
 
   .-floatabove.-icon.-dense &.-outlined {
-    left: var(--rs-text-field__floatabove__icon__dense-label__outlined--left, 16px);
+    left: var(--rs-floating-label__floatabove__icon__dense-label__outlined--left, 16px);
     top: 4px;
   }
 }
