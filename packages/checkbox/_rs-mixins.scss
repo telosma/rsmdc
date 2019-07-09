@@ -1,8 +1,8 @@
-@import "@rsmdc/form-field/rs-mixins";
 @import "./functions";
 @import "./keyframes";
 @import "./variables";
 @import "./rs-functions";
+@import "./rs-variables";
 
 // Change checkbox checked states color and box color.
 @mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) {
@@ -47,5 +47,7 @@
 @mixin rs-checkbox-label-position($position) {
   @if $position == left {
     --rs-checkbox--flex-flow: row-reverse;
+    --rs-checkbox-label--padding-right: #{$rs-checkbox-label-spacing};
+    --rs-checkbox-label--padding-left: 0;
   }
 }
