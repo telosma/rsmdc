@@ -45,8 +45,8 @@
   overflow: hidden;
   will-change: transform;
 
-  color: var(--rs-form-label__floatinglabel--color, $rs-text-field-label);
-  top: var(--rs-form-label__floatinglabel--top, 18px);
+  color: var(--rs-floating-label--color, $rs-text-field-label);
+  top: var(--rs-floating-label--top, 18px);
 
   &:-webkit-autofill {
     transform: translateY(-50%) scale(.75);
@@ -83,7 +83,7 @@
 
   .-floatabove & {
     cursor: auto;
-    transform: rs-form-label-floatinglabel-position($rs-floating-label-position-y);
+    transform: rs-floating-label-position($rs-floating-label-position-y);
   }
 
   &.-shake {
@@ -91,11 +91,11 @@
   }
 
   &[dir="rtl"].-shake {
-    animation: var(--rs-form-label__floatinglabel_rtl__shake--animation);
+    animation: var(--rs-floating-label_rtl__shake--animation);
   }
 
   .-floatabove &.-right {
-    transform: rs-form-label-floatinglabel-rtl-position($rs-floating-label-position-y);
+    transform: rs-floating-label-rtl-position($rs-floating-label-position-y);
   }
 
   .-floatabove &.-textarea {
@@ -112,7 +112,7 @@
   }
 
   .-dense.-floatabove & {
-    transform: rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+    transform: rs-floating-label-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
   }
 
   .-dense.-floatabove &.-outlined {

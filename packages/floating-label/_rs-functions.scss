@@ -1,4 +1,4 @@
-@function rs-form-label-floatinglabel-position($positionY, $positionX: 0%, $scale: .75) {
+@function rs-floating-label-position($positionY, $positionX: 0%, $scale: .75) {
   @if $positionX > 0 or $positionX < 0 {
     @return translateY(-1 * $positionY) translateX(-1 * $positionX) scale($scale);
   } @else {
@@ -6,7 +6,7 @@
   }
 }
 
-@function rs-form-label-floatinglabel-rtl-position($positionY, $positionX: 0%, $scale: .75) {
+@function rs-floating-label-rtl-position($positionY, $positionX: 0%, $scale: .75) {
   @if $positionX > 0 or $positionX < 0 {
     @return translateY(-1 * $positionY) translateX($positionX) scale($scale);
   } @else {
