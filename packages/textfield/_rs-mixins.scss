@@ -104,6 +104,26 @@
   --rs-text-field-form-input--caret-color: #{$color};
 }
 
+// Change text-field label color.
+@mixin rs-text-field-label-ink-color($color) {
+  @include rs-floating-label-ink-color($color);
+}
+
+// Change textarea label color.
+@mixin rs-textarea-label-ink-color($color) {
+  @include rs-floating-label-ink-color($color);
+}
+
+// Change text-field focused label color.
+@mixin rs-text-field-focused-label-ink-color($color) {
+  @include rs-floating-label-focused-ink-color($color);
+}
+
+// Change textarea focused label color.
+@mixin rs-textarea-focused-label-ink-color($color) {
+  @include rs-floating-label-focused-ink-color($color);
+}
+
 // Change icon color.
 @mixin rs-text-field-icon-ink-color($color) {
   --rs-text-field-form-inputarea_before--color: #{$color};
