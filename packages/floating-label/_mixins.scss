@@ -1,7 +1,7 @@
 @import "./rs-variables";
 @import "./rs-functions";
 
-@mixin rs-form-label-floatinglabel-shake-keyframes($modifier, $positionY, $positionX: 0%, $scale: .75) {
+@mixin rs-floating-label-shake-keyframes($modifier, $positionY, $positionX: 0%, $scale: .75) {
   @keyframes rs-form-label-shake-float-above-#{$modifier} {
     0% {
       transform: translateX(calc(0 - #{$positionX})) translateY(-#{$positionY}) scale(#{$scale});
@@ -24,7 +24,7 @@
 }
 
 @mixin rs-floating-label-animation {
-  @include rs-form-label-floatinglabel-shake-keyframes(standard, $rs-floating-label-position-y);
+  @include rs-floating-label-shake-keyframes(standard, $rs-floating-label-position-y);
 }
 
 @mixin rs-floating-label_ {
