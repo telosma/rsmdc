@@ -205,6 +205,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@rsmdc/notched-outline/mixins";
+@import "@rsmdc/line-ripple/rs-line-ripple";
+@import "../../floating-label/mixins";
 @import "../mixins";
 @import "../character-counter/mixins";
 @import "../variables";
