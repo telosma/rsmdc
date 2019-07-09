@@ -2,6 +2,7 @@
   <span class="rs-text-field__trailing-icon" />
 </template>
 <style lang="scss">
+@import "../variables";
 
 .rs-text-field__trailing-icon {
   display: inline-block;
@@ -11,6 +12,7 @@
   background-position: center;
   background-size: 20px;
 
+  color: var(--rs-text-field-trailing-icon--color, $rs-text-field-icon-color);
   height: var(--rs-text-field-trailing-icon--height);
   background-image: var(--rs-text-field-trailing-icon--background-image);
   font-family: var(--rs-text-field-trailing-icon--font-family);

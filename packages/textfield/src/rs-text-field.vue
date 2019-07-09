@@ -212,9 +212,6 @@ export default {
 @import "../character-counter/mixins";
 @import "../variables";
 @import "../icon/variables";
-@import "@rsmdc/notched-outline/mixins";
-@import "@rsmdc/line-ripple/rs-line-ripple";
-@import "@rsmdc/form-field/mixins";
 
 :host {
   width: var(--rs-text-field_host--width);
@@ -284,12 +281,17 @@ export default {
     height: var(--rs-text-field-form-inputarea_before--height);
     font-family: var(--rs-text-field-form-inputarea_before--font-family);
     background-image: var(--rs-text-field-form-inputarea_before--background-image);
+    color: var(--rs-text-field-form-inputarea_before--color, $rs-text-field-icon-color);
     font-size: var(--rs-text-field-form-inputarea_before--font-size, 24px);
     font-weight: var(--rs-text-field-form-inputarea_before--font-weight, 400);
     display: var(--rs-text-field-form-inputarea_before--display, none);
     content: var(--rs-text-field-form-inputarea_before--content, '');
     top: var(--rs-text-field-form-inputarea_before--top, auto);
     bottom: var(--rs-text-field-form-inputarea_before--bottom, auto);
+  }
+
+  [disabled] &::before {
+    color: $rs-text-field-disabled-icon;
   }
 
   .-icon.-dense &::before {
@@ -316,6 +318,14 @@ export default {
     transform: scale(.8);
     margin-right: 12px;
   }
+}
+
+[invalid] ::slotted(*) {
+  --rs-text-field-trailing-icon--color: #{$rs-text-field-error};
+}
+
+[disabled] ::slotted(*) {
+  --rs-text-field-trailing-icon--color: #{$rs-text-field-disabled-icon};
 }
 
 .rs-ripple-upgraded {
