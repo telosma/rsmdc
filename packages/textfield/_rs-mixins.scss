@@ -1,5 +1,4 @@
-@import "@rsmdc/form-field/rs-functions";
-@import "@rsmdc/form-field/rs-mixins";
+@import "../floating-label/rs-mixins";
 @import "@rsmdc/line-ripple/rs-mixins";
 @import "@rsmdc/notched-outline/rs-mixins";
 
@@ -136,7 +135,8 @@
   @include rs-textarea-focused-outline-color($color);
   @include rs-textarea-caret-color($color);
   @include rs-line-ripple-color($color);
-  @include rs-form-field-focus-label-ink-color($color);
+  @include rs-text-field-focused-label-ink-color($color);
+  @include rs-textarea-focused-label-ink-color($color);
 }
 
 // Change text-field type.
