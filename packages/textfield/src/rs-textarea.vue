@@ -161,9 +161,7 @@ export default {
 
 <style lang="scss">
 @import "@rsmdc/notched-outline/mixins";
-@import "../../floating-label/mixins";
-
-
+@import "@rsmdc/floating-label/mixins";
 @import "../mixins";
 @import "../character-counter/mixins";
 

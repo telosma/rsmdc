@@ -18,7 +18,7 @@
     "@rsmdc/base": "^1.0.1",
     "@rsmdc/dom": "^1.0.2",
     "@rsmdc/elevation": "^1.0.5",
-    "@rsmdc/form-field": "^1.1.5",
+    "@rsmdc/floating-label": "^1.1.5",
     "@rsmdc/line-ripple": "^1.0.0",
     "@rsmdc/notched-outline": "^1.1.5",
     "@rsmdc/ripple": "^1.0.2",

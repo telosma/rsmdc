@@ -23,6 +23,7 @@
     "@rsmdc/dom": "^1.1.0",
     "@rsmdc/drawer": "^1.1.4",
     "@rsmdc/elevation": "^1.1.0",
+    "@rsmdc/floating-label": "^1.1.5",
     "@rsmdc/form-field": "^1.1.5",
     "@rsmdc/line-ripple": "^1.1.0",
     "@rsmdc/list": "^1.1.4",
