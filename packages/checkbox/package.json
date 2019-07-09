@@ -21,6 +21,7 @@
     "@rsmdc/ripple": "^1.1.0",
     "@rsmdc/rtl": "^1.1.0",
     "@rsmdc/theme": "^1.1.0",
+    "@rsmdc/typography": "^1.0.5",
     "tslib": "^1.9.3"
   },
   "publishConfig": {

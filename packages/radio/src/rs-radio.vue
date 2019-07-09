@@ -109,9 +109,10 @@ export default {
 @import "@rsmdc/ripple/variables";
 @import "@rsmdc/theme/mixins";
 @import "@rsmdc/theme/variables";
-@import "@rsmdc/form-field/rs-form-field";
+@import "@rsmdc/typography/mixins";
 @import "../functions";
 @import "../variables";
+@import "../rs-variables";
 
 @include rs-ripple-common;
 
@@ -291,7 +292,14 @@ export default {
 }
 
 .rs-radio__label {
-  @include rs-form-label_;
+  @include rs-typography(body2);
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  margin-right: auto;
+  padding-right: var(--rs-radio-label--padding-right);
+  padding-left: var(--rs-radio-label--padding-left, $rs-radio-label-spacing);
 
   &[disabled] {
     cursor: default;

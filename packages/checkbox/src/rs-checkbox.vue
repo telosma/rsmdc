@@ -121,10 +121,11 @@ export default {
 @import "@rsmdc/animation/functions";
 @import "@rsmdc/ripple/mixins";
 @import "@rsmdc/rtl/mixins";
-@import '@rsmdc/form-field/rs-form-field';
+@import "@rsmdc/typography/mixins";
 @import "../functions";
 @import "../keyframes";
 @import "../variables";
+@import "../rs-variables";
 
 @mixin rs-checkbox__child--cover-parent_ {
   position: absolute;
@@ -450,7 +451,14 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
 }
 
 .rs-checkbox__label {
-  @include rs-form-label_;
+  @include rs-typography(body2);
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  margin-right: auto;
+  padding-right: var(--rs-checkbox-label--padding-right);
+  padding-left: var(--rs-checkbox-label--padding-left, $rs-checkbox-label-spacing);
 
   &[disabled] {
     cursor: default;
