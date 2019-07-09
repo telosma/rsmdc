@@ -23,7 +23,8 @@
 
 // Change unchecked checkbox line.
 @mixin rs-checkbox-unchecked-stroke-color($color) {
-  --rs-checkbox-background--border-color: #{$color};
+  $value: rgba($color, .54);
+  --rs-checkbox-background--border-color: #{$value};
 }
 
 // Change checkmark color.

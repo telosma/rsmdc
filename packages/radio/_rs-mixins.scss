@@ -3,7 +3,8 @@
 
 // Change radio unchecked line color.
 @mixin rs-radio-unchecked-stroke-color($color) {
-  --rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color: #{$color};
+  $value: rgba($color, .54);
+  --rs-radio-nativeControl_enabled_not_checked_-background-outerCircle--border-color: #{$value};
 }
 
 // Change radio checked line color.

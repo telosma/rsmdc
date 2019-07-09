@@ -8,7 +8,8 @@
 
 // Change helper text ink color.
 @mixin rs-form-field-helper-text-ink-color($color) {
-  --rs-form-field-line_not__disabled--color: #{$color};
+  $value: rgba($color, .6);
+  --rs-form-field-line_not__disabled--color: #{$value};
 }
 
 // Change form field type.

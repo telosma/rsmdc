@@ -53,14 +53,6 @@
     background-color: transparent;
   } 
 
-  :not([disabled]) & {
-    border-color: var(--rs-text-field_not__disabled-form--border-color, $rs-text-field-outlined-idle-border);
-  }
-
-  :not([disabled]):hover & {
-    border-color: var(--rs-text-field_not__disabled_hover-form--border-color, $rs-text-field-outlined-hover-border);
-  }
-
   :not([disabled]):not(.-outlined) &:not(.rs-text-field--textarea) {
     background-color: $rs-text-field-background;
   } 

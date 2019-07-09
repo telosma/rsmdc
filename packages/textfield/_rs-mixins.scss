@@ -26,12 +26,14 @@
 
 // Change text-field input ink color.
 @mixin rs-text-field-ink-color($color) {
-  --rs-text-field_not__disabled-form-input--color: #{$color};
+  $value: rgba($color, .87);
+  --rs-text-field_not__disabled-form-input--color: #{$value};
 }
 
 // Change textarea input ink color.
 @mixin rs-textarea-ink-color($color) {
-  --rs-text-field_not__disabled-form-input--color: #{$color};
+  $value: rgba($color, .87);
+  --rs-text-field_not__disabled-form-input--color: #{$value};
 }
 
 // Change text-field input container color.
@@ -80,12 +82,14 @@
 
 // Change text-field bottom color.
 @mixin rs-text-field-bottom-line-color($color) {
-  --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea--border-bottom-color: #{$color};
+  $value: rgba($color, .42);
+  --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea--border-bottom-color: #{$value};
 }
 
 // Change text-field bottom hover color.
 @mixin rs-text-field-hover-bottom-line-color($color) {
-  --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea_hover--border-bottom-color: #{$color};
+  $value: rgba($color, .87);
+  --rs-text-field_not__disabled_not__outlined-form_not__textarea-inputarea_hover--border-bottom-color: #{$value};
 }
 
 // Change text-field bottom focus color.
@@ -125,8 +129,9 @@
 
 // Change icon color.
 @mixin rs-text-field-icon-ink-color($color) {
-  --rs-text-field-form-inputarea_before--color: #{$color};
-  --rs-text-field-trailing-icon--color: #{$color};
+  $value: rgba($color, .54);
+  --rs-text-field-form-inputarea_before--color: #{$value};
+  --rs-text-field-trailing-icon--color: #{$value};
 }
 
 // Change focused color.
@@ -187,7 +192,8 @@
 
 // Change character counter ink color.
 @mixin rs-text-field-character-counter-ink-color($color) {
-  --rs-text-field_not__disabled-character-counter--color: #{$color};
+  $value: rgba($color, .6);
+  --rs-text-field_not__disabled-character-counter--color: #{$value};
 }
 
 // Change character counter position.

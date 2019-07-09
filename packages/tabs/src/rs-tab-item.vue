@@ -108,6 +108,11 @@ export default {
     color: var(--rs-tab__activated-content--color, $rs-theme-primary);
   }
 
+  .rs-tab__content::before,
+  .rs-tab__content::after {
+    opacity: 1;
+  }
+
   .rs-tab__text-label {
     color: var(--rs-tab__activated-text-label--color, $rs-theme-primary);
     transition-delay: 100ms;
@@ -130,6 +135,7 @@ export default {
     background-size: 24px;
     background-position: center;
     background-repeat: no-repeat;
+    opacity: $rs-tab-icon-opacity;
 
     height: var(--rs-tab-content_before--height);
     font-size: var(--rs-tab-content_before--font-size, 24px);
@@ -147,6 +153,7 @@ export default {
     background-size: 24px;
     background-position: center;
     background-repeat: no-repeat;
+    opacity: $rs-tab-icon-opacity;
 
     height: var(--rs-tab-content_after--height);
     font-size: var(--rs-tab-content_after--font-size, 24px);

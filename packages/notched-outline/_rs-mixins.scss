@@ -3,16 +3,18 @@
 
 // Change outline color.
 @mixin rs-notched-outline-color($color) {
-  --rs-text-field_not_disabled-notched-outline-leading--border-color: #{$color};
-  --rs-text-field_not_disabled-notched-outline-notch--border-color: #{$color};
-  --rs-text-field_not_disabled-notched-outline-trailing--border-color: #{$color};
+  $value: rgba($color, .24);
+  --rs-text-field_not_disabled-notched-outline-leading--border-color: #{$value};
+  --rs-text-field_not_disabled-notched-outline-notch--border-color: #{$value};
+  --rs-text-field_not_disabled-notched-outline-trailing--border-color: #{$value};
 }
 
 // Change outline hover color.
 @mixin rs-notched-outline-hover-color($color) {
-  --rs-text-field_not_disabled_hover-notched-outline-leading--border-color: #{$color};
-  --rs-text-field_not_disabled_hover-notched-outline-notch--border-color: #{$color};
-  --rs-text-field_not_disabled_hover-notched-outline-trailing--border-color: #{$color};
+  $value: rgba($color, .87);
+  --rs-text-field_not_disabled_hover-notched-outline-leading--border-color: #{$value};
+  --rs-text-field_not_disabled_hover-notched-outline-notch--border-color: #{$value};
+  --rs-text-field_not_disabled_hover-notched-outline-trailing--border-color: #{$value};
 }
 
 // Change outline focus color.
