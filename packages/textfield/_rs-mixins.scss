@@ -13,8 +13,8 @@
   --rs-text-field__outlined-form-inputarea--border-radius: #{$radius};
   --rs-text-field_not__textarea__outlined-form-input--padding-left: #{$radius};
   --rs-text-field_not__textarea__dense__outlined-form-input--padding-left: #{$radius};
-  --rs-text-field__floatabove__icon-label__outlined--left: #{$calculate-radius};
-  --rs-text-field__floatabove__icon__dense-label__outlined--left: #{$calculate-radius};
+  --rs-floating-label__floatabove__icon-label__outlined--left: #{$calculate-radius};
+  --rs-floating-label__floatabove__icon__dense-label__outlined--left: #{$calculate-radius};
 
   // outlined
   @include rs-notched-outline-shape-radius($radius);
