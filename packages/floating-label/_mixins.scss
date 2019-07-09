@@ -1,0 +1,153 @@
+@import "./rs-variables";
+@import "./rs-functions";
+
+@mixin rs-form-label-floatinglabel-shake-keyframes($modifier, $positionY, $positionX: 0%, $scale: .75) {
+  @keyframes rs-form-label-shake-float-above-#{$modifier} {
+    0% {
+      transform: translateX(calc(0 - #{$positionX})) translateY(-#{$positionY}) scale(#{$scale});
+    }
+
+    33% {
+      animation-timing-function: cubic-bezier(.5, 0, .701732, .495819);
+      transform: translateX(calc(4% - #{$positionX})) translateY(-#{$positionY}) scale(#{$scale});
+    }
+
+    66% {
+      animation-timing-function: cubic-bezier(.302435, .381352, .55, .956352);
+      transform: translateX(calc(-4% - #{$positionX})) translateY(-#{$positionY}) scale(#{$scale});
+    }
+
+    100% {
+      transform: translateX(calc(0 - #{$positionX})) translateY(-#{$positionY}) scale(#{$scale});
+    }
+  }
+}
+
+@mixin rs-floating-label-animation {
+  @include rs-form-label-floatinglabel-shake-keyframes(standard, $rs-floating-label-position-y);
+}
+
+@mixin rs-floating-label_ {
+  @include rs-typography(subtitle1);
+  margin: 0;
+  padding: 0;
+  cursor: text;
+  pointer-events: none;
+  position: absolute;
+  left: 16px;
+  right: auto;
+  transform-origin: left top;
+  transition:
+    transform $rs-floating-label-transition-duration $rs-animation-standard-curve-timing-function,
+    color $rs-floating-label-transition-duration $rs-animation-standard-curve-timing-function;
+  line-height: 1.15rem;
+  text-align: left;
+  overflow: hidden;
+  will-change: transform;
+
+  color: var(--rs-form-label__floatinglabel--color, $rs-text-field-label);
+  top: var(--rs-form-label__floatinglabel--top, 18px);
+
+  &:-webkit-autofill {
+    transform: translateY(-50%) scale(.75);
+    cursor: auto;
+  }
+
+  &[dir="rtl"] {
+    right: 0;
+    left: auto;
+    transform-origin: right top;
+    text-align: right;
+  }
+
+  .-focus & {
+    color: var(--rs-text-field__focus-label--color, $rs-text-field-focused-label-color);
+  }
+
+  [invalid] & {
+    color: $rs-floating-label-error;
+  }
+
+  [invalid][required] &:after {
+    color: $rs-floating-label-error;
+  }
+
+  [disabled] & {
+    color: $rs-text-field-disabled-label-color;
+  }
+
+  [required] &::after {
+    margin-left: 1px;
+    content: "*";
+  }
+
+  .-floatabove & {
+    cursor: auto;
+    transform: rs-form-label-floatinglabel-position($rs-floating-label-position-y);
+  }
+
+  &.-shake {
+    animation: rs-form-label-floatinglabel-shake-animation(standard);
+  }
+
+  &[dir="rtl"].-shake {
+    animation: var(--rs-form-label__floatinglabel_rtl__shake--animation);
+  }
+
+  .-floatabove &.-right {
+    transform: rs-form-label-floatinglabel-rtl-position($rs-floating-label-position-y);
+  }
+
+  .-floatabove &.-textarea {
+    top: 3px;
+    bottom: auto;
+  }
+
+  .-dense & {
+    font-size: .813rem;
+  }
+
+  .-dense &.-outlined {
+    top: 16px;
+  }
+
+  .-dense.-floatabove & {
+    transform: rs-form-label-floatinglabel-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+  }
+
+  .-dense.-floatabove &.-outlined {
+    top: 5px;
+  }
+
+  &.-outlined {
+    left: var(--rs-text-field-label__outlined--left, 16px);
+  }
+
+  &.-textarea {
+    left: var(--rs-text-field-label__textarea--left, 16px);
+  }
+
+  .-floatabove &.-outlined {
+    display: inline-block;
+    max-width: 130%;
+    top: 2px;
+  }
+
+  .-icon & {
+    left: 48px;
+    top: 18px;
+  }
+
+  .-icon.-dense & {
+    left: 44px;
+  }
+
+  .-floatabove.-icon &.-outlined {
+    left: var(--rs-text-field__floatabove__icon-label__outlined--left, 16px);
+  }
+
+  .-floatabove.-icon.-dense &.-outlined {
+    left: var(--rs-text-field__floatabove__icon__dense-label__outlined--left, 16px);
+    top: 4px;
+  }
+}

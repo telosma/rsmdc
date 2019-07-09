@@ -1,0 +1,28 @@
+{
+  "name": "@rsmdc/floating-label",
+  "description": "The Material Components for the web floating-label component",
+  "version": "1.1.0",
+  "license": "MIT",
+  "keywords": [
+    "material components",
+    "material design",
+    "floatinglabel",
+    "floating label"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@rsmdc/animation": "^1.0.0",
+    "@rsmdc/base": "^1.0.1-beta.1",
+    "@rsmdc/rtl": "^0.42.0",
+    "@rsmdc/theme": "^1.0.2",
+    "@rsmdc/typography": "^1.0.5",
+    "tslib": "^1.9.3"
+  }
+}
