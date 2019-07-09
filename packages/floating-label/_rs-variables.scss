@@ -3,3 +3,9 @@
 $rs-floating-label-position-y: 50% !default;
 $rs-floating-label-transition-duration: 150ms !default;
 $rs-floating-label-error: $rs-theme-error !default;
+// transparent text-field style
+$rs-floating-label-color: rgba(rs-theme-prop-value(on-surface), .6) !default;
+$rs-floating-label-focused-label-color: rgba(rs-theme-prop-value(primary), .87) !default;
+$rs-floating-label-disabled-label-color: rgba(rs-theme-prop-value(on-surface), .37) !default;
+$rs-floating-label-dense-label-position-y: 70% !default;
+$rs-floating-label-dense-label-scale: .8 !default;

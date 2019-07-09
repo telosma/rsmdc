@@ -45,7 +45,7 @@
   overflow: hidden;
   will-change: transform;
 
-  color: var(--rs-floating-label--color, $rs-text-field-label);
+  color: var(--rs-floating-label--color, $rs-floating-label-color);
   top: var(--rs-floating-label--top, 18px);
 
   &:-webkit-autofill {
@@ -61,7 +61,7 @@
   }
 
   .-focus & {
-    color: var(--rs-floating-label__focus--color, $rs-text-field-focused-label-color);
+    color: var(--rs-floating-label__focus--color, $rs-floating-label-focused-label-color);
   }
 
   [invalid] & {
@@ -73,7 +73,7 @@
   }
 
   [disabled] & {
-    color: $rs-text-field-disabled-label-color;
+    color: $rs-floating-label-disabled-label-color;
   }
 
   [required] &::after {
@@ -112,7 +112,7 @@
   }
 
   .-dense.-floatabove & {
-    transform: rs-floating-label-position($rs-text-field-dense-label-position-y, 0%, $rs-text-field-dense-label-scale);
+    transform: rs-floating-label-position($rs-floating-label-dense-label-position-y, 0%, $rs-floating-label-dense-label-scale);
   }
 
   .-dense.-floatabove &.-outlined {
