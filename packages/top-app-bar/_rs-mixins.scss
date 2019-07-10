@@ -29,6 +29,7 @@
       --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-dense-row-height};
       
       --rs-top-app-bar-row--height: #{$rs-top-app-bar-dense-row-height};
+      --rs-top-app-bar-row_media--height: #{$rs-top-app-bar-dense-row-height};
       --rs-top-app-bar-section--padding: #{0 $rs-top-app-bar-dense-section-horizontal-padding};
       --rs-top-app-bar-title--padding-left: #{$rs-top-app-bar-dense-title-left-padding};
     }@else if $type == prominent {
