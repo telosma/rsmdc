@@ -36,7 +36,7 @@ export default {
   watch: {
     el() {
       this.host = this.el.parentNode.parentNode.host
-      this.hostParent = this.host.parentNode
+      this.appLayoutHost = this.host.parentNode.parentNode
     },
     host() {
       const appBarHeight = 56
@@ -48,8 +48,8 @@ export default {
       this.isProminent = this.getElementProperty(this.host, '--rs-top-app-bar__prominent') ? true : false
       this.topLimit = this.isProminent ? -(withProminentHeight * 2) : -(appBarHeight * 2)
     },
-    hostParent() {
-      this.isDrawer = this.getElementProperty(this.hostParent, '--rs-top-app-bar_-drawer') ? true : false
+    appLayoutHost() {
+      this.isDrawer = this.getElementProperty(this.appLayoutHost, '--rs-drawer') ? true : false
     },
     lastChild() { 
       const appBarHeight = 56

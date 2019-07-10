@@ -5,6 +5,17 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      hasDrawer: false
+    }
+  },
+  watch: {
+    hasDrawer() {
+      const host = this.$el.parentNode.host
+      host.style.setProperty('--rs-drawer', 'true')
+    }
+  },
   mounted() {
     this.$nextTick()
       .then(this.fixSlot.bind(this))
@@ -12,6 +23,8 @@ export default {
         const contents = Array.from(this.$el.querySelector('slot').assignedNodes()).filter(node => node.nodeType === 1)
         const drawers = contents.filter(content => this.getElementProperty(content, '--rs-drawer') === 'true')
         if(drawers.length === 0) { return }
+
+        this.hasDrawer = true
         const drawer = drawers[0]
         const isPermanentDrawer = this.getElementProperty(drawers[0], '--rs-drawer__modal') ? false
           : this.getElementProperty(drawers[0], '--rs-drawer__dismissible') ? false : true 
