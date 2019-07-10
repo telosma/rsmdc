@@ -36,9 +36,10 @@
       --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-prominent-row-height};
 
       --rs-top-app-bar-row--height: #{$rs-top-app-bar-prominent-row-height};
+      --rs-top-app-bar-row_media--height: #{$rs-top-app-bar-prominent-row-height};
       --rs-top-app-bar--padding-bottom: #{$rs-top-app-bar-prominent-mobile-title-bottom-padding};
       --rs-top-app-bar-title--align-self: flex-end;
-      --rs-top-app-bar-title--padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
+      --rs-top-app-bar-title--padding-bottom: #{$rs-top-app-bar-prominent-title-bottom-padding};
       --rs-top-app-bar-action-item--align-self: flex-start;
       --rs-top-app-bar-navigation-icon--align-self: flex-start;
     }@else if $type == fixed {

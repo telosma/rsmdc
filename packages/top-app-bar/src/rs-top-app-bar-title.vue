@@ -21,6 +21,11 @@ export default {
 @import '@rsmdc/theme/variables';
 @import '@rsmdc/typography/mixins';
 
+:host {
+  padding-bottom: var(--rs-top-app-bar-title--padding-bottom);
+  align-self: var(--rs-top-app-bar-title--align-self);
+}
+
 .rs-top-app-bar__title {
   @include rs-typography(headline6);
   
@@ -35,8 +40,6 @@ export default {
   opacity: var(--rs-top-app-bar-title--opacity);
   display: var(--rs-top-app-bar-title--display);
   padding-left: var(--rs-top-app-bar-title--padding-left, $rs-top-app-bar-title-left-padding);
-  padding-bottom: var(--rs-top-app-bar-title--padding-bottom);
-  align-self: var(--rs-top-app-bar-title--align-self);
 }
 </style>
 

@@ -238,7 +238,7 @@ export default {
   }
 
   .rs-top-app-bar__row {
-    height: $rs-top-app-bar-mobile-row-height;
+    height: var(--rs-top-app-bar-row_media--height, $rs-top-app-bar-mobile-row-height);
   }
 
   .rs-top-app-bar__row > .rs-top-app-bar__section {
