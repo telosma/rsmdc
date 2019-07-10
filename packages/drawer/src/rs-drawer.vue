@@ -2,7 +2,7 @@
   <div class="rs-drawer-content">
     <div
       class="rs-drawer"
-      :class="{ 'rs-drawer--open': isOpen, 'rs-drawer--opening': isOpening, 'rs-drawer--animate': isAnimate, 'rs-drawer--closing' : isClosing }"
+      :class="{ 'rs-drawer--open': isOpen, 'rs-drawer--opening': isOpening, 'rs-drawer--closing' : isClosing }"
       :opened="opened"
       ref="slotContainer">
       <slot></slot>
@@ -28,7 +28,6 @@ export default {
       isDismissible: false,
       isOpen: false,
       isOpening: false,
-      isAnimate: false,
       isClosing: false
     }
   },
@@ -89,21 +88,12 @@ export default {
         if(this.isDismissible) {
           this.addStyleToBody('--rs-app-layout-content--margin-left', this.width)
         }
-        this.isAnimate = true
-        this.isOpening = true
+        this.isOpen = true
         resolve()
       }).then(() => {
         setTimeout(() => {
-          this.isOpen = true
+          this.isOpening = true
         }, 50)
-      }).then(() => {
-        setTimeout(() => {
-          this.isAnimate = false
-        }, 60)
-      }).then(() => {
-        setTimeout(() => {
-          this.isOpening = false
-        }, 250)
       })
     },
     closeDrawer() {
@@ -118,6 +108,7 @@ export default {
         }
       }
       this.isClosing = true
+      this.isOpening = false
       setTimeout(() => {
         this.isOpen = false
         this.isClosing = false
@@ -163,6 +154,7 @@ export default {
     border-right-style: none;
     /* @noflip */
     border-left-style: solid;
+    transform: translateX(100%);
   }
 
   flex-direction: column;
@@ -174,6 +166,8 @@ export default {
   border-right-width: 1px;
   border-right-style: solid;
   overflow: hidden;
+  transform: translateX(-100%);
+
   width: var(--rs-drawer--width, $rs-drawer-width);
   border-color: var(--rs-drawer--border-color, rgba(rs-theme-prop-value($rs-drawer-divider-color), $rs-drawer-divider-opacity));
   background-color: var(--rs-drawer--background-color, $rs-drawer-surface-fill-color);
@@ -211,14 +205,6 @@ export default {
 .rs-drawer--closing {
   transform: translateX(-100%);
   transition-duration: $rs-drawer-animation-exit;
-
-  @include rs-rtl {
-    transform: translateX(100%);
-  }
-}
-
-.rs-drawer--animate {
-  transform: translateX(-100%);
 
   @include rs-rtl {
     transform: translateX(100%);
