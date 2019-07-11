@@ -54,6 +54,7 @@ export class RsSelect {
   }
 
   componentDidLoad() {
+    let optionElms = []
     const selectElm = this.el.shadowRoot.querySelector('.mdc-select')
     const nativeSelectElm = this.el.shadowRoot.querySelector('.mdc-select__native-control')
     const slotElm = this.el.shadowRoot.querySelector('slot')
@@ -63,12 +64,23 @@ export class RsSelect {
       this.selectedIndex = this.mdcSelect.selectedIndex
       this.value = this.mdcSelect.value
       this.change.emit({ value: this.value, index: this.selectedIndex})
+      
+      if (optionElms.length === 0) { return }
+      optionElms.forEach((option, i) => {
+        if (i === this.selectedIndex) {
+          option.setAttribute('data-selected', true)
+          option.value = this.value
+        } else {
+          option.removeAttribute('data-selected')
+        }
+      })
     })
 
     slotElm.addEventListener('slotchange', () => {
       nativeSelectElm.innerHTML = ''
       slotElm.assignedElements().forEach(e => {
         nativeSelectElm.append(e.cloneNode(true))
+        optionElms.push(e)
       })
       this.mdcSelect.value = this.value
     })
