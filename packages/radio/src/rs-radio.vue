@@ -81,12 +81,14 @@ export default {
         } else {
           radio._wrapper.$children[0].isChecked = false
           radio._wrapper.$children[0].deactivateRipple()
+          radio.removeAttribute('data-checked')
         }
       })
       this.passChangeEvent()
     },
     passChangeEvent() {
       this.$emit('change')
+      this.host.setAttribute('data-checked', this.isChecked)
     },
     triggerRipple() {
       this.activateRipple()
