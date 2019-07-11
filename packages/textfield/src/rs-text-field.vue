@@ -2,8 +2,8 @@
   <div class="rs-text-field" :class="{ '-nolabel': label.length === 0 }" :required="required" :disabled="disabled" :invalid="invalid">
     <div class="rs-text-field__form" @click="activateTextField">
       <div class="rs-text-field__inputarea">
-        <input :id="id" :type="type" class="rs-text-field__input" v-model="value" 
-          :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent">
+        <input :id="id" :type="type" class="rs-text-field__input" v-model="text" 
+          :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @input="passChangeEvent">
         <div class="rs-text-field__action" ref="slotContainer">
           <slot></slot>
         </div>
@@ -76,6 +76,7 @@ export default {
     return {
       el: '',
       host: '',
+      text: '',
       formLabel: '',
       lineRipple: '',
       labelPosition: '',
@@ -134,6 +135,8 @@ export default {
     this.lineRipple = new RSLineRipple(this.$el.querySelector('.rs-line-ripple'))
     this.el = this.$el
 
+    this.text = this.value
+
     if(this.type === 'date') {
       this.el.classList.add('-floatabove')
     }
@@ -150,6 +153,8 @@ export default {
     },
     passChangeEvent(event) {
       this.$emit('change', event.target.value)
+      this.host.setAttribute('data-input', true)
+      this.host.text = this.text
     },
     activateTextField() {
       this.changeLabelStyle('activate')
