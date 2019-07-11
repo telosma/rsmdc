@@ -1,6 +1,6 @@
 <template>
   <div class="rs-checkbox">
-    <div class="rs-checkbox__container" :disabled="disabled" @click="updateCheckbox">
+    <div class="rs-checkbox__container" :disabled="disabled" @change="updateCheckbox">
       <input type="checkbox" class="rs-checkbox__native-control" :class="{ '-checked': isChecked }"
       :id="id" :name="name" :disabled="disabled" :indeterminate="isIndeterminate">
       <div class="rs-checkbox__background">
@@ -10,7 +10,7 @@
         <div class="rs-checkbox__mixedmark" />
       </div>
     </div>
-    <label class="rs-checkbox__label" :for="id" @click="triggerRipple" :disabled="disabled">{{ label }}</label>
+    <label class="rs-checkbox__label" :for="id" @click="updateCheckbox(), triggerRipple()" :disabled="disabled">{{ label }}</label>
   </div>
 </template>
 <script>
@@ -38,10 +38,6 @@ export default {
       type: Boolean,
       default: false
     },
-    id: {
-      type: String,
-      default: ''
-    }
   },
   data() {
     return {
@@ -107,6 +103,7 @@ export default {
     },
     passChangeEvent() {
       this.$emit('change')
+      this.host.setAttribute('data-checked', this.isChecked)
     },
     triggerRipple() {
       this.checkbox.ripple.activate()
