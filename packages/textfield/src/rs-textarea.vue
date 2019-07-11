@@ -1,8 +1,8 @@
 <template>
   <div class="rs-text-field -outlined -textarea" :class="{ '-nolabel': label.length === 0 }" :required="required" :disabled="disabled" :invalid="invalid">
     <div class="rs-text-field__form rs-text-field--textarea" @click="activateTextField">
-    <textarea class="rs-text-field__input" :id="id" v-model="value" :value="value" :maxlength="maxlength" :cols="cols" :rows="rows"
-      :placeholder="placeholder" :autocomplete="autocomplete" @change="passChangeEvent" />
+    <textarea class="rs-text-field__input" :id="id" v-model="text" :value="value" :maxlength="maxlength" :cols="cols" :rows="rows"
+      :placeholder="placeholder" :autocomplete="autocomplete" @input="passChangeEvent" />
     </div>
     <div class="rs-notched-outline">
       <div class="rs-notched-outline__leading" />
@@ -78,7 +78,8 @@ export default {
       host: '',
       formLabel: '',
       labelPosition: '',
-      hasValue: ''
+      hasValue: '',
+      text: ''
     }
   },
   watch: {
@@ -98,6 +99,8 @@ export default {
   mounted() {
     const ripple = new RSRipple(this.$el.querySelector('.rs-text-field__form'))
     this.el = this.$el
+
+    this.text = this.value
   },
   methods: {
     getElementProperty(el, prop) {
@@ -107,6 +110,8 @@ export default {
     },
     passChangeEvent(event) {
       this.$emit('change', event.target.value)
+      this.host.setAttribute('data-input', true)
+      this.host.text = this.text
     },
     activateTextField() {
       this.changeLabelStyle('activate')
