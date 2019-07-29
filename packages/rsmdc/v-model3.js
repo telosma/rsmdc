@@ -15,11 +15,12 @@ export const VModel3 =  {
           vNode.context[dataName] = isChecked ? value : ''
         } else {
           const index = dataSet.findIndex(el => el === value)
-          
-          if (isChecked) {
-            dataSet.push(value)
+          if (index > -1 && isChecked) {
+            return
           } else if (index > -1 && !isChecked) {
             dataSet.splice(index, 1)
+          } else if (isChecked) {
+            dataSet.push(value)
           }
         }
       })
