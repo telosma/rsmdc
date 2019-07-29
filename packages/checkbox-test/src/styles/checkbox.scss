@@ -96,6 +96,35 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   vertical-align: middle;
   flex-flow: row;
 
+  &.-disabled > .container {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.-disabled > .label {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.-disabled > .container > .nativecontrol {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.-disabled > .container > .nativecontrol:not(:checked):not(:indeterminate) ~ .background {
+    border-color: $rs-checkbox-disabled-color;
+  }
+
+  &.-disabled > .container > .nativecontrol:checked ~ .background {
+    border-color: transparent;
+    background-color: $rs-checkbox-disabled-color;
+  }
+
+  &.-disabled > .container > .nativecontrol:indeterminate ~ .background {
+    border-color: transparent;
+    background-color: $rs-checkbox-disabled-color;
+  }
+
   > .container {
     display: inline-block;
     position: relative;
@@ -120,11 +149,6 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   > .container.-upgraded > .background > .checkmark > .checkmarkpath,
   > .container.-upgraded > .background > .mixedmark {
     transition: none !important;
-  }
-
-  > .container[disabled] {
-    cursor: default;
-    pointer-events: none;
   }
 
   > .container.-anim {
@@ -162,25 +186,6 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
       rs-checkbox-transition-enter(transform, 0ms, 80ms);
   }
 
-  > .container > .nativecontrol:disabled {
-    cursor: default;
-    pointer-events: none;
-  }
-
-  > .container > .nativecontrol:disabled:not(:checked):not([indeterminate]) ~ .background {
-    border-color: $rs-checkbox-disabled-color;
-  }
-
-  > .container > .nativecontrol:disabled:checked ~ .background {
-    border-color: transparent;
-    background-color: $rs-checkbox-disabled-color;
-  }
-
-  > .container > .nativecontrol:disabled[indeterminate] ~ .background {
-    border-color: transparent;
-    background-color: $rs-checkbox-disabled-color;
-  }
-
   > .container > .nativecontrol:checked ~ .background > .checkmark {
     transition:
       rs-checkbox-transition-enter(opacity, 0ms, $rs-checkbox-transition-duration * 2),
@@ -192,7 +197,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     transform: scaleX(1) rotate(-45deg);
   }
 
-  > .container > .nativecontrol[indeterminate] ~ .background > .checkmark {
+  > .container > .nativecontrol:indeterminate ~ .background > .checkmark {
     transform: rotate(45deg);
     opacity: 0;
     transition:
@@ -200,20 +205,20 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
       rs-checkbox-transition-exit(transform, 0ms, $rs-checkbox-transition-duration);
   }
 
-  > .container > .nativecontrol[indeterminate] ~ .background > .mixedmark {
+  > .container > .nativecontrol:indeterminate ~ .background > .mixedmark {
     transform: scaleX(1) rotate(0deg);
     opacity: 1;
   }
 
   > .container > .nativecontrol:checked ~ .background,
-  > .container > .nativecontrol[indeterminate] ~ .background {
+  > .container > .nativecontrol:indeterminate ~ .background {
     transition:
       rs-checkbox-transition-enter(border-color),
       rs-checkbox-transition-enter(background-color);
   }
 
   > .container > .nativecontrol:checked ~ .background > .checkmark > .checkmarkpath,
-  > .container > .nativecontrol[indeterminate] ~ .background > .checkmark > .checkmarkpath {
+  > .container > .nativecontrol:indeterminate ~ .background > .checkmark > .checkmarkpath {
     stroke-dashoffset: 0;
   }
 
@@ -222,7 +227,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     background-color: $rs-checkbox-baseline-theme-color;
   }
 
-  > .container > .nativecontrol:enabled[indeterminate] ~ .background {
+  > .container > .nativecontrol:enabled:indeterminate ~ .background {
     border-color: $rs-checkbox-baseline-theme-color;
     background-color: $rs-checkbox-baseline-theme-color;
   }
@@ -309,10 +314,6 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     padding-right: 0;
     padding-left: $rs-checkbox-label-spacing;
   }  
-  > .label[disabled] {
-    cursor: default;
-    pointer-events: none;
-  }
 }
 
 @media screen and (-ms-high-contrast: active) {
