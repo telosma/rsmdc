@@ -2,26 +2,24 @@ export const VModel3 =  {
   bind(el, binding, vNode) {
     let observer
     const type = vNode.data.attrs.type
-    const label = vNode.data.attrs.label
     const value = vNode.data.attrs.value
     const dataName = binding.expression
 
     if (type === 'checkbox') {
       observer = new MutationObserver(() => {
         let dataSet = binding.value
-        const isChecked = el.getAttribute('data-checked') === 'true' ? true : false
-        
+        const isChecked = el.getAttribute('data-checked') ? true : false
         if (typeof binding.value === 'boolean') {
           vNode.context[dataName] = isChecked
         } else if (typeof binding.value === 'string') {
           vNode.context[dataName] = isChecked ? value : ''
         } else {
           const index = dataSet.findIndex(el => el === value)
-
-          if(index > -1 && !isChecked) {
-            dataSet.splice(index, 1)
-          } else {
+          
+          if (isChecked) {
             dataSet.push(value)
+          } else if (index > -1 && !isChecked) {
+            dataSet.splice(index, 1)
           }
         }
       })
