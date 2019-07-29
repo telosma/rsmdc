@@ -278,7 +278,7 @@ export default {
 
 :host {
   display: inline-block;
-  height: 100%;
+  height: auto;
   margin-bottom: 22px;
   width: var(--rs-form-field_host--width);
 }
