@@ -1,0 +1,17 @@
+@import "@rsmdc/theme/functions";
+
+$rs-checkbox-container-keyframes-uid_: -1;
+
+@function rs-checkbox-transition-enter($property, $delay: 0ms, $duration: $rs-checkbox-transition-duration) {
+  @return rs-animation-enter($property, $duration, $delay);
+}
+
+@function rs-checkbox-transition-exit($property, $delay: 0ms, $duration: $rs-checkbox-transition-duration) {
+  @return rs-animation-exit-temporary($property, $duration, $delay);
+}
+
+@function rs-checkbox-container-keyframes-uid_() {
+  $rs-checkbox-container-keyframes-uid_: $rs-checkbox-container-keyframes-uid_ + 1 !global;
+
+  @return $rs-checkbox-container-keyframes-uid_;
+}

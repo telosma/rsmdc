@@ -1,0 +1,331 @@
+@import "@rsmdc/animation/functions";
+@import "../../../ripple/mixins";
+@import "@rsmdc/typography/mixins";
+@import "./functions";
+@import "./keyframes";
+@import "./variables";
+@import "./rs-variables";
+
+@mixin rs-checkbox__child--cover-parent_ {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin rs-checkbox--anim_ {
+  $rs-checkbox-indeterminate-change-duration_: 500ms;
+
+  &-unchecked-checked,
+  &-unchecked-indeterminate,
+  &-checked-unchecked,
+  &-indeterminate-unchecked {
+    > .background {
+      animation-duration: $rs-checkbox-transition-duration * 2;
+      animation-timing-function: linear;
+    }
+  }
+
+  &-unchecked-checked {
+    > .background > .checkmark > .checkmarkpath {
+      animation: rs-checkbox-unchecked-checked-checkmark-path $rs-checkbox-transition-duration * 2 linear 0s;
+      transition: none;
+    }
+  }
+
+  &-unchecked-indeterminate {
+    > .background > .mixedmark {
+      animation: rs-checkbox-unchecked-indeterminate-mixedmark $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+  }
+
+  &-checked-unchecked {
+    > .background > .checkmark > .checkmarkpath {
+      animation: rs-checkbox-checked-unchecked-checkmark-path $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+  }
+
+  &-checked-indeterminate {
+    > .background > .checkmark {
+      animation: rs-checkbox-checked-indeterminate-checkmark $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+
+    > .background > .mixedmark {
+      animation: rs-checkbox-checked-indeterminate-mixedmark $rs-checkbox-transition-duration linear 0s;
+      transition: none;
+    }
+  }
+
+  &-indeterminate-checked {
+    > .background > .checkmark {
+      animation: rs-checkbox-indeterminate-checked-checkmark $rs-checkbox-indeterminate-change-duration_ linear 0s;
+      transition: none;
+    }
+
+    > .background > .mixedmark {
+      animation: rs-checkbox-indeterminate-checked-mixedmark $rs-checkbox-indeterminate-change-duration_ linear 0s;
+      transition: none;
+    }
+  }
+
+  &-indeterminate-unchecked {
+    > .background > .mixedmark {
+      // stylelint-disable-next-line declaration-colon-space-after
+      animation:
+        rs-checkbox-indeterminate-unchecked-mixedmark $rs-checkbox-indeterminate-change-duration_ * .6 linear 0s;
+      transition: none;
+    }
+  }
+}
+
+@include rs-ripple-common;
+@include rs-checkbox-mark-keyframes_;
+
+$fade-in-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-uid_(), in);
+$fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-uid_(), out);
+
+.rs-checkbox {
+  border-color: $rs-checkbox-baseline-theme-color;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  flex-flow: row;
+
+  > .container {
+    display: inline-block;
+    position: relative;
+    flex: 0 0 $rs-checkbox-size;
+    box-sizing: content-box;
+    width: $rs-checkbox-size;
+    height: $rs-checkbox-size;
+    padding: ($rs-checkbox-touch-area - $rs-checkbox-size) / 2;
+    line-height: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    vertical-align: bottom;
+  }
+
+  // -background-focused is ripple class.
+  > .container.-background-focused > .background::before {
+    content: none
+  }
+
+  > .container.-upgraded > .background,
+  > .container.-upgraded > .background > .checkmark,
+  > .container.-upgraded > .background > .checkmark > .checkmarkpath,
+  > .container.-upgraded > .background > .mixedmark {
+    transition: none !important;
+  }
+
+  > .container[disabled] {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  > .container.-anim {
+    @include rs-checkbox--anim_;
+  }
+
+  > .container.-anim-unchecked-checked > .nativecontrol:enabled ~ .background,
+  > .container.-anim-unchecked-indeterminate > .nativecontrol:enabled ~ .background {
+    animation-name: $fade-in-animation;
+  }
+
+  > .container.-anim-checked-unchecked > .nativecontrol:enabled ~ .background,
+  > .container.-anim-indeterminate-unchecked > .nativecontrol:enabled ~ .background {
+    animation-name: $fade-out-animation;
+  }
+
+  > .container > .nativecontrol {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  > .container > .nativecontrol:focus ~ .background::before {
+    transform: scale(2.75, 2.75);
+    opacity: $rs-checkbox-focus-indicator-opacity;
+
+    transition:
+      rs-checkbox-transition-enter(opacity, 0ms, 80ms),
+      rs-checkbox-transition-enter(transform, 0ms, 80ms);
+  }
+
+  > .container > .nativecontrol:disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  > .container > .nativecontrol:disabled:not(:checked):not([indeterminate]) ~ .background {
+    border-color: $rs-checkbox-disabled-color;
+  }
+
+  > .container > .nativecontrol:disabled:checked ~ .background {
+    border-color: transparent;
+    background-color: $rs-checkbox-disabled-color;
+  }
+
+  > .container > .nativecontrol:disabled[indeterminate] ~ .background {
+    border-color: transparent;
+    background-color: $rs-checkbox-disabled-color;
+  }
+
+  > .container > .nativecontrol:checked ~ .background > .checkmark {
+    transition:
+      rs-checkbox-transition-enter(opacity, 0ms, $rs-checkbox-transition-duration * 2),
+      rs-checkbox-transition-enter(transform, 0ms, $rs-checkbox-transition-duration * 2);
+    opacity: 1;
+  }
+
+  > .container > .nativecontrol:checked ~ .background > .mixedmark {
+    transform: scaleX(1) rotate(-45deg);
+  }
+
+  > .container > .nativecontrol[indeterminate] ~ .background > .checkmark {
+    transform: rotate(45deg);
+    opacity: 0;
+    transition:
+      rs-checkbox-transition-exit(opacity, 0ms, $rs-checkbox-transition-duration),
+      rs-checkbox-transition-exit(transform, 0ms, $rs-checkbox-transition-duration);
+  }
+
+  > .container > .nativecontrol[indeterminate] ~ .background > .mixedmark {
+    transform: scaleX(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  > .container > .nativecontrol:checked ~ .background,
+  > .container > .nativecontrol[indeterminate] ~ .background {
+    transition:
+      rs-checkbox-transition-enter(border-color),
+      rs-checkbox-transition-enter(background-color);
+  }
+
+  > .container > .nativecontrol:checked ~ .background > .checkmark > .checkmarkpath,
+  > .container > .nativecontrol[indeterminate] ~ .background > .checkmark > .checkmarkpath {
+    stroke-dashoffset: 0;
+  }
+
+  > .container > .nativecontrol:enabled:checked ~ .background {
+    border-color: $rs-checkbox-baseline-theme-color;
+    background-color: $rs-checkbox-baseline-theme-color;
+  }
+
+  > .container > .nativecontrol:enabled[indeterminate] ~ .background {
+    border-color: $rs-checkbox-baseline-theme-color;
+    background-color: $rs-checkbox-baseline-theme-color;
+  }
+
+  > .container > .background {  
+    display: inline-flex;
+    position: absolute;
+    top: ($rs-checkbox-touch-area - $rs-checkbox-size) / 2;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: $rs-checkbox-ui-pct;
+    height: $rs-checkbox-ui-pct;
+    border: $rs-checkbox-border-width solid;
+    border-radius: 2px;
+    background-color: transparent;
+    pointer-events: none;
+    will-change: background-color, border-color;
+    transition:
+      rs-checkbox-transition-exit(background-color),
+      rs-checkbox-transition-exit(border-color);
+    border-color: $rs-checkbox-border-color;
+  }
+
+  > .container > .background::before {
+    @include rs-checkbox__child--cover-parent_;
+
+    width: 100%;
+    height: 100%;
+    transform: scale(0, 0);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    content: "";
+    will-change: opacity, transform;
+    transition:
+      rs-checkbox-transition-exit(opacity),
+      rs-checkbox-transition-exit(transform);
+    background-color: $rs-checkbox-baseline-theme-color;
+  }
+
+  > .container > .background > .checkmark {
+    @include rs-checkbox__child--cover-parent_;
+  
+    width: 100%;
+    opacity: 0;
+    transition: rs-checkbox-transition-exit(opacity, 0ms, $rs-checkbox-transition-duration * 2);
+    color: $rs-checkbox-mark-color;
+  }
+
+  > .container.-upgraded > .background > .checkmark {
+    opacity: 1;
+  }
+
+  > .container > .background > .checkmark > .checkmarkpath {
+    transition: rs-checkbox-transition-exit(stroke-dashoffset, 0ms, $rs-checkbox-transition-duration * 2);
+    stroke: currentColor;
+    stroke-width: $rs-checkbox-mark-stroke-size * 1.3;
+    stroke-dashoffset: $rs-checkbox-mark-path-length_;
+    stroke-dasharray: $rs-checkbox-mark-path-length_;
+  }
+
+  > .container > .background > .mixedmark {
+    width: 100%;
+    height: 0;
+    transform: scaleX(0) rotate(0deg);
+    border-width: floor($rs-checkbox-mark-stroke-size) / 2;
+    border-style: solid;
+    opacity: 0;
+    transition:
+      rs-checkbox-transition-exit(opacity),
+      rs-checkbox-transition-exit(transform);
+    border-color: $rs-checkbox-mark-color;
+  }
+
+  > .label {
+    @include rs-typography(body2);
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  
+    margin-right: auto;
+    padding-right: 0;
+    padding-left: $rs-checkbox-label-spacing;
+  }  
+  > .label[disabled] {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .rs-checkbox {
+    > .container > .background > .mixedmark {
+      margin: 0 1px; // Extra horizontal space around mixedmark symbol.
+    }
+  }
+}
+
+.rs-ripple-upgraded {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-unbounded;
+  @include rs-ripple-upgraded($rs-checkbox-baseline-theme-color);
+}
+
