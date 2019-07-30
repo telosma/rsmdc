@@ -1,0 +1,86 @@
+@import "./functions";
+@import "./keyframes";
+@import "./variables";
+@import "./rs-functions";
+@import "./rs-variables";
+
+// Change checkbox checked states color and box color.
+@mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) {
+  .rs-checkbox {
+    > .container > .nativecontrol:enabled:checked ~ .background {
+      border-color: $color;
+      background-color: $color;
+    }
+    > .container > .nativecontrol:enabled:indeterminate ~ .background {
+      border-color: $color;
+      background-color: $color;
+    }
+  }
+
+  @if $generate-keyframes {
+    $uid: rs-checkbox-container-keyframes-uid_();
+    $fade-in-animation: rs-checkbox-animation-name($uid, in);
+    $fade-out-animation: rs-checkbox-animation-name($uid, out);
+
+    .rs-checkbox {
+      > .container.-anim-unchecked-checked > .nativecontrol:enabled ~ .background,
+      > .container.-anim-unchecked-indeterminate > .nativecontrol:enabled ~ .background {
+        animation-name: $fade-in-animation;
+      }
+    
+      > .container.-anim-checked-unchecked > .nativecontrol:enabled ~ .background,
+      > .container.-anim-indeterminate-unchecked > .nativecontrol:enabled ~ .background {
+        animation-name: $fade-out-animation;
+      }
+    }
+  }
+}
+
+// Change unchecked checkbox line.
+@mixin rs-checkbox-unchecked-stroke-color($color) {
+  .rs-checkbox > .container > .background {  
+    border-color: $color;
+  }
+}
+
+// Change checkmark color.
+@mixin rs-checkbox-checkmark-ink-color($color) {
+  .rs-checkbox {
+    > .container > .background > .checkmark {
+      color: $color;
+    }
+    > .container > .background > .mixedmark {
+      border-color: $color;
+    }
+  }
+}
+
+// Change checkbox states color.
+@mixin rs-checkbox-focus-indicator-color($color) {
+  .rs-ripple-upgraded {  
+    &::before,
+    &::after {
+      background-color: $color;
+    }
+  }
+}
+
+// Change checkbox line and states color.
+@mixin rs-checkbox-fill-color-accessible($color) {
+  @include rs-checkbox-checked-container-colors($color);
+  @include rs-checkbox-focus-indicator-color($color);
+}
+
+// Change checkbox label position.
+@mixin rs-checkbox-label-position($position) {
+  @if $position == left {
+    .rs-checkbox {
+      flex-flow: row-reverse;
+
+      > .label {
+        padding-right: $rs-checkbox-label-spacing;
+        padding-left: 0;
+      }
+    }
+  }
+}
