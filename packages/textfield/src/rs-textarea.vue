@@ -2,7 +2,7 @@
   <div class="rs-text-field -outlined -textarea" :class="{ '-nolabel': label.length === 0 }" :required="required" :disabled="disabled" :invalid="invalid">
     <div class="rs-text-field__form rs-text-field--textarea" @click="activateTextField">
     <textarea class="rs-text-field__input" :id="id" v-model="text" :value="value" :maxlength="maxlength" :cols="cols" :rows="rows"
-      :placeholder="placeholder" :autocomplete="autocomplete" @input="passChangeEvent" />
+      :placeholder="placeholder" :autocomplete="autocomplete" />
     </div>
     <div class="rs-notched-outline">
       <div class="rs-notched-outline__leading" />
@@ -79,7 +79,8 @@ export default {
       formLabel: '',
       labelPosition: '',
       hasValue: '',
-      text: ''
+      text: '',
+      observer: '',
     }
   },
   watch: {
@@ -90,6 +91,20 @@ export default {
       this.labelPosition = this.getElementProperty(this.host, '--rs-form-label__textarea__floatinglabel--left')
       this.formLabel = this.el.querySelector('.rs-text-field__label')
       this.hasValue = this.value.length > 0
+
+      if(!this.observer) {
+        this.observer = new MutationObserver(mutation => {
+          if(mutation[0].attributeName !== 'value') { return }
+          this.$emit('input')
+          this.$emit('change')
+        })
+        this.observer.observe(this.host, {
+          attributes: true,
+        })
+      }
+    },
+    text() {
+      this.passValueToHost()
     },
     hasValue() {
       if(!this.hasValue) { return }
@@ -108,8 +123,7 @@ export default {
       const value = String(style.getPropertyValue(prop)).trim()
       return value
     },
-    passChangeEvent(event) {
-      this.$emit('change', event.target.value)
+    passValueToHost() {
       this.host.setAttribute('data-input', true)
       this.host.text = this.text
     },

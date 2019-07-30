@@ -3,7 +3,7 @@
     <div class="rs-text-field__form" @click="activateTextField">
       <div class="rs-text-field__inputarea">
         <input :id="id" :type="type" class="rs-text-field__input" v-model="text" 
-          :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete" @input="passChangeEvent">
+          :value="value" :maxlength="maxlength" :placeholder="placeholder" :autocomplete="autocomplete">
         <div class="rs-text-field__action" ref="slotContainer">
           <slot></slot>
         </div>
@@ -81,6 +81,7 @@ export default {
       lineRipple: '',
       labelPosition: '',
       hasValue: '',
+      observer: '',
       hasIcon: false,
       isDense: false,
       isOutlined: false
@@ -94,6 +95,20 @@ export default {
       this.hasIcon = this.getElementProperty(this.host, '--rs-text-field__icon')
       this.isDense = this.getElementProperty(this.host, '--rs-text-field__dense')
       this.isOutlined = this.getElementProperty(this.host, '--rs-text-field__outlined')
+
+      if(!this.observer) {
+        this.observer = new MutationObserver(mutation => {
+          if(mutation[0].attributeName !== 'value') { return }
+          this.$emit('input')
+          this.$emit('change')
+        })
+        this.observer.observe(this.host, {
+          attributes: true,
+        })
+      }
+    },
+    text() {
+      this.passValueToHost()
     },
     isOutlined() {
       if(this.isOutlined) {
@@ -151,8 +166,7 @@ export default {
       const value = String(style.getPropertyValue(prop)).trim()
       return value
     },
-    passChangeEvent(event) {
-      this.$emit('change', event.target.value)
+    passValueToHost() {
       this.host.setAttribute('data-input', true)
       this.host.text = this.text
     },
