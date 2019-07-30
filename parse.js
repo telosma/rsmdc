@@ -22,8 +22,12 @@ const replaceWords = {
 const ripples = ['--rs-ripple-fg-size', '--rs-ripple-left', '--rs-ripple-top', '--rs-ripple-fg-scale', '--rs-ripple-fg-translate-end', '--rs-ripple-fg-translate-start']
 
 const sourceScss = fs.readFileSync('./packages/checkbox-test/src/styles/checkbox.scss', 'utf8')
-const variableFiles = fs.readdirSync('./packages/checkbox-test/src/styles', 'utf8')
-  .filter(file => file.match(/variable/))
+
+const getVariablesFiles = (directoryPath) => {
+  return fs.readdirSync(directoryPath, 'utf8').filter(file => file.match(/variable/))
+}
+
+const variableFiles = getVariablesFiles('./packages/checkbox-test/src/styles')
 const variableFilesTexts = variableFiles.map(file => fs.readFileSync(`./packages/checkbox-test/src/styles/${file}`, 'utf8'))
 const getThemeVariables = (fileTexts) => {
   const themeVariables = fileTexts.map(text => {
@@ -72,7 +76,6 @@ const getCssRule = (cssToJson) => {
 
 const createCustomPropertyHeader = (cssToJson, selectors) => {
   const prefix = getCssRule(cssToJson) ? `--${getCssRule(cssToJson)}--` : '--'
-
   return selectors.reduce((customPropName, parseSelector) => {
     const type = parseSelector.type
 
@@ -185,4 +188,4 @@ const style = Object.entries(propToCustomProp).reduce((result, [prop, value]) =>
 const mixin = `${componentName} {\n${style}\n}`
 
 fs.writeFileSync('./packages/checkbox-test/src/styles/result.css', css)
-fs.writeFileSync(`./packages/checkbox-test/src/mixins.scss`, mixin)
+fs.writeFileSync('./packages/checkbox-test/src/client.scss', mixin)
