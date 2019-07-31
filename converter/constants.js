@@ -12,3 +12,5 @@ module.exports.replaceWords = {
 }
 
 module.exports.ripples = ['--rs-ripple-fg-size', '--rs-ripple-left', '--rs-ripple-top', '--rs-ripple-fg-scale', '--rs-ripple-fg-translate-end', '--rs-ripple-fg-translate-start']
+
+module.exports.dirPath = './src/styles'
