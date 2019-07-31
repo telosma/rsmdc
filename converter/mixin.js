@@ -2,15 +2,17 @@
 const fs = require('fs')
 
 const getMixinFile = (dirPath) => {
-  return fs.readdirSync(`${dirPath}/src/styles`, 'utf8').filter(file => file.match(/rs-mixins/g))[0]
+  const fileName = fs.readdirSync(`${dirPath}/src/styles`, 'utf8').filter(file => file.match(/mixins/g))[0]
+  return fs.readFileSync(`${dirPath}/src/styles/${fileName}`, 'utf8')
 }
 
 const replaceSourceScss = (text) => {
   return text.replace(/@import(.*?);/g, '').replace(/\s\s/g, '')
 }
 
-const getSelectorsInMixin = (text) => {
-  return text.match(/(\.).*?}\s/g)
+const getSelectorsInMixin = (scssText) => {
+  const selectors = scssText.match(/(\.).*?}\s/g)
+  return getReplaceMixinSelectors(selectors)
 }
 
 const getReplaceMixinSelectors = (selectors) => {
@@ -44,31 +46,24 @@ const getSelectorsScss = (selectors) => {
 }
 
 module.exports.mixinSelectorsScss = (dirPath) => {
-  const mixinFile = getMixinFile(dirPath)
-
-  const sourceScss = fs.readFileSync(`${dirPath}/src/styles/${mixinFile}`, 'utf8')
+  const sourceScss = getMixinFile(dirPath)
   const replaceScss = replaceSourceScss(sourceScss)
-
   const mixinSelectors = getSelectorsInMixin(replaceScss)
-  const replaceMixinSelectors = getReplaceMixinSelectors(mixinSelectors)
 
-  const scss = getSelectorsScss(replaceMixinSelectors)
+  const scss = getSelectorsScss(mixinSelectors)
   fs.writeFileSync(`${dirPath}/src/copy3.scss`, scss)
   return scss
 }
 
 module.exports.createClientMixin = (replaceValues, dirPath) => {
-  const mixinFile = getMixinFile(dirPath)
-  const sourceScss = fs.readFileSync(`${dirPath}/src/styles/${mixinFile}`, 'utf8')
-  const importFiles = sourceScss.match(/@import(.*?);/g)
-
+  const sourceScss = getMixinFile(dirPath)
   const replaceScss = replaceSourceScss(sourceScss)
   const mixinSelectors = getSelectorsInMixin(replaceScss)
-  const replaceMixinSelectors = getReplaceMixinSelectors(mixinSelectors)
+  const importFiles = sourceScss.match(/@import(.*?);/g)
 
   let scss = replaceScss
   let values = replaceValues
-  replaceMixinSelectors.forEach(selector => {
+  mixinSelectors.forEach(selector => {
     let word = ''
     const insertValueslength = selector.match(/{.*?(}|;>|;&|;\+|;~)/g).length
     for(let i = 0; i < insertValueslength; i++) {
@@ -80,12 +75,12 @@ module.exports.createClientMixin = (replaceValues, dirPath) => {
     values = values.slice(insertValueslength)
     scss = scss.replace(selector, word)
   })
+
   const files = importFiles.reduce((res, file) => {
     const value = file.replace('./', './styles/')
     return res = `${res}${value}\n`
   },'')
 
   scss = files + scss
-    
   fs.writeFileSync(`${dirPath}/src/mixins.scss`, scss)
 }
