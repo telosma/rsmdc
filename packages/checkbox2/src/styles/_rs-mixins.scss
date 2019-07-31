@@ -4,13 +4,14 @@
 @import "./rs-functions";
 @import "./rs-variables";
 
-// Change checkbox checked states color and box color.
+/* Change checkbox checked states color and box color. */
 @mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) {
   .rs-checkbox {
     > .container > .nativecontrol:enabled:checked ~ .background {
       border-color: $color;
       background-color: $color;
     }
+
     > .container > .nativecontrol:enabled:indeterminate ~ .background {
       border-color: $color;
       background-color: $color;
@@ -25,13 +26,14 @@
     .rs-checkbox {
       > .container.-anim-unchecked-checked > .nativecontrol:enabled ~ .background,
       > .container.-anim-unchecked-indeterminate > .nativecontrol:enabled ~ .background {
-        animation-name: $fade-in-animation;
+        animation-name: $fade-in-animation; /* comment */
       }
-    
+
       > .container.-anim-checked-unchecked > .nativecontrol:enabled ~ .background,
       > .container.-anim-indeterminate-unchecked > .nativecontrol:enabled ~ .background {
         animation-name: $fade-out-animation;
       }
+
     }
   }
 }
@@ -49,6 +51,7 @@
     > .container > .background > .checkmark {
       color: $color;
     }
+
     > .container > .background > .mixedmark {
       border-color: $color;
     }
@@ -57,11 +60,14 @@
 
 // Change checkbox states color.
 @mixin rs-checkbox-focus-indicator-color($color) {
-  .rs-ripple-upgraded {  
+
+  .rs-ripple-upgraded { 
+
     &::before,
     &::after {
       background-color: $color;
     }
+
   }
 }
 
@@ -74,6 +80,7 @@
 // Change checkbox label position.
 @mixin rs-checkbox-label-position($position) {
   @if $position == left {
+
     .rs-checkbox {
       flex-flow: row-reverse;
 
@@ -82,5 +89,6 @@
         padding-left: 0;
       }
     }
+    
   }
 }
