@@ -52,7 +52,6 @@ module.exports.mixinSelectorsScss = (dirPath) => {
   const mixinSelectors = getSelectorsInMixin(replaceScss)
 
   const scss = getSelectorsScss(mixinSelectors)
-  fs.writeFileSync(`${dirPath}/src/copy3.scss`, scss)
   return scss
 }
 
