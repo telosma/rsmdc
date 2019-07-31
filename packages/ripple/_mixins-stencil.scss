@@ -1,0 +1,203 @@
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/base/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/theme/variables";
+@import "./functions";
+@import "./keyframes";
+@import "./variables";
+@import "./rs-mixins";
+
+@mixin rs-ripple-core-styles() {
+  // postcss-bem-linter: define ripple-surface
+  .rs-ripple-surface {
+    @include rs-ripple-surface;
+    @include rs-states;
+    @include rs-ripple-radius-bounded;
+
+    position: relative;
+    outline: none;
+    overflow: hidden;
+
+    &[data-rs-ripple-is-unbounded] {
+      @include rs-ripple-radius-unbounded;
+
+      overflow: visible;
+    }
+
+    &--primary {
+      @include rs-states(primary);
+    }
+
+    &--accent {
+      @include rs-states(secondary);
+    }
+  }
+
+  // postcss-bem-linter: end
+}
+
+@mixin rs-ripple-common() {
+  // Ensure that styles needed by any component using MDC Ripple are emitted, but only once.
+  // (Every component using MDC Ripple imports these mixins, but doesn't necessarily import
+  // rs-ripple.scss.)
+  @include rs-base-emit-once("rs-ripple/common/animation") {
+    @include rs-ripple-keyframes_;
+  }
+
+  @include rs-base-emit-once("rs-ripple/common/structure") {
+    .rs-ripple-surface--test-edge-var-bug {
+      visibility: hidden;
+
+      &::before {
+        border: 1px solid #000;
+      }
+    }
+  }
+}
+
+@mixin rs-ripple-surface {
+  --rs-ripple-fg-size: 0;
+  --rs-ripple-left: 0;
+  --rs-ripple-top: 0;
+  --rs-ripple-fg-scale: 1;
+  --rs-ripple-fg-translate-end: 0;
+  --rs-ripple-fg-translate-start: 0;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
+
+  &::before,
+  &::after {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    content: "";
+  }
+
+  &::before {
+    transition:
+      opacity $rs-states-wash-duration linear,
+      background-color $rs-states-wash-duration linear;
+
+    z-index: 1; // Ensure that the ripple wash for hover/focus states is displayed on top of positioned child elements
+  }
+
+  &.rs-ripple-upgraded::before {
+    transform: scale(var(--rs-ripple-fg-scale, 1));
+  }
+
+  &.rs-ripple-upgraded::after {
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    transform-origin: center center;
+  }
+
+  &.rs-ripple-upgraded--unbounded::after {
+    top: var(--rs-ripple-top, 0);
+    left: var(--rs-ripple-left, 0);
+  }
+
+  &.rs-ripple-upgraded--foreground-activation::after {
+    animation:
+      rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
+      rs-ripple-fg-opacity-in $rs-ripple-fade-in-duration forwards;
+  }
+
+  &.rs-ripple-upgraded--foreground-deactivation::after {
+    animation: rs-ripple-fg-opacity-out $rs-ripple-fade-out-duration;
+
+    // Retain transform from rs-ripple-fg-radius-in activation
+    transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
+  }
+}
+
+@mixin rs-ripple-radius-bounded($radius: 100%) {
+  &::before,
+  &::after {
+    top: calc(50% - #{$radius});
+    left: calc(50% - #{$radius});
+    width: $radius * 2;
+    height: $radius * 2;
+  }
+
+  &.rs-ripple-upgraded::after {
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
+  }
+}
+
+@mixin rs-ripple-radius-unbounded($radius: 100%) {
+  &::before,
+  &::after {
+    top: calc(50% - #{$radius / 2});
+    left: calc(50% - #{$radius / 2});
+    width: $radius;
+    height: $radius;
+  }
+
+  &.rs-ripple-upgraded::before,
+  &.rs-ripple-upgraded::after {
+    top: var(--rs-ripple-top, calc(50% - #{$radius / 2}));
+    left: var(--rs-ripple-left, calc(50% - #{$radius / 2}));
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
+  }
+
+  &.rs-ripple-upgraded::after {
+    width: var(--rs-ripple-fg-size, $radius);
+    height: var(--rs-ripple-fg-size, $radius);
+  }
+}
+
+@mixin rs-ripple-upgraded($color) {
+
+  &::before, 
+  &::after {
+    background-color: $color;
+    content: '';
+  }
+
+  &:hover::before {
+    opacity: 'rs-states-opacity(' + $color + ', hover)';
+  }
+
+  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
+    transition-duration: 75ms;
+    opacity: 'rs-states-opacity(' + $color + ', focus)';
+  }
+
+  &.rs-ripple-upgraded--background-focused::before {
+    transition-duration: 75ms;
+    opacity: 'rs-states-opacity(' + $color + ', focus)';
+  }
+
+  &:not(.rs-ripple-upgraded) {
+    &::after {
+      transition: opacity $rs-ripple-fade-out-duration linear;
+    }
+
+    &:active::after {
+      transition-duration: $rs-ripple-fade-in-duration;
+      opacity: 'rs-states-opacity(' + $color + ', press)';
+    }
+  }
+
+  &.rs-ripple-upgraded {
+    --rs-ripple-fg-opacity: #{'"rs-states-opacity(' + $color + ', press)"'};
+  }
+}
+
+@mixin rs-states-activated($color) {
+  &::before {
+    opacity: rs-states-opacity($color, activated);
+  }
+}
+
+@mixin rs-states-selected($color) {
+  &::before {
+    opacity: rs-states-opacity($color, selected);
+  }
+}
