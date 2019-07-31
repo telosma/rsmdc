@@ -1,23 +1,22 @@
 /* eslint-disable vue/use-v-on-exact */
 const sass = require('node-sass')
-const path = require('path')
 const fs = require('fs')
 const CSSJSON = require('cssjson')
 const CSSwhat = require('css-what')
 const { flattenDeep } = require('lodash')
-const { replaceWords, ripples } = require('./constants')
+const { replaceWords, ripples, dirPath } = require('./constants')
 const { styleScss, generateStyle } = require('./style')
 const { mixinSelectorsScss, generateClientMixin } = require('./mixin')
 
-const getCompileCss = (dirPath, targetScss) => {
-  const copyFile = `${dirPath}/src/styles/copy.scss`
+const getCompileCss = (dirPath, nodeModulesPath, targetScss) => {
+  const copyFile = `${dirPath}/copy.scss`
   fs.writeFileSync(copyFile, targetScss)
   const res = sass.renderSync({
     file: copyFile,
     sourceMap: true,
     outFile: './nested.css',
     outputStyle: 'nested',
-    includePaths: [path.resolve('', 'node_modules')]
+    includePaths: [nodeModulesPath]
   })
   fs.unlinkSync(copyFile)
   return res.css.toString()
@@ -135,29 +134,33 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
 
 // generate styles
-const scss = styleScss('./packages/checkbox2')
-const compileCss = getCompileCss('./packages/checkbox2', scss)
-  .replace(/(\/\*(.*?)')|('(.*?)\*\/)/g, '')
+module.exports.convertStyle = (fileName, nodeModulesPath) => {
+  const scss = styleScss(fileName)
+  const compileCss = getCompileCss(dirPath, nodeModulesPath, scss)
+    .replace(/(\/\*(.*?)')|('(.*?)\*\/)/g, '')
 
-const sourceJson = CSSJSON.toJSON(compileCss)
-const customPropJson= CSSJSON.toJSON(compileCss)
+  const sourceJson = CSSJSON.toJSON(compileCss)
+  const customPropJson= CSSJSON.toJSON(compileCss)
 
-const css = replaceSassVariablesCss(customPropJson)
-const styles = convertPropToCustomProp(customPropJson, sourceJson)
+  const css = replaceSassVariablesCss(customPropJson)
+  const styles = convertPropToCustomProp(customPropJson, sourceJson)
 
-generateStyle(css, styles, './packages/checkbox2')
+  generateStyle(css, styles)
+}
 
 
 // generate client mixin 
-const parseMixinScss = mixinSelectorsScss('./packages/checkbox2')
-const convertCss = getCompileCss('./packages/checkbox2', parseMixinScss)
+module.exports.convertMixin = (nodeModulesPath) => {
+  const parseMixinScss = mixinSelectorsScss()
+  const convertCss = getCompileCss(dirPath, nodeModulesPath, parseMixinScss)
 
-const sj = CSSJSON.toJSON(convertCss)
-const cj = CSSJSON.toJSON(convertCss)
+  const sj = CSSJSON.toJSON(convertCss)
+  const cj = CSSJSON.toJSON(convertCss)
 
-Object.keys(cj.children).forEach(selectorName => {
-  const children = cj.children[selectorName]
-  replaceAttrToCustomProp(children, selectorName)
-})
+  Object.keys(cj.children).forEach(selectorName => {
+    const children = cj.children[selectorName]
+    replaceAttrToCustomProp(children, selectorName)
+  })
 
-generateClientMixin(mappingSelectors(cj, sj), './packages/checkbox2')
+  generateClientMixin(mappingSelectors(cj, sj))
+}

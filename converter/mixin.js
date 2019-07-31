@@ -1,9 +1,10 @@
 /* eslint-disable vue/use-v-on-exact */
 const fs = require('fs')
+const { dirPath } = require('./constants')
 
 const getMixinFile = (dirPath) => {
-  const fileName = fs.readdirSync(`${dirPath}/src/styles`, 'utf8').filter(file => file.match(/mixins/g))[0]
-  return fs.readFileSync(`${dirPath}/src/styles/${fileName}`, 'utf8')
+  const fileName = fs.readdirSync(`${dirPath}`, 'utf8').filter(file => file.match(/mixins/g))[0]
+  return fs.readFileSync(`${dirPath}/${fileName}`, 'utf8')
 }
 
 const replaceSourceScss = (text) => {
@@ -46,7 +47,7 @@ const getSelectorsScss = (selectors) => {
 }
 
 
-module.exports.mixinSelectorsScss = (dirPath) => {
+module.exports.mixinSelectorsScss = () => {
   const sourceScss = getMixinFile(dirPath)
   const replaceScss = replaceSourceScss(sourceScss)
   const mixinSelectors = getSelectorsInMixin(replaceScss)
@@ -55,7 +56,7 @@ module.exports.mixinSelectorsScss = (dirPath) => {
   return scss
 }
 
-module.exports.generateClientMixin = (replaceValues, dirPath) => {
+module.exports.generateClientMixin = (replaceValues) => {
   const sourceScss = getMixinFile(dirPath)
   const replaceScss = replaceSourceScss(sourceScss)
   const mixinSelectors = getSelectorsInMixin(replaceScss)
@@ -82,5 +83,5 @@ module.exports.generateClientMixin = (replaceValues, dirPath) => {
   },'')
 
   scss = files + scss
-  fs.writeFileSync(`${dirPath}/src/mixins.scss`, scss)
+  fs.writeFileSync('./src/mixins.scss', scss)
 }

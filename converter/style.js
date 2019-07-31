@@ -1,7 +1,7 @@
 /* eslint-disable vue/use-v-on-exact */
 const fs = require('fs')
 const { flattenDeep } = require('lodash')
-const { ripples } = require('./constants')
+const { ripples, dirPath } = require('./constants')
 
 const getThemeVariables = (dirPath, files) => {
   const variableFilesTexts =files.map(file => fs.readFileSync(`${dirPath}/${file}`, 'utf8'))
@@ -21,11 +21,10 @@ const replaceCssInnerRippleValue = (css, target, value) => {
 }
 
 
-module.exports.styleScss = (dirPath) => {
-  const path = `${dirPath}/src/styles`
-  const sourceScss = fs.readFileSync(`${path}/checkbox.scss`, 'utf8')
-  const variableFiles = fs.readdirSync(path, 'utf8').filter(file => file.match(/variable/))
-  const themeVariables = getThemeVariables(path, variableFiles)
+module.exports.styleScss = (styleCssName) => {
+  const sourceScss = fs.readFileSync(`${dirPath}/${styleCssName}`, 'utf8')
+  const variableFiles = fs.readdirSync(dirPath, 'utf8').filter(file => file.match(/variable/))
+  const themeVariables = getThemeVariables(dirPath, variableFiles)
 
   let scss = sourceScss
   themeVariables.forEach(variable => {
@@ -36,7 +35,7 @@ module.exports.styleScss = (dirPath) => {
   return scss
 }
 
-module.exports.generateStyle = (sourceCss, styles, dirPath) => {
+module.exports.generateStyle = (sourceCss, styles) => {
   let css = sourceCss
   // const componentName = dirPath.replace(/.*\//g, '')
   const componentName = 'rs-checkbox'
@@ -56,7 +55,6 @@ module.exports.generateStyle = (sourceCss, styles, dirPath) => {
     return result
   }, '')
   const client = `${componentName} {\n${style}\n}`
-
-  fs.writeFileSync(`${dirPath}/src/styles/result.scss`, css)
-  fs.writeFileSync(`${dirPath}/src/client.scss`, client)
+  fs.writeFileSync(`${dirPath}/result.scss`, css)
+  fs.writeFileSync('./src/client.scss', client)
 }
