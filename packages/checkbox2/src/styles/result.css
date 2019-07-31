@@ -130,6 +130,29 @@
 	vertical-align: var(--rs-checkbox---vertical-align);
 	flex-flow: var(--rs-checkbox---flex-flow);
 }
+.rs-checkbox.-disabled > .container {
+	cursor: var(--rs-checkbox-disabledCHcontainer---cursor);
+	pointer-events: var(--rs-checkbox-disabledCHcontainer---pointer-events);
+}
+.rs-checkbox.-disabled > .label {
+	cursor: var(--rs-checkbox-disabledCHlabel---cursor);
+	pointer-events: var(--rs-checkbox-disabledCHlabel---pointer-events);
+}
+.rs-checkbox.-disabled > .container > .nativecontrol {
+	cursor: var(--rs-checkbox-disabledCHcontainerCHnativecontrol---cursor);
+	pointer-events: var(--rs-checkbox-disabledCHcontainerCHnativecontrol---pointer-events);
+}
+.rs-checkbox.-disabled > .container > .nativecontrol:not(:checked):not(:indeterminate) ~ .background {
+	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSnotVundefinedPSnotVundefinedSIbackground---border-color);
+}
+.rs-checkbox.-disabled > .container > .nativecontrol:checked ~ .background {
+	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPScheckedSIbackground---border-color);
+	background-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPScheckedSIbackground---background-color);
+}
+.rs-checkbox.-disabled > .container > .nativecontrol:indeterminate ~ .background {
+	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSindeterminateSIbackground---border-color);
+	background-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSindeterminateSIbackground---background-color);
+}
 .rs-checkbox > .container {
 	display: var(--rs-checkboxCHcontainer---display);
 	position: var(--rs-checkboxCHcontainer---position);
@@ -151,10 +174,6 @@
   .rs-checkbox > .container.-upgraded > .background > .checkmark > .checkmarkpath,
   .rs-checkbox > .container.-upgraded > .background > .mixedmark {
 	transition: var(--rs-checkboxCHcontainer-upgradedCHbackgroundrs-checkboxCHcontainer-upgradedCHbackgroundCHcheckmarkrs-checkboxCHcontainer-upgradedCHbackgroundCHcheckmarkCHcheckmarkpathrs-checkboxCHcontainer-upgradedCHbackgroundCHmixedmark---transition);
-}
-.rs-checkbox > .container[disabled] {
-	cursor: var(--rs-checkboxCHcontainerNdisabledV---cursor);
-	pointer-events: var(--rs-checkboxCHcontainerNdisabledV---pointer-events);
 }
 .rs-checkbox > .container.-anim-unchecked-checked > .background, .rs-checkbox > .container.-anim-unchecked-indeterminate > .background, .rs-checkbox > .container.-anim-checked-unchecked > .background, .rs-checkbox > .container.-anim-indeterminate-unchecked > .background {
 	animation-duration: var(--rs-checkboxCHcontainer-anim-unchecked-checkedCHbackgroundrs-checkboxCHcontainer-anim-unchecked-indeterminateCHbackgroundrs-checkboxCHcontainer-anim-checked-uncheckedCHbackgroundrs-checkboxCHcontainer-anim-indeterminate-uncheckedCHbackground---animation-duration);
@@ -216,21 +235,6 @@
 	opacity: var(--rs-checkboxCHcontainerCHnativecontrolPSfocusSIbackgroundPEbefore---opacity);
 	transition: var(--rs-checkboxCHcontainerCHnativecontrolPSfocusSIbackgroundPEbefore---transition);
 }
-.rs-checkbox > .container > .nativecontrol:disabled {
-	cursor: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabled---cursor);
-	pointer-events: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabled---pointer-events);
-}
-.rs-checkbox > .container > .nativecontrol:disabled:not(:checked):not([indeterminate]) ~ .background {
-	border-color: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabledPSnotVundefinedPSnotVSIbackground---border-color);
-}
-.rs-checkbox > .container > .nativecontrol:disabled:checked ~ .background {
-	border-color: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabledPScheckedSIbackground---border-color);
-	background-color: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabledPScheckedSIbackground---background-color);
-}
-.rs-checkbox > .container > .nativecontrol:disabled[indeterminate] ~ .background {
-	border-color: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabledNindeterminateVSIbackground---border-color);
-	background-color: var(--rs-checkboxCHcontainerCHnativecontrolPSdisabledNindeterminateVSIbackground---background-color);
-}
 .rs-checkbox > .container > .nativecontrol:checked ~ .background > .checkmark {
 	transition: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundCHcheckmark---transition);
 	opacity: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundCHcheckmark---opacity);
@@ -238,30 +242,30 @@
 .rs-checkbox > .container > .nativecontrol:checked ~ .background > .mixedmark {
 	transform: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundCHmixedmark---transform);
 }
-.rs-checkbox > .container > .nativecontrol[indeterminate] ~ .background > .checkmark {
-	transform: var(--rs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackgroundCHcheckmark---transform);
-	opacity: var(--rs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackgroundCHcheckmark---opacity);
-	transition: var(--rs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackgroundCHcheckmark---transition);
+.rs-checkbox > .container > .nativecontrol:indeterminate ~ .background > .checkmark {
+	transform: var(--rs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackgroundCHcheckmark---transform);
+	opacity: var(--rs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackgroundCHcheckmark---opacity);
+	transition: var(--rs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackgroundCHcheckmark---transition);
 }
-.rs-checkbox > .container > .nativecontrol[indeterminate] ~ .background > .mixedmark {
-	transform: var(--rs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackgroundCHmixedmark---transform);
-	opacity: var(--rs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackgroundCHmixedmark---opacity);
+.rs-checkbox > .container > .nativecontrol:indeterminate ~ .background > .mixedmark {
+	transform: var(--rs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackgroundCHmixedmark---transform);
+	opacity: var(--rs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackgroundCHmixedmark---opacity);
 }
 .rs-checkbox > .container > .nativecontrol:checked ~ .background,
-  .rs-checkbox > .container > .nativecontrol[indeterminate] ~ .background {
-	transition: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundrs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackground---transition);
+  .rs-checkbox > .container > .nativecontrol:indeterminate ~ .background {
+	transition: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundrs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackground---transition);
 }
 .rs-checkbox > .container > .nativecontrol:checked ~ .background > .checkmark > .checkmarkpath,
-  .rs-checkbox > .container > .nativecontrol[indeterminate] ~ .background > .checkmark > .checkmarkpath {
-	stroke-dashoffset: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundCHcheckmarkCHcheckmarkpathrs-checkboxCHcontainerCHnativecontrolNindeterminateVSIbackgroundCHcheckmarkCHcheckmarkpath---stroke-dashoffset);
+  .rs-checkbox > .container > .nativecontrol:indeterminate ~ .background > .checkmark > .checkmarkpath {
+	stroke-dashoffset: var(--rs-checkboxCHcontainerCHnativecontrolPScheckedSIbackgroundCHcheckmarkCHcheckmarkpathrs-checkboxCHcontainerCHnativecontrolPSindeterminateSIbackgroundCHcheckmarkCHcheckmarkpath---stroke-dashoffset);
 }
 .rs-checkbox > .container > .nativecontrol:enabled:checked ~ .background {
 	border-color: var(--rs-checkboxCHcontainerCHnativecontrolPSenabledPScheckedSIbackground---border-color);
 	background-color: var(--rs-checkboxCHcontainerCHnativecontrolPSenabledPScheckedSIbackground---background-color);
 }
-.rs-checkbox > .container > .nativecontrol:enabled[indeterminate] ~ .background {
-	border-color: var(--rs-checkboxCHcontainerCHnativecontrolPSenabledNindeterminateVSIbackground---border-color);
-	background-color: var(--rs-checkboxCHcontainerCHnativecontrolPSenabledNindeterminateVSIbackground---background-color);
+.rs-checkbox > .container > .nativecontrol:enabled:indeterminate ~ .background {
+	border-color: var(--rs-checkboxCHcontainerCHnativecontrolPSenabledPSindeterminateSIbackground---border-color);
+	background-color: var(--rs-checkboxCHcontainerCHnativecontrolPSenabledPSindeterminateSIbackground---background-color);
 }
 .rs-checkbox > .container > .background {
 	display: var(--rs-checkboxCHcontainerCHbackground---display);
@@ -346,10 +350,6 @@
 	padding-right: var(--rs-checkboxCHlabel---padding-right);
 	padding-left: var(--rs-checkboxCHlabel---padding-left);
 }
-.rs-checkbox > .label[disabled] {
-	cursor: var(--rs-checkboxCHlabelNdisabledV---cursor);
-	pointer-events: var(--rs-checkboxCHlabelNdisabledV---pointer-events);
-}
 @media screen and (-ms-high-contrast: active) {
 	.rs-checkbox > .container > .background > .mixedmark {
 		margin: var(--media--rs-checkboxCHcontainerCHbackgroundCHmixedmark---margin);
@@ -375,12 +375,11 @@
 	left: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---left);
 	width: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---width);
 	height: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---height);
+	background-color: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---background-color);
 }
 .rs-ripple-upgraded::before {
 	transition: var(--rs-ripple-upgradedPEbefore---transition);
 	z-index: var(--rs-ripple-upgradedPEbefore---z-index);
-	background-color: var(--rs-ripple-upgradedPEbefore---background-color);
-	content: var(--rs-ripple-upgradedPEbefore---content);
 }
 .rs-ripple-upgraded.rs-ripple-upgraded::before {
 	transform: scale(var(--rs-ripple-fg-scale, 1));
@@ -409,10 +408,6 @@
 	left: var(--rs-ripple-left, calc(50% - 50%));
 	width: var(--rs-ripple-fg-size, 100%);
 	height: var(--rs-ripple-fg-size, 100%);
-}
-.rs-ripple-upgraded::after {
-	background-color: var(--rs-ripple-upgradedPEafter---background-color);
-	content: var(--rs-ripple-upgradedPEafter---content);
 }
 .rs-ripple-upgraded:hover::before {
 	opacity: var(--rs-ripple-upgradedPShoverPEbefore---opacity);

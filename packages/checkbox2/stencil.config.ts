@@ -6,7 +6,7 @@ export const config: Config = {
     {
       type: 'dist',
       copy: [
-        { src: 'mixins.scss' }
+        { src: 'client.scss' }
       ],
       esmLoaderPath: '../loader'
     },
@@ -17,7 +17,7 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
       copy: [
-        { src: 'mixins.scss' }
+        { src: 'client.scss' }
       ]
     }
   ]

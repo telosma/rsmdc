@@ -1,0 +1,95 @@
+import { Component, Element, Prop, State, Method, h } from '@stencil/core';
+import { RSCheckbox } from '../../utils/index'
+
+@Component({
+  tag: 'rs-checkbox',
+  styleUrl: '../../styles/result.css',
+  shadow: true
+})
+export class Checkbox {
+
+  @Element() el: HTMLElement
+
+  @Prop() id: string
+
+  @Prop() name: string
+
+  @Prop() label: string
+
+  @Prop() value: string | number
+
+  @Prop() checked: boolean
+
+  @Prop() disabled: boolean
+
+  @Prop() indeterminate: boolean
+
+  @Prop() dataChecked: string
+
+  @State() rsCheckbox: RSCheckbox
+
+
+
+  @Method()
+  async activateRipple() {
+    this.rsCheckbox.ripple.activate()
+    setTimeout(() => {
+      this.rsCheckbox.ripple.deactivate()
+    }, 200)
+  }
+
+  @Method()
+  async passValueToHost() {
+
+    // this.host.setAttribute('data-checked', this.dataChecked)
+  }
+
+  componentDidLoad() {
+    const checkboxEl = this.el.shadowRoot.querySelector('.container')
+    this.rsCheckbox = new RSCheckbox(checkboxEl)
+  }
+
+  componentDidRender() {
+    const checkboxEl = this.el.shadowRoot.querySelector('.rs-checkbox')
+    const labelEl = this.el.shadowRoot.querySelector('.label')
+
+    if(this.disabled) {
+      checkboxEl.classList.add('-disabled')
+    } else {
+      checkboxEl.classList.remove('-disabled')
+    }
+    if (!this.rsCheckbox) { return }
+    this.rsCheckbox.indeterminate = this.indeterminate
+    this.rsCheckbox.checked = this.checked
+    this.dataChecked = this.checked ? 'checked' : ''
+
+    checkboxEl.addEventListener('click', () => {
+      this.passValueToHost()
+    })
+    labelEl.addEventListener('click', () => {
+      this.activateRipple()
+    })
+  }
+
+  render() {
+    return <div class="rs-checkbox">
+              <div class="container">
+                <input
+                  id={this.id}
+                  name={this.name}
+                  type="checkbox"
+                  class="nativecontrol" />
+                <div class="background">
+                  <svg class="checkmark" viewBox="0 0 24 24">
+                    <path
+                      class="checkmarkpath"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                  </svg>
+                  <div class="mixedmark" />
+                </div>
+              </div>
+              <label htmlFor={this.id}>{this.label}</label>
+            </div>
+  }
+}

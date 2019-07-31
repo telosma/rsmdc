@@ -9,7 +9,18 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsCheckbox {}
+  interface RsCheckbox {
+    'activateRipple': () => Promise<void>;
+    'checked': boolean;
+    'dataChecked': string;
+    'disabled': boolean;
+    'id': string;
+    'indeterminate': boolean;
+    'label': string;
+    'name': string;
+    'passValueToHost': () => Promise<void>;
+    'value': string | number;
+  }
 }
 
 declare global {
@@ -26,7 +37,16 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface RsCheckbox extends JSXBase.HTMLAttributes<HTMLRsCheckboxElement> {}
+  interface RsCheckbox extends JSXBase.HTMLAttributes<HTMLRsCheckboxElement> {
+    'checked'?: boolean;
+    'dataChecked'?: string;
+    'disabled'?: boolean;
+    'id'?: string;
+    'indeterminate'?: boolean;
+    'label'?: string;
+    'name'?: string;
+    'value'?: string | number;
+  }
 
   interface IntrinsicElements {
     'rs-checkbox': RsCheckbox;
