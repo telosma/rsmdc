@@ -115,14 +115,16 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     border-color: $rs-checkbox-disabled-color;
   }
 
-  &.-disabled > .container > .nativecontrol:checked ~ .background {
+  &.-disabled > .container > .nativecontrol:checked ~ .background,
+  &.-disabled > .container > .nativecontrol:enabled:checked ~ .background {
     border-color: transparent;
     background-color: $rs-checkbox-disabled-color;
   }
 
-  &.-disabled > .container > .nativecontrol:indeterminate ~ .background {
+  &.-disabled > .container > .nativecontrol:indeterminate ~ .background,
+  &.-disabled > .container > .nativecontrol:enabled:indeterminate ~ .background {
     border-color: transparent;
-    background-color: $rs-checkbox-disabled-color;
+    background-color: $rs-checkbox-indeterminate-disabled-color;
   }
 
   > .container {
@@ -314,6 +316,16 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     padding-right: 0;
     padding-left: $rs-checkbox-label-spacing;
   }  
+
+  > .rs-ripple-upgraded {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-unbounded;
+    @include rs-ripple-upgraded($rs-theme-on-surface);
+  }
+
+  &.-checked > .rs-ripple-upgraded {
+    @include rs-ripple-upgraded($rs-checkbox-baseline-theme-color);
+  }
 }
 
 @media screen and (-ms-high-contrast: active) {
@@ -323,10 +335,3 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     }
   }
 }
-
-.rs-ripple-upgraded {
-  @include rs-ripple-surface;
-  @include rs-ripple-radius-unbounded;
-  @include rs-ripple-upgraded($rs-checkbox-baseline-theme-color);
-}
-

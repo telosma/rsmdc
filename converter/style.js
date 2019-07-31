@@ -55,6 +55,6 @@ module.exports.generateStyle = (sourceCss, styles) => {
     return result
   }, '')
   const client = `${componentName} {\n${style}\n}`
-  fs.writeFileSync(`${dirPath}/result.scss`, css)
+  fs.writeFileSync(`${dirPath}/result.css`, css)
   fs.writeFileSync('./src/client.scss', client)
 }

@@ -145,13 +145,15 @@
 .rs-checkbox.-disabled > .container > .nativecontrol:not(:checked):not(:indeterminate) ~ .background {
 	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSnotVundefinedPSnotVundefinedSIbackground---border-color);
 }
-.rs-checkbox.-disabled > .container > .nativecontrol:checked ~ .background {
-	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPScheckedSIbackground---border-color);
-	background-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPScheckedSIbackground---background-color);
+.rs-checkbox.-disabled > .container > .nativecontrol:checked ~ .background,
+  .rs-checkbox.-disabled > .container > .nativecontrol:enabled:checked ~ .background {
+	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPScheckedSIbackgroundrs-checkbox-disabledCHcontainerCHnativecontrolPSenabledPScheckedSIbackground---border-color);
+	background-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPScheckedSIbackgroundrs-checkbox-disabledCHcontainerCHnativecontrolPSenabledPScheckedSIbackground---background-color);
 }
-.rs-checkbox.-disabled > .container > .nativecontrol:indeterminate ~ .background {
-	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSindeterminateSIbackground---border-color);
-	background-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSindeterminateSIbackground---background-color);
+.rs-checkbox.-disabled > .container > .nativecontrol:indeterminate ~ .background,
+  .rs-checkbox.-disabled > .container > .nativecontrol:enabled:indeterminate ~ .background {
+	border-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSindeterminateSIbackgroundrs-checkbox-disabledCHcontainerCHnativecontrolPSenabledPSindeterminateSIbackground---border-color);
+	background-color: var(--rs-checkbox-disabledCHcontainerCHnativecontrolPSindeterminateSIbackgroundrs-checkbox-disabledCHcontainerCHnativecontrolPSenabledPSindeterminateSIbackground---background-color);
 }
 .rs-checkbox > .container {
 	display: var(--rs-checkboxCHcontainer---display);
@@ -350,83 +352,108 @@
 	padding-right: var(--rs-checkboxCHlabel---padding-right);
 	padding-left: var(--rs-checkboxCHlabel---padding-left);
 }
-@media screen and (-ms-high-contrast: active) {
-	.rs-checkbox > .container > .background > .mixedmark {
-		margin: var(--media--rs-checkboxCHcontainerCHbackgroundCHmixedmark---margin);
-	}
-}
-.rs-ripple-upgraded {
+.rs-checkbox > .rs-ripple-upgraded {
 	--rs-ripple-fg-size: var(--rs-ripple-fg-size);
 	--rs-ripple-left: var(--rs-ripple-left);
 	--rs-ripple-top: var(--rs-ripple-top);
 	--rs-ripple-fg-scale: var(--rs-ripple-fg-scale);
 	--rs-ripple-fg-translate-end: var(--rs-ripple-fg-translate-end);
 	--rs-ripple-fg-translate-start: var(--rs-ripple-fg-translate-start);
-	-webkit-tap-highlight-color: var(--rs-ripple-upgraded----webkit-tap-highlight-color);
-	will-change: var(--rs-ripple-upgraded---will-change);
+	-webkit-tap-highlight-color: var(--rs-checkboxCHrs-ripple-upgraded----webkit-tap-highlight-color);
+	will-change: var(--rs-checkboxCHrs-ripple-upgraded---will-change);
 }
-.rs-ripple-upgraded::before, .rs-ripple-upgraded::after {
-	position: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---position);
-	border-radius: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---border-radius);
-	opacity: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---opacity);
-	pointer-events: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---pointer-events);
-	content: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---content);
-	top: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---top);
-	left: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---left);
-	width: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---width);
-	height: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---height);
-	background-color: var(--rs-ripple-upgradedPEbeforers-ripple-upgradedPEafter---background-color);
+.rs-checkbox > .rs-ripple-upgraded::before, .rs-checkbox > .rs-ripple-upgraded::after {
+	position: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---position);
+	border-radius: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---border-radius);
+	opacity: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---opacity);
+	pointer-events: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---pointer-events);
+	content: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---content);
+	top: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---top);
+	left: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---left);
+	width: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---width);
+	height: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---height);
+	background-color: var(--rs-checkboxCHrs-ripple-upgradedPEbeforers-checkboxCHrs-ripple-upgradedPEafter---background-color);
 }
-.rs-ripple-upgraded::before {
-	transition: var(--rs-ripple-upgradedPEbefore---transition);
-	z-index: var(--rs-ripple-upgradedPEbefore---z-index);
+.rs-checkbox > .rs-ripple-upgraded::before {
+	transition: var(--rs-checkboxCHrs-ripple-upgradedPEbefore---transition);
+	z-index: var(--rs-checkboxCHrs-ripple-upgradedPEbefore---z-index);
 }
-.rs-ripple-upgraded.rs-ripple-upgraded::before {
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded::before {
 	transform: scale(var(--rs-ripple-fg-scale, 1));
 }
-.rs-ripple-upgraded.rs-ripple-upgraded::after {
-	top: var(--rs-ripple-upgradedrs-ripple-upgradedPEafter---top);
-	left: var(--rs-ripple-upgradedrs-ripple-upgradedPEafter---left);
-	transform: var(--rs-ripple-upgradedrs-ripple-upgradedPEafter---transform);
-	transform-origin: var(--rs-ripple-upgradedrs-ripple-upgradedPEafter---transform-origin);
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded::after {
+	top: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgradedPEafter---top);
+	left: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgradedPEafter---left);
+	transform: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgradedPEafter---transform);
+	transform-origin: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgradedPEafter---transform-origin);
 	width: var(--rs-ripple-fg-size, 100%);
 	height: var(--rs-ripple-fg-size, 100%);
 }
-.rs-ripple-upgraded.rs-ripple-upgraded--unbounded::after {
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded--unbounded::after {
 	top: var(--rs-ripple-top, 0);
 	left: var(--rs-ripple-left, 0);
 }
-.rs-ripple-upgraded.rs-ripple-upgraded--foreground-activation::after {
-	animation: var(--rs-ripple-upgradedrs-ripple-upgraded--foreground-activationPEafter---animation);
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded--foreground-activation::after {
+	animation: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgraded--foreground-activationPEafter---animation);
 }
-.rs-ripple-upgraded.rs-ripple-upgraded--foreground-deactivation::after {
-	animation: var(--rs-ripple-upgradedrs-ripple-upgraded--foreground-deactivationPEafter---animation);
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded--foreground-deactivation::after {
+	animation: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgraded--foreground-deactivationPEafter---animation);
 	transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
 }
-.rs-ripple-upgraded.rs-ripple-upgraded::before, .rs-ripple-upgraded.rs-ripple-upgraded::after {
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded::before, .rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded::after {
 	top: var(--rs-ripple-top, calc(50% - 50%));
 	left: var(--rs-ripple-left, calc(50% - 50%));
 	width: var(--rs-ripple-fg-size, 100%);
 	height: var(--rs-ripple-fg-size, 100%);
 }
-.rs-ripple-upgraded:hover::before {
-	opacity: var(--rs-ripple-upgradedPShoverPEbefore---opacity);
+.rs-checkbox > .rs-ripple-upgraded:hover::before {
+	opacity: var(--rs-checkboxCHrs-ripple-upgradedPShoverPEbefore---opacity);
 }
-.rs-ripple-upgraded:not(.rs-ripple-upgraded):focus::before {
-	transition-duration: var(--rs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---transition-duration);
-	opacity: var(--rs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---opacity);
+.rs-checkbox > .rs-ripple-upgraded:not(.rs-ripple-upgraded):focus::before {
+	transition-duration: var(--rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---transition-duration);
+	opacity: var(--rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---opacity);
 }
-.rs-ripple-upgraded.rs-ripple-upgraded--background-focused::before {
-	transition-duration: var(--rs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---transition-duration);
-	opacity: var(--rs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---opacity);
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded--background-focused::before {
+	transition-duration: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---transition-duration);
+	opacity: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---opacity);
 }
-.rs-ripple-upgraded:not(.rs-ripple-upgraded)::after {
-	transition: var(--rs-ripple-upgradedPSnotVrs-ripple-upgradedPEafter---transition);
+.rs-checkbox > .rs-ripple-upgraded:not(.rs-ripple-upgraded)::after {
+	transition: var(--rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPEafter---transition);
 }
-.rs-ripple-upgraded:not(.rs-ripple-upgraded):active::after {
-	transition-duration: var(--rs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---transition-duration);
-	opacity: var(--rs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---opacity);
+.rs-checkbox > .rs-ripple-upgraded:not(.rs-ripple-upgraded):active::after {
+	transition-duration: var(--rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---transition-duration);
+	opacity: var(--rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---opacity);
 }
-.rs-ripple-upgraded.rs-ripple-upgraded {
-	--rs-ripple-fg-opacity: var(--rs-ripple-upgradedrs-ripple-upgraded-----rs-ripple-fg-opacity);
+.rs-checkbox > .rs-ripple-upgraded.rs-ripple-upgraded {
+	--rs-ripple-fg-opacity: var(--rs-checkboxCHrs-ripple-upgradedrs-ripple-upgraded-----rs-ripple-fg-opacity);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded::before, .rs-checkbox.-checked > .rs-ripple-upgraded::after {
+	background-color: var(--rs-checkbox-checkedCHrs-ripple-upgradedPEbeforers-checkbox-checkedCHrs-ripple-upgradedPEafter---background-color);
+	content: var(--rs-checkbox-checkedCHrs-ripple-upgradedPEbeforers-checkbox-checkedCHrs-ripple-upgradedPEafter---content);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded:hover::before {
+	opacity: var(--rs-checkbox-checkedCHrs-ripple-upgradedPShoverPEbefore---opacity);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded:not(.rs-ripple-upgraded):focus::before {
+	transition-duration: var(--rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---transition-duration);
+	opacity: var(--rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---opacity);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded.rs-ripple-upgraded--background-focused::before {
+	transition-duration: var(--rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---transition-duration);
+	opacity: var(--rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---opacity);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded:not(.rs-ripple-upgraded)::after {
+	transition: var(--rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPEafter---transition);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded:not(.rs-ripple-upgraded):active::after {
+	transition-duration: var(--rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---transition-duration);
+	opacity: var(--rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---opacity);
+}
+.rs-checkbox.-checked > .rs-ripple-upgraded.rs-ripple-upgraded {
+	--rs-ripple-fg-opacity: var(--rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded-----rs-ripple-fg-opacity);
+}
+@media screen and (-ms-high-contrast: active) {
+	.rs-checkbox > .container > .background > .mixedmark {
+		margin: var(--media--rs-checkboxCHcontainerCHbackgroundCHmixedmark---margin);
+	}
 }

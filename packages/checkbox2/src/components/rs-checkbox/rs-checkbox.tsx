@@ -72,6 +72,7 @@ export class Checkbox {
     } else {
       this.checkbox.classList.remove('-disabled')
     }
+
     this.rsCheckbox.checked = this.checked
     this.rsCheckbox.indeterminate = this.indeterminate
 
@@ -94,6 +95,11 @@ export class Checkbox {
   componentDidRender() {
     if (!this.rsCheckbox) { return }
     this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
+    if (this.dataChecked) {
+      this.checkbox.classList.add('-checked')
+    } else {
+      this.checkbox.classList.remove('-checked')
+    }
   }
 
   render() {
