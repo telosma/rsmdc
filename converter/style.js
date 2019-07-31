@@ -38,6 +38,7 @@ module.exports.styleScss = (dirPath) => {
 
 module.exports.generateStyle = (sourceCss, styles, dirPath) => {
   let css = sourceCss
+  // const componentName = dirPath.replace(/.*\//g, '')
   const componentName = 'rs-checkbox'
 
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
