@@ -12,13 +12,11 @@ export namespace Components {
   interface RsCheckbox {
     'activateRipple': () => Promise<void>;
     'checked': boolean;
-    'dataChecked': string;
     'disabled': boolean;
     'id': string;
     'indeterminate': boolean;
     'label': string;
     'name': string;
-    'passValueToHost': () => Promise<void>;
     'value': string | number;
   }
 }
@@ -39,12 +37,12 @@ declare global {
 declare namespace LocalJSX {
   interface RsCheckbox extends JSXBase.HTMLAttributes<HTMLRsCheckboxElement> {
     'checked'?: boolean;
-    'dataChecked'?: string;
     'disabled'?: boolean;
     'id'?: string;
     'indeterminate'?: boolean;
     'label'?: string;
     'name'?: string;
+    'onChange'?: (event: CustomEvent<any>) => void;
     'value'?: string | number;
   }
 
