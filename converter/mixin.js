@@ -45,6 +45,7 @@ const getSelectorsScss = (selectors) => {
   return text
 }
 
+
 module.exports.mixinSelectorsScss = (dirPath) => {
   const sourceScss = getMixinFile(dirPath)
   const replaceScss = replaceSourceScss(sourceScss)
@@ -55,7 +56,7 @@ module.exports.mixinSelectorsScss = (dirPath) => {
   return scss
 }
 
-module.exports.createClientMixin = (replaceValues, dirPath) => {
+module.exports.generateClientMixin = (replaceValues, dirPath) => {
   const sourceScss = getMixinFile(dirPath)
   const replaceScss = replaceSourceScss(sourceScss)
   const mixinSelectors = getSelectorsInMixin(replaceScss)
