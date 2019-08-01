@@ -12,7 +12,9 @@
   "unpkg": "dist/checkbox/checkbox.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",
