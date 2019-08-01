@@ -83,5 +83,5 @@ module.exports.generateClientMixin = (replaceValues) => {
   },'')
 
   scss = files + scss
-  fs.writeFileSync('./src/client-mixins.scss', scss)
+  fs.writeFileSync('./src/dist/client-mixins.scss', scss)
 }

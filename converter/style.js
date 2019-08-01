@@ -45,7 +45,6 @@ module.exports.styleScss = () => {
 }
 
 module.exports.generateStyle = (sourceCss, styles) => {
-  const fileName = getComponentStyleFileName()
   let css = sourceCss
 
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
@@ -63,6 +62,6 @@ module.exports.generateStyle = (sourceCss, styles) => {
     return result
   }, '')
   const clientStyle = `:root {\n${style}\n}`
-  fs.writeFileSync(`${dirPath}/result.css`, css)
-  fs.writeFileSync(`./src/client-${fileName}`, clientStyle)
+  fs.writeFileSync(`./src/dist/result.css`, css)
+  fs.writeFileSync(`./src/dist/client-style.scss`, clientStyle)
 }

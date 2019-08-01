@@ -2,7 +2,7 @@ import { Component, Element, Prop, State, Watch, Event, EventEmitter, Method, Ho
 import { RSCheckbox } from '../../utils/index'
 @Component({
   tag: 'rs-checkbox',
-  styleUrl: '../../styles/result.css',
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 export class Checkbox {
