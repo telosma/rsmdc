@@ -30,7 +30,7 @@
  --rs-checkboxCHcontainer---white-space: nowrap;
  --rs-checkboxCHcontainer---cursor: pointer;
  --rs-checkboxCHcontainer---vertical-align: bottom;
- --rs-checkboxCHcontainer-background-focusedCHbackgroundPEbefore---content: none;
+ --rs-checkboxCHcontainerrs-ripple-upgraded--background-focusedCHbackgroundPEbefore---content: none;
  --rs-checkboxCHcontainer-upgradedCHbackgroundrs-checkboxCHcontainer-upgradedCHbackgroundCHcheckmarkrs-checkboxCHcontainer-upgradedCHbackgroundCHcheckmarkCHcheckmarkpathrs-checkboxCHcontainer-upgradedCHbackgroundCHmixedmark---transition: none !important;
  --rs-checkboxCHcontainer-anim-unchecked-checkedCHbackgroundrs-checkboxCHcontainer-anim-unchecked-indeterminateCHbackgroundrs-checkboxCHcontainer-anim-checked-uncheckedCHbackgroundrs-checkboxCHcontainer-anim-indeterminate-uncheckedCHbackground---animation-duration: 180ms;
  --rs-checkboxCHcontainer-anim-unchecked-checkedCHbackgroundrs-checkboxCHcontainer-anim-unchecked-indeterminateCHbackgroundrs-checkboxCHcontainer-anim-checked-uncheckedCHbackgroundrs-checkboxCHcontainer-anim-indeterminate-uncheckedCHbackground---animation-timing-function: linear;
@@ -192,16 +192,16 @@
  --rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---transition-duration: 75ms;
  --rs-checkboxCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---opacity: #{rs-states-opacity(#000, press)};
  --rs-checkboxCHrs-ripple-upgradedrs-ripple-upgraded-----rs-ripple-fg-opacity: #{rs-states-opacity(#000, press)};
- --rs-checkbox-checkedCHrs-ripple-upgradedPEbeforers-checkbox-checkedCHrs-ripple-upgradedPEafter---background-color: #{$rs-checkbox-baseline-theme-color};
- --rs-checkbox-checkedCHrs-ripple-upgradedPEbeforers-checkbox-checkedCHrs-ripple-upgradedPEafter---content: '';
- --rs-checkbox-checkedCHrs-ripple-upgradedPShoverPEbefore---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, hover)};
- --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---transition-duration: 75ms;
- --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, focus)};
- --rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---transition-duration: 75ms;
- --rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, focus)};
- --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPEafter---transition: opacity 150ms linear;
- --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---transition-duration: 75ms;
- --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, press)};
- --rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded-----rs-ripple-fg-opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, press)};
+ --rs-checkbox-checkedCHrs-ripple-upgradedPEbeforers-checkbox-checkedCHrs-ripple-upgradedPEafterrs-checkbox-indeterminateCHrs-ripple-upgradedPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedPEafter---background-color: #{$rs-checkbox-baseline-theme-color};
+ --rs-checkbox-checkedCHrs-ripple-upgradedPEbeforers-checkbox-checkedCHrs-ripple-upgradedPEafterrs-checkbox-indeterminateCHrs-ripple-upgradedPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedPEafter---content: '';
+ --rs-checkbox-checkedCHrs-ripple-upgradedPShoverPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedPShoverPEbefore---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, hover)};
+ --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---transition-duration: 75ms;
+ --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSfocusPEbefore---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, focus)};
+ --rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---transition-duration: 75ms;
+ --rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbeforers-checkbox-indeterminateCHrs-ripple-upgradedrs-ripple-upgraded--background-focusedPEbefore---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, focus)};
+ --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPEafterrs-checkbox-indeterminateCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPEafter---transition: opacity 150ms linear;
+ --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafterrs-checkbox-indeterminateCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---transition-duration: 75ms;
+ --rs-checkbox-checkedCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafterrs-checkbox-indeterminateCHrs-ripple-upgradedPSnotVrs-ripple-upgradedPSactivePEafter---opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, press)};
+ --rs-checkbox-checkedCHrs-ripple-upgradedrs-ripple-upgradedrs-checkbox-indeterminateCHrs-ripple-upgradedrs-ripple-upgraded-----rs-ripple-fg-opacity: #{rs-states-opacity($rs-checkbox-baseline-theme-color, press)};
  --media--rs-checkboxCHcontainerCHbackgroundCHmixedmark---margin: 0 1px;
 }

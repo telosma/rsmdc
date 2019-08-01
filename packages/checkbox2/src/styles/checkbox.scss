@@ -141,7 +141,7 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
   }
 
   // -background-focused is ripple class.
-  > .container.-background-focused > .background::before {
+  > .container.rs-ripple-upgraded--background-focused > .background::before {
     content: none
   }
 
@@ -322,7 +322,8 @@ $fade-out-animation: rs-checkbox-animation-name(rs-checkbox-container-keyframes-
     @include rs-ripple-upgraded($rs-theme-on-surface);
   }
 
-  &.-checked > .rs-ripple-upgraded {
+  &.-checked > .rs-ripple-upgraded,
+  &.-indeterminate > .rs-ripple-upgraded {
     @include rs-ripple-upgraded($rs-checkbox-baseline-theme-color);
   }
 }
