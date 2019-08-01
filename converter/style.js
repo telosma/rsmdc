@@ -35,10 +35,8 @@ module.exports.styleScss = (styleCssName) => {
   return scss
 }
 
-module.exports.generateStyle = (sourceCss, styles) => {
+module.exports.generateStyle = (sourceCss, styles, fileName) => {
   let css = sourceCss
-  // const componentName = dirPath.replace(/.*\//g, '')
-  const componentName = 'rs-checkbox'
 
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
     if(typeof value === 'object') {
@@ -54,7 +52,7 @@ module.exports.generateStyle = (sourceCss, styles) => {
     result = `${result}\n ${prop}: ${value};`
     return result
   }, '')
-  const client = `${componentName} {\n${style}\n}`
+  const clientStyle = `:root {\n${style}\n}`
   fs.writeFileSync(`${dirPath}/result.css`, css)
-  fs.writeFileSync('./src/client.scss', client)
+  fs.writeFileSync(`./src/client-${fileName}`, clientStyle)
 }

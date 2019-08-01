@@ -145,7 +145,7 @@ module.exports.convertStyle = (fileName, nodeModulesPath) => {
   const css = replaceSassVariablesCss(customPropJson)
   const styles = convertPropToCustomProp(customPropJson, sourceJson)
 
-  generateStyle(css, styles)
+  generateStyle(css, styles, fileName)
 }
 
 
