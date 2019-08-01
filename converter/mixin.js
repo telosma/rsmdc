@@ -78,7 +78,7 @@ module.exports.generateClientMixin = (replaceValues) => {
   })
 
   const files = importFiles.reduce((res, file) => {
-    const value = file.replace('./', './styles/')
+    const value = file.replace('./', '../styles/')
     return res = `${res}${value}\n`
   },'')
 

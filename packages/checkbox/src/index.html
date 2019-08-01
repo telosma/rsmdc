@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
 
-  <script type="module" src="/build/checkbox-test.esm.js"></script>
-  <script nomodule src="/build/checkbox-test.js"></script>
+  <script type="module" src="/build/checkbox.esm.js"></script>
+  <script nomodule src="/build/checkbox.js"></script>
   <script src="https://cdn.rawgit.com/medialize/sass.js/master/dist/sass.sync.js"></script>
 </head>
 <body>
@@ -18,10 +18,11 @@
 </style>
 <script>
   (async function() {
-    const res = await fetch('./mixins.scss')
-    const mixinScss = await res.text()
+    const res = await fetch('./styles/_variables.scss')
+    const clientStyleScss = await res.text()
     const styleScss = document.querySelector('style[type="text/scss"]').textContent
-    Sass.compile(mixinScss + styleScss, result => {
+    Sass.compile(clientStyleScss + styleScss, result => {
+      console.log(result)
       style = document.createElement('style')
       style.type = 'text/css'
       style.appendChild(document.createTextNode(result.text))
