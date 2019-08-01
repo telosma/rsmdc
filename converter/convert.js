@@ -8,7 +8,7 @@ const { replaceWords, ripples, dirPath } = require('./constants')
 const { styleScss, generateStyle } = require('./style')
 const { mixinSelectorsScss, generateClientMixin } = require('./mixin')
 
-const getCompileCss = (dirPath, nodeModulesPath, targetScss) => {
+const getCompileCss = (nodeModulesPath, targetScss) => {
   const copyFile = `${dirPath}/copy.scss`
   fs.writeFileSync(copyFile, targetScss)
   const res = sass.renderSync({
@@ -134,9 +134,9 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
 
 // generate styles
-module.exports.convertStyle = (fileName, nodeModulesPath) => {
-  const scss = styleScss(fileName)
-  const compileCss = getCompileCss(dirPath, nodeModulesPath, scss)
+module.exports.convertStyle = (nodeModulesPath) => {
+  const scss = styleScss()
+  const compileCss = getCompileCss(nodeModulesPath, scss)
     .replace(/(\/\*(.*?)')|('(.*?)\*\/)/g, '')
 
   const sourceJson = CSSJSON.toJSON(compileCss)
@@ -145,14 +145,14 @@ module.exports.convertStyle = (fileName, nodeModulesPath) => {
   const css = replaceSassVariablesCss(customPropJson)
   const styles = convertPropToCustomProp(customPropJson, sourceJson)
 
-  generateStyle(css, styles, fileName)
+  generateStyle(css, styles)
 }
 
 
 // generate client mixin 
 module.exports.convertMixin = (nodeModulesPath) => {
   const parseMixinScss = mixinSelectorsScss()
-  const convertCss = getCompileCss(dirPath, nodeModulesPath, parseMixinScss)
+  const convertCss = getCompileCss(nodeModulesPath, parseMixinScss)
 
   const sj = CSSJSON.toJSON(convertCss)
   const cj = CSSJSON.toJSON(convertCss)

@@ -15,7 +15,7 @@
     "loader/"
   ],
   "scripts": {
-    "convert": "node ../../converter/index.js checkbox.scss",
+    "convert": "node ../../converter/index.js",
     "build": "yarn convert && stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",

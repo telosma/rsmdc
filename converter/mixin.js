@@ -2,7 +2,7 @@
 const fs = require('fs')
 const { dirPath } = require('./constants')
 
-const getMixinFile = (dirPath) => {
+const getMixinFile = () => {
   const fileName = fs.readdirSync(`${dirPath}`, 'utf8').filter(file => file.match(/^(?!_)mixins/g))[0]
   return fs.readFileSync(`${dirPath}/${fileName}`, 'utf8')
 }
@@ -48,7 +48,7 @@ const getSelectorsScss = (selectors) => {
 
 
 module.exports.mixinSelectorsScss = () => {
-  const sourceScss = getMixinFile(dirPath)
+  const sourceScss = getMixinFile()
   const replaceScss = replaceSourceScss(sourceScss)
   const mixinSelectors = getSelectorsInMixin(replaceScss)
 
@@ -57,7 +57,7 @@ module.exports.mixinSelectorsScss = () => {
 }
 
 module.exports.generateClientMixin = (replaceValues) => {
-  const sourceScss = getMixinFile(dirPath)
+  const sourceScss = getMixinFile()
   const replaceScss = replaceSourceScss(sourceScss)
   const mixinSelectors = getSelectorsInMixin(replaceScss)
   const importFiles = sourceScss.match(/@import(.*?);/g)
