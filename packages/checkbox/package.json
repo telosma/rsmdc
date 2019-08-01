@@ -14,7 +14,8 @@
     "dist/",
     "loader/",
     "src/styles/",
-    "src/dist/"
+    "src/dist/",
+    "rs-checkbox.scss"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",
