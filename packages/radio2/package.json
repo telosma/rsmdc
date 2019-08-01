@@ -12,10 +12,7 @@
   "unpkg": "dist/radio2/radio2.js",
   "files": [
     "dist/",
-    "loader/",
-    "src/styles/",
-    "src/dist/",
-    "rs-radio.scss"
+    "loader/"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",

@@ -9,53 +9,33 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
+  interface RsRadio {
+    'id': string;
+    'label': string;
   }
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLRsRadioElement extends Components.RsRadio, HTMLStencilElement {}
+  var HTMLRsRadioElement: {
+    prototype: HTMLRsRadioElement;
+    new (): HTMLRsRadioElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'rs-radio': HTMLRsRadioElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
+  interface RsRadio extends JSXBase.HTMLAttributes<HTMLRsRadioElement> {
+    'id'?: string;
+    'label'?: string;
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'rs-radio': RsRadio;
   }
 }
 
