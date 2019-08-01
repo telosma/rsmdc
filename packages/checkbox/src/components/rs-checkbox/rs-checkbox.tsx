@@ -41,7 +41,7 @@ export class Checkbox {
 
   @Watch('indeterminate')
   indeterminateHandler() {
-    this.isIndeterminate()
+    this.isHostIndeterminate()
   }
 
   @Event({
@@ -69,6 +69,8 @@ export class Checkbox {
   @Method()
   async isHostChecked() {
     this.rsCheckbox.checked = this.checked
+    this.updateDataChecked()
+    this.isChecked()
   }
 
   @Method()
@@ -90,8 +92,15 @@ export class Checkbox {
   }
 
   @Method()
+  async isHostIndeterminate() {
+    this.rsCheckbox.indeterminate = this.indeterminate
+  }
+
+  @Method()
   async updateDataChecked() {
-    this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
+    const isChecked = this.rsCheckbox.checked ? 'checked' : ''
+    this.el.setAttribute('data-checked', isChecked)
+    this.dataChecked = isChecked
   }
 
   componentDidLoad() {
@@ -99,9 +108,9 @@ export class Checkbox {
     this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
     this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
 
-    this.isHostChecked()
     this.isDisabled()
-    this.rsCheckbox.indeterminate = this.indeterminate
+    this.isHostChecked()
+    this.isHostIndeterminate()
     this.isIndeterminate()
 
     this.checkbox.addEventListener('click', () => {
@@ -110,14 +119,6 @@ export class Checkbox {
     })
     labelEl.addEventListener('click', () => {
       this.activateRipple()
-    })
-
-    const observer = new MutationObserver(mutation => {
-      if (mutation[0].attributeName !== 'data-checked') { return }
-      this.change.emit({ value: this.value})
-    })
-    observer.observe(this.el, {
-      attributes: true
     })
   }
 
@@ -128,8 +129,12 @@ export class Checkbox {
     this.isChecked()
   }
 
+  componentDidUpdate() {
+    this.change.emit({ value: this.value })
+  }
+
   render() {
-    return  <Host data-checked={this.dataChecked}>
+    return  <Host>
               <div class="rs-checkbox">
                 <div class="container">
                   <input
@@ -147,7 +152,7 @@ export class Checkbox {
                     <div class="mixedmark" />
                   </div>
                 </div>
-                <label class="label" htmlFor={this.id}>{this.label}</label>
+                <label class="label" htmlFor={this.id} >{this.label}</label>
               </div>
             </Host>
   }

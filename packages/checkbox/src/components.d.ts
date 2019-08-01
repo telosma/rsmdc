@@ -18,6 +18,7 @@ export namespace Components {
     'isChecked': () => Promise<void>;
     'isDisabled': () => Promise<void>;
     'isHostChecked': () => Promise<void>;
+    'isHostIndeterminate': () => Promise<void>;
     'isIndeterminate': () => Promise<void>;
     'label': string;
     'name': string;

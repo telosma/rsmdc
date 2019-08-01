@@ -67,6 +67,16 @@ Type: `Promise<void>`
 
 
 
+### `isHostIndeterminate() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `isIndeterminate() => Promise<void>`
 
 
