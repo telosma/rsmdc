@@ -11,6 +11,13 @@ module.exports.replaceWords = {
   descendant: 'DE'
 }
 
-module.exports.ripples = ['--rs-ripple-fg-size', '--rs-ripple-left', '--rs-ripple-top', '--rs-ripple-fg-scale', '--rs-ripple-fg-translate-end', '--rs-ripple-fg-translate-start']
+module.exports.ripples = [
+  '--rs-ripple-fg-size', 
+  '--rs-ripple-left', 
+  '--rs-ripple-top', 
+  '--rs-ripple-fg-scale', 
+  '--rs-ripple-fg-translate-end', 
+  '--rs-ripple-fg-translate-start'
+]
 
 module.exports.dirPath = './src/styles'
