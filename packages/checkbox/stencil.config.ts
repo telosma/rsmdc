@@ -5,9 +5,6 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      copy: [
-        { src: 'client-checkbox.scss' }
-      ],
       esmLoaderPath: '../loader'
     },
     {
@@ -16,9 +13,6 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
-      copy: [
-        { src: 'client-checkbox.scss' }
-      ]
     }
   ]
 };
