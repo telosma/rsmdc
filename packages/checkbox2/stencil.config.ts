@@ -6,7 +6,7 @@ export const config: Config = {
     {
       type: 'dist',
       copy: [
-        { src: 'client.scss' }
+        { src: 'client-checkbox.scss' }
       ],
       esmLoaderPath: '../loader'
     },
@@ -17,7 +17,7 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
       copy: [
-        { src: 'client.scss' }
+        { src: 'client-checkbox.scss' }
       ]
     }
   ]

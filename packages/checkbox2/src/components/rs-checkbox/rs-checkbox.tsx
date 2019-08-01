@@ -1,6 +1,5 @@
 import { Component, Element, Prop, State, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core';
 import { RSCheckbox } from '../../utils/index'
-
 @Component({
   tag: 'rs-checkbox',
   styleUrl: '../../styles/result.css',
@@ -26,27 +25,28 @@ export class Checkbox {
 
   @State() dataChecked: string = ''
 
-  @State() rsCheckbox: RSCheckbox
+  rsCheckbox: RSCheckbox
 
   checkbox: Element
 
   @Watch('checked')
-  isChecked() {
-    this.rsCheckbox.checked = this.checked
+  checkedHandler() {
+    this.isChecked()
   }
 
   @Watch('disabled')
-  isDisabled() {
-    if (this.disabled) {
-      this.checkbox.classList.add('-disabled')
-    } else {
-      this.checkbox.classList.remove('-disabled')
-    }
+  disabledHandler() {
+    this.isDisabled()
   }
 
   @Watch('indeterminate')
-  isIndeterminate() {
-    this.rsCheckbox.indeterminate = this.indeterminate
+  indeterminateHandler() {
+    this.isIndeterminate()
+  }
+
+  @Watch('rsCheckbox[indeterminate]')
+  handler() {
+    console.log(111)
   }
 
   @Event({
@@ -62,22 +62,44 @@ export class Checkbox {
     }, 200)
   }
 
-  componentDidLoad() {
-    const labelEl = this.el.shadowRoot.querySelector('.label')
-    this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
-    this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
+  @Method()
+  async isChecked() {
+    this.rsCheckbox.checked = this.checked
+  }
 
+  @Method()
+  async isIndeterminate() {
+    this.rsCheckbox.indeterminate = this.indeterminate
+    if (this.indeterminate) {
+      this.checkbox.classList.add('-indeterminate')
+    } else {
+      this.checkbox.classList.remove('-indeterminate')
+    }
+  }
+
+  @Method()
+  async isDisabled() {
     if (this.disabled) {
       this.checkbox.classList.add('-disabled')
     } else {
       this.checkbox.classList.remove('-disabled')
     }
+  }
 
-    this.rsCheckbox.checked = this.checked
-    this.rsCheckbox.indeterminate = this.indeterminate
+  componentDidLoad() {
+    const labelEl = this.el.shadowRoot.querySelector('.label')
+    this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
+    this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
+
+    this.isDisabled()
+    this.isChecked()
+    this.isIndeterminate()
 
     this.checkbox.addEventListener('click', () => {
       this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
+      if (!this.rsCheckbox.indeterminate) {
+        this.checkbox.classList.remove('-indeterminate')
+      }
     })
     labelEl.addEventListener('click', () => {
       this.activateRipple()
@@ -94,6 +116,7 @@ export class Checkbox {
 
   componentDidRender() {
     if (!this.rsCheckbox) { return }
+
     this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
     if (this.dataChecked) {
       this.checkbox.classList.add('-checked')

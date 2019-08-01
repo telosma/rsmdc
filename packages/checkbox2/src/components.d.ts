@@ -15,6 +15,9 @@ export namespace Components {
     'disabled': boolean;
     'id': string;
     'indeterminate': boolean;
+    'isChecked': () => Promise<void>;
+    'isDisabled': () => Promise<void>;
+    'isIndeterminate': () => Promise<void>;
     'label': string;
     'name': string;
     'value': string | number;
