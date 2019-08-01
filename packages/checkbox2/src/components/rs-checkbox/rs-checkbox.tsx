@@ -31,7 +31,7 @@ export class Checkbox {
 
   @Watch('checked')
   checkedHandler() {
-    this.isChecked()
+    this.isHostChecked()
   }
 
   @Watch('disabled')
@@ -44,11 +44,6 @@ export class Checkbox {
     this.isIndeterminate()
   }
 
-  @Watch('rsCheckbox[indeterminate]')
-  handler() {
-    console.log(111)
-  }
-
   @Event({
     cancelable: false,
     composed: false,
@@ -57,24 +52,9 @@ export class Checkbox {
   @Method()
   async activateRipple() {
     this.rsCheckbox.ripple.activate()
-    setTimeout(() => {
+    setTimeout(() => { // TODO
       this.rsCheckbox.ripple.deactivate()
     }, 200)
-  }
-
-  @Method()
-  async isChecked() {
-    this.rsCheckbox.checked = this.checked
-  }
-
-  @Method()
-  async isIndeterminate() {
-    this.rsCheckbox.indeterminate = this.indeterminate
-    if (this.indeterminate) {
-      this.checkbox.classList.add('-indeterminate')
-    } else {
-      this.checkbox.classList.remove('-indeterminate')
-    }
   }
 
   @Method()
@@ -86,20 +66,47 @@ export class Checkbox {
     }
   }
 
+  @Method()
+  async isHostChecked() {
+    this.rsCheckbox.checked = this.checked
+  }
+
+  @Method()
+  async isChecked() {
+    if (this.dataChecked) {
+      this.checkbox.classList.add('-checked')
+    } else {
+      this.checkbox.classList.remove('-checked')
+    }
+  }
+
+  @Method()
+  async isIndeterminate() {
+    if (this.rsCheckbox.indeterminate) {
+      this.checkbox.classList.add('-indeterminate')
+    } else {
+      this.checkbox.classList.remove('-indeterminate')
+    }
+  }
+
+  @Method()
+  async updateDataChecked() {
+    this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
+  }
+
   componentDidLoad() {
     const labelEl = this.el.shadowRoot.querySelector('.label')
     this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
     this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
 
+    this.isHostChecked()
     this.isDisabled()
-    this.isChecked()
+    this.rsCheckbox.indeterminate = this.indeterminate
     this.isIndeterminate()
 
     this.checkbox.addEventListener('click', () => {
-      this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
-      if (!this.rsCheckbox.indeterminate) {
-        this.checkbox.classList.remove('-indeterminate')
-      }
+      this.updateDataChecked()
+      this.isIndeterminate()
     })
     labelEl.addEventListener('click', () => {
       this.activateRipple()
@@ -117,12 +124,8 @@ export class Checkbox {
   componentDidRender() {
     if (!this.rsCheckbox) { return }
 
-    this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
-    if (this.dataChecked) {
-      this.checkbox.classList.add('-checked')
-    } else {
-      this.checkbox.classList.remove('-checked')
-    }
+    this.updateDataChecked()
+    this.isChecked()
   }
 
   render() {

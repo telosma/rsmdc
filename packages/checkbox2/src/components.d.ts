@@ -17,9 +17,11 @@ export namespace Components {
     'indeterminate': boolean;
     'isChecked': () => Promise<void>;
     'isDisabled': () => Promise<void>;
+    'isHostChecked': () => Promise<void>;
     'isIndeterminate': () => Promise<void>;
     'label': string;
     'name': string;
+    'updateDataChecked': () => Promise<void>;
     'value': string | number;
   }
 }

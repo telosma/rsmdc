@@ -57,7 +57,27 @@ Type: `Promise<void>`
 
 
 
+### `isHostChecked() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `isIndeterminate() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `updateDataChecked() => Promise<void>`
 
 
 
