@@ -50,8 +50,8 @@ rs-checkbox {
  --rs-checkboxCHcontainer-anim-indeterminate-checkedCHbackgroundCHmixedmark---transition: none;
  --rs-checkboxCHcontainer-anim-indeterminate-uncheckedCHbackgroundCHmixedmark---animation: rs-checkbox-indeterminate-unchecked-mixedmark 300ms linear 0s;
  --rs-checkboxCHcontainer-anim-indeterminate-uncheckedCHbackgroundCHmixedmark---transition: none;
- --rs-checkboxCHcontainer-anim-unchecked-checkedCHnativecontrolPSenabledSIbackgroundrs-checkboxCHcontainer-anim-unchecked-indeterminateCHnativecontrolPSenabledSIbackground---animation-name: rs-checkbox-animation-name(0, in);
- --rs-checkboxCHcontainer-anim-checked-uncheckedCHnativecontrolPSenabledSIbackgroundrs-checkboxCHcontainer-anim-indeterminate-uncheckedCHnativecontrolPSenabledSIbackground---animation-name: rs-checkbox-animation-name(1, out);
+ --rs-checkboxCHcontainer-anim-unchecked-checkedCHnativecontrolPSenabledSIbackgroundrs-checkboxCHcontainer-anim-unchecked-indeterminateCHnativecontrolPSenabledSIbackground---animation-name: rs-checkbox-fade-in-background-0;
+ --rs-checkboxCHcontainer-anim-checked-uncheckedCHnativecontrolPSenabledSIbackgroundrs-checkboxCHcontainer-anim-indeterminate-uncheckedCHnativecontrolPSenabledSIbackground---animation-name: rs-checkbox-fade-out-background-1;
  --rs-checkboxCHcontainerCHnativecontrol---position: absolute;
  --rs-checkboxCHcontainerCHnativecontrol---top: 0;
  --rs-checkboxCHcontainerCHnativecontrol---left: 0;

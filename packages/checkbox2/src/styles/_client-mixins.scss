@@ -1,8 +1,6 @@
 @import "./functions";
 @import "./keyframes";
 @import "./variables";
-@import "./rs-functions";
-@import "./rs-variables";
 
 /* Change checkbox checked states color and box color. */
 @mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) {

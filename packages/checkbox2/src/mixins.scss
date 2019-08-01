@@ -1,8 +1,6 @@
 @import "./styles/functions";
 @import "./styles/keyframes";
 @import "./styles/variables";
-@import "./styles/rs-functions";
-@import "./styles/rs-variables";
 /* Change checkbox checked states color and box color. */
 @mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) { --rs-checkboxCHcontainerCHnativecontrolPSenabledPScheckedSIbackground---border-color: #{$color};
 --rs-checkboxCHcontainerCHnativecontrolPSenabledPScheckedSIbackground---background-color: #{$color};
