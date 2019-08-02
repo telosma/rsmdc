@@ -10,8 +10,15 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsRadio {
+    'checked': boolean;
+    'dataChecked': string;
+    'disabled': boolean;
     'id': string;
+    'isChecked': () => Promise<void>;
+    'isDisabled': () => Promise<void>;
+    'isHostChecked': () => Promise<void>;
     'label': string;
+    'updateDataChecked': () => Promise<void>;
   }
 }
 
@@ -30,6 +37,9 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsRadio extends JSXBase.HTMLAttributes<HTMLRsRadioElement> {
+    'checked'?: boolean;
+    'dataChecked'?: string;
+    'disabled'?: boolean;
     'id'?: string;
     'label'?: string;
   }
