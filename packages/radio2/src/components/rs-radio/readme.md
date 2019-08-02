@@ -14,11 +14,52 @@
 | `disabled`    | `disabled`     |             | `boolean` | `undefined` |
 | `id`          | `id`           |             | `string`  | `undefined` |
 | `label`       | `label`        |             | `string`  | `undefined` |
+| `name`        | `name`         |             | `string`  | `undefined` |
 
 
 ## Methods
 
+### `activateRipple() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `checkDataChecked() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `extractSameGroupRadios() => Promise<Element[]>`
+
+
+
+#### Returns
+
+Type: `Promise<Element[]>`
+
+
+
 ### `isChecked() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `isDataChecked() => Promise<void>`
 
 
 
@@ -38,17 +79,7 @@ Type: `Promise<void>`
 
 
 
-### `isHostChecked() => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-### `updateDataChecked() => Promise<void>`
+### `uncheckSameGroupRadios() => Promise<void>`
 
 
 

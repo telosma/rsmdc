@@ -6,19 +6,26 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
+import {
+  Element,
+} from '@stencil/core';
 
 
 export namespace Components {
   interface RsRadio {
+    'activateRipple': () => Promise<void>;
+    'checkDataChecked': () => Promise<void>;
     'checked': boolean;
     'dataChecked': string;
     'disabled': boolean;
+    'extractSameGroupRadios': () => Promise<Element[]>;
     'id': string;
     'isChecked': () => Promise<void>;
+    'isDataChecked': () => Promise<void>;
     'isDisabled': () => Promise<void>;
-    'isHostChecked': () => Promise<void>;
     'label': string;
-    'updateDataChecked': () => Promise<void>;
+    'name': string;
+    'uncheckSameGroupRadios': () => Promise<void>;
   }
 }
 
@@ -42,6 +49,7 @@ declare namespace LocalJSX {
     'disabled'?: boolean;
     'id'?: string;
     'label'?: string;
+    'name'?: string;
   }
 
   interface IntrinsicElements {
