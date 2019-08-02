@@ -1,5 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Element, Prop, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'app-bar',
@@ -7,26 +6,25 @@ import { format } from '../../utils/utils';
   shadow: true
 })
 export class AppBar {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
 
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
+  @Element() el: HTMLElement
 
-  /**
-   * The last name
-   */
-  @Prop() last: string;
+  @Prop() first: string
 
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
-  }
+  @Prop() middle: string
+
+  @Prop() last: string
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return  <Host>
+              <header class="rs-app-bar">
+                <div class="row">
+                  <div class="section">
+                    <slot></slot>
+                  </div>
+                </div>
+              </header>
+              <div class="rs-app-bar-content" />
+            </Host>
   }
 }

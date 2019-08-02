@@ -10,17 +10,8 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AppBar {
-    /**
-    * The first name
-    */
     'first': string;
-    /**
-    * The last name
-    */
     'last': string;
-    /**
-    * The middle name
-    */
     'middle': string;
   }
 }
@@ -40,17 +31,8 @@ declare global {
 
 declare namespace LocalJSX {
   interface AppBar extends JSXBase.HTMLAttributes<HTMLAppBarElement> {
-    /**
-    * The first name
-    */
     'first'?: string;
-    /**
-    * The last name
-    */
     'last'?: string;
-    /**
-    * The middle name
-    */
     'middle'?: string;
   }
 
