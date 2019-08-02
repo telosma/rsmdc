@@ -9,6 +9,7 @@
 
 | Property | Attribute | Description | Type     | Default     |
 | -------- | --------- | ----------- | -------- | ----------- |
+| `id`     | `id`      |             | `string` | `undefined` |
 | `label`  | `label`   |             | `string` | `undefined` |
 
 
