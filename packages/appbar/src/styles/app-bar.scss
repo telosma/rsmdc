@@ -16,6 +16,7 @@
   right: 0;
   left: 0;
   padding-top: auto;
+  width: auto;
 
   &.-fixed-scrolled {
     box-shadow: rs-elevation(4);
@@ -27,6 +28,10 @@
     transition: width 300ms $rs-animation-standard-curve-timing-function;
     box-shadow: rs-elevation(4);
     border-radius: 0 0 24px 0;
+    padding-right: 12px;
+    padding-left: 0;
+    margin-left: 0;
+
 
     // --rs-top-app-bar-title--display: none;
     // --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
