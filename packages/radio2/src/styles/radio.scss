@@ -17,6 +17,58 @@
   vertical-align: middle;
   flex-flow: row-reverse;
 
+  &.-checked > .container > .nativecontrol + .background,
+  &.-disabled > .container > .nativecontrol + .background {
+    transition: rs-radio-enter(opacity), rs-radio-enter(transform);
+  }
+
+  &.-checked > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled > .container > .nativecontrol + .background > .outercircle {
+    transition: rs-radio-enter(border-color);
+  }
+
+  &.-checked > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled > .container > .nativecontrol + .background > .outercircle {
+    transition: rs-radio-enter(transform), rs-radio-enter(border-color);
+  }
+
+  &.-checked > .container > .nativecontrol + .background > .innercircle {
+    transform: scale(0.5);
+    transition: rs-radio-enter(transform), rs-radio-enter(border-color);
+  }
+
+  &.-checked > .container > .nativecontrol:enabled + .background > .outercircle {
+    border-color: $rs-theme-secondary;
+  }
+
+  &.-checked > .container > .nativecontrol:enabled + .background > .innercircle {
+    border-color: $rs-theme-secondary;
+  }
+
+  &:not(.-checked) > .container > .nativecontrol:enabled + .background > .outercircle {
+    border-color: $rs-radio-unchecked-color;
+  }
+
+  &:not(.-checked) > .container > .nativecontrol:enabled + .background > .innercircle {
+    border-color: transparent;
+  }
+
+  &:not(.-disabled) > .container > .nativecontrol + .background > .innercircle {
+    transform: scale(0.5);
+  }
+
+  &.-disabled > .container > .nativecontrol + .background,
+  &[aria-disabled="true"] > .container > .nativecontrol + .background {
+    cursor: default;
+  }
+
+  &.-disabled > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled > .container > .nativecontrol + .background > .innercircle,
+  &[aria-disabled="true"] > .container > .nativecontrol + .background > .outercircle,
+  &[aria-disabled="true"] > .container > .nativecontrol + .background > .innercircle {
+    border-color: $rs-radio-circle-color;
+  }
+
   > .container {
     display: inline-block;
     position: relative;
@@ -27,11 +79,11 @@
     padding: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
     cursor: pointer;
     will-change: opacity, transform, border-color, color;
+  }
 
-    &[disabled] {
-      cursor: default;
-      pointer-events: none;
-    }
+  &.-disabled > .container {
+    cursor: default;
+    pointer-events: none;
   }
 
   > .container > .nativecontrol {
@@ -45,58 +97,6 @@
     opacity: 0;
     cursor: inherit;
     z-index: 1;
-
-    &.-checked + .background,
-    &:disabled + .background {
-      transition: rs-radio-enter(opacity), rs-radio-enter(transform);
-    }
-
-    &.-checked + .background > .outercircle,
-    &:disabled + .background > .outercircle {
-      transition: rs-radio-enter(border-color);
-    }
-
-    &.-checked + .background > .innercircle,
-    &:disabled + .background > .innercircle {
-      transition: rs-radio-enter(transform), rs-radio-enter(border-color);
-    }
-
-    &.-checked + .background > .innercircle {
-      transform: scale(0.5);
-      transition: rs-radio-enter(transform), rs-radio-enter(border-color);
-    }
-
-    &:enabled.-checked + .background > .outercircle {
-      border-color: $rs-theme-secondary;
-    }
-
-    &:enabled.-checked + .background > .innercircle {
-      border-color: $rs-theme-secondary;
-    }
-
-    &:enabled:not(.-checked) + .background > .outercircle {
-      border-color: $rs-radio-unchecked-color;
-    }
-
-    &:enabled:not(.-checked) + .background > .innercircle {
-      border-color: transparent;
-    }
-
-    &:not(:disabled) + .background > .innercircle {
-      transform: scale(0.5);
-    }
-
-    &:disabled + .background,
-    [aria-disabled="true"] & + .background {
-      cursor: default;
-    }
-
-    &:disabled + .background > .outercircle,
-    &:disabled + .background > .innercircle,
-    [aria-disabled="true"] & + .background > .outercircle,
-    [aria-disabled="true"] & + .background > .innercircle {
-      border-color: $rs-radio-circle-color;
-    }
 
     &:focus + .background::before {
       transform: scale(2, 2);
@@ -163,12 +163,13 @@
     margin-right: auto;
     padding-right: $rs-radio-label-spacing;
     padding-left: $rs-radio-label-spacing;
-
-    &[disabled] {
-      cursor: default;
-      pointer-events: none;
-    }
   }
+
+  &.-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+  
   > .rs-ripple-upgraded {
     @include rs-ripple-surface;
     @include rs-ripple-radius-unbounded;
