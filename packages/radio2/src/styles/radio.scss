@@ -1,5 +1,5 @@
 @import "@rsmdc/animation/functions";
-@import "@rsmdc/ripple/mixins";
+@import "@rsmdc/ripple/mixins-stencil";
 @import "@rsmdc/ripple/variables";
 @import "@rsmdc/theme/mixins";
 @import "@rsmdc/theme/variables";
@@ -172,7 +172,7 @@
   > .rs-ripple-upgraded {
     @include rs-ripple-surface;
     @include rs-ripple-radius-unbounded;
-    @include rs-ripple-upgraded_($rs-theme-secondary);
+    @include rs-ripple-upgraded($rs-theme-secondary);
 
     &.rs-ripple-upgraded--background-focused {
       > .container > .background::before {
