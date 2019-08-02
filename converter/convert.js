@@ -152,6 +152,8 @@ module.exports.convertStyle = (nodeModulesPath) => {
 // generate client mixin 
 module.exports.convertMixin = (nodeModulesPath) => {
   const parseMixinScss = mixinSelectorsScss()
+  if (!parseMixinScss) { return }
+  
   const convertCss = getCompileCss(nodeModulesPath, parseMixinScss)
 
   const sj = CSSJSON.toJSON(convertCss)

@@ -61,7 +61,11 @@ module.exports.generateStyle = (sourceCss, styles) => {
     result = `${result}\n ${prop}: ${value};`
     return result
   }, '')
-  const clientStyle = `rs-checkbox {\n${style}\n}`
+  const clientStyle = `:root {\n${style}\n}`
+
+  if (!fs.existsSync('./src/dist')) {
+    fs.mkdirSync('./src/dist')
+  }
   fs.writeFileSync(`./src/dist/result.css`, css)
   fs.writeFileSync(`./src/dist/client-style.scss`, clientStyle)
 }
