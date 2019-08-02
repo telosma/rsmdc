@@ -1,0 +1,152 @@
+@import "@rsmdc/animation/variables";
+@import '@rsmdc/elevation/mixins';
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import './variables';
+@import './rs-functions';
+
+// Change top-app-bar type.
+@mixin rs-top-app-bar-type($types...) {
+  @each $type in $types {
+    @if $type == short {
+      --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-mobile-row-height};
+      
+      --rs-top-app-bar__short: true;
+      --rs-top-app-bar--top: 0;
+      --rs-top-app-bar--right: auto;
+      --rs-top-app-bat--left: 0;
+      --rs-top-app-bar--width: 100%;
+      --rs-top-app-bar--transition: #{width 250ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar_media--transition: #{width 200ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar_rtl--right: 0;
+      --rs-top-app-bar_rtl--left: auto;
+      --rs-top-app-bar-row--height: #{$rs-top-app-bar-mobile-row-height};
+      --rs-top-app-bar-section--padding: #{$rs-top-app-bar-mobile-section-padding};
+      --rs-top-app-bar-title--transition: #{opacity 200ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar-title--opacity: 1;
+    }@else if $type == dense {
+      --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-dense-row-height};
+      
+      --rs-top-app-bar-row--height: #{$rs-top-app-bar-dense-row-height};
+      --rs-top-app-bar-row_media--height: #{$rs-top-app-bar-dense-row-height};
+      --rs-top-app-bar-section--padding: #{0 $rs-top-app-bar-dense-section-horizontal-padding};
+      --rs-top-app-bar-title--padding-left: #{$rs-top-app-bar-dense-title-left-padding};
+    }@else if $type == prominent {
+      --rs-top-app-bar__prominent: true;
+      --rs-top-app-bar-content--padding-top: #{$rs-top-app-bar-prominent-row-height};
+
+      --rs-top-app-bar-row--height: #{$rs-top-app-bar-prominent-row-height};
+      --rs-top-app-bar-row_media--height: #{$rs-top-app-bar-prominent-row-height};
+      --rs-top-app-bar--padding-bottom: #{$rs-top-app-bar-prominent-mobile-title-bottom-padding};
+      --rs-top-app-bar-title--align-self: flex-end;
+      --rs-top-app-bar-title--padding-bottom: #{$rs-top-app-bar-prominent-title-bottom-padding};
+      --rs-top-app-bar-action-item--align-self: flex-start;
+      --rs-top-app-bar-navigation-icon--align-self: flex-start;
+    }@else if $type == fixed {
+      --rs-top-app-bar__fixed: true;
+      --rs-top-app-bar--transition: box-shadow 200ms linear;
+    }@else if $type == adjust {
+      --rs-top-app-bar--padding-top: #{$rs-top-app-bar-row-height};
+      --rs-top-app-bar_media--padding-top: #{$rs-top-app-bar-mobile-row-height};
+    }@else if $type == collapsed {
+      --rs-top-app-bar__collapsed: true;
+      @include rs-top-app-bar-short-shape-radius(24px);
+      --rs-top-app-bar--box-shadow: #{rs-elevation(4)};
+      --rs-top-app-bar_media--transition: #{width 250ms $rs-animation-standard-curve-timing-function};
+      --rs-top-app-bar__collapsed--padding-right: #{$rs-top-app-bar-short-collapsed-right-icon-padding};
+      --rs-top-app-bar__collapsed--padding-left: 0;
+      --rs-top-app-bar__collapsed--margin-left: 0;
+      --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+    }
+  }
+
+  $short: find-item($types, short);
+  $collapsed: find-item($types, collapsed);
+  $prominent: find-item($types, prominent);
+  $adjust: find-item($types, adjust);
+  $dense: find-item($types, dense);
+
+  @if $short and $collapsed {
+    --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width, #{$rs-top-app-bar-short-collapsed-width});
+    --rs-top-app-bar-action-item--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
+    --rs-top-app-bar--transition: #{width 300ms $rs-animation-standard-curve-timing-function};
+    --rs-top-app-bar-title--display: none;
+    --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
+  }
+  @if $prominent and $dense {
+    $height: $rs-top-app-bar-dense-row-height * 2;
+    --rs-top-app-bar-content--padding-top: #{$height};
+    
+    --rs-top-app-bar-row--height: #{$height};
+    --rs-top-app-bar-section--padding: 0 #{$rs-top-app-bar-section-horizontal-padding};
+    --rs-top-app-bar-title--padding-bottom: #{$rs-top-app-bar-prominent-dense-title-bottom-padding};
+    --rs-top-app-bar-title--padding-left: #{$rs-top-app-bar-title-left-padding};
+  }
+}
+
+// Set icon to action-item.
+@mixin rs-top-app-bar-action-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    --rs-top-app-bar-action-label--background-image: #{$icon};
+    --rs-top-app-bar-action-label--height: 24px;
+  }@else {
+    --rs-top-app-bar-action-item--font-family: '#{$icon}';
+    --rs-top-app-bar-action-label_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
+}
+
+// Set icon to nav.
+@mixin rs-top-app-bar-nav-icon-image($icon, $icon-name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    --rs-top-app-bar-navigation-label--background-image: #{$icon};
+    --rs-top-app-bar-navigation-label--height: 24px;
+  }@else {
+    --rs-top-app-bar-navigation-icon--font-family: '#{$icon}';
+    --rs-top-app-bar-navigation-label_before--content: #{unquote('"\\#{$icon-name}"')};
+  }
+
+  --rs-top-app-bar-navigation-icon--background-image: #{$icon};
+}
+
+// Change title ink color.
+@mixin rs-top-app-bar-title-ink-color($color) {
+  --rs-top-app-bar-title--color: #{$color};
+}
+
+// Change top-app-bar container color.
+@mixin rs-top-app-bar-fill-color($color) {
+  --rs-top-app-bar--background-color: #{$color};
+}
+
+// Change top-app-bar cotainer and title color. (Title color is modified to match container color)
+@mixin rs-top-app-bar-fill-color-accessible($color) {
+  @include rs-top-app-bar-fill-color($color);
+  @include rs-top-app-bar-title-ink-color(rs-theme-accessible-ink-color($color));
+  @include rs-top-app-bar-icon-ink-color(rs-theme-accessible-ink-color($color));
+  @include rs-top-app-bar-icon-states-color(rs-theme-accessible-ink-color($color));
+}
+
+// Change icon ink color.
+@mixin rs-top-app-bar-icon-ink-color($color) {
+  --rs-top-app-bar-action-item--color: #{$color};
+  --rs-top-app-bar-navigation-icon--color: #{$color};
+}
+
+// Change icon ripple color.
+@mixin rs-top-app-bar-icon-states-color($color) {
+  @include rs-states($color);
+}
+
+// Change top-app-bar radius.
+@mixin rs-top-app-bar-short-shape-radius($radius) {
+  @if length($radius) > 1 {
+    @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
+  }
+  $radius: 0 0 $radius 0;
+  --rs-top-app-bar--border-radius: #{rs-shape-resolve-percentage-radius($rs-top-app-bar-dense-row-height, $radius)};
+}
