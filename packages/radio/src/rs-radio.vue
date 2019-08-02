@@ -114,7 +114,6 @@ export default {
 @import "@rsmdc/typography/mixins";
 @import "../functions";
 @import "../variables";
-@import "../rs-variables";
 
 @include rs-ripple-common;
 

@@ -6,7 +6,6 @@
 @import "@rsmdc/typography/mixins";
 @import "./functions";
 @import "./variables";
-@import "./rs-variables";
 
 @include rs-ripple-common;
 
@@ -37,19 +36,35 @@
     transition: rs-radio-enter(transform), rs-radio-enter(border-color);
   }
 
-  &.-checked > .container > .nativecontrol:enabled + .background > .outercircle {
+  &.-checked
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .outercircle {
     border-color: $rs-theme-secondary;
   }
 
-  &.-checked > .container > .nativecontrol:enabled + .background > .innercircle {
+  &.-checked
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .innercircle {
     border-color: $rs-theme-secondary;
   }
 
-  &:not(.-checked) > .container > .nativecontrol:enabled + .background > .outercircle {
+  &:not(.-checked)
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .outercircle {
     border-color: $rs-radio-unchecked-color;
   }
 
-  &:not(.-checked) > .container > .nativecontrol:enabled + .background > .innercircle {
+  &:not(.-checked)
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .innercircle {
     border-color: transparent;
   }
 
@@ -64,8 +79,16 @@
 
   &.-disabled > .container > .nativecontrol + .background > .outercircle,
   &.-disabled > .container > .nativecontrol + .background > .innercircle,
-  &[aria-disabled="true"] > .container > .nativecontrol + .background > .outercircle,
-  &[aria-disabled="true"] > .container > .nativecontrol + .background > .innercircle {
+  &[aria-disabled="true"]
+    > .container
+    > .nativecontrol
+    + .background
+    > .outercircle,
+  &[aria-disabled="true"]
+    > .container
+    > .nativecontrol
+    + .background
+    > .innercircle {
     border-color: $rs-radio-circle-color;
   }
 
@@ -169,7 +192,7 @@
     cursor: default;
     pointer-events: none;
   }
-  
+
   > .rs-ripple-upgraded {
     @include rs-ripple-surface;
     @include rs-ripple-radius-unbounded;
