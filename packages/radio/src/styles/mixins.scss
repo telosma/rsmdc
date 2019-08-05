@@ -1,0 +1,51 @@
+@import "@rsmdc/ripple/mixins-stencil";
+
+// Change radio unchecked line color.
+@mixin rs-radio-unchecked-stroke-color($color) {
+  .rs-radio:not(.-checked) > .container > .nativecontrol:enabled + .background > .outercircle {
+    border-color: $color;
+  }
+}
+
+// Change radio checked line color.
+@mixin rs-radio-checked-stroke-color($color) {
+  .rs-radio.-checked > .container > .nativecontrol:enabled + .background > .outercircle {
+    border-color: $color;
+  }
+}
+
+// Change radio checked mark color.
+@mixin rs-radio-ink-color($color) {
+  .rs-radio.-checked > .container > .nativecontrol:enabled + .background > .innercircle {
+    border-color: $color;
+  }
+}
+
+// Change radio line, mark and states color.
+@mixin rs-radio-fill-color-accessible($color) {
+  @include rs-radio-unchecked-stroke-color($color);
+  @include rs-radio-checked-stroke-color($color);
+  @include rs-radio-ink-color($color);
+}
+
+// Change label position.
+@mixin rs-radio-label-position($position) {
+  @if $position == left {
+
+    .rs-radio {
+      flex-flow: row-reverse;
+
+      > .label {
+        padding-right: $rs-radio-label-spacing;
+        padding-left: 0;
+      }
+    }
+
+  }
+}
+
+
+// Change radio states color. TODO
+// @mixin rs-radio-states-color($color) {
+//   @include rs-states($color);
+// }

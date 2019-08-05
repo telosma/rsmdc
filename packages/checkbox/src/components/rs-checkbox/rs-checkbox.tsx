@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core';
+import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core';
 import { RSCheckbox } from '../../utils/index'
 @Component({
   tag: 'rs-checkbox',
@@ -23,7 +23,9 @@ export class Checkbox {
 
   @Prop() indeterminate: boolean
 
-  @State() dataChecked: string = ''
+  @Prop({
+    mutable: true
+  }) dataChecked: string = ''
 
   rsCheckbox: RSCheckbox
 
@@ -99,38 +101,41 @@ export class Checkbox {
   @Method()
   async updateDataChecked() {
     const isChecked = this.rsCheckbox.checked ? 'checked' : ''
-    this.el.setAttribute('data-checked', isChecked)
-    this.dataChecked = isChecked
+    await this.el.setAttribute('data-checked', isChecked)
   }
 
   componentDidLoad() {
-    const labelEl = this.el.shadowRoot.querySelector('.label')
     this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
     this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
+    const labelEl = this.el.shadowRoot.querySelector('.label')
 
     this.isDisabled()
     this.isHostChecked()
     this.isHostIndeterminate()
     this.isIndeterminate()
 
-    this.checkbox.addEventListener('click', () => {
-      this.updateDataChecked()
-      this.isIndeterminate()
+    this.checkbox.addEventListener('click', async e => {
+      if (e.target === labelEl) { return }
+      await this.updateDataChecked()
+      await this.isChecked()
+      await this.isIndeterminate()
+      await this.change.emit({ value: this.value })
     })
     labelEl.addEventListener('click', () => {
       this.activateRipple()
     })
-  }
 
-  componentDidRender() {
-    if (!this.rsCheckbox) { return }
-
-    this.updateDataChecked()
-    this.isChecked()
-  }
-
-  componentDidUpdate() {
-    this.change.emit({ value: this.value })
+    // TODO (If host component has other classname, disappear this component when properties changes)
+    const observer = new MutationObserver(records => {
+      records.forEach(record => {
+        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
+          this.el.classList.add('hydrated')
+        }
+      })
+    })
+    observer.observe(this.el, {
+      attributes: true
+    })
   }
 
   render() {

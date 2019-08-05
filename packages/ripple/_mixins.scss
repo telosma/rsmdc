@@ -83,8 +83,7 @@
   }
 
   &::before {
-    transition:
-      opacity $rs-states-wash-duration linear,
+    transition: opacity $rs-states-wash-duration linear,
       background-color $rs-states-wash-duration linear;
 
     z-index: 1; // Ensure that the ripple wash for hover/focus states is displayed on top of positioned child elements
@@ -109,8 +108,7 @@
   }
 
   &.rs-ripple-upgraded--foreground-activation::after {
-    animation:
-      rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
+    animation: rs-ripple-fg-radius-in $rs-ripple-translate-duration forwards,
       rs-ripple-fg-opacity-in $rs-ripple-fade-in-duration forwards;
   }
 
@@ -118,7 +116,8 @@
     animation: rs-ripple-fg-opacity-out $rs-ripple-fade-out-duration;
 
     // Retain transform from rs-ripple-fg-radius-in activation
-    transform: translate(var(--rs-ripple-fg-translate-end, 0)) scale(var(--rs-ripple-fg-scale, 1));
+    transform: translate(var(--rs-ripple-fg-translate-end, 0))
+      scale(var(--rs-ripple-fg-scale, 1));
   }
 }
 
@@ -164,44 +163,71 @@
 }
 
 @mixin rs-ripple-upgraded_($color) {
-
-  &::before{
+  &::before {
     background-color: var(--rs-ripple_before--background-color, $color);
-    content: var(--rs-ripple_before--content, '');
+    content: var(--rs-ripple_before--content, "");
   }
 
   &::after {
     background-color: var(--rs-ripple_after--background-color, $color);
-    content: var(--rs-ripple_after--content, '');
+    content: var(--rs-ripple_after--content, "");
   }
 
   &:hover::before {
-    opacity: var(--rs-ripple_hover_before--opacity, rs-states-opacity($color, hover));
+    opacity: var(
+      --rs-ripple_hover_before--opacity,
+      rs-states-opacity($color, hover)
+    );
   }
 
-  &:not(.rs-ripple-upgraded):focus::before { // @mixin rs-states-focus-opacityのfalse
-    transition-duration: var(--rs-ripple_not-upgraded_focus_before--transition-duration, 75ms);
-    opacity: var(--rs-ripple_not-upgraded_focus_before--opacity, rs-states-opacity($color, focus));
+  &:not(.rs-ripple-upgraded):focus::before {
+    // @mixin rs-states-focus-opacityのfalse
+    transition-duration: var(
+      --rs-ripple_not-upgraded_focus_before--transition-duration,
+      75ms
+    );
+    opacity: var(
+      --rs-ripple_not-upgraded_focus_before--opacity,
+      rs-states-opacity($color, focus)
+    );
   }
 
   &.rs-ripple-upgraded--background-focused::before {
-    transition-duration: var(--rs-upgraded_-background-focused_before--transition-duration, 75ms);
-    opacity: var(--rs-upgraded_-background-focused_before--opacity, rs-states-opacity($color, focus));
+    transition-duration: var(
+      --rs-upgraded_-background-focused_before--transition-duration,
+      75ms
+    );
+    opacity: var(
+      --rs-upgraded_-background-focused_before--opacity,
+      rs-states-opacity($color, focus)
+    );
   }
 
   &:not(.rs-ripple-upgraded) {
     &::after {
-      transition: var(--rs-ripple_not-upgraded_after--transition, opacity $rs-ripple-fade-out-duration linear);
+      transition: var(
+        --rs-ripple_not-upgraded_after--transition,
+        opacity $rs-ripple-fade-out-duration linear
+      );
     }
 
     &:active::after {
-      transition-duration: var(--rs-ripple_not-upgraded_active_after--transition-duration, $rs-ripple-fade-in-duration);
-      opacity: var(--rs-ripple_not-upgraded_active_after--opacity, rs-states-opacity($color, press));
+      transition-duration: var(
+        --rs-ripple_not-upgraded_active_after--transition-duration,
+        $rs-ripple-fade-in-duration
+      );
+      opacity: var(
+        --rs-ripple_not-upgraded_active_after--opacity,
+        rs-states-opacity($color, press)
+      );
     }
   }
 
   &.rs-ripple-upgraded {
-    --rs-ripple-fg-opacity: var(--rs-ripple-upgraded--rs-ripple-fg-opacity, #{rs-states-opacity($color, press)});
+    --rs-ripple-fg-opacity: var(
+      --rs-ripple-upgraded--rs-ripple-fg-opacity,
+      #{rs-states-opacity($color, press)}
+    );
   }
 }
 

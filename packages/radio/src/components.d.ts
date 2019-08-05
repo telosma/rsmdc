@@ -9,53 +9,50 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsCheckbox {
+  interface RsRadio {
     'activateRipple': () => Promise<void>;
+    'checkDataChecked': () => Promise<void>;
     'checked': boolean;
     'dataChecked': string;
     'disabled': boolean;
     'id': string;
-    'indeterminate': boolean;
     'isChecked': () => Promise<void>;
+    'isDataChecked': () => Promise<void>;
     'isDisabled': () => Promise<void>;
-    'isHostChecked': () => Promise<void>;
-    'isHostIndeterminate': () => Promise<void>;
-    'isIndeterminate': () => Promise<void>;
     'label': string;
     'name': string;
-    'updateDataChecked': () => Promise<void>;
-    'value': string | number;
+    'uncheckSameGroupRadios': () => Promise<void>;
+    'value': string;
   }
 }
 
 declare global {
 
 
-  interface HTMLRsCheckboxElement extends Components.RsCheckbox, HTMLStencilElement {}
-  var HTMLRsCheckboxElement: {
-    prototype: HTMLRsCheckboxElement;
-    new (): HTMLRsCheckboxElement;
+  interface HTMLRsRadioElement extends Components.RsRadio, HTMLStencilElement {}
+  var HTMLRsRadioElement: {
+    prototype: HTMLRsRadioElement;
+    new (): HTMLRsRadioElement;
   };
   interface HTMLElementTagNameMap {
-    'rs-checkbox': HTMLRsCheckboxElement;
+    'rs-radio': HTMLRsRadioElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface RsCheckbox extends JSXBase.HTMLAttributes<HTMLRsCheckboxElement> {
+  interface RsRadio extends JSXBase.HTMLAttributes<HTMLRsRadioElement> {
     'checked'?: boolean;
     'dataChecked'?: string;
     'disabled'?: boolean;
     'id'?: string;
-    'indeterminate'?: boolean;
     'label'?: string;
     'name'?: string;
     'onChange'?: (event: CustomEvent<any>) => void;
-    'value'?: string | number;
+    'value'?: string;
   }
 
   interface IntrinsicElements {
-    'rs-checkbox': RsCheckbox;
+    'rs-radio': RsRadio;
   }
 }
 

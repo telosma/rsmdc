@@ -1,4 +1,4 @@
-export const VModel3 =  {
+export const VModel3 = {
   bind(el, binding, vNode) {
     let observer
     const type = vNode.data.attrs.type
@@ -25,10 +25,9 @@ export const VModel3 =  {
         }
       })
     } else if (type === 'radio') {
-      observer = new MutationObserver(() => {
-        const isChecked = el.getAttribute('data-checked') === 'true' ? true : false
+      observer = new MutationObserver(mu=> {
+        const isChecked = el.getAttribute('data-checked') ? true : false
         if (!isChecked) { return }
-
         vNode.context[dataName] = value
       })
     } else if (type === 'select') {
