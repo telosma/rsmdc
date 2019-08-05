@@ -26,8 +26,8 @@
     transition: rs-radio-enter(border-color);
   }
 
-  &.-checked > .container > .nativecontrol + .background > .outercircle,
-  &.-disabled > .container > .nativecontrol + .background > .outercircle {
+  &.-checked > .container > .nativecontrol + .background > .innercircle,
+  &.-disabled > .container > .nativecontrol + .background > .innercircle {
     transition: rs-radio-enter(transform), rs-radio-enter(border-color);
   }
 
@@ -68,7 +68,7 @@
     border-color: transparent;
   }
 
-  &:not(.-disabled) > .container > .nativecontrol + .background > .innercircle {
+  &.-checked:not(.-disabled) > .container > .nativecontrol + .background > .innercircle {
     transform: scale(0.5);
   }
 
@@ -77,18 +77,10 @@
     cursor: default;
   }
 
-  &.-disabled > .container > .nativecontrol + .background > .outercircle,
-  &.-disabled > .container > .nativecontrol + .background > .innercircle,
-  &[aria-disabled="true"]
-    > .container
-    > .nativecontrol
-    + .background
-    > .outercircle,
-  &[aria-disabled="true"]
-    > .container
-    > .nativecontrol
-    + .background
-    > .innercircle {
+  &.-disabled:not(.-checked) > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled:not(.-checked) > .container > .nativecontrol + .background > .innercircle,
+  &.-disabled.-checked > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled.-checked > .container > .nativecontrol + .background > .innercircle {
     border-color: $rs-radio-circle-color;
   }
 
@@ -151,9 +143,6 @@
     }
   }
 
-
-
-  
   > .container > .background > .outercircle {
     position: absolute;
     top: 0;
