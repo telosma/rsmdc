@@ -114,6 +114,16 @@ export class Radio {
         this.uncheckSameGroupRadios()
       }
     })
+
+    // TODO (If host component has other classname, disappear this component when properties changes)
+    const observer = new MutationObserver(record => {
+      if (record[0].attributeName === 'class' && !this.el.classList.contains('hydrated')) {
+        this.el.classList.add('hydrated')
+      }
+    })
+    observer.observe(this.el, {
+      attributes: true
+    })
   }
 
   componentDidRender() {
