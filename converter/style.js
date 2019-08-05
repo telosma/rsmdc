@@ -1,6 +1,5 @@
 /* eslint-disable vue/use-v-on-exact */
 const fs = require('fs')
-const { flattenDeep } = require('lodash')
 const { ripples, dirPath } = require('./constants')
 
 const getComponentStyleFileName = () => {
@@ -12,16 +11,55 @@ const getComponentStyleFile = () => {
   return fs.readFileSync(`${dirPath}/${fileName}`, 'utf8')
 }
 
-const getThemeVariables = (files) => {
-  const variableFilesTexts = files.map(file => fs.readFileSync(`${dirPath}/${file}`, 'utf8'))
-  const themeVariables = variableFilesTexts.map(text => {
-    const themeVariableParts = text.match(/(.*?)rs-theme-prop(.*?);/g)
-    const themeVariables = themeVariableParts ? themeVariableParts.map(part => part.replace(/:(.*?);/g, '')) : ''
-    return themeVariables
-  })
-    .filter(value => value)
+const readFile = (filePath) => {
+  return fs.readFileSync(filePath, 'utf8')
+}
 
-  return flattenDeep(themeVariables)
+const readStyleDir = (dirPath) => {
+  return fs.readdirSync(dirPath, 'utf8')
+}
+
+const extractMatchWords = (text, searchFormat) => {
+  return text.match(searchFormat)
+}
+
+const extractDefaultThemeVariables = (nodeModulesPath) => {
+  const themeFile = readFile(`${nodeModulesPath}/@rsmdc/theme/_variables.scss`)
+  return extractMatchWords(themeFile, /\$rs-theme.*(?=:)/g)
+}
+
+const extractComponentVariableFiles = () => {
+  return readStyleDir(dirPath).filter(file => extractMatchWords(file, /variable/g))
+}
+
+const extractComponentThemeVariables = () => {
+  const files = extractComponentVariableFiles()
+  const variableFilesTexts = files.map(file => readFile(`${dirPath}/${file}`))
+  const themeVariables = variableFilesTexts.reduce((result, text) => {
+    const variables = extractMatchWords(text, /(.*?)rs-theme-prop(.*?);/g)
+    if (variables) {
+      variables.forEach((part, i) => {
+        variables[i] = part.replace(/:(.*?);/g, '')
+      })
+      return result.concat(variables)
+    }
+  }, [])
+  return themeVariables
+}
+
+const extractVariables = (nodeModulesPath) => {
+  const defaultThemeVariables = extractDefaultThemeVariables(nodeModulesPath)
+  const componentThemeVariables = extractComponentThemeVariables()
+
+  return defaultThemeVariables.concat(componentThemeVariables)
+}
+
+const excludeThemeVariablesInScss = (sourceScss, variables) => {
+  variables.forEach(variable => {
+    const regExp = new RegExp(`\\${variable}`, 'g')
+    sourceScss = sourceScss.replace(regExp, `'${variable}'`)
+  })
+  return sourceScss
 }
 
 const replaceCssInnerRippleValue = (css, target, value) => {
@@ -30,18 +68,11 @@ const replaceCssInnerRippleValue = (css, target, value) => {
 }
 
 
-module.exports.styleScss = () => {
+module.exports.styleScss = (nodeModulesPath) => {
   const sourceScss = getComponentStyleFile()
-  const variableFiles = fs.readdirSync(dirPath, 'utf8').filter(file => file.match(/variable/))
-  const themeVariables = getThemeVariables(variableFiles)
+  const themeVariables = extractVariables(nodeModulesPath)
 
-  let scss = sourceScss
-  themeVariables.forEach(variable => {
-    const regExp = new RegExp(`\\${variable}`, 'g')
-    scss = scss.replace(regExp, `'${variable}'`)
-  })
-
-  return scss
+  return excludeThemeVariablesInScss(sourceScss, themeVariables)
 }
 
 module.exports.generateStyle = (sourceCss, styles) => {

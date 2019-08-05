@@ -135,7 +135,7 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
 // generate styles
 module.exports.convertStyle = (nodeModulesPath) => {
-  const scss = styleScss()
+  const scss = styleScss(nodeModulesPath)
   const compileCss = getCompileCss(nodeModulesPath, scss)
     .replace(/(\/\*(.*?)')|('(.*?)\*\/)/g, '')
 
