@@ -126,10 +126,12 @@ export class Radio {
     })
 
     // TODO (If host component has other classname, disappear this component when properties changes)
-    const observer = new MutationObserver(record => {
-      if (record[0].attributeName === 'class' && !this.el.classList.contains('hydrated')) {
-        this.el.classList.add('hydrated')
-      }
+    const observer = new MutationObserver(records => {
+      records.forEach(record => {
+        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
+          this.el.classList.add('hydrated')
+        }
+      })
     })
     observer.observe(this.el, {
       attributes: true
