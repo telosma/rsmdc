@@ -26,6 +26,7 @@ export namespace Components {
     'label': string;
     'name': string;
     'uncheckSameGroupRadios': () => Promise<void>;
+    'value': string;
   }
 }
 
@@ -50,6 +51,8 @@ declare namespace LocalJSX {
     'id'?: string;
     'label'?: string;
     'name'?: string;
+    'onChange'?: (event: CustomEvent<any>) => void;
+    'value'?: string;
   }
 
   interface IntrinsicElements {

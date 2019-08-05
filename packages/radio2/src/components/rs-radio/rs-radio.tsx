@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Watch, Method, Host, h, State } from "@stencil/core"
+import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h, State } from "@stencil/core"
 import { RSRadio } from "../../utils/index"
 
 @Component({
@@ -15,6 +15,8 @@ export class Radio {
   @Prop() label: string
 
   @Prop() name: string
+
+  @Prop() value: string
 
   @Prop() checked: boolean
 
@@ -47,7 +49,12 @@ export class Radio {
     } else {
       this.radioEl.classList.remove('-checked')
     }
-  }
+}
+
+  @Event({
+    cancelable: false,
+    composed: false,
+  }) change: EventEmitter
 
   @Method()
   async isDisabled() {
@@ -73,7 +80,8 @@ export class Radio {
   async checkDataChecked() {
     this.dataChecked = 'checked'
     this.rsRadio.checked = this.dataChecked
-    this.el.setAttribute('data-checked', this.dataChecked)
+    await this.el.setAttribute('data-checked', this.dataChecked)
+    await this.change.emit({ value: this.value })
   }
 
   @Method()
@@ -102,12 +110,14 @@ export class Radio {
     this.sameGroupRadios = await this.extractSameGroupRadios()
     this.rsRadio = new RSRadio(this.el.shadowRoot.querySelector('.container'))
     this.radioEl = this.el.shadowRoot.querySelector('.rs-radio')
+    const labelEl = this.el.shadowRoot.querySelector('.label')
     
     this.isChecked()
     this.isDataChecked()
     this.isDisabled()
 
-    this.radioEl.addEventListener('click', () => {
+    this.radioEl.addEventListener('click', e => {
+      if (e.target === labelEl) { return }
       this.activateRipple()
       this.checkDataChecked()
       if (this.sameGroupRadios) {
@@ -124,12 +134,6 @@ export class Radio {
     observer.observe(this.el, {
       attributes: true
     })
-  }
-
-  componentDidRender() {
-    if (!this.rsRadio) { return }
-
-    this.isDataChecked()
   }
 
   render() {

@@ -15,6 +15,14 @@
 | `id`          | `id`           |             | `string`  | `undefined` |
 | `label`       | `label`        |             | `string`  | `undefined` |
 | `name`        | `name`         |             | `string`  | `undefined` |
+| `value`       | `value`        |             | `string`  | `undefined` |
+
+
+## Events
+
+| Event    | Description | Type               |
+| -------- | ----------- | ------------------ |
+| `change` |             | `CustomEvent<any>` |
 
 
 ## Methods
