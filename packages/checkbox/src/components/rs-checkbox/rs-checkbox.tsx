@@ -114,7 +114,7 @@ export class Checkbox {
     this.isHostIndeterminate()
     this.isIndeterminate()
 
-    this.checkbox.addEventListener('click', async (e) => {
+    this.checkbox.addEventListener('click', async e => {
       if (e.target === labelEl) { return }
       await this.updateDataChecked()
       await this.isChecked()
@@ -123,6 +123,18 @@ export class Checkbox {
     })
     labelEl.addEventListener('click', () => {
       this.activateRipple()
+    })
+
+    // TODO (If host component has other classname, disappear this component when properties changes)
+    const observer = new MutationObserver(records => {
+      records.forEach(record => {
+        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
+          this.el.classList.add('hydrated')
+        }
+      })
+    })
+    observer.observe(this.el, {
+      attributes: true
     })
   }
 
