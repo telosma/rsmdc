@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/radio",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@rsmdc/animation": "^1.0.0",
     "@rsmdc/base": "^1.1.0",
-    "@rsmdc/ripple": "^1.1.14",
+    "@rsmdc/ripple": "^1.1.15",
     "@rsmdc/theme": "^1.0.2",
     "@rsmdc/typography": "^1.0.5",
     "tslib": "^1.9.3"
