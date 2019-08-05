@@ -14,7 +14,7 @@
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
-  flex-flow: row-reverse;
+  flex-flow: row;
 
   &.-checked > .container > .nativecontrol + .background,
   &.-disabled > .container > .nativecontrol + .background {
