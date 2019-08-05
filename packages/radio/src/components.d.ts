@@ -6,9 +6,6 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import {
-  Element,
-} from '@stencil/core';
 
 
 export namespace Components {
@@ -18,7 +15,6 @@ export namespace Components {
     'checked': boolean;
     'dataChecked': string;
     'disabled': boolean;
-    'extractSameGroupRadios': () => Promise<Element[]>;
     'id': string;
     'isChecked': () => Promise<void>;
     'isDataChecked': () => Promise<void>;

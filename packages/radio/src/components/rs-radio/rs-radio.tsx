@@ -94,11 +94,6 @@ export class Radio {
   }
 
   @Method()
-  async extractSameGroupRadios() {
-    return Array.from(window.document.querySelectorAll(`rs-radio[name=${this.name}]`))
-  }
-
-  @Method()
   async activateRipple() { //TODO
     this.rsRadio.ripple.activate()
     setTimeout(() => {
@@ -107,7 +102,7 @@ export class Radio {
   }
 
   async componentDidLoad() {
-    this.sameGroupRadios = await this.extractSameGroupRadios()
+    this.sameGroupRadios = Array.from(window.document.querySelectorAll(`rs-radio[name=${this.name}]`))
     this.rsRadio = new RSRadio(this.el.shadowRoot.querySelector('.container'))
     this.radioEl = this.el.shadowRoot.querySelector('.rs-radio')
     const labelEl = this.el.shadowRoot.querySelector('.label')

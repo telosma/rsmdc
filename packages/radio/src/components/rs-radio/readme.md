@@ -47,16 +47,6 @@ Type: `Promise<void>`
 
 
 
-### `extractSameGroupRadios() => Promise<Element[]>`
-
-
-
-#### Returns
-
-Type: `Promise<Element[]>`
-
-
-
 ### `isChecked() => Promise<void>`
 
 
