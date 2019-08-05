@@ -40,7 +40,16 @@ export const VModel3 = {
     } else if (type === 'text' || type === 'textarea' || type === 'date') {
       observer = new MutationObserver(mutations => {
         const text = mutations[0].target.text
-        vNode.context[dataName] = text
+        const dataNames = dataName.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
+        const objectName = dataName.replace(/\..*/, '')
+
+        if (dataNames || objectName !== dataName) {
+          const data = dataNames[0].replace(/\./, '')
+
+          vNode.context.$data[objectName][data] = text
+        } else {
+          vNode.context[dataName] = text
+        }
       })
     } 
 
