@@ -80,8 +80,7 @@ export class Radio {
   async checkDataChecked() {
     this.dataChecked = 'checked'
     this.rsRadio.checked = this.dataChecked
-    await this.el.setAttribute('data-checked', this.dataChecked)
-    await this.change.emit({ value: this.value })
+    this.el.setAttribute('data-checked', this.dataChecked)
   }
 
   @Method()
@@ -111,13 +110,14 @@ export class Radio {
     this.isDataChecked()
     this.isDisabled()
 
-    this.radioEl.addEventListener('click', e => {
+    this.radioEl.addEventListener('click', async e => {
       if (e.target === labelEl) { return }
-      this.activateRipple()
-      this.checkDataChecked()
+      await this.activateRipple()
+      await this.checkDataChecked()
       if (this.sameGroupRadios) {
-        this.uncheckSameGroupRadios()
+        await this.uncheckSameGroupRadios()
       }
+      await this.change.emit({ value: this.value })
     })
 
     // TODO (If host component has other classname, disappear this component when properties changes)
