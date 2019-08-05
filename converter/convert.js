@@ -135,7 +135,7 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
 // generate styles
 module.exports.convertStyle = (nodeModulesPath) => {
-  const scss = styleScss()
+  const scss = styleScss(nodeModulesPath)
   const compileCss = getCompileCss(nodeModulesPath, scss)
     .replace(/(\/\*(.*?)')|('(.*?)\*\/)/g, '')
 
@@ -152,6 +152,8 @@ module.exports.convertStyle = (nodeModulesPath) => {
 // generate client mixin 
 module.exports.convertMixin = (nodeModulesPath) => {
   const parseMixinScss = mixinSelectorsScss()
+  if (!parseMixinScss) { return }
+  
   const convertCss = getCompileCss(nodeModulesPath, parseMixinScss)
 
   const sj = CSSJSON.toJSON(convertCss)
