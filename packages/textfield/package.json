@@ -2,7 +2,7 @@
   "name": "@rsmdc/textfield",
   "description": "The Material Components for the web tab component",
   "main": "dist/rs-elements.common.js",
-  "version": "1.1.10",
+  "version": "1.1.14",
   "license": "MIT",
   "keywords": [
     "material components",
@@ -22,7 +22,7 @@
     "@rsmdc/floating-label": "^1.1.6",
     "@rsmdc/line-ripple": "^1.0.0",
     "@rsmdc/notched-outline": "^1.1.6",
-    "@rsmdc/ripple": "^1.1.10",
+    "@rsmdc/ripple": "^1.1.14",
     "@rsmdc/rtl": "^1.0.2",
     "@rsmdc/shape": "^1.0.2",
     "@rsmdc/theme": "^1.0.2",
