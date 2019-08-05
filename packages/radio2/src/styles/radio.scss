@@ -188,12 +188,14 @@
   > .rs-ripple-upgraded {
     @include rs-ripple-surface;
     @include rs-ripple-radius-unbounded;
-    @include rs-ripple-upgraded($rs-theme-secondary);
+    @include rs-ripple-upgraded($rs-theme-on-surface);
+  }
 
-    &.rs-ripple-upgraded--background-focused {
-      > .container > .background::before {
-        content: none;
-      }
-    }
+  &.-checked > .rs-ripple-upgraded {
+    @include rs-ripple-upgraded($rs-theme-secondary);
+  }
+
+  > .rs-ripple-upgraded.rs-ripple-upgraded--background-focused > .background::before {
+    content: none;
   }
 }
