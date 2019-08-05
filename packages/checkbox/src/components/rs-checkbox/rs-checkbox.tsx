@@ -114,7 +114,7 @@ export class Checkbox {
     this.isHostIndeterminate()
     this.isIndeterminate()
 
-    this.checkbox.addEventListener('click', async e => {
+    this.checkbox.addEventListener('click', async (e) => {
       if (e.target === labelEl) { return }
       await this.updateDataChecked()
       await this.isChecked()
