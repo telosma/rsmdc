@@ -2,7 +2,7 @@ import { Component, Element, Prop, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'app-bar',
-  // styleUrl: '../../dist/result.css',
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 export class AppBar {
