@@ -114,13 +114,19 @@ export class Checkbox {
     this.isHostIndeterminate()
     this.isIndeterminate()
 
-    this.checkbox.addEventListener('click', async (e) => {
+    this.checkbox.addEventListener('mouseover', e => {
+      if (e.target === labelEl) { return }
+      this.rsCheckbox.ripple.layout()
+    })
+
+    this.checkbox.addEventListener('click', async e => {
       if (e.target === labelEl) { return }
       await this.updateDataChecked()
       await this.isChecked()
       await this.isIndeterminate()
       await this.change.emit({ value: this.value })
     })
+
     labelEl.addEventListener('click', () => {
       this.activateRipple()
     })
