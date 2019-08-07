@@ -150,9 +150,10 @@ $fade-out-animation: rs-checkbox-animation-name(
     position: relative;
     flex: 0 0 $rs-checkbox-size;
     box-sizing: content-box;
-    width: $rs-checkbox-size;
-    height: $rs-checkbox-size;
-    padding: ($rs-checkbox-touch-area - $rs-checkbox-size) / 2;
+    width: calc($rs-checkbox-size * $rs-theme-size-ratio);
+    max-width: calc($rs-checkbox-size * $rs-theme-size-ratio);
+    height: calc($rs-checkbox-size * $rs-theme-size-ratio);
+    padding: calc((($rs-checkbox-touch-area - $rs-checkbox-size) / 2) * $rs-theme-size-ratio);
     line-height: 0;
     white-space: nowrap;
     cursor: pointer;
@@ -279,7 +280,7 @@ $fade-out-animation: rs-checkbox-animation-name(
   > .container > .background {
     display: inline-flex;
     position: absolute;
-    top: ($rs-checkbox-touch-area - $rs-checkbox-size) / 2;
+    top: calc((($rs-checkbox-touch-area - $rs-checkbox-size) / 2) * $rs-theme-size-ratio);
     bottom: 0;
     align-items: center;
     justify-content: center;
