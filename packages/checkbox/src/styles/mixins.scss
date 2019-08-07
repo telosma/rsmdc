@@ -59,13 +59,16 @@
 // Change checkbox states color.
 @mixin rs-checkbox-focus-indicator-color($color) {
 
-  .rs-ripple-upgraded { 
-
-    &::before,
-    &::after {
-      background-color: $color;
+  .rs-checkbox  {
+    &.-checked > .rs-ripple-upgraded,
+    &.-indeterminate > .rs-ripple-upgraded {
+      &::before {
+        background-color: $color;
+      }
+      &::after {
+        background-color: $color;
+      }
     }
-
   }
 }
 
