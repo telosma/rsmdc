@@ -62,9 +62,7 @@
   .rs-checkbox  {
     &.-checked > .rs-ripple-upgraded,
     &.-indeterminate > .rs-ripple-upgraded {
-      &::before {
-        background-color: $color;
-      }
+      &::before,
       &::after {
         background-color: $color;
       }
