@@ -36,7 +36,7 @@ const extractComponentThemeVariables = () => {
   const files = extractComponentVariableFiles()
   const variableFilesTexts = files.map(file => readFile(`${dirPath}/${file}`))
   const themeVariables = variableFilesTexts.reduce((result, text) => {
-    const variables = extractMatchWords(text, /(.*?)rs-theme-prop(.*?);/g)
+    const variables = extractMatchWords(text, /(.*?)rs-theme(.*?);/g)
     if (variables) {
       variables.forEach((part, i) => {
         variables[i] = part.replace(/:(.*?);/g, '')
@@ -76,6 +76,9 @@ module.exports.styleScss = (nodeModulesPath) => {
 }
 
 module.exports.generateStyle = (sourceCss, styles) => {
+  const files = extractComponentVariableFiles()
+  const componentVariables = files.map(file => readFile(`${dirPath}/${file}`))[0].match(/\$.*(?=:)/g)
+
   let css = sourceCss
 
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
@@ -89,6 +92,15 @@ module.exports.generateStyle = (sourceCss, styles) => {
 
     prop = prop.match(/\$rs-theme/) ? prop.replace(/(.*?)(?=\$)/g, '') : prop
     value = value.match(/'\$/) || value.match(/"/) ? value.replace(/'|"/, '#{').replace(/'|"/, '}').replace('#{}', '""') : value
+    if (value.match(/calc\(/)) {
+      componentVariables.forEach(variable => {
+        let regExp = new RegExp(`\\${variable}`, 'g')
+        value = value.replace(regExp, `#{${variable}}`).replace()
+
+        regExp = new RegExp(`#{#{\\${variable}}}`, 'g')
+        value = value.replace(regExp, `#{${variable}}`).replace()
+      })
+    }
     result = `${result}\n ${prop}: ${value};`
     return result
   }, '')
