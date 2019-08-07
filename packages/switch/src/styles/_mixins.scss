@@ -1,0 +1,53 @@
+.rs-switch {
+  @mixin rs-switch-toggled-on-color($color) {
+    @include rs-switch-toggled-on-track-color($color);
+    @include rs-switch-toggled-on-thumb-color($color);
+    @include rs-switch-toggled-on-ripple-color($color);
+  }
+
+  @mixin rs-switch-toggled-off-color {
+    @include rs-switch-toggled-off-track-color($color);
+    @include rs-switch-toggled-off-thumb-color($color);
+    @include rs-switch-toggled-off-ripple-color($color);
+  }
+
+  @mixin rs-switch-toggled-on-track-color {
+    &.-checked > .track {
+      @include rs-theme-prop(background-color, $color);
+      @include rs-theme-prop(border-color, $color);
+    }
+  }
+
+  @mixin rs-switch-toggled-off-track-color {
+    &:not(.-checked) > .track {
+      @include rs-theme-prop(background-color, $color);
+      @include rs-theme-prop(border-color, $color);
+    }
+  }
+
+  @mixin rs-switch-toggled-on-thumb-color {
+    &.-checked > .thumbunderlay >.thumb {
+      @include rs-theme-prop(background-color, $color);
+      @include rs-theme-prop(border-color, $color);
+    }
+  }
+
+  @mixin rs-switch-toggled-off-thumb-color {
+    &:not(.-checked) > .thumbunderlay > .thumb {
+      @include rs-theme-prop(background-color, $color);
+      @include rs-theme-prop(border-color, $color);
+    }
+  }
+
+  @mixin rs-switch-toggled-on-ripple-color {
+    &.-checked > .thumbunderlay {
+      @include rs-ripple-upgraded($color, false);
+    }
+  }
+
+  @mixin rs-switch-toggled-off-ripple-color {
+    &:not(.-checked) > .thumbunderlay {
+      @include rs-ripple-upgraded($color, false);
+    }
+  }
+}

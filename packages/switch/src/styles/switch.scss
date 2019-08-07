@@ -1,0 +1,133 @@
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/elevation/mixins";
+@import "./functions";
+@import "./variables";
+@import "./mixins";
+
+@include rs-ripple-common;
+
+.rs-switch {
+  display: inline-block;
+  position: relative;
+  outline: none;
+  user-select: none;
+
+  > .track {
+    box-sizing: border-box;
+    width: $rs-switch-track-width;
+    height: $rs-switch-track-height;
+    border: 1px solid;
+    border-radius: $rs-switch-track-height / 2;
+    opacity: .38;
+
+    transition:
+      rs-switch-transition(opacity),
+      rs-switch-transition(background-color),
+      rs-switch-transition(border-color);
+  }
+
+  > .thumbunderlay {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-unbounded(100%);
+    @include rs-ripple-upgraded($rs-switch-baseline-theme-color);
+    
+    display: flex;
+    position: absolute;
+    top: -(($rs-switch-tap-target-size - $rs-switch-track-height) / 2);
+    left: -18px;
+    align-items: center;
+    justify-content: center;
+    width: $rs-switch-tap-target-size;
+    height: $rs-switch-tap-target-size;
+    transform: translateX(0);
+    transition:
+      rs-switch-transition(transform),
+      rs-switch-transition(background-color),
+      rs-switch-transition(border-color);
+  }
+
+  > .thumbunderlay > .thumb {
+    box-shadow: rs-elevation(2);
+    box-sizing: border-box;
+    width: $rs-switch-thumb-diameter;
+    height: $rs-switch-thumb-diameter;
+    border: $rs-switch-thumb-diameter / 2 solid;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  > .thumbunderlay > .thumb > .nativecontrol {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $rs-switch-native-control-width;
+    height: $rs-switch-tap-target-size;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: auto;
+  
+  }
+
+  &.-checked {
+    > .track {
+      opacity: .54;
+      border-color: $rs-switch-baseline-theme-color;
+      background-color: $rs-switch-baseline-theme-color;
+    }
+
+    > .thumbunderlay {
+      transform: translateX($rs-switch-thumb-active-margin);
+    }
+
+    > .thumbunderlay > .thumb {
+      border-color: $rs-switch-baseline-theme-color;
+      background-color: $rs-switch-baseline-theme-color;
+    }
+    
+    > .thumbunderlay > .thumb > .nativecontrol {
+      transform: translateX(-($rs-switch-thumb-active-margin));
+    }
+  }
+
+
+  &:not(.-checked) {
+    > .track {
+      border-color: $rs-switch-toggled-off-track-color;
+      background-color: $rs-switch-toggled-off-track-color;
+    }
+    
+    > .thumbunderlay {
+      @include rs-ripple-upgraded($rs-switch-toggled-off-ripple-color);
+    }
+    
+    > .thumbunderlay > .thumb {
+      border-color: $rs-switch-toggled-off-thumb-color;
+      background-color: $rs-switch-toggled-off-thumb-color;
+    }
+  }
+
+  &.-disabled {
+    opacity: .38;
+    pointer-events: none;
+
+    > .thumbunderlay > .thumb {
+      border-width: 1px;
+    }
+
+    > .thumbunderlay > .thumb > .nativecontrol {
+      cursor: default;
+      pointer-events: none;
+    }
+    &+.label {
+      pointer-events: none;
+    }
+  }
+  &+.label {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+}

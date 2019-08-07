@@ -1,5 +1,5 @@
 {
-  "name": "swich",
+  "name": "switch",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
@@ -9,16 +9,23 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/swich/swich.js",
+  "unpkg": "dist/switch/switch.js",
   "files": [
     "dist/",
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "convert": "node ../../converter/index.js",
+    "build": "yarn convert && stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "dependencies": {
+    "@rsmdc/elevation": "^1.1.0",
+    "@rsmdc/ripple": "^1.1.10",
+    "@rsmdc/rtl": "^1.1.0",
+    "@rsmdc/theme": "^1.1.0"
   },
   "devDependencies": {
     "@stencil/core": "^1.0.7"

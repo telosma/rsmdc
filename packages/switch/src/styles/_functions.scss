@@ -1,0 +1,5 @@
+@import "@rsmdc/animation/variables";
+
+@function rs-switch-transition($property) {
+  @return $property 90ms $rs-animation-standard-curve-timing-function;
+}

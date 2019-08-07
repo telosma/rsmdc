@@ -1,0 +1,95 @@
+.rs-slide {
+  @mixin rs-slider-highlight-color($color) {
+    > .trackcontainer > .track {
+      @include rs-theme-prop(background-color, $color);
+    }
+  }
+
+  @mixin rs-slider-rail-color_($color, $opacity: $rs-slider-baseline-rail-opacity) {
+    > .trackcontainer {
+      @include rs-theme-prop(background-color, rgba(rs-theme-prop-value($color), $opacity));
+    }
+  }
+
+   @mixin rs-slider-rail-tick-mark-color_($color) {
+    > .trackmarker::after,
+    > .trackmarkercontainer::after {
+      @include rs-theme-prop(background-color, $color);
+    }
+  }
+
+  @mixin rs-slider-thumb-color_($color) {
+    > .thumbcontainer > .thumb {
+      @include rs-theme-prop(fill, $color);
+      @include rs-theme-prop(stroke, $color);
+    }
+  }
+
+  @mixin rs-slider-highlight-color($color) {
+    &:not(.-disabled) {
+      @include rs-slider-highlight-color_($color);
+    }
+  }
+   
+  @mixin rs-slider-rail-color($color, $opacity: $rs-slider-baseline-rail-opacity) {
+    &:not(.-disabled) {
+      @include rs-slider-rail-color_($color, $opacity);
+    }
+  }
+
+  @mixin rs-slider-rail-tick-mark-color($color) {
+    &:not(.-disabled) {
+      @include rs-slider-rail-tick-mark-color_($color);
+    }
+  }
+    
+  @mixin rs-slider-thumb-color($color) {
+    &:not(.-disabled) {
+      @include rs-slider-thumb-color_($color);
+    }
+  }
+
+    
+  @mixin rs-slider-focus-halo-color($color) {
+    &:not(.-disabled) {
+      > .focusring {
+        @include rs-theme-prop(background-color, $color);
+      }
+    }
+  }
+
+
+  @mixin rs-slider-value-pin-fill-color-accessible($color) {
+    $color-value: rs-theme-prop-value($color);
+    $ink-color: if(rs-theme-tone($color-value) == "light", text-primary-on-light, text-primary-on-dark);
+
+    @include rs-slider-value-pin-fill-color($color);
+    @include rs-slider-value-pin-ink-color($ink-color);
+  }
+
+  @mixin rs-slider-value-pin-fill-color($color) {
+    &:not(.-disabled) {
+      > .pin {
+        @include rs-theme-prop(background-color, $color);
+      }
+    }
+  }
+
+
+  @mixin rs-slider-value-pin-ink-color($color) {
+    &:not(.-disabled) {
+      > .pin {
+        @include rs-theme-prop(color, $color);
+      }
+    }
+  }
+
+  @mixin rs-slider-color-accessible($color) {
+    @include rs-slider-highlight-color($color);
+    @include rs-slider-rail-color($color);
+    @include rs-slider-rail-tick-mark-color($color);
+    @include rs-slider-thumb-color($color);
+    @include rs-slider-focus-halo-color($color);
+    @include rs-slider-value-pin-fill-color-accessible($color);
+  }
+}

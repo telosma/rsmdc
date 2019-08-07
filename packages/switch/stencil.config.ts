@@ -1,7 +1,7 @@
 import { Config } from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'swich',
+  namespace: 'switch',
   outputTargets: [
     {
       type: 'dist',
