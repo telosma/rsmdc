@@ -14,21 +14,18 @@
         right: auto;
         left: 0;
         width: 100%;
-
         > .row {
           height: $rs-top-app-bar-mobile-row-height;
         }
-
-        > .row > .section {
-          padding: #{$rs-top-app-bar-mobile-section-padding};
+        > .row
+        > .section {
+          padding: $rs-top-app-bar-mobile-section-padding;
         }
       }
-
       .rs-app-bar-title {
         transition: opacity 200ms $rs-animation-standard-curve-timing-function;
         opacity: 1;
       }
-
       .rs-app-bar-content {
         padding-top: $rs-top-app-bar-mobile-row-height;
       }
@@ -36,52 +33,46 @@
       @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
         .rs-app-bar {
           transition: width 250ms $rs-animation-standard-curve-timing-function;
-      
+
           > .row {
             height: $rs-top-app-bar-mobile-row-height;
           }
-      
+
           > .row > .section {
             padding: $rs-top-app-bar-mobile-section-padding;
           }
         }
       }
-
     }@else if $type == dense {
       .rs-app-bar-content {
         padding-top: $rs-top-app-bar-dense-row-height;
       }
-
       .rs-app-bar {
+
         > .row {
           height: $rs-top-app-bar-dense-row-height;
         }
       }
-
       @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
         .rs-app-bar {
           transition: width 250ms $rs-animation-standard-curve-timing-function;
-      
+
           > .row {
             height: $rs-top-app-bar-dense-row-height;
           }
-      
+
           > .row > .section {
             padding: 0 $rs-top-app-bar-dense-section-horizontal-padding;
           }
         }
       }
-
       .rs-app-bar-title {
         padding-left: $rs-top-app-bar-dense-title-left-padding;
       }
-
-
     }@else if $type == prominent {
       .rs-app-bar-content {
         padding-top: $rs-top-app-bar-prominent-row-height;
       }
-
       .rs-app-bar {
         padding-bottom: $rs-top-app-bar-prominent-mobile-title-bottom-padding;
 
@@ -89,7 +80,6 @@
           height: $rs-top-app-bar-prominent-row-height;
         }
       }
-
       @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
         .rs-app-bar {      
           > .row {
@@ -97,7 +87,6 @@
           }
         }
       }
-
       .rs-app-bar-title {
         align-self: flex-end;
         padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
@@ -178,8 +167,6 @@
     .rs-app-bar-item {
       transition: padding 150ms $rs-animation-standard-curve-timing-function;
 
-      &.-short-collapsed {
-      }
     }
 
   }
@@ -208,38 +195,30 @@
 }
 
 // Set icon to action-item.
-@mixin rs-top-app-bar-action-icon-image($icon, $icon-name: '') {
+@mixin rs-top-app-bar-action-icon-image($icon, $name: '') {
   $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
 
   @if $value == path {
     .rs-app-bar-item {
+
       > .label {
-        background-image: #{$icon};
+        background-image: $icon;
         height: 24px;
       }
+
     }
 
   }@else {
     .rs-app-bar-item {
+
       > .label {
         font-family: '#{$icon}';
       }
 
       > .label::before {
-        content: unquote('"\\#{$icon-name}"');
+        content: unquote('"\\#{$name}"');
       }
+
     }
-  }
-}
-
-// Change top-app-bar radius.
-@mixin rs-top-app-bar-short-shape-radius($radius) {
-  @if length($radius) > 1 {
-    @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
-  }
-  $radius: 0 0 $radius 0;
-
-  .rs-app-bar.-short-collapsed {
-    border-radius: rs-shape-resolve-percentage-radius($rs-top-app-bar-dense-row-height, $radius);
   }
 }
