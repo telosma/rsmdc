@@ -6,7 +6,7 @@
 @import './variables';
 
 // Change top-app-bar type.
-@mixin rs-top-app-bar-type($types...) {
+@mixin rs-app-bar-type($types...) {
   @each $type in $types {
     @if $type == short {
       .rs-app-bar {
@@ -117,7 +117,7 @@
       }
 
     }@else if $type == collapsed {
-      @include rs-top-app-bar-short-shape-radius(24px);
+      @include rs-app-bar-short-shape-radius(24px);
 
       .rs-app-bar {
         box-shadow: rs-elevation(4);
@@ -195,7 +195,7 @@
 }
 
 // Set icon to action-item.
-@mixin rs-top-app-bar-action-icon-image($icon, $name: '') {
+@mixin rs-app-bar-action-icon-image($icon, $codepoint: '') {
   $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
 
   @if $value == path {
@@ -209,6 +209,8 @@
     }
 
   }@else {
+    $name: '\\' + $codepoint;
+
     .rs-app-bar-item {
 
       > .label {
@@ -216,9 +218,31 @@
       }
 
       > .label::before {
-        content: unquote('"\\#{$name}"');
+        content: '#{$name}';
       }
 
+    }
+  }
+}
+
+// Set icon to nav.
+@mixin rs-app-bar-nav-icon-image($icon, $codepoint: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    .rs-app-bar-nav > .label {
+      background-image: #{$icon};
+      height: 24px;
+    }
+  }@else {
+    $name: '\\' + $codepoint;
+
+    .rs-app-bar-nav {
+      font-family: '#{$icon}';
+
+      > .label::before {
+        content: '#{$name}';
+      }
     }
   }
 }
