@@ -49,10 +49,14 @@
       .rs-app-bar-content {
         padding-top: $rs-top-app-bar-dense-row-height;
       }
-      .rs-app-bar {
 
+      .rs-app-bar {
         > .row {
           height: $rs-top-app-bar-dense-row-height;
+        }
+
+        > .row > .section {
+          padding: 0 4px;
         }
       }
       @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
@@ -101,7 +105,7 @@
       .rs-app-bar-nav {
         align-self: flex-start;
       }
-      
+
     }@else if $type == adjust {
       .rs-app-bar {
         padding-top: $rs-top-app-bar-row-height;
