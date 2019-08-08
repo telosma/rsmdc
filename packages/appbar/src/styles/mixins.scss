@@ -101,18 +101,10 @@
           }
         }
       }
-      
-      .rs-app-bar-title {
+
+      .host-rs-app-bar-title {
         align-self: flex-end;
         padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
-      }
-
-      .rs-app-bar-item {
-        align-self: flex-start;
-      }
-
-      .rs-app-bar-nav {
-        align-self: flex-start;
       }
 
     }@else if $type == adjust {

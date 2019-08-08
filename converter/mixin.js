@@ -116,25 +116,40 @@ module.exports.generateClientMixin = (selectorsStyles) => {
   const replaceScss = excludeImportAndBlank(sourceScss)
   const mixinSelectors = extractSelectorsInMixin(replaceScss)
   fixSelectorsCorrectFormat(mixinSelectors)
-
   let scss = replaceScss
   mixinSelectors.forEach((selector, i) => {
-    let replaceCustomProperty = ''
 
+    let styleText = ''
     for (let n = 0; n < selectorsStyles[i].length; n++) {
-      replaceCustomProperty = Object.values(selectorsStyles[i][n])
+      const className = Object.values(selectorsStyles[i][n])[0]
+        .replace('--', '')
+        .replace(/--.*/, '')
+      
+      if (className.match(/^host-rs-/)) {
+        const text = Object.values(selectorsStyles[i][n])
+          .reduce((res, val) => {
+            const style = val.replace(/.*---/, '')
+            return res = `${res}${style} `
+          }, '')
+
+        styleText = `.${className} { ${text} }\n`
+
+      } else {
+        styleText = Object.values(selectorsStyles[i][n])
         .reduce((res, val) => {
           return res = `${res}${val}\n`
-        }, replaceCustomProperty)
+        }, styleText)
+
+      }
     }
     if (selector.match(/media/)) {
-      replaceCustomProperty = selector.replace(/{(.*)}$/, `{${replaceCustomProperty}}`)
+      styleText = selector.replace(/{(.*)}$/, `{${styleText}}`)
     } 
-    scss = scss.replace(selector, replaceCustomProperty)
-    if (scss.indexOf(replaceCustomProperty) === -1) {
+    scss = scss.replace(selector, styleText)
+    if (scss.indexOf(styleText) === -1) {
       const endBraces = selector.match(/}+$/g)[0].match(/}/g).join(' ')
       selector = selector.replace(/}+$/g, endBraces)
-      scss = scss.replace(selector, replaceCustomProperty)
+      scss = scss.replace(selector, styleText)
     }
   })
 
