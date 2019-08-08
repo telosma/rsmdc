@@ -144,8 +144,9 @@ const mappingSelectors = (customPropJson, sourceJson) => {
         const prop = attr.replace(/var\(|\)/g, '')
         let value = sJsonAttrs[i][1].replace(/'\$/g, '#{$').replace(/(?<=[a-z|A-Z])'/g, '}')
         value = value.replace(/"\$/g, '\'#{$').replace(/(?<=[a-z|A-Z])"/g, '}\'')
-        if (value.match(/"\\\$/)) {
-          value = value.replace(/"\\\$/g, '\'"\\\\#{$').replace(/}'/g, '}"\'')
+
+        if (value.match(/"\\\\\$/)) {
+          value = value.replace(/"\\\\\$/g, '\'\\\\#{$').replace(/}'/g, '}\'')
         }
 
         style[sJsonAttrs[i][0]] = `${prop}: ${value};`
