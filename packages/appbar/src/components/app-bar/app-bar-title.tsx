@@ -1,7 +1,7 @@
 import { Component, Element, Prop, State, Host, h } from '@stencil/core';
 
 @Component({
-  tag: 'rs-app-bar',
+  tag: 'rs-app-bar-title',
   styleUrl: '../../dist/result.css',
   shadow: true
 })
@@ -18,15 +18,10 @@ export class AppBar {
   @State() top: string
 
   render() {
-    return  <Host>
-              <header class="rs-app-bar">
-                <div class="row">
-                  <div class="section">
-                    <slot></slot>
-                  </div>
-                </div>
-              </header>
-              <div class="rs-app-bar-content" />
+    return  <Host class="rs-app-bar-title-host">
+              <h1 class="rs-app-bar-title">
+                <slot />
+              </h1>
             </Host>
   }
 }

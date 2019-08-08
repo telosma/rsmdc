@@ -9,7 +9,17 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface AppBar {
+  interface RsAppBar {
+    'first': string;
+    'last': string;
+    'middle': string;
+  }
+  interface RsAppBarNav {
+    'first': string;
+    'last': string;
+    'middle': string;
+  }
+  interface RsAppBarTitle {
     'first': string;
     'last': string;
     'middle': string;
@@ -19,25 +29,51 @@ export namespace Components {
 declare global {
 
 
-  interface HTMLAppBarElement extends Components.AppBar, HTMLStencilElement {}
-  var HTMLAppBarElement: {
-    prototype: HTMLAppBarElement;
-    new (): HTMLAppBarElement;
+  interface HTMLRsAppBarElement extends Components.RsAppBar, HTMLStencilElement {}
+  var HTMLRsAppBarElement: {
+    prototype: HTMLRsAppBarElement;
+    new (): HTMLRsAppBarElement;
+  };
+
+  interface HTMLRsAppBarNavElement extends Components.RsAppBarNav, HTMLStencilElement {}
+  var HTMLRsAppBarNavElement: {
+    prototype: HTMLRsAppBarNavElement;
+    new (): HTMLRsAppBarNavElement;
+  };
+
+  interface HTMLRsAppBarTitleElement extends Components.RsAppBarTitle, HTMLStencilElement {}
+  var HTMLRsAppBarTitleElement: {
+    prototype: HTMLRsAppBarTitleElement;
+    new (): HTMLRsAppBarTitleElement;
   };
   interface HTMLElementTagNameMap {
-    'app-bar': HTMLAppBarElement;
+    'rs-app-bar': HTMLRsAppBarElement;
+    'rs-app-bar-nav': HTMLRsAppBarNavElement;
+    'rs-app-bar-title': HTMLRsAppBarTitleElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface AppBar extends JSXBase.HTMLAttributes<HTMLAppBarElement> {
+  interface RsAppBar extends JSXBase.HTMLAttributes<HTMLRsAppBarElement> {
+    'first'?: string;
+    'last'?: string;
+    'middle'?: string;
+  }
+  interface RsAppBarNav extends JSXBase.HTMLAttributes<HTMLRsAppBarNavElement> {
+    'first'?: string;
+    'last'?: string;
+    'middle'?: string;
+  }
+  interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {
     'first'?: string;
     'last'?: string;
     'middle'?: string;
   }
 
   interface IntrinsicElements {
-    'app-bar': AppBar;
+    'rs-app-bar': RsAppBar;
+    'rs-app-bar-nav': RsAppBarNav;
+    'rs-app-bar-title': RsAppBarTitle;
   }
 }
 

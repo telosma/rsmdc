@@ -1,8 +1,13 @@
 @import '@rsmdc/animation/variables';
 @import '@rsmdc/drawer/variables';
 @import '@rsmdc/elevation/mixins';
+@import "@rsmdc/ripple/mixins-stencil";
 @import '@rsmdc/theme/variables';
+@import '@rsmdc/typography/mixins';
 @import './variables';
+@import './_mixins';
+
+@include rs-ripple-common;
 
 .rs-app-bar {
   display: flex;
@@ -83,6 +88,58 @@
 
 .rs-app-bar-content {
   padding-top: $rs-top-app-bar-row-height;
+}
+
+.rs-app-bar-title-host {
+  padding-bottom: 0;
+  align-self: flex-start;
+}
+
+.rs-app-bar-title {
+  @include rs-typography(headline6);
+  
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 1;
+  padding-right: 0;
+  margin: 0;
+  color: $rs-theme-on-primary;
+  transition: none;
+  opacity: 1;
+  display: block;
+  padding-left: $rs-top-app-bar-title-left-padding;
+}
+
+.rs-app-bar-nav-host {
+  align-self: flex-start;
+}
+
+.rs-app-bar-nav {
+  @include rs-top-app-bar-icon_;
+  font-family: initial;
+  font-size: 24px;
+  font-weight: 400;
+  color: inherit;
+
+  > .label {
+    width: 24px;
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: auto;
+    background-image: none;
+  
+    &::before {
+      content: '';
+    }
+  }
+
+  &.rs-ripple-upgraded {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-unbounded;
+    @include rs-ripple-upgraded($rs-theme-on-primary);
+  }
 }
 
 @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
