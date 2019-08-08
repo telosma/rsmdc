@@ -24,7 +24,11 @@
   padding-top: auto;
   width: auto;
 
-  &.-fixed-scrolled {
+  &.-fixed {
+    transition: box-shadow 200ms linear;
+  }
+
+  &.-fixed.-fixed-scrolled {
     box-shadow: rs-elevation(4);
     transition: box-shadow 200ms linear;
   }

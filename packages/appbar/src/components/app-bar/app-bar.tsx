@@ -1,4 +1,4 @@
-import { Component, Element, State, Host, h } from '@stencil/core';
+import { Component, Element, Prop, State, Watch, Method, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'rs-app-bar',
@@ -9,13 +9,15 @@ export class AppBar {
 
   @Element() el: HTMLElement
 
+  @Prop() fixed: boolean
+
   @State() isDrawer: boolean
+
+  @State() isScrolling: boolean
 
   appBar: HTMLElement
 
   hasAppBarTool: boolean
-
-  isScrolling: boolean
 
   topLimit: number
 
@@ -30,12 +32,37 @@ export class AppBar {
   appBarPadding: number = 12
 
   withCollapsedAppBarPadding: number = 4
-  
 
+  @Watch('fixed')
+  fixedHandler() {
+    this.isFixed()
+  }
+
+  @Watch('isScrolling')
+  isScrollingHandler() {
+    if (this.isScrolling && !this.appBar.classList.contains('-fixed-scrolled')) {
+      this.appBar.classList.add('-fixed-scrolled')
+    } else if (!this.isScrolling) {
+      this.appBar.classList.remove('-fixed-scrolled')
+    }
+  }
+
+  @Method()
+  async isFixed() {
+    if (this.fixed) {
+      this.appBar.classList.add('-fixed')
+    } else {
+      this.appBar.classList.remove('-fixed')
+    }
+  }
+  
   componentDidLoad() {
     this.appBar = this.el.shadowRoot.querySelector('.rs-app-bar')
     this.topLimit = -(this.appBarHeight * 2)
     const slotEl = this.el.shadowRoot.querySelector('slot')
+    // const appBarStyle = window.getComputedStyle(this.el)
+
+    this.isFixed()
 
     // TODO (If host component has other classname, disappear this component when properties changes)
     const observer = new MutationObserver(records => {
@@ -61,9 +88,12 @@ export class AppBar {
     })
 
     window.onscroll = () => {
+      // const appBarType = appBarStyle.getPropertyValue('--rs-app-bar-type')
       let top = window.pageYOffset
       const diff = this.windowScrollTop - top
       this.isScrolling = top > 0
+
+      if (this.fixed) { return }
 
       if(top < this.windowScrollTop) {
         // scroll up
