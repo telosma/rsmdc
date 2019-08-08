@@ -1,4 +1,4 @@
-@mixin rs-top-app-bar-icon_ {
+@mixin rs-app-bar-icon_ {
   display: flex;
   position: relative;
   flex-shrink: 0;
@@ -14,4 +14,20 @@
   fill: currentColor;
   text-decoration: none;
   cursor: pointer;
+  font-family: initial;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+@mixin rs-app-bar-icon-label_ {
+  width: 24px;
+  background-size: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: auto;
+  background-image: none;
+
+  &::before {
+    content: '';
+  }
 }

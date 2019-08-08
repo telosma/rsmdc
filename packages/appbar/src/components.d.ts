@@ -14,6 +14,11 @@ export namespace Components {
     'last': string;
     'middle': string;
   }
+  interface RsAppBarItem {
+    'first': string;
+    'last': string;
+    'middle': string;
+  }
   interface RsAppBarNav {
     'first': string;
     'last': string;
@@ -35,6 +40,12 @@ declare global {
     new (): HTMLRsAppBarElement;
   };
 
+  interface HTMLRsAppBarItemElement extends Components.RsAppBarItem, HTMLStencilElement {}
+  var HTMLRsAppBarItemElement: {
+    prototype: HTMLRsAppBarItemElement;
+    new (): HTMLRsAppBarItemElement;
+  };
+
   interface HTMLRsAppBarNavElement extends Components.RsAppBarNav, HTMLStencilElement {}
   var HTMLRsAppBarNavElement: {
     prototype: HTMLRsAppBarNavElement;
@@ -48,6 +59,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'rs-app-bar': HTMLRsAppBarElement;
+    'rs-app-bar-item': HTMLRsAppBarItemElement;
     'rs-app-bar-nav': HTMLRsAppBarNavElement;
     'rs-app-bar-title': HTMLRsAppBarTitleElement;
   }
@@ -55,6 +67,11 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsAppBar extends JSXBase.HTMLAttributes<HTMLRsAppBarElement> {
+    'first'?: string;
+    'last'?: string;
+    'middle'?: string;
+  }
+  interface RsAppBarItem extends JSXBase.HTMLAttributes<HTMLRsAppBarItemElement> {
     'first'?: string;
     'last'?: string;
     'middle'?: string;
@@ -72,6 +89,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'rs-app-bar': RsAppBar;
+    'rs-app-bar-item': RsAppBarItem;
     'rs-app-bar-nav': RsAppBarNav;
     'rs-app-bar-title': RsAppBarTitle;
   }

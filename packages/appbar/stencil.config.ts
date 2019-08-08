@@ -16,6 +16,11 @@ export const config: Config = {
     }
   ],
   bundles: [
-    { components: ['rs-app-bar', 'rs-app-bar-title', 'rs-app-bar-nav']}
+    { components: [
+      'rs-app-bar', 
+      'rs-app-bar-title',
+      'rs-app-bar-nav',
+      'rs-app-bar-item'
+    ]}
   ]
 };

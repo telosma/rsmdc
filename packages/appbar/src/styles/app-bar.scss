@@ -116,25 +116,32 @@
 }
 
 .rs-app-bar-nav {
-  @include rs-top-app-bar-icon_;
-  font-family: initial;
-  font-size: 24px;
-  font-weight: 400;
-  color: inherit;
+  @include rs-app-bar-icon_;
+  color: $rs-theme-on-primary;
 
   > .label {
-    width: 24px;
-    background-size: 24px;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: auto;
-    background-image: none;
-  
-    &::before {
-      content: '';
-    }
+    @include rs-app-bar-icon-label_;
   }
 
+  &.rs-ripple-upgraded {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-unbounded;
+    @include rs-ripple-upgraded($rs-theme-on-primary);
+  }
+}
+
+.rs-app-bar-item-host {
+  align-self: flex-start;
+}
+
+.rs-app-bar-item {
+  @include rs-app-bar-icon_;
+  color: $rs-theme-on-primary;
+
+  > .label {
+    @include rs-app-bar-icon-label_;
+  }
+  
   &.rs-ripple-upgraded {
     @include rs-ripple-surface;
     @include rs-ripple-radius-unbounded;
