@@ -29,11 +29,17 @@ export class AppBar {
         if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
           this.el.classList.add('hydrated')
         }
+        if (record.attributeName === 'class' && !this.el.classList.contains('rs-app-bar-item-host')) {
+          this.el.classList.add('rs-app-bar-item-host')
+        }
       })
     })
     observer.observe(this.el, {
       attributes: true
     })
+  }
+
+  componentDidRender() {
   }
 
   render() {

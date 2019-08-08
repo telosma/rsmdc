@@ -29,6 +29,9 @@ export class AppBar {
         if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
           this.el.classList.add('hydrated')
         }
+        if (record.attributeName === 'class' && !this.el.classList.contains('rs-app-bar-nav-host')) {
+          this.el.classList.add('rs-app-bar-nav-host')
+        }
       })
     })
     observer.observe(this.el, {

@@ -24,6 +24,9 @@ export class AppBar {
         if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
           this.el.classList.add('hydrated')
         }
+        if (record.attributeName === 'class' && !this.el.classList.contains('rs-app-bar-tool-host')) {
+          this.el.classList.add('rs-app-bar-tool-host')
+        }
       })
     })
     observer.observe(this.el, {
@@ -33,7 +36,7 @@ export class AppBar {
 
   render() {
     return  <Host class="rs-app-bar-tool-host">
-              <div class="app-bar-tool">
+              <div class="rs-app-bar-tool">
                 <slot />
               </div>
             </Host>
