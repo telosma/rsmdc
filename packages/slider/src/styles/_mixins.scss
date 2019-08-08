@@ -1,36 +1,32 @@
-.rs-slide {
+.rs-slider {
+// @include rs-slider-emphasize-keyframes_;
   @mixin rs-slider-highlight-color($color) {
-    > .trackcontainer > .track {
+    &:not(.-disabled) {
+      @include rs-slider-highlight-color_($color);
+    }
+  }
+
+  @mixin rs-slider-highlight-color_($color) {
+    > .track {
       @include rs-theme-prop(background-color, $color);
     }
   }
 
   @mixin rs-slider-rail-color_($color, $opacity: $rs-slider-baseline-rail-opacity) {
     > .trackcontainer {
-      @include rs-theme-prop(background-color, rgba(rs-theme-prop-value($color), $opacity));
+      background-color: rgba(1,135,134,.26);
     }
   }
 
-   @mixin rs-slider-rail-tick-mark-color_($color) {
+  @mixin rs-slider-rail-tick-mark-color_($color) {
     > .trackmarker::after,
     > .trackmarkercontainer::after {
       @include rs-theme-prop(background-color, $color);
+      // background: #018786;
     }
   }
 
-  @mixin rs-slider-thumb-color_($color) {
-    > .thumbcontainer > .thumb {
-      @include rs-theme-prop(fill, $color);
-      @include rs-theme-prop(stroke, $color);
-    }
-  }
 
-  @mixin rs-slider-highlight-color($color) {
-    &:not(.-disabled) {
-      @include rs-slider-highlight-color_($color);
-    }
-  }
-   
   @mixin rs-slider-rail-color($color, $opacity: $rs-slider-baseline-rail-opacity) {
     &:not(.-disabled) {
       @include rs-slider-rail-color_($color, $opacity);
@@ -42,14 +38,22 @@
       @include rs-slider-rail-tick-mark-color_($color);
     }
   }
-    
+
+  @mixin rs-slider-thumb-color_($color) {
+    > .thumbcontainer > .thumb {
+      // background: #018786;
+      @include rs-theme-prop(fill, $color);
+      @include rs-theme-prop(stroke, $color);
+    }
+  }
+
   @mixin rs-slider-thumb-color($color) {
     &:not(.-disabled) {
       @include rs-slider-thumb-color_($color);
     }
   }
 
-    
+
   @mixin rs-slider-focus-halo-color($color) {
     &:not(.-disabled) {
       > .focusring {
@@ -57,7 +61,6 @@
       }
     }
   }
-
 
   @mixin rs-slider-value-pin-fill-color-accessible($color) {
     $color-value: rs-theme-prop-value($color);
@@ -75,7 +78,6 @@
     }
   }
 
-
   @mixin rs-slider-value-pin-ink-color($color) {
     &:not(.-disabled) {
       > .pin {
@@ -83,13 +85,18 @@
       }
     }
   }
-
   @mixin rs-slider-color-accessible($color) {
-    @include rs-slider-highlight-color($color);
+    // @include rs-slider-highlight-color($color);
     @include rs-slider-rail-color($color);
     @include rs-slider-rail-tick-mark-color($color);
     @include rs-slider-thumb-color($color);
     @include rs-slider-focus-halo-color($color);
     @include rs-slider-value-pin-fill-color-accessible($color);
+  }
+  @include rs-slider-color-accessible(secondary);
+
+  &.-disabled {
+    $disabled-color: #9a9a9a;
+     @include rs-slider-highlight-color_($disabled-color);
   }
 }

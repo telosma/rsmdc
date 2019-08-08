@@ -24,7 +24,8 @@
   "devDependencies": {
     "@stencil/core": "^1.0.7",
     "@rsmdc/rtl": "^1.1.0",
-    "@rsmdc/theme": "^1.1.0"
+    "@rsmdc/theme": "^1.1.0",
+    "@rsmdc/typography": "^1.1.0"
   },
   "license": "MIT"
 }
