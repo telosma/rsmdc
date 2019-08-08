@@ -29,6 +29,11 @@ export namespace Components {
     'last': string;
     'middle': string;
   }
+  interface RsAppBarTool {
+    'first': string;
+    'last': string;
+    'middle': string;
+  }
 }
 
 declare global {
@@ -57,11 +62,18 @@ declare global {
     prototype: HTMLRsAppBarTitleElement;
     new (): HTMLRsAppBarTitleElement;
   };
+
+  interface HTMLRsAppBarToolElement extends Components.RsAppBarTool, HTMLStencilElement {}
+  var HTMLRsAppBarToolElement: {
+    prototype: HTMLRsAppBarToolElement;
+    new (): HTMLRsAppBarToolElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-app-bar': HTMLRsAppBarElement;
     'rs-app-bar-item': HTMLRsAppBarItemElement;
     'rs-app-bar-nav': HTMLRsAppBarNavElement;
     'rs-app-bar-title': HTMLRsAppBarTitleElement;
+    'rs-app-bar-tool': HTMLRsAppBarToolElement;
   }
 }
 
@@ -86,12 +98,18 @@ declare namespace LocalJSX {
     'last'?: string;
     'middle'?: string;
   }
+  interface RsAppBarTool extends JSXBase.HTMLAttributes<HTMLRsAppBarToolElement> {
+    'first'?: string;
+    'last'?: string;
+    'middle'?: string;
+  }
 
   interface IntrinsicElements {
     'rs-app-bar': RsAppBar;
     'rs-app-bar-item': RsAppBarItem;
     'rs-app-bar-nav': RsAppBarNav;
     'rs-app-bar-title': RsAppBarTitle;
+    'rs-app-bar-tool': RsAppBarTool;
   }
 }
 

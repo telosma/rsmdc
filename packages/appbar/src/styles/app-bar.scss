@@ -149,6 +149,19 @@
   }
 }
 
+.rs-app-bar-tools-host {
+  // --rs-top-app-bar-actions: true;
+  margin-left: auto;
+  margin-right: 0;
+  align-self: flex-start;
+}
+
+.rs-app-bar-tool {
+  display: flex;
+  justify-content: center;
+  padding-right: 0;
+}
+
 @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
   .rs-app-bar {
     transition: width 250ms $rs-animation-standard-curve-timing-function;

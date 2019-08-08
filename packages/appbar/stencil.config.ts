@@ -20,6 +20,7 @@ export const config: Config = {
       'rs-app-bar', 
       'rs-app-bar-title',
       'rs-app-bar-nav',
+      'rs-app-bar-tool',
       'rs-app-bar-item'
     ]}
   ]
