@@ -9,11 +9,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsAppBar {
-    'first': string;
-    'last': string;
-    'middle': string;
-  }
+  interface RsAppBar {}
   interface RsAppBarItem {
     'first': string;
     'last': string;
@@ -78,11 +74,7 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface RsAppBar extends JSXBase.HTMLAttributes<HTMLRsAppBarElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
-  }
+  interface RsAppBar extends JSXBase.HTMLAttributes<HTMLRsAppBarElement> {}
   interface RsAppBarItem extends JSXBase.HTMLAttributes<HTMLRsAppBarItemElement> {
     'first'?: string;
     'last'?: string;
