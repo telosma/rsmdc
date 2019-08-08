@@ -7,6 +7,7 @@
 
 // Change top-app-bar type.
 @mixin rs-app-bar-type($types...) {
+  --rs-app-bar-type: #{$types};
   @each $type in $types {
     @if $type == short {
       .rs-app-bar {
@@ -117,7 +118,7 @@
       }
 
     }@else if $type == collapsed {
-      @include rs-app-bar-short-shape-radius(24px);
+      // @include rs-app-bar-short-shape-radius(24px);
 
       .rs-app-bar {
         box-shadow: rs-elevation(4);
@@ -212,10 +213,7 @@
     $name: '\\' + $codepoint;
 
     .rs-app-bar-item {
-
-      > .label {
-        font-family: '#{$icon}';
-      }
+      font-family: '#{$icon}';
 
       > .label::before {
         content: '#{$name}';

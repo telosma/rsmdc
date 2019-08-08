@@ -90,11 +90,6 @@
   padding-top: $rs-top-app-bar-row-height;
 }
 
-.rs-app-bar-title-host {
-  padding-bottom: 0;
-  align-self: flex-start;
-}
-
 .rs-app-bar-title {
   @include rs-typography(headline6);
   
@@ -109,10 +104,6 @@
   opacity: 1;
   display: block;
   padding-left: $rs-top-app-bar-title-left-padding;
-}
-
-.rs-app-bar-nav-host {
-  align-self: flex-start;
 }
 
 .rs-app-bar-nav {
@@ -130,10 +121,6 @@
   }
 }
 
-.rs-app-bar-item-host {
-  align-self: flex-start;
-}
-
 .rs-app-bar-item {
   @include rs-app-bar-icon_;
   color: $rs-theme-on-primary;
@@ -147,13 +134,6 @@
     @include rs-ripple-radius-unbounded;
     @include rs-ripple-upgraded($rs-theme-on-primary);
   }
-}
-
-.rs-app-bar-tools-host {
-  // --rs-top-app-bar-actions: true;
-  margin-left: auto;
-  margin-right: 0;
-  align-self: flex-start;
 }
 
 .rs-app-bar-tool {
