@@ -1,6 +1,7 @@
 /* eslint-disable vue/use-v-on-exact */
 const fs = require('fs')
 const { ripples, dirPath } = require('./constants')
+const { uniqWith, isEqual } = require('lodash')
 
 const getComponentStyleFileName = () => {
   return fs.readdirSync(`${dirPath}`, 'utf8').filter(file => file.match(/^(?!_)^(?!mixins).*.scss/g))[0]
@@ -78,10 +79,15 @@ module.exports.styleScss = (nodeModulesPath) => {
 module.exports.generateStyle = (sourceCss, styles) => {
   const files = extractComponentVariableFiles()
   const componentVariables = files.map(file => readFile(`${dirPath}/${file}`))[0].match(/\$.*(?=:)/g)
-
   let css = sourceCss
 
+  const hostStyles = []
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
+    if(prop.match(/^--host-rs/)) {
+      hostStyles.push([prop, value])
+      return result
+    }
+
     if(typeof value === 'object') {
       value = value[value.length-1]
     }
@@ -104,7 +110,34 @@ module.exports.generateStyle = (sourceCss, styles) => {
     result = `${result}\n ${prop}: ${value};`
     return result
   }, '')
-  const clientStyle = `:root {\n${style}\n}`
+  let clientStyle = `:root {\n${style}\n}`
+
+  if (hostStyles.length > 0) {
+    let styles = []
+
+    hostStyles.forEach(([prop]) => {
+      const className = prop.replace('--', '').replace(/--.*/, '')
+      const sameHostStyles = hostStyles.filter(([p]) => {
+        return p.match(className)
+      })
+      styles.push(sameHostStyles)
+    })
+
+    styles = uniqWith(styles, isEqual)
+
+    const hostStyle = styles.reduce((result, sameStyles) => {
+      const className = sameStyles[0][0].replace('--', '').replace(/--.*/, '')
+      const styleText = sameStyles.reduce((res, [prop, value]) => {
+        const property = prop.replace(/.*---/, '')
+        res = `${res}${property}:${value}; `
+        return res
+      }, '')
+      result = `${result}.${className} { ${styleText} }\n`
+      return result
+    }, '')
+
+    clientStyle = `${clientStyle}\n\n${hostStyle}`
+  }
 
   if (!fs.existsSync('./src/dist')) {
     fs.mkdirSync('./src/dist')
