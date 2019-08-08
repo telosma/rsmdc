@@ -40,7 +40,7 @@ export class AppBar {
   }
 
   render() {
-    return  <Host class="rs-app-bar-nav-host">
+    return  <Host class="host-rs-app-bar-nav">
               <span class="rs-app-bar-nav" tabindex="0">
                 <span class="label">
                   <slot />

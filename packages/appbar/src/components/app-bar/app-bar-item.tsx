@@ -43,7 +43,7 @@ export class AppBar {
   }
 
   render() {
-    return  <Host class="rs-app-bar-item-host">
+    return  <Host class="host-rs-app-bar-item">
               <span class="rs-app-bar-item" tabindex="0">
                 <span class="label">
                   <slot />
