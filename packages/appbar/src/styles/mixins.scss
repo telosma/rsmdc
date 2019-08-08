@@ -195,7 +195,7 @@
 }
 
 // Set icon to action-item.
-@mixin rs-app-bar-action-icon-image($icon, $codepoint: '') {
+@mixin rs-app-bar-tool-icon-image($icon, $codepoint: '') {
   $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
 
   @if $value == path {
