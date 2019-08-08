@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core';
+import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core';
 import { RSCheckbox } from '../../utils/index'
 @Component({
   tag: 'rs-checkbox',
@@ -23,7 +23,9 @@ export class Checkbox {
 
   @Prop() indeterminate: boolean
 
-  @State() dataChecked: string = ''
+  @Prop({
+    mutable: true
+  }) dataChecked: string = ''
 
   rsCheckbox: RSCheckbox
 
@@ -41,7 +43,7 @@ export class Checkbox {
 
   @Watch('indeterminate')
   indeterminateHandler() {
-    this.isIndeterminate()
+    this.isHostIndeterminate()
   }
 
   @Event({
@@ -69,6 +71,8 @@ export class Checkbox {
   @Method()
   async isHostChecked() {
     this.rsCheckbox.checked = this.checked
+    this.updateDataChecked()
+    this.isChecked()
   }
 
   @Method()
@@ -90,46 +94,58 @@ export class Checkbox {
   }
 
   @Method()
+  async isHostIndeterminate() {
+    this.rsCheckbox.indeterminate = this.indeterminate
+  }
+
+  @Method()
   async updateDataChecked() {
-    this.dataChecked = this.rsCheckbox.checked ? 'checked' : ''
+    const isChecked = this.rsCheckbox.checked ? 'checked' : ''
+    await this.el.setAttribute('data-checked', isChecked)
   }
 
   componentDidLoad() {
-    const labelEl = this.el.shadowRoot.querySelector('.label')
     this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
     this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
+    const labelEl = this.el.shadowRoot.querySelector('.label')
 
-    this.isHostChecked()
     this.isDisabled()
-    this.rsCheckbox.indeterminate = this.indeterminate
+    this.isHostChecked()
+    this.isHostIndeterminate()
     this.isIndeterminate()
 
-    this.checkbox.addEventListener('click', () => {
-      this.updateDataChecked()
-      this.isIndeterminate()
+    this.checkbox.addEventListener('mouseover', e => {
+      if (e.target === labelEl) { return }
+      this.rsCheckbox.ripple.layout()
     })
+
+    this.checkbox.addEventListener('click', async e => {
+      if (e.target === labelEl) { return }
+      await this.updateDataChecked()
+      await this.isChecked()
+      await this.isIndeterminate()
+      await this.change.emit({ value: this.value })
+    })
+
     labelEl.addEventListener('click', () => {
       this.activateRipple()
     })
 
-    const observer = new MutationObserver(mutation => {
-      if (mutation[0].attributeName !== 'data-checked') { return }
-      this.change.emit({ value: this.value})
+    // TODO (If host component has other classname, disappear this component when properties changes)
+    const observer = new MutationObserver(records => {
+      records.forEach(record => {
+        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
+          this.el.classList.add('hydrated')
+        }
+      })
     })
     observer.observe(this.el, {
       attributes: true
     })
   }
 
-  componentDidRender() {
-    if (!this.rsCheckbox) { return }
-
-    this.updateDataChecked()
-    this.isChecked()
-  }
-
   render() {
-    return  <Host data-checked={this.dataChecked}>
+    return  <Host>
               <div class="rs-checkbox">
                 <div class="container">
                   <input
@@ -147,7 +163,7 @@ export class Checkbox {
                     <div class="mixedmark" />
                   </div>
                 </div>
-                <label class="label" htmlFor={this.id}>{this.label}</label>
+                <label class="label" htmlFor={this.id} >{this.label}</label>
               </div>
             </Host>
   }

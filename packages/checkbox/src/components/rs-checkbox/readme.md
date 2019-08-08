@@ -10,6 +10,7 @@
 | Property        | Attribute       | Description | Type               | Default     |
 | --------------- | --------------- | ----------- | ------------------ | ----------- |
 | `checked`       | `checked`       |             | `boolean`          | `undefined` |
+| `dataChecked`   | `data-checked`  |             | `string`           | `''`        |
 | `disabled`      | `disabled`      |             | `boolean`          | `undefined` |
 | `id`            | `id`            |             | `string`           | `undefined` |
 | `indeterminate` | `indeterminate` |             | `boolean`          | `undefined` |
@@ -58,6 +59,16 @@ Type: `Promise<void>`
 
 
 ### `isHostChecked() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `isHostIndeterminate() => Promise<void>`
 
 
 

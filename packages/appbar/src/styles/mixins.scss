@@ -1,0 +1,224 @@
+@import "@rsmdc/animation/variables";
+@import '@rsmdc/elevation/mixins';
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import './variables';
+
+// Change top-app-bar type.
+@mixin rs-top-app-bar-type($types...) {
+  @each $type in $types {
+    @if $type == short {
+      .rs-app-bar {
+        top: 0;
+        right: auto;
+        left: 0;
+        width: 100%;
+        > .row {
+          height: $rs-top-app-bar-mobile-row-height;
+        }
+        > .row
+        > .section {
+          padding: $rs-top-app-bar-mobile-section-padding;
+        }
+      }
+      .rs-app-bar-title {
+        transition: opacity 200ms $rs-animation-standard-curve-timing-function;
+        opacity: 1;
+      }
+      .rs-app-bar-content {
+        padding-top: $rs-top-app-bar-mobile-row-height;
+      }
+
+      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
+        .rs-app-bar {
+          transition: width 250ms $rs-animation-standard-curve-timing-function;
+
+          > .row {
+            height: $rs-top-app-bar-mobile-row-height;
+          }
+
+          > .row > .section {
+            padding: $rs-top-app-bar-mobile-section-padding;
+          }
+        }
+      }
+    }@else if $type == dense {
+      .rs-app-bar-content {
+        padding-top: $rs-top-app-bar-dense-row-height;
+      }
+      .rs-app-bar {
+
+        > .row {
+          height: $rs-top-app-bar-dense-row-height;
+        }
+      }
+      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
+        .rs-app-bar {
+          transition: width 250ms $rs-animation-standard-curve-timing-function;
+
+          > .row {
+            height: $rs-top-app-bar-dense-row-height;
+          }
+
+          > .row > .section {
+            padding: 0 $rs-top-app-bar-dense-section-horizontal-padding;
+          }
+        }
+      }
+      .rs-app-bar-title {
+        padding-left: $rs-top-app-bar-dense-title-left-padding;
+      }
+    }@else if $type == prominent {
+      .rs-app-bar-content {
+        padding-top: $rs-top-app-bar-prominent-row-height;
+      }
+      .rs-app-bar {
+        padding-bottom: $rs-top-app-bar-prominent-mobile-title-bottom-padding;
+
+        > .row {
+          height: $rs-top-app-bar-prominent-row-height;
+        }
+      }
+      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
+        .rs-app-bar {      
+          > .row {
+            height: $rs-top-app-bar-prominent-row-height;
+          }
+        }
+      }
+      .rs-app-bar-title {
+        align-self: flex-end;
+        padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
+      }
+
+      .rs-app-bar-item {
+        align-self: flex-start;
+      }
+
+      .rs-app-bar-nav {
+        align-self: flex-start;
+      }
+
+    }@else if $type == fixed {
+      .rs-app-bar {
+        transition: box-shadow 200ms linear;
+      }
+
+    }@else if $type == adjust {
+      .rs-app-bar {
+        padding-top: $rs-top-app-bar-row-height;
+      }
+
+      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
+        .rs-app-bar {      
+          padding-top: $rs-top-app-bar-mobile-row-height;
+        }
+      }
+
+    }@else if $type == collapsed {
+      @include rs-top-app-bar-short-shape-radius(24px);
+
+      .rs-app-bar {
+        box-shadow: rs-elevation(4);
+
+        &.-short-collapsed {
+          width: $rs-top-app-bar-short-collapsed-width;
+          transition: width 300ms $rs-animation-standard-curve-timing-function;
+          box-shadow: rs-elevation(4);
+          border-radius: 0 0 24px 0;
+          padding-right: $rs-top-app-bar-short-collapsed-right-icon-padding;
+          padding-left: 0;
+          margin-left: 0;
+        }
+      }
+
+      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
+        .rs-app-bar {      
+          transition: width 250ms $rs-animation-standard-curve-timing-function;
+        }
+      }
+
+      .rs-app-bar-item {
+        transition: padding 150ms $rs-animation-standard-curve-timing-function;
+      }
+    }
+  }
+
+  $short: find-item($types, short);
+  $collapsed: find-item($types, collapsed);
+  $prominent: find-item($types, prominent);
+  $adjust: find-item($types, adjust);
+  $dense: find-item($types, dense);
+
+  @if $short and $collapsed {
+    .rs-app-bar {
+      transition: width 300ms $rs-animation-standard-curve-timing-function;
+
+      &.-short-collapsed {
+        width: $rs-top-app-bar-short-collapsed-width;
+      }
+    }
+  
+    .rs-app-bar-title {
+      display: none;
+    }
+
+    .rs-app-bar-item {
+      transition: padding 150ms $rs-animation-standard-curve-timing-function;
+
+    }
+
+  }
+  @if $prominent and $dense {
+    $height: $rs-top-app-bar-dense-row-height * 2;
+
+    .rs-app-bar-content {
+      padding-top: $height;
+    }
+
+    .rs-app-bar {
+       > .row {
+        height: $height;
+      }
+
+      > .section {
+        padding: 0 $rs-top-app-bar-section-horizontal-padding;
+      }
+    }
+
+    .rs-app-bar-title {
+      padding-bottom: $rs-top-app-bar-prominent-dense-title-bottom-padding;
+      padding-left: $rs-top-app-bar-title-left-padding;
+    }
+  }
+}
+
+// Set icon to action-item.
+@mixin rs-top-app-bar-action-icon-image($icon, $name: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    .rs-app-bar-item {
+
+      > .label {
+        background-image: $icon;
+        height: 24px;
+      }
+
+    }
+
+  }@else {
+    .rs-app-bar-item {
+
+      > .label {
+        font-family: '#{$icon}';
+      }
+
+      > .label::before {
+        content: unquote('"\\#{$name}"');
+      }
+
+    }
+  }
+}

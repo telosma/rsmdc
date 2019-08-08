@@ -12,7 +12,10 @@
   white-space: nowrap;
 
   position: absolute;
-  bottom: var(--rs-text-field-character-counter--bottom, $rs-text-field-character-counter-bottom);
+  bottom: var(
+    --rs-text-field-character-counter--bottom,
+    $rs-text-field-character-counter-bottom
+  );
   right: var(--rs-text-field-character-counter--right, 16px);
 
   [dir="rtl"] &,
@@ -28,6 +31,9 @@
   }
 
   :not([disabled]) & {
-    color: var(--rs-text-field_not__disabled-character-counter--color, $rs-text-field-helper-text-color);
+    color: var(
+      --rs-text-field_not__disabled-character-counter--color,
+      $rs-text-field-helper-text-color
+    );
   }
 }

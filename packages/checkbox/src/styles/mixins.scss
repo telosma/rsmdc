@@ -2,7 +2,7 @@
 @import "./keyframes";
 @import "./variables";
 
-/* Change checkbox checked states color and box color. */
+// Change checkbox checked states color and box color.
 @mixin rs-checkbox-checked-container-colors($color, $generate-keyframes: true) {
   .rs-checkbox {
     > .container > .nativecontrol:enabled:checked ~ .background {
@@ -24,7 +24,7 @@
     .rs-checkbox {
       > .container.-anim-unchecked-checked > .nativecontrol:enabled ~ .background,
       > .container.-anim-unchecked-indeterminate > .nativecontrol:enabled ~ .background {
-        animation-name: $fade-in-animation; /* comment */
+        animation-name: $fade-in-animation;
       }
 
       > .container.-anim-checked-unchecked > .nativecontrol:enabled ~ .background,
@@ -59,13 +59,14 @@
 // Change checkbox states color.
 @mixin rs-checkbox-focus-indicator-color($color) {
 
-  .rs-ripple-upgraded { 
-
-    &::before,
-    &::after {
-      background-color: $color;
+  .rs-checkbox  {
+    &.-checked > .rs-ripple-upgraded,
+    &.-indeterminate > .rs-ripple-upgraded {
+      &::before,
+      &::after {
+        background-color: $color;
+      }
     }
-
   }
 }
 

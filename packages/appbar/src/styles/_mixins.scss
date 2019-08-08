@@ -1,0 +1,19 @@
+@import "./variables";
+
+@mixin rs-top-app-bar-icon_ {
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: $rs-top-app-bar-icon-size + $rs-top-app-bar-icon-padding * 2;
+  height: $rs-top-app-bar-icon-size + $rs-top-app-bar-icon-padding * 2;
+  padding: $rs-top-app-bar-icon-padding;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  fill: currentColor;
+  text-decoration: none;
+  cursor: pointer;
+}

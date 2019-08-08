@@ -21,10 +21,10 @@
  * THE SOFTWARE.
  */
 var strings = {
-    NATIVE_CONTROL_SELECTOR: '.rs-radio__native-control',
+    NATIVE_CONTROL_SELECTOR: '.nativecontrol',
 };
 var cssClasses = {
-    DISABLED: 'rs-radio--disabled',
+    DISABLED: '-disabled',
     ROOT: 'rs-radio',
 };
 export { strings, cssClasses };

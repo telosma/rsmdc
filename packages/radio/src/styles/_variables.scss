@@ -26,7 +26,9 @@ $rs-radio-touch-area: 40px !default;
 $rs-radio-ui-size: 20px !default;
 $rs-radio-ui-pct: percentage($rs-radio-ui-size / $rs-radio-touch-area) !default;
 $rs-radio-transition-duration: 120ms !default;
-$rs-radio-ripple-opacity: .14 !default;
-$rs-radio-baseline-theme-color: secondary !default;
-$rs-radio-unchecked-color: rgba(rs-theme-prop-value(on-surface), .54) !default;
-$rs-radio-circle-color: rgba(rs-theme-prop-value(on-surface), .26) !default;
+$rs-radio-ripple-opacity: 0.14 !default;
+$rs-radio-baseline-theme-color: rs-theme-prop-value(secondary) !default;
+$rs-radio-unchecked-color: rgba(rs-theme-prop-value(on-surface), 0.54) !default;
+$rs-radio-circle-color: rgba(rs-theme-prop-value(on-surface), 0.26) !default;
+
+$rs-radio-label-spacing: 4px;

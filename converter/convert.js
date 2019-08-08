@@ -9,16 +9,16 @@ const { styleScss, generateStyle } = require('./style')
 const { mixinSelectorsScss, generateClientMixin } = require('./mixin')
 
 const getCompileCss = (nodeModulesPath, targetScss) => {
-  const copyFile = `${dirPath}/copy.scss`
-  fs.writeFileSync(copyFile, targetScss)
+  const copyFilePath = `${dirPath}/copy.scss`
+  fs.writeFileSync(copyFilePath, targetScss)
   const res = sass.renderSync({
-    file: copyFile,
+    file: copyFilePath,
     sourceMap: true,
     outFile: './nested.css',
     outputStyle: 'nested',
     includePaths: [nodeModulesPath]
   })
-  fs.unlinkSync(copyFile)
+  fs.unlinkSync(copyFilePath)
   return res.css.toString()
 }
 
@@ -119,14 +119,38 @@ const convertPropToCustomProp = (customPropJson, sourceJson) => {
 const mappingSelectors = (customPropJson, sourceJson) => {
   const styles = []
   Object.keys(customPropJson.children).forEach(selector => {
-    const cJsonAttrs = Object.values(customPropJson.children[selector].attributes)
-    const sJsonAttrs = Object.entries(sourceJson.children[selector].attributes)
+    const cssRuleName = selector.match(/(?<=@)(.*?)(?= )/g)
     const style = {}
-    cJsonAttrs.forEach((attr, i) => {
-      const prop = attr.replace(/var\(|\)/g, '')
-      const value = sJsonAttrs[i][1].replace(/^'/, '#{').replace(/'/, '}')
-      style[sJsonAttrs[i][0]] = `${prop}: ${value};`
-    })
+
+    if (cssRuleName) {
+      Object.keys(customPropJson.children[selector].children).forEach(selc => {
+        const cJsonAttrs = Object.values(customPropJson.children[selector].children[selc].attributes)
+        const sJsonAttrs = Object.entries(sourceJson.children[selector].children[selc].attributes)
+        cJsonAttrs.forEach((attr, i) => {
+          const prop = attr.replace(/var\(|\)/g, '')
+          let value = sJsonAttrs[i][1].replace(/'\$/g, '#{$').replace(/(?<=[a-z|A-Z])'/g, '}')
+          value = value.replace(/"\$/g, '\'#{$').replace(/(?<=[a-z|A-Z])"/g, '}\'')
+          if (value.match(/"\\\$/)) {
+            value = value.replace(/"\\\$/g, '\'"\\\\#{$').replace(/}'/g, '}"\'')
+          }
+          style[sJsonAttrs[i][0]] = `${prop}: ${value};`
+        })
+      })
+    } else {
+      const cJsonAttrs = Object.values(customPropJson.children[selector].attributes)
+      const sJsonAttrs = Object.entries(sourceJson.children[selector].attributes)
+
+      cJsonAttrs.forEach((attr, i) => {
+        const prop = attr.replace(/var\(|\)/g, '')
+        let value = sJsonAttrs[i][1].replace(/'\$/g, '#{$').replace(/(?<=[a-z|A-Z])'/g, '}')
+        value = value.replace(/"\$/g, '\'#{$').replace(/(?<=[a-z|A-Z])"/g, '}\'')
+        if (value.match(/"\\\$/)) {
+          value = value.replace(/"\\\$/g, '\'"\\\\#{$').replace(/}'/g, '}"\'')
+        }
+
+        style[sJsonAttrs[i][0]] = `${prop}: ${value};`
+      })
+    }
     styles.push(style)
   })
   return styles
@@ -135,7 +159,7 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
 // generate styles
 module.exports.convertStyle = (nodeModulesPath) => {
-  const scss = styleScss()
+  const scss = styleScss(nodeModulesPath)
   const compileCss = getCompileCss(nodeModulesPath, scss)
     .replace(/(\/\*(.*?)')|('(.*?)\*\/)/g, '')
 
@@ -148,19 +172,27 @@ module.exports.convertStyle = (nodeModulesPath) => {
   generateStyle(css, styles)
 }
 
-
 // generate client mixin 
 module.exports.convertMixin = (nodeModulesPath) => {
-  const parseMixinScss = mixinSelectorsScss()
-  const convertCss = getCompileCss(nodeModulesPath, parseMixinScss)
+  const parseMixinSelectors = mixinSelectorsScss()
+  if (!parseMixinSelectors ) { return }
+  const selectorsStyles = []
 
-  const sj = CSSJSON.toJSON(convertCss)
-  const cj = CSSJSON.toJSON(convertCss)
+  parseMixinSelectors.forEach(selector => {
+    const convertCss = getCompileCss(nodeModulesPath, selector)
+    const sj = CSSJSON.toJSON(convertCss)
+    const cj = CSSJSON.toJSON(convertCss)
 
-  Object.keys(cj.children).forEach(selectorName => {
-    const children = cj.children[selectorName]
-    replaceAttrToCustomProp(children, selectorName)
+    Object.keys(cj.children).forEach(selectorName => {
+      const children = cj.children[selectorName]
+      replaceAttrToCustomProp(children, selectorName)
+      if(children.parseSelectors === '' && selectorName.match(/media/)) {
+        Object.keys(children.children).forEach(selector => {
+          replaceAttrToCustomProp(children.children[selector], selector)
+        })
+      }
+    })
+    selectorsStyles.push(mappingSelectors(cj, sj))
   })
-
-  generateClientMixin(mappingSelectors(cj, sj))
+  generateClientMixin(selectorsStyles)
 }

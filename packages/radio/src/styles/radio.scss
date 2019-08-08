@@ -1,0 +1,201 @@
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/ripple/variables";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/typography/mixins";
+@import "./functions";
+@import "./variables";
+
+@include rs-ripple-common;
+
+.rs-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  flex-flow: row;
+
+  &.-checked > .container > .nativecontrol + .background,
+  &.-disabled > .container > .nativecontrol + .background {
+    transition: rs-radio-enter(opacity), rs-radio-enter(transform);
+  }
+
+  &.-checked > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled > .container > .nativecontrol + .background > .outercircle {
+    transition: rs-radio-enter(border-color);
+  }
+
+  &.-checked > .container > .nativecontrol + .background > .innercircle,
+  &.-disabled > .container > .nativecontrol + .background > .innercircle {
+    transition: rs-radio-enter(transform), rs-radio-enter(border-color);
+  }
+
+  &.-checked > .container > .nativecontrol + .background > .innercircle {
+    transform: scale(0.5);
+    transition: rs-radio-enter(transform), rs-radio-enter(border-color);
+  }
+
+  &.-checked
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .outercircle {
+    border-color: $rs-theme-secondary;
+  }
+
+  &.-checked
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .innercircle {
+    border-color: $rs-theme-secondary;
+  }
+
+  &:not(.-checked)
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .outercircle {
+    border-color: $rs-radio-unchecked-color;
+  }
+
+  &:not(.-checked)
+    > .container
+    > .nativecontrol:enabled
+    + .background
+    > .innercircle {
+    border-color: transparent;
+  }
+
+  &.-checked:not(.-disabled) > .container > .nativecontrol + .background > .innercircle {
+    transform: scale(0.5);
+  }
+
+  &.-disabled > .container > .nativecontrol + .background,
+  &[aria-disabled="true"] > .container > .nativecontrol + .background {
+    cursor: default;
+  }
+
+  &.-disabled:not(.-checked) > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled:not(.-checked) > .container > .nativecontrol + .background > .innercircle,
+  &.-disabled.-checked > .container > .nativecontrol + .background > .outercircle,
+  &.-disabled.-checked > .container > .nativecontrol + .background > .innercircle {
+    border-color: $rs-radio-circle-color;
+  }
+
+  > .container {
+    display: inline-block;
+    position: relative;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: $rs-radio-touch-area;
+    height: $rs-radio-touch-area;
+    padding: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
+    cursor: pointer;
+    will-change: opacity, transform, border-color, color;
+  }
+
+  &.-disabled > .container {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  > .container > .nativecontrol {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: inherit;
+    z-index: 1;
+
+    &:focus + .background::before {
+      transform: scale(2, 2);
+      opacity: map-get($rs-ripple-dark-ink-opacities, focus);
+      transition: rs-radio-enter(opacity), rs-radio-enter(transform);
+    }
+  }
+
+  > .container > .background {
+    display: inline-block;
+    position: absolute;
+    left: ($rs-radio-touch-area - $rs-radio-ui-size) / 2;
+    box-sizing: border-box;
+    width: $rs-radio-ui-pct;
+    height: $rs-radio-ui-pct;
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: scale(0, 0);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      content: "";
+      transition: rs-radio-exit(opacity), rs-radio-exit(transform);
+      background-color: $rs-theme-secondary;
+    }
+  }
+
+  > .container > .background > .outercircle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    transition: rs-radio-exit(border-color);
+  }
+
+  > .container > .background > .innercircle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    transform: scale(0, 0);
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    transition: rs-radio-exit(transform), rs-radio-exit(border-color);
+  }
+
+  > .label {
+    @include rs-typography(body2);
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: auto;
+    padding-right: $rs-radio-label-spacing;
+    padding-left: $rs-radio-label-spacing;
+  }
+
+  &.-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  > .rs-ripple-upgraded {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-unbounded;
+    @include rs-ripple-upgraded($rs-theme-on-surface);
+  }
+
+  &.-checked > .rs-ripple-upgraded {
+    @include rs-ripple-upgraded($rs-theme-secondary);
+  }
+
+  > .rs-ripple-upgraded.rs-ripple-upgraded--background-focused > .background::before {
+    content: none;
+  }
+}
