@@ -159,7 +159,9 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
 const extractHostStyles = (json) => {
   const selectors = Object.entries(json)
-  const hostStyleSelectors = selectors.filter(([selector])=> selector.match(/host-rs/))
+  const hostStyleSelectors = selectors.filter(([selector])=> {    
+    return !selector.match(/\.|@media|@keyframes/g)
+  })
   return hostStyleSelectors
 }
 

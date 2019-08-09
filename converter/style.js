@@ -15,7 +15,7 @@ const readFile = (filePath) => {
   return fs.readFileSync(filePath, 'utf8')
 }
 
-const readStyleDir = (dirPath) => {
+const readDir = (dirPath) => {
   return fs.readdirSync(dirPath, 'utf8')
 }
 
@@ -29,7 +29,7 @@ const extractDefaultThemeVariables = (nodeModulesPath) => {
 }
 
 const extractComponentVariableFiles = () => {
-  return readStyleDir(dirPath).filter(file => extractMatchWords(file, /variable/g))
+  return readDir(dirPath).filter(file => extractMatchWords(file, /variable/g))
 }
 
 const extractComponentThemeVariables = () => {
@@ -112,9 +112,20 @@ module.exports.generateStyle = (sourceCss, styles, hostStyles) => {
       const text = Object.entries(styleData.attributes)
         .reduce((result, [prop, value]) => {
           return `${result}${prop}: ${value}; `
-        }, '')
+        }, 'visibility: visible; ')
       
       clientStyle = `${clientStyle}\n${selector} { ${text}}`
+    })
+  } else {
+    let componentsPath = './src/components/'
+    const componentName = readDir(componentsPath)[0]
+    const files = readDir(`${componentsPath}${componentName}`)
+      .filter(file => file.match(/\.tsx/))
+    
+    files.forEach(file => {
+      const elementName = file.replace(/\.tsx/, '')
+
+      clientStyle = `${clientStyle}\n${elementName} { visibility: visible; }`
     })
   }
 
