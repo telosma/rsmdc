@@ -83,7 +83,7 @@ module.exports.generateStyle = (sourceCss, styles) => {
 
   const hostStyles = []
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
-    if(prop.match(/host-rs/)) {
+    if(prop.match(/^--host-rs/)) {
       hostStyles.push([prop, value])
       return result
     }
