@@ -11,6 +11,8 @@ export class AppBar {
 
   @Prop() fixed: boolean
 
+  @Prop() compactable: boolean
+
   @State() isDrawer: boolean
 
   @State() isScrolling: boolean
@@ -28,6 +30,8 @@ export class AppBar {
   appBarPadding: number = 12
 
   withCollapsedAppBarPadding: number = 4
+
+  mobileHeight: number = 56
 
   @Watch('fixed')
   fixedHandler() {
