@@ -19,6 +19,8 @@ export class AppBar {
 
   appBar: HTMLElement
 
+  appBarTitle: Element
+
   hasAppBarTool: boolean
 
   topLimit: number
@@ -89,10 +91,12 @@ export class AppBar {
     this.isCompactable()
 
     slotEl.addEventListener('slotchange', () => {
+      const titleEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TITLE')[0]
+      this.appBarTitle = titleEl
       const toolEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TOOL')
-      this.hasAppBarTool = toolEl.length > 0 ? true : false
+      const hasAppBarTool = toolEl.length > 0 ? true : false
 
-      if (this.hasAppBarTool) {
+      if (hasAppBarTool) {
         this.itemLength = Array.from(toolEl[0].childNodes).filter(child => child.nodeType === 1).length
         this.appBar.classList.add('-has-action-item')
         this.updateAppBarWidth()
