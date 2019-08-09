@@ -23,24 +23,30 @@ export class AppBar {
 
   topLimit: number
 
+  itemLength: number
+
   windowScrollTop: number = 0
 
   scrollTop: number = 0
 
   appBarPadding: number = 12
 
-  withCollapsedAppBarPadding: number = 4
-
-  mobileHeight: number = 56
+  sectionPadding: number = 4
 
   @Watch('fixed')
   fixedHandler() {
     this.isFixed()
   }
 
+  @Watch('compactable')
+  compactableHandler() {
+    this.isCompactable()
+  }
+
   @Watch('isScrolling')
   isScrollingHandler() {
-    this.topLimit = -(this.appBar.clientHeight * 2)
+    const height = this.appBar.clientHeight
+    this.topLimit = -(height * 2)
 
     if (this.isScrolling && !this.appBar.classList.contains('-fixed-scrolled')) {
       this.appBar.classList.add('-fixed-scrolled')
@@ -57,22 +63,39 @@ export class AppBar {
       this.appBar.classList.remove('-fixed')
     }
   }
+
+  @Method()
+  async isCompactable() {
+    if (this.compactable) {
+      this.appBar.classList.add('-compact')
+    } else {
+      this.appBar.classList.remove('-compact')
+    }
+    this.updateAppBarWidth()
+  }
+
+  @Method()
+  async updateAppBarWidth() {
+    const appBarHeight = this.appBar.clientHeight
+    const withCollapsedWidth = appBarHeight * this.itemLength + appBarHeight - this.appBarPadding + this.sectionPadding
+    this.appBar.style.cssText = `--rs-app-bar-compact-fixed-scrolled-has-action-item---width: ${withCollapsedWidth}px;`
+  }
   
   componentDidLoad() {
     this.appBar = this.el.shadowRoot.querySelector('.rs-app-bar')
     const slotEl = this.el.shadowRoot.querySelector('slot')
 
     this.isFixed()
+    this.isCompactable()
 
     slotEl.addEventListener('slotchange', () => {
-      const appBarHeight = this.appBar.clientHeight
       const toolEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TOOL')
-      this.hasAppBarTool = toolEl.length > -1 ? true : false
+      this.hasAppBarTool = toolEl.length > 0 ? true : false
 
       if (this.hasAppBarTool) {
-        const itemLengh = Array.from(toolEl[0].childNodes).filter(child => child.nodeType === 1).length
-        const withCollapsedWidth = (appBarHeight * itemLengh) + appBarHeight - this.appBarPadding + this.withCollapsedAppBarPadding
-        this.appBar.style.cssText = `--rs-top-app-bar__collapsed--width: ${withCollapsedWidth}px;`
+        this.itemLength = Array.from(toolEl[0].childNodes).filter(child => child.nodeType === 1).length
+        this.appBar.classList.add('-has-action-item')
+        this.updateAppBarWidth()
       }
     })
 
@@ -81,7 +104,7 @@ export class AppBar {
       const diff = this.windowScrollTop - top
       this.isScrolling = top > 0
 
-      if (this.fixed) { return }
+      if (this.fixed || this.compactable) { return }
 
       if(top < this.windowScrollTop) {
         // scroll up

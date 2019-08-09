@@ -26,11 +26,7 @@ export namespace Components {
     'last': string;
     'middle': string;
   }
-  interface RsAppBarTitle {
-    'first': string;
-    'last': string;
-    'middle': string;
-  }
+  interface RsAppBarTitle {}
   interface RsAppBarTool {
     'first': string;
     'last': string;
@@ -94,11 +90,7 @@ declare namespace LocalJSX {
     'last'?: string;
     'middle'?: string;
   }
-  interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
-  }
+  interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {}
   interface RsAppBarTool extends JSXBase.HTMLAttributes<HTMLRsAppBarToolElement> {
     'first'?: string;
     'last'?: string;

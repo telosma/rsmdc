@@ -24,6 +24,19 @@
   padding-top: auto;
   width: auto;
 
+  &.-compact {
+    right: auto;
+    width: 100%;
+  }
+
+  &.-compact > .row {
+    height: $rs-top-app-bar-mobile-row-height;
+  }
+
+  &.-compact > .row > .section {
+    padding: $rs-top-app-bar-mobile-section-padding;
+  }
+
   &.-fixed {
     transition: box-shadow 200ms linear;
   }
@@ -33,29 +46,26 @@
     transition: box-shadow 200ms linear;
   }
 
-  &.-short-collapsed {
+  &.-compact.-fixed-scrolled {
     width: $rs-top-app-bar-short-collapsed-width;
     transition: width 300ms $rs-animation-standard-curve-timing-function;
     box-shadow: rs-elevation(4);
     border-radius: 0 0 24px 0;
-    padding-right: 12px;
     padding-left: 0;
     margin-left: 0;
 
-
     // --rs-top-app-bar-title--display: none;
     // --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
-    // --rs-top-app-bar-action-item--padding-right: var(--rs-top-app-bar__collapsed-actionItems--padding-right);
+  }
+
+  &.-compact.-fixed-scrolled.-has-action-item {
+    width: var(--rs-top-app-bar---width);
   }
 
   &.-short-collapsed > .row > .section {
     padding-right: 12px;
     padding-left: 0;
     margin-left: 0;
-  }
-
-  &.-has-action-item {
-    --rs-top-app-bar--width: var(--rs-top-app-bar__collapsed--width);
   }
 
   &.-drawer {
@@ -93,9 +103,19 @@
   padding-top: $rs-top-app-bar-row-height;
 }
 
-.host-rs-app-bar-title {
+.rs-app-bar.-short + .rs-app-bar-content {
+  padding-top: $rs-top-app-bar-mobile-row-height;
+}
+
+rs-app-bar-title {
   padding-bottom: 0;
   align-self: auto;
+}
+
+[compactable] > rs-app-bar-title {
+  transition: opacity 200ms $rs-animation-standard-curve-timing-function;
+  opacity: 1;
+  --rs-app-bar-titleDE-fixed-scrolled---display: none;
 }
 
 .rs-app-bar-title {
@@ -112,9 +132,13 @@
   opacity: 1;
   display: block;
   padding-left: $rs-top-app-bar-title-left-padding;
+
+  .-fixed-scrolled {
+    display: var(--display);
+  }
 }
 
-.host-rs-app-bar-nav {
+rs-app-bar-nav {
   align-self: flex-start;
 }
 
@@ -133,8 +157,12 @@
   }
 }
 
-.host-rs-app-bar-item {
+rs-app-bar-item {
   align-self: flex-start;
+}
+
+[compactable] > rs-app-bar-item {
+  transition: padding 150ms $rs-animation-standard-curve-timing-function;
 }
 
 .rs-app-bar-item {
@@ -152,7 +180,7 @@
   }
 }
 
-.host-rs-app-bar-tool {
+rs-app-bar-tool {
   margin-left: auto;
   margin-right: 0;
   align-self: flex-start;

@@ -8,11 +8,8 @@
 
 // Change top-app-bar type.
 @mixin rs-app-bar-type($types...) {
-  --rs-app-bar-type: #{$types};
   @each $type in $types {
-    @if $type == short {
-
-    }@else if $type == dense {
+    @if $type == dense {
 
       .rs-app-bar-content {
         padding-top: $rs-top-app-bar-dense-row-height;
@@ -72,61 +69,12 @@
         align-self: flex-end;
         padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
       }
-
-    }@else if $type == collapsed {
-      // @include rs-app-bar-short-shape-radius(24px);
-
-      .rs-app-bar {
-        box-shadow: rs-elevation(4);
-
-        &.-short-collapsed {
-          width: $rs-top-app-bar-short-collapsed-width;
-          transition: width 300ms $rs-animation-standard-curve-timing-function;
-          box-shadow: rs-elevation(4);
-          border-radius: 0 0 24px 0;
-          padding-right: $rs-top-app-bar-short-collapsed-right-icon-padding;
-          padding-left: 0;
-          margin-left: 0;
-        }
-      }
-
-      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
-        .rs-app-bar {      
-          transition: width 250ms $rs-animation-standard-curve-timing-function;
-        }
-      }
-
-      .host-rs-app-bar-item {
-        transition: padding 150ms $rs-animation-standard-curve-timing-function;
-      }
     }
   }
 
-  $short: find-item($types, short);
-  $collapsed: find-item($types, collapsed);
   $prominent: find-item($types, prominent);
   $dense: find-item($types, dense);
 
-  @if $short and $collapsed {
-    --short-collapsed: true;
-    .rs-app-bar {
-      transition: width 300ms $rs-animation-standard-curve-timing-function;
-
-      &.-short-collapsed {
-        width: $rs-top-app-bar-short-collapsed-width;
-      }
-    }
-  
-    .rs-app-bar-title {
-      display: none;
-    }
-
-    .rs-app-bar-item {
-      transition: padding 150ms $rs-animation-standard-curve-timing-function;
-
-    }
-
-  }
   @if $prominent and $dense {
     $height: $rs-top-app-bar-dense-row-height * 2;
 

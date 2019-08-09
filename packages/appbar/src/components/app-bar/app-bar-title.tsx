@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, Host, h } from '@stencil/core';
+import { Component, Element, State, Watch, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'rs-app-bar-title',
@@ -9,13 +9,22 @@ export class AppBar {
 
   @Element() el: HTMLElement
 
-  @Prop() first: string
+  @State() isScrolling: boolean
 
-  @Prop() middle: string
+  appBarTitle: HTMLElement
 
-  @Prop() last: string
+  @Watch('isScrolling')
+  isScrollingHandler() {
+    if (this.isScrolling && !this.appBarTitle.classList.contains('-fixed-scrolled')) {
+      this.appBarTitle.classList.add('-fixed-scrolled')
+    } else if (!this.isScrolling) {
+      this.appBarTitle.classList.remove('-fixed-scrolled')
+    }
+  }
 
-  @State() top: string
+  componentDidLoad() {
+    this.appBarTitle = this.el.shadowRoot.querySelector('.rs-app-bar-title')
+  }
   
   render() {
     return  <Host>
