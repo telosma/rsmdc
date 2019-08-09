@@ -11,41 +11,7 @@
   --rs-app-bar-type: #{$types};
   @each $type in $types {
     @if $type == short {
-      .rs-app-bar {
-        top: 0;
-        right: auto;
-        left: 0;
-        width: 100%;
-        > .row {
-          height: $rs-top-app-bar-mobile-row-height;
-        }
-        > .row > .section {
-          padding: $rs-top-app-bar-mobile-section-padding;
-        }
-      }
 
-      .rs-app-bar-title {
-        transition: opacity 200ms $rs-animation-standard-curve-timing-function;
-        opacity: 1;
-      }
-
-      .rs-app-bar-content {
-        padding-top: $rs-top-app-bar-mobile-row-height;
-      }
-
-      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
-        .rs-app-bar {
-          transition: width 250ms $rs-animation-standard-curve-timing-function;
-
-          > .row {
-            height: $rs-top-app-bar-mobile-row-height;
-          }
-
-          > .row > .section {
-            padding: $rs-top-app-bar-mobile-section-padding;
-          }
-        }
-      }
     }@else if $type == dense {
 
       .rs-app-bar-content {
@@ -107,17 +73,6 @@
         padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
       }
 
-    }@else if $type == adjust {
-      .rs-app-bar {
-        padding-top: $rs-top-app-bar-row-height;
-      }
-
-      @media (max-width: $rs-top-app-bar-mobile-breakpoint) {
-        .rs-app-bar {      
-          padding-top: $rs-top-app-bar-mobile-row-height;
-        }
-      }
-
     }@else if $type == collapsed {
       // @include rs-app-bar-short-shape-radius(24px);
 
@@ -150,7 +105,6 @@
   $short: find-item($types, short);
   $collapsed: find-item($types, collapsed);
   $prominent: find-item($types, prominent);
-  $adjust: find-item($types, adjust);
   $dense: find-item($types, dense);
 
   @if $short and $collapsed {
