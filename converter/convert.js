@@ -157,6 +157,11 @@ const mappingSelectors = (customPropJson, sourceJson) => {
   return styles
 }
 
+const extractHostStyles = (json) => {
+  const selectors = Object.entries(json)
+  const hostStyleSelectors = selectors.filter(([selector])=> selector.match(/host-rs/))
+  return hostStyleSelectors
+}
 
 // generate styles
 module.exports.convertStyle = (nodeModulesPath) => {
@@ -170,7 +175,9 @@ module.exports.convertStyle = (nodeModulesPath) => {
   const css = replaceSassVariablesCss(customPropJson)
   const styles = convertPropToCustomProp(customPropJson, sourceJson)
 
-  generateStyle(css, styles)
+  const hostStyles = extractHostStyles(sourceJson.children)
+
+  generateStyle(css, styles, hostStyles)
 }
 
 // generate client mixin 
