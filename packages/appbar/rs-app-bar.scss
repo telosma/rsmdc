@@ -2,22 +2,3 @@
 @import "./src/styles/functions";
 @import "./src/dist/client-style.scss";
 @import "./src/dist/client-mixins.scss";
-
-.rs-app-bar-title-host {
-  padding-bottom: 0;
-  align-self: auto;
-}
-
-.rs-app-bar-nav-host {
-  align-self: auto;
-}
-
-.rs-app-bar-tool-host {
-  margin-left: auto;
-  margin-right: 0;
-  align-self: auto;
-}
-
-.rs-app-bar-item-host {
-  align-self: auto;
-}
