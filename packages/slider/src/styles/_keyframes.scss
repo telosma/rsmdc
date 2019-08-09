@@ -1,14 +1,17 @@
-@keyframes rs-slider-emphasize {
-  0% {
-    animation-timing-function: ease-out;
-  }
 
-  50% {
-    animation-timing-function: ease-in;
-    transform: scale(.85);
-  }
+@mixin rs-slider-emphasize-keyframes_ {
+  @keyframes rs-slider-emphasize {
+    0% {
+      animation-timing-function: ease-out;
+    }
 
-  100% {
-    transform: scale(.571);
+    50% {
+      animation-timing-function: ease-in;
+      transform: scale(.85);
+    }
+
+    100% {
+      transform: scale(.571);
+    }
   }
 }

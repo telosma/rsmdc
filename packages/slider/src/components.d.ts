@@ -9,7 +9,17 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsSlider {}
+  interface RsSlider {
+    'countable': boolean;
+    'disabled': boolean;
+    'isCountable': () => Promise<void>;
+    'isDisabled': () => Promise<void>;
+    'isMarked': () => Promise<void>;
+    'marked': boolean;
+    'max': number;
+    'min': number;
+    'now': number;
+  }
 }
 
 declare global {
@@ -26,7 +36,14 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface RsSlider extends JSXBase.HTMLAttributes<HTMLRsSliderElement> {}
+  interface RsSlider extends JSXBase.HTMLAttributes<HTMLRsSliderElement> {
+    'countable'?: boolean;
+    'disabled'?: boolean;
+    'marked'?: boolean;
+    'max'?: number;
+    'min'?: number;
+    'now'?: number;
+  }
 
   interface IntrinsicElements {
     'rs-slider': RsSlider;

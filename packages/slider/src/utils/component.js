@@ -103,7 +103,7 @@ var RSSlider = /** @class */ (function (_super) {
                 var frag = document.createDocumentFragment();
                 for (var i = 0; i < numMarkers; i++) {
                     var marker = document.createElement('div');
-                    marker.classList.add('RS-slider__track-marker');
+                    marker.classList.add('trackmarker');
                     frag.appendChild(marker);
                 }
                 _this.trackMarkerContainer_.appendChild(frag);
