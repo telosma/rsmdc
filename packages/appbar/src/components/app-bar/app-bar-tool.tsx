@@ -17,25 +17,8 @@ export class AppBar {
 
   @State() top: string
 
-  componentDidLoad() {
-    // TODO (If host component has other classname, disappear this component when properties changes)
-    const observer = new MutationObserver(records => {
-      records.forEach(record => {
-        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
-          this.el.classList.add('hydrated')
-        }
-        if (record.attributeName === 'class' && !this.el.classList.contains('rs-app-bar-tool-host')) {
-          this.el.classList.add('rs-app-bar-tool-host')
-        }
-      })
-    })
-    observer.observe(this.el, {
-      attributes: true
-    })
-  }
-
   render() {
-    return  <Host class="host-rs-app-bar-tool">
+    return  <Host>
               <div class="rs-app-bar-tool">
                 <slot />
               </div>

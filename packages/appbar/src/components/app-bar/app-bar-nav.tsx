@@ -22,25 +22,10 @@ export class AppBar {
     const navEl = this.el.shadowRoot.querySelector('.rs-app-bar-nav')
     const ripple = new RSRipple(navEl)
     ripple.unbounded = true
-
-    // TODO (If host component has other classname, disappear this component when properties changes)
-    const observer = new MutationObserver(records => {
-      records.forEach(record => {
-        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
-          this.el.classList.add('hydrated')
-        }
-        if (record.attributeName === 'class' && !this.el.classList.contains('rs-app-bar-nav-host')) {
-          this.el.classList.add('rs-app-bar-nav-host')
-        }
-      })
-    })
-    observer.observe(this.el, {
-      attributes: true
-    })
   }
 
   render() {
-    return  <Host class="host-rs-app-bar-nav">
+    return  <Host>
               <span class="rs-app-bar-nav" tabindex="0">
                 <span class="label">
                   <slot />

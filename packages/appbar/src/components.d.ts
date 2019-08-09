@@ -10,8 +10,11 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsAppBar {
+    'compactable': boolean;
     'fixed': boolean;
+    'isCompactable': () => Promise<void>;
     'isFixed': () => Promise<void>;
+    'updateAppBarWidth': () => Promise<void>;
   }
   interface RsAppBarItem {
     'first': string;
@@ -78,6 +81,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsAppBar extends JSXBase.HTMLAttributes<HTMLRsAppBarElement> {
+    'compactable'?: boolean;
     'fixed'?: boolean;
   }
   interface RsAppBarItem extends JSXBase.HTMLAttributes<HTMLRsAppBarItemElement> {

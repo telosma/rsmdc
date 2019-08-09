@@ -64,18 +64,6 @@ export class AppBar {
 
     this.isFixed()
 
-    // TODO (If host component has other classname, disappear this component when properties changes)
-    const observer = new MutationObserver(records => {
-      records.forEach(record => {
-        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
-          this.el.classList.add('hydrated')
-        }
-      })
-    })
-    observer.observe(this.el, {
-      attributes: true
-    })
-
     slotEl.addEventListener('slotchange', () => {
       const appBarHeight = this.appBar.clientHeight
       const toolEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TOOL')
