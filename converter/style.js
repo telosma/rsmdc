@@ -112,22 +112,26 @@ module.exports.generateStyle = (sourceCss, styles, hostStyles) => {
       const text = Object.entries(styleData.attributes)
         .reduce((result, [prop, value]) => {
           return `${result}${prop}: ${value}; `
-        }, 'visibility: visible; ')
+        }, '')
       
       clientStyle = `${clientStyle}\n${selector} { ${text}}`
     })
-  } else {
-    let componentsPath = './src/components/'
-    const componentName = readDir(componentsPath)[0]
-    const files = readDir(`${componentsPath}${componentName}`)
-      .filter(file => file.match(/\.tsx/))
-    
-    files.forEach(file => {
-      const elementName = file.replace(/\.tsx/, '')
-
-      clientStyle = `${clientStyle}\n${elementName} { visibility: visible; }`
-    })
   }
+
+  // Add visibility
+  let componentsPath = './src/components/'
+  const componentName = readDir(componentsPath)[0]
+  const componentFiles = readDir(`${componentsPath}${componentName}`)
+    .filter(file => file.match(/\.tsx/))
+  
+  componentFiles.forEach(file => {
+    let elementName = file.replace(/\.tsx/, '')
+    if (!elementName.match(/rs-/)) {
+      elementName = `rs-${elementName}`
+    }
+
+    clientStyle = `${clientStyle}\n${elementName} { visibility: visible; }`
+  })
 
   if (!fs.existsSync('./src/dist')) {
     fs.mkdirSync('./src/dist')
