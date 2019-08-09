@@ -174,8 +174,6 @@
 
   }
   @if $prominent and $dense {
-    --prominent-dense: true;
-
     $height: $rs-top-app-bar-dense-row-height * 2;
 
     .rs-app-bar-content {
@@ -187,14 +185,14 @@
         height: $height;
       }
 
-      > .section {
+      > .row > .section {
         padding: 0 $rs-top-app-bar-section-horizontal-padding;
       }
     }
 
-    .rs-app-bar-title {
+    .host-rs-app-bar-title {
       padding-bottom: $rs-top-app-bar-prominent-dense-title-bottom-padding;
-      padding-left: $rs-top-app-bar-title-left-padding;
+      padding-left: $rs-top-app-bar-prominent-dense-title-left-padding;
     }
   }
 }
