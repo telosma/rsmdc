@@ -19,7 +19,7 @@ export class AppBar {
 
   appBar: HTMLElement
 
-  appBarTitle: Element
+  appBarTitle: HTMLElement
 
   hasAppBarTool: boolean
 
@@ -52,8 +52,14 @@ export class AppBar {
 
     if (this.isScrolling && !this.appBar.classList.contains('-fixed-scrolled')) {
       this.appBar.classList.add('-fixed-scrolled')
+      
+      if (!this.appBarTitle) { return }
+      this.appBarTitle.classList.add('-fixed-scrolled')
     } else if (!this.isScrolling) {
       this.appBar.classList.remove('-fixed-scrolled')
+
+      if (!this.appBarTitle) { return }
+      this.appBarTitle.classList.remove('-fixed-scrolled')
     }
   }
 
@@ -91,8 +97,10 @@ export class AppBar {
     this.isCompactable()
 
     slotEl.addEventListener('slotchange', () => {
-      const titleEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TITLE')[0]
-      this.appBarTitle = titleEl
+      const appBarTitles = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TITLE'))
+      if (appBarTitles.length > 0) {
+        this.appBarTitle = appBarTitles[0].shadowRoot.querySelector('.rs-app-bar-title')
+      }
       const toolEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TOOL')
       const hasAppBarTool = toolEl.length > 0 ? true : false
 

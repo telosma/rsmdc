@@ -115,7 +115,7 @@ rs-app-bar-title {
 [compactable] > rs-app-bar-title {
   transition: opacity 200ms $rs-animation-standard-curve-timing-function;
   opacity: 1;
-  --rs-app-bar-titleDE-fixed-scrolled---display: none;
+  --rs-app-bar-title-fixed-scrolled---display: none;
 }
 
 .rs-app-bar-title {
@@ -133,7 +133,7 @@ rs-app-bar-title {
   display: block;
   padding-left: $rs-top-app-bar-title-left-padding;
 
-  .-fixed-scrolled {
+  &.-fixed-scrolled {
     display: var(--display);
   }
 }
