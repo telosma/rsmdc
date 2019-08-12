@@ -16,8 +16,16 @@
       }
 
       .rs-app-bar {
+        &.-compact > .row {
+          height: $rs-top-app-bar-dense-row-height;
+        }
+
         > .row {
           height: $rs-top-app-bar-dense-row-height;
+        }
+
+        &.-compact > .row > .section {
+          padding: 0;
         }
 
         > .row > .section {
@@ -65,7 +73,7 @@
         }
       }
 
-      .host-rs-app-bar-title {
+      rs-app-bar-title {
         align-self: flex-end;
         padding-bottom: $rs-top-app-bar-prominent-title-bottom-padding;
       }
