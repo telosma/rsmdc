@@ -19,7 +19,9 @@ export class AppBar {
 
   appBar: HTMLElement
 
-  appBarTitle: HTMLElement
+  appBarTitle: Element
+
+  appBarTool: Element
 
   hasAppBarTool: boolean
 
@@ -53,13 +55,23 @@ export class AppBar {
     if (this.isScrolling && !this.appBar.classList.contains('-fixed-scrolled')) {
       this.appBar.classList.add('-fixed-scrolled')
       
-      if (!this.appBarTitle) { return }
-      this.appBarTitle.classList.add('-fixed-scrolled')
+      if (this.appBarTitle) { 
+        console.log(this.appBarTitle)
+        this.appBarTitle.setAttribute('scrolling', 'true')
+      }
+      if (this.appBarTool) { 
+        console.log(this.appBarTool)
+        this.appBarTool.setAttribute('scrolling', 'true')
+      }
     } else if (!this.isScrolling) {
       this.appBar.classList.remove('-fixed-scrolled')
 
-      if (!this.appBarTitle) { return }
-      this.appBarTitle.classList.remove('-fixed-scrolled')
+      if (this.appBarTitle) { 
+        this.appBarTitle.removeAttribute('scrolling')
+      }
+      if (this.appBarTool) { 
+        this.appBarTool.removeAttribute('scrolling')
+      }
     }
   }
 
@@ -99,13 +111,13 @@ export class AppBar {
     slotEl.addEventListener('slotchange', () => {
       const appBarTitles = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TITLE'))
       if (appBarTitles.length > 0) {
-        this.appBarTitle = appBarTitles[0].shadowRoot.querySelector('.rs-app-bar-title')
+        this.appBarTitle = appBarTitles[0]
       }
-      const toolEl = slotEl.assignedNodes().filter(node => node.nodeName === 'RS-APP-BAR-TOOL')
-      const hasAppBarTool = toolEl.length > 0 ? true : false
 
-      if (hasAppBarTool) {
-        this.itemLength = Array.from(toolEl[0].childNodes).filter(child => child.nodeType === 1).length
+      const appBarTools = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TOOL'))
+      if (appBarTools.length > 0) {
+        this.appBarTool = appBarTools[0]
+        this.itemLength = Array.from(this.appBarTool.childNodes).filter(child => child.nodeType === 1).length
         this.appBar.classList.add('-has-action-item')
         this.updateAppBarWidth()
       }

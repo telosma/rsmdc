@@ -26,11 +26,11 @@ export namespace Components {
     'last': string;
     'middle': string;
   }
-  interface RsAppBarTitle {}
+  interface RsAppBarTitle {
+    'scrolling': string;
+  }
   interface RsAppBarTool {
-    'first': string;
-    'last': string;
-    'middle': string;
+    'scrolling': string;
   }
 }
 
@@ -90,11 +90,11 @@ declare namespace LocalJSX {
     'last'?: string;
     'middle'?: string;
   }
-  interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {}
+  interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {
+    'scrolling'?: string;
+  }
   interface RsAppBarTool extends JSXBase.HTMLAttributes<HTMLRsAppBarToolElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
+    'scrolling'?: string;
   }
 
   interface IntrinsicElements {

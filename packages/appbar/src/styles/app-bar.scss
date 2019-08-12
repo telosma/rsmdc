@@ -23,6 +23,7 @@
   left: 0;
   padding-top: auto;
   width: auto;
+  transition: width 300ms $rs-animation-standard-curve-timing-function;
 
   &.-compact {
     right: auto;
@@ -48,14 +49,10 @@
 
   &.-compact.-fixed-scrolled {
     width: $rs-top-app-bar-short-collapsed-width;
-    transition: width 300ms $rs-animation-standard-curve-timing-function;
     box-shadow: rs-elevation(4);
     border-radius: 0 0 24px 0;
     padding-left: 0;
     margin-left: 0;
-
-    // --rs-top-app-bar-title--display: none;
-    // --rs-top-app-bar-action-item--transition: #{padding 150ms $rs-animation-standard-curve-timing-function};
   }
 
   &.-compact.-fixed-scrolled.-has-action-item {
@@ -161,10 +158,6 @@ rs-app-bar-item {
   align-self: flex-start;
 }
 
-[compactable] > rs-app-bar-item {
-  transition: padding 150ms $rs-animation-standard-curve-timing-function;
-}
-
 .rs-app-bar-item {
   @include rs-app-bar-icon_;
   color: $rs-theme-on-primary;
@@ -184,6 +177,10 @@ rs-app-bar-tool {
   margin-left: auto;
   margin-right: 0;
   align-self: flex-start;
+}
+
+[compactable] > rs-app-bar-tool[scrolling] {
+  margin: 0;
 }
 
 .rs-app-bar-tool {

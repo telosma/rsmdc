@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, Host, h } from '@stencil/core'
+import { Component, Element, Prop, Host, h } from '@stencil/core'
 
 @Component({
   tag: 'rs-app-bar-tool',
@@ -9,14 +9,8 @@ export class AppBar {
 
   @Element() el: HTMLElement
 
-  @Prop() first: string
-
-  @Prop() middle: string
-
-  @Prop() last: string
-
-  @State() top: string
-
+  @Prop() scrolling: string
+  
   render() {
     return  <Host>
               <div class="rs-app-bar-tool">
