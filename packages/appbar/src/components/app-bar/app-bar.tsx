@@ -27,7 +27,7 @@ export class AppBar {
 
   topLimit: number
 
-  itemLength: number
+  itemLength: number = 0
 
   windowScrollTop: number = 0
 
@@ -56,11 +56,9 @@ export class AppBar {
       this.appBar.classList.add('-fixed-scrolled')
       
       if (this.appBarTitle) { 
-        console.log(this.appBarTitle)
         this.appBarTitle.setAttribute('scrolling', 'true')
       }
       if (this.appBarTool) { 
-        console.log(this.appBarTool)
         this.appBarTool.setAttribute('scrolling', 'true')
       }
     } else if (!this.isScrolling) {
@@ -91,7 +89,9 @@ export class AppBar {
     } else {
       this.appBar.classList.remove('-compact')
     }
-    this.updateAppBarWidth()
+    if (this.itemLength > 0) {
+      this.updateAppBarWidth()
+    }
   }
 
   @Method()
@@ -100,28 +100,47 @@ export class AppBar {
     const withCollapsedWidth = appBarHeight * this.itemLength + appBarHeight - this.appBarPadding + this.sectionPadding
     this.appBar.style.cssText = `--rs-app-bar-compact-fixed-scrolled-has-action-item---width: ${withCollapsedWidth}px;`
   }
+
+  @Method()
+  async selectAppBarTitle() {
+    const slotEl = this.el.shadowRoot.querySelector('slot')
+
+    const appBarTitles = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TITLE'))
+    if (appBarTitles.length > 0) {
+      this.appBarTitle = appBarTitles[0]
+    }
+  }
+
+  @Method()
+  async selectAppBarTool() {
+    const slotEl = this.el.shadowRoot.querySelector('slot')
+
+    const appBarTools = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TOOL'))
+    if (appBarTools.length > 0) {
+      this.appBarTool = appBarTools[0]
+    }
+  }
+
+  @Method()
+  async hasAppBarItems() {
+    this.itemLength = Array.from(this.appBarTool.childNodes).filter(child => child.nodeType === 1).length
+
+    if (this.itemLength > 0) {
+      this.appBar.classList.add('-has-action-item')
+      this.updateAppBarWidth()
+    } else {
+      this.appBar.classList.remove('-has-action-item')
+    }
+  }
   
   componentDidLoad() {
     this.appBar = this.el.shadowRoot.querySelector('.rs-app-bar')
-    const slotEl = this.el.shadowRoot.querySelector('slot')
-
+    this.selectAppBarTitle()
+    this.selectAppBarTool()
+    this.hasAppBarItems()
+    
     this.isFixed()
     this.isCompactable()
-
-    slotEl.addEventListener('slotchange', () => {
-      const appBarTitles = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TITLE'))
-      if (appBarTitles.length > 0) {
-        this.appBarTitle = appBarTitles[0]
-      }
-
-      const appBarTools = Array.from(slotEl.assignedElements().filter(element => element.tagName === 'RS-APP-BAR-TOOL'))
-      if (appBarTools.length > 0) {
-        this.appBarTool = appBarTools[0]
-        this.itemLength = Array.from(this.appBarTool.childNodes).filter(child => child.nodeType === 1).length
-        this.appBar.classList.add('-has-action-item')
-        this.updateAppBarWidth()
-      }
-    })
 
     window.onscroll = () => {
       let top = window.pageYOffset
@@ -157,6 +176,13 @@ export class AppBar {
         this.appBar.style.setProperty('top', `${this.scrollTop}px`)
         this.windowScrollTop = top    
       }
+    }
+  }
+
+  componentDidRender() {
+    if (this.appBar) {
+      this.selectAppBarTool()
+      this.hasAppBarItems()
     }
   }
 

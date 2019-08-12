@@ -12,8 +12,11 @@ export namespace Components {
   interface RsAppBar {
     'compactable': boolean;
     'fixed': boolean;
+    'hasAppBarItems': () => Promise<void>;
     'isCompactable': () => Promise<void>;
     'isFixed': () => Promise<void>;
+    'selectAppBarTitle': () => Promise<void>;
+    'selectAppBarTool': () => Promise<void>;
     'updateAppBarWidth': () => Promise<void>;
   }
   interface RsAppBarItem {
