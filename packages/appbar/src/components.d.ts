@@ -19,16 +19,8 @@ export namespace Components {
     'selectAppBarTool': () => Promise<void>;
     'updateAppBarWidth': () => Promise<void>;
   }
-  interface RsAppBarItem {
-    'first': string;
-    'last': string;
-    'middle': string;
-  }
-  interface RsAppBarNav {
-    'first': string;
-    'last': string;
-    'middle': string;
-  }
+  interface RsAppBarItem {}
+  interface RsAppBarNav {}
   interface RsAppBarTitle {
     'scrolling': string;
   }
@@ -83,16 +75,8 @@ declare namespace LocalJSX {
     'compactable'?: boolean;
     'fixed'?: boolean;
   }
-  interface RsAppBarItem extends JSXBase.HTMLAttributes<HTMLRsAppBarItemElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
-  }
-  interface RsAppBarNav extends JSXBase.HTMLAttributes<HTMLRsAppBarNavElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
-  }
+  interface RsAppBarItem extends JSXBase.HTMLAttributes<HTMLRsAppBarItemElement> {}
+  interface RsAppBarNav extends JSXBase.HTMLAttributes<HTMLRsAppBarNavElement> {}
   interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {
     'scrolling'?: string;
   }

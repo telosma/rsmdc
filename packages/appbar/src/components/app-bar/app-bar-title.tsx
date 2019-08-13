@@ -5,7 +5,7 @@ import { Component, Element, Prop, Watch, Host, h } from '@stencil/core';
   styleUrl: '../../dist/result.css',
   shadow: true
 })
-export class AppBar {
+export class AppBarTitle {
 
   @Element() el: HTMLElement
 

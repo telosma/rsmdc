@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, Host, h } from '@stencil/core'
+import { Component, Element, Host, h } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
 
 @Component({
@@ -6,17 +6,9 @@ import { RSRipple } from '@rsmdc/ripple'
   styleUrl: '../../dist/result.css',
   shadow: true
 })
-export class AppBar {
+export class AppBarItem {
 
   @Element() el: HTMLElement
-
-  @Prop() first: string
-
-  @Prop() middle: string
-
-  @Prop() last: string
-
-  @State() top: string
 
   componentDidLoad() {
     const itemEl = this.el.shadowRoot.querySelector('.rs-app-bar-item')
