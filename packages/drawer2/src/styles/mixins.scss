@@ -1,0 +1,20 @@
+@mixin rs-drawer-type($type) {
+  @if $type == modal {
+    .rs-drawer {
+      > .content.-open {
+        display: flex;
+      }
+    }
+  }@else if $type == dismissible {
+    .rs-drawer {
+      > .content {
+        display: none;
+        position: absolute;
+        left: 0;
+      }
+      > .content.-open {
+        display: flex;
+      }
+    }
+  }
+}
