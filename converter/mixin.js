@@ -103,9 +103,12 @@ module.exports.mixinSelectorsScss = () => {
   const mixinSelectors = extractSelectorsInMixin(excludeImportAndBlank(sourceScss))
   let selectorsScss = createEscapeVariablesScss(mixinSelectors)
 
-  selectorsScss.forEach((selector, i) => {
-    selectorsScss[i] = insertImportFilesInScss(selector, importFiles)
-  })
+  if (importFiles) {
+    selectorsScss.forEach((selector, i) => {
+      selectorsScss[i] = insertImportFilesInScss(selector, importFiles)
+    })
+  }
+  
   return selectorsScss 
 }
 
@@ -153,6 +156,8 @@ module.exports.generateClientMixin = (selectorsStyles) => {
     }
   })
 
-  insertImportFilesInScss(scss, importFiles)
+  if (importFiles) {
+    insertImportFilesInScss(scss, importFiles)
+  }
   fs.writeFileSync('./src/dist/client-mixins.scss', scss)
 }
