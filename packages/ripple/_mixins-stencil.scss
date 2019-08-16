@@ -201,3 +201,31 @@
     opacity: rs-states-opacity($color, selected);
   }
 }
+
+@mixin rs-states-base-color($color) {
+  @if alpha(rs-theme-prop-value($color)) > 0 {
+    $background-color: rs-theme-prop-value($color);
+
+    &::before,
+    &::after {
+      background-color: $background-color;
+      content: '';
+    }  
+  } @else {
+    &::before,
+    &::after {
+      content: none;
+    }  
+  }
+}
+
+@mixin rs-states-hover-opacity($opacity) {
+  --rs-ripple_hover_before--opacity: #{$opacity};
+}
+
+@mixin rs-states-focus-opacity($opacity) {
+  --rs-ripple_not-upgraded_focus_before--transition-duration: 75ms;
+  --rs-upgraded_-background-focused_before--transition-duration: 75ms;
+  --rs-ripple_not-upgraded_focus_before--opacity: #{$opacity};
+  --rs-upgraded_-background-focused_before--opacity: #{$opacity};
+}
