@@ -1,0 +1,404 @@
+//
+// Copyright 2018 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "@rsmdc/floating-label/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import "@rsmdc/line-ripple/mixins";
+@import "@rsmdc/notched-outline/mixins";
+@import "@rsmdc/notched-outline/variables";
+@import "./icon/mixins";
+@import "./variables";
+
+// Public
+
+@mixin rs-select-ink-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-ink-color_($color);
+  }
+}
+
+@mixin rs-select-container-fill-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-container-fill-color_($color);
+  }
+}
+
+@mixin rs-select-focused-label-color($color) {
+  &:not(.rs-select--disabled) {
+    &.rs-select--focused .rs-floating-label {
+      @include rs-floating-label-ink-color(rs-theme-prop-value($color));
+    }
+  }
+}
+
+@mixin rs-select-hover-bottom-line-color($color) {
+  &:not(.rs-select--disabled) .rs-select__native-control:hover {
+    @include rs-select-native-control-bottom-line-color_($color);
+  }
+}
+
+@mixin rs-select-bottom-line-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-bottom-line-color_($color);
+  }
+}
+
+@mixin rs-select-focused-bottom-line-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-focused-line-ripple-color_($color);
+  }
+}
+
+@mixin rs-select-label-color($color) {
+  &:not(.rs-select--disabled) .rs-floating-label {
+    @include rs-floating-label-ink-color($color);
+  }
+}
+
+@mixin rs-select-outline-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-outline-color_($color);
+  }
+}
+
+@mixin rs-select-hover-outline-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-hover-outline-color_($color);
+  }
+}
+
+@mixin rs-select-focused-outline-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-focused-outline-color_($color);
+  }
+}
+
+@mixin rs-select-shape-radius($radius, $rtl-reflexive: false) {
+  @if length($radius) > 2 {
+    @error "Invalid radius: '#{$radius}' component doesn't allow customizing all corners";
+  }
+
+  $masked-radius: rs-shape-mask-radius($radius, 1 1 0 0);
+
+  &,
+  &__native-control {
+    @include rs-shape-radius(rs-shape-resolve-percentage-radius($rs-select-height, $masked-radius), $rtl-reflexive);
+  }
+}
+
+@mixin rs-select-outline-shape-radius($radius, $rtl-reflexive: false) {
+  $resolved-radius: rs-shape-resolve-percentage-radius($rs-select-height, $radius);
+
+  .rs-notched-outline {
+    @include rs-notched-outline-shape-radius($resolved-radius, $rtl-reflexive);
+  }
+
+  .rs-select__native-control {
+    @include rs-shape-radius($resolved-radius, $rtl-reflexive);
+  }
+
+  $radius-pixels: rs-shape-prop-value($resolved-radius);
+
+  @if ($radius-pixels > $rs-notched-outline-leading-width) {
+    .rs-select__native-control {
+      @include rs-rtl-reflexive-property(padding, $radius-pixels + $rs-notched-outline-padding, $rs-select-arrow-padding);
+    }
+
+    + .rs-select-helper-text {
+      @include rs-rtl-reflexive-property(margin, $radius-pixels + $rs-notched-outline-padding, $rs-select-outline-label-offset);
+    }
+  }
+}
+
+// Private
+@mixin rs-select-focused-line-ripple_ {
+  &.rs-select--focused .rs-line-ripple {
+    @content;
+  }
+}
+
+@mixin rs-select-focused-outline_ {
+  &.rs-select--focused .rs-notched-outline {
+    @include rs-notched-outline-stroke-width(2px);
+    @content;
+  }
+}
+
+@mixin rs-select-focused-outline-idle_ {
+  &.rs-select--focused {
+    @content;
+  }
+}
+
+@mixin rs-select-ink-color_($color) {
+  .rs-select__native-control,
+  .rs-select__selected-text {
+    @include rs-theme-prop(color, $color);
+  }
+}
+
+@mixin rs-select-container-fill-color_($color) {
+  @include rs-theme-prop(background-color, $color);
+}
+
+@mixin rs-select-bottom-line-color_($color) {
+  .rs-select__native-control,
+  .rs-select__selected-text {
+    @include rs-select-native-control-bottom-line-color_($color);
+  }
+}
+
+@mixin rs-select-native-control-bottom-line-color_($color) {
+  @include rs-theme-prop(border-bottom-color, $color);
+}
+
+@mixin rs-select-focused-line-ripple-color_($color) {
+  @include rs-select-focused-line-ripple_ {
+    @include rs-line-ripple-color($color);
+  }
+}
+
+@mixin rs-select-dd-arrow-svg-bg_($fill-hex-number, $opacity) {
+  // Lookup color and remove leading #.
+  $fill-hex-number: rs-theme-prop-value($fill-hex-number);
+  $fill-hex-number: str-slice(unquote("#{$fill-hex-number}"), 2);
+
+  background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23#{$fill-hex-number}%22%20fill-rule%3D%22evenodd%22%20opacity%3D%22#{$opacity}%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+}
+
+@mixin rs-select-outline-color_($color) {
+  @include rs-notched-outline-color($color);
+}
+
+@mixin rs-select-hover-outline-color_($color) {
+  // stylelint-disable-next-line selector-combinator-space-after
+  &:not(.rs-select--focused) .rs-select__native-control:hover ~,
+  &:not(.rs-select--focused) .rs-select__selected-text:hover ~ {
+    .rs-notched-outline {
+      @include rs-notched-outline-color($color);
+    }
+  }
+}
+
+@mixin rs-select-focused-outline-color_($color) {
+  @include rs-select-focused-outline_ {
+    @include rs-notched-outline-color($color);
+  }
+}
+
+@mixin rs-select-floating-label_ {
+  .rs-floating-label {
+    @include rs-rtl-reflexive-position(left, $rs-select-outline-label-offset);
+
+    top: 21px;
+    pointer-events: none;
+  }
+
+  &.rs-select--with-leading-icon {
+    .rs-floating-label {
+      @include rs-rtl-reflexive-position(left, $rs-select-icon-padding);
+    }
+  }
+
+  &.rs-select--outlined {
+    .rs-floating-label {
+      @include rs-rtl-reflexive-position(left, $rs-notched-outline-padding);
+
+      top: 17px;
+    }
+
+    &.rs-select--with-leading-icon {
+      .rs-floating-label {
+        @include rs-rtl-reflexive-position(left, $rs-select-icon-padding - $rs-notched-outline-leading-width);
+
+        &--float-above {
+          @include rs-rtl-reflexive-position(left, $rs-select-icon-padding - $rs-notched-outline-leading-width);
+        }
+      }
+    }
+  }
+}
+
+@mixin rs-select-with-leading-icon_ {
+  @include rs-select-icon-horizontal-position_(16px, $rs-select-icon-padding);
+
+  &.rs-select--outlined {
+    @include rs-notched-outline-floating-label-float-position($rs-select-outlined-label-position-y, $rs-select-outlined-with-leading-icon-label-position-x);
+    @include rs-floating-label-shake-animation(select-outlined-leading-icon);
+
+    @include rs-rtl {
+      @include rs-floating-label-shake-animation(select-outlined-leading-icon-rtl);
+    }
+  }
+
+  &.rs-select__menu .rs-list-item__text {
+    @include rs-rtl-reflexive-property(padding, 32px /* left-value */, 32px /* right-value */);
+  }
+}
+
+@mixin rs-select-text-and-control_ {
+  .rs-select__selected-text {
+    min-width: 200px;
+    padding-top: 22px;
+  }
+
+  .rs-select__native-control,
+  .rs-select__selected-text {
+    @include rs-rtl-reflexive-property(padding, $rs-select-label-padding, $rs-select-arrow-padding);
+    @include rs-typography(subtitle1);
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &::-ms-value {
+      background-color: transparent;
+      color: inherit;
+    }
+
+    // counteracts the extra text padding that Firefox adds by default
+    @-moz-document url-prefix("") {
+      text-indent: -2px;
+    }
+
+    box-sizing: border-box;
+    width: 100%;
+    height: $rs-select-height;
+    padding-top: 20px;
+    padding-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    background-color: transparent;
+    color: inherit; // Override default user agent stylesheet
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+  }
+}
+
+@mixin rs-select-disabled_ {
+  @include rs-select-container-fill-color_($rs-select-disabled-fill-color);
+
+  .rs-floating-label {
+    @include rs-floating-label-ink-color($rs-select-disabled-label-color);
+  }
+
+  .rs-select__dropdown-icon {
+    @include rs-select-dd-arrow-svg-bg_($rs-select-dropdown-color, $rs-select-disabled-dropdown-opacity);
+  }
+
+  .rs-line-ripple {
+    display: none;
+  }
+
+  .rs-select__icon {
+    @include rs-theme-prop(color, $rs-select-disabled-icon-color);
+  }
+
+  .rs-select__native-control,
+  .rs-select__selected-text {
+    @include rs-theme-prop(color, $rs-select-disabled-ink-color);
+
+    border-bottom-style: dotted;
+  }
+
+  .rs-select__selected-text {
+    pointer-events: none;
+  }
+
+  &.rs-select--outlined {
+    @include rs-select-container-fill-color_(transparent);
+
+    .rs-select__native-control,
+    .rs-select__selected-text {
+      border-bottom-style: none;
+    }
+
+    @include rs-select-outline-color_($rs-select-outlined-disabled-border);
+  }
+
+  cursor: default;
+  pointer-events: none;
+}
+
+@mixin rs-select-outlined_ {
+  @include rs-select-container-fill-color(transparent);
+  @include rs-select-outline-color($rs-select-outlined-idle-border);
+  @include rs-select-hover-outline-color($rs-select-outlined-hover-border);
+  @include rs-select-focused-outline-color(primary);
+  @include rs-floating-label-shake-animation(text-field-outlined);
+  @include rs-select-outline-shape-radius(medium);
+  @include rs-states-base-color(transparent);
+  @include rs-select-container-fill-color(transparent);
+  @include rs-notched-outline-floating-label-float-position($rs-select-outlined-label-position-y, 0);
+
+  border: none;
+  overflow: visible;
+
+  .rs-select__native-control,
+  .rs-select__selected-text {
+    @include rs-rtl-reflexive-property(padding, $rs-select-label-padding, $rs-select-arrow-padding);
+
+    display: flex;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: none;
+    background-color: transparent;
+    z-index: 1;
+  }
+
+  .rs-select__selected-text {
+    padding-top: 14px;
+  }
+
+  .rs-select__icon {
+    z-index: 2;
+  }
+
+  .rs-floating-label {
+    line-height: 1.15rem;
+    pointer-events: auto;
+  }
+}
+
+@mixin rs-select-helper-text_ {
+  .rs-select-helper-text {
+    // stylelint-disable plugin/selector-bem-pattern
+    .rs-select + & {
+      margin-right: 12px;
+      margin-left: 12px;
+    }
+
+    .rs-select--outlined + & {
+      margin-right: 16px;
+      margin-left: 16px;
+    }
+    // stylelint-enable plugin/selector-bem-pattern
+  }
+
+  .rs-select--focused + .rs-select-helper-text:not(.rs-select-helper-text--validation-msg) {
+    opacity: 1;
+  }
+}
