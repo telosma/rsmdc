@@ -33,46 +33,73 @@
 // Public
 
 @mixin rs-select-ink-color($color) {
-  &:not(.rs-select--disabled) {
-    @include rs-select-ink-color_($color);
+  .rs-select {
+    &:not(.-disabled) {
+      > .nativecontrol,
+      > .selectedtext {
+        color: $color;
+      }
+    }
   }
 }
 
 @mixin rs-select-container-fill-color($color) {
-  &:not(.rs-select--disabled) {
-    @include rs-select-container-fill-color_($color);
+  .rs-select {
+    &:not(.-disabled) {
+      background-color: $color;
+    }
   }
 }
 
 @mixin rs-select-focused-label-color($color) {
-  &:not(.rs-select--disabled) {
-    &.rs-select--focused .rs-floating-label {
-      @include rs-floating-label-ink-color(rs-theme-prop-value($color));
+
+  .rs-select {
+    &:not(.-disabled).-focused {
+      > .label 
+      color: $color;
     }
   }
 }
 
 @mixin rs-select-hover-bottom-line-color($color) {
   &:not(.rs-select--disabled) .rs-select__native-control:hover {
-    @include rs-select-native-control-bottom-line-color_($color);
+    border-bottom-color: $color;
   }
 }
 
 @mixin rs-select-bottom-line-color($color) {
-  &:not(.rs-select--disabled) {
-    @include rs-select-bottom-line-color_($color);
+  .rs-select {
+    &:not(.-disabled) {
+      > .nativecontrol,
+      > .selectedtext {
+        border-bottom-color: $color;
+      }
+    }
   }
 }
 
+@mixin rs-select-focused-line-ripple_ {
+  &.rs-select--focused .rs-line-ripple {
+    @content;
+  }
+}
+
+
+
 @mixin rs-select-focused-bottom-line-color($color) {
-  &:not(.rs-select--disabled) {
-    @include rs-select-focused-line-ripple-color_($color);
+  .rs-select {
+    &:not(.-disabled).-focused > .ripple {
+      background-color: $color;
+    }
   }
 }
 
 @mixin rs-select-label-color($color) {
-  &:not(.rs-select--disabled) .rs-floating-label {
-    @include rs-floating-label-ink-color($color);
+  .rs-select {
+    > .label,
+    > .outline > .notch > .label.-outlined {
+      color: $rs-select-ink-color;
+    }
   }
 }
 
@@ -132,12 +159,6 @@
 }
 
 // Private
-@mixin rs-select-focused-line-ripple_ {
-  &.rs-select--focused .rs-line-ripple {
-    @content;
-  }
-}
-
 @mixin rs-select-focused-outline_ {
   &.rs-select--focused .rs-notched-outline {
     @include rs-notched-outline-stroke-width(2px);
@@ -151,33 +172,6 @@
   }
 }
 
-@mixin rs-select-ink-color_($color) {
-  .rs-select__native-control,
-  .rs-select__selected-text {
-    @include rs-theme-prop(color, $color);
-  }
-}
-
-@mixin rs-select-container-fill-color_($color) {
-  @include rs-theme-prop(background-color, $color);
-}
-
-@mixin rs-select-bottom-line-color_($color) {
-  .rs-select__native-control,
-  .rs-select__selected-text {
-    @include rs-select-native-control-bottom-line-color_($color);
-  }
-}
-
-@mixin rs-select-native-control-bottom-line-color_($color) {
-  @include rs-theme-prop(border-bottom-color, $color);
-}
-
-@mixin rs-select-focused-line-ripple-color_($color) {
-  @include rs-select-focused-line-ripple_ {
-    @include rs-line-ripple-color($color);
-  }
-}
 
 @mixin rs-select-dd-arrow-svg-bg_($fill-hex-number, $opacity) {
   // Lookup color and remove leading #.
@@ -299,7 +293,7 @@
 }
 
 @mixin rs-select-disabled_ {
-  @include rs-select-container-fill-color_($rs-select-disabled-fill-color);
+  background-color: $rs-select-disabled-fill-color;
 
   .rs-floating-label {
     @include rs-floating-label-ink-color($rs-select-disabled-label-color);
@@ -329,7 +323,7 @@
   }
 
   &.rs-select--outlined {
-    @include rs-select-container-fill-color_(transparent);
+    background-color: transparent;
 
     .rs-select__native-control,
     .rs-select__selected-text {

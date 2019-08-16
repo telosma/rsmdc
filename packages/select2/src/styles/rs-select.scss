@@ -30,28 +30,51 @@
 @import "@rsmdc/typography/mixins";
 @import "@rsmdc/ripple/common";
 @import "@rsmdc/ripple/mixins";
-@import "@rsmdc/rtl/mixins";
 @import "./icon/rs-select-icon";
 @import "./helper-text/rs-select-helper-text";
 @import "./helper-text/mixins";
 
-// postcss-bem-linter: define select
 .rs-select {
-  @include rs-select-container-fill-color($rs-select-fill-color);
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
-  // Select intentionally omits press ripple, so each state needs to be specified individually.
   @include rs-states-base-color($rs-select-ink-color);
   @include rs-states-hover-opacity(rs-states-opacity($rs-select-ink-color, hover));
   @include rs-states-focus-opacity(rs-states-opacity($rs-select-ink-color, focus));
-  @include rs-select-ink-color($rs-select-ink-color);
-  @include rs-select-label-color($rs-select-label-color);
-  @include rs-select-bottom-line-color($rs-select-bottom-line-idle-color);
+
+  &:not(.-disabled) {
+    background-color: $rs-select-fill-color;
+  }
+
+  &:not(.-disabled) {
+    > .nativecontrol,
+    > .selectedtext {
+      color: $rs-select-ink-color;
+    }
+  }
+
+  &:not(.-disabled) {
+    > .label,
+    > .outline > .notch > .label.-outlined {
+      color: $rs-select-ink-color;
+    }
+  }
+
+  &:not(.-disabled) {
+    > .nativecontrol,
+    > .selectedtext {
+      border-bottom-color: $rs-select-bottom-line-idle-color;
+    }
+  }
+
+
+
   @include rs-select-helper-text-color($rs-select-helper-text-color);
   @include rs-select-shape-radius(medium);
 
-  // Focused state colors
-  @include rs-select-focused-bottom-line-color(primary);
+  &:not(.-disabled).-focused > .ripple {
+    background-color: $rs-theme-primary;
+  }
+
   @include rs-select-focused-label-color($rs-select-focused-label-color);
 
   // Hover state colors
