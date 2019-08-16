@@ -7,14 +7,22 @@
 
 ## Properties
 
-| Property    | Attribute   | Description | Type      | Default     |
-| ----------- | ----------- | ----------- | --------- | ----------- |
-| `countable` | `countable` |             | `boolean` | `undefined` |
-| `disabled`  | `disabled`  |             | `boolean` | `undefined` |
-| `marked`    | `marked`    |             | `boolean` | `undefined` |
-| `max`       | `max`       |             | `number`  | `50`        |
-| `min`       | `min`       |             | `number`  | `0`         |
-| `now`       | `now`       |             | `number`  | `0`         |
+| Property    | Attribute   | Description | Type               | Default     |
+| ----------- | ----------- | ----------- | ------------------ | ----------- |
+| `countable` | `countable` |             | `boolean`          | `undefined` |
+| `disabled`  | `disabled`  |             | `boolean`          | `undefined` |
+| `marked`    | `marked`    |             | `boolean`          | `undefined` |
+| `max`       | `max`       |             | `number`           | `50`        |
+| `min`       | `min`       |             | `number`           | `0`         |
+| `now`       | `now`       |             | `number`           | `0`         |
+| `value`     | `value`     |             | `number \| string` | `undefined` |
+
+
+## Events
+
+| Event    | Description | Type               |
+| -------- | ----------- | ------------------ |
+| `change` |             | `CustomEvent<any>` |
 
 
 ## Methods

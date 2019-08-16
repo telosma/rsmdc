@@ -1,4 +1,4 @@
-import { Component, Prop, Host, Element, Watch, Method, State, h } from "@stencil/core";
+import { Component, Prop, Host, Element, Event, EventEmitter, Watch, Method, h } from "@stencil/core";
 import { RSSlider } from "../../utils/index";
 
 @Component({
@@ -7,6 +7,7 @@ import { RSSlider } from "../../utils/index";
   shadow: true
 })
 export class Slider {
+
   @Element() el: HTMLElement
 
   @Prop() disabled: boolean
@@ -15,18 +16,25 @@ export class Slider {
 
   @Prop() max: number = 50
 
-  @Prop() now: number = 0
+  @Prop({
+    mutable: true
+  }) now: number = 0
 
   @Prop() countable: boolean
 
   @Prop() marked: boolean
 
-  @State() count: number
+  @Prop() value: string | number
 
   rsSlider: RSSlider;
 
   slider: Element;
 
+  @Watch("now")
+  nowHandler() {
+    console.log(111)
+  }
+    
   @Watch("countable")
   countableHandler() {
     this.isCountable()
@@ -42,6 +50,12 @@ export class Slider {
     this.isMarked()
   }
 
+  @Event({
+    cancelable: false,
+    composed: false,
+  }) change: EventEmitter
+
+
   @Method()
   async isCountable() {
     if (this.countable) {
@@ -50,6 +64,7 @@ export class Slider {
       this.slider.classList.remove("-discrete")
     }
   }
+
 
   @Method()
   async isDisabled() {
@@ -66,7 +81,7 @@ export class Slider {
       this.slider.classList.add("-display-markers")
     } else {
       this.slider.classList.remove("-display-markers")
-    }
+    } addEventListener
   }
 
   componentDidLoad() {
@@ -78,6 +93,19 @@ export class Slider {
 
     this.rsSlider = new RSSlider(this.slider);
 
+    // TODO
+    const ob = new MutationObserver(records => {
+      records.forEach(record => {
+        if (record.attributeName === 'aria-valuenow') {
+          const value = this.slider.getAttribute('aria-valuenow')
+          this.change.emit({ value: value })
+        }
+      })
+    })
+    ob.observe(this.slider, {
+      attributes: true
+    })
+  
     const observer = new MutationObserver(records => {
       records.forEach(record => {
         if (
@@ -94,32 +122,29 @@ export class Slider {
   }
 
   render() {
-    return (
-      <Host>
-        <div
-          class="rs-slider"
-          tabindex="0"
-          role="slider"
-          aria-valuemin={this.min}
-          aria-valuemax={this.max}
-          aria-valuenow={this.now}
-          aria-label="Select Value"
-        >
-          <div class="trackcontainer">
-            <div class="track" />
-            <div class="trackmarkercontainer" />
-          </div>
-          <div class="thumbcontainer">
-            <div class="pin">
-              <span class="pinvaluemarker" />
+    return <Host>
+            <div
+              class="rs-slider"
+              tabindex="0"
+              role="slider"
+              aria-valuemin={this.min}
+              aria-valuemax={this.max}
+              aria-valuenow={this.now}
+            >
+              <div class="trackcontainer">
+                <div class="track" />
+                <div class="trackmarkercontainer" />
+              </div>
+              <div class="thumbcontainer">
+                <div class="pin">
+                  <span class="pinvaluemarker" />
+                </div>
+                <svg class="thumb" width="21" height="21">
+                  <circle cx="10.5" cy="10.5" r="7.875" />
+                </svg>
+                <div class="focusring" />
+              </div>
             </div>
-            <svg class="thumb" width="21" height="21">
-              <circle cx="10.5" cy="10.5" r="7.875" />
-            </svg>
-            <div class="focusring" />
-          </div>
-        </div>
-      </Host>
-    );
+          </Host>
   }
 }
