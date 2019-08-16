@@ -1,0 +1,177 @@
+//
+// Copyright 2017 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "./keyframes";
+@import "./mixins";
+@import "./variables";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/line-ripple/rs-line-ripple";
+@import "@rsmdc/notched-outline/rs-notched-outline";
+@import "@rsmdc/floating-label/rs-floating-label";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/ripple/common";
+@import "@rsmdc/ripple/mixins";
+@import "./icon/rs-select-icon";
+@import "./helper-text/rs-select-helper-text";
+@import "./helper-text/mixins";
+
+.rs-select {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+  @include rs-states-base-color($rs-select-ink-color);
+  @include rs-states-hover-opacity(rs-states-opacity($rs-select-ink-color, hover));
+  @include rs-states-focus-opacity(rs-states-opacity($rs-select-ink-color, focus));
+
+  &:not(.-disabled) {
+    background-color: $rs-select-fill-color;
+  }
+
+  &:not(.-disabled) {
+    > .nativecontrol,
+    > .selectedtext {
+      color: $rs-select-ink-color;
+    }
+  }
+
+  &:not(.-disabled) {
+    > .label,
+    > .outline > .notch > .label.-outlined {
+      color: $rs-select-ink-color;
+    }
+  }
+
+  &:not(.-disabled) {
+    > .nativecontrol,
+    > .selectedtext {
+      border-bottom-color: $rs-select-bottom-line-idle-color;
+    }
+  }
+
+
+
+  @include rs-select-helper-text-color($rs-select-helper-text-color);
+  @include rs-select-shape-radius(medium);
+
+  &:not(.-disabled).-focused > .ripple {
+    background-color: $rs-theme-primary;
+  }
+
+  @include rs-select-focused-label-color($rs-select-focused-label-color);
+
+  // Hover state colors
+  @include rs-select-hover-bottom-line-color($rs-select-bottom-line-hover-color);
+  @include rs-floating-label-float-position($rs-select-label-position-y);
+  @include rs-select-floating-label_;
+
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  height: $rs-select-height;
+  overflow: hidden;
+  will-change: opacity, transform, color;
+
+  &__dropdown-icon {
+    @include rs-select-dd-arrow-svg-bg_($rs-select-dropdown-color, $rs-select-dropdown-opacity);
+    @include rs-rtl-reflexive(left, auto, right, 8px);
+
+    position: absolute;
+    bottom: 16px;
+    width: 24px;
+    height: 24px;
+    transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
+    pointer-events: none;
+
+    .rs-select--focused & {
+      @include rs-select-dd-arrow-svg-bg_(rs-theme-prop-value(primary), 1);
+
+      transform: rotate(180deg) translateY(-5px);
+      transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
+    }
+  }
+
+  &__native-control {
+    padding-top: 20px;
+  }
+
+  @include rs-select-focused-line-ripple_ {
+    &::after {
+      transform: scale(1, 2);
+      opacity: 1;
+    }
+  }
+}
+
+@include rs-select-helper-text_;
+@include rs-select-text-and-control_();
+
+.rs-select--outlined {
+  @include rs-select-outlined_;
+}
+
+.rs-select--invalid {
+  @include rs-select-label-color($rs-select-error-color);
+  @include rs-select-bottom-line-color($rs-select-error-color);
+  @include rs-select-focused-bottom-line-color($rs-select-error-color);
+  @include rs-select-focused-label-color($rs-select-error-color);
+  @include rs-select-helper-text-validation-color($rs-select-error-color);
+
+  // Hover state colors
+  @include rs-select-hover-bottom-line-color($rs-select-error-color);
+
+  &.rs-select--outlined {
+    @include rs-select-outline-color($rs-select-error-color);
+    @include rs-select-hover-outline-color($rs-select-error-color);
+    @include rs-select-focused-outline-color($rs-select-error-color);
+  }
+
+  .rs-select__dropdown-icon {
+    @include rs-select-dd-arrow-svg-bg_($rs-select-error-color, 1);
+  }
+
+  // stylelint-disable-next-line plugin/selector-bem-pattern
+  + .rs-select-helper-text--validation-msg {
+    opacity: 1;
+  }
+}
+
+.rs-select--required {
+  // stylelint-disable-next-line plugin/selector-bem-pattern
+  .rs-floating-label::after {
+    content: "*";
+  }
+}
+
+.rs-select--disabled {
+  @include rs-select-disabled_;
+}
+
+.rs-select--with-leading-icon {
+  @include rs-select-with-leading-icon_;
+}
+
+.rs-select__menu .rs-list .rs-list-item--selected {
+  @include rs-theme-prop(color, on-surface);
+  @include rs-states(on-surface);
+}
+
+@include rs-floating-label-shake-keyframes(select-outlined-leading-icon, $rs-select-outlined-label-position-y, $rs-select-outlined-with-leading-icon-label-position-x);
+@include rs-floating-label-shake-keyframes(select-outlined-leading-icon-rtl, $rs-select-outlined-label-position-y, -$rs-select-outlined-with-leading-icon-label-position-x);

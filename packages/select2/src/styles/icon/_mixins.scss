@@ -1,0 +1,71 @@
+//  Copyright 2018 Google Inc.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:/
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software./
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+@import "@rsmdc/theme/mixins";
+@import "./variables";
+
+// Public mixins
+
+@mixin rs-select-icon-color($color) {
+  &:not(.rs-select--disabled) {
+    @include rs-select-icon-color_($color);
+  }
+}
+
+// Private mixins
+
+@mixin rs-select-icon_ {
+  @include rs-select-icon-color(on-surface);
+
+  .rs-select__icon {
+    display: inline-block;
+    position: absolute;
+    bottom: 16px;
+    box-sizing: border-box;
+    width: $rs-select-icon-size;
+    height: $rs-select-icon-size;
+    border: none;
+    background-color: transparent;
+    fill: currentColor;
+    opacity: $rs-select-icon-opacity;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+@mixin rs-select-icon-color_($color) {
+  .rs-select__icon {
+    @include rs-theme-prop(color, $color);
+  }
+}
+
+@mixin rs-select-icon-horizontal-position_($iconPosition, $inputPadding) {
+  .rs-select__icon {
+    @include rs-rtl-reflexive-position(left, $iconPosition);
+  }
+
+  // Move the input's position, to allow room for the icon
+  .rs-select__native-control,
+  .rs-select__selected-text {
+    @include rs-rtl-reflexive-property(padding, $inputPadding /* left */, $rs-select-icon-right-padding /* right */);
+  }
+}

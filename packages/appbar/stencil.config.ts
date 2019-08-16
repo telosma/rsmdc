@@ -14,5 +14,14 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null // disable service workers
     }
+  ],
+  bundles: [
+    { components: [
+      'rs-app-bar', 
+      'rs-app-bar-title',
+      'rs-app-bar-nav',
+      'rs-app-bar-tool',
+      'rs-app-bar-item'
+    ]}
   ]
 };

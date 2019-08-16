@@ -9,35 +9,87 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface AppBar {
-    'first': string;
-    'last': string;
-    'middle': string;
+  interface RsAppBar {
+    'compactable': boolean;
+    'fixed': boolean;
+    'hasAppBarItems': () => Promise<void>;
+    'isCompactable': () => Promise<void>;
+    'isFixed': () => Promise<void>;
+    'selectAppBarTitle': () => Promise<void>;
+    'selectAppBarTool': () => Promise<void>;
+    'updateAppBarWidth': () => Promise<void>;
+  }
+  interface RsAppBarItem {}
+  interface RsAppBarNav {}
+  interface RsAppBarTitle {
+    'scrolling': string;
+  }
+  interface RsAppBarTool {
+    'scrolling': string;
   }
 }
 
 declare global {
 
 
-  interface HTMLAppBarElement extends Components.AppBar, HTMLStencilElement {}
-  var HTMLAppBarElement: {
-    prototype: HTMLAppBarElement;
-    new (): HTMLAppBarElement;
+  interface HTMLRsAppBarElement extends Components.RsAppBar, HTMLStencilElement {}
+  var HTMLRsAppBarElement: {
+    prototype: HTMLRsAppBarElement;
+    new (): HTMLRsAppBarElement;
+  };
+
+  interface HTMLRsAppBarItemElement extends Components.RsAppBarItem, HTMLStencilElement {}
+  var HTMLRsAppBarItemElement: {
+    prototype: HTMLRsAppBarItemElement;
+    new (): HTMLRsAppBarItemElement;
+  };
+
+  interface HTMLRsAppBarNavElement extends Components.RsAppBarNav, HTMLStencilElement {}
+  var HTMLRsAppBarNavElement: {
+    prototype: HTMLRsAppBarNavElement;
+    new (): HTMLRsAppBarNavElement;
+  };
+
+  interface HTMLRsAppBarTitleElement extends Components.RsAppBarTitle, HTMLStencilElement {}
+  var HTMLRsAppBarTitleElement: {
+    prototype: HTMLRsAppBarTitleElement;
+    new (): HTMLRsAppBarTitleElement;
+  };
+
+  interface HTMLRsAppBarToolElement extends Components.RsAppBarTool, HTMLStencilElement {}
+  var HTMLRsAppBarToolElement: {
+    prototype: HTMLRsAppBarToolElement;
+    new (): HTMLRsAppBarToolElement;
   };
   interface HTMLElementTagNameMap {
-    'app-bar': HTMLAppBarElement;
+    'rs-app-bar': HTMLRsAppBarElement;
+    'rs-app-bar-item': HTMLRsAppBarItemElement;
+    'rs-app-bar-nav': HTMLRsAppBarNavElement;
+    'rs-app-bar-title': HTMLRsAppBarTitleElement;
+    'rs-app-bar-tool': HTMLRsAppBarToolElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface AppBar extends JSXBase.HTMLAttributes<HTMLAppBarElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
+  interface RsAppBar extends JSXBase.HTMLAttributes<HTMLRsAppBarElement> {
+    'compactable'?: boolean;
+    'fixed'?: boolean;
+  }
+  interface RsAppBarItem extends JSXBase.HTMLAttributes<HTMLRsAppBarItemElement> {}
+  interface RsAppBarNav extends JSXBase.HTMLAttributes<HTMLRsAppBarNavElement> {}
+  interface RsAppBarTitle extends JSXBase.HTMLAttributes<HTMLRsAppBarTitleElement> {
+    'scrolling'?: string;
+  }
+  interface RsAppBarTool extends JSXBase.HTMLAttributes<HTMLRsAppBarToolElement> {
+    'scrolling'?: string;
   }
 
   interface IntrinsicElements {
-    'app-bar': AppBar;
+    'rs-app-bar': RsAppBar;
+    'rs-app-bar-item': RsAppBarItem;
+    'rs-app-bar-nav': RsAppBarNav;
+    'rs-app-bar-title': RsAppBarTitle;
+    'rs-app-bar-tool': RsAppBarTool;
   }
 }
 

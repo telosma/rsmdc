@@ -1,0 +1,93 @@
+@import './rs-mixins';
+@import './variables';
+
+rs-drawer {
+  --rs-drawer: true;
+  --rs-drawer-list-item--border-radius: 4px;
+
+  position: fixed;
+  z-index: 10;
+  height: 100%;
+}
+
+:root {
+  --rs-app-layout--display: flex;
+  --rs-app-layout--height: 100%;
+  --rs-app-layout-content--margin-left: #{$rs-drawer-width};
+}
+
+.rs-drawer {
+  height: 100%;
+
+  > .content {
+    @include rs-drawer-item-shape-radius(4px);
+
+    flex-direction: column;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    height: 100%;
+    transition-property: transform;
+    transition-timing-function: $rs-animation-standard-curve-timing-function;
+    border-right-width: 1px;
+    border-right-style: solid;
+    overflow: hidden;
+    transform: translateX(-100%);
+    width: $rs-drawer-width;
+    border-color: $rs-drawer-divider-color;
+    background-color: $rs-drawer-surface-fill-color;
+    z-index: $rs-drawer-z-index;
+    border-radius: rs-shape-radius(large);
+    box-shadow: none;
+    display: flex;
+    position: static;
+    left: auto;
+    right: auto;
+  }
+
+  > .content.-open {
+    display: block;
+  }
+
+  > .content.-opening {
+    transform: translateX(0);
+    transition-duration: $rs-drawer-animation-enter;
+  }
+
+  > .content.-closing {
+    transform: translateX(-100%);
+    transition-duration: $rs-drawer-animation-exit;
+  }
+
+  > .scrim {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: auto;
+    width: 100%;
+    height: 100%;
+    transition-property: opacity;
+    transition-timing-function: $rs-animation-standard-curve-timing-function;
+    z-index: $rs-drawer-z-index - 1;
+    background-color: $rs-drawer-modal-scrim-color;
+    box-shadow: #{rs-elevation($rs-drawer-modal-elevation)};
+  }
+
+  > .content.-open + .scrim {
+    display: block;
+  }
+
+  > .content.-opening + .scrim {
+    transition-duration: $rs-drawer-animation-enter;
+    opacity: 1;
+  }
+
+  > .content.-animate + .scrim {
+    opacity: 0;
+  }
+
+  > .content.-closing + .scrim {
+    transition-duration: $rs-drawer-animation-exit;
+    opacity: 0;
+  }
+}

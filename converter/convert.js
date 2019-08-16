@@ -144,8 +144,9 @@ const mappingSelectors = (customPropJson, sourceJson) => {
         const prop = attr.replace(/var\(|\)/g, '')
         let value = sJsonAttrs[i][1].replace(/'\$/g, '#{$').replace(/(?<=[a-z|A-Z])'/g, '}')
         value = value.replace(/"\$/g, '\'#{$').replace(/(?<=[a-z|A-Z])"/g, '}\'')
-        if (value.match(/"\\\$/)) {
-          value = value.replace(/"\\\$/g, '\'"\\\\#{$').replace(/}'/g, '}"\'')
+
+        if (value.match(/"\\\\\$/)) {
+          value = value.replace(/"\\\\\$/g, '\'\\\\#{$').replace(/}'/g, '}\'')
         }
 
         style[sJsonAttrs[i][0]] = `${prop}: ${value};`
@@ -156,6 +157,13 @@ const mappingSelectors = (customPropJson, sourceJson) => {
   return styles
 }
 
+const extractHostStyles = (json) => {
+  const selectors = Object.entries(json)
+  const hostStyleSelectors = selectors.filter(([selector])=> {    
+    return !selector.match(/\.|@media|@keyframes/g)
+  })
+  return hostStyleSelectors
+}
 
 // generate styles
 module.exports.convertStyle = (nodeModulesPath) => {
@@ -169,7 +177,9 @@ module.exports.convertStyle = (nodeModulesPath) => {
   const css = replaceSassVariablesCss(customPropJson)
   const styles = convertPropToCustomProp(customPropJson, sourceJson)
 
-  generateStyle(css, styles)
+  const hostStyles = extractHostStyles(sourceJson.children)
+
+  generateStyle(css, styles, hostStyles)
 }
 
 // generate client mixin 

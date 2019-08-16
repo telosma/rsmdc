@@ -1,0 +1,56 @@
+//
+// Copyright 2017 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "@rsmdc/theme/variables";
+
+// Colors
+$rs-drawer-title-ink-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-subtitle-ink-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-item-inactive-ink-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-item-activated-ink-color: rs-theme-prop-value(primary) !default;
+$rs-drawer-divider-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-surface-fill-color: rs-theme-prop-value(surface) !default;
+
+// Opacity
+$rs-drawer-title-ink-opacity: rs-theme-text-emphasis(high) !default;
+$rs-drawer-subtitle-ink-opacity: rs-theme-text-emphasis(medium) !default;
+$rs-drawer-item-inactive-icon-ink-opacity: rs-theme-text-emphasis(medium) !default;
+$rs-drawer-item-inactive-text-ink-opacity: rs-theme-text-emphasis(high) !default;
+$rs-drawer-item-active-icon-ink-opacity: 1 !default;
+$rs-drawer-item-active-text-ink-opacity: rs-theme-text-emphasis(high) !default;
+$rs-drawer-divider-opacity: .12 !default;
+
+// Widths
+$rs-drawer-width: 256px !default;
+$rs-drawer-list-item-spacing: 4px !default;
+$rs-drawer-surface-padding: 16px !default;
+
+// Animations
+$rs-drawer-animation-enter: 250ms !default;
+$rs-drawer-animation-exit: 200ms !default;
+
+// Scrim
+$rs-drawer-modal-scrim-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-modal-scrim-opacity: .32 !default;
+
+$rs-drawer-z-index: 6 !default;
+$rs-drawer-modal-elevation: 16 !default;

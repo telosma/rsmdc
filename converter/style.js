@@ -15,7 +15,7 @@ const readFile = (filePath) => {
   return fs.readFileSync(filePath, 'utf8')
 }
 
-const readStyleDir = (dirPath) => {
+const readDir = (dirPath) => {
   return fs.readdirSync(dirPath, 'utf8')
 }
 
@@ -29,7 +29,7 @@ const extractDefaultThemeVariables = (nodeModulesPath) => {
 }
 
 const extractComponentVariableFiles = () => {
-  return readStyleDir(dirPath).filter(file => extractMatchWords(file, /variable/g))
+  return readDir(dirPath).filter(file => extractMatchWords(file, /variable/g))
 }
 
 const extractComponentThemeVariables = () => {
@@ -75,10 +75,8 @@ module.exports.styleScss = (nodeModulesPath) => {
   return excludeThemeVariablesInScss(sourceScss, themeVariables)
 }
 
-module.exports.generateStyle = (sourceCss, styles) => {
+module.exports.generateStyle = (sourceCss, styles, hostStyles) => {
   const files = extractComponentVariableFiles()
-  const componentVariables = files.map(file => readFile(`${dirPath}/${file}`))[0].match(/\$.*(?=:)/g)
-
   let css = sourceCss
 
   const style = Object.entries(styles).reduce((result, [prop, value]) => {
@@ -92,7 +90,9 @@ module.exports.generateStyle = (sourceCss, styles) => {
 
     prop = prop.match(/\$rs-theme/) ? prop.replace(/(.*?)(?=\$)/g, '') : prop
     value = value.match(/'\$/) || value.match(/"/) ? value.replace(/'|"/, '#{').replace(/'|"/, '}').replace('#{}', '""') : value
-    if (value.match(/calc\(/)) {
+    if (value.match(/calc\(/) && files.length > 0) {
+      const componentVariables = files.map(file => readFile(`${dirPath}/${file}`))[0].match(/\$.*(?=:)/g)
+
       componentVariables.forEach(variable => {
         let regExp = new RegExp(`\\${variable}`, 'g')
         value = value.replace(regExp, `#{${variable}}`).replace()
@@ -104,7 +104,35 @@ module.exports.generateStyle = (sourceCss, styles) => {
     result = `${result}\n ${prop}: ${value};`
     return result
   }, '')
-  const clientStyle = `:root {\n${style}\n}`
+
+  let clientStyle = `:root {\n${style}\n}`
+
+  if (hostStyles.length > 0) {
+    hostStyles.forEach(([selector, styleData]) => {
+
+      const text = Object.entries(styleData.attributes)
+        .reduce((result, [prop, value]) => {
+          return `${result}${prop}: ${value}; `
+        }, '')
+      
+      clientStyle = `${clientStyle}\n${selector} { ${text}}`
+    })
+  }
+
+  // Add visibility
+  let componentsPath = './src/components/'
+  const componentName = readDir(componentsPath)[0]
+  const componentFiles = readDir(`${componentsPath}${componentName}`)
+    .filter(file => file.match(/\.tsx/))
+  
+  componentFiles.forEach(file => {
+    let elementName = file.replace(/\.tsx/, '')
+    if (!elementName.match(/rs-/)) {
+      elementName = `rs-${elementName}`
+    }
+
+    clientStyle = `${clientStyle}\n${elementName} { visibility: visible; }`
+  })
 
   if (!fs.existsSync('./src/dist')) {
     fs.mkdirSync('./src/dist')
