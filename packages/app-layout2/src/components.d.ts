@@ -9,53 +9,27 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
+  interface RsAppLayout {}
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLRsAppLayoutElement extends Components.RsAppLayout, HTMLStencilElement {}
+  var HTMLRsAppLayoutElement: {
+    prototype: HTMLRsAppLayoutElement;
+    new (): HTMLRsAppLayoutElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'rs-app-layout': HTMLRsAppLayoutElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
+  interface RsAppLayout extends JSXBase.HTMLAttributes<HTMLRsAppLayoutElement> {}
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'rs-app-layout': RsAppLayout;
   }
 }
 

@@ -10,6 +10,12 @@ rs-drawer {
   height: 100%;
 }
 
+:root {
+  --rs-app-layout--display: flex;
+  --rs-app-layout--height: 100%;
+  --rs-app-layout-content--margin-left: #{$rs-drawer-width};
+}
+
 .rs-drawer {
   height: 100%;
 
