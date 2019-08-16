@@ -1,0 +1,71 @@
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/theme/mixins";
+@import "./variables";
+
+
+.rs-snackbar {
+  @mixin rs-snackbar-fill-color($color) {
+    > .surface {
+      @include rs-theme-prop(background-color, $color);
+    }
+  }
+
+  @mixin rs-snackbar-label-ink-color($color) {
+    > .surface > .label {
+      @include rs-theme-prop(color, $color);
+    }
+  }
+
+  // @mixin rs-snackbar-shape-radius($radius, $rtl-reflexive: false) {
+  //   > .surface {
+  //     @include rs-shape-radius($radius, $rtl-reflexive);
+  //   }
+  // }
+
+  @mixin rs-snackbar-min-width($min-width, $mobile-breakpoint: $rs-snackbar-mobile-breakpoint) {
+    > .surface {
+      min-width: $min-width;
+
+      @media (max-width: $mobile-breakpoint), (max-width: $min-width) {
+        min-width: 100%;
+      }
+    }
+  }
+
+  @mixin rs-snackbar-max-width($max-width) {
+    > .surface {
+      max-width: $max-width;
+    }
+  }
+
+  @mixin rs-snackbar-elevation($z-index) {
+    > .surface {
+      @include rs-elevation($z-index);
+    }
+  }
+
+  @mixin rs-snackbar-viewport-margin($margin) {
+    margin: $margin;
+  }
+
+  @mixin rs-snackbar-z-index($z-index) {
+    z-index: $z-index;
+  }
+
+  @mixin rs-snackbar-position-leading {
+    justify-content: flex-start;
+  }
+
+  @mixin rs-snackbar-layout-stacked {
+    > .surface {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    > .surface > .actions {
+      align-self: flex-end;
+      margin-bottom: $rs-snackbar-padding;
+    }
+  }
+}

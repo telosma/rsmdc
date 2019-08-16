@@ -1,0 +1,46 @@
+//
+// Copyright 2018 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/theme/variables"; // for mdc-theme-prop-value() function
+
+$rs-snackbar-fill-color: mix(rs-theme-prop-value(on-surface), rs-theme-prop-value(surface), 80%) !default;
+$rs-snackbar-label-ink-color: rgba(rs-theme-prop-value(surface), rs-theme-text-emphasis(high)) !default;
+$rs-snackbar-action-ink-color: #bb86fc !default;
+$rs-snackbar-dismiss-ink-color: rgba(rs-theme-prop-value(surface), rs-theme-text-emphasis(high)) !default;
+
+$rs-snackbar-label-type-scale: body2 !default;
+$rs-snackbar-dismiss-icon-size: 18px !default;
+$rs-snackbar-min-width: 344px !default;
+$rs-snackbar-max-width: 672px !default;
+$rs-snackbar-mobile-breakpoint: 480px !default;
+$rs-snackbar-viewport-margin-narrow: 8px !default;
+$rs-snackbar-viewport-margin-wide: 24px !default;
+$rs-snackbar-padding: 8px !default;
+
+$rs-snackbar-elevation: 6 !default;
+$rs-snackbar-shape-radius: small !default; // Key from $rs-shape-category-values or CSS length value (e.g., 4px)
+$rs-snackbar-z-index: 8 !default; // One above rs-dialog
+
+// These variables need to be kept in sync with the values in constants.js.
+$rs-snackbar-enter-duration: 150ms !default;
+$rs-snackbar-exit-duration: 75ms !default;
