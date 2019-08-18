@@ -220,12 +220,15 @@
 }
 
 @mixin rs-states-hover-opacity($opacity) {
-  --rs-ripple_hover_before--opacity: #{$opacity};
+  &::before:hover {
+    opacity: $opacity;
+  }
 }
 
 @mixin rs-states-focus-opacity($opacity) {
-  --rs-ripple_not-upgraded_focus_before--transition-duration: 75ms;
-  --rs-upgraded_-background-focused_before--transition-duration: 75ms;
-  --rs-ripple_not-upgraded_focus_before--opacity: #{$opacity};
-  --rs-upgraded_-background-focused_before--opacity: #{$opacity};
+  &:not(.rs-ripple-upgraded):focus::before,
+  &.rs-ripple-upgraded--background-focused::before {
+    transition-duration: 75ms;
+    opacity: $opacity;
+  }
 }
