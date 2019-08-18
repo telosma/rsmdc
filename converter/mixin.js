@@ -67,10 +67,9 @@ const replaceVariablesToString = (text, targets) => {
 
 const insertImportFilesInScss = (text, files) => {
   const file = files.reduce((res, file) => {
-    const value = file.replace('./', '../styles/')
-    return res = `${res}${value}\n`
+    // const value = file.replace('./', '../styles/')
+    return res = `${res}${file}\n`
   },'')
-
   return file + text
 }
 
