@@ -62,10 +62,10 @@ $rs-select-outlined-with-leading-icon-label-position-x: 32px !default;
 $rs-select-dropdown-transition-duration: 150ms !default;
 
 // Error colors
-$rs-select-error-color: error !default;
+$rs-select-error-color: rs-theme-prop-value(error) !default;
 
 // icon
 $rs-select-icon-size: 24px !default;
 $rs-select-icon-opacity: .54 !default;
-$rs-select-icon-color: on-surface !default;
+$rs-select-icon-color: rs-theme-prop-value(on-surface) !default;
 $rs-select-icon-right-padding: 32px !default;
