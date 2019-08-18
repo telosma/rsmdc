@@ -57,9 +57,14 @@ const fixCorrectFormat = (text) => {
   }
 }
 
+const escapeRegExpWord = (text) => {
+  return text.replace(/\$/g, '\\$').replace(/\(/g, '\\(').replace(/\)/g, '\\)')
+}
+
 const replaceVariablesToString = (text, targets) => {
   targets.forEach(target => {
-    const regExp = new RegExp(`\\${target}`, 'g')
+    const replaceText = escapeRegExpWord(target)
+    const regExp = new RegExp(`${replaceText}`, 'g')
     text = text.replace(regExp, `'${target}'`)
   })
   return text
@@ -122,27 +127,11 @@ module.exports.generateClientMixin = (selectorsStyles) => {
   mixinSelectors.forEach((selector, i) => {
 
     let styleText = ''
-    for (let n = 0; n < selectorsStyles[i].length; n++) {
-      const className = Object.values(selectorsStyles[i][n])[0]
-        .replace('--', '')
-        .replace(/--.*/, '')
-      
-      if (className.match(/^host-rs-/)) {
-        const text = Object.values(selectorsStyles[i][n])
-          .reduce((res, val) => {
-            const style = val.replace(/.*---/, '')
-            return res = `${res}${style} `
-          }, '')
-
-        styleText = `.${className} { ${text} }\n`
-
-      } else {
-        styleText = Object.values(selectorsStyles[i][n])
+    for (let n = 0; n < selectorsStyles[i].length; n++) {  
+      styleText = Object.values(selectorsStyles[i][n])
         .reduce((res, val) => {
           return res = `${res}${val}\n`
         }, styleText)
-
-      }
     }
     if (selector.match(/media/)) {
       styleText = selector.replace(/{(.*)}$/, `{${styleText}}`)
