@@ -100,7 +100,7 @@
       }
     }
 
-    .host-rs-app-bar-title {
+    rs-app-bar-title {
       padding-bottom: $rs-top-app-bar-prominent-dense-title-bottom-padding;
       padding-left: $rs-top-app-bar-prominent-dense-title-left-padding;
     }
@@ -141,7 +141,7 @@
 
   @if $value == path {
     .rs-app-bar-nav > .label {
-      background-image: #{$icon};
+      background-image: $icon;
       height: 24px;
     }
   }@else {
