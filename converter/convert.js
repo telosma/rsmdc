@@ -11,15 +11,21 @@ const { mixinSelectorsScss, generateClientMixin } = require('./mixin')
 const getCompileCss = (nodeModulesPath, targetScss) => {
   const copyFilePath = `${dirPath}/copy.scss`
   fs.writeFileSync(copyFilePath, targetScss)
-  const res = sass.renderSync({
-    file: copyFilePath,
-    sourceMap: true,
-    outFile: './nested.css',
-    outputStyle: 'nested',
-    includePaths: [nodeModulesPath]
-  })
-  fs.unlinkSync(copyFilePath)
-  return res.css.toString()
+
+  try {
+    const res = sass.renderSync({
+      file: copyFilePath,
+      sourceMap: true,
+      outFile: './nested.css',
+      outputStyle: 'nested',
+      includePaths: [nodeModulesPath]
+    })
+    fs.unlinkSync(copyFilePath)
+    return res.css.toString()
+  } catch(e) {
+    console.error(e)
+    fs.unlinkSync(copyFilePath)
+  }
 }
 
 const getCssRule = (cssToJson) => {
