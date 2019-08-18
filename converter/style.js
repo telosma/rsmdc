@@ -67,6 +67,16 @@ const replaceCssInnerRippleValue = (css, target, value) => {
   return css.replace(regExp, value)
 }
 
+const escapeVariableValue = (value) => {
+  if (value.match(/'\*'|"\*"/)) {
+    return value
+  }
+  
+  if (value.match(/'\$/) || value.match(/"/)) {
+    return value.replace(/'|"/, '#{').replace(/'|"/, '}').replace('#{}', '""')
+  }
+  return value
+}
 
 module.exports.styleScss = (nodeModulesPath) => {
   const sourceScss = getComponentStyleFile()
@@ -89,16 +99,16 @@ module.exports.generateStyle = (sourceCss, styles, hostStyles) => {
     }
 
     prop = prop.match(/\$rs-theme/) ? prop.replace(/(.*?)(?=\$)/g, '') : prop
-    value = value.match(/'\$/) || value.match(/"/) ? value.replace(/'|"/, '#{').replace(/'|"/, '}').replace('#{}', '""') : value
+    value = escapeVariableValue(value)
     if (value.match(/calc\(/) && files.length > 0) {
       const componentVariables = files.map(file => readFile(`${dirPath}/${file}`))[0].match(/\$.*(?=:)/g)
 
       componentVariables.forEach(variable => {
         let regExp = new RegExp(`\\${variable}`, 'g')
-        value = value.replace(regExp, `#{${variable}}`).replace()
+        value = value.replace(regExp, `#{${variable}}`)
 
         regExp = new RegExp(`#{#{\\${variable}}}`, 'g')
-        value = value.replace(regExp, `#{${variable}}`).replace()
+        value = value.replace(regExp, `#{${variable}}`)
       })
     }
     result = `${result}\n ${prop}: ${value};`
