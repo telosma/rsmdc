@@ -44,7 +44,7 @@
 
   &:not(.-disabled) {
     > .label,
-    > .outline > .notch > .label.-outlined {
+    > .outline > .notch > .label {
       color: $rs-select-ink-color;
     }
   }
@@ -62,7 +62,7 @@
 
   &:not(.-disabled).-focused {
     > .label,
-    > .outline > .notch > .label.-outlined {
+    > .outline > .notch > .label {
       opacity: .6;
       color: $rs-select-focused-label-color;
     }
@@ -85,17 +85,17 @@
   }
 
   &.-required {
-    > .label::after,
-    > .outline > .notch > .label.-outlined::after {
-      content: "*";
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-required_;
     }
   }
 
   &.-invalid:not(.-disabled) {
 
     > .label,
-    > .outline > .notch > .label.-outlined {
-      color: $rs-select-error-color;
+    > .outline > .notch > .label {
+      @include rs-floating-label-invalid_;
     }
 
     > .nativecontrol,
@@ -109,7 +109,7 @@
 
     &.-focused {
       > .label,
-      > .outline > .notch > .label.-outlined {
+      > .outline > .notch > .label {
         color: $rs-select-error-color;
       }
     }
@@ -130,9 +130,8 @@
     pointer-events: none;
 
     > .label,
-    > .outline > .notch > .label.-outlined {
-      opacity: .6;
-      color: $rs-select-disabled-label-color;
+    > .outline > .notch > .label {
+      @include rs-floating-label-disabled_;
     }
   
     > .dropdownicon {
@@ -189,12 +188,26 @@
     // }
   }
 
+  &.-focus {
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-focused_;
+    }
+  }
+
+  &.-floatabove {
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-floatabove_;
+    }
+  }
+
   &.-icon:not(.-disabled) > .icon {
     color: $rs-theme-on-surface;
   }
 
   > .label,
-  > .outline > .notch > .label.-outlined {
+  > .outline > .notch > .label {
     @include rs-floating-label_;
   }
 
