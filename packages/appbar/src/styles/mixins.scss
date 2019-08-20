@@ -122,13 +122,14 @@
     }
 
   }@else {
-    $name: '\\' + $codepoint;
+    $font-family: '"' + $icon + '"';
+    $name: '"' + '\\' + $codepoint + '"';
 
     .rs-app-bar-item {
-      font-family: '#{$icon}';
+      font-family: $font-family;
 
       > .label::before {
-        content: '#{$name}';
+        content: $name;
       }
 
     }
@@ -145,13 +146,14 @@
       height: 24px;
     }
   }@else {
-    $name: '\\' + $codepoint;
+    $font-family: '"' + $icon + '"';
+    $name: '"' + '\\' + $codepoint + '"';
 
     .rs-app-bar-nav {
-      font-family: '#{$icon}';
+      font-family: $font-family;
 
       > .label::before {
-        content: '#{$name}';
+        content: $name;
       }
     }
   }
