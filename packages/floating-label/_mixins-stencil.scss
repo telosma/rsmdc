@@ -60,86 +60,93 @@
     text-align: right;
   }
 
-  .-focus & {
-    color: $rs-floating-label-focused-label-color;
-  }
-
-  .-invalid & {
-    color: $rs-floating-label-error;
-  }
-
-  .-invalid.-required &:after {
-    color: $rs-floating-label-error;
-  }
-
-  .-disabled & {
-    color: $rs-floating-label-disabled-label-color;
-  }
-
-  .-required &::after {
-    margin-left: 1px;
-    content: "*";
-  }
-
-  .-floatabove & {
-    cursor: auto;
-    transform: rs-floating-label-position($rs-floating-label-position-y);
-  }
-
   &.-shake {
     animation: rs-floating-label-shake-animation(standard);
-  }
-
-  .-floatabove &.-right {
-    transform: rs-floating-label-rtl-position($rs-floating-label-position-y);
-  }
-
-  .-floatabove &.-textarea {
-    top: 3px;
-    bottom: auto;
-  }
-
-  .-dense & {
-    font-size: .813rem;
-  }
-
-  .-dense &.-outlined {
-    top: 16px;
-  }
-
-  .-dense.-floatabove & {
-    transform: rs-floating-label-position($rs-floating-label-dense-label-position-y, 0%, $rs-floating-label-dense-label-scale);
-  }
-
-  .-dense.-floatabove &.-outlined {
-    top: 5px;
   }
 
   &.-outlined {
     left: 16px;
   }
+}
 
-  .-floatabove &.-outlined {
+@mixin rs-floating-label-icon_ {
+  left: 48px;
+  top: 18px;
+}
+
+@mixin rs-floating-label-icon-dense_ {
+  left: 44px;
+}
+
+
+@mixin rs-floating-label-dense_ {
+  font-size: .813rem;
+
+  &.-outlined {
+    top: 16px;
+  }
+}
+
+@mixin rs-floating-label-icon-floatabove_ {
+  &.-outlined {
+    left: 16px;
+  }
+}
+
+@mixin rs-floating-label-icon-dense-floatabove_ {
+  &.-outlined {
+    left: 16px;
+    top: 4px;
+  }
+}
+
+@mixin rs-floating-label-dense-floatabove_ {
+  transform: rs-floating-label-position($rs-floating-label-dense-label-position-y, 0%, $rs-floating-label-dense-label-scale);
+
+  &.-outlined {
+    top: 5px;
+  }
+}
+
+@mixin rs-floating-label-focused_ {
+  color: $rs-floating-label-focused-label-color;
+}
+
+@mixin rs-floating-label-floatabove_ {
+  cursor: auto;
+  transform: rs-floating-label-position($rs-floating-label-position-y);
+
+  &.-outlined {
     display: inline-block;
     max-width: 130%;
     top: 2px;
   }
 
-  .-icon & {
-    left: 48px;
-    top: 18px;
+  &.-right {
+    transform: rs-floating-label-rtl-position($rs-floating-label-position-y);
   }
 
-  .-icon.-dense & {
-    left: 44px;
+  &.-textarea {
+    top: 3px;
+    bottom: auto;
   }
+}
 
-  .-floatabove.-icon &.-outlined {
-    left: 16px;
+@mixin rs-floating-label-disabled_ {
+  color: $rs-floating-label-disabled-label-color;
+}
+
+@mixin rs-floating-label-invalid_ {
+  color: $rs-floating-label-error;
+
+  &::after {
+    color: $rs-floating-label-error;
   }
+}
 
-  .-floatabove.-icon.-dense &.-outlined {
-    left: 16px;
-    top: 4px;
+@mixin rs-floating-label-required_ {
+  &::after {
+    margin-left: 1px;
+    content: "*";
   }
 }
