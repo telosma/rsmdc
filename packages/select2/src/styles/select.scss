@@ -191,7 +191,7 @@
   &.-focus {
     > .label,
     > .outline > .notch > .label {
-      @include rs-floating-label-focused_;
+      @include rs-floating-label-focused_($rs-select-focused-label-color);
     }
   }
 

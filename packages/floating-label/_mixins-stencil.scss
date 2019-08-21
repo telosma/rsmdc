@@ -27,7 +27,7 @@
   @include rs-floating-label-shake-keyframes(standard, $rs-floating-label-position-y);
 }
 
-@mixin rs-floating-label_ {
+@mixin rs-floating-label_($color: $rs-floating-label-color) {
   @include rs-typography(subtitle1);
   margin: 0;
   padding: 0;
@@ -45,7 +45,7 @@
   overflow: hidden;
   will-change: transform;
 
-  color: $rs-floating-label-color;
+  color: $color;
   top: 18px;
 
   &:-webkit-autofill {
@@ -108,8 +108,8 @@
   }
 }
 
-@mixin rs-floating-label-focused_ {
-  color: $rs-floating-label-focused-label-color;
+@mixin rs-floating-label-focused_($color: $rs-floating-label-focused-label-color) {
+  color: $color;
 }
 
 @mixin rs-floating-label-floatabove_ {
@@ -132,15 +132,15 @@
   }
 }
 
-@mixin rs-floating-label-disabled_ {
-  color: $rs-floating-label-disabled-label-color;
+@mixin rs-floating-label-disabled_($color: $rs-floating-label-disabled-label-color) {
+  color: $color;
 }
 
-@mixin rs-floating-label-invalid_ {
-  color: $rs-floating-label-error;
+@mixin rs-floating-label-invalid_($color: $rs-floating-label-error) {
+  color: $color;
 
   &::after {
-    color: $rs-floating-label-error;
+    color: $color;
   }
 }
 
