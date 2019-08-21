@@ -76,7 +76,8 @@
     $opacity: 1;
     transform: rotate(180deg) translateY(-5px);
     transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
-    background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23#{$rs-theme-primary}%22%20fill-rule%3D%22evenodd%22%20opacity%3D%22#{$opacity}%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+    opacity: 1;
+    color: $rs-theme-primary;
   }
 
   &.-focused > .rs-line-ripple::after {
@@ -120,8 +121,8 @@
   }
 
   &.-invalid > .dropdownicon {
-    $opacity: 1;
-    background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23#{$rs-select-error-color}%22%20fill-rule%3D%22evenodd%22%20opacity%3D%22#{$opacity}%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+    opacity: 1;
+    color: $rs-select-error-color;
   }
 
   &.-disabled {
@@ -135,7 +136,8 @@
     }
   
     > .dropdownicon {
-      background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23#{$rs-select-dropdown-color}%22%20fill-rule%3D%22evenodd%22%20opacity%3D%22#{$rs-select-disabled-dropdown-opacity}%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+      color: $rs-select-dropdown-color;
+      opacity: $rs-select-disabled-dropdown-opacity;
     }
   
     > .rs-line-ripple {
@@ -220,7 +222,8 @@
     height: 24px;
     transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
     pointer-events: none;
-    background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23#{$rs-select-dropdown-color}%22%20fill-rule%3D%22evenodd%22%20opacity%3D%22#{$rs-select-dropdown-opacity}%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+    color: $rs-select-dropdown-color;
+    opacity: $rs-select-dropdown-opacity;
   }
 
   > .nativecontrol {

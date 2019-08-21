@@ -2,7 +2,10 @@ import { Component, Element, Prop, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'rs-select',
-  styleUrl: '../../dist/result.css',
+  styleUrls: [
+    '../../dist/result.css',
+    '../../styles/_material-icons.scss'
+  ],
   shadow: true
 })
 export class Select {
@@ -14,7 +17,7 @@ export class Select {
   render() {
     return <Host>
               <div class="rs-select">
-                <i class="dropdownicon"></i>
+                <i class="dropdownicon material-icons">arrow_drop_down</i>
                 <select class="nativecontrol">
                   <slot></slot>
                 </select>
