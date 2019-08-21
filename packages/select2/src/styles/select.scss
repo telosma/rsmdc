@@ -95,7 +95,7 @@
 
     > .label,
     > .outline > .notch > .label {
-      @include rs-floating-label-invalid_;
+      @include rs-floating-label-invalid_($rs-select-error-color);
     }
 
     > .nativecontrol,
@@ -131,7 +131,7 @@
 
     > .label,
     > .outline > .notch > .label {
-      @include rs-floating-label-disabled_;
+      @include rs-floating-label-disabled_($rs-select-disabled-ink-color);
     }
   
     > .dropdownicon {
@@ -208,7 +208,7 @@
 
   > .label,
   > .outline > .notch > .label {
-    @include rs-floating-label_;
+    @include rs-floating-label_($rs-select-label-color);
   }
 
   > .dropdownicon {
