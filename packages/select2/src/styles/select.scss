@@ -8,6 +8,7 @@
 @import "../../../line-ripple/rs-line-ripple";
 @import "./mixins";
 
+@include rs-floating-label-animation;
 @include rs-floating-label-shake-keyframes(select-outlined-leading-icon, $rs-select-outlined-label-position-y, $rs-select-outlined-with-leading-icon-label-position-x);
 @include rs-select-shape-radius(rs-shape-prop-value(medium));
 
@@ -45,7 +46,7 @@
   &:not(.-disabled) {
     > .label,
     > .outline > .notch > .label {
-      color: $rs-select-ink-color;
+      color: $rs-select-label-color;
     }
   }
 
@@ -63,7 +64,6 @@
   &:not(.-disabled).-focused {
     > .label,
     > .outline > .notch > .label {
-      opacity: .6;
       color: $rs-select-focused-label-color;
     }
   }
@@ -73,16 +73,19 @@
   }
 
   &.-focused > .dropdownicon {
-    $opacity: 1;
     transform: rotate(180deg) translateY(-5px);
     transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
     opacity: 1;
     color: $rs-theme-primary;
   }
 
-  &.-focused > .rs-line-ripple::after {
-    transform: scale(1, 2);
-    opacity: 1;
+  &.-focused > .rs-line-ripple {
+    background-color: $rs-select-focused-label-color;
+
+    &::after  {
+      transform: scale(1, 2);
+      opacity: 1;
+    }
   }
 
   &.-required {
@@ -190,17 +193,10 @@
     // }
   }
 
-  &.-focus {
+  &.-focused {
     > .label,
     > .outline > .notch > .label {
       @include rs-floating-label-focused_($rs-select-focused-label-color);
-    }
-  }
-
-  &.-floatabove {
-    > .label,
-    > .outline > .notch > .label {
-      @include rs-floating-label-floatabove_;
     }
   }
 
@@ -271,6 +267,10 @@
 
   > .rs-line-ripple {
     @include rs-line-ripple;
+  }
+
+  > .outline {
+    display: none;
   }
 }
 

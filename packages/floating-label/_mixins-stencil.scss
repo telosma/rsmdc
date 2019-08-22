@@ -67,6 +67,26 @@
   &.-outlined {
     left: 16px;
   }
+
+  &.-floatabove {
+    cursor: auto;
+    transform: rs-floating-label-position($rs-floating-label-position-y);
+  
+    &.-outlined {
+      display: inline-block;
+      max-width: 130%;
+      top: 2px;
+    }
+  
+    &.-right {
+      transform: rs-floating-label-rtl-position($rs-floating-label-position-y);
+    }
+  
+    &.-textarea {
+      top: 3px;
+      bottom: auto;
+    }  
+  }
 }
 
 @mixin rs-floating-label-icon_ {
@@ -110,26 +130,6 @@
 
 @mixin rs-floating-label-focused_($color: $rs-floating-label-focused-label-color) {
   color: $color;
-}
-
-@mixin rs-floating-label-floatabove_ {
-  cursor: auto;
-  transform: rs-floating-label-position($rs-floating-label-position-y);
-
-  &.-outlined {
-    display: inline-block;
-    max-width: 130%;
-    top: 2px;
-  }
-
-  &.-right {
-    transform: rs-floating-label-rtl-position($rs-floating-label-position-y);
-  }
-
-  &.-textarea {
-    top: 3px;
-    bottom: auto;
-  }
 }
 
 @mixin rs-floating-label-disabled_($color: $rs-floating-label-disabled-label-color) {
