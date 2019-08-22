@@ -102,6 +102,7 @@ export class Select {
 
     nativeControl.addEventListener('focus', () => {
       this.select.classList.add('-focused')
+      this.select.classList.add('rs-ripple-upgraded--background-focused')
       this.rsLineRipple.activate()
       this.labels.forEach(l => { 
         l.classList.add('-floatabove')
@@ -112,6 +113,7 @@ export class Select {
 
     nativeControl.addEventListener('blur', () => {
       this.select.classList.remove('-focused')
+      this.select.classList.remove('rs-ripple-upgraded--background-focused')
       this.rsLineRipple.deactivate()
 
       this.labels.forEach(l => { 
