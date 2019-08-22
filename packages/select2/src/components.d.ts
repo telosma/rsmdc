@@ -10,7 +10,14 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsSelect {
+    'disabled': boolean;
+    'invalid': boolean;
+    'isDisabled': () => Promise<void>;
+    'isInvalid': () => Promise<void>;
+    'isRequired': () => Promise<void>;
     'label': string;
+    'name': string;
+    'required': boolean;
   }
 }
 
@@ -29,7 +36,11 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsSelect extends JSXBase.HTMLAttributes<HTMLRsSelectElement> {
+    'disabled'?: boolean;
+    'invalid'?: boolean;
     'label'?: string;
+    'name'?: string;
+    'required'?: boolean;
   }
 
   interface IntrinsicElements {
