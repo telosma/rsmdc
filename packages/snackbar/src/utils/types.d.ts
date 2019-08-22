@@ -20,9 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import * as util from './util';
-export { util };
-export * from './adapter';
-export * from './component';
-export * from './foundation';
-export * from './types';
+export declare type RSSnackbarAnnouncer = (ariaEl: Element, labelEl?: Element) => void;
+export declare type RSSnackbarAnnouncerFactory = () => RSSnackbarAnnouncer;
+export interface RSSnackbarCloseEventDetail {
+    reason?: string;
+}
+export interface RSSnackbarCloseEvent extends Event {
+    readonly detail: RSSnackbarCloseEventDetail;
+}

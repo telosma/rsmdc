@@ -10,10 +10,14 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsSnackbar {
-    'first': string;
-    'last': string;
-    'middle': string;
+    'isLeading': () => Promise<void>;
+    'isOpened': () => Promise<void>;
+    'isStacked': () => Promise<void>;
+    'leading': boolean;
+    'opened': boolean;
+    'stacked': boolean;
   }
+  interface RsSnackbarText {}
 }
 
 declare global {
@@ -24,20 +28,29 @@ declare global {
     prototype: HTMLRsSnackbarElement;
     new (): HTMLRsSnackbarElement;
   };
+
+  interface HTMLRsSnackbarTextElement extends Components.RsSnackbarText, HTMLStencilElement {}
+  var HTMLRsSnackbarTextElement: {
+    prototype: HTMLRsSnackbarTextElement;
+    new (): HTMLRsSnackbarTextElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-snackbar': HTMLRsSnackbarElement;
+    'rs-snackbar-text': HTMLRsSnackbarTextElement;
   }
 }
 
 declare namespace LocalJSX {
   interface RsSnackbar extends JSXBase.HTMLAttributes<HTMLRsSnackbarElement> {
-    'first'?: string;
-    'last'?: string;
-    'middle'?: string;
+    'leading'?: boolean;
+    'opened'?: boolean;
+    'stacked'?: boolean;
   }
+  interface RsSnackbarText extends JSXBase.HTMLAttributes<HTMLRsSnackbarTextElement> {}
 
   interface IntrinsicElements {
     'rs-snackbar': RsSnackbar;
+    'rs-snackbar-text': RsSnackbarText;
   }
 }
 
