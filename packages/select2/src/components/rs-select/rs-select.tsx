@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Watch, Method, Host, h } from '@stencil/core'
+import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
 import { RSLineRipple } from "@rsmdc/line-ripple"
 
@@ -24,13 +24,27 @@ export class Select {
 
   @Prop() required: boolean
 
+  @Prop() multiple: boolean = false
+
+  @Prop() value: string
+
+  @Prop() selectedIndex: number
+
   select: Element
 
   labels: Element[]
 
+  nativeControl: Element
+
   rsRipple: RSRipple
 
   rsLineRipple: RSLineRipple
+
+  @Event({
+    cancelable: false,
+    composed: false,
+  }) change: EventEmitter
+
 
   @Watch('disabled')
   disabledHandler() {
@@ -74,14 +88,39 @@ export class Select {
     }
   }
 
+  @Method()
+  async addFocusStyle() {
+    this.select.classList.add('-focused')
+    this.select.classList.add('rs-ripple-upgraded--background-focused')
+    this.rsLineRipple.activate()
+    this.labels.forEach(l => { 
+      l.classList.add('-floatabove')
+      if (!l.classList.contains('-shake')) { return }
+      l.classList.remove('-shake')
+    })
+  }
+
+  @Method()
+  async removeFocusStyle() {
+    this.select.classList.remove('-focused')
+    this.select.classList.remove('rs-ripple-upgraded--background-focused')
+    this.rsLineRipple.deactivate()
+
+    this.labels.forEach(l => { 
+      if (this.invalid) l.classList.add('-shake')
+      if ((this.nativeControl as HTMLSelectElement).selectedIndex > -1) { return }
+      l.classList.remove('-floatabove')
+    })
+  }
+
   componentDidLoad() {
     this.select = this.el.shadowRoot.querySelector('.rs-select')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
+    this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
     this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
     this.rsRipple = new RSRipple(this.select)
-    let options = []
+    const options = []
     const slot = this.el.shadowRoot.querySelector('slot')
-    const nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
 
     this.isDisabled()
     this.isInvalid()
@@ -93,34 +132,40 @@ export class Select {
       })
 
       if (options.length === 0) { return }
-      nativeControl.innerHTML = ''
+      this.nativeControl.innerHTML = ''
       options.forEach(op => {
-        nativeControl.append(op.cloneNode(true))
+        this.nativeControl.append(op.cloneNode(true))
       })
-      ;(nativeControl as HTMLSelectElement).selectedIndex = -1
+      if (options.find(op => op.getAttribute('selected'))) {
+        this.addFocusStyle()
+        return
+      }
+      (this.nativeControl as HTMLSelectElement).selectedIndex = -1
     })
 
-    nativeControl.addEventListener('focus', () => {
-      this.select.classList.add('-focused')
-      this.select.classList.add('rs-ripple-upgraded--background-focused')
-      this.rsLineRipple.activate()
-      this.labels.forEach(l => { 
-        l.classList.add('-floatabove')
-        if (!l.classList.contains('-shake')) { return }
-        l.classList.remove('-shake')
+    this.nativeControl.addEventListener('focus', () => {
+      this.addFocusStyle()
+    })
+
+    this.nativeControl.addEventListener('change', () => {
+      this.value = (this.nativeControl as HTMLSelectElement).value
+      this.selectedIndex = (this.nativeControl as HTMLSelectElement).selectedIndex
+      
+      this.change.emit({ value: this.value, index: this.selectedIndex})
+      
+      if (options.length === 0) { return }
+      options.forEach((option, i) => {
+        if (i === this.selectedIndex) {
+          option.setAttribute('data-selected', true)
+          option.value = this.value
+        } else {
+          option.removeAttribute('data-selected')
+        }
       })
     })
 
-    nativeControl.addEventListener('blur', () => {
-      this.select.classList.remove('-focused')
-      this.select.classList.remove('rs-ripple-upgraded--background-focused')
-      this.rsLineRipple.deactivate()
-
-      this.labels.forEach(l => { 
-        if (this.invalid) l.classList.add('-shake')
-        if ((nativeControl as HTMLSelectElement).selectedIndex > -1) { return }
-        l.classList.remove('-floatabove')
-      })
+    this.nativeControl.addEventListener('blur', () => {
+      this.removeFocusStyle()
     })
   }
 
@@ -128,7 +173,7 @@ export class Select {
     return <Host>
               <div class="rs-select">
                 <i class="dropdownicon material-icons">arrow_drop_down</i>
-                <select class="nativecontrol">
+                <select class="nativecontrol" multiple={this.multiple}>
                   <slot />
                 </select>
                 <label class="label">{this.label}</label>
