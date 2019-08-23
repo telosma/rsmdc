@@ -1,0 +1,38 @@
+//
+// Copyright 2018 Google Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+$rs-dialog-scrim-color: on-surface !default;
+$rs-dialog-title-ink-color: on-surface !default;
+$rs-dialog-content-ink-color: on-surface !default;
+$rs-dialog-scroll-divider-color: on-surface !default;
+
+$rs-dialog-scrim-opacity: .32 !default;
+$rs-dialog-title-ink-opacity: .87 !default;
+$rs-dialog-content-ink-opacity: .6 !default;
+$rs-dialog-scroll-divider-opacity: .12 !default;
+
+$rs-dialog-min-width: 280px !default;
+$rs-dialog-max-width: 560px !default;
+$rs-dialog-margin: 16px !default;
+$rs-dialog-title-bottom-padding: 9px !default;
+
+$rs-dialog-z-index: 7 !default;

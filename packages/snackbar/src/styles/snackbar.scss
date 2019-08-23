@@ -1,6 +1,5 @@
 @import "@rsmdc/animation/functions";
 @import "@rsmdc/button/rs-mixins";
-// @import "@rsmdc/icon-button/mixins";
 @import "@rsmdc/ripple/mixins";
 @import "@rsmdc/ripple/mixins-stencil";
 @import "@rsmdc/rtl/mixins";
@@ -9,8 +8,8 @@
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/theme/mixins";
 @import "./variables";
-@import './mixins';
-
+@import "./mixins";
+@import "./rs-mixins";
 
 .rs-snackbar {
   @include rs-snackbar-z-index($rs-snackbar-z-index);
@@ -24,7 +23,6 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  // pointer-events: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &.-opening,
@@ -33,88 +31,47 @@
     display: flex;
   }
 
-  &.-leading {
-    justify-content: flex-start;
-  }
-  
   &.-open > .surface {
     opacity: 1;
     transform: scale(1);
-    transition:
-      rs-animation-enter(opacity, $rs-snackbar-enter-duration),
+    transition: rs-animation-enter(opacity, $rs-snackbar-enter-duration),
       rs-animation-enter(transform, $rs-snackbar-enter-duration);
-  }
-
-
-
-  &.-stacked > .surface {
-    flex-direction: column;
-    align-items: flex-start;
-    
-    > .actions {
-      // align-self: flex-end;
-      // margin-bottom: $rs-snackbar-padding;
-    }
   }
 
   > .surface {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     box-sizing: border-box;
-    transform: scale(.8);
+    transform: scale(0.8);
     opacity: 0;
-    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
     border-radius: 4px;
-    transition: 180ms;
-  }
-
-  > .surface > .actions {
-    // @include rs-rtl-reflexive-property(margin, 0, $rs-snackbar-padding);
-    display: flex;
+    transition: 70ms;
+    flex-direction: row;
     flex-shrink: 0;
-    align-items: center;
-    box-sizing: border-box;
-    margin-right: 8px;
+    flex-wrap: nowrap;
   }
 
-  > .surface > .actions > .action {
-    color: $rs-snackbar-action-ink-color;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    // @include rs-button-ink-color($rs-snackbar-action-ink-color);
-  }
-
-  .dismiss {
+  > .dismiss {
     color: $rs-snackbar-dismiss-ink-color;
-    // @include rs-icon-button-ink-color($rs-snackbar-dismiss-ink-color);
-    // @include rs-icon-button-size($rs-snackbar-dismiss-icon-size);
   }
-
-  // > .surface > .actions .action + .dismiss {
-  //   @include rs-rtl-reflexive-property(margin, $rs-snackbar-padding, 0);
-  // }
 }
 
-rs-snackbar-text {
+.rs-snackbar-text {
   @include rs-typography($rs-snackbar-label-type-scale);
   flex-grow: 1;
   box-sizing: border-box;
   margin: 0;
   padding: 14px 16px;
-  color: hsla(0,0%,100%,.87);
+  color: hsla(0, 0%, 100%, 0.87);
+  word-break: break-word;
 }
 
-rs-button {
+rs-snackbar > rs-button {
   @include rs-states($rs-snackbar-action-ink-color);
   @include rs-button-ink-color($rs-snackbar-action-ink-color);
-}
-
-
-
-.rs-snackbar.-stacked > .surface > ::slotted(rs-button) {
-  align-self: flex-end;
-  // margin-bottom: $rs-snackbar-padding;
+  white-space: nowrap;
+  padding: 0 4px;
 }

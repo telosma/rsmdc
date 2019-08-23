@@ -1,0 +1,20 @@
+@mixin rs-snackbar-type($types...) {
+  @each $type in $types {
+    @if $type == stacked {
+      .rs-snackbar {
+        > .surface {
+          padding-bottom: 8px;
+          flex-wrap: wrap;
+        }
+      }
+      rs-snackbar-text {
+        width: 100%;
+        display: block;
+      }
+    } @else if $type == leading {
+      .rs-snackbar {
+        justify-content: flex-start;
+      }
+    }
+  }
+}

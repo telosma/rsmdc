@@ -1,0 +1,96 @@
+@mixin rs-dialog-container-fill-color($color) {
+  .rs-dialog > .container > .surface {
+    // @include rs-theme-prop(background-color, $color);
+    background-color: $color;
+  }
+}
+
+@mixin rs-dialog-scrim-color($color, $opacity: $rs-dialog-scrim-opacity) {
+  .rs-dialog > .scrim {
+    background-color: rgba(rs-theme-prop-value($color), $opacity);
+  }
+}
+
+@mixin rs-dialog-title-ink-color($color, $opacity: $rs-dialog-title-ink-opacity) {
+  .rs-dialog > .container > .surface > .title {
+    color: rgba(rs-theme-prop-value($color), $opacity);
+  }
+}
+
+@mixin rs-dialog-content-ink-color($color, $opacity: $rs-dialog-content-ink-opacity) {
+  .rs-dialog > .container > .surface > .content {
+    color: rgba(rs-theme-prop-value($color), $opacity);
+  }
+}
+
+@mixin rs-dialog-scroll-divider-color($color, $opacity: $rs-dialog-scroll-divider-opacity) {
+  &.rs-dialog--scrollable > .container > .surface > .title,
+  &.rs-dialog--scrollable > .container > .surface > .actions {
+    border-color: rgba(rs-theme-prop-value($color), $opacity);
+  }
+}
+
+@mixin rs-dialog-shape-radius($radius) {
+  .rs-dialog > .container > .surface {
+    @include rs-shape-radius($radius);
+  }
+}
+
+@mixin rs-dialog-min-width($min-width) {
+  .rs-dialog > .container > .surface {
+    min-width: $min-width;
+  }
+}
+
+@mixin rs-dialog-max-width($max-width, $margin) {
+  $max-size-calc-expr: calc(100vw - #{$margin * 2});
+
+  .rs-dialog > .container > .surface {
+    @if $max-width {
+      $max-width-breakpoint: $max-width + ($margin * 2);
+
+      @media (max-width: $max-width-breakpoint) {
+        max-width: $max-size-calc-expr;
+      }
+
+      @media (min-width: $max-width-breakpoint) {
+        max-width: $max-width;
+      }
+    } @else {
+      max-width: $max-size-calc-expr;
+    }
+  }
+}
+
+@mixin rs-dialog-max-height($max-height, $margin) {
+  $max-size-calc-expr: calc(100vh - #{$margin * 2});
+
+  .rs-dialog > .container > .surface {
+    @if $max-height {
+      $max-height-breakpoint: $max-height + ($margin * 2);
+
+      @media (max-height: $max-height-breakpoint) {
+        max-height: $max-size-calc-expr;
+      }
+
+      @media (min-height: $max-height-breakpoint) {
+        max-height: $max-height;
+      }
+    } @else {
+      max-height: $max-size-calc-expr;
+    }
+  }
+}
+
+
+.rs-dialog {
+  @include rs-dialog-container-fill-color(surface);
+  @include rs-dialog-scrim-color($rs-dialog-scrim-color);
+  @include rs-dialog-title-ink-color($rs-dialog-title-ink-color);
+  @include rs-dialog-content-ink-color($rs-dialog-content-ink-color);
+  @include rs-dialog-scroll-divider-color($rs-dialog-scroll-divider-color);
+  @include rs-dialog-shape-radius(medium);
+  @include rs-dialog-min-width($rs-dialog-min-width);
+  @include rs-dialog-max-width($rs-dialog-max-width, $rs-dialog-margin);
+  @include rs-dialog-max-height(null, $rs-dialog-margin);
+}
