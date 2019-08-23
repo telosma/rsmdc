@@ -220,7 +220,7 @@
 }
 
 @mixin rs-states-hover-opacity($opacity) {
-  &::before:hover {
+  &:hover::before {
     opacity: $opacity;
   }
 }
