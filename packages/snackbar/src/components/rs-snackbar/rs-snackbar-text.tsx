@@ -5,22 +5,22 @@ import { Component, Element, h, Host } from '@stencil/core';
   styleUrl: "../../dist/result.css",
   shadow: true
 })
-export class SnackbarText {
+export class snackbarTitle {
 
   @Element() el: HTMLElement
   
-  snackbarText: HTMLElement
+  snackbarTitle: HTMLElement
   
   componentDidLoad() {
-    this.snackbarText = this.el.shadowRoot.querySelector('.rs-snackbar-text')
+    this.snackbarTitle = this.el.shadowRoot.querySelector('.rs-snackbar-title')
     
-    const text = document.getElementsByTagName('rs-snackbar-text')
-    this.snackbarText.innerHTML = text[0].innerHTML
+    const title = document.getElementsByTagName('rs-snackbar-title')
+    this.snackbarTitle.innerHTML = title[0].innerHTML
   }
 
   render() {
     return  <Host>
-              <div class="rs-snackbar-text"
+              <div class="rs-snackbar-title"
                 role="status"
                 aria-live="polite">
               </div>

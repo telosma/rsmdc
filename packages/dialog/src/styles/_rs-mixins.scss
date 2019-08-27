@@ -7,18 +7,19 @@
 
 @mixin rs-dialog-scrim-color($color, $opacity: $rs-dialog-scrim-opacity) {
   .rs-dialog > .scrim {
-    background-color: rgba(rs-theme-prop-value($color), $opacity);
+    // background-color: rgba(rs-theme-prop-value($color), $opacity);
+    background-color: rgba(0,0,0,.32);
   }
 }
 
 @mixin rs-dialog-title-ink-color($color, $opacity: $rs-dialog-title-ink-opacity) {
-  .rs-dialog > .container > .surface > .title {
+  rs-dialog-title {
     color: rgba(rs-theme-prop-value($color), $opacity);
   }
 }
 
 @mixin rs-dialog-content-ink-color($color, $opacity: $rs-dialog-content-ink-opacity) {
-  .rs-dialog > .container > .surface > .content {
+  rs-dialog-content {
     color: rgba(rs-theme-prop-value($color), $opacity);
   }
 }

@@ -9,7 +9,14 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsDialog {}
+  interface RsDialog {
+    'isOpened': () => Promise<void>;
+    'isScrolling': () => Promise<void>;
+    'opened': boolean;
+    'scrolling': string;
+  }
+  interface RsDialogContent {}
+  interface RsDialogTitle {}
 }
 
 declare global {
@@ -20,16 +27,37 @@ declare global {
     prototype: HTMLRsDialogElement;
     new (): HTMLRsDialogElement;
   };
+
+  interface HTMLRsDialogContentElement extends Components.RsDialogContent, HTMLStencilElement {}
+  var HTMLRsDialogContentElement: {
+    prototype: HTMLRsDialogContentElement;
+    new (): HTMLRsDialogContentElement;
+  };
+
+  interface HTMLRsDialogTitleElement extends Components.RsDialogTitle, HTMLStencilElement {}
+  var HTMLRsDialogTitleElement: {
+    prototype: HTMLRsDialogTitleElement;
+    new (): HTMLRsDialogTitleElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-dialog': HTMLRsDialogElement;
+    'rs-dialog-content': HTMLRsDialogContentElement;
+    'rs-dialog-title': HTMLRsDialogTitleElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface RsDialog extends JSXBase.HTMLAttributes<HTMLRsDialogElement> {}
+  interface RsDialog extends JSXBase.HTMLAttributes<HTMLRsDialogElement> {
+    'opened'?: boolean;
+    'scrolling'?: string;
+  }
+  interface RsDialogContent extends JSXBase.HTMLAttributes<HTMLRsDialogContentElement> {}
+  interface RsDialogTitle extends JSXBase.HTMLAttributes<HTMLRsDialogTitleElement> {}
 
   interface IntrinsicElements {
     'rs-dialog': RsDialog;
+    'rs-dialog-content': RsDialogContent;
+    'rs-dialog-title': RsDialogTitle;
   }
 }
 

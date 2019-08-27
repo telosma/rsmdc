@@ -14,5 +14,15 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null // disable service workers
     }
+  ],
+  bundles: [
+    {
+      components: [
+        'rs-dialog',
+        'rs-dialog-title',
+        'rs-dialog-content'
+      ]
+    }
   ]
+  
 };
