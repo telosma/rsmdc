@@ -24,8 +24,6 @@ export class Slider {
 
   @Prop() marked: boolean
 
-  @Prop() value: string | number
-
   rsSlider: RSSlider;
 
   slider: Element;

@@ -19,7 +19,6 @@ export namespace Components {
     'max': number;
     'min': number;
     'now': number;
-    'value': string | number;
   }
 }
 
@@ -45,7 +44,6 @@ declare namespace LocalJSX {
     'min'?: number;
     'now'?: number;
     'onChange'?: (event: CustomEvent<any>) => void;
-    'value'?: string | number;
   }
 
   interface IntrinsicElements {
