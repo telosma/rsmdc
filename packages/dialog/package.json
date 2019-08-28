@@ -1,6 +1,6 @@
 {
-  "name": "dialog",
-  "version": "0.0.1",
+  "name": "@rsmdc/dialog",
+  "version": "1.1.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,7 +12,10 @@
   "unpkg": "dist/dialog/dialog.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/",
+    "rs-dialog.scss"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",

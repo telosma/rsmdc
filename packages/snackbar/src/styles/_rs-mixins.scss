@@ -5,8 +5,8 @@
 }
 
 @mixin rs-snackbar-label-ink-color($color) {
-  .rs-snackbar > .surface > .text {
-    color: $color;
+  rs-snackbar-text {
+    color: $color
   }
 }
 
@@ -42,7 +42,6 @@
 
 @at-root {
   @include rs-snackbar-fill-color($rs-snackbar-fill-color);
-  @include rs-snackbar-label-ink-color($rs-snackbar-label-ink-color);
-  @include rs-snackbar-min-width($rs-snackbar-min-width);
-  @include rs-snackbar-max-width($rs-snackbar-max-width);
+  @include rs-snackbar-min-width($rs-snackbar-min-width)
+  @include rs-snackbar-max-width($rs-snackbar-max-width)
 }

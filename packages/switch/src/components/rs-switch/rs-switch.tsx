@@ -22,7 +22,6 @@ export class Switch {
 
   switch: Element
 
-
   @Watch('checked')
   checkedHandler() {
     this.isHostChecked()
@@ -32,7 +31,6 @@ export class Switch {
   disabledHandler() {
     this.isDisabled()
   }
-
 
   @Method()
   async activateRipple() {
@@ -56,8 +54,6 @@ export class Switch {
     this.rsSwitch.checked = this.checked
   }
 
-
-
   componentDidLoad() {
     this.switch = this.el.shadowRoot.querySelector('.rs-switch')
     const labelEl = this.el.shadowRoot.querySelector('.label')
@@ -69,19 +65,6 @@ export class Switch {
 
     labelEl.addEventListener('click', () => {
       this.activateRipple()
-    })
-
-    // TODO (If host component has other classname, disappear this component when properties changes)
-    //
-    const observer = new MutationObserver(records => {
-      records.forEach(record => {
-        if (record.attributeName === 'class' && !this.el.classList.contains('hydrated')) {
-          this.el.classList.add('hydrated')
-        }
-      })
-    })
-    observer.observe(this.el, {
-      attributes: true
     })
   }
 

@@ -1,6 +1,6 @@
 {
-  "name": "slider",
-  "version": "0.0.1",
+  "name": "@rsmdc/slider",
+  "version": "1.1.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,7 +12,10 @@
   "unpkg": "dist/slider/slider.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/",
+    "rs-slider.scss"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",

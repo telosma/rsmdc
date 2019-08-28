@@ -11,10 +11,6 @@ export class Snackbar {
 
   @Prop() opened: boolean
 
-  @Prop() stacked: boolean
-
-  @Prop() leading: boolean
-
   rsSnackbar: RSSnackbar
 
   snackbar: HTMLElement
@@ -26,42 +22,12 @@ export class Snackbar {
     this.isOpened()
   }
 
-  @Watch('stacked')
-  stackedHandler() {
-    this.isStacked()
-  }
-
-  @Watch('leading')
-  leadingHandler() {
-    this.isLeading()
-  }
-
-  @Method()
-  async isStacked() {
-    if (this.stacked) {
-      this.snackbar.classList.add('-stacked')
-    } else {
-      this.snackbar.classList.remove('-stacked')
-    }
-  }
-
-  @Method()
-  async isLeading() {
-    if (this.leading) {
-      this.snackbar.classList.add('-leading')
-    } else {
-      this.snackbar.classList.remove('-leading')
-    }
-  }
-
   @Method()
   async isOpened() {
     if (this.opened) {
       this.snackbar.classList.add('-open')
       this.snackbar.style.opacity = '1'
-
       // TODO
-      
       // setTimeout(() => {
       //   this.snackbar.style.opacity = '0'
       //   this.snackbar.style.transition = '180ms'
@@ -76,8 +42,6 @@ export class Snackbar {
     this.rsSnackbar = new RSSnackbar(this.snackbar)
 
     this.isOpened()
-    this.isStacked()
-    this.isLeading()
   }
 
   render() {

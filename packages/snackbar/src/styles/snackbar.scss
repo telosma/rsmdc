@@ -53,6 +53,7 @@
     flex-shrink: 0;
     flex-wrap: nowrap;
     padding-bottom: 0;
+    background-color: $rs-theme-on-surface;
   }
 
   > .dismiss {
@@ -60,14 +61,14 @@
   }
 }
 
-.rs-snackbar-text {
+.rs-snackbar-title {
   @include rs-typography($rs-snackbar-label-type-scale);
   flex-grow: 1;
   box-sizing: border-box;
   margin: 0;
   padding: 14px 16px;
-  color: hsla(0, 0%, 100%, 0.87);
   word-break: break-word;
+  color: $rs-snackbar-label-ink-color;
 }
 
 rs-snackbar > rs-button {

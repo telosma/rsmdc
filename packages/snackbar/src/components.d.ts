@@ -10,12 +10,8 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsSnackbar {
-    'isLeading': () => Promise<void>;
     'isOpened': () => Promise<void>;
-    'isStacked': () => Promise<void>;
-    'leading': boolean;
     'opened': boolean;
-    'stacked': boolean;
   }
   interface RsSnackbarText {}
 }
@@ -42,9 +38,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsSnackbar extends JSXBase.HTMLAttributes<HTMLRsSnackbarElement> {
-    'leading'?: boolean;
     'opened'?: boolean;
-    'stacked'?: boolean;
   }
   interface RsSnackbarText extends JSXBase.HTMLAttributes<HTMLRsSnackbarTextElement> {}
 

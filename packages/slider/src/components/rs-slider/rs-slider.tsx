@@ -30,11 +30,6 @@ export class Slider {
 
   slider: Element;
 
-  @Watch("now")
-  nowHandler() {
-    console.log(111)
-  }
-    
   @Watch("countable")
   countableHandler() {
     this.isCountable()
@@ -55,7 +50,6 @@ export class Slider {
     composed: false,
   }) change: EventEmitter
 
-
   @Method()
   async isCountable() {
     if (this.countable) {
@@ -64,7 +58,6 @@ export class Slider {
       this.slider.classList.remove("-discrete")
     }
   }
-
 
   @Method()
   async isDisabled() {
@@ -92,33 +85,6 @@ export class Slider {
     this.isMarked();
 
     this.rsSlider = new RSSlider(this.slider);
-
-    // TODO
-    const ob = new MutationObserver(records => {
-      records.forEach(record => {
-        if (record.attributeName === 'aria-valuenow') {
-          const value = this.slider.getAttribute('aria-valuenow')
-          this.change.emit({ value: value })
-        }
-      })
-    })
-    ob.observe(this.slider, {
-      attributes: true
-    })
-  
-    const observer = new MutationObserver(records => {
-      records.forEach(record => {
-        if (
-          record.attributeName === "class" &&
-          !this.el.classList.contains("hydrated")
-        ) {
-          this.el.classList.add("hydrated")
-        }
-      })
-    })
-    observer.observe(this.el, {
-      attributes: true
-    })
   }
 
   render() {

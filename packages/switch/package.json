@@ -1,6 +1,6 @@
 {
-  "name": "switch",
-  "version": "0.0.1",
+  "name": "@rsmdc/switch",
+  "version": "1.1.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,7 +12,10 @@
   "unpkg": "dist/switch/switch.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/",
+    "rs-switch.scss"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",

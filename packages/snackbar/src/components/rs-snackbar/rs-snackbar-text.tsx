@@ -13,9 +13,6 @@ export class snackbarTitle {
   
   componentDidLoad() {
     this.snackbarTitle = this.el.shadowRoot.querySelector('.rs-snackbar-title')
-    
-    const title = document.getElementsByTagName('rs-snackbar-title')
-    this.snackbarTitle.innerHTML = title[0].innerHTML
   }
 
   render() {
@@ -23,6 +20,7 @@ export class snackbarTitle {
               <div class="rs-snackbar-title"
                 role="status"
                 aria-live="polite">
+                  <slot />
               </div>
             </Host>
   }
