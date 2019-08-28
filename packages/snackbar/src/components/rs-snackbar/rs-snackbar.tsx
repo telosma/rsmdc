@@ -1,5 +1,4 @@
 import { Component, Element, Prop, Watch, Method, Host, h } from '@stencil/core'
-import { RSSnackbar } from "../../utils/index"
 
 @Component({
   tag: "rs-snackbar",
@@ -11,11 +10,7 @@ export class Snackbar {
 
   @Prop() opened: boolean
 
-  rsSnackbar: RSSnackbar
-
   snackbar: HTMLElement
-
-  snackbarText: Element
 
   @Watch('opened')
   openedHandler() {
@@ -39,8 +34,6 @@ export class Snackbar {
 
   componentDidLoad() {
     this.snackbar = this.el.shadowRoot.querySelector(".rs-snackbar")
-    this.rsSnackbar = new RSSnackbar(this.snackbar)
-
     this.isOpened()
   }
 

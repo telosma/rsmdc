@@ -1,5 +1,4 @@
-import { Component, Element, Host, h, Prop, Watch, Method } from '@stencil/core'
-import { RSDialog } from '../../utils/index'
+import { Component, Element, Host, h, Prop, Event, EventEmitter, Watch, Method } from '@stencil/core'
 
 @Component({
   tag: 'rs-dialog',
@@ -10,21 +9,20 @@ export class Dialog {
 
   @Element() el: Element
 
-  rsDialog: RSDialog
-
   dialog: HTMLElement
 
   dialogTitle: Element
 
   dialogContent: Element
 
-  
-
   @Prop() opened: boolean
   
-  @Prop() scrolling: string
+  @Prop() scrolling: boolean
 
-
+  @Event({
+    cancelable: false,
+    composed: false,
+  }) change: EventEmitter
 
   @Watch("opened")
   openedHandler() {
@@ -41,65 +39,56 @@ export class Dialog {
     if (this.opened) {
       this.dialog.classList.add('-open')
 
-      document.getElementsByTagName('body')[0].style.overflow = "hidden"
+      document.querySelector('body').style.overflow = "hidden"
       this.dialog.style.visibility = 'visible'
-
       this.el.shadowRoot.querySelector('.scrim').addEventListener('click', () => {
-        this.dialog.style.visibility = 'hidden'
-        document.getElementsByTagName('body')[0].style.overflow = "scroll"
-
+        // this.change.emit()
+      })
+      this.el.shadowRoot.querySelector('.container').addEventListener('click', () => {
+        // this.change.emit()
       })
     } else {
       this.dialog.classList.remove('-open')
+      this.dialog.style.visibility = 'hidden'
+      document.querySelector('body').style.overflow = "auto"
     }
   }
 
   @Method()
   async isScrolling() {
+    const title = document.querySelector('rs-dialog-title')
+    const content = document.querySelector('rs-dialog-content')
+  
     if (this.scrolling) {
       this.dialog.classList.add('-scrollable')
-
-      const title = document.getElementsByTagName('rs-dialog-title')[0]
-      const content = document.getElementsByTagName('rs-dialog-content')[0]
-
-      if (title != null && content != null) {
-        title.style.borderBottom = 'solid 1px rgba(0,0,0,.12)'
-        content.style.borderBottom = 'solid 1px rgba(0,0,0,.12)'
+      if (title) {
+        title.setAttribute('scrolling', 'true')
+      }
+      if (content) {
+        title.setAttribute('scrolling', 'true')
       }
     } else {
       this.dialog.classList.remove('-scrollable')
     }
   }
 
-  
+  @Method()
+  async wrap(element, wrapper) {
+    element.parentNode.insertBefore(wrapper, element);
+    wrapper.appendChild(element);
+  }
 
   componentDidLoad() {
     this.dialog = this.el.shadowRoot.querySelector('.rs-dialog')
-    this.rsDialog = new RSDialog(this.dialog)
 
-    const title = document.getElementsByTagName('rs-dialog-title')[0]
-    const content = document.getElementsByTagName('rs-dialog-content')[0]
-    if (title != null && content != null) {
-      document.getElementsByTagName('rs-dialog-content')[0].style.paddingTop = '0' 
-    }
+    const buttonParent = document.createElement("div");
+    buttonParent.classList.add('buttons')
+    const buttons = Array.from(document.querySelectorAll('rs-button'))
 
+    buttons.forEach(button => {
+      this.wrap(button, buttonParent)
+    })
 
-    const buttons = document.createElement("div");
-
-    buttons.classList.add('buttons')
-
-    const button = document.getElementsByTagName('rs-button')[0]
-    const button1 = document.getElementsByTagName('rs-button')[1]
-    
-    wrap(button, buttons)
-    wrap(button1, buttons)
-    function wrap(element, wrapper) {
-      element.parentNode.insertBefore(wrapper, element);
-      wrapper.appendChild(element);
-    }
-
-
-    
     this.isOpened()
     this.isScrolling()
   }
@@ -115,10 +104,10 @@ export class Dialog {
               >
                 <div class="container">
                   <div class="surface">
-                    <slot></slot>
+                    <slot />
                   </div>
                 </div>
-                <div class="scrim"></div>
+                <div class="scrim" />
               </div>
 
             </Host>

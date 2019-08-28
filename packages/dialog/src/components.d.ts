@@ -13,7 +13,8 @@ export namespace Components {
     'isOpened': () => Promise<void>;
     'isScrolling': () => Promise<void>;
     'opened': boolean;
-    'scrolling': string;
+    'scrolling': boolean;
+    'wrap': (element: any, wrapper: any) => Promise<void>;
   }
   interface RsDialogContent {}
   interface RsDialogTitle {}
@@ -48,8 +49,9 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsDialog extends JSXBase.HTMLAttributes<HTMLRsDialogElement> {
+    'onChange'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
-    'scrolling'?: string;
+    'scrolling'?: boolean;
   }
   interface RsDialogContent extends JSXBase.HTMLAttributes<HTMLRsDialogContentElement> {}
   interface RsDialogTitle extends JSXBase.HTMLAttributes<HTMLRsDialogTitleElement> {}

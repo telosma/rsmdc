@@ -1,4 +1,4 @@
-import { Component, Element, h, Host } from '@stencil/core';
+import { Component, h, Host } from '@stencil/core';
 
 @Component({
   tag: 'rs-snackbar-text',
@@ -6,15 +6,6 @@ import { Component, Element, h, Host } from '@stencil/core';
   shadow: true
 })
 export class snackbarTitle {
-
-  @Element() el: HTMLElement
-  
-  snackbarTitle: HTMLElement
-  
-  componentDidLoad() {
-    this.snackbarTitle = this.el.shadowRoot.querySelector('.rs-snackbar-title')
-  }
-
   render() {
     return  <Host>
               <div class="rs-snackbar-title"

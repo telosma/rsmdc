@@ -9,7 +9,6 @@
 @import "./mixins";
 @import "./rs-mixins";
 
-
 .rs-dialog,
 .scrim {
   position: fixed;
@@ -23,13 +22,12 @@
 }
 
 .rs-dialog {
-  display: none;
+  visibility: hidden;
   z-index: $rs-dialog-z-index;
-
   > .scrim {
     opacity: 0;
     z-index: -1;
-    background-color: rgba(0,0,0,.32)
+    background-color: rgba(0,0,0,.32);
   }
 
   > .container {
@@ -54,29 +52,8 @@
     box-sizing: border-box;
     box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
     border-radius: 4px;
-    background-color: #ffffff;
-  }
-
-
-  // &.-scrollable > .container > .surface > .content {
-  //   padding-top: 8px;
-  //   padding-bottom: 8px;
-  // }
-
-  // &.-scrollable > .container > .surface > .content .rs-list:first-child:last-child {
-  //   padding: 0;
-  // }
-
-
-  > .container > .surface > .actions > .button {
-
-    &.-stacked &:not(:first-child) {
-      margin-top: 12px;
-    }
-
-    &:first-child {
-      margin-left: 8px;
-    }
+    background-color: $rs-theme-surface;
+    // background-color: #ffffff;
   }
 
   &.-open,
@@ -85,25 +62,6 @@
     display: flex;
   }
 
-  // &.-open {
-  //   > .scrim {
-  //     transition: opacity 150ms linear;
-  //   }
-  //   > .container {
-  //     transition: opacity 75ms linear, rs-animation-enter(transform, 150ms);
-  //   }
-  // }
-
-  // &.-closing {
-  //   > .scrim,
-  //   > .container {
-  //     transition: opacity 75ms linear;
-  //   }
-
-  //   > .container {
-  //     transform: scale(1);
-  //   }
-  // }
 
   &.-open {
     > .scrim {
@@ -114,7 +72,7 @@
     > .container {
       opacity: 1;
       transform: scale(1);
-      // transition: opacity 75ms linear, rs-animation-enter(transform, 150ms);
+      transition: opacity 75ms linear, rs-animation-enter(transform, 150ms);
     }
   }
 
@@ -122,6 +80,7 @@
     overflow: hidden;
   }
 }
+
 .rs-dialog-title {
   @include rs-typography(headline6);
   position: relative;
@@ -130,7 +89,8 @@
   margin: 0;
   padding: 0 24px $rs-dialog-title-bottom-padding;
   border-bottom: none;
-
+  border-top: none;
+  color: $rs-theme-on-surface;
   &::before {
     display: inline-block;
     width: 0;
@@ -153,9 +113,9 @@ rs-dialog-content {
   align-items: center;
   box-sizing: border-box;
   margin: 0;
-  // padding: 20px 24px;
   opacity: .6;
   -webkit-overflow-scrolling: touch;
+  color: $rs-theme-on-surface;
   > :first-child {
     margin-top: 0;
   }
@@ -167,7 +127,21 @@ rs-dialog-content {
 .rs-list:first-child:last-child {
   padding: 6px 0 0;
 }
-rs-dialog + div
+
+rs-dialog-title + rs-dialog-content {
+  padding-top: 0;
+}
+
+rs-dialog[scrolling] {
+  > rs-dialog-title {
+    border-bottom: solid 1px rgba(0,0,0,.12);
+  }
+  > rs-dialog-content {
+    border-bottom: solid 1px rgba(0,0,0,.12);
+    padding: 8px 24px;
+  }
+}
+
 rs-dialog-title + div,
 rs-dialog-content + div {
   display: flex;

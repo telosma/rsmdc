@@ -1,13 +1,11 @@
 @mixin rs-dialog-container-fill-color($color) {
   .rs-dialog > .container > .surface {
-    // @include rs-theme-prop(background-color, $color);
     background-color: $color;
   }
 }
 
 @mixin rs-dialog-scrim-color($color, $opacity: $rs-dialog-scrim-opacity) {
   .rs-dialog > .scrim {
-    // background-color: rgba(rs-theme-prop-value($color), $opacity);
     background-color: rgba(0,0,0,.32);
   }
 }
@@ -21,13 +19,6 @@
 @mixin rs-dialog-content-ink-color($color, $opacity: $rs-dialog-content-ink-opacity) {
   rs-dialog-content {
     color: rgba(rs-theme-prop-value($color), $opacity);
-  }
-}
-
-@mixin rs-dialog-scroll-divider-color($color, $opacity: $rs-dialog-scroll-divider-opacity) {
-  &.rs-dialog--scrollable > .container > .surface > .title,
-  &.rs-dialog--scrollable > .container > .surface > .actions {
-    border-color: rgba(rs-theme-prop-value($color), $opacity);
   }
 }
 
@@ -89,7 +80,6 @@
   @include rs-dialog-scrim-color($rs-dialog-scrim-color);
   @include rs-dialog-title-ink-color($rs-dialog-title-ink-color);
   @include rs-dialog-content-ink-color($rs-dialog-content-ink-color);
-  @include rs-dialog-scroll-divider-color($rs-dialog-scroll-divider-color);
   @include rs-dialog-shape-radius(medium);
   @include rs-dialog-min-width($rs-dialog-min-width);
   @include rs-dialog-max-width($rs-dialog-max-width, $rs-dialog-margin);
