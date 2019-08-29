@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/dialog",
-  "version": "1.1.0",
+  "version": "1.1.16",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -25,13 +25,13 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "devDependencies": {
-    "@stencil/core": "^1.3.0",
     "@rsmdc/animation": "^1.1.0",
     "@rsmdc/elevation": "^1.1.0",
+    "@rsmdc/rtl": "^1.1.16",
+    "@rsmdc/shape": "^1.1.0",
     "@rsmdc/theme": "^1.1.0",
-    "@rsmdc/rtl": "^1.1.0",
     "@rsmdc/typography": "^1.1.0",
-    "@rsmdc/shape": "^1.1.0"
+    "@stencil/core": "^1.3.0"
   },
   "license": "MIT"
 }
