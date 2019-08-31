@@ -123,6 +123,7 @@ export class AppBar {
 
   @Method()
   async hasAppBarItems() {
+    if (!this.appBarTool) { return }
     this.itemLength = Array.from(this.appBarTool.childNodes).filter(child => child.nodeType === 1).length
 
     if (this.itemLength > 0) {
@@ -133,11 +134,11 @@ export class AppBar {
     }
   }
   
-  componentDidLoad() {
+  async componentDidLoad() {
     this.appBar = this.el.shadowRoot.querySelector('.rs-app-bar')
-    this.selectAppBarTitle()
-    this.selectAppBarTool()
-    this.hasAppBarItems()
+    await this.selectAppBarTitle()
+    await this.selectAppBarTool()
+    await this.hasAppBarItems()
     
     this.isFixed()
     this.isCompactable()
