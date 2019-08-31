@@ -2,3 +2,7 @@ app-layout {
   display: var(--rs-app-layout--display);
   height: var(--rs-app-layout--height);
 }
+
+.rs-app-layout-content {
+  margin-left: var(--rs-app-layout-content--margin-left);
+}
