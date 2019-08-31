@@ -11,6 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface RsDrawer {
     'closeDrawerMotion': () => Promise<void>;
+    'isOpened': () => Promise<void>;
     'openDrawerMotion': () => Promise<void>;
     'opened': boolean;
   }

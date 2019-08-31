@@ -11,6 +11,8 @@ export class Drawer {
 
   @Prop() opened: boolean
 
+  drawer: HTMLElement
+
   @Watch('opened')
   openedHandler() {
     if (this.opened) {
@@ -26,22 +28,42 @@ export class Drawer {
   }) change: EventEmitter
 
   @Method()
+  async isOpened() {
+    if (this.opened) {
+      this.drawer.classList.add('-open')
+    } else {
+      this.drawer.classList.remove('-open')
+    }
+  }
+
+  @Method()
   async openDrawerMotion() {
-    
+    this.drawer.classList.add('-opening')
+    setTimeout(() => {
+      this.drawer.classList.add('-open')
+    }, 200)
   }
 
   @Method()
   async closeDrawerMotion() {
-
+    this.drawer.classList.add('-closing')
+    this.drawer.classList.remove('-opening')
+    setTimeout(() => {
+      this.drawer.classList.remove('-open')
+      this.drawer.classList.remove('-closing')
+    }, 200)
   }
 
   componentDidLoad() {
+    this.drawer = this.el.shadowRoot.querySelector('.rs-drawer')
     const scrim = this.el.shadowRoot.querySelector('.scrim')
 
+    this.isOpened()
+
     scrim.addEventListener('click', () => {
+      console.log('scrim emit')
       this.change.emit()
     })
-
   }
 
   render() {

@@ -2,7 +2,6 @@
 @import './variables';
 
 rs-drawer {
-  --rs-drawer: true;
   --rs-drawer-list-item--border-radius: 4px;
 
   position: fixed;
@@ -13,49 +12,49 @@ rs-drawer {
 :root {
   --rs-app-layout--display: flex;
   --rs-app-layout--height: 100%;
-  --rs-app-layout-content--margin-left: #{$rs-drawer-width};
 }
 
 .rs-drawer {
   height: 100%;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-color: $rs-drawer-divider-color;
+  border-radius: rs-shape-radius(large);
+  background-color: $rs-drawer-surface-fill-color;
+  width: $rs-drawer-width;
+  z-index: $rs-drawer-z-index;
+  box-sizing: border-box;
+  box-shadow: none;
+  display: none;
+
+  &.-open {
+    display: block;
+  }
+
+  &.-opening {
+    transform: translateX(0);
+    transition-duration: $rs-drawer-animation-enter;
+  }
+
+  &.-closing {
+    transform: translateX(-100%);
+    transition-duration: $rs-drawer-animation-exit;
+  }
 
   > .content {
     @include rs-drawer-item-shape-radius(4px);
 
     flex-direction: column;
     flex-shrink: 0;
-    box-sizing: border-box;
     height: 100%;
     transition-property: transform;
     transition-timing-function: $rs-animation-standard-curve-timing-function;
-    border-right-width: 1px;
-    border-right-style: solid;
     overflow: hidden;
     transform: translateX(-100%);
-    width: $rs-drawer-width;
-    border-color: $rs-drawer-divider-color;
-    background-color: $rs-drawer-surface-fill-color;
-    z-index: $rs-drawer-z-index;
-    border-radius: rs-shape-radius(large);
-    box-shadow: none;
     display: flex;
     position: static;
     left: auto;
     right: auto;
-  }
-
-  > .content.-open {
-    display: block;
-  }
-
-  > .content.-opening {
-    transform: translateX(0);
-    transition-duration: $rs-drawer-animation-enter;
-  }
-
-  > .content.-closing {
-    transform: translateX(-100%);
-    transition-duration: $rs-drawer-animation-exit;
   }
 
   > .scrim {
@@ -70,24 +69,31 @@ rs-drawer {
     transition-timing-function: $rs-animation-standard-curve-timing-function;
     z-index: $rs-drawer-z-index - 1;
     background-color: $rs-drawer-modal-scrim-color;
+    opacity: $rs-drawer-modal-scrim-opacity;
     box-shadow: #{rs-elevation($rs-drawer-modal-elevation)};
   }
 
-  > .content.-open + .scrim {
-    display: block;
+  &.-open > .scrim {
+    display: none;
   }
 
-  > .content.-opening + .scrim {
+  &.-opening > .scrim {
     transition-duration: $rs-drawer-animation-enter;
     opacity: 1;
   }
 
-  > .content.-animate + .scrim {
+  &.-animate > .scrim {
     opacity: 0;
   }
 
-  > .content.-closing + .scrim {
+  &.-closing > .scrim {
     transition-duration: $rs-drawer-animation-exit;
     opacity: 0;
+  }
+}
+
+[opened] + rs-app-layout-content {
+  rs-app-bar {
+    --rs-app-bar---margin-left: $rs-drawer-width;
   }
 }

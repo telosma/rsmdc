@@ -31,6 +31,16 @@ Type: `Promise<void>`
 
 
 
+### `isOpened() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `openDrawerMotion() => Promise<void>`
 
 

@@ -1,15 +1,24 @@
 @mixin rs-drawer-type($type) {
   @if $type == modal {
-    .rs-drawer {
-      > .content.-open {
+    .rs-drawer.-open {
+      > .content {
         display: flex;
+      }
+
+      > .scrim {
+        display: block;
+      }
+    }
+
+    [opened] + app-layout-content {
+      app-bar {
+        --rs-app-layout-content--margin-left: auto;
       }
     }
 
     :root {
       --rs-app-layout--display: inline;
       --rs-app-layout--height: auto;
-      --rs-app-layout-content--margin-left: auto;
     }
   }@else if $type == dismissible {
     .rs-drawer {
@@ -18,7 +27,10 @@
         position: absolute;
         left: 0;
       }
-      > .content.-open {
+    }
+
+    .rs-drawer.-open {
+      > .content {
         display: flex;
       }
     }
