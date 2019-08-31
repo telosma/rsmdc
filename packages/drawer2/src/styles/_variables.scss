@@ -27,7 +27,7 @@ $rs-drawer-title-ink-color: rs-theme-prop-value(on-surface) !default;
 $rs-drawer-subtitle-ink-color: rs-theme-prop-value(on-surface) !default;
 $rs-drawer-item-inactive-ink-color: rs-theme-prop-value(on-surface) !default;
 $rs-drawer-item-activated-ink-color: rs-theme-prop-value(primary) !default;
-$rs-drawer-divider-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-divider-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
 $rs-drawer-surface-fill-color: rs-theme-prop-value(surface) !default;
 
 // Opacity
