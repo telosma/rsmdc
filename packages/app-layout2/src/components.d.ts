@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsAppLayout {}
+  interface RsAppLayoutContent {}
 }
 
 declare global {
@@ -20,16 +21,25 @@ declare global {
     prototype: HTMLRsAppLayoutElement;
     new (): HTMLRsAppLayoutElement;
   };
+
+  interface HTMLRsAppLayoutContentElement extends Components.RsAppLayoutContent, HTMLStencilElement {}
+  var HTMLRsAppLayoutContentElement: {
+    prototype: HTMLRsAppLayoutContentElement;
+    new (): HTMLRsAppLayoutContentElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-app-layout': HTMLRsAppLayoutElement;
+    'rs-app-layout-content': HTMLRsAppLayoutContentElement;
   }
 }
 
 declare namespace LocalJSX {
   interface RsAppLayout extends JSXBase.HTMLAttributes<HTMLRsAppLayoutElement> {}
+  interface RsAppLayoutContent extends JSXBase.HTMLAttributes<HTMLRsAppLayoutContentElement> {}
 
   interface IntrinsicElements {
     'rs-app-layout': RsAppLayout;
+    'rs-app-layout-content': RsAppLayoutContent;
   }
 }
 
