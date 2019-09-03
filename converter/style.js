@@ -123,7 +123,7 @@ module.exports.generateStyle = (sourceCss, styles, hostStyles) => {
 
       const text = Object.entries(styleData.attributes)
         .reduce((result, [prop, value]) => {
-          if (prop.match(/---/g) && value.match(/\$.*?/g)) {
+          if (prop.match(/^--.*?/g) && value.match(/\$.*?/g)) {
             value = `#{${value}}`
           }
           return `${result}${prop}: ${value}; `
