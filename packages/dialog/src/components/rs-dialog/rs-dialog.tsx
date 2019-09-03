@@ -80,11 +80,12 @@ export class Dialog {
 
   componentDidLoad() {
     this.dialog = this.el.shadowRoot.querySelector('.rs-dialog')
+    const slot = this.el.shadowRoot.querySelector('slot')
 
     const buttonParent = document.createElement("div");
     buttonParent.classList.add('buttons')
-    const buttons = Array.from(document.querySelectorAll('rs-button'))
 
+    const buttons = slot.assignedElements().filter(e => e.tagName === 'RS-BUTTON')
     buttons.forEach(button => {
       this.wrap(button, buttonParent)
     })
