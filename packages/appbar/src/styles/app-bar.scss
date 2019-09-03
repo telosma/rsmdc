@@ -66,11 +66,6 @@
     margin-left: 0;
   }
 
-  &.-drawer {
-    position: absolute;
-    margin-left: var(--rs-app-layout-content--margin-left);
-  }
-
   &.-drawer.-fixed-scrolled,
   &.-drawer.-short-collapsed {
     position: fixed;
