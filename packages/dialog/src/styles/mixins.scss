@@ -1,16 +1,21 @@
-@mixin rs-dialog-type($types...) {
-  @each $type in $types {
-    @if $type == scrollable {
-      .rs-dialog-title {
-        border-bottom: 1px solid rgba(0, 0, 0, .14);
-      }
-    } @else if $type == stacked {
-      rs-dialog + div
-      rs-dialog-title + div,
-      rs-dialog-content + div {
+@mixin rs-dialog-type($type) {
+  @if $type == stacked {
+
+    .dummy {
+      color: inherit;
+    }
+    
+    rs-dialog {
+      + div {
         flex-direction: column;
         text-align: right;
       }
+    }
+
+    rs-dialog-title + div,
+    rs-dialog-content + div {
+      flex-direction: column;
+      text-align: right;
     }
   }
 }
