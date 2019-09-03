@@ -1,0 +1,113 @@
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import "./variables";
+@import "./rs-mixins";
+@import "./mixins";
+
+@include rs-ripple-common;
+
+.rs-chip {
+  @include rs-chip-height($rs-chip-height-default);
+  @include rs-chip-leading-icon-margin;
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+  @include rs-ripple-upgraded($rs-chip-ink-color-default);
+
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 $rs-chip-horizontal-padding;
+  border-width: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: $rs-chip-fill-color-default;
+  @include rs-typography(body2);
+  
+  > .label {
+    background-image: none;
+    height: auto;
+    display: flex;
+    align-items: center;
+    color: $rs-chip-ink-color-default;
+  }
+
+  > .label::before {
+    display: inline;
+    font-family: inherit;
+    content: none;
+    margin: $rs-chip-leading-icon-margin-top;
+    margin-right: $rs-chip-leading-icon-margin-right;
+    font-size: $rs-chip-leading-icon-size;
+    color: $rs-theme-on-surface;
+  }
+
+  > .label::after {
+    display: inline;
+    font-family: inherit;
+    content: none;
+    margin: $rs-chip-trailing-icon-margin-top;
+    margin-left: $rs-chip-trailing-icon-margin-left;
+    margin-right: $rs-chip-trailing-icon-margin-right;
+    font-size: $rs-chip-trailing-icon-size;
+    color: $rs-theme-on-surface;
+
+    &:hover {
+      opacity: 0;
+    }
+  }
+
+  &.-selected {
+    background-color: $rs-selected-fill-color;
+    @include rs-ripple-upgraded($rs-theme-primary);
+    > .label {
+      color: $rs-theme-primary;
+    }
+  }
+
+  &.-set-filter {
+    &.-icon.-leading {
+      transition: opacity $rs-chip-opacity-animation-duration linear;
+      transition-delay: $rs-chip-leading-icon-delay;
+      opacity: 1;
+
+      + .checkmark {
+        transition: opacity $rs-chip-opacity-animation-duration linear;
+        transition-delay: $rs-chip-checkmark-with-leading-icon-delay;
+
+        opacity: 0;
+
+        > .checkmark-svg {
+          transition: width 0ms;
+        }
+      }
+    }
+
+    &.-selected.-icon.-leading {
+      opacity: 0;
+      + .checkmark {
+        width: 0;
+        opacity: 1;
+      }
+    }
+
+    &.-icon.-leading.-leading-hidden {
+      width: 0;
+      opacity: 0;
+      + .checkmark {
+        width: $rs-chip-leading-icon-size;
+      }
+    }
+  }
+}

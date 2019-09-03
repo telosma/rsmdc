@@ -1,0 +1,73 @@
+@mixin rs-chip-height($height) {
+  height: $height;
+}
+
+@mixin rs-chip-fill-color-accessible($color) {
+  $fill-tone: rs-theme-tone($color);
+
+  @include rs-chip-fill-color($color);
+
+  @if ($fill-tone == "dark") {
+    @include rs-chip-ink-color(text-primary-on-dark);
+    @include rs-chip-selected-ink-color(text-primary-on-dark);
+    @include rs-chip-leading-icon-color(text-primary-on-dark);
+    @include rs-chip-trailing-icon-color(text-primary-on-dark);
+  } @else {
+    @include rs-chip-ink-color(text-primary-on-light);
+    @include rs-chip-selected-ink-color(text-primary-on-light);
+    @include rs-chip-leading-icon-color(text-primary-on-light);
+    @include rs-chip-trailing-icon-color(text-primary-on-light);
+  }
+}
+
+@mixin rs-chip-set-spacing($gap-size) {
+  padding: $gap-size / 2;
+  .rs-chip {
+    margin: $gap-size / 2;
+  }
+}
+
+@mixin rs-chip-trailing-icon-color(
+  $color,
+  $opacity: $rs-chip-icon-opacity,
+  $hover-opacity: $rs-chip-trailing-icon-hover-opacity,
+  $focus-opacity: $rs-chip-trailing-icon-focus-opacity
+) {
+  .icon-trailing {
+    color: rgba(rs-theme-prop-value($color), $opacity);
+    &:hover {
+      color: rgba(rs-theme-prop-value($color), $hover-opacity);
+    }
+    &:focus {
+      color: rgba(rs-theme-prop-value($color), $focus-opacity);
+    }
+  }
+}
+
+@mixin rs-chip-leading-icon-size($size) {
+  .icon.-leading:not(.icon.-leading-hidden) {
+    @include rs-chip-icon-size_($size);
+  }
+}
+
+@mixin rs-chip-trailing-icon-size($size) {
+  .rs-chip > .-icon.-trailing {
+    @include rs-chip-icon-size_($size);
+  }
+}
+
+@mixin rs-chip-leading-icon-margin(
+  $left-margin: $rs-chip-leading-icon-margin-left,
+  $right-margin: $rs-chip-leading-icon-margin-right
+) {
+}
+
+@mixin rs-chip-trailing-icon-margin(
+  $left-margin: $rs-chip-trailing-icon-margin-left,
+  $right-margin: $rs-chip-trailing-icon-margin-right
+) {
+  .icon-trailing {
+    margin-right: $right-margin;
+    margin-left: $left-margin;
+  }
+}

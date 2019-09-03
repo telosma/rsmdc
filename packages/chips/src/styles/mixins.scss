@@ -1,0 +1,72 @@
+@import "@rsmdc/ripple/mixins-stencil";
+@mixin rs-chip-icon-image($icon, $codepoint: "") {
+  $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
+
+  @if $value == path {
+    .rs-chip > .label {
+      background-image: $icon;
+      height: 24px;
+    }
+  } @else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + "\\"+ $codepoint + '"';
+
+    .rs-chip {
+      > .label::before {
+        font-family: $font-family;
+        content: $name;
+      }
+      > .label::after {
+        font-family: $font-family;
+        content: $name;
+      }
+    }
+  }
+}
+
+@mixin rs-chip-icon-position($position: left) {
+  @if $position == left {
+    .rs-chip {
+      padding-left: 8px;
+      padding-right: 0;
+      display: block;
+    }
+    .rs-chip > .label::after {
+      display: none;
+    }
+  } @else if $position == right {
+    .rs-chip {
+      padding-left: 0;
+      padding-right: 8px;
+      display: block;
+    }
+    .rs-chip > .label::before {
+      display: none;
+    }
+  }
+}
+
+@mixin rs-chip-type($types...) {
+  @each $type in $types {
+    @if $type == outlined {
+      .rs-chip {
+        background-color: $rs-theme-surface;
+        border: solid 1px $rs-theme-on-surface;
+        &.-selected {
+          background-color: none;
+          @include rs-ripple-upgraded(none);
+        }
+        &.-selected > .label {
+          color: $rs-chip-ink-color-default;
+
+        }
+      }
+    } @else if $type == shaped {
+      .rs-chip {
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+
