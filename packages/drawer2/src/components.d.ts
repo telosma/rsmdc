@@ -15,6 +15,10 @@ export namespace Components {
     'openDrawerMotion': () => Promise<void>;
     'opened': boolean;
   }
+  interface RsDrawerContent {}
+  interface RsDrawerHeader {}
+  interface RsDrawerSubtitle {}
+  interface RsDrawerTitle {}
 }
 
 declare global {
@@ -25,8 +29,36 @@ declare global {
     prototype: HTMLRsDrawerElement;
     new (): HTMLRsDrawerElement;
   };
+
+  interface HTMLRsDrawerContentElement extends Components.RsDrawerContent, HTMLStencilElement {}
+  var HTMLRsDrawerContentElement: {
+    prototype: HTMLRsDrawerContentElement;
+    new (): HTMLRsDrawerContentElement;
+  };
+
+  interface HTMLRsDrawerHeaderElement extends Components.RsDrawerHeader, HTMLStencilElement {}
+  var HTMLRsDrawerHeaderElement: {
+    prototype: HTMLRsDrawerHeaderElement;
+    new (): HTMLRsDrawerHeaderElement;
+  };
+
+  interface HTMLRsDrawerSubtitleElement extends Components.RsDrawerSubtitle, HTMLStencilElement {}
+  var HTMLRsDrawerSubtitleElement: {
+    prototype: HTMLRsDrawerSubtitleElement;
+    new (): HTMLRsDrawerSubtitleElement;
+  };
+
+  interface HTMLRsDrawerTitleElement extends Components.RsDrawerTitle, HTMLStencilElement {}
+  var HTMLRsDrawerTitleElement: {
+    prototype: HTMLRsDrawerTitleElement;
+    new (): HTMLRsDrawerTitleElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-drawer': HTMLRsDrawerElement;
+    'rs-drawer-content': HTMLRsDrawerContentElement;
+    'rs-drawer-header': HTMLRsDrawerHeaderElement;
+    'rs-drawer-subtitle': HTMLRsDrawerSubtitleElement;
+    'rs-drawer-title': HTMLRsDrawerTitleElement;
   }
 }
 
@@ -35,9 +67,17 @@ declare namespace LocalJSX {
     'onChange'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
+  interface RsDrawerContent extends JSXBase.HTMLAttributes<HTMLRsDrawerContentElement> {}
+  interface RsDrawerHeader extends JSXBase.HTMLAttributes<HTMLRsDrawerHeaderElement> {}
+  interface RsDrawerSubtitle extends JSXBase.HTMLAttributes<HTMLRsDrawerSubtitleElement> {}
+  interface RsDrawerTitle extends JSXBase.HTMLAttributes<HTMLRsDrawerTitleElement> {}
 
   interface IntrinsicElements {
     'rs-drawer': RsDrawer;
+    'rs-drawer-content': RsDrawerContent;
+    'rs-drawer-header': RsDrawerHeader;
+    'rs-drawer-subtitle': RsDrawerSubtitle;
+    'rs-drawer-title': RsDrawerTitle;
   }
 }
 

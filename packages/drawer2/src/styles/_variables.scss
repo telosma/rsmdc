@@ -22,14 +22,6 @@
 
 @import "@rsmdc/theme/variables";
 
-// Colors
-$rs-drawer-title-ink-color: rs-theme-prop-value(on-surface) !default;
-$rs-drawer-subtitle-ink-color: rs-theme-prop-value(on-surface) !default;
-$rs-drawer-item-inactive-ink-color: rs-theme-prop-value(on-surface) !default;
-$rs-drawer-item-activated-ink-color: rs-theme-prop-value(primary) !default;
-$rs-drawer-divider-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
-$rs-drawer-surface-fill-color: rs-theme-prop-value(surface) !default;
-
 // Opacity
 $rs-drawer-title-ink-opacity: rs-theme-text-emphasis(high) !default;
 $rs-drawer-subtitle-ink-opacity: rs-theme-text-emphasis(medium) !default;
@@ -38,6 +30,14 @@ $rs-drawer-item-inactive-text-ink-opacity: rs-theme-text-emphasis(high) !default
 $rs-drawer-item-active-icon-ink-opacity: 1 !default;
 $rs-drawer-item-active-text-ink-opacity: rs-theme-text-emphasis(high) !default;
 $rs-drawer-divider-opacity: .12 !default;
+
+// Colors
+$rs-drawer-title-ink-color: rgba(rs-theme-prop-value(on-surface), $rs-drawer-title-ink-opacity) !default;
+$rs-drawer-subtitle-ink-color: rgba(rs-theme-prop-value(on-surface), $rs-drawer-subtitle-ink-opacity) !default;
+$rs-drawer-item-inactive-ink-color: rs-theme-prop-value(on-surface) !default;
+$rs-drawer-item-activated-ink-color: rs-theme-prop-value(primary) !default;
+$rs-drawer-divider-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
+$rs-drawer-surface-fill-color: rs-theme-prop-value(surface) !default;
 
 // Widths
 $rs-drawer-width: 256px !default;
