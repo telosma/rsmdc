@@ -17,7 +17,7 @@ export class Dialog {
 
   @Prop() opened: boolean
   
-  @Prop() scrolling: boolean
+  @Prop() scrollable: boolean
 
   @Event({
     cancelable: false,
@@ -29,9 +29,9 @@ export class Dialog {
     this.isOpened()
   }
 
-  @Watch("scrolling")
-  scrollingHandler() {
-    this.isScrolling()
+  @Watch("scrollable")
+  scrollableHandler() {
+    this.isScrollable()
   }
 
   @Method()
@@ -55,17 +55,17 @@ export class Dialog {
   }
 
   @Method()
-  async isScrolling() {
+  async isScrollable() {
     const title = document.querySelector('rs-dialog-title')
     const content = document.querySelector('rs-dialog-content')
   
-    if (this.scrolling) {
+    if (this.scrollable) {
       this.dialog.classList.add('-scrollable')
       if (title) {
-        title.setAttribute('scrolling', 'true')
+        title.setAttribute('scrollable', 'true')
       }
       if (content) {
-        title.setAttribute('scrolling', 'true')
+        title.setAttribute('scrollable', 'true')
       }
     } else {
       this.dialog.classList.remove('-scrollable')
@@ -91,7 +91,7 @@ export class Dialog {
     })
 
     this.isOpened()
-    this.isScrolling()
+    this.isScrollable()
   }
 
   render() {
