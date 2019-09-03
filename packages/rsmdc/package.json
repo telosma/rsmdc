@@ -2,7 +2,7 @@
   "name": "@rsmdc/rsmdc",
   "main": "dist/rs-elements.common.js",
   "description": "The Material Components for the web all components",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "license": "MIT",
   "sideEffects": false,
   "keywords": [
@@ -20,7 +20,7 @@
     "@rsmdc/button": "^1.1.16",
     "@rsmdc/card": "^1.1.16",
     "@rsmdc/checkbox": "^1.1.16",
-    "@rsmdc/dialog": "^1.1.16",
+    "@rsmdc/dialog": "^1.1.17",
     "@rsmdc/dom": "^1.1.0",
     "@rsmdc/drawer": "^1.1.16",
     "@rsmdc/elevation": "^1.1.0",
