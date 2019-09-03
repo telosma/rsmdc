@@ -14,5 +14,14 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null // disable service workers
     }
+  ],
+  bundles: [
+    { components: [
+      'rs-drawer', 
+      'rs-drawer-header',
+      'rs-drawer-title',
+      'rs-drawer-subtitle',
+      'rs-drawer-content'
+    ]}
   ]
 };
