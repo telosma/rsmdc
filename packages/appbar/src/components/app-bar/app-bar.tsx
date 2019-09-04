@@ -143,6 +143,9 @@ export class AppBar {
     this.isFixed()
     this.isCompactable()
 
+    const inAppLayoutContent = 
+      this.el.parentNode.nodeName === 'RS-APP-LAYOUT-CONTENT'
+
     window.onscroll = () => {
       let top = window.pageYOffset
       const diff = this.windowScrollTop - top
@@ -150,32 +153,53 @@ export class AppBar {
 
       if (this.fixed || this.compactable) { return }
 
-      if(top < this.windowScrollTop) {
-        // scroll up
 
-        if(this.scrollTop === 0) {
+      if (inAppLayoutContent) {
+        console.log(top)
+
+        if(top < this.windowScrollTop) {
+          // scroll up
+          const startTopPosition = top + this.topLimit
+          this.scrollTop = this.scrollTop === 0 
+            ? startTopPosition : this.scrollTop >= top
+            ? top : this.scrollTop + diff
+          this.scrollTop = this.scrollTop < 0 ? 0 : this.scrollTop
+          this.appBar.style.setProperty('top', `${this.scrollTop}px`)
           this.windowScrollTop = top
-          return
+        } else {
+          // scroll down
+          this.windowScrollTop = top
         }
 
-        const scrollTopHarf = this.topLimit / 2
-        const startTopPosition = this.scrollTop === this.topLimit 
-          ? scrollTopHarf 
-          : this.scrollTop + diff
-        this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
-        this.appBar.style.setProperty('top', `${this.scrollTop}px`)
-        this.windowScrollTop = top
-
       } else {
-        // scroll down
+        // only appbar
+        if(top < this.windowScrollTop) {
+          // scroll up
 
-        const moving = this.scrollTop + diff
-        const startTopPosition = -top > this.topLimit 
-          ? -top : moving < this.topLimit 
-          ? this.topLimit : moving
-        this.scrollTop = startTopPosition
-        this.appBar.style.setProperty('top', `${this.scrollTop}px`)
-        this.windowScrollTop = top    
+          if(this.scrollTop === 0) {
+            this.windowScrollTop = top
+            return
+          }
+
+          const scrollTopHarf = this.topLimit / 2
+          const startTopPosition = this.scrollTop === this.topLimit 
+            ? scrollTopHarf 
+            : this.scrollTop + diff
+          this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
+          this.appBar.style.setProperty('top', `${this.scrollTop}px`)
+          this.windowScrollTop = top
+
+        } else {
+          // scroll down
+
+          const moving = this.scrollTop + diff
+          const startTopPosition = -top > this.topLimit 
+            ? -top : moving < this.topLimit 
+            ? this.topLimit : moving
+          this.scrollTop = startTopPosition
+          this.appBar.style.setProperty('top', `${this.scrollTop}px`)
+          this.windowScrollTop = top    
+        }
       }
     }
   }
@@ -192,7 +216,7 @@ export class AppBar {
               <header class="rs-app-bar">
                 <div class="row">
                   <div class="section">
-                    <slot></slot>
+                    <slot />
                   </div>
                 </div>
               </header>

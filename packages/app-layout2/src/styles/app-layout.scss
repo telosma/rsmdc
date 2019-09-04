@@ -1,6 +1,6 @@
 app-layout {
-  display: var(--rs-app-layout--display);
-  height: var(--rs-app-layout--height);
+  display: flex;
+  height: 100%;
 }
 
 .rs-app-layout-content {
