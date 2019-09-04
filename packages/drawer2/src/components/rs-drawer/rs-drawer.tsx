@@ -46,11 +46,13 @@ export class Drawer {
 
   @Method()
   async closeDrawerMotion() {
+    this.el.setAttribute('closing', 'closing')
     this.drawer.classList.add('-closing')
     this.drawer.classList.remove('-opening')
     setTimeout(() => {
       this.drawer.classList.remove('-open')
       this.drawer.classList.remove('-closing')
+      this.el.removeAttribute('closing')
     }, 200)
   }
 
