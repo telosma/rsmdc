@@ -59,12 +59,20 @@ export class Drawer {
   componentDidLoad() {
     this.drawer = this.el.shadowRoot.querySelector('.rs-drawer')
     const scrim = this.el.shadowRoot.querySelector('.scrim')
+    const body = window.document.querySelector('body')
 
     this.isOpened()
 
     scrim.addEventListener('click', () => {
       console.log('scrim emit')
       this.change.emit()
+    })
+
+    this.drawer.addEventListener('mouseover', () => {
+      body.style.setProperty('overflow', 'hidden')
+    })
+    this.drawer.addEventListener('mouseout', () => {
+      body.style.setProperty('overflow', 'auto')
     })
   }
 

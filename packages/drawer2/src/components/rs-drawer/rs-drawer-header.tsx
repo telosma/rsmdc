@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Element, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'rs-drawer-header',
@@ -6,6 +6,15 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true
 })
 export class DrawerHeader {
+
+  @Element() el: HTMLElement
+
+  componentDidLoad() {
+    const height = this.el.getBoundingClientRect().height
+    const body = window.document.querySelector('body')
+    body.style.setProperty('--rs-drawer-content---height', `calc(100% - ${height}px)`)    
+  }
+
   render() {
     return  <Host>
               <header class="rs-drawer-header">

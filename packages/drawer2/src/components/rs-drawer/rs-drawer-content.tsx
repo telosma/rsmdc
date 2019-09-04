@@ -8,9 +8,9 @@ import { Component, Host, h } from '@stencil/core';
 export class DrawerContent {
   render() {
     return  <Host>
-              <header class="rs-drawer-content">
+              <div class="rs-drawer-content">
                 <slot />
-              </header>
+              </div>
             </Host>
   }
 }
