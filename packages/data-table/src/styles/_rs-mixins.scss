@@ -9,30 +9,9 @@
 }
 
 @mixin rs-data-table-header-row-fill-color($color) {
-  .rs-data-table > .table > .header > .headerrow {
+  rs-data-table-header > rs-data-table-row {
     background-color: $color;
   }
-}
-
-@mixin rs-data-table-selected-row-fill-color($color) {
-  .rs-checkbox.-selected {
-    // background-color: $color;
-  }
-}
-
-@mixin rs-data-table-checked-icon-color($color) {
-  .header-row-checkbox,
-  .row-checkbox {
-    @include rs-checkbox-focus-indicator-color($color);
-    @include rs-checkbox-container-colors(
-      $marked-stroke-color: $color,
-      $marked-fill-color: $color
-    );
-  }
-}
-
-@mixin rs-data-table-theme-baseline {
-  @include rs-data-table-checked-icon-color($rs-data-table-checked-icon-color);
 }
 
 @mixin rs-data-table-divider-color($color) {
@@ -52,18 +31,6 @@
   .rs-data-table-row:hover {
     background-color: $color;
   }
-}
-
-@mixin rs-data-table-header-row-text-color($color) {
-  // .rs-data-table-header {
-  //   color: $color;
-  // }
-}
-
-@mixin rs-data-table-row-text-color($color) {
-  // .rs-data-table-body{
-  //   color: $color;
-  // }
 }
 
 @mixin rs-data-table-shape-radius($radius) {
@@ -98,7 +65,6 @@
   rs-data-table-cell {
     padding-right: $trailing-padding;
     padding-left: $leading-padding;
-    // @include rs-rtl-reflexive-property(padding, $leading-padding, 0);
   }
 }
 
@@ -121,20 +87,11 @@
     @include rs-data-table-header-row-fill-color(
       $rs-data-table-header-row-fill-color
     );
-    @include rs-data-table-selected-row-fill-color(
-      $rs-data-table-selected-row-fill-color
-    );
     @include rs-data-table-divider-color($rs-data-table-divider-color);
     @include rs-data-table-divider-size($rs-data-table-divider-size);
     @include rs-data-table-row-hover-fill-color(
       $rs-data-table-row-hover-fill-color
     );
-    @include rs-data-table-header-row-text-color(
-      $rs-data-table-header-row-text-color
-    );
-    @include rs-data-table-row-text-color($rs-data-table-row-text-color);
-    // @include rs-data-table-header-row-height($rs-data-table-header-row-height);
-    // @include rs-data-table-row-height($rs-data-table-row-height);
     @include rs-data-table-cell-padding(
       $leading-padding: $rs-data-table-cell-leading-padding,
       $trailing-padding: $rs-data-table-cell-trailing-padding
