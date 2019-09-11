@@ -1,0 +1,26 @@
+@mixin rs-data-table-head-text-align($type) {
+  .rs-data-table {
+    z-index: auto;
+  }
+  @if $type == center {
+     rs-data-table-header > rs-data-table-row > rs-data-table-cell {
+      justify-content: center;
+    }
+  } @else if $type == right {
+    rs-data-table-header > rs-data-table-row > rs-data-table-cell {
+      justify-content: flex-end;
+    }
+  }
+}
+
+@mixin rs-data-table-body-text-align($type) {
+  @if $type == center {
+    rs-data-table-body > rs-data-table-row > rs-data-table-cell {
+      justify-content: center;
+    }
+  } @else if $type == right {
+    rs-data-table-body > rs-data-table-row > rs-data-table-cell {
+      justify-content: flex-end;
+    }
+  }
+}

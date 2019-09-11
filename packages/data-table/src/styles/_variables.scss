@@ -25,20 +25,20 @@
 $rs-data-table-fill-color: surface !default;
 $rs-data-table-header-row-fill-color: inherit !default;
 $rs-data-table-row-fill-color: inherit !default;
-$rs-data-table-selected-row-fill-color: rgba(rs-theme-prop-value(primary), .04) !default;
+$rs-data-table-selected-row-fill-color: rgba(rs-theme-prop-value(primary),0.04) !default;
 
 $rs-data-table-checked-icon-color: primary !default;
-$rs-data-table-divider-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
+$rs-data-table-divider-color: rgba(rs-theme-prop-value(on-surface),0.12) !default;
 $rs-data-table-divider-size: 1px !default;
-$rs-data-table-row-hover-fill-color: rgba(rs-theme-prop-value(on-surface), .04) !default;
+$rs-data-table-row-hover-fill-color: rgba(rs-theme-prop-value(on-surface),0.04) !default;
 $rs-data-table-checkbox-touch-dimension: 48px !default;
 
-$rs-data-table-header-row-text-color: rgba(rs-theme-prop-value(on-surface), .87) !default;
-$rs-data-table-row-text-color: rgba(rs-theme-prop-value(on-surface), .87) !default;
+$rs-data-table-header-row-text-color: rgba(rs-theme-prop-value(on-surface),0.87) !default;
+$rs-data-table-row-text-color: rgba(rs-theme-prop-value(on-surface),0.87) !default;
 
 $rs-data-table-shape-radius: medium !default;
 $rs-data-table-stroke-size: 1px !default;
-$rs-data-table-stroke-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
+$rs-data-table-stroke-color: rgba(rs-theme-prop-value(on-surface),0.12) !default;
 
 $rs-data-table-row-height: 52px !default;
 $rs-data-table-header-row-height: $rs-data-table-row-height + 4px !default;

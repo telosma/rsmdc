@@ -21,14 +21,17 @@
  * THE SOFTWARE.
  */
 
-import {RSComponent} from '@rsmdc/base/component';
-import {SpecificEventListener} from '@rsmdc/base/types';
-import {RSCheckbox, RSCheckboxFactory} from '@rsmdc/checkbox/component';
-import {closest} from '@rsmdc/dom/ponyfill';
-import {RSDataTableAdapter} from './adapter';
-import {cssClasses, events, strings} from './constants';
-import {RSDataTableFoundation} from './foundation';
-import {RSDataTableRowSelectionChangedEventDetail} from './types';
+import { RSComponent } from "@rsmdc/base/component";
+import { SpecificEventListener } from "@rsmdc/base/types";
+import {
+  RSCheckbox,
+  RSCheckboxFactory
+} from "@rsmdc/checkbox/src/utils/component";
+import { closest } from "@rsmdc/dom/ponyfill";
+import { RSDataTableAdapter } from "./adapter";
+import { cssClasses, events, strings } from "./constants";
+import { RSDataTableFoundation } from "./foundation";
+import { RSDataTableRowSelectionChangedEventDetail } from "./types";
 
 export class RSDataTable extends RSComponent<RSDataTableFoundation> {
   static attachTo(root: Element): RSDataTable {
@@ -40,21 +43,32 @@ export class RSDataTable extends RSComponent<RSDataTableFoundation> {
   private checkboxFactory_!: RSCheckboxFactory;
   private headerRow_!: HTMLElement;
   private content_!: HTMLElement;
-  private handleHeaderRowCheckboxChange_!: SpecificEventListener<'change'>;
-  private handleRowCheckboxChange_!: SpecificEventListener<'change'>;
+  private handleHeaderRowCheckboxChange_!: SpecificEventListener<"change">;
+  private handleRowCheckboxChange_!: SpecificEventListener<"change">;
 
-  initialize(checkboxFactory: RSCheckboxFactory = (el: Element) => new RSCheckbox(el)) {
+  initialize(
+    checkboxFactory: RSCheckboxFactory = (el: Element) => new RSCheckbox(el)
+  ) {
     this.checkboxFactory_ = checkboxFactory;
   }
 
   initialSyncWithDOM() {
-    this.headerRow_ = this.root_.querySelector(`.${cssClasses.HEADER_ROW}`) as HTMLElement;
-    this.handleHeaderRowCheckboxChange_ = () => this.foundation_.handleHeaderRowCheckboxChange();
-    this.headerRow_.addEventListener('change', this.handleHeaderRowCheckboxChange_);
+    this.headerRow_ = this.root_.querySelector(
+      `.${cssClasses.HEADER_ROW}`
+    ) as HTMLElement;
+    this.handleHeaderRowCheckboxChange_ = () =>
+      this.foundation_.handleHeaderRowCheckboxChange();
+    this.headerRow_.addEventListener(
+      "change",
+      this.handleHeaderRowCheckboxChange_
+    );
 
-    this.content_ = this.root_.querySelector(`.${cssClasses.CONTENT}`) as HTMLElement;
-    this.handleRowCheckboxChange_ = (event) => this.foundation_.handleRowCheckboxChange(event);
-    this.content_.addEventListener('change', this.handleRowCheckboxChange_);
+    this.content_ = this.root_.querySelector(
+      `.${cssClasses.CONTENT}`
+    ) as HTMLElement;
+    this.handleRowCheckboxChange_ = event =>
+      this.foundation_.handleRowCheckboxChange(event);
+    this.content_.addEventListener("change", this.handleRowCheckboxChange_);
 
     this.layout();
   }
@@ -76,7 +90,7 @@ export class RSDataTable extends RSComponent<RSDataTableFoundation> {
   /**
    * @return Returns array of selected row ids.
    */
-  getSelectedRowIds(): Array<string|null> {
+  getSelectedRowIds(): Array<string | null> {
     return this.foundation_.getSelectedRowIds();
   }
 
@@ -89,11 +103,14 @@ export class RSDataTable extends RSComponent<RSDataTableFoundation> {
   }
 
   destroy() {
-    this.headerRow_.removeEventListener('change', this.handleHeaderRowCheckboxChange_);
-    this.content_.removeEventListener('change', this.handleRowCheckboxChange_);
+    this.headerRow_.removeEventListener(
+      "change",
+      this.handleHeaderRowCheckboxChange_
+    );
+    this.content_.removeEventListener("change", this.handleRowCheckboxChange_);
 
     this.headerRowCheckbox_.destroy();
-    this.rowCheckboxList_.forEach((checkbox) => checkbox.destroy());
+    this.rowCheckboxList_.forEach(checkbox => checkbox.destroy());
   }
 
   getDefaultFoundation() {
@@ -101,51 +118,75 @@ export class RSDataTable extends RSComponent<RSDataTableFoundation> {
     // To ensure we don't accidentally omit any methods, we need a separate, strongly typed adapter variable.
     // tslint:disable:object-literal-sort-keys Methods should be in the same order as the adapter interface.
     const adapter: RSDataTableAdapter = {
-      addClassAtRowIndex: (rowIndex: number, className: string) => this.getRows()[rowIndex].classList.add(className),
+      addClassAtRowIndex: (rowIndex: number, className: string) =>
+        this.getRows()[rowIndex].classList.add(className),
       getRowCount: () => this.getRows().length,
-      getRowElements: () => [].slice.call(this.root_.querySelectorAll(strings.ROW_SELECTOR)),
-      getRowIdAtIndex: (rowIndex: number) => this.getRows()[rowIndex].getAttribute(strings.DATA_ROW_ID_ATTR),
+      getRowElements: () =>
+        [].slice.call(this.root_.querySelectorAll(strings.ROW_SELECTOR)),
+      getRowIdAtIndex: (rowIndex: number) =>
+        this.getRows()[rowIndex].getAttribute(strings.DATA_ROW_ID_ATTR),
       getRowIndexByChildElement: (el: Element) => {
-        return this.getRows().indexOf((closest(el, strings.ROW_SELECTOR) as HTMLElement));
+        return this.getRows().indexOf(closest(
+          el,
+          strings.ROW_SELECTOR
+        ) as HTMLElement);
       },
-      getSelectedRowCount: () => this.root_.querySelectorAll(strings.ROW_SELECTED_SELECTOR).length,
-      isCheckboxAtRowIndexChecked: (rowIndex: number) => this.rowCheckboxList_[rowIndex].checked,
+      getSelectedRowCount: () =>
+        this.root_.querySelectorAll(strings.ROW_SELECTED_SELECTOR).length,
+      isCheckboxAtRowIndexChecked: (rowIndex: number) =>
+        this.rowCheckboxList_[rowIndex].checked,
       isHeaderRowCheckboxChecked: () => this.headerRowCheckbox_.checked,
-      isRowsSelectable: () => !!this.root_.querySelector(strings.ROW_CHECKBOX_SELECTOR),
-      notifyRowSelectionChanged: (data: RSDataTableRowSelectionChangedEventDetail) => {
-        this.emit(events.ROW_SELECTION_CHANGED, {
-          row: this.getRowByIndex_(data.rowIndex),
-          rowId: this.getRowIdByIndex_(data.rowIndex),
-          rowIndex: data.rowIndex,
-          selected: data.selected,
-        },
-        /** shouldBubble */ true);
+      isRowsSelectable: () =>
+        !!this.root_.querySelector(strings.ROW_CHECKBOX_SELECTOR),
+      notifyRowSelectionChanged: (
+        data: RSDataTableRowSelectionChangedEventDetail
+      ) => {
+        this.emit(
+          events.ROW_SELECTION_CHANGED,
+          {
+            row: this.getRowByIndex_(data.rowIndex),
+            rowId: this.getRowIdByIndex_(data.rowIndex),
+            rowIndex: data.rowIndex,
+            selected: data.selected
+          },
+          /** shouldBubble */ true
+        );
       },
-      notifySelectedAll: () => this.emit(events.SELECTED_ALL, {}, /** shouldBubble */ true),
-      notifyUnselectedAll: () => this.emit(events.UNSELECTED_ALL, {}, /** shouldBubble */ true),
+      notifySelectedAll: () =>
+        this.emit(events.SELECTED_ALL, {}, /** shouldBubble */ true),
+      notifyUnselectedAll: () =>
+        this.emit(events.UNSELECTED_ALL, {}, /** shouldBubble */ true),
       registerHeaderRowCheckbox: () => {
         if (this.headerRowCheckbox_) {
           this.headerRowCheckbox_.destroy();
         }
 
-        const checkboxEl = (this.root_.querySelector(strings.HEADER_ROW_CHECKBOX_SELECTOR) as HTMLElement);
+        const checkboxEl = this.root_.querySelector(
+          strings.HEADER_ROW_CHECKBOX_SELECTOR
+        ) as HTMLElement;
         this.headerRowCheckbox_ = this.checkboxFactory_(checkboxEl);
       },
       registerRowCheckboxes: () => {
         if (this.rowCheckboxList_) {
-          this.rowCheckboxList_.forEach((checkbox) => checkbox.destroy());
+          this.rowCheckboxList_.forEach(checkbox => checkbox.destroy());
         }
 
         this.rowCheckboxList_ = [];
-        this.getRows().forEach((rowEl) => {
-          const checkbox = this.checkboxFactory_((rowEl.querySelector(strings.ROW_CHECKBOX_SELECTOR) as HTMLElement));
+        this.getRows().forEach(rowEl => {
+          const checkbox = this.checkboxFactory_(rowEl.querySelector(
+            strings.ROW_CHECKBOX_SELECTOR
+          ) as HTMLElement);
           this.rowCheckboxList_.push(checkbox);
         });
       },
       removeClassAtRowIndex: (rowIndex: number, className: string) => {
         this.getRows()[rowIndex].classList.remove(className);
       },
-      setAttributeAtRowIndex: (rowIndex: number, attr: string, value: string) => {
+      setAttributeAtRowIndex: (
+        rowIndex: number,
+        attr: string,
+        value: string
+      ) => {
         this.getRows()[rowIndex].setAttribute(attr, value);
       },
       setHeaderRowCheckboxChecked: (checked: boolean) => {
@@ -156,7 +197,7 @@ export class RSDataTable extends RSComponent<RSDataTableFoundation> {
       },
       setRowCheckboxCheckedAtIndex: (rowIndex: number, checked: boolean) => {
         this.rowCheckboxList_[rowIndex].checked = checked;
-      },
+      }
     };
     return new RSDataTableFoundation(adapter);
   }

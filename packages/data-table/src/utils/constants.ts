@@ -22,7 +22,7 @@
  */
 
 export const cssClasses = {
-  CELL: '__cell',
+  CELL: 'cell',
   CELL_NUMERIC: '-numeric',
   CONTENT: 'content',
   HEADER_ROW: 'headerrow',

@@ -9,53 +9,67 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
+  interface RsDataTable {}
+  interface RsDataTableBody {}
+  interface RsDataTableCell {}
+  interface RsDataTableHeader {}
+  interface RsDataTableRow {}
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLRsDataTableElement extends Components.RsDataTable, HTMLStencilElement {}
+  var HTMLRsDataTableElement: {
+    prototype: HTMLRsDataTableElement;
+    new (): HTMLRsDataTableElement;
+  };
+
+  interface HTMLRsDataTableBodyElement extends Components.RsDataTableBody, HTMLStencilElement {}
+  var HTMLRsDataTableBodyElement: {
+    prototype: HTMLRsDataTableBodyElement;
+    new (): HTMLRsDataTableBodyElement;
+  };
+
+  interface HTMLRsDataTableCellElement extends Components.RsDataTableCell, HTMLStencilElement {}
+  var HTMLRsDataTableCellElement: {
+    prototype: HTMLRsDataTableCellElement;
+    new (): HTMLRsDataTableCellElement;
+  };
+
+  interface HTMLRsDataTableHeaderElement extends Components.RsDataTableHeader, HTMLStencilElement {}
+  var HTMLRsDataTableHeaderElement: {
+    prototype: HTMLRsDataTableHeaderElement;
+    new (): HTMLRsDataTableHeaderElement;
+  };
+
+  interface HTMLRsDataTableRowElement extends Components.RsDataTableRow, HTMLStencilElement {}
+  var HTMLRsDataTableRowElement: {
+    prototype: HTMLRsDataTableRowElement;
+    new (): HTMLRsDataTableRowElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'rs-data-table': HTMLRsDataTableElement;
+    'rs-data-table-body': HTMLRsDataTableBodyElement;
+    'rs-data-table-cell': HTMLRsDataTableCellElement;
+    'rs-data-table-header': HTMLRsDataTableHeaderElement;
+    'rs-data-table-row': HTMLRsDataTableRowElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
+  interface RsDataTable extends JSXBase.HTMLAttributes<HTMLRsDataTableElement> {}
+  interface RsDataTableBody extends JSXBase.HTMLAttributes<HTMLRsDataTableBodyElement> {}
+  interface RsDataTableCell extends JSXBase.HTMLAttributes<HTMLRsDataTableCellElement> {}
+  interface RsDataTableHeader extends JSXBase.HTMLAttributes<HTMLRsDataTableHeaderElement> {}
+  interface RsDataTableRow extends JSXBase.HTMLAttributes<HTMLRsDataTableRowElement> {}
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'rs-data-table': RsDataTable;
+    'rs-data-table-body': RsDataTableBody;
+    'rs-data-table-cell': RsDataTableCell;
+    'rs-data-table-header': RsDataTableHeader;
+    'rs-data-table-row': RsDataTableRow;
   }
 }
 

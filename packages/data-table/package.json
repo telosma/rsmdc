@@ -1,6 +1,6 @@
 {
-  "name": "data-table",
-  "version": "0.0.1",
+  "name": "@rsmdc/data-table",
+  "version": "1.1.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,17 +12,28 @@
   "unpkg": "dist/data-table/data-table.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/",
+    "rs-data-table.scss"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "convert": "node ../../converter/index.js",
+    "build": "yarn convert && stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
   "devDependencies": {
-    "@stencil/core": "^1.3.0"
+    "@stencil/core": "^1.3.0",
+    "@rsmdc/animation": "^1.1.0",
+    "@rsmdc/elevation": "^1.1.0",
+    "@rsmdc/rtl": "^1.1.0",
+    "@rsmdc/theme": "^1.1.0",
+    "@rsmdc/shape": "^1.1.0",
+    "@rsmdc/typography": "^1.1.0",
+    "@rsmdc/checkbox": "^1.1.15"
   },
   "license": "MIT"
 }

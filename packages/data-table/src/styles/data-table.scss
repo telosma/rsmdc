@@ -1,0 +1,78 @@
+@import "@rsmdc/animation/functions";
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/checkbox/src/styles/mixins";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/typography/mixins";
+@import "./variables";
+@import "./rs-mixins";
+@import "./mixins";
+
+.rs-data-table {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border-radius: 4px;
+
+  > .table {
+    width: 100%;
+    border: 0;
+    white-space: nowrap;
+    border-collapse: collapse;
+  }
+}
+
+.rs-data-table-header,
+.rs-data-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.rs-data-table-row {
+  height: $rs-data-table-header-row-height;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &.-selected {
+    background: $rs-data-table-selected-row-fill-color;
+  }
+}
+
+.rs-data-table-header {
+  @include rs-typography(subtitle2);
+  color: $rs-theme-on-surface;
+}
+
+.rs-data-table-body {
+  @include rs-typography(body2);
+  color: $rs-theme-on-surface;
+}
+
+rs-data-table {
+  display: table;
+}
+rs-data-table-header {
+  display: table-header-group;
+}
+rs-data-table-body {
+  display: table-row-group;
+}
+rs-data-table-row {
+  display: table-row;
+}
+
+rs-data-table-cell {
+  display: table-cell;
+}
+
+rs-data-table-header > rs-data-table-row > rs-data-table-cell {
+  display: flex;
+  justify-content: flex-start;
+}
+
+rs-data-table-body > rs-data-table-row > rs-data-table-cell {
+  display: flex;
+  justify-content: flex-start;
+}
