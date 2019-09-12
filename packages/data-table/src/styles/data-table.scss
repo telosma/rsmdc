@@ -1,6 +1,5 @@
 @import "@rsmdc/animation/functions";
 @import "@rsmdc/elevation/mixins";
-@import "@rsmdc/checkbox/src/styles/mixins";
 @import "@rsmdc/rtl/mixins";
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/theme/mixins";
@@ -13,9 +12,8 @@
 .rs-data-table {
   width: 100%;
   box-sizing: border-box;
-  overflow-x: auto;
   border-radius: 4px;
-
+  height: 100%;
   > .table {
     width: 100%;
     border: 0;
@@ -35,8 +33,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  &:hover:not(.-header) {
+    background: $rs-data-table-row-hover-fill-color;
+  }
   &.-selected {
     background: $rs-data-table-selected-row-fill-color;
+
+    &:hover {
+      background: $rs-data-table-selected-row-fill-color;
+    }
   }
 }
 
@@ -48,17 +53,22 @@
 .rs-data-table-body {
   @include rs-typography(body2);
   color: $rs-theme-on-surface;
+  height: 100%;
 }
 
 rs-data-table {
   display: table;
 }
+
 rs-data-table-header {
   display: table-header-group;
+  background: #fff;
 }
+
 rs-data-table-body {
   display: table-row-group;
 }
+
 rs-data-table-row {
   display: table-row;
 }

@@ -8,18 +8,22 @@ import { Component, Element, Host, h } from "@stencil/core";
 export class DataTableCell {
   @Element() el: HTMLElement;
 
-  dataTableCell: HTMLElement
+  dataTableCell: HTMLElement;
 
   componentDidLoad() {
-    this.dataTableCell = this.el.shadowRoot.querySelector('.rs-data-table-cell')
+    this.dataTableCell = this.el.shadowRoot.querySelector(
+      ".rs-data-table-cell"
+    );
 
-    const slot = this.el.shadowRoot.querySelector('slot')
-    
-    const checkboxes = Array.from(slot.assignedElements().filter(e => e.tagName === 'RS-CHECKBOX'))
+    const slot = this.el.shadowRoot.querySelector("slot");
+
+    const checkboxes = Array.from(
+      slot.assignedElements().filter(e => e.tagName === "RS-CHECKBOX")
+    );
     if (checkboxes.length > 0) {
       this.dataTableCell.classList.add("-checkbox");
-      this.el.style.paddingRight = '0px'
-      this.el.style.justifyContent = 'flex-start'
+      this.dataTableCell.style.paddingRight = "0px";
+      this.el.style.justifyContent = "flex-start";
     }
   }
 

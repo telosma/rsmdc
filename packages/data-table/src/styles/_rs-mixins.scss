@@ -27,16 +27,6 @@
   }
 }
 
-@mixin rs-data-table-row-hover-fill-color($color) {
-  .rs-data-table-row:hover {
-    background-color: $color;
-  }
-}
-
-@mixin rs-data-table-shape-radius($radius) {
-  @include rs-shape-radius($radius);
-}
-
 @mixin rs-data-table-stroke-size($size) {
   border-width: $size;
   border-style: solid;
@@ -44,18 +34,6 @@
 
 @mixin rs-data-table-stroke-color($color) {
   border-color: $color;
-}
-
-@mixin rs-data-table-header-row-height($height) {
-  .rs-data-table-row {
-    height: $rs-data-table-header-row-height;
-  }
-}
-
-@mixin rs-data-table-row-height($height) {
-  .rs-data-table-row {
-    height: $height;
-  }
 }
 
 @mixin rs-data-table-cell-padding(
@@ -78,7 +56,6 @@
 
 .rs-data-table {
   @include rs-data-table-fill-color($rs-data-table-fill-color);
-  @include rs-data-table-shape-radius($rs-data-table-shape-radius);
   @include rs-data-table-stroke-size($rs-data-table-stroke-size);
   @include rs-data-table-stroke-color($rs-data-table-stroke-color);
 
@@ -89,9 +66,6 @@
     );
     @include rs-data-table-divider-color($rs-data-table-divider-color);
     @include rs-data-table-divider-size($rs-data-table-divider-size);
-    @include rs-data-table-row-hover-fill-color(
-      $rs-data-table-row-hover-fill-color
-    );
     @include rs-data-table-cell-padding(
       $leading-padding: $rs-data-table-cell-leading-padding,
       $trailing-padding: $rs-data-table-cell-trailing-padding

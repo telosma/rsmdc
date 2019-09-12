@@ -9,8 +9,13 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsDataTable {}
-  interface RsDataTableBody {}
+  interface RsDataTable {
+    'fixed': boolean;
+    'isFixed': () => Promise<void>;
+  }
+  interface RsDataTableBody {
+    'isCheckboxChecked': (checkbox: any, row: any) => Promise<void>;
+  }
   interface RsDataTableCell {}
   interface RsDataTableHeader {}
   interface RsDataTableRow {}
@@ -58,7 +63,9 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface RsDataTable extends JSXBase.HTMLAttributes<HTMLRsDataTableElement> {}
+  interface RsDataTable extends JSXBase.HTMLAttributes<HTMLRsDataTableElement> {
+    'fixed'?: boolean;
+  }
   interface RsDataTableBody extends JSXBase.HTMLAttributes<HTMLRsDataTableBodyElement> {}
   interface RsDataTableCell extends JSXBase.HTMLAttributes<HTMLRsDataTableCellElement> {}
   interface RsDataTableHeader extends JSXBase.HTMLAttributes<HTMLRsDataTableHeaderElement> {}

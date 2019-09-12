@@ -1,10 +1,11 @@
-@mixin rs-data-table-head-text-align($type) {
-  .rs-data-table {
-    z-index: auto;
-  }
+@mixin rs-data-table-header-text-align($type) {
   @if $type == center {
-     rs-data-table-header > rs-data-table-row > rs-data-table-cell {
+    rs-data-table-header > rs-data-table-row > rs-data-table-cell {
       justify-content: center;
+    }
+
+    .dummy1 {
+      color: green;
     }
   } @else if $type == right {
     rs-data-table-header > rs-data-table-row > rs-data-table-cell {
@@ -18,9 +19,22 @@
     rs-data-table-body > rs-data-table-row > rs-data-table-cell {
       justify-content: center;
     }
+
+    .dummy2 {
+      z-index: auto;
+    }
   } @else if $type == right {
     rs-data-table-body > rs-data-table-row > rs-data-table-cell {
       justify-content: flex-end;
     }
   }
 }
+
+@mixin rs-data-table-height($height) {
+
+  .rs-data-table-body {
+    height: $height;
+  }
+}
+
+
