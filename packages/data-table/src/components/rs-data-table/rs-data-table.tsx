@@ -10,8 +10,6 @@ export class DataTable {
 
   @Prop() fixed: boolean;
 
-  dataTable: HTMLElement;
-
   dataTableBody: Element
 
   dataTableHeader: Element
@@ -41,7 +39,6 @@ export class DataTable {
   }
 
   componentDidLoad() {
-    this.dataTable = this.el.shadowRoot.querySelector(".rs-data-table");
     const slot = this.el.shadowRoot.querySelector("slot");
 
     slot.addEventListener("slotchange", () => {
@@ -50,21 +47,6 @@ export class DataTable {
       this.dataTableBody = children.find(child => child.tagName === 'RS-DATA-TABLE-BODY')
 
       // adjust cell width to most long width
-      const cellsWitdh = children.map(child => {
-        const childSlot = child.shadowRoot.querySelector("slot");
-        const rows = Array.from(childSlot.assignedElements());
-
-        return rows.map(row => {
-          const rowSlot = row.shadowRoot.querySelector("slot");
-          const cells = Array.from(
-            rowSlot
-              .assignedElements()
-              .filter(e => e.tagName === "RS-DATA-TABLE-CELL")
-          );
-          return cells.map(cell => cell.getBoundingClientRect().width);
-        });
-      });
-
       const cells = children.map(child => {
         const childSlot = child.shadowRoot.querySelector("slot");
         const rows = Array.from(childSlot.assignedElements());
@@ -78,9 +60,26 @@ export class DataTable {
           );
         });
       });
-
       const flatCells = cells[0].concat(cells[1]);
-      const b = [];
+
+      const cellsWidth = children.map(child => {
+        const childSlot = child.shadowRoot.querySelector("slot");
+        const rows = Array.from(childSlot.assignedElements());
+
+        return rows.map(row => {
+          const rowSlot = row.shadowRoot.querySelector("slot");
+          const cells = Array.from(
+            rowSlot
+              .assignedElements()
+              .filter(e => e.tagName === "RS-DATA-TABLE-CELL")
+          );
+          return cells.map(cell => cell.getBoundingClientRect().width);
+        });
+      });
+      const flatCellsWidth = cellsWidth[0].concat(cellsWidth[1]);
+
+
+      const verticalCells = [];
       for (let i = 0; i < flatCells.length; i++) {
         const arr = [];
         for (let n = 0; n < flatCells.length; n++) {
@@ -88,11 +87,10 @@ export class DataTable {
             arr.push(flatCells[n][i]);
           }
         }
-        b.push(arr);
+        verticalCells.push(arr);
       }
 
-      const flatCellsWidth = cellsWitdh[0].concat(cellsWitdh[1]);
-      const a = [];
+      const verticalCellsWidth = [];
       for (let i = 0; i < flatCellsWidth.length; i++) {
         const arr = [];
         for (let n = 0; n < flatCellsWidth.length; n++) {
@@ -100,9 +98,9 @@ export class DataTable {
             arr.push(flatCellsWidth[n][i]);
           }
         }
-        a.push(arr);
+        verticalCellsWidth.push(arr);
         const maxWidth = Math.max.apply(null, arr);
-        b[i].forEach(cell => {
+        verticalCells[i].forEach(cell => {
           if (cell) {
             const checkboxes = Array.from(
               cell.shadowRoot.querySelector("slot").assignedElements()
@@ -116,8 +114,6 @@ export class DataTable {
       this.isFixed();
     });
   }
-
-  componentDidRender() {}
 
   render() {
     return (
