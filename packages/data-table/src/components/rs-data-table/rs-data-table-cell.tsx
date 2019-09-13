@@ -22,7 +22,7 @@ export class DataTableCell {
     );
     if (checkboxes.length > 0) {
       this.dataTableCell.classList.add("-checkbox");
-      this.dataTableCell.style.paddingRight = "0px";
+      // this.dataTableCell.style.paddingRight = "0px";
       this.el.style.justifyContent = "flex-start";
     }
   }
