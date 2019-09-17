@@ -40,9 +40,12 @@
   $leading-padding: $rs-data-table-cell-leading-padding,
   $trailing-padding: $rs-data-table-cell-trailing-padding
 ) {
-  rs-data-table-cell {
+  .rs-data-table-cell {
     padding-right: $trailing-padding;
     padding-left: $leading-padding;
+    &.-checkbox {
+      padding-right: 0;
+    }
   }
 }
 

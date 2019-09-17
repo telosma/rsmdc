@@ -40,7 +40,7 @@ export class DataTable {
 
   componentDidLoad() {
     const slot = this.el.shadowRoot.querySelector("slot");
-
+    
     slot.addEventListener("slotchange", () => {
       const children = Array.from(slot.assignedElements());
       this.dataTableHeader = children.find(child => child.tagName === 'RS-DATA-TABLE-HEADER')
