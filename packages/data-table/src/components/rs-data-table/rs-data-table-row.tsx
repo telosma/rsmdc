@@ -1,4 +1,4 @@
-import { Component, Element, Host, h } from "@stencil/core";
+import { Component, Host, h } from "@stencil/core";
 
 @Component({
   tag: "rs-data-table-row",
@@ -6,14 +6,6 @@ import { Component, Element, Host, h } from "@stencil/core";
   shadow: true
 })
 export class DataTableRow {
-  @Element() el: HTMLElement;
-  
-  dataTableRow: HTMLElement;
-
-  componentDidLoad() {
-    this.dataTableRow = this.el.shadowRoot.querySelector(".rs-data-table-row");
-  }
-
   render() {
     return (
       <Host>

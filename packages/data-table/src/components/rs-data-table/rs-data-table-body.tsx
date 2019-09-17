@@ -23,9 +23,7 @@ export class DataTableBody {
 
   componentDidLoad() {
     const slot = this.el.shadowRoot.querySelector('slot')
-
     this.rows = Array.from(slot.assignedElements());
-
     this.checkboxes = this.rows.map(row => {
       const cells = Array.from(row
         .shadowRoot
@@ -50,6 +48,18 @@ export class DataTableBody {
       this.isCheckboxChecked(checkbox, row)
 
       checkbox.addEventListener('change', () => {
+        this.isCheckboxChecked(checkbox, row)
+      })
+    })
+  }
+
+  componentDidUnload() {
+    this.checkboxes.forEach((checkbox, i) => {
+      const row = this.rows[i]
+        .shadowRoot
+        .querySelector('.rs-data-table-row')
+
+      checkbox.removeEventListener('change', () => {
         this.isCheckboxChecked(checkbox, row)
       })
     })

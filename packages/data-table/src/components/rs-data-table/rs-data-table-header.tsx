@@ -8,8 +8,6 @@ import { Component, Element, Host, h } from "@stencil/core";
 export class DataTableHeader {
   @Element() el: HTMLElement;
 
-  dataTableHeader: Element;
-
   componentDidLoad() {
     const slot = this.el.shadowRoot.querySelector('slot')
     const rows = Array.from(slot.assignedElements());
