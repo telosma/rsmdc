@@ -135,7 +135,11 @@ const mappingSelectors = (customPropJson, sourceJson) => {
         cJsonAttrs.forEach((attr, i) => {
           const prop = attr.replace(/var\(|\)/g, '')
           let value = sJsonAttrs[i][1].replace(/'\$/g, '#{$').replace(/(?<=[a-z|A-Z])'/g, '}')
-          value = value.replace(/"\$/g, '\'#{$').replace(/(?<=[a-z|A-Z])"/g, '}\'')
+          value = value
+            .replace(/"\$/g, '\'#{$')
+            .replace(/(?<=[a-z|A-Z])"/g, '}\'')
+            .replace(/"(?=[a-z|A-Z])|'(?=[a-z|A-Z])/g, '#{')
+            .replace(/(?<=[a-z|A-Z|\)])"|(?<=[a-z|A-Z|\)])'/g, '}')
           style[sJsonAttrs[i][0]] = `${prop}: ${value};`
         })
       })
@@ -145,8 +149,11 @@ const mappingSelectors = (customPropJson, sourceJson) => {
 
       cJsonAttrs.forEach((attr, i) => {
         const prop = attr.replace(/var\(|\)/g, '')
-        let value = sJsonAttrs[i][1].replace(/'\$|"\$/g, '#{$').replace(/(?<=[a-z|A-Z])'|(?<=[a-z|A-Z])"/g, '}')
-        
+        let value = sJsonAttrs[i][1]
+          .replace(/'\$|"\$/g, '#{$')
+          .replace(/(?<=[a-z|A-Z])'|(?<=[a-z|A-Z])"/g, '}')
+          .replace(/"(?=[a-z|A-Z])|'(?=[a-z|A-Z])/g, '#{')
+          .replace(/(?<=[a-z|A-Z|\)])"|(?<=[a-z|A-Z|\)])'/g, '}')
         style[sJsonAttrs[i][0]] = `${prop}: ${value};`
       })
     }
