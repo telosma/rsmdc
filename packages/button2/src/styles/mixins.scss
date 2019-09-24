@@ -1,0 +1,197 @@
+@import "@rsmdc/elevation/mixins";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "../styles/icon-button/variables";
+@import "../styles/fab/variables";
+@import "./variables";
+
+@mixin rs-button-type($types...) {
+  @each $type in $types {
+    @if $type == outlined {
+      
+      .rs-button {
+        border: solid 2px $rs-theme-primary;
+        
+        &.-disabled {
+          border-color: $rs-button-disabled-ink-color; 
+        }
+      
+      }
+    }@else if $type == raised {
+    
+      .rs-button {
+        box-shadow: rs-elevation(2);
+        transition: rs-elevation-transition-value();
+        @include rs-ripple-upgraded($rs-theme-on-primary);
+
+        &:hover {
+          box-shadow: rs-elevation(4);
+        }
+
+        &:active {
+          box-shadow: rs-elevation(10);
+        }
+        
+        &:not(.-disabled) {
+          background-color: $rs-theme-primary;
+          color: $rs-theme-on-primary;
+        }
+        &.-disabled {
+          background: $rs-button-disabled-fill-color;
+        }
+      }
+
+    } @else if $type == dense {
+    
+      .rs-button {
+        height: $rs-dense-button-height;
+        font-size: 0.8125rem;
+      }
+
+    }@else if $type == unelevated {
+    
+      .rs-button {
+        @include rs-ripple-upgraded($rs-theme-on-primary);
+        
+        &:not(.-disabled) {
+          background-color: $rs-theme-primary;
+          color: $rs-theme-on-primary;
+        }
+        
+        &.-disabled {
+          background: $rs-button-disabled-fill-color;
+        }
+      }
+
+    }@else if $type == fab {
+      
+      .rs-button {
+        --ripple: unbounded;
+        min-width: auto;
+        width: $rs-fab-height;
+        height: $rs-fab-height;
+        border-radius: 50%;
+        box-shadow: rs-elevation(6);
+        transition: rs-elevation-transition-value();
+        @include rs-ripple-upgraded($rs-theme-on-secondary);
+        
+        > .label::before {
+          margin: 0;
+          width: 24px;
+          height: 24px;
+          font-size: 24px;
+        }
+
+        > .label::after {
+          margin: 0;
+          width: 24px;
+          height: 24px;
+          font-size: 24px;
+        }
+
+        &:hover {
+          box-shadow: rs-elevation(8);
+        }
+
+        &:active {
+          box-shadow: rs-elevation(12);
+        }
+
+        &:not(.-disabled) {
+          color: $rs-theme-on-secondary;
+          background-color: $rs-theme-secondary;
+        }
+      }
+    }
+  }
+}
+
+@mixin rs-button-icon-image($icon, $codepoint: "") {
+  $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
+
+  @if $value == path {
+
+    .rs-button {
+      > .label {
+        background-image: $icon;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+  } @else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + "\\"+ $codepoint + '"';
+
+    .rs-button {
+      > .label::before {
+        font-family: $font-family;
+        content: $name;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        vertical-align: top;
+      }
+      
+      > .label::after {
+        font-family: $font-family;
+        content: $name;
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        vertical-align: top;
+        display: none;
+      }
+    }
+  }
+}
+
+@mixin rs-button-icon-position($position: left) {
+  @if $position == left {
+
+     .rs-button {
+      
+      > .label::before {
+        display: inline-block;
+        margin: 0 8px 0 -4px;
+      }
+
+      > .label::after {
+        display: none;
+        margin: 0 -4px 0 8px;
+      }
+    }
+    
+  } @else if $position == right {
+    
+    .rs-button {
+      
+      > .label::before {
+        display: none;
+      }
+
+      > .label::after {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@mixin rs-button-filled-accessible($container-fill-color) {
+  $fill-tone: rs-theme-tone($container-fill-color);
+  @include rs-button-container-fill-color($container-fill-color);
+
+  @if ($fill-tone == "dark") {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
+    @include rs-button-icon-ink-color(
+      rs-theme-ink-color-for-fill_(primary, dark)
+    );
+    @include rs-states(text-primary-on-dark);
+  } @else {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
+    @include rs-button-icon-ink-color(
+      rs-theme-ink-color-for-fill_(primary, light)
+    );
+    @include rs-states(text-primary-on-light);
+  }
+}

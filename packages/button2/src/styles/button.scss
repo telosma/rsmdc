@@ -1,20 +1,30 @@
-@import '@rsmdc/typography/mixins';
-@import '@rsmdc/theme/mixins';
-@import '@rsmdc/shape/functions';
-@import './variables';
+@import "@material/animation/functions";
+@import "@rsmdc/elevation/mixins";
 @import "@rsmdc/ripple/mixins-stencil";
-@import '../styles/icon-button/variables';
-@import './mixins';
-@import './rs-mixins';
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/shape/functions";
+@import "./variables";
+@import "./mixins";
 
 @include rs-ripple-common;
 
-.rs-button2 {
+.rs-button {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+  @include rs-ripple-upgraded($rs-theme-primary);
   @include rs-typography(button);
-
+  display: inline-flex;
   position: relative;
   align-items: center;
+  justify-content: center;
   box-sizing: border-box;
+  min-width: 64px;
+  width: auto;
+  height: $rs-button-height;
   border: none;
   outline: none;
   line-height: inherit;
@@ -23,59 +33,38 @@
   overflow: hidden;
   vertical-align: middle;
   border-radius: 4px;
-  font-size: 0.875rem;
   box-shadow: none;
-  height: $rs-button-height;
-  padding-right: var(--rs-button--padding-right, $rs-button-horizontal-padding);
-  padding-left: var(--rs-button--padding-left, $rs-button-horizontal-padding);
-  padding-top: var(--rs-button--padding-top, 0);
-  padding-bottom: var(--rs-button--padding-bottom, 0);
+  transition: 0;
+  padding: 0 $rs-button-contained-horizontal-padding;
 
-  justify-content: center;
-  display: inline-flex;
-  border-width: var(--rs-button--border-width);
-  border-style: var(--rs-button--border-style);
-  transition: var(--rs-button--transition);
-  opacity: var(--rs-button--opacity);
-  fill: var(--rs-button--fill);
-  cursor: var(--rs-button--cursor);
-  -moz-appearance: var(--rs-button--moz-appearance);
-  color: var(--rs-button--color);
-  background-color: var(--rs-button--background-color);
-  width: var(--rs-button--width);
-  min-width: 64px;
-  max-width: var(--rs-button--max-width);
-  text-decoration: var(--rs-button--text-decoration);
-  text-overflow: var(--rs-button--text-overflow);
-  white-space: var(--rs-button--white-space);
-
-  &.-exited.-fab {
-    transform: scale(0);
-    transition:
-      opacity 15ms linear 150ms,
-      rs-animation-exit-permanent(transform, 180ms);
-    opacity: 0;
+  > .label::before {
+    font-family: 'Courier New', Courier, monospace;
+    content: '';
+    display: inherit;
+    width: auto;
+    height: auto;
+    font-size: medium;
+    vertical-align: baseline;
+    margin: 0 8px 0 -4px;
   }
 
-  &.-icon.-no-text:not(.-fab) {
-    // @include rs-ripple-radius-unbounded;
-
+  > .label::after {
+    font-family: 'Courier New', Courier, monospace;
+    content: '';
+    display: inherit;
+    width: auto;
+    height: auto;
+    font-size: medium;
+    vertical-align: baseline;
+    margin: 0 -4px 0 8px;
+  }
+  
+  &.-no-text {
+    @include rs-ripple-upgraded($rs-theme-on-surface);
     $padding: $rs-icon-button-size / 2;
     $width: $rs-icon-button-size + $padding * 2;
     $height: $rs-icon-button-size + $padding * 2;
     $font-size: max($width, $height);
-
-    --rs-ripple_before--background-color: #{$rs-theme-on-surface};
-    --rs-ripple_after--background-color: #{$rs-theme-on-surface};
-    --rs-ripple_hover_before--opacity: #{rs-states-opacity(on-surface, hover)};
-    --rs-upgraded_-background-focused_before--opacity: #{rs-states-opacity(on-surface, focus)};
-    --rs-ripple_not-upgraded_active_after--opacity: #{rs-states-opacity(on-surface, press)};
-    --rs-ripple-upgraded--rs-ripple-fg-opacity: #{rs-states-opacity(on-surface, press)};
-
-    @include rs-ripple-surface;
-    @include rs-ripple-radius-unbounded;
-    @include rs-ripple-upgraded($rs-theme-on-primary);
-    
     min-width: auto;
     width: $width;
     height: $height;
@@ -83,169 +72,87 @@
     font-size: $font-size;
     display: inline-flex;
     background-color: transparent;
-    fill: currentColor;
-    text-decoration: none;
     cursor: pointer;
+    border-radius: 50%;
+    color: $rs-theme-on-surface;
 
-    &::before {
+    > .label::before {
       width: 24px;
       height: 24px;
+      font-size: 24px;
+      margin: 0;
     }
-
-    &:not(:disabled) {
-      background-color: transparent;
-    }
-
-    &:not(:disabled)::before {
-      color: $rs-theme-on-surface;
-    }
-
-    &:disabled {
-      opacity: 0.38;
-    }
-
-    &:disabled::before {
-      color: #{rs-theme-ink-color-for-fill_(disabled, light)};
-    }
-
   }
 
-  // [dir="rtl"] &,
-  // &[dir="rtl"] {
-  //   border-radius: rs-shape-rtl-radius(medium, false);
-  // }
+  &.-extended {
+    width: auto;
+    max-width: 100%;
+    height: $rs-fab-extended-height;
+    justify-content: flex-start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 24px;
+    font-size: .875rem;
+    padding: 0 $rs-fab-extended-label-padding;
+    line-height: 2.25rem;
+    > .label::before {
+      margin: 0 12px 0 -8px;
+    }
+    > .label::after {
+      margin: 0 -8px 0 12px;
+    }
+  }
+
+  &.-exited {
+    transform: scale(0);
+    transition:
+      opacity 15ms linear 150ms,
+      rs-animation-exit-permanent(transform, 180ms);
+    opacity: 0;
+  }
+
+  &:not(.-disabled).-no-text {
+    color: $rs-theme-on-surface;
+  } 
+
+  &:not(.-disabled) {
+    color: $rs-theme-primary;
+    background-color: transparent;
+  } 
 
   &::-moz-focus-inner {
-    padding: var(--rs-button_moz-focus-inner--padding, 0);
+    padding: 0;
     border: 0;
   }
 
   &:hover {
-    box-shadow: none;
     cursor: pointer;
-  }
-
-  &:focus {
-    box-shadow: var(--rs-button_focus--box-shadow);
-    outline: var(--rs-button_focus--outline);
+    box-shadow: none;
   }
 
   &:active {
-    box-shadow: var(--rs-button_active--box-shadow);
     outline: none;
+    box-shadow: none;
   }
 
-  &:not(:disabled) {
-    background-color: transparent;
-    color: $rs-theme-primary;
-    border-color: none;
-  }
-
-  &:disabled {
+  &.-disabled {
+    color: $rs-button-disabled-ink-color;
+    background: transparent;
     cursor: default;
-    pointer-events: none;    
-    box-shadow: var(--rs-button_disabled--box-shadow);
-    background-color: transparent;
-    color: $rs-button-disabled-ink-color;
-    border-color: var(--rs-button_disabled--border-color);
-    opacity: var(--rs-button_disabled--opacity);
+    pointer-events: none;
+    border-color: inherit;
+    box-shadow: none;
   }
+}
 
-  &::before {
-    background-repeat: no-repeat;
-    background-position: center;
-    
-    color: $rs-theme-primary;
-    display: none;
-    content: '';
-    font-weight: 400;
-    font-family: var(--rs-button_before--font-family);
-    background-image: var(--rs-button_before--background-image);
+@mixin rs-button-filled-accessible($container-fill-color) {
+  $fill-tone: rs-theme-tone($container-fill-color);
+
+  @if ($fill-tone == "dark") {
+    @include rs-button-ink-color(text-primary-on-dark);
+    @include rs-states(text-primary-on-dark);
+  } @else {
+    @include rs-button-ink-color(text-primary-on-light);
+    @include rs-states(text-primary-on-light);
   }
-
-  &::before:disabled{
-    color: $rs-button-disabled-ink-color;
-  }
-
-  &.-no-text::before,
-  &:not(.-no-text).-fab::before {
-    width: 24px;
-    height: 24px;
-    background-size: 24px;
-    font-size: 24px;
-  }
-
-  &:not(.-no-text)::before {
-    width: 18px;
-    height: 18px;
-    background-size: 18px;
-    font-size: 18px;
-  }
-
-  &::after {
-    background-repeat: no-repeat;
-    background-position: center;
-
-    color: var(--rs-button_after--color, $rs-theme-primary);
-    display: none;
-    content: '';
-    font-weight: 400;
-    font-family: var(--rs-button_after--font-family);
-    background-image: var(--rs-button_after--background-image);
-  }
-
-  &::after:disabled{
-    color: $rs-button-disabled-ink-color;
-  }
-  &.-no-text::after,
-  &:not(.-no-text).-fab::after {
-    width: 24px;
-    height: 24px;
-    background-size: 24px;
-    font-size: 24px;
-  }
-
-  &:not(.-no-text)::after {
-    width: 18px;
-    height: 18px;
-    background-size: 18px;
-    font-size: 18px;
-  }
-
-
-  // > .label {
-  //   padding-right: var(--rs-button-label--padding-right);
-  //   padding-left: var(--rs-button-label--padding-left);
-
-  //   .-no-text & {
-  //     // padding-right: 0;
-  //     // padding-left: 0;
-  //   }
-  // }
-
-  // > .ripple {
-  //   @include rs-ripple-surface;
-  //   @include rs-ripple-radius-bounded;
-  //   @include rs-ripple-upgraded($rs-theme-primary);
-
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   overflow: hidden;
-
-  //   .-icon.-no-text:not(.-fab) & {
-  //     // border-radius: 50%;
-  //   }
-
-  //   :focus &  {
-  //     &:hover::before,
-  //     &::before {
-  //       background-color: $rs-theme-primary;
-  //       transition-duration: 75ms;
-  //       opacity: rs-states-opacity(primary, focus);
-  //     }
-  //   }
-  // }
 }

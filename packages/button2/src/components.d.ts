@@ -9,29 +9,36 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsButton2 {
+  interface RsButton {
     'activateRipple': () => Promise<void>;
+    'disabled': boolean;
+    'exited': boolean;
+    'isDisabled': () => Promise<void>;
+    'isExited': () => Promise<void>;
   }
 }
 
 declare global {
 
 
-  interface HTMLRsButton2Element extends Components.RsButton2, HTMLStencilElement {}
-  var HTMLRsButton2Element: {
-    prototype: HTMLRsButton2Element;
-    new (): HTMLRsButton2Element;
+  interface HTMLRsButtonElement extends Components.RsButton, HTMLStencilElement {}
+  var HTMLRsButtonElement: {
+    prototype: HTMLRsButtonElement;
+    new (): HTMLRsButtonElement;
   };
   interface HTMLElementTagNameMap {
-    'rs-button2': HTMLRsButton2Element;
+    'rs-button': HTMLRsButtonElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface RsButton2 extends JSXBase.HTMLAttributes<HTMLRsButton2Element> {}
+  interface RsButton extends JSXBase.HTMLAttributes<HTMLRsButtonElement> {
+    'disabled'?: boolean;
+    'exited'?: boolean;
+  }
 
   interface IntrinsicElements {
-    'rs-button2': RsButton2;
+    'rs-button': RsButton;
   }
 }
 
