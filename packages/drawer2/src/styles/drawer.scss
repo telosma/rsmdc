@@ -96,7 +96,7 @@ rs-drawer[closing] {
 
 rs-drawer + rs-app-layout-content {
   rs-app-bar {
-    --rs-app-bar---position: absolute;
+    --rs-app-bar---position: fixed;
   }
 }
 
