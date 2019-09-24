@@ -20,6 +20,7 @@ rs-drawer[closing] {
 
 .rs-drawer {
   height: 100%;
+  display: block;
 
   > .content {
     @include rs-drawer-item-shape-radius(4px);
@@ -43,6 +44,10 @@ rs-drawer[closing] {
     z-index: $rs-drawer-z-index;
     box-sizing: border-box;
     box-shadow: none;  
+  }
+
+  &.-open-modal {
+    box-shadow: none;
   }
 
   &.-open > .content {
@@ -69,10 +74,7 @@ rs-drawer[closing] {
     height: 100%;
     transition-property: opacity;
     transition-timing-function: $rs-animation-standard-curve-timing-function;
-    z-index: $rs-drawer-z-index - 1;
     background-color: $rs-drawer-modal-scrim-color;
-    opacity: $rs-drawer-modal-scrim-opacity;
-    box-shadow: #{rs-elevation($rs-drawer-modal-elevation)};
   }
 
   &.-open > .scrim {

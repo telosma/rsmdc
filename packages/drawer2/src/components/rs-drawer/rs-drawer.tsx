@@ -80,7 +80,7 @@ export class Drawer {
     return  <Host>
               <div class="rs-drawer">
                 <div class="content">
-                  <slot></slot>
+                  <slot />
                 </div>
                 <div class="scrim" />
               </div>

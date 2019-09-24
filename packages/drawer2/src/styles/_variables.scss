@@ -49,8 +49,8 @@ $rs-drawer-animation-enter: 250ms !default;
 $rs-drawer-animation-exit: 200ms !default;
 
 // Scrim
-$rs-drawer-modal-scrim-color: rs-theme-prop-value(on-surface) !default;
 $rs-drawer-modal-scrim-opacity: .32 !default;
+$rs-drawer-modal-scrim-color: rgba(rs-theme-prop-value(on-surface), $rs-drawer-modal-scrim-opacity) !default;
 
 $rs-drawer-z-index: 6 !default;
 $rs-drawer-modal-elevation: 16 !default;

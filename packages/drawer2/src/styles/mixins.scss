@@ -1,44 +1,45 @@
 @mixin rs-drawer-type($type) {
   @if $type == modal {
-    .rs-drawer.-open {
-      > .content {
-        display: flex;
-      }
+    $elevation: rs-elevation($rs-drawer-modal-elevation);
 
-      > .scrim {
-        display: block;
-      }
-    }
-
-    [opened] + app-layout-content {
-      app-bar {
-        --rs-app-layout-content--margin-left: auto;
-      }
-    }
-
-    :root {
-      --rs-app-layout--display: inline;
-      --rs-app-layout--height: auto;
-    }
-  }@else if $type == dismissible {
     .rs-drawer {
-      > .content {
-        display: none;
-        position: absolute;
-        left: 0;
+      display: flex;
+
+      &.-open-modal {
+        box-shadow: $elevation;
+      }
+
+      &.-open {
+        > .content {
+          display: flex;
+        }
+  
+        > .scrim {
+          display: block;
+        }
       }
     }
 
-    .rs-drawer.-open {
-      > .content {
-        display: flex;
-      }
-    }
+    @at-root {  
+      rs-drawer[opened] {
+        z-index: 100;
+      }      
 
-    :root {
-      --rs-app-layout--display: inline;
-      --rs-app-layout--height: auto;
-      --rs-app-layout-content--margin-left: auto;
+      rs-drawer[opened] + rs-app-layout-content {
+        rs-app-bar {
+          --rs-app-bar---position: absolute;
+          --rs-app-bar---margin-left: auto;
+        }
+      }
+  
+      rs-drawer[opened] + rs-app-layout-content { 
+        --rs-app-layout-content---margin-left: auto;
+      }
     }
   }
 }
+
+// :root {
+//   --rs-app-layout--display: inline;
+//   --rs-app-layout--height: auto;
+// }
