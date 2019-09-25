@@ -33,9 +33,6 @@ rs-drawer[closing] {
     overflow: hidden;
     transform: translateX(-100%);
     display: flex;
-    position: static;
-    left: auto;
-    right: auto;
     border-right-width: 1px;
     border-right-style: solid;
     border-color: $rs-drawer-divider-color;
@@ -77,17 +74,18 @@ rs-drawer[closing] {
     background-color: $rs-drawer-modal-scrim-color;
   }
 
-  &.-open > .scrim {
+  &.-opening > .scrim {
     display: none;
+    opacity: 0;
   }
 
-  &.-opening > .scrim {
+  &.-animate > .scrim {
     transition-duration: $rs-drawer-animation-enter;
     opacity: 1;
   }
 
-  &.-animate > .scrim {
-    opacity: 0;
+  &.-open > .scrim {
+    opacity: 1;
   }
 
   &.-closing > .scrim {

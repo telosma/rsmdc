@@ -3,7 +3,7 @@
     $elevation: rs-elevation($rs-drawer-modal-elevation);
 
     .rs-drawer {
-      display: flex;
+      display: inline-flex;
 
       &.-open-modal {
         box-shadow: $elevation;
@@ -13,10 +13,12 @@
         > .content {
           display: flex;
         }
-  
-        > .scrim {
-          display: block;
-        }
+      }
+    }
+
+    .rs-drawer {
+      &.-opening > .scrim {
+        display: block;
       }
     }
 
@@ -27,7 +29,6 @@
 
       rs-drawer[opened] + rs-app-layout-content {
         rs-app-bar {
-          --rs-app-bar---position: absolute;
           --rs-app-bar---margin-left: auto;
         }
       }
@@ -38,8 +39,3 @@
     }
   }
 }
-
-// :root {
-//   --rs-app-layout--display: inline;
-//   --rs-app-layout--height: auto;
-// }

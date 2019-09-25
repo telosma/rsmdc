@@ -13,6 +13,10 @@ export class Drawer {
 
   drawer: HTMLElement
 
+  scrim: HTMLElement
+
+  body: HTMLElement
+
   @Watch('opened')
   openedHandler() {
     if (this.opened) {
@@ -39,8 +43,11 @@ export class Drawer {
   @Method()
   async openDrawerMotion() {
     this.drawer.classList.add('-opening')
+    this.drawer.classList.add('-animate')
     setTimeout(() => {
       this.drawer.classList.add('-open')
+      this.drawer.classList.add('-open-modal')
+      this.drawer.classList.remove('-animate')
     }, 200)
   }
 
@@ -49,6 +56,7 @@ export class Drawer {
     this.el.setAttribute('closing', 'closing')
     this.drawer.classList.add('-closing')
     this.drawer.classList.remove('-opening')
+    this.drawer.classList.remove('-open-modal')
     setTimeout(() => {
       this.drawer.classList.remove('-open')
       this.drawer.classList.remove('-closing')
@@ -58,21 +66,41 @@ export class Drawer {
 
   componentDidLoad() {
     this.drawer = this.el.shadowRoot.querySelector('.rs-drawer')
-    const scrim = this.el.shadowRoot.querySelector('.scrim')
-    const body = window.document.querySelector('body')
+    this.scrim = this.el.shadowRoot.querySelector('.scrim')
+    this.body = window.document.querySelector('body')
+
+    const slot = this.el.shadowRoot.querySelector('slot')
+    slot.addEventListener('slotchange', () => {
+      const drawerHeader = Array.from(slot.assignedElements())
+        .find(el => el.tagName === 'RS-DRAWER-HEADER')
+      const height = drawerHeader
+        ? drawerHeader.getBoundingClientRect().height
+        : 0
+      this. body.style.setProperty('--rs-drawer-content---height', `calc(100vh - ${height}px)`)
+    })
 
     this.isOpened()
 
-    scrim.addEventListener('click', () => {
-      console.log('scrim emit')
+    this.scrim.addEventListener('click', () => {
       this.change.emit()
     })
-
     this.drawer.addEventListener('mouseover', () => {
-      body.style.setProperty('overflow', 'hidden')
+      this.body.style.setProperty('overflow', 'hidden')
     })
     this.drawer.addEventListener('mouseout', () => {
-      body.style.setProperty('overflow', 'auto')
+      this.body.style.setProperty('overflow', 'auto')
+    })
+  }
+
+  componentDidUnload() {
+    this.scrim.removeEventListener('click', () => {
+      this.change.emit()
+    })
+    this.drawer.removeEventListener('mouseover', () => {
+      this.body.style.setProperty('overflow', 'hidden')
+    })
+    this.drawer.removeEventListener('mouseout', () => {
+      this.body.style.setProperty('overflow', 'auto')
     })
   }
 
