@@ -6,6 +6,7 @@
 @import "../../../ripple/mixins-stencil";
 @import "../../../rtl/mixins";
 @import "../../../line-ripple/rs-line-ripple";
+@import "../../../notched-outline/mixins-stencil";
 @import "./mixins";
 
 @include rs-floating-label-animation;
@@ -24,52 +25,95 @@
   height: $rs-select-height;
   overflow: hidden;
   will-change: opacity, transform, color;
+  width: auto;
 
   // states-base-color
   &::before,
   &::after {
     background-color: $rs-select-ink-color;
     content: "";
-  }  
+  }
+
+  > .label {
+    display: inline;
+  }
 
   &:not(.-disabled) {
     background-color: $rs-select-fill-color;
-  }
 
-  &:not(.-disabled) {
+    > .nativecontrol:hover {
+      border-bottom-color: $rs-select-bottom-line-hover-color;
+    }
+
     > .nativecontrol,
     > .selectedtext {
       color: $rs-select-ink-color;
+      border-bottom-color: $rs-select-bottom-line-idle-color;
     }
-  }
 
-  &:not(.-disabled) {
     > .label,
     > .outline > .notch > .label {
       color: $rs-select-label-color;
     }
-  }
 
-  &:not(.-disabled) {
-    > .nativecontrol,
-    > .selectedtext {
-      border-bottom-color: $rs-select-bottom-line-idle-color;
+    > .outline {
+      > .leading {
+        border-color: $rs-select-bottom-line-idle-color;
+      }
+
+      > .notch {
+        border-color: $rs-select-bottom-line-idle-color;
+      }
+
+      > .trailing {
+        border-color: $rs-select-bottom-line-idle-color;
+      }
     }
   }
 
-  &:not(.-disabled).-focused > .rs-line-ripple {
-    background-color: $rs-theme-primary;
+  &:not(.-disabled):hover {
+    > .outline {
+      > .leading {
+        border-color: $rs-select-bottom-line-hover-color;
+      }
+
+      > .notch {
+        border-color: $rs-select-bottom-line-hover-color;
+      }
+
+      > .trailing {
+        border-color: $rs-select-bottom-line-hover-color;
+      }
+
+    }
   }
 
   &:not(.-disabled).-focused {
+    > .rs-line-ripple {
+      background-color: $rs-theme-primary;
+    }
+
     > .label,
     > .outline > .notch > .label {
       color: $rs-select-focused-label-color;
     }
-  }
 
-  &:not(.-disabled) .nativecontrol:hover {
-    border-bottom-color: $rs-select-bottom-line-hover-color;
+    > .outline {
+      > .leading {
+        border-width: 2px;
+        border-color: $rs-theme-primary;
+      }
+
+      > .notch {
+        border-width: 2px;
+        border-color: $rs-theme-primary;
+      }
+
+      > .trailing {
+        border-width: 2px;
+        border-color: $rs-theme-primary;
+      }
+    }
   }
 
   &.-focused > .dropdownicon {
@@ -95,7 +139,7 @@
     }
   }
 
-  &.-invalid:not(.-disabled) {
+  &:not(.-disabled).-invalid {
 
     > .label,
     > .outline > .notch > .label {
@@ -107,19 +151,72 @@
       border-bottom-color: $rs-select-error-color;
     }
 
-    &.-focused > .rs-line-ripple {
+    > .nativecontrol:hover {
+      border-bottom-color: $rs-select-error-color;
+    }
+
+    > .outline {
+      > .leading {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .notch {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .trailing {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+    }
+  }
+
+  &:not(.-disabled).-invalid:hover {
+    > .outline {
+      > .leading {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .notch {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .trailing {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+    }
+  }
+
+  &:not(.-disabled).-invalid.-focused {
+    > .rs-line-ripple {
       background-color: $rs-select-error-color;
     }
 
-    &.-focused {
-      > .label,
-      > .outline > .notch > .label {
-        color: $rs-select-error-color;
-      }
+    > .label,
+    > .outline > .notch > .label {
+      color: $rs-select-error-color;
     }
 
-    > .nativecontrol:hover {
-      border-bottom-color: $rs-select-error-color;
+    > .outline {
+      > .leading {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .notch {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .trailing {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
     }
   }
 
@@ -155,7 +252,21 @@
   
     > .selectedtext {
       pointer-events: none;
-    }  
+    }
+
+    > .outline {
+      > .leading {
+        border-color: $rs-select-outlined-disabled-border;
+      }
+
+      > .notch {
+        border-color: $rs-select-outlined-disabled-border;
+      }
+
+      > .trailing {
+        border-color: $rs-select-outlined-disabled-border;
+      }
+    }
   }
   
   &.-icon {
@@ -224,6 +335,8 @@
 
   > .nativecontrol {
     padding-top: 20px;
+    position: absolute;
+    top: 0;
   }
 
   > .selectedtext {
@@ -267,10 +380,30 @@
 
   > .rs-line-ripple {
     @include rs-line-ripple;
+    display: inline;
   }
 
   > .outline {
+    @include rs-notched-outline_;
     display: none;
+
+    > .leading {
+      @include rs-notched-outline-leading_;
+    }
+
+    > .notch {
+      @include rs-notched-outline-notch_;
+    }
+
+    > .trailing {
+      @include rs-notched-outline-trailing_;
+      border-radius: 0 4px 4px 0;
+    }
+
+    > .notch > .label {
+      white-space: nowrap;
+      text-overflow: clip;
+    }
   }
 }
 

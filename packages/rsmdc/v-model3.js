@@ -24,19 +24,46 @@ export const VModel3 = {
           }
         }
       })
+
+      observer.observe(el, {
+        attributes: true,
+        subtree: true
+      })  
     } else if (type === 'radio') {
-      observer = new MutationObserver(mu=> {
+      observer = new MutationObserver(() => {
         const isChecked = el.getAttribute('data-checked') ? true : false
         if (!isChecked) { return }
         vNode.context[dataName] = value
       })
+
+      observer.observe(el, {
+        attributes: true,
+        subtree: true
+      })  
     } else if (type === 'select') {
-      observer = new MutationObserver(mutations => {
-        const mutation = mutations.filter(mu => mu.target.getAttribute('data-selected'))[0]
-        if (!mutation) { return }
-        
-        vNode.context[dataName] = mutation.target.value
-      })
+      const dataName = binding.expression.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
+        ? binding.expression.split('.')
+        : binding.expression
+
+      const func = e => {
+        typeof dataName === 'object'
+          ? vNode.context[dataName[0]][dataName[1]] = e.detail.value
+          : vNode.context[dataName] = e.detail.value
+      }
+
+      if (!vNode.data.on || !vNode.data.on.change) {
+        el.addEventListener('change', e => {
+          func(e)
+        })
+
+      } else {
+        const changeEvent = vNode.data.on.change.fns
+        vNode.data.on.change.fns = e => {
+          func(e)
+          changeEvent(e)
+        }
+      }
+      return
     } else if (type === 'text' || type === 'textarea' || type === 'date') {
       observer = new MutationObserver(mutations => {
         const text = mutations[0].target.text
@@ -51,11 +78,53 @@ export const VModel3 = {
           vNode.context[dataName] = text
         }
       })
-    } 
 
-    observer.observe(el, {
-      attributes: true,
-      subtree: true
-    })
+      observer.observe(el, {
+        attributes: true,
+        subtree: true
+      })
+    } 
+  },
+  componentUpdated(el, binding, vNode) {
+    const type = vNode.data.attrs.type
+    const dataName = binding.expression.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
+      ? binding.expression.split('.')
+      : binding.expression
+
+    if (type === 'select') {
+      const func = e => {
+        typeof dataName === 'object'
+          ? vNode.context[dataName[0]][dataName[1]] = e.detail.value
+          : vNode.context[dataName] = e.detail.value
+      }
+    
+      if (!vNode.data.on || !vNode.data.on.change) return
+
+      const changeEvent = vNode.data.on.change.fns
+      vNode.data.on.change.fns = e => {
+        func(e)
+        changeEvent(e)
+      }
+    }
+  },
+  unbind(el, binding, vNode) {
+    const type = vNode.data.attrs.type
+    const dataName = binding.expression.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
+      ? binding.expression.split('.')
+      : binding.expression
+
+    if (type === 'select') {
+      const func = e => {
+        typeof dataName === 'object'
+          ? vNode.context[dataName[0]][dataName[1]] = e.detail.value
+          : vNode.context[dataName] = e.detail.value
+      }
+
+      if (vNode.data.on && vNode.data.on.change) return
+
+      el.removeEventListener('change', e => {
+        func(e)
+      })
+    }
   }
 }

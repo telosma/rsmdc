@@ -28,13 +28,17 @@ export class Select {
 
   @Prop() value: string
 
-  @Prop() selectedIndex: number
-
   select: Element
 
   labels: Element[]
 
+  options: Element[]
+
   nativeControl: Element
+
+  htmlNativeConctrol: HTMLSelectElement
+
+  notch: HTMLElement
 
   rsRipple: RSRipple
 
@@ -44,7 +48,6 @@ export class Select {
     cancelable: false,
     composed: false,
   }) change: EventEmitter
-
 
   @Watch('disabled')
   disabledHandler() {
@@ -59,6 +62,11 @@ export class Select {
   @Watch('required')
   requiredHandler() {
     this.isRequired()
+  }
+
+  @Watch('multiple')
+  multipleHandler() {
+    this.isMultiple()
   }
 
   @Method()
@@ -89,6 +97,27 @@ export class Select {
   }
 
   @Method()
+  async isMultiple() {
+    if (!this.multiple) return
+    this.floatLabel()
+  }
+
+  @Method()
+  async floatLabel() {
+    this.labels.forEach(l => { 
+      l.classList.add('-floatabove')
+    })
+    this.setLabelWidthToNotch()
+  }
+
+  @Method()
+  async setLabelWidthToNotch() {
+    const labelWidth = await this.retriveLabelWidth(this.labels)
+    const width = labelWidth * 0.8 + 4
+    this.notch.style.setProperty('width', `${width}px`)
+  }
+
+  @Method()
   async addFocusStyle() {
     this.select.classList.add('-focused')
     this.select.classList.add('rs-ripple-upgraded--background-focused')
@@ -98,6 +127,7 @@ export class Select {
       if (!l.classList.contains('-shake')) { return }
       l.classList.remove('-shake')
     })
+    this.setLabelWidthToNotch()
   }
 
   @Method()
@@ -106,10 +136,62 @@ export class Select {
     this.select.classList.remove('rs-ripple-upgraded--background-focused')
     this.rsLineRipple.deactivate()
 
-    this.labels.forEach(l => { 
-      if (this.invalid) l.classList.add('-shake')
-      if ((this.nativeControl as HTMLSelectElement).selectedIndex > -1) { return }
+    this.labels.forEach(l => {
+      if (this.invalid && this.value) l.classList.add('-shake')
+      if (this.value) return
       l.classList.remove('-floatabove')
+      this.notch.style.setProperty('width', 'auto')
+    })
+  }
+
+  @Method()
+  async hasSelectedOption(options) {
+    if (options.find(op => op.getAttribute('selected'))) {
+      this.floatLabel()
+      return
+    }
+    this.htmlNativeConctrol.selectedIndex = -1
+  }
+
+  @Method()
+  async retrieveOptionWidth(options) {
+    const longText = options.reduce((res, op) => {
+      return res > op.text.length
+        ? res
+        : op.text.length
+    }, 0)
+    return longText * 16
+  }
+
+  @Method()
+  async retriveLabelWidth(labels) {
+    return labels.reduce((res, l) => {
+      return res > l.clientWidth
+        ? res
+        : l.clientWidth
+    }, 0)
+  }
+
+  @Method()
+  async changeHandler() {
+    this.value = this.htmlNativeConctrol.value
+    const selectedIndex = this.htmlNativeConctrol.selectedIndex
+    const values = Array.from(this.htmlNativeConctrol.selectedOptions)
+      .map(op => op.value)
+
+    this.change.emit({
+      value: values.length > 1 ? values : values[0],
+      index: selectedIndex
+    })
+
+    if (this.options.length === 0) return
+
+    this.options.forEach((option, i) => {
+      if (i === selectedIndex) {
+        option.setAttribute('data-selected', 'true')
+      } else {
+        option.removeAttribute('data-selected')
+      }
     })
   }
 
@@ -117,30 +199,37 @@ export class Select {
     this.select = this.el.shadowRoot.querySelector('.rs-select')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
     this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
+    this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement);
+    this.notch = this.el.shadowRoot.querySelector('.notch')
     this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
     this.rsRipple = new RSRipple(this.select)
-    const options = []
+    this.options = []
     const slot = this.el.shadowRoot.querySelector('slot')
 
     this.isDisabled()
     this.isInvalid()
     this.isRequired()
+    this.isMultiple()
     
-    slot.addEventListener('slotchange', () => {
+    slot.addEventListener('slotchange', async () => {
       slot.assignedElements().forEach(e => {
-        options.push(e)
+        this.options.push(e)
       })
 
-      if (options.length === 0) { return }
+      if (this.options.length === 0) return
+
       this.nativeControl.innerHTML = ''
-      options.forEach(op => {
+      this.options.forEach(op => {
         this.nativeControl.append(op.cloneNode(true))
       })
-      if (options.find(op => op.getAttribute('selected'))) {
-        this.addFocusStyle()
-        return
-      }
-      (this.nativeControl as HTMLSelectElement).selectedIndex = -1
+
+      const optionWidth = await this.retrieveOptionWidth(this.options)
+      const labelWidth = await this.retriveLabelWidth(this.labels)
+      const width = optionWidth > labelWidth
+        ? optionWidth
+        : labelWidth
+      ;(this.select as HTMLElement).style.setProperty('width', `calc(52px + 16px + ${width}px`)
+      this.hasSelectedOption(this.options)
     })
 
     this.nativeControl.addEventListener('focus', () => {
@@ -148,23 +237,24 @@ export class Select {
     })
 
     this.nativeControl.addEventListener('change', () => {
-      this.value = (this.nativeControl as HTMLSelectElement).value
-      this.selectedIndex = (this.nativeControl as HTMLSelectElement).selectedIndex
-      
-      this.change.emit({ value: this.value, index: this.selectedIndex})
-      
-      if (options.length === 0) { return }
-      options.forEach((option, i) => {
-        if (i === this.selectedIndex) {
-          option.setAttribute('data-selected', true)
-          option.value = this.value
-        } else {
-          option.removeAttribute('data-selected')
-        }
-      })
+      this.changeHandler()
     })
 
     this.nativeControl.addEventListener('blur', () => {
+      this.removeFocusStyle()
+    })
+  }
+
+  componentDidUnLoad() {
+    this.nativeControl.removeEventListener('focus', () => {
+      this.addFocusStyle()
+    })
+
+    this.nativeControl.removeEventListener('change', () => {
+      this.changeHandler()
+    })
+
+    this.nativeControl.removeEventListener('blur', () => {
       this.removeFocusStyle()
     })
   }
@@ -177,13 +267,13 @@ export class Select {
                   <slot />
                 </select>
                 <label class="label">{this.label}</label>
-                <div class="rs-line-ripple"></div>
+                <div class="rs-line-ripple" />
                 <div class="outline">
-                  <div class="leading"></div>
+                  <div class="leading" />
                   <div class="notch">
                     <label class="label -outlined">{this.label}</label>
                   </div>
-                  <div class="trailing"></div>
+                  <div class="trailing" />
                 </div>
               </div>
             </Host>

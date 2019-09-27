@@ -7,16 +7,15 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type      | Default     |
-| --------------- | ---------------- | ----------- | --------- | ----------- |
-| `disabled`      | `disabled`       |             | `boolean` | `undefined` |
-| `invalid`       | `invalid`        |             | `boolean` | `undefined` |
-| `label`         | `label`          |             | `string`  | `undefined` |
-| `multiple`      | `multiple`       |             | `boolean` | `false`     |
-| `name`          | `name`           |             | `string`  | `undefined` |
-| `required`      | `required`       |             | `boolean` | `undefined` |
-| `selectedIndex` | `selected-index` |             | `number`  | `undefined` |
-| `value`         | `value`          |             | `string`  | `undefined` |
+| Property   | Attribute  | Description | Type      | Default     |
+| ---------- | ---------- | ----------- | --------- | ----------- |
+| `disabled` | `disabled` |             | `boolean` | `undefined` |
+| `invalid`  | `invalid`  |             | `boolean` | `undefined` |
+| `label`    | `label`    |             | `string`  | `undefined` |
+| `multiple` | `multiple` |             | `boolean` | `false`     |
+| `name`     | `name`     |             | `string`  | `undefined` |
+| `required` | `required` |             | `boolean` | `undefined` |
+| `value`    | `value`    |             | `string`  | `undefined` |
 
 
 ## Events
@@ -29,6 +28,36 @@
 ## Methods
 
 ### `addFocusStyle() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `changeHandler() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `floatLabel() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `hasSelectedOption(options: any) => Promise<void>`
 
 
 
@@ -58,6 +87,16 @@ Type: `Promise<void>`
 
 
 
+### `isMultiple() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `isRequired() => Promise<void>`
 
 
@@ -69,6 +108,36 @@ Type: `Promise<void>`
 
 
 ### `removeFocusStyle() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `retrieveOptionWidth(options: any) => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
+### `retriveLabelWidth(labels: any) => Promise<any>`
+
+
+
+#### Returns
+
+Type: `Promise<any>`
+
+
+
+### `setLabelWidthToNotch() => Promise<void>`
 
 
 

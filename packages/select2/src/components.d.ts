@@ -11,17 +11,23 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface RsSelect {
     'addFocusStyle': () => Promise<void>;
+    'changeHandler': () => Promise<void>;
     'disabled': boolean;
+    'floatLabel': () => Promise<void>;
+    'hasSelectedOption': (options: any) => Promise<void>;
     'invalid': boolean;
     'isDisabled': () => Promise<void>;
     'isInvalid': () => Promise<void>;
+    'isMultiple': () => Promise<void>;
     'isRequired': () => Promise<void>;
     'label': string;
     'multiple': boolean;
     'name': string;
     'removeFocusStyle': () => Promise<void>;
     'required': boolean;
-    'selectedIndex': number;
+    'retrieveOptionWidth': (options: any) => Promise<number>;
+    'retriveLabelWidth': (labels: any) => Promise<any>;
+    'setLabelWidthToNotch': () => Promise<void>;
     'value': string;
   }
 }
@@ -48,7 +54,6 @@ declare namespace LocalJSX {
     'name'?: string;
     'onChange'?: (event: CustomEvent<any>) => void;
     'required'?: boolean;
-    'selectedIndex'?: number;
     'value'?: string;
   }
 

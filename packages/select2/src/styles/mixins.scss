@@ -28,10 +28,8 @@
   }
 }
 
-// @include rs-notched-outline-floating-label-float-position($rs-select-outlined-label-position-y, 0);
 @mixin rs-select-type($type) {
   @if $type == outlined {
-    @include rs-select-outline-shape-radius(rs-shape-prop-value(medium));
     @include rs-states-base-color(transparent);
 
     .rs-select {
@@ -40,75 +38,26 @@
 
       &:not(.-disabled) {
         background-color: transparent;
+      }  
 
-        > .outline {
-          > .leading,
-          > .notch,
-          > .trailing {
-            opacity: .24;
-            border-color: $rs-select-outlined-idle-border;
-          }
-        }
+      > .label {
+        display: none;
+      }
+
+      > .outline {
+        display: flex;
+      }
+
+      > .rs-line-ripple {
+        display: none;
+      }
+
+      > .nativecontrol,
+      > .selectedtext {
+        border-bottom: none;
       }
     }
-
-    .rs-select {
-      &:not(.-disabled):not(.-focused) {
-        > .nativecontrol:hover ~,
-        > .selectedtext:hover ~ {
-          .outline {
-            opacity: .24;
-            border-color: $rs-select-outlined-hover-border;
-          }
-        }
-      }
-    }
-
-    .rs-select {
-      &:not(.-disabled).-focused > .outline {
-        > .leading,
-        > .notch,
-        > .trailing {
-          opacity: .24;
-          border-color: $rs-theme-primary;
-        }
-      }
-    }
-
-    .rs-select {
-      &.-invalid:not(.-disabled) > .outline {
-        > .leading,
-        > .notch,
-        > .trailing {
-          opacity: .24;
-          border-color: $rs-select-error-color;
-        }
-      }
-    }
-
-    .rs-select {
-      &.-invalid:not(.-disabled):not(.-focused) {
-        > .nativecontrol:hover ~,
-        > .selectedtext:hover ~ {
-          .outline {
-            opacity: .24;
-            border-color: $rs-select-error-color;
-          }
-        }
-      }
-    }
-
-    .rs-select {
-      &.-invalid:not(.-disabled).-focused > .outline {
-        > .leading,
-        > .notch,
-        > .trailing {
-          opacity: .24;
-          border-color: $rs-select-error-color;
-        }
-      }
-    }
-
+    
     .rs-select {
       &.-disabled {
         background-color: transparent;
@@ -116,24 +65,6 @@
         > .nativecontrol,
         > .selectedtext {
           border-bottom-style: none;
-        }
-    
-        > .outline {
-          > .leading,
-          > .notch,
-          > .trailing {
-            opacity: .24;
-            border-color: $rs-select-outlined-disabled-border;
-          }
-        }
-      }
-    }
-
-    .rs-select {
-      &.-icon {
-        > .label,
-        > .outline > .notch > .label.-outlined.-shake {
-          animation: rs-floating-label-shake-animation(select-outlined-leading-icon);
         }
       }
     }
@@ -170,6 +101,7 @@
         z-index: 2;
       }
     }
+
   }
 }
 
@@ -326,11 +258,5 @@
     > .nativecontrol {
       border-radius: $calc-radius;
     }  
-  }
-
-  @if ($insert-radius > $rs-notched-outline-leading-width) {
-    .rs-select > .outline > .leading {
-      width: $insert-radius;
-    }
   }
 }
