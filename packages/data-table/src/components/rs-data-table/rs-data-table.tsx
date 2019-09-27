@@ -119,7 +119,7 @@ export class DataTable {
     return (
       <Host>
         <div class="rs-data-table">
-          <table class="table" aria-label="Dessert calories">
+          <table class="table">
             <slot />
           </table>
         </div>
