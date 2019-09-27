@@ -24,7 +24,15 @@ $rs-button-height: 36px !default;
 $rs-button-horizontal-padding: 8px !default;
 $rs-button-contained-horizontal-padding: 16px !default;
 $rs-dense-button-height: 32px !default;
-
 $rs-button-disabled-ink-color: rgba(rs-theme-prop-value(on-surface), .37) !default;
-
 $rs-button-disabled-fill-color: rgba(rs-theme-prop-value(on-surface), .12);
+
+$rs-fab-extended-icon-padding: 12px !default;
+$rs-fab-extended-label-padding: 20px !default;
+$rs-fab-height: 56px !default;
+$rs-fab-mini-height: 40px !default;
+$rs-fab-extended-height: 48px !default;
+$rs-fab-icon-enter-delay_: 90ms;
+$rs-fab-icon-enter-duration_: 180ms;
+
+$rs-icon-button-size: 24px !default;

@@ -1,7 +1,5 @@
 @import "@rsmdc/elevation/mixins";
 @import "@rsmdc/ripple/mixins-stencil";
-@import "../styles/icon-button/variables";
-@import "../styles/fab/variables";
 @import "./variables";
 
 @mixin rs-button-type($types...) {
