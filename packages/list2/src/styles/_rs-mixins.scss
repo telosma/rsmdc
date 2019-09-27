@@ -1,0 +1,65 @@
+@mixin rs-list-item-primary-text-ink-color($color) {
+  color: $color;
+}
+
+@mixin rs-list-item-secondary-text-ink-color($color) {
+  .rs-list-secondary {
+    color: $color;
+  }
+}
+
+@mixin rs-list-item-graphic-fill-color($color) {
+  .rs-list-graphic {
+    background-color: $color;
+  }
+}
+
+@mixin rs-list-item-graphic-ink-color($color) {
+  .rs-list-graphic {
+    color: $color;
+  }
+}
+
+@mixin rs-list-item-meta-ink-color($color) {
+  .rs-list-meta {
+    color: $color;
+  }
+}
+
+@mixin rs-list-item-shape-radius($radius) {
+  .item {
+    @include rs-shape-radius($radius);
+  }
+}
+
+@mixin rs-list-divider-color($color) {
+  .divider {
+    border-bottom-color: $color;
+  }
+}
+
+@mixin rs-list-group-subheader-ink-color($color) {
+  .subheader {
+    color: $color;
+  }
+}
+
+
+@include rs-list-item-secondary-text-ink-color(text-secondary-on-backgroun);
+@include rs-list-item-graphic-fill-color(transparent);
+@include rs-list-item-graphic-ink-color(text-icon-on-background);
+@include rs-list-item-meta-ink-color(text-hint-on-background);
+@include rs-list-divider-color(red);
+// @include rs-list-group-subheader-ink-color(text-primary-on-background);
+
+.rs-list {
+  &.-selected,
+  &.-activated {
+    @include rs-list-item-primary-text-ink-color(primary);
+    @include rs-list-item-graphic-ink-color(primary);
+  }
+
+  &.-disabled {
+    @include rs-list-item-primary-text-ink-color(text-disabled-on-background);
+  }
+}

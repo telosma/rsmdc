@@ -14,6 +14,5 @@
 .rs-list-item__meta {
   color: var(--rs-menu-list-item-meta--color, var(--rs-list-item-meta--color, rs-theme-ink-color-for-fill_(hint, $rs-theme-background)));
 }
-
 </style>
 

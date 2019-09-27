@@ -1,0 +1,163 @@
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/typography/variables";
+@import "./variables";
+@import "./rs-mixins";
+@import "./mixins";
+
+@include rs-ripple-common;
+
+.rs-list {
+  @include rs-typography(subtitle1);
+
+  padding: 8px 0;
+  padding-bottom: 8px;
+  line-height: map-get(map-get($rs-typography-styles, body1), line-height);
+  margin: 0;
+  list-style-type: none;
+  outline: none;
+  cursor: pointer;
+
+  &.-dense {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 0.812rem;
+  }
+
+
+  @mixin rs-list-item-base_ {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    height: 48px;
+    padding: 0 $rs-list-side-padding;
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  @mixin rs-list-item-interactive-ripple_ {
+    @include rs-ripple-surface;
+    @include rs-ripple-radius-bounded;
+    @include rs-states(rs-theme-prop-value(on-surface), false);
+    @include rs-states-activated(primary, false);
+    @include rs-states-selected(primary, false);
+  }
+
+  @mixin rs-list-graphic-size($size) {
+    $text-offset: 72px;
+    $side-padding: $rs-list-side-padding;
+    $margin-value: $text-offset - $side-padding - $size;
+    width: $size;
+    height: $size;
+  }
+}
+
+.rs-list-item {
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding: 0 $rs-list-side-padding;
+  overflow: hidden;
+  height: 48px;
+  align-items: center;
+  padding-left: $rs-list-side-padding;
+  padding-right: $rs-list-side-padding;
+
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-unbounded;
+  @include rs-ripple-upgraded($rs-theme-primary);
+}
+
+.rs-list-text {
+  @include rs-typography-overflow-ellipsis;
+  &[for] {
+    pointer-events: none;
+  }
+}
+
+.rs-list-meta {
+  color: rgba(0, 0, 0, .38);
+}
+
+@mixin rs-list-without-ripple {
+ 
+  $item-primary-text-baseline-height: 32px;
+  $item-secondary-text-baseline-height: 20px;
+  $dense-item-primary-text-baseline-height: 24px;
+  // $divider-color: if(
+  //   rs-theme-tone($mdc-theme-background) == "dark",
+  //   $rs-list-divider-color-on-dark-bg,
+  //   $rs-list-divider-color-on-light-bg
+  // );
+
+  @include rs-list-item-secondary-text-ink-color(text-secondary-on-background);
+  @include rs-list-item-graphic-fill-color(transparent);
+  @include rs-list-item-graphic-ink-color(text-icon-on-background);
+  @include rs-list-item-meta-ink-color(text-hint-on-background);
+  @include rs-list-group-subheader-ink-color(text-primary-on-background);
+}
+
+.rs-list-primary {
+  @include rs-typography-overflow-ellipsis;
+  display: block;
+  margin-top: 0;
+  line-height: 32px;
+}
+
+.rs-list-secondary {
+  @include rs-typography(body2);
+  @include rs-typography-overflow-ellipsis;
+  display: block;
+  line-height: normal;
+}
+
+.rs-list-graphic {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  fill: currentColor;
+  border-radius: 50%;
+  background-size: 24px;
+  margin-right: 32px;
+
+  &::before {
+    width: 24px;
+    height: 24px;
+    content: '';
+    font-family: inherit;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $rs-theme-primary;
+  }
+}
+
+.rs-list-divider {
+  height: 0;
+  margin: 0;
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: rgba(0, 0, 0, 0.54);
+}
+
+.rs-list-subheader {
+  $rs-list-subheader-virtual-height: 3rem;
+  $rs-list-subheader-leading: map-get(map-get($rs-typography-styles, body1), line-height);
+  $rs-list-subheader-margin: ($rs-list-subheader-virtual-height - $rs-list-subheader-leading) / 2;
+  @include rs-typography(subtitle1);
+  margin: $rs-list-subheader-margin $rs-list-side-padding;
+}

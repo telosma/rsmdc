@@ -1,0 +1,82 @@
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/shape/mixins";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/typography/variables";
+@import "./variables";
+@import "./rs-mixins";
+
+@mixin rs-list-type($types...) {
+  @each $type in $types {
+    @if $type == two-line {
+      
+      .rs-list-item {
+        justify-content: flex-start;
+        height: 72px;
+      }
+
+    } @else if $type == avatar-list  {
+      
+      .rs-list-item {
+        height: 56px;
+      }
+    } @else if $type == dense {
+      
+      .rs-list {
+        padding: 4px 0;
+        font-size: .812rem;
+        height: 40px;
+        margin: 0 36px 0 0;
+      }
+
+      .rs-list-graphic {
+        width: 20px;
+        height: 20px;
+        background-size: 20px;
+      }
+    }
+  }
+}
+
+@mixin rs-list-graphic-image($icon, $codepoint: "") {
+  $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
+
+  @if $value == path {
+
+    .rs-list-graphic {
+      background-image: $icon;
+      width: 24px;
+      height: 24px;
+    }
+
+  } @else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + "\\"+ $codepoint + '"';
+
+    .rs-list-graphic {
+      &::before {
+        font-family: $font-family;
+        content: $name;
+      }
+    }
+  }
+}
+
+@mixin rs-list-divider-type($types...) {
+  @each $type in $types {
+    @if $type == inset {
+
+      .rs-list-divider {
+        margin: 0 0 0 72px;
+      }
+
+    }@else if $type == padded {
+     
+      .rs-list-divider {
+        margin: 0;
+      }
+    }
+  }
+}
