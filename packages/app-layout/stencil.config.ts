@@ -1,7 +1,7 @@
 import { Config } from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'app-layout2',
+  namespace: 'app-layout',
   outputTargets: [
     {
       type: 'dist',
