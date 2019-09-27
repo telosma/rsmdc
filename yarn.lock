@@ -1705,10 +1705,38 @@
   dependencies:
     webpack-sources "^1.0.0"
 
+"@rsmdc/button@^1.1.15":
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/@rsmdc/button/-/button-1.1.16.tgz#d4824806cf9627ca0c05711721fdb9349c322b82"
+  integrity sha512-Q/Lrd8GOdj4dFZ/RGu8NIIny39EwyTMZeDVbuYndTWTCm/ou4ABaHdwCqBRrNjRd8WZHxg6bOAV36bTqJD3/AQ==
+  dependencies:
+    "@rsmdc/elevation" "^1.1.0"
+    "@rsmdc/ripple" "^1.1.16"
+    "@rsmdc/rtl" "^1.1.16"
+    "@rsmdc/shape" "^1.1.0"
+    "@rsmdc/theme" "^1.1.0"
+    "@rsmdc/typography" "^1.1.0"
+
+"@rsmdc/ripple@^1.1.16":
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/@rsmdc/ripple/-/ripple-1.1.16.tgz#ccf96c755737abc853dc8a1de8f13d4f6f71d66f"
+  integrity sha512-moVYtxDL+7UX8/IGcsRDAJgj6yl/0eDkVsY4GNJD+uWaDjuaIgqsRGjRDmT5YdQIHrOwPaYbgiaaav8US8WYhQ==
+  dependencies:
+    "@rsmdc/animation" "^1.1.0"
+    "@rsmdc/base" "^1.1.0"
+    "@rsmdc/dom" "^1.1.0"
+    "@rsmdc/theme" "^1.1.0"
+    tslib "^1.9.3"
+
 "@rsmdc/rtl@^0.42.0":
   version "0.42.0"
   resolved "https://registry.yarnpkg.com/@rsmdc/rtl/-/rtl-0.42.0.tgz#98b132bdf1aaa1d94810aefd07e0c0d1217b0d2a"
   integrity sha512-DtZ+IlaIaXFzX9Kz+v25MeL7AeJQtYGikpp37Y8pmSVGYJfyeqNypoRkAimq8/PGQJ3Nnm9NaZ5yIT/Q1TrrTQ==
+
+"@rsmdc/rtl@^1.1.16":
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/@rsmdc/rtl/-/rtl-1.1.16.tgz#c2cd89469477b6460c1da6572ca828ccfbbebc75"
+  integrity sha512-TjLoxjq+DcweJQkdcocEZVOaw1w26ObIOekKho4s5CThBPIqs9CXEkrgiu4guZodtxOxTC51pRcWa/QSHfvNdg==
 
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.7.1"
