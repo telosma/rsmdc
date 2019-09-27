@@ -12,7 +12,10 @@
   "unpkg": "dist/app-layout/app-layout.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/",
+    "rs-app-layout.scss"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",
