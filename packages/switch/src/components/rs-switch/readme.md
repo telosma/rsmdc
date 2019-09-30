@@ -15,6 +15,13 @@
 | `label`    | `label`    |             | `string`  | `undefined` |
 
 
+## Events
+
+| Event    | Description | Type               |
+| -------- | ----------- | ------------------ |
+| `change` |             | `CustomEvent<any>` |
+
+
 ## Methods
 
 ### `activateRipple() => Promise<void>`

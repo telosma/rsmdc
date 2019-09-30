@@ -25,8 +25,8 @@ export class Dialog {
   dialogContent: Element;
 
   @Prop() opened: boolean;
-
-  @Prop() scrolling: boolean;
+  
+  @Prop() scrollable: boolean
 
   @Event({
     cancelable: false,
@@ -39,9 +39,9 @@ export class Dialog {
     this.isOpened();
   }
 
-  @Watch("scrolling")
-  scrollingHandler() {
-    this.isScrolling();
+  @Watch("scrollable")
+  scrollableHandler() {
+    this.isScrollable()
   }
 
   @Method()
@@ -69,17 +69,17 @@ export class Dialog {
   }
 
   @Method()
-  async isScrolling() {
-    const title = document.querySelector("rs-dialog-title");
-    const content = document.querySelector("rs-dialog-content");
-
-    if (this.scrolling) {
-      this.dialog.classList.add("-scrollable");
+  async isScrollable() {
+    const title = document.querySelector('rs-dialog-title')
+    const content = document.querySelector('rs-dialog-content')
+  
+    if (this.scrollable) {
+      this.dialog.classList.add('-scrollable')
       if (title) {
-        title.setAttribute("scrolling", "true");
+        title.setAttribute('scrollable', 'true')
       }
       if (content) {
-        title.setAttribute("scrolling", "true");
+        title.setAttribute('scrollable', 'true')
       }
     } else {
       this.dialog.classList.remove("-scrollable");
@@ -93,18 +93,19 @@ export class Dialog {
   }
 
   componentDidLoad() {
-    this.dialog = this.el.shadowRoot.querySelector(".rs-dialog");
+    this.dialog = this.el.shadowRoot.querySelector('.rs-dialog')
+    const slot = this.el.shadowRoot.querySelector('slot')
 
     const buttonParent = document.createElement("div");
-    buttonParent.classList.add("buttons");
-    const buttons = Array.from(document.querySelectorAll("rs-button"));
+    buttonParent.classList.add('buttons')
 
+    const buttons = slot.assignedElements().filter(e => e.tagName === 'RS-BUTTON')
     buttons.forEach(button => {
       this.wrap(button, buttonParent);
     });
 
-    this.isOpened();
-    this.isScrolling();
+    this.isOpened()
+    this.isScrollable()
   }
 
   render() {

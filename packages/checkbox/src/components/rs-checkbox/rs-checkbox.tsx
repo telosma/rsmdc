@@ -31,6 +31,8 @@ export class Checkbox {
 
   checkbox: Element
 
+  nativeControl: Element
+
   @Watch('checked')
   checkedHandler() {
     this.isHostChecked()
@@ -107,6 +109,7 @@ export class Checkbox {
   componentDidLoad() {
     this.checkbox = this.el.shadowRoot.querySelector('.rs-checkbox')
     this.rsCheckbox = new RSCheckbox(this.el.shadowRoot.querySelector('.container'))
+    this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
     const labelEl = this.el.shadowRoot.querySelector('.label')
 
     this.isDisabled()
@@ -121,10 +124,14 @@ export class Checkbox {
 
     this.checkbox.addEventListener('click', async e => {
       if (e.target === labelEl) { return }
+      const value = this.value 
+        ? this.value
+        : (this.nativeControl as HTMLInputElement).checked
+
       await this.updateDataChecked()
       await this.isChecked()
       await this.isIndeterminate()
-      await this.change.emit({ value: this.value })
+      await this.change.emit({ value })
     })
 
     labelEl.addEventListener('click', () => {

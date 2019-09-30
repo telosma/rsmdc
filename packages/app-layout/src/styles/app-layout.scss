@@ -1,0 +1,8 @@
+app-layout {
+  display: flex;
+  height: 100%;
+}
+
+.rs-app-layout-content {
+  margin-left: var(--rs-app-layout-content---margin-left);
+}

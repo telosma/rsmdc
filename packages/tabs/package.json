@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/tabs",
   "description": "The Material Components for the web tab component",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "license": "MIT",
   "keywords": [
     "material components",
@@ -18,8 +18,8 @@
     "@rsmdc/base": "^1.1.0",
     "@rsmdc/dom": "^1.1.0",
     "@rsmdc/elevation": "^1.1.0",
-    "@rsmdc/ripple": "^1.1.15",
-    "@rsmdc/rtl": "^1.1.0",
+    "@rsmdc/ripple": "^1.1.16",
+    "@rsmdc/rtl": "^1.1.16",
     "@rsmdc/theme": "^1.1.0",
     "@rsmdc/typography": "^1.1.0",
     "tslib": "^1.9.3"

@@ -1,0 +1,41 @@
+@mixin rs-drawer-type($type) {
+  @if $type == modal {
+    $elevation: rs-elevation($rs-drawer-modal-elevation);
+
+    .rs-drawer {
+      display: inline-flex;
+
+      &.-open-modal {
+        box-shadow: $elevation;
+      }
+
+      &.-open {
+        > .content {
+          display: flex;
+        }
+      }
+    }
+
+    .rs-drawer {
+      &.-opening > .scrim {
+        display: block;
+      }
+    }
+
+    @at-root {  
+      rs-drawer[opened] {
+        z-index: 100;
+      }      
+
+      rs-drawer[opened] + rs-app-layout-content {
+        rs-app-bar {
+          --rs-app-bar---margin-left: auto;
+        }
+      }
+  
+      rs-drawer[opened] + rs-app-layout-content { 
+        --rs-app-layout-content---margin-left: auto;
+      }
+    }
+  }
+}

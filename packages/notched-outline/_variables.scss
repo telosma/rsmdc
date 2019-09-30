@@ -8,3 +8,7 @@ $rs-notched-outline-leading-width: 12px !default;
 $rs-notched-outline-padding: 4px !default;
 // This variable keeps the before/after JS label centered in the notch when the font-size is changed.
 $rs-notched-outline-label-adjust: 14% !default;
+
+$rs-notched-outline-idle: rgba(rs-theme-prop-value(on-surface), .24) !default;
+$rs-notched-outline-border: rgba(rs-theme-prop-value(on-surface), .87) !default;
+$rs-notched-outline-disabled-border: rgba(rs-theme-prop-value(on-surface), .06) !default;

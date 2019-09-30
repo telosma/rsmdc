@@ -39,6 +39,7 @@ declare namespace LocalJSX {
     'disabled'?: boolean;
     'id'?: string;
     'label'?: string;
+    'onChange'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {

@@ -6,9 +6,6 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      copy: [
-        { src: 'mixin.scss' }
-      ],
       esmLoaderPath: '../loader'
     },
     {
@@ -16,10 +13,7 @@ export const config: Config = {
     },
     {
       type: 'www',
-      serviceWorker: null, // disable service workers
-      copy: [
-        { src: 'mixin.scss' }
-      ],
+      serviceWorker: null // disable service workers
     }
   ],
   plugins: [

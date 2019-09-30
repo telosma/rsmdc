@@ -1,0 +1,410 @@
+@import "./keyframes";
+@import "./variables";
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/typography/mixins";
+@import "../../../floating-label/mixins-stencil";
+@import "../../../ripple/mixins-stencil";
+@import "../../../rtl/mixins";
+@import "../../../line-ripple/rs-line-ripple";
+@import "../../../notched-outline/mixins-stencil";
+@import "./mixins";
+
+@include rs-floating-label-animation;
+@include rs-floating-label-shake-keyframes(select-outlined-leading-icon, $rs-select-outlined-label-position-y, $rs-select-outlined-with-leading-icon-label-position-x);
+@include rs-select-shape-radius(rs-shape-prop-value(medium));
+
+.rs-select {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+  @include rs-states-hover-opacity('rs-states-opacity(' + $rs-select-ink-color + ', hover)');
+  @include rs-states-focus-opacity('rs-states-opacity(' + $rs-select-ink-color + ', focus)');
+
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  height: $rs-select-height;
+  overflow: hidden;
+  will-change: opacity, transform, color;
+  width: auto;
+
+  // states-base-color
+  &::before,
+  &::after {
+    background-color: $rs-select-ink-color;
+    content: "";
+  }
+
+  > .label {
+    display: inline;
+  }
+
+  &:not(.-disabled) {
+    background-color: $rs-select-fill-color;
+
+    > .nativecontrol:hover {
+      border-bottom-color: $rs-select-bottom-line-hover-color;
+    }
+
+    > .nativecontrol,
+    > .selectedtext {
+      color: $rs-select-ink-color;
+      border-bottom-color: $rs-select-bottom-line-idle-color;
+    }
+
+    > .label,
+    > .outline > .notch > .label {
+      color: $rs-select-label-color;
+    }
+
+    > .outline {
+      > .leading {
+        border-color: $rs-select-bottom-line-idle-color;
+      }
+
+      > .notch {
+        border-color: $rs-select-bottom-line-idle-color;
+      }
+
+      > .trailing {
+        border-color: $rs-select-bottom-line-idle-color;
+      }
+    }
+  }
+
+  &:not(.-disabled):hover {
+    > .outline {
+      > .leading {
+        border-color: $rs-select-bottom-line-hover-color;
+      }
+
+      > .notch {
+        border-color: $rs-select-bottom-line-hover-color;
+      }
+
+      > .trailing {
+        border-color: $rs-select-bottom-line-hover-color;
+      }
+
+    }
+  }
+
+  &:not(.-disabled).-focused {
+    > .rs-line-ripple {
+      background-color: $rs-theme-primary;
+    }
+
+    > .label,
+    > .outline > .notch > .label {
+      color: $rs-select-focused-label-color;
+    }
+
+    > .outline {
+      > .leading {
+        border-width: 2px;
+        border-color: $rs-theme-primary;
+      }
+
+      > .notch {
+        border-width: 2px;
+        border-color: $rs-theme-primary;
+      }
+
+      > .trailing {
+        border-width: 2px;
+        border-color: $rs-theme-primary;
+      }
+    }
+  }
+
+  &.-focused > .dropdownicon {
+    transform: rotate(180deg) translateY(-5px);
+    transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
+    opacity: 1;
+    color: $rs-theme-primary;
+  }
+
+  &.-focused > .rs-line-ripple {
+    background-color: $rs-select-focused-label-color;
+
+    &::after  {
+      transform: scale(1, 2);
+      opacity: 1;
+    }
+  }
+
+  &.-required {
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-required_;
+    }
+  }
+
+  &:not(.-disabled).-invalid {
+
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-invalid_($rs-select-error-color);
+    }
+
+    > .nativecontrol,
+    > .selectedtext {
+      border-bottom-color: $rs-select-error-color;
+    }
+
+    > .nativecontrol:hover {
+      border-bottom-color: $rs-select-error-color;
+    }
+
+    > .outline {
+      > .leading {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .notch {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .trailing {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+    }
+  }
+
+  &:not(.-disabled).-invalid:hover {
+    > .outline {
+      > .leading {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .notch {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .trailing {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+    }
+  }
+
+  &:not(.-disabled).-invalid.-focused {
+    > .rs-line-ripple {
+      background-color: $rs-select-error-color;
+    }
+
+    > .label,
+    > .outline > .notch > .label {
+      color: $rs-select-error-color;
+    }
+
+    > .outline {
+      > .leading {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .notch {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+
+      > .trailing {
+        color: $rs-select-error-color;
+        border-color: $rs-select-error-color;
+      }
+    }
+  }
+
+  &.-invalid > .dropdownicon {
+    opacity: 1;
+    color: $rs-select-error-color;
+  }
+
+  &.-disabled {
+    background-color: $rs-select-disabled-fill-color;
+    cursor: default;
+    pointer-events: none;
+
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-disabled_($rs-select-disabled-ink-color);
+    }
+  
+    > .dropdownicon {
+      color: $rs-select-dropdown-color;
+      opacity: $rs-select-disabled-dropdown-opacity;
+    }
+  
+    > .rs-line-ripple {
+      display: none;
+    }
+    
+    > .nativecontrol,
+    > .selectedtext {
+      color: $rs-select-disabled-ink-color;
+      border-bottom-style: dotted;
+    }
+  
+    > .selectedtext {
+      pointer-events: none;
+    }
+
+    > .outline {
+      > .leading {
+        border-color: $rs-select-outlined-disabled-border;
+      }
+
+      > .notch {
+        border-color: $rs-select-outlined-disabled-border;
+      }
+
+      > .trailing {
+        border-color: $rs-select-outlined-disabled-border;
+      }
+    }
+  }
+  
+  &.-icon {
+    > .icon {
+      @include rs-rtl-reflexive-position(left, 16px);
+      display: inline-block;
+      position: absolute;
+      bottom: 16px;
+      box-sizing: border-box;
+      width: $rs-select-icon-size;
+      height: $rs-select-icon-size;
+      border: none;
+      background-color: transparent;
+      fill: currentColor;
+      opacity: $rs-select-icon-opacity;
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    > .icon:not([tabindex]),
+    > .icon[tabindex="-1"] {
+      cursor: default;
+      pointer-events: none;
+    }
+  
+
+    > .nativecontrol,
+    > .selectedtext {
+      @include rs-rtl-reflexive-property(padding, $rs-select-icon-padding /* left */, $rs-select-icon-right-padding /* right */);
+    }
+  
+    // &.rs-select__menu .rs-list-item__text {
+    //   @include rs-rtl-reflexive-property(padding, 32px /* left-value */, 32px /* right-value */);
+    // }
+  }
+
+  &.-focused {
+    > .label,
+    > .outline > .notch > .label {
+      @include rs-floating-label-focused_($rs-select-focused-label-color);
+    }
+  }
+
+  &.-icon:not(.-disabled) > .icon {
+    color: $rs-theme-on-surface;
+  }
+
+  > .label,
+  > .outline > .notch > .label {
+    @include rs-floating-label_($rs-select-label-color);
+    white-space: nowrap;
+    text-overflow: clip;
+  }
+
+  > .dropdownicon {
+    position: absolute;
+    left: auto;
+    right: 8px;
+    bottom: 16px;
+    width: 24px;
+    height: 24px;
+    transition: transform $rs-select-dropdown-transition-duration $rs-animation-standard-curve-timing-function;
+    pointer-events: none;
+    color: $rs-select-dropdown-color;
+    opacity: $rs-select-dropdown-opacity;
+  }
+
+  > .nativecontrol {
+    padding-top: 20px;
+    position: absolute;
+    top: 0;
+  }
+
+  > .selectedtext {
+    min-width: 200px;
+    padding-top: 22px;
+  }
+
+  > .nativecontrol,
+  > .selectedtext {
+    @include rs-typography(subtitle1);
+    @include rs-rtl-reflexive-property(padding, $rs-select-label-padding, $rs-select-arrow-padding);
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &::-ms-value {
+      background-color: transparent;
+      color: inherit;
+    }
+
+    // counteracts the extra text padding that Firefox adds by default
+    // @-moz-document url-prefix("") {
+    //   text-indent: -2px;
+    // }
+
+    box-sizing: border-box;
+    width: 100%;
+    height: $rs-select-height;
+    padding-top: 20px;
+    padding-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    background-color: transparent;
+    color: inherit; // Override default user agent stylesheet
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  > .rs-line-ripple {
+    @include rs-line-ripple;
+    display: inline;
+  }
+
+  > .outline {
+    @include rs-notched-outline_;
+    display: none;
+
+    > .leading {
+      @include rs-notched-outline-leading_;
+    }
+
+    > .notch {
+      @include rs-notched-outline-notch_;
+    }
+
+    > .trailing {
+      @include rs-notched-outline-trailing_;
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+// .rs-select__menu .rs-list .rs-list-item--selected {
+//   @include rs-theme-prop(color, on-surface);
+//   @include rs-states(on-surface);
+// }

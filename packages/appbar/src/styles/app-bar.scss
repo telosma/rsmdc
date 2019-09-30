@@ -24,6 +24,7 @@
   padding-top: auto;
   width: auto;
   transition: width 300ms $rs-animation-standard-curve-timing-function;
+  margin-left: var(--rs-app-layout-content--margin-left);
 
   &.-compact {
     right: auto;
@@ -63,11 +64,6 @@
     padding-right: 12px;
     padding-left: 0;
     margin-left: 0;
-  }
-
-  &.-drawer {
-    position: absolute;
-    margin-left: var(--rs-app-layout-content--margin-left);
   }
 
   &.-drawer.-fixed-scrolled,

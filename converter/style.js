@@ -117,11 +117,15 @@ module.exports.generateStyle = (sourceCss, styles, hostStyles) => {
 
   let clientStyle = `:root {\n${style}\n}`
 
+  // Define host style
   if (hostStyles.length > 0) {
     hostStyles.forEach(([selector, styleData]) => {
 
       const text = Object.entries(styleData.attributes)
         .reduce((result, [prop, value]) => {
+          if (prop.match(/^--.*?/g) && value.match(/\$.*?/g)) {
+            value = `#{${value}}`
+          }
           return `${result}${prop}: ${value}; `
         }, '')
       

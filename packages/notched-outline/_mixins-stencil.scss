@@ -1,0 +1,62 @@
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/theme/variables";
+@import "./rs-variables";
+@import "./variables";
+
+@mixin rs-notched-outline_ {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  text-align: left;
+  pointer-events: none;
+
+  > .leading,
+  > .notch,
+  > .trailing {
+    box-sizing: border-box;
+    height: 100%;
+    pointer-events: none;
+  }
+}
+
+@mixin rs-notched-outline-leading_ {
+  border: solid;
+  border-right: none;
+  border-top: solid;
+  border-bottom: solid;
+  width: $rs-notched-outline-leading-width;
+  border-width: 1px;
+  border-radius: 4px 0 0 4px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+@mixin rs-notched-outline-notch_ {
+  flex: 0 0 auto;
+  border-top: none;
+  border-bottom: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+@mixin rs-notched-outline-notch-no-label_ {
+  padding: 0;
+}
+
+@mixin rs-notched-outline-trailing_ {
+  flex-grow: 1;
+  border-left: none;
+  border-right: solid;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: 1px;
+  border-radius: 0 4px 4px 0;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}

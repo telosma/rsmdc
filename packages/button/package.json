@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/button",
-  "version": "1.1.0",
+  "version": "1.1.16",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -24,14 +24,19 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsmdc/rsmdc.git"
+  },
   "devDependencies": {
     "@stencil/core": "^1.3.3",
     "@rsmdc/elevation": "^1.1.0",
-    "@rsmdc/ripple": "^1.1.15",
-    "@rsmdc/rtl": "^1.1.0",
+    "@rsmdc/ripple": "^1.1.16",
+    "@rsmdc/rtl": "^1.1.16",
     "@rsmdc/shape": "^1.1.0",
     "@rsmdc/theme": "^1.1.0",
     "@rsmdc/typography": "^1.1.0"
-  },
-  "license": "MIT"
+  }
 }

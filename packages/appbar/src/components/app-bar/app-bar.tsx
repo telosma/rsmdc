@@ -25,17 +25,17 @@ export class AppBar {
 
   hasAppBarTool: boolean
 
-  topLimit: number
-
   itemLength: number = 0
-
-  windowScrollTop: number = 0
-
-  scrollTop: number = 0
 
   appBarPadding: number = 12
 
   sectionPadding: number = 4
+
+  appbarHeight: number = 0
+
+  prevWindowScrollTop: number = 0
+
+  topPosition: number = 0
 
   @Watch('fixed')
   fixedHandler() {
@@ -49,9 +49,6 @@ export class AppBar {
 
   @Watch('isScrolling')
   isScrollingHandler() {
-    const height = this.appBar.clientHeight
-    this.topLimit = -(height * 2)
-
     if (this.isScrolling && !this.appBar.classList.contains('-fixed-scrolled')) {
       this.appBar.classList.add('-fixed-scrolled')
       
@@ -123,6 +120,7 @@ export class AppBar {
 
   @Method()
   async hasAppBarItems() {
+    if (!this.appBarTool) { return }
     this.itemLength = Array.from(this.appBarTool.childNodes).filter(child => child.nodeType === 1).length
 
     if (this.itemLength > 0) {
@@ -132,50 +130,48 @@ export class AppBar {
       this.appBar.classList.remove('-has-action-item')
     }
   }
+
+  async scrollAppbarMotion(top, movingDiff) {
+    if(top < this.prevWindowScrollTop) {
+      // scroll up
+
+      this.topPosition =  this.topPosition < -this.appbarHeight
+        ? -this.appbarHeight
+        : this.topPosition + movingDiff
+      this.topPosition = this.topPosition > 0
+        ? 0
+        : this.topPosition
+
+      this.appBar.style.setProperty('top', `${this.topPosition}px`)
+      this.prevWindowScrollTop = top
+    } else {
+      // scroll down
+      this.topPosition = -top > -this.appbarHeight
+        ? -top
+        : this.topPosition + movingDiff
+      this.appBar.style.setProperty('top', `${this.topPosition}px`)
+      this.prevWindowScrollTop = top    
+    }
+  }
   
-  componentDidLoad() {
+  async componentDidLoad() {
     this.appBar = this.el.shadowRoot.querySelector('.rs-app-bar')
-    this.selectAppBarTitle()
-    this.selectAppBarTool()
-    this.hasAppBarItems()
+    await this.selectAppBarTitle()
+    await this.selectAppBarTool()
+    await this.hasAppBarItems()
     
     this.isFixed()
     this.isCompactable()
 
     window.onscroll = () => {
-      let top = window.pageYOffset
-      const diff = this.windowScrollTop - top
+      const top = window.pageYOffset
+      const movingDiff = this.prevWindowScrollTop - top
+      this.appbarHeight = this.appBar.clientHeight
       this.isScrolling = top > 0
 
       if (this.fixed || this.compactable) { return }
 
-      if(top < this.windowScrollTop) {
-        // scroll up
-
-        if(this.scrollTop === 0) {
-          this.windowScrollTop = top
-          return
-        }
-
-        const scrollTopHarf = this.topLimit / 2
-        const startTopPosition = this.scrollTop === this.topLimit 
-          ? scrollTopHarf 
-          : this.scrollTop + diff
-        this.scrollTop  = startTopPosition > 0 ? 0 : startTopPosition
-        this.appBar.style.setProperty('top', `${this.scrollTop}px`)
-        this.windowScrollTop = top
-
-      } else {
-        // scroll down
-
-        const moving = this.scrollTop + diff
-        const startTopPosition = -top > this.topLimit 
-          ? -top : moving < this.topLimit 
-          ? this.topLimit : moving
-        this.scrollTop = startTopPosition
-        this.appBar.style.setProperty('top', `${this.scrollTop}px`)
-        this.windowScrollTop = top    
-      }
+      this.scrollAppbarMotion(top, movingDiff)
     }
   }
 
@@ -191,7 +187,7 @@ export class AppBar {
               <header class="rs-app-bar">
                 <div class="row">
                   <div class="section">
-                    <slot></slot>
+                    <slot />
                   </div>
                 </div>
               </header>
