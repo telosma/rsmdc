@@ -318,6 +318,8 @@
   > .label,
   > .outline > .notch > .label {
     @include rs-floating-label_($rs-select-label-color);
+    white-space: nowrap;
+    text-overflow: clip;
   }
 
   > .dropdownicon {
@@ -398,11 +400,6 @@
     > .trailing {
       @include rs-notched-outline-trailing_;
       border-radius: 0 4px 4px 0;
-    }
-
-    > .notch > .label {
-      white-space: nowrap;
-      text-overflow: clip;
     }
   }
 }
