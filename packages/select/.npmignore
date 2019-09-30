@@ -1,8 +1,0 @@
-.stencil/
-node_modules/
-www/
-
-.editorconfig
-.gitignore
-stencil.config.ts
-tsconfig.json

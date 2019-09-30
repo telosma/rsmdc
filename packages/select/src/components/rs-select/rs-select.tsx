@@ -1,113 +1,281 @@
-import { Component, Element, Event, EventEmitter, Prop, h, State } from '@stencil/core'
-import {MDCSelect} from '@material/select'
+import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core'
+import { RSRipple } from '@rsmdc/ripple'
+import { RSLineRipple } from "@rsmdc/line-ripple"
 
 @Component({
   tag: 'rs-select',
-  styleUrl: 'rs-select.scss',
+  styleUrls: [
+    '../../dist/result.css',
+    '../../styles/_material-icons.scss'
+  ],
   shadow: true
 })
-export class RsSelect {
+export class Select {
 
   @Element() el: HTMLElement
 
   @Prop() name: string
 
-  @Prop() value: string
-
   @Prop() label: string
 
   @Prop() disabled: boolean
 
-  @State() selectedIndex: number = 0
+  @Prop() invalid: boolean
 
-  @State() styleType: string = 'filled'
-  
+  @Prop() required: boolean
+
+  @Prop() multiple: boolean = false
+
+  @Prop() value: string
+
+  select: Element
+
+  labels: Element[]
+
+  options: Element[]
+
+  nativeControl: Element
+
+  htmlNativeConctrol: HTMLSelectElement
+
+  notch: HTMLElement
+
+  rsRipple: RSRipple
+
+  rsLineRipple: RSLineRipple
+
   @Event({
     cancelable: false,
     composed: false,
   }) change: EventEmitter
 
-  mdcSelect: MDCSelect
-
-  disconnectedCallback() {
-    this.mdcSelect.destroy()
-    this.mdcSelect = null
+  @Watch('disabled')
+  disabledHandler() {
+    this.isDisabled()
   }
 
-  componentWillRender() {
-    const style = window.getComputedStyle(this.el)
-    this.styleType = style.getPropertyValue('--rs-select-type').trim() || 'filled'
+  @Watch('invalid')
+  invalidHandler() {
+    this.isInvalid()
   }
 
-  componentDidRender() {
-    const selectElm = this.el.shadowRoot.querySelector('.mdc-select')
-    if (this.styleType === 'outlined') {
-      selectElm.classList.add('mdc-select--outlined')
-    } else {
-      selectElm.classList.remove('mdc-select--outlined')
-    }
+  @Watch('required')
+  requiredHandler() {
+    this.isRequired()
+  }
+
+  @Watch('multiple')
+  multipleHandler() {
+    this.isMultiple()
+  }
+
+  @Method()
+  async isDisabled() {
     if (this.disabled) {
-      selectElm.classList.add('mdc-select--disabled')
+      this.select.classList.add('-disabled')
     } else {
-      selectElm.classList.remove('mdc-select--disabled')
+      this.select.classList.remove('-disabled')
     }
+  }
+
+  @Method()
+  async isInvalid() {
+    if (this.invalid) {
+      this.select.classList.add('-invalid')
+    } else {
+      this.select.classList.remove('-invalid')
+    }
+  }
+
+  @Method()
+  async isRequired() {
+    if (this.required) {
+      this.select.classList.add('-required')
+    } else {
+      this.select.classList.remove('-required')
+    }
+  }
+
+  @Method()
+  async isMultiple() {
+    if (!this.multiple) return
+    this.floatLabel()
+  }
+
+  @Method()
+  async floatLabel() {
+    this.labels.forEach(l => { 
+      l.classList.add('-floatabove')
+    })
+    this.setLabelWidthToNotch()
+  }
+
+  @Method()
+  async setLabelWidthToNotch() {
+    const labelWidth = await this.retriveLabelWidth(this.labels)
+    const width = labelWidth * 0.8 + 4
+    this.notch.style.setProperty('width', `${width}px`)
+  }
+
+  @Method()
+  async addFocusStyle() {
+    this.select.classList.add('-focused')
+    this.select.classList.add('rs-ripple-upgraded--background-focused')
+    this.rsLineRipple.activate()
+    this.labels.forEach(l => { 
+      l.classList.add('-floatabove')
+      if (!l.classList.contains('-shake')) { return }
+      l.classList.remove('-shake')
+    })
+    this.setLabelWidthToNotch()
+  }
+
+  @Method()
+  async removeFocusStyle() {
+    this.select.classList.remove('-focused')
+    this.select.classList.remove('rs-ripple-upgraded--background-focused')
+    this.rsLineRipple.deactivate()
+
+    this.labels.forEach(l => {
+      if (this.invalid && this.value) l.classList.add('-shake')
+      if (this.value) return
+      l.classList.remove('-floatabove')
+      this.notch.style.setProperty('width', 'auto')
+    })
+  }
+
+  @Method()
+  async hasSelectedOption(options) {
+    if (options.find(op => op.getAttribute('selected'))) {
+      this.floatLabel()
+      return
+    }
+    this.htmlNativeConctrol.selectedIndex = -1
+  }
+
+  @Method()
+  async retrieveOptionWidth(options) {
+    const longText = options.reduce((res, op) => {
+      return res > op.text.length
+        ? res
+        : op.text.length
+    }, 0)
+    return longText * 16
+  }
+
+  @Method()
+  async retriveLabelWidth(labels) {
+    return labels.reduce((res, l) => {
+      return res > l.clientWidth
+        ? res
+        : l.clientWidth
+    }, 0)
+  }
+
+  @Method()
+  async changeHandler() {
+    this.value = this.htmlNativeConctrol.value
+    const selectedIndex = this.htmlNativeConctrol.selectedIndex
+    const values = Array.from(this.htmlNativeConctrol.selectedOptions)
+      .map(op => op.value)
+
+    this.change.emit({
+      value: values.length > 1 ? values : values[0],
+      index: selectedIndex
+    })
+
+    if (this.options.length === 0) return
+
+    this.options.forEach((option, i) => {
+      if (i === selectedIndex) {
+        option.setAttribute('data-selected', 'true')
+      } else {
+        option.removeAttribute('data-selected')
+      }
+    })
   }
 
   componentDidLoad() {
-    let optionElms = []
-    const selectElm = this.el.shadowRoot.querySelector('.mdc-select')
-    const nativeSelectElm = this.el.shadowRoot.querySelector('.mdc-select__native-control')
-    const slotElm = this.el.shadowRoot.querySelector('slot')
+    this.select = this.el.shadowRoot.querySelector('.rs-select')
+    this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
+    this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
+    this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement);
+    this.notch = this.el.shadowRoot.querySelector('.notch')
+    this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
+    this.rsRipple = new RSRipple(this.select)
+    this.options = []
+    const slot = this.el.shadowRoot.querySelector('slot')
 
-    this.mdcSelect = new MDCSelect(selectElm)
-    this.mdcSelect.listen('MDCSelect:change', () => {
-      this.selectedIndex = this.mdcSelect.selectedIndex
-      this.value = this.mdcSelect.value
-      this.change.emit({ value: this.value, index: this.selectedIndex})
-      
-      if (optionElms.length === 0) { return }
-      optionElms.forEach((option, i) => {
-        if (i === this.selectedIndex) {
-          option.setAttribute('data-selected', true)
-          option.value = this.value
-        } else {
-          option.removeAttribute('data-selected')
-        }
+    this.isDisabled()
+    this.isInvalid()
+    this.isRequired()
+    this.isMultiple()
+    
+    slot.addEventListener('slotchange', async () => {
+      slot.assignedElements().forEach(e => {
+        this.options.push(e)
       })
+
+      if (this.options.length === 0) return
+
+      this.nativeControl.innerHTML = ''
+      this.options.forEach(op => {
+        this.nativeControl.append(op.cloneNode(true))
+      })
+
+      const optionWidth = await this.retrieveOptionWidth(this.options)
+      const labelWidth = await this.retriveLabelWidth(this.labels)
+      const width = optionWidth > labelWidth
+        ? optionWidth
+        : labelWidth
+      ;(this.select as HTMLElement).style.setProperty('width', `calc(52px + 16px + ${width}px`)
+      this.hasSelectedOption(this.options)
     })
 
-    slotElm.addEventListener('slotchange', () => {
-      nativeSelectElm.innerHTML = ''
-      slotElm.assignedElements().forEach(e => {
-        nativeSelectElm.append(e.cloneNode(true))
-        optionElms.push(e)
-      })
-      this.mdcSelect.value = this.value
+    this.nativeControl.addEventListener('focus', () => {
+      this.addFocusStyle()
+    })
+
+    this.nativeControl.addEventListener('change', () => {
+      this.changeHandler()
+    })
+
+    this.nativeControl.addEventListener('blur', () => {
+      this.removeFocusStyle()
+    })
+  }
+
+  componentDidUnLoad() {
+    this.nativeControl.removeEventListener('focus', () => {
+      this.addFocusStyle()
+    })
+
+    this.nativeControl.removeEventListener('change', () => {
+      this.changeHandler()
+    })
+
+    this.nativeControl.removeEventListener('blur', () => {
+      this.removeFocusStyle()
     })
   }
 
   render() {
-    return <div class="mdc-select">
-            <i class="mdc-select__dropdown-icon"></i>
-            <select class="mdc-select__native-control">
-            </select>
-
-            {(() => {
-              if (this.styleType === 'outlined') {
-                return <div class="mdc-notched-outline">
-                  <div class="mdc-notched-outline__leading"></div>
-                  <div class="mdc-notched-outline__notch">
-                    <label class="mdc-floating-label">{this.label}</label>
+    return <Host>
+              <div class="rs-select">
+                <i class="dropdownicon material-icons">arrow_drop_down</i>
+                <select class="nativecontrol" multiple={this.multiple}>
+                  <slot />
+                </select>
+                <label class="label">{this.label}</label>
+                <div class="rs-line-ripple" />
+                <div class="outline">
+                  <div class="leading" />
+                  <div class="notch">
+                    <label class="label -outlined">{this.label}</label>
                   </div>
-                  <div class="mdc-notched-outline__trailing"></div>
+                  <div class="trailing" />
                 </div>
-              } else {
-                return [<label class="mdc-floating-label">{this.label}</label>,
-                <div class="mdc-line-ripple"></div>]
-              }
-            })()}
-
-            <slot />
-          </div>
+              </div>
+            </Host>
   }
 }
