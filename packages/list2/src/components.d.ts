@@ -14,7 +14,12 @@ export namespace Components {
   interface RsListGraphic {}
   interface RsListGroup {}
   interface RsListItem {
-    'activateRipple': () => Promise<void>;
+    'activated': boolean;
+    'disabled': boolean;
+    'isActivated': () => Promise<void>;
+    'isDisabled': () => Promise<void>;
+    'isSelected': () => Promise<void>;
+    'selected': boolean;
   }
   interface RsListMeta {}
   interface RsListPrimary {}
@@ -104,7 +109,11 @@ declare namespace LocalJSX {
   interface RsListDivider extends JSXBase.HTMLAttributes<HTMLRsListDividerElement> {}
   interface RsListGraphic extends JSXBase.HTMLAttributes<HTMLRsListGraphicElement> {}
   interface RsListGroup extends JSXBase.HTMLAttributes<HTMLRsListGroupElement> {}
-  interface RsListItem extends JSXBase.HTMLAttributes<HTMLRsListItemElement> {}
+  interface RsListItem extends JSXBase.HTMLAttributes<HTMLRsListItemElement> {
+    'activated'?: boolean;
+    'disabled'?: boolean;
+    'selected'?: boolean;
+  }
   interface RsListMeta extends JSXBase.HTMLAttributes<HTMLRsListMetaElement> {}
   interface RsListPrimary extends JSXBase.HTMLAttributes<HTMLRsListPrimaryElement> {}
   interface RsListSecondary extends JSXBase.HTMLAttributes<HTMLRsListSecondaryElement> {}

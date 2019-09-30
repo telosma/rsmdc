@@ -14,28 +14,17 @@ export class List {
 
   rsList: RSList
 
+  
+
   componentDidLoad() {
     this.list = this.el.shadowRoot.querySelector('.rs-list')
-
   }
 
   render() {
     return  <Host>
               <ul class="rs-list">
                 <slot />
-                  {/* <li class="item" tabindex="0">
-                    <span class="text">Single-line</span>
-                    <span class="meta">めた</span>
-                  </li>
-                  <li class="item">
-                    <span class="text">Single-line</span>
-                    <span class="meta">めた</span>
-                  </li>
-                  <li class="item">
-                    <span class="text">Single-line</span>
-                    <span class="meta">めた</span>
-                  </li> */}
-                </ul>
+              </ul>
             </Host>
   }
 }

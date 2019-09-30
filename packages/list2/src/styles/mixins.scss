@@ -6,7 +6,6 @@
 @import "@rsmdc/typography/mixins";
 @import "@rsmdc/typography/variables";
 @import "./variables";
-@import "./rs-mixins";
 
 @mixin rs-list-type($types...) {
   @each $type in $types {
@@ -23,8 +22,16 @@
         height: 56px;
       }
     } @else if $type == dense {
-      
+
       .rs-list {
+        font-size: 0.812rem;
+      }
+
+      .rs-list-secondary {
+        font-size: .812rem;
+      }
+      
+      .rs-list-item {
         padding: 4px 0;
         font-size: .812rem;
         height: 40px;
@@ -35,10 +42,13 @@
         width: 20px;
         height: 20px;
         background-size: 20px;
+        display: flex;
+        align-items: center;
       }
     }
   }
 }
+
 
 @mixin rs-list-graphic-image($icon, $codepoint: "") {
   $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
@@ -47,8 +57,6 @@
 
     .rs-list-graphic {
       background-image: $icon;
-      width: 24px;
-      height: 24px;
     }
 
   } @else {
@@ -63,6 +71,35 @@
     }
   }
 }
+
+@mixin rs-list-graphic-type($type) {
+  @if $type == circle {
+    
+    .rs-list-graphic {
+      width: 40px;
+      height: 40px;
+      background-size: 40px;
+      border-radius: 50%;
+    }
+
+  }@else if $type == rectangle {
+    
+    .rs-list-graphic {
+      width: 40px;
+      height: 40px;
+      background-size: 56px;
+      border-radius: 50%;
+    }
+
+  }@else if $type == square {
+    
+    .rs-list-graphic {
+      background-size: 100px 56px;
+    }
+  }
+}
+
+
 
 @mixin rs-list-divider-type($types...) {
   @each $type in $types {

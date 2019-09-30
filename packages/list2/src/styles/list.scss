@@ -6,58 +6,17 @@
 @import "@rsmdc/typography/mixins";
 @import "@rsmdc/typography/variables";
 @import "./variables";
-@import "./rs-mixins";
-@import "./mixins";
 
 @include rs-ripple-common;
 
 .rs-list {
   @include rs-typography(subtitle1);
-
   padding: 8px 0;
-  padding-bottom: 8px;
   line-height: map-get(map-get($rs-typography-styles, body1), line-height);
   margin: 0;
   list-style-type: none;
   outline: none;
   cursor: pointer;
-
-  &.-dense {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    font-size: 0.812rem;
-  }
-
-
-  @mixin rs-list-item-base_ {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: flex-start;
-    height: 48px;
-    padding: 0 $rs-list-side-padding;
-    overflow: hidden;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  @mixin rs-list-item-interactive-ripple_ {
-    @include rs-ripple-surface;
-    @include rs-ripple-radius-bounded;
-    @include rs-states(rs-theme-prop-value(on-surface), false);
-    @include rs-states-activated(primary, false);
-    @include rs-states-selected(primary, false);
-  }
-
-  @mixin rs-list-graphic-size($size) {
-    $text-offset: 72px;
-    $side-padding: $rs-list-side-padding;
-    $margin-value: $text-offset - $side-padding - $size;
-    width: $size;
-    height: $size;
-  }
 }
 
 .rs-list-item {
@@ -71,16 +30,26 @@
   align-items: center;
   padding-left: $rs-list-side-padding;
   padding-right: $rs-list-side-padding;
+  outline: none;
 
   @include rs-ripple-surface;
-  @include rs-ripple-radius-unbounded;
-  @include rs-ripple-upgraded($rs-theme-primary);
-}
+  @include rs-ripple-radius-bounded;
+  @include rs-ripple-upgraded($rs-theme-on-surface);
 
-.rs-list-text {
-  @include rs-typography-overflow-ellipsis;
-  &[for] {
+  &.-disabled {
     pointer-events: none;
+    color: rgba(0,0,0,.38);
+  }
+  
+  &.-selected,
+  &.-activated {
+    color: $rs-theme-primary;
+    background: $rs-list-select-fill-color;
+    @include rs-ripple-upgraded($rs-theme-primary);
+  }
+
+  &.-activated {
+    background: $rs-list-activated-fill-color;
   }
 }
 
@@ -88,36 +57,22 @@
   color: rgba(0, 0, 0, .38);
 }
 
-@mixin rs-list-without-ripple {
- 
-  $item-primary-text-baseline-height: 32px;
-  $item-secondary-text-baseline-height: 20px;
-  $dense-item-primary-text-baseline-height: 24px;
-  // $divider-color: if(
-  //   rs-theme-tone($mdc-theme-background) == "dark",
-  //   $rs-list-divider-color-on-dark-bg,
-  //   $rs-list-divider-color-on-light-bg
-  // );
-
-  @include rs-list-item-secondary-text-ink-color(text-secondary-on-background);
-  @include rs-list-item-graphic-fill-color(transparent);
-  @include rs-list-item-graphic-ink-color(text-icon-on-background);
-  @include rs-list-item-meta-ink-color(text-hint-on-background);
-  @include rs-list-group-subheader-ink-color(text-primary-on-background);
+rs-list-meta {
+  margin: 0 0 0 auto;
 }
 
 .rs-list-primary {
   @include rs-typography-overflow-ellipsis;
   display: block;
-  margin-top: 0;
-  line-height: 32px;
+  margin: 0;
+  line-height: normal;
 }
 
 .rs-list-secondary {
   @include rs-typography(body2);
   @include rs-typography-overflow-ellipsis;
   display: block;
-  line-height: normal;
+  color: rgba(0,0,0,.54);
 }
 
 .rs-list-graphic {
@@ -128,9 +83,11 @@
   align-items: center;
   justify-content: center;
   fill: currentColor;
-  border-radius: 50%;
+  border-radius: 0;
   background-size: 24px;
   margin-right: 32px;
+  background-image: none;
+  color: inherit;
 
   &::before {
     width: 24px;
@@ -138,10 +95,6 @@
     content: '';
     font-family: inherit;
     font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: $rs-theme-primary;
   }
 }
 
@@ -151,7 +104,7 @@
   border: none;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-color: rgba(0, 0, 0, 0.54);
+  border-bottom-color: $rs-list-divider-color-on-light-bg;
 }
 
 .rs-list-subheader {
@@ -160,4 +113,13 @@
   $rs-list-subheader-margin: ($rs-list-subheader-virtual-height - $rs-list-subheader-leading) / 2;
   @include rs-typography(subtitle1);
   margin: $rs-list-subheader-margin $rs-list-side-padding;
+}
+
+rs-list-item > rs-list-graphic {
+  --rs-list-graphic---color: rgba(0,0,0,.38);
+}
+
+rs-list-item[selected] > rs-list-graphic,
+rs-list-item[activated] > rs-list-graphic{
+  --rs-list-graphic---color: $rs-theme-primary;
 }
