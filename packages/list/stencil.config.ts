@@ -1,7 +1,7 @@
 import { Config } from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'data-table',
+  namespace: 'list',
   outputTargets: [
     {
       type: 'dist',
@@ -17,11 +17,16 @@ export const config: Config = {
   ],
   bundles: [
     { components: [
-      'rs-data-table', 
-      'rs-data-table-header',
-      'rs-data-table-body', 
-      'rs-data-table-row',
-      'rs-data-table-cell'
+      'rs-list', 
+      'rs-list-item', 
+      'rs-list-text',
+      'rs-list-primary', 
+      'rs-list-secondary', 
+      'rs-list-meta', 
+      'rs-list-graphic', 
+      'rs-list-divider', 
+      'rs-list-subheader',
+      'rs-list-group'
     ]}
   ]
 };

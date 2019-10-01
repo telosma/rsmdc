@@ -18,7 +18,6 @@ rs-drawer[closing] {
   display: block;
 
   > .content {
-    @include rs-drawer-item-shape-radius(4px);
     width: $rs-drawer-width;
     flex-direction: column;
     flex-shrink: 0;

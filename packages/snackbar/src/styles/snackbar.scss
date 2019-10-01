@@ -1,5 +1,4 @@
 @import "@rsmdc/animation/functions";
-@import "@rsmdc/button/rs-mixins";
 @import "@rsmdc/ripple/mixins";
 @import "@rsmdc/ripple/mixins-stencil";
 @import "@rsmdc/rtl/mixins";
@@ -73,7 +72,7 @@
 
 rs-snackbar > rs-button {
   @include rs-states($rs-snackbar-action-ink-color);
-  @include rs-button-ink-color($rs-snackbar-action-ink-color);
+  color: $rs-snackbar-action-ink-color;
   white-space: nowrap;
   padding: 0 4px;
 }

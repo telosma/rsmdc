@@ -1,5 +1,4 @@
 @import '@rsmdc/animation/variables';
-@import '@rsmdc/drawer/variables';
 @import '@rsmdc/elevation/mixins';
 @import "@rsmdc/ripple/mixins-stencil";
 @import '@rsmdc/theme/variables';
@@ -69,7 +68,7 @@
   &.-drawer.-fixed-scrolled,
   &.-drawer.-short-collapsed {
     position: fixed;
-    margin-left: $rs-drawer-width;
+    margin-left: auto;
   }
 
   > .row {

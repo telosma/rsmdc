@@ -1,4 +1,4 @@
-@import "@rsmdc/list/rs-mixins";
+// @import "@rsmdc/list/rs-mixins";
 @import "@rsmdc/ripple/mixins";
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/rs-functions";
@@ -12,10 +12,6 @@
 @mixin rs-drawer-border-color($color) {
   $value: rgba(rs-theme-prop-value($color), $rs-drawer-divider-opacity);
   --rs-drawer--border-color: #{$value};
-}
-
-@mixin rs-drawer-item-shape-radius($radius, $rtl-reflexive: true) {
-  @include rs-list-item-shape-radius($radius);
 }
 
 @mixin rs-drawer-shape-radius($radius) {

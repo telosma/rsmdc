@@ -11,8 +11,6 @@ export class Button {
 
   button: HTMLElement
 
-  label: Element
-
   @Prop() disabled: boolean
 
   @Prop() exited: boolean

@@ -16,6 +16,7 @@
   "dependencies": {
     "@rsmdc/animation": "^1.1.0",
     "@rsmdc/app-layout": "^1.1.6",
+    "@rsmdc/appbar": "^1.1.0",
     "@rsmdc/base": "^1.1.0",
     "@rsmdc/button": "^1.1.16",
     "@rsmdc/card": "^1.1.16",

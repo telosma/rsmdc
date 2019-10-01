@@ -1,0 +1,117 @@
+@import "@rsmdc/theme/mixins";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/theme/functions";
+@import "@rsmdc/typography/mixins";
+@import "@rsmdc/typography/variables";
+@import "./variables";
+
+@mixin rs-list-type($types...) {
+  @each $type in $types {
+    @if $type == two-line {
+      
+      .rs-list-item {
+        justify-content: flex-start;
+        height: 72px;
+      }
+
+    } @else if $type == avatar-list  {
+      
+      .rs-list-item {
+        height: 56px;
+      }
+    } @else if $type == dense {
+
+      .rs-list {
+        font-size: 0.812rem;
+      }
+
+      .rs-list-secondary {
+        font-size: .812rem;
+      }
+      
+      .rs-list-item {
+        padding: 4px 0;
+        font-size: .812rem;
+        height: 40px;
+        margin: 0 36px 0 0;
+      }
+
+      .rs-list-graphic {
+        width: 20px;
+        height: 20px;
+        background-size: 20px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+
+@mixin rs-list-graphic-image($icon, $codepoint: "") {
+  $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
+
+  @if $value == path {
+
+    .rs-list-graphic {
+      background-image: $icon;
+    }
+
+  } @else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + "\\"+ $codepoint + '"';
+
+    .rs-list-graphic {
+      &::before {
+        font-family: $font-family;
+        content: $name;
+      }
+    }
+  }
+}
+
+@mixin rs-list-graphic-type($type) {
+  @if $type == circle {
+    
+    .rs-list-graphic {
+      width: 40px;
+      height: 40px;
+      background-size: 40px;
+      border-radius: 50%;
+    }
+
+  }@else if $type == rectangle {
+    
+    .rs-list-graphic {
+      width: 40px;
+      height: 40px;
+      background-size: 56px;
+      border-radius: 50%;
+    }
+
+  }@else if $type == square {
+    
+    .rs-list-graphic {
+      background-size: 100px 56px;
+    }
+  }
+}
+
+
+
+@mixin rs-list-divider-type($types...) {
+  @each $type in $types {
+    @if $type == inset {
+
+      .rs-list-divider {
+        margin: 0 0 0 72px;
+      }
+
+    }@else if $type == padded {
+     
+      .rs-list-divider {
+        margin: 0;
+      }
+    }
+  }
+}
