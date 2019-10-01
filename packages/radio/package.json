@@ -35,5 +35,8 @@
     "@rsmdc/typography": "^1.0.5",
     "tslib": "^1.9.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }

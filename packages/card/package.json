@@ -19,5 +19,8 @@
     "@rsmdc/rtl": "^0.42.0",
     "@rsmdc/shape": "^1.1.0",
     "@rsmdc/theme": "^1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
