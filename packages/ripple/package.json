@@ -5,8 +5,7 @@
   "license": "MIT",
   "keywords": [
     "material components",
-    "material design",
-    "ripple"
+    "material design"
   ],
   "main": "./index.js",
   "sideEffects": false,

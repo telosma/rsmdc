@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@rsmdc/animation": "^1.0.0",
-    "@rsmdc/base": "^1.0.1-beta.1",
+    "@rsmdc/base": "^1.1.0",
     "@rsmdc/ripple": "^1.1.18",
     "@rsmdc/shape": "^1.0.2",
     "@rsmdc/theme": "^1.0.2",
