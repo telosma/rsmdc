@@ -21,6 +21,8 @@
     "@rsmdc/button": "^1.1.20",
     "@rsmdc/card": "^1.1.20",
     "@rsmdc/checkbox": "^1.1.20",
+    "@rsmdc/chips": "^1.1.20",
+    "@rsmdc/data-table": "^1.1.20",
     "@rsmdc/dialog": "^1.1.20",
     "@rsmdc/dom": "^1.1.0",
     "@rsmdc/drawer": "^1.1.20",
