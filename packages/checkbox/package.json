@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/checkbox",
-  "version": "1.1.16",
+  "version": "1.1.18",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -33,8 +33,8 @@
     "@rsmdc/animation": "^1.1.0",
     "@rsmdc/base": "^1.1.0",
     "@rsmdc/dom": "^1.1.0",
-    "@rsmdc/ripple": "^1.1.16",
-    "@rsmdc/rtl": "^1.1.16",
+    "@rsmdc/ripple": "^1.1.18",
+    "@rsmdc/rtl": "^1.1.18",
     "@rsmdc/theme": "^1.1.0",
     "@rsmdc/typography": "^1.0.5",
     "tslib": "^1.9.3"
