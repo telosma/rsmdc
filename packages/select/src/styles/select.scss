@@ -2,11 +2,11 @@
 @import "./variables";
 @import "@rsmdc/animation/variables";
 @import "@rsmdc/typography/mixins";
-@import "../../../floating-label/mixins-stencil";
-@import "../../../ripple/mixins-stencil";
-@import "../../../rtl/mixins";
-@import "../../../line-ripple/rs-line-ripple";
-@import "../../../notched-outline/mixins-stencil";
+@import "@rsmdc/floating-label/mixins-stencil";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/line-ripple/rs-line-ripple";
+@import "@rsmdc/notched-outline/mixins-stencil";
 @import "./mixins";
 
 @include rs-floating-label-animation;

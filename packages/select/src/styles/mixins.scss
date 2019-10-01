@@ -2,8 +2,8 @@
 @import "@rsmdc/theme/mixins";
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/functions";
-@import "../../../notched-outline/variables";
-@import "../../../rtl/mixins";
+@import "@rsmdc/notched-outline/variables";
+@import "@rsmdc/rtl/mixins";
 @import "./variables";
 
 @mixin rs-states-base-color($color) {
