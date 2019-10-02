@@ -12,7 +12,10 @@
   "unpkg": "dist/appbar/appbar.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/styles/",
+    "src/dist/",
+    "rs-app-bar.scss"
   ],
   "scripts": {
     "convert": "node ../../converter/index.js",
