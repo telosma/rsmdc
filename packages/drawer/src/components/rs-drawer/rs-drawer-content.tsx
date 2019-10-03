@@ -6,6 +6,7 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true
 })
 export class DrawerContent {
+
   render() {
     return  <Host>
               <div class="rs-drawer-content">

@@ -104,6 +104,33 @@ rs-drawer[opened] + rs-app-layout-content {
   --rs-app-layout-content---margin-left: $rs-drawer-width;
 }
 
+rs-drawer-content > rs-list > rs-list-item {
+  --rs-list-item---padding-top: 0;
+  --rs-list-item---padding-buttom: 0;
+  --rs-list-item---padding-right: 8px;
+  --rs-list-item---padding-left: 8px;
+  --rs-list-item---margin-top: 8px;
+  --rs-list-item---margin-bottom: 8px;
+  --rs-list-item---margin-right: 8px;
+  --rs-list-item---margin-left: 8px;
+  --rs-list-item---border-radius: 4px;
+  --rs-list-item---height: 40px;
+  --rs-list-item---font-size: .875rem;
+  --rs-list-item---font-weight: 500;
+  --rs-list-item---color: rgba(0,0,0,.87);
+  --rs-list-itemrs-ripple-upgraded--foreground-activationPEafter---animation: rs-ripple-fg-radius-in 75ms forwards, rs-ripple-fg-opacity-in 75ms forwards;
+  &:nth-child(1) {
+    --rs-list-item---margin-top: 2px;
+  }
+  &:last-child {
+    --rs-list-item---margin-bottom: 0;
+  }
+}
+
+rs-drawer-content > rs-list > rs-list-item > rs-list-graphic {
+  --rs-list-graphic---color: rgba(0,0,0,.6);
+}
+
  // 64px same as $rs-top-app-bar-row-height
 .rs-drawer-header {
   flex-shrink: 0;
