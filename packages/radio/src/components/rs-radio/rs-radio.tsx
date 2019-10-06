@@ -32,6 +32,8 @@ export class Radio {
 
   radioEl: Element
 
+  labelEl: Element
+
   @Watch('checked')
   checkedHandler() {
     this.isChecked()
@@ -100,24 +102,35 @@ export class Radio {
     }, 200)
   }
 
+  @Method()
+  async clickEventHandler(e) {
+    if (e.target === this.labelEl) return
+    await this.activateRipple()
+    await this.checkDataChecked()
+    if (this.sameGroupRadios) {
+      await this.uncheckSameGroupRadios()
+    }
+    await this.change.emit({ value: this.value })
+  }
+
   async componentDidLoad() {
     this.sameGroupRadios = Array.from(window.document.querySelectorAll(`rs-radio[name=${this.name}]`))
     this.rsRadio = new RSRadio(this.el.shadowRoot.querySelector('.container'))
     this.radioEl = this.el.shadowRoot.querySelector('.rs-radio')
-    const labelEl = this.el.shadowRoot.querySelector('.label')
+    this.labelEl = this.el.shadowRoot.querySelector('.label')
     
     this.isChecked()
     this.isDataChecked()
     this.isDisabled()
 
-    this.radioEl.addEventListener('click', async e => {
-      if (e.target === labelEl) { return }
-      await this.activateRipple()
-      await this.checkDataChecked()
-      if (this.sameGroupRadios) {
-        await this.uncheckSameGroupRadios()
-      }
-      await this.change.emit({ value: this.value })
+    this.radioEl.addEventListener('click', e => {
+      this.clickEventHandler(e)
+    })
+  }
+
+  async componentDidUnLoad() {
+    this.radioEl.removeEventListener('click', e => {
+      this.clickEventHandler(e)
     })
   }
 

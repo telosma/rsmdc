@@ -13,6 +13,7 @@ export namespace Components {
     'activateRipple': () => Promise<void>;
     'checkDataChecked': () => Promise<void>;
     'checked': boolean;
+    'clickEventHandler': (e: any) => Promise<void>;
     'dataChecked': string;
     'disabled': boolean;
     'id': string;

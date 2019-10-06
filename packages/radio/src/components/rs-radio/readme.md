@@ -47,6 +47,16 @@ Type: `Promise<void>`
 
 
 
+### `clickEventHandler(e: any) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `isChecked() => Promise<void>`
 
 

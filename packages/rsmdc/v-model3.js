@@ -1,10 +1,10 @@
 const makeFunc = (type, value) => {
   return (e, dataName, vnode, el) => {
-    if (type === 'select') {
+    if (type === 'select' || type === 'radio') {
       typeof dataName === 'object'
         ? vnode.context[dataName[0]][dataName[1]] = e.detail.value
         : vnode.context[dataName] = e.detail.value
-
+        
     } else if (type === 'checkbox') {
       const vNodeValue = typeof dataName === 'object'
         ? vnode.context[dataName[0]][dataName[1]]
@@ -37,7 +37,7 @@ export const VModel3 = {
     const value = vNode.data.attrs.value
     const dataName = binding.expression
 
-    if (type === 'select' || type === 'checkbox') {
+    if (type === 'select' || type === 'checkbox' || type === 'radio') {
       const dataName = binding.expression.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
         ? binding.expression.split('.')
         : binding.expression
@@ -56,17 +56,6 @@ export const VModel3 = {
           changeEvent(e)
         }
       }
-    } else if (type === 'radio') {
-      observer = new MutationObserver(() => {
-        const isChecked = el.getAttribute('data-checked') ? true : false
-        if (!isChecked) { return }
-        vNode.context[dataName] = value
-      })
-
-      observer.observe(el, {
-        attributes: true,
-        subtree: true
-      })  
     } else if (type === 'text' || type === 'textarea' || type === 'date') {
       observer = new MutationObserver(mutations => {
         const text = mutations[0].target.text
@@ -96,7 +85,7 @@ export const VModel3 = {
       : binding.expression
     const func = makeFunc(type, value)
 
-    if (type === 'select' || type === 'checkbox') {
+    if (type === 'select' || type === 'checkbox' || type === 'radio') {
       if (!vNode.data.on || !vNode.data.on.change) return
 
       const changeEvent = vNode.data.on.change.fns
@@ -114,7 +103,7 @@ export const VModel3 = {
       : binding.expression
     const func = makeFunc(type, value)
 
-    if (type === 'select' || type === 'checkbox') {
+    if (type === 'select' || type === 'checkbox' || type === 'radio') {
       if (vNode.data.on && vNode.data.on.change) return
 
       el.removeEventListener('change', e => {
