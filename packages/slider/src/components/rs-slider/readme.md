@@ -56,6 +56,16 @@ Type: `Promise<void>`
 
 
 
+### `passChangeEvent() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 
 ----------------------------------------------
 

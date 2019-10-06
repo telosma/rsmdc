@@ -1,9 +1,8 @@
-import { Component, Prop, Host, Element, Event, EventEmitter, Watch, Method, h } from "@stencil/core";
-import { RSSlider } from "../../utils/index";
-
+import { Component, Prop, Host, Element, Event, EventEmitter, Watch, Method, h } from '@stencil/core'
+import { RSSlider } from '../../utils/index'
 @Component({
-  tag: "rs-slider",
-  styleUrl: "../../dist/result.css",
+  tag: 'rs-slider',
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 export class Slider {
@@ -24,21 +23,23 @@ export class Slider {
 
   @Prop() marked: boolean
 
-  rsSlider: RSSlider;
+  rsSlider: RSSlider
 
-  slider: Element;
+  slider: Element
 
-  @Watch("countable")
+  thumb: Element
+
+  @Watch('countable')
   countableHandler() {
     this.isCountable()
   }
 
-  @Watch("disabled")
+  @Watch('disabled')
   disabledHandler() {
     this.isDisabled()
   }
 
-  @Watch("marked")
+  @Watch('marked')
   markedHandler() {
     this.isMarked()
   }
@@ -51,36 +52,55 @@ export class Slider {
   @Method()
   async isCountable() {
     if (this.countable) {
-      this.slider.classList.add("-discrete")
+      this.slider.classList.add('-discrete')
     } else {
-      this.slider.classList.remove("-discrete")
+      this.slider.classList.remove('-discrete')
     }
   }
 
   @Method()
   async isDisabled() {
     if (this.disabled) {
-      this.slider.classList.add("-disabled")
+      this.slider.classList.add('-disabled')
     } else {
-      this.slider.classList.remove("-disabled")
+      this.slider.classList.remove('-disabled')
     }
   }
 
   @Method()
   async isMarked() {
     if (this.marked) {
-      this.slider.classList.add("-display-markers")
+      this.slider.classList.add('-display-markers')
     } else {
-      this.slider.classList.remove("-display-markers")
-    } addEventListener
+      this.slider.classList.remove('-display-markers')
+    }
+  }
+
+  @Method()
+  async passChangeEvent() {
+    const value = this.slider.getAttribute('aria-valuenow')
+    this.change.emit({ value })
   }
 
   componentDidLoad() {
-    this.slider = this.el.shadowRoot.querySelector(".rs-slider")
-    this.isMarked();
-    this.isCountable();
-    this.rsSlider = new RSSlider(this.slider);
-    this.isDisabled();
+    this.slider = this.el.shadowRoot.querySelector('.rs-slider')
+    this.thumb = this.el.shadowRoot.querySelector('.thumbcontainer')
+
+    this.isDisabled()
+    this.isCountable()
+    this.isMarked()
+
+    this.rsSlider = new RSSlider(this.slider)
+
+    this.thumb.addEventListener('click', () => {
+      this.passChangeEvent()
+    })
+  }
+
+  componentDidUnLoad() {
+    this.thumb.removeEventListener('click', () => {
+      this.passChangeEvent()
+    })
   }
 
   render() {

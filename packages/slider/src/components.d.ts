@@ -19,6 +19,7 @@ export namespace Components {
     'max': number;
     'min': number;
     'now': number;
+    'passChangeEvent': () => Promise<void>;
   }
 }
 
