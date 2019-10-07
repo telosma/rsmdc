@@ -38,6 +38,8 @@
   margin-bottom: 0;
   margin-right: 0;
   margin-left: 0;
+  flex-wrap: nowrap;
+  user-select: auto;
 
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
