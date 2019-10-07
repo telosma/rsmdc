@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export { Corner } from '@rsmdc/menu-surface/constants'; // for backward compatibility
+export { Corner } from '@rsmdc/menu-surface/constants';
 export * from './component';
 export * from './foundation';
 //# sourceMappingURL=index.js.map

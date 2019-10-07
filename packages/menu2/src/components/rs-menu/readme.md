@@ -12,6 +12,13 @@
 | `opened` | `opened`  |             | `boolean` | `undefined` |
 
 
+## Events
+
+| Event    | Description | Type               |
+| -------- | ----------- | ------------------ |
+| `change` |             | `CustomEvent<any>` |
+
+
 ## Methods
 
 ### `isOpened() => Promise<void>`

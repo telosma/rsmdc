@@ -3,43 +3,42 @@
 @import "@rsmdc/shape/rs-functions";
 @import "./variables";
 
-
-:host {
-  position: absolute;
-}
-
 .rs-menu {
   min-width: $rs-menu-min-width;
-  width: $rs-menu-width-base;
 
   &.rs-menu-surface {
     background-color: $rs-theme-surface;
     color: $rs-theme-on-surface;
     border-radius: 4px;
-    transform: scale(1);
+    transform: scale(0);
     opacity: 0;
   }
 }
 
 .rs-menu-surface {
-  box-sizing: border-box;
   max-width: calc(100vw - #{$rs-menu-surface-min-distance-from-edge});
   max-height: calc(100vh - #{$rs-menu-surface-min-distance-from-edge});
+  height: 0;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow: auto;
-  will-change: transform, opacity;
   z-index: $rs-menu-surface-z-index;
-  transition: opacity .03s linear,-webkit-transform .12s cubic-bezier(0,0,.2,1);
   box-shadow: #{rs-elevation(8)};
   min-width: $rs-menu-min-width;
-
+  transition: opacity $rs-menu-surface-fade-out-duration linear;
+  
   &.-opened {
+    height: auto;
+    will-change: transform, opacity;
     display: inline-block;
     transform: scale(1);
     opacity: 1;
+    transition:
+      opacity $rs-menu-surface-fade-in-duration linear,
+      transform $rs-menu-surface-scale-duration $rs-animation-deceleration-curve-timing-function;
   }
 }
+
 
 rs-menu > rs-list > rs-list-item {
   --rs-list-item---user-select: none;

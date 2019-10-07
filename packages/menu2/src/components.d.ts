@@ -30,6 +30,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsMenu extends JSXBase.HTMLAttributes<HTMLRsMenuElement> {
+    'onChange'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
 
