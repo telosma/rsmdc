@@ -13,8 +13,10 @@ export namespace Components {
     'activateRipple': () => Promise<void>;
     'disabled': boolean;
     'exited': boolean;
+    'fixed': boolean;
     'isDisabled': () => Promise<void>;
     'isExited': () => Promise<void>;
+    'isFixed': () => Promise<void>;
   }
 }
 
@@ -35,6 +37,7 @@ declare namespace LocalJSX {
   interface RsButton extends JSXBase.HTMLAttributes<HTMLRsButtonElement> {
     'disabled'?: boolean;
     'exited'?: boolean;
+    'fixed'?: boolean;
   }
 
   interface IntrinsicElements {

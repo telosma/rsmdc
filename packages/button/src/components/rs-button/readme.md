@@ -11,6 +11,7 @@
 | ---------- | ---------- | ----------- | --------- | ----------- |
 | `disabled` | `disabled` |             | `boolean` | `undefined` |
 | `exited`   | `exited`   |             | `boolean` | `undefined` |
+| `fixed`    | `fixed`    |             | `boolean` | `undefined` |
 
 
 ## Methods
@@ -36,6 +37,16 @@ Type: `Promise<void>`
 
 
 ### `isExited() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `isFixed() => Promise<void>`
 
 
 

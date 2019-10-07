@@ -15,6 +15,8 @@ export class Button {
 
   @Prop() exited: boolean
 
+  @Prop() fixed: boolean
+
   @Watch("disabled")
   disabledHandler() {
     this.isDisabled();
@@ -23,6 +25,11 @@ export class Button {
   @Watch("exited")
   exitedHandler() {
     this.isExited();
+  }
+
+  @Watch("fixed")
+  fixedHandler() {
+    this.isFixed();
   }
 
   @Method()
@@ -55,6 +62,16 @@ export class Button {
     })
   }
 
+  @Method()
+  async isFixed() {
+    this.button = this.el.shadowRoot.querySelector('.rs-button')
+    if (this.fixed) {
+      this.button.classList.add("-fixed");
+    } else {
+      this.button.classList.remove("-fixed");
+    }
+  }
+
   componentDidLoad() {
     const button = this.el.shadowRoot.querySelector('.rs-button');
     const ripple = new RSRipple(button)
@@ -73,6 +90,7 @@ export class Button {
 
     this.isDisabled()
     this.isExited()
+    this.isFixed()
   }
 
   render() {

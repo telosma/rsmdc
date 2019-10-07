@@ -77,6 +77,7 @@
           width: 24px;
           height: 24px;
           font-size: 24px;
+          vertical-align: top;
         }
 
         > .label::after {
@@ -84,6 +85,7 @@
           width: 24px;
           height: 24px;
           font-size: 24px;
+          vertical-align: top;
         }
 
         &:hover {
@@ -98,6 +100,20 @@
           color: $rs-theme-on-secondary;
           background-color: $rs-theme-secondary;
         }
+      }
+    }
+  }
+}
+
+@mixin rs-button-position($position) {
+  @if $position == center {
+
+    .rs-button {
+
+      &.-fixed {
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
       }
     }
   }
@@ -125,19 +141,13 @@
         font-family: $font-family;
         content: $name;
         display: inline-block;
-        width: 18px;
-        height: 18px;
-        font-size: 18px;
-        vertical-align: top;
+        vertical-align: middle;
       }
       
       > .label::after {
         font-family: $font-family;
         content: $name;
-        width: 18px;
-        height: 18px;
-        font-size: 18px;
-        vertical-align: top;
+        vertical-align: middle;
         display: none;
       }
     }
@@ -151,12 +161,10 @@
       
       > .label::before {
         display: inline-block;
-        margin: 0 8px 0 -4px;
       }
 
       > .label::after {
         display: none;
-        margin: 0 -4px 0 8px;
       }
     }
     
