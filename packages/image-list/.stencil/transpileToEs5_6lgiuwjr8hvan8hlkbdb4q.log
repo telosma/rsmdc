@@ -1,0 +1,16 @@
+import { r as registerInstance, h, H as Host } from './core-8a3faffc.js';
+var ImageList = /** @class */ (function () {
+    function ImageList(hostRef) {
+        registerInstance(this, hostRef);
+    }
+    ImageList.prototype.render = function () {
+        return h(Host, null, h("ul", { class: "rs-image-list" }, h("li", { class: "item" }, h("div", { class: "imageaspectcontainer" }, h("img", { class: "image", src: "https://cweb.canon.jp/showroom/personal/workshop/instaevent-2018/img/picture19.jpg" })), h("div", { class: "supporting" }, h("span", { class: "label" }, "Text label"))), h("li", { class: "item" }, h("div", { class: "imageaspectcontainer" }, h("img", { class: "image", src: "https://cweb.canon.jp/showroom/personal/workshop/instaevent-2018/img/picture19.jpg" })), h("div", { class: "supporting" }, h("span", { class: "label" }, "Text label")))));
+    };
+    Object.defineProperty(ImageList, "style", {
+        get: function () { return "STYLE_TEXT_PLACEHOLDER:rs-image-list"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ImageList;
+}());
+export { ImageList as rs_image_list };
