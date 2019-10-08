@@ -9,7 +9,13 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsImageList {}
+  interface RsImageList {
+    'isMasonry': () => Promise<void>;
+    'masonry': boolean;
+  }
+  interface RsImageListContainer {}
+  interface RsImageListItem {}
+  interface RsImageListLabel {}
 }
 
 declare global {
@@ -20,16 +26,45 @@ declare global {
     prototype: HTMLRsImageListElement;
     new (): HTMLRsImageListElement;
   };
+
+  interface HTMLRsImageListContainerElement extends Components.RsImageListContainer, HTMLStencilElement {}
+  var HTMLRsImageListContainerElement: {
+    prototype: HTMLRsImageListContainerElement;
+    new (): HTMLRsImageListContainerElement;
+  };
+
+  interface HTMLRsImageListItemElement extends Components.RsImageListItem, HTMLStencilElement {}
+  var HTMLRsImageListItemElement: {
+    prototype: HTMLRsImageListItemElement;
+    new (): HTMLRsImageListItemElement;
+  };
+
+  interface HTMLRsImageListLabelElement extends Components.RsImageListLabel, HTMLStencilElement {}
+  var HTMLRsImageListLabelElement: {
+    prototype: HTMLRsImageListLabelElement;
+    new (): HTMLRsImageListLabelElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-image-list': HTMLRsImageListElement;
+    'rs-image-list-container': HTMLRsImageListContainerElement;
+    'rs-image-list-item': HTMLRsImageListItemElement;
+    'rs-image-list-label': HTMLRsImageListLabelElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface RsImageList extends JSXBase.HTMLAttributes<HTMLRsImageListElement> {}
+  interface RsImageList extends JSXBase.HTMLAttributes<HTMLRsImageListElement> {
+    'masonry'?: boolean;
+  }
+  interface RsImageListContainer extends JSXBase.HTMLAttributes<HTMLRsImageListContainerElement> {}
+  interface RsImageListItem extends JSXBase.HTMLAttributes<HTMLRsImageListItemElement> {}
+  interface RsImageListLabel extends JSXBase.HTMLAttributes<HTMLRsImageListLabelElement> {}
 
   interface IntrinsicElements {
     'rs-image-list': RsImageList;
+    'rs-image-list-container': RsImageListContainer;
+    'rs-image-list-item': RsImageListItem;
+    'rs-image-list-label': RsImageListLabel;
   }
 }
 
