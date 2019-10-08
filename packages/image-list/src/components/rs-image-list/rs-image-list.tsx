@@ -13,13 +13,21 @@ export class ImageList {
               <ul class="rs-image-list">
                 <li class="item">
                   <div class="imageaspectcontainer">
-                    <img class="image" src="..." />
+                    <img class="image" src="https://cweb.canon.jp/showroom/personal/workshop/instaevent-2018/img/picture19.jpg" />
                   </div>
                   <div class="supporting">
                     <span class="label">Text label</span>
                   </div>
                 </li>
-              </ul>
+              </ul>      
+              {/* <ul class="rs-image-list -masonry -masonry-image-list">
+                <li class="item">
+                  <img class="image" src="https://cweb.canon.jp/showroom/personal/workshop/instaevent-2018/img/picture19.jpg" />
+                  <div class="supporting">
+                    <span class="label">Text label</span>
+                  </div>
+                </li>
+              </ul> */}
             </Host>
   }
 }

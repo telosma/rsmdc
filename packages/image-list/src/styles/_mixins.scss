@@ -1,46 +1,40 @@
-// @import "@rsmdc/shape/mixins";
-// @import "@rsmdc/shape/functions";
-// @import "./variables";
+@mixin rs-image-list-aspect($width-height-ratio) {
+.rs-image-list > .item > .imageaspectcontainer {
+    padding-bottom: calc(100% / #{$width-height-ratio});
+  }
+}
 
-// @mixin rs-image-list-aspect($width-height-ratio) {
-//   .image-aspect-container {
-//     padding-bottom: calc(100% / #{$width-height-ratio});
-//   }
-// }
+@mixin rs-image-list-shape-radius($radius) {
+  .rs-image-list > .item > .imageaspectcontainer > .image {
+    @include rs-shape-radius($radius);
+  }
+  $selector: if(&, "&.rs-image-list--with-text-protection", ".rs-image-list--with-text-protection");
+  #{$selector} .supporting {
+    $masked-radius: rs-shape-mask-radius($radius, 0 0 1 1);
+    @include rs-shape-radius($masked-radius);
+  }
+}
 
-// @mixin rs-image-list-shape-radius($radius, $rtl-reflexive: false) {
-//   .rs-image-list__image {
-//     @include rs-shape-radius($radius, $rtl-reflexive);
-//   }
+@mixin rs-image-list-standard-columns($column-count, $gutter-size: $rs-image-list-standard-gutter-size) {
+  .rs-image-list > .item {
+    width: calc(100% / #{$column-count} - #{$gutter-size + 1 / $column-count});
+    margin: $gutter-size / 2;
+  }
+}
 
-//   $selector: if(&, "&.rs-image-list--with-text-protection", ".rs-image-list--with-text-protection");
+@mixin rs-image-list-masonry-columns($column-count, $gutter-size: $rs-image-list-masonry-gutter-size) {
+  column-count: $column-count;
+  column-gap: $gutter-size;
 
-//   #{$selector} .rs-image-list__supporting {
-//     $masked-radius: rs-shape-mask-radius($radius, 0 0 1 1);
+  .rs-image-list > .item {
+    margin-bottom: $gutter-size;
+  }
+}
+  
 
-//     @include rs-shape-radius($masked-radius, $rtl-reflexive);
-//   }
-// }
 
-// // Standard Image List
-
-// @mixin rs-image-list-standard-columns($column-count, $gutter-size: $rs-image-list-standard-gutter-size) {
-//   // This uses margin rather than padding to facilitate properly positioning the supporting content element when
-//   // --with-text-protection is used.
-//   .rs-image-list__item {
-//     // Subtract extra fraction from each item's width to ensure correct wrapping in IE and Edge which round differently
-//     width: calc(100% / #{$column-count} - #{$gutter-size + 1 / $column-count});
-//     margin: $gutter-size / 2;
-//   }
-// }
-
-// // Masonry Image List
-
-// @mixin rs-image-list-masonry-columns($column-count, $gutter-size: $rs-image-list-masonry-gutter-size) {
-//   column-count: $column-count;
-//   column-gap: $gutter-size;
-
-//   .rs-image-list__item {
-//     margin-bottom: $gutter-size;
-//   }
-// }
+.rs-image-list {
+  @include rs-image-list-aspect(1);
+  @include rs-image-list-shape-radius(0);
+}
+  

@@ -1,0 +1,1 @@
+System.register(["./p-7d5f628f.system.js"],(function(){"use strict";var t,e;return{setters:[function(s){t=s.p;e=s.b}],execute:function(){t().then((function(t){return e([["p-y0sdxbd4.system",[[1,"rs-menu"]]]],t)}))}}}));

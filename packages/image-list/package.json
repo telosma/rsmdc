@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/image-list",
-  "version": "0.0.1",
+  "version": "1.1.20",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

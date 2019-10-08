@@ -1,0 +1,1 @@
+import{r as s,h as r,H as t}from"./p-4361c442.js";const e=class{constructor(r){s(this,r)}render(){return r(t,null,r("div",{class:"rs-menu rs-menu-surface"},r("slot",null)))}static get style(){return"STYLE_TEXT_PLACEHOLDER:rs-menu"}};export{e as rs_menu};

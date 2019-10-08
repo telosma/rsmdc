@@ -1,0 +1,16 @@
+import { r as registerInstance, h, H as Host } from './core-bb890076.js';
+var Menu = /** @class */ (function () {
+    function Menu(hostRef) {
+        registerInstance(this, hostRef);
+    }
+    Menu.prototype.render = function () {
+        return h(Host, null, h("div", { class: "rs-menu rs-menu-surface" }, h("slot", null)));
+    };
+    Object.defineProperty(Menu, "style", {
+        get: function () { return "STYLE_TEXT_PLACEHOLDER:rs-menu"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Menu;
+}());
+export { Menu as rs_menu };

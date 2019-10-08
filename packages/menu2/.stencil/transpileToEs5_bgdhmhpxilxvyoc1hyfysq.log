@@ -1,0 +1,7 @@
+import { a as patchEsm, b as bootstrapLazy } from './core-143ab076.js';
+var defineCustomElements = function (win, options) {
+    return patchEsm().then(function () {
+        bootstrapLazy([["rs-menu", [[1, "rs-menu", { "opened": [4], "isOpened": [64] }]]]], options);
+    });
+};
+export { defineCustomElements };

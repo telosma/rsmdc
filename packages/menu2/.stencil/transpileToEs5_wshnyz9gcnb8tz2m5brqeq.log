@@ -1,0 +1,22 @@
+System.register(['./p-1b850f76.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h, Host;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+                Host = module.H;
+            }],
+        execute: function () {
+            var Menu = exports('rs_menu', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    return h(Host, null, h("div", { class: "rs-menu rs-menu-surface" }, h("slot", null)));
+                };
+                return class_1;
+            }()));
+        }
+    };
+});

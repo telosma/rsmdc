@@ -1,0 +1,38 @@
+import { registerInstance as __stencil_registerInstance, createEvent as __stencil_createEvent, getElement as __stencil_getElement } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+export const Menu = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.change = __stencil_createEvent(this, "change", 4);
+    }
+    openeddHandler() {
+        this.isOpened();
+    }
+    async isOpened() {
+        if (this.opened) {
+            this.menu.classList.add('-opened');
+        }
+        else {
+            this.menu.classList.remove("-opened");
+        }
+    }
+    componentDidLoad() {
+        this.menu = this.el.shadowRoot.querySelector('.rs-menu');
+        this.isOpened();
+        const list = Array.from(this.el.shadowRoot
+            .querySelector('slot')
+            .assignedElements())[0];
+        this.listItems = Array.from(list.shadowRoot
+            .querySelector('slot')
+            .assignedElements());
+        console.log(this.listItems);
+    }
+    render() {
+        return h(Host, null, h("div", { class: "rs-menu rs-menu-surface" }, h("slot", null)));
+    }
+    get el() { return __stencil_getElement(this); }
+    static get watchers() { return {
+        "opened": ["openeddHandler"]
+    }; }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:rs-menu"; }
+};
