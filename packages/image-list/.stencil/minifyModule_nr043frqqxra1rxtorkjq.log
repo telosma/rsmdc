@@ -1,1 +1,0 @@
-System.register(["./p-c227cb46.system.js"],(function(){"use strict";var t,e;return{setters:[function(s){t=s.p;e=s.b}],execute:function(){t().then((function(t){return e([["p-8gwjwiu0.system",[[1,"rs-image-list"]]]],t)}))}}}));

@@ -1,4 +1,0 @@
-import { p as patchBrowser, b as bootstrapLazy } from './core-8a3faffc.js';
-patchBrowser().then(function (options) {
-    return bootstrapLazy([["rs-image-list", [[1, "rs-image-list"]]]], options);
-});

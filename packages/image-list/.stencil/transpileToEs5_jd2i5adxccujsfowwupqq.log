@@ -1,7 +1,0 @@
-import { a as patchEsm, b as bootstrapLazy } from './core-8a3faffc.js';
-var defineCustomElements = function (win, options) {
-    return patchEsm().then(function () {
-        bootstrapLazy([["rs-image-list", [[1, "rs-image-list"]]]], options);
-    });
-};
-export { defineCustomElements };
