@@ -1,0 +1,233 @@
+@import "./variables";
+@import "./functions";
+@import "@rsmdc/animation/variables";
+@import "../../../typography/mixins-stencil";
+@import "@rsmdc/floating-label/mixins-stencil";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/line-ripple/rs-line-ripple";
+@import "@rsmdc/notched-outline/mixins-stencil";
+
+@include rs-floating-label-animation;
+
+.rs-textfield {
+   > .form {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    height: $rs-text-field-height;
+    will-change: opacity, transform, color;
+    width: auto;
+    overflow: hidden;
+    border: none;
+    border-radius: 4px 4px 0 0;
+  }
+  
+
+  &.-disabled {
+    > .form {
+      pointer-events: none;
+      border-bottom: none;
+      border-color: $rs-text-field-outlined-disabled-border;
+      background-color: $rs-text-field-disabled-background;
+      border-bottom-color: $rs-text-field-fullwidth-bottom-line-color;
+    }
+
+    > .form > .input {
+      background-color: $rs-text-field-disabled-background;
+      border-bottom-color: $rs-text-field-disabled-border;
+
+      &:hover {
+        border-bottom-color: $rs-text-field-disabled-border;
+      }
+
+      &::before {
+        color: $rs-text-field-disabled-icon;
+      }    
+    }
+
+    > .form > .input > .nativecontrol {
+      color: $rs-text-field-disabled-ink-color;
+
+      &:hover {
+        color: $rs-text-field-disabled-ink-color;
+      }
+    }
+
+    > .counter {
+      color: $rs-text-field-disabled-helper-text-color;
+    }
+  }
+
+  > .form > .input {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    transition: rs-text-field-transition(opacity);
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid;
+
+    &::before {
+      width: 24px;
+      position: absolute;
+      left: 16px;
+      margin: auto;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px;
+  
+      height: auto;
+      font-family: inherit;
+      background-image: none;
+      color: $rs-text-field-icon-color;
+      font-size: 24px;
+      font-weight: 400;
+      display: none;
+      content: none;
+      top: auto;
+      bottom: auto;
+    }
+  }
+
+  &:not(.-disabled) {
+    > .form {
+      background-color: $rs-text-field-background;
+    }
+
+    > .form > .input {
+      background-color: $rs-text-field-background;
+      border-bottom-color: $rs-text-field-bottom-line-idle;
+
+      &:hover {
+        border-bottom-color: $rs-text-field-bottom-line-hover;
+      }
+    }
+    
+    > .form > .input > .nativecontrol {
+      background-color: transparent;
+      color: $rs-text-field-ink-color;
+    }
+
+    > .counter {
+      color: $rs-text-field-helper-text-color;
+    }
+  }
+
+  &:not(.-disabled).-invalid {
+    > .form > .input {
+      border-bottom-color: $rs-text-field-error;
+
+      &:hover {
+        border-bottom-color: $rs-text-field-error;
+      }
+    }
+  }
+
+  > .form > .input > .nativecontrol {
+    @include rs-typography(subtitle1);
+    align-self: flex-end;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background: none;
+    appearance: none;
+    border: none;
+    line-height: 1.75rem;
+    caret-color: $rs-theme-primary;
+    padding: 20px 16px 6px;
+
+    &::placeholder {
+      transition: rs-text-field-transition(opacity, $duration: 67ms);
+      color: $rs-text-field-placeholder-ink-color;
+      opacity: 0;
+      transition-delay: 0;
+      transition-duration: 0;
+    }
+
+    &:-ms-input-placeholder {
+      color: $rs-text-field-placeholder-ink-color !important;
+    }
+  
+    &:focus {
+      outline: none;
+    }
+  
+    &:focus::placeholder {
+      transition-delay: 40ms;
+      transition-duration: 110ms;
+      opacity: 1;
+    }
+
+    &:-webkit-autofill {
+      z-index: auto !important;
+    }
+  }
+
+  &.-invalid {
+    > .form > .input > .nativecontrol {
+      box-shadow: none;
+      caret-color: $rs-text-field-error;  
+    }
+
+    > .rs-line-ripple {
+      background-color: $rs-text-field-error;
+    }
+  }
+
+  &.-nolabel {
+    > .form > .input > .nativecontrol {
+      padding: 16px;
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+  }
+
+  > .form > .input > .action {
+    min-width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    margin-left: -4px;
+
+    &.-none {
+      display: none;
+    }
+  }
+
+  > .rs-line-ripple {
+    background-color: $rs-theme-primary;
+  }
+
+  > .outline {
+    &.-none {
+      display: none;
+    }
+  }
+
+  > .counter {
+    @include rs-typography(caption);
+    @include rs-typography-baseline-top(16px);
+  
+    margin-left: auto;
+    margin-right: 0;
+    padding-left: 16px;
+    padding-right: 0;
+    white-space: nowrap;
+    position: absolute;
+    bottom: $rs-text-field-character-counter-bottom;
+    right: 16px;
+
+    &.-none {
+      display: none;
+    }
+  }
+}
+
+rs-textfield[invalid] > rs-textfield-trailing {
+  color: $rs-text-field-error;
+}
+
+rs-textfield[disabled] > rs-textfield-trailing {
+  color: $rs-text-field-disabled-icon;
+}

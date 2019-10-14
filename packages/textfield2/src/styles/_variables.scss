@@ -1,0 +1,52 @@
+@import "@rsmdc/theme/variables";
+
+$rs-text-field-error: $rs-theme-error !default;
+$rs-text-field-fullwidth-bottom-line-color: rgba(rs-theme-prop-value(on-surface), .12) !default;
+$rs-text-field-disabled-border: rgba(rs-theme-prop-value(on-surface), .06) !default;
+$rs-text-field-disabled-icon: rgba(rs-theme-prop-value(on-surface), .3) !default;
+$rs-text-field-bottom-line-hover: rgba(rs-theme-prop-value(on-surface), .87) !default;
+$rs-text-field-bottom-line-idle: rgba(rs-theme-prop-value(on-surface), .42) !default;
+$rs-text-field-label: rgba(rs-theme-prop-value(on-surface), .6) !default;
+
+$rs-text-field-ink-color: rgba(rs-theme-prop-value(on-surface), .87) !default;
+$rs-text-field-helper-text-color: rgba(rs-theme-prop-value(on-surface), .6) !default;
+$rs-text-field-icon-color: rgba(rs-theme-prop-value(on-surface), .54) !default;
+$rs-text-field-focused-label-color: rgba(rs-theme-prop-value(primary), .87) !default;
+$rs-text-field-placeholder-ink-color: rgba(rs-theme-prop-value(on-surface), .54) !default;
+
+$rs-text-field-disabled-label-color: rgba(rs-theme-prop-value(on-surface), .37) !default;
+$rs-text-field-disabled-ink-color: rgba(rs-theme-prop-value(on-surface), .37) !default;
+$rs-text-field-disabled-helper-text-color: rgba(rs-theme-prop-value(on-surface), .37) !default;
+
+$rs-text-field-background: mix(rs-theme-prop-value(on-surface), rs-theme-prop-value(surface), 4%) !default;
+$rs-text-field-disabled-background: mix(rs-theme-prop-value(on-surface), rs-theme-prop-value(surface), 2%) !default;
+$rs-text-field-secondary-text: rgba(rs-theme-prop-value(on-surface), .6) !default;
+
+$rs-text-field-outlined-idle-border: rgba(rs-theme-prop-value(on-surface), .24) !default;
+$rs-text-field-outlined-disabled-border: rgba(rs-theme-prop-value(on-surface), .06) !default;
+$rs-text-field-outlined-hover-border: rgba(rs-theme-prop-value(on-surface), .87) !default;
+
+$rs-textarea-border: rgba(rs-theme-prop-value(on-surface), .73) !default;
+$rs-textarea-background: rgba(rs-theme-prop-value(surface), 1) !default;
+$rs-textarea-disabled-border-color: rgba(rs-theme-prop-value(on-surface), .26) !default;
+// cannot be transparent because multiline textarea input
+// will make text unreadable
+$rs-textarea-disabled-background: rgba(249, 249, 249, 1) !default;
+
+$rs-text-field-height: 56px !default;
+$rs-text-field-label-position-y: 50% !default;
+$rs-text-field-label-offset: 16px !default;
+$rs-text-field-dense-label-position-y: 70% !default;
+$rs-text-field-dense-label-scale: .8 !default;
+$rs-text-field-outlined-label-position-y: 130% !default;
+$rs-text-field-outlined-dense-label-position-y: 120% !default;
+$rs-text-field-outlined-with-leading-icon-label-position-x: 0 !default;
+$rs-text-field-outlined-dense-with-leading-icon-label-position-x: 21px !default;
+$rs-text-field-textarea-label-position-y: 130% !default;
+$rs-text-field-helper-line-padding: 16px;
+// Note that the scale factor is an eyeballed approximation of what's shown in the mocks.
+
+$rs-text-field-character-counter-bottom: -22px;
+
+$rs-text-field-label-padding: 16px !default;
+$rs-text-field-arrow-padding: 52px !default;
