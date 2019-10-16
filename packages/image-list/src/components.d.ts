@@ -9,13 +9,13 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface RsImageList {
-    'isMasonry': () => Promise<void>;
-    'masonry': boolean;
-  }
-  interface RsImageListContainer {}
+  interface RsImageList {}
   interface RsImageListItem {}
   interface RsImageListLabel {}
+  interface RsImageListMedia {
+    'alt': string;
+    'src': string;
+  }
 }
 
 declare global {
@@ -25,12 +25,6 @@ declare global {
   var HTMLRsImageListElement: {
     prototype: HTMLRsImageListElement;
     new (): HTMLRsImageListElement;
-  };
-
-  interface HTMLRsImageListContainerElement extends Components.RsImageListContainer, HTMLStencilElement {}
-  var HTMLRsImageListContainerElement: {
-    prototype: HTMLRsImageListContainerElement;
-    new (): HTMLRsImageListContainerElement;
   };
 
   interface HTMLRsImageListItemElement extends Components.RsImageListItem, HTMLStencilElement {}
@@ -44,27 +38,34 @@ declare global {
     prototype: HTMLRsImageListLabelElement;
     new (): HTMLRsImageListLabelElement;
   };
+
+  interface HTMLRsImageListMediaElement extends Components.RsImageListMedia, HTMLStencilElement {}
+  var HTMLRsImageListMediaElement: {
+    prototype: HTMLRsImageListMediaElement;
+    new (): HTMLRsImageListMediaElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-image-list': HTMLRsImageListElement;
-    'rs-image-list-container': HTMLRsImageListContainerElement;
     'rs-image-list-item': HTMLRsImageListItemElement;
     'rs-image-list-label': HTMLRsImageListLabelElement;
+    'rs-image-list-media': HTMLRsImageListMediaElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface RsImageList extends JSXBase.HTMLAttributes<HTMLRsImageListElement> {
-    'masonry'?: boolean;
-  }
-  interface RsImageListContainer extends JSXBase.HTMLAttributes<HTMLRsImageListContainerElement> {}
+  interface RsImageList extends JSXBase.HTMLAttributes<HTMLRsImageListElement> {}
   interface RsImageListItem extends JSXBase.HTMLAttributes<HTMLRsImageListItemElement> {}
   interface RsImageListLabel extends JSXBase.HTMLAttributes<HTMLRsImageListLabelElement> {}
+  interface RsImageListMedia extends JSXBase.HTMLAttributes<HTMLRsImageListMediaElement> {
+    'alt'?: string;
+    'src'?: string;
+  }
 
   interface IntrinsicElements {
     'rs-image-list': RsImageList;
-    'rs-image-list-container': RsImageListContainer;
     'rs-image-list-item': RsImageListItem;
     'rs-image-list-label': RsImageListLabel;
+    'rs-image-list-media': RsImageListMedia;
   }
 }
 

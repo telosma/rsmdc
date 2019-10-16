@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, h, Element } from '@stencil/core';
 
 @Component({
   tag: 'rs-image-list-label',
@@ -6,11 +6,22 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true
 })
 
-export class ImageListLabel {
+export class ImageListLabel{
+
+  @Element() el: Element;
+
+  imageListLabel: HTMLElement;
+
+  componentDidLoad() {
+    this.imageListLabel = this.el.shadowRoot.querySelector('.rs-image-list-label')
+  }
+
   render() {
     return  <Host>
               <div class="rs-image-list-label">
-                <slot />
+                <div class="text">
+                  <slot />
+                </div>
               </div>
             </Host>
   }

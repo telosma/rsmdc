@@ -1,0 +1,56 @@
+@import "./variables";
+@import "./rs-mixins";
+
+@mixin rs-image-list-type($type) {
+  @if $type == masonry {
+
+    rs-image-list-label > rs-button {
+      --rs-buttonCHlabelPEbefore---color: black;
+    }
+
+    .rs-image-list {
+      column-count: 3;
+      column-gap: 10px;
+    }
+
+    .rs-image-list-image {
+      padding-bottom: 0;
+      > .image {
+        border-radius: 0;
+        position: relative;
+      }
+    }
+
+    .rs-image-list-item {
+      margin: 0 0 16px 0;
+    }
+    
+    .rs-image-list-label {
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding: 8px 0;
+      line-height: $rs-image-list-icon-size;
+      position: relative;
+      background: none;
+      color: rgba(0,0,0,.87);
+    }
+  }
+}
+
+@mixin rs-image-list-standard-columns($column-count, $gutter-size: $rs-image-list-masonry-gutter-size) {
+  column-count: $column-count;
+  column-gap: $gutter-size;
+  rs-image-list > rs-image-list-item {
+    width: calc(100% / $column-count);
+    margin: $gutter-size / 2;
+  }
+}
+
+@mixin rs-image-list-masonry-columns($column-count, $gutter-size: $rs-image-list-masonry-gutter-size) {
+  column-count: $column-count;
+  column-gap: $gutter-size;
+
+  rs-image-list > rs-image-list-item {
+    margin-bottom: $gutter-size;
+  }
+}

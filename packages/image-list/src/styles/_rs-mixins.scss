@@ -1,0 +1,28 @@
+// @mixin rs-image-list-standard-columns($column-count, $gutter-size: $rs-image-list-masonry-gutter-size) {
+//   column-count: $column-count;
+//   column-gap: $gutter-size;
+//   rs-image-list > rs-image-list-item {
+//     width: calc(100% / $column-count);
+//     margin: $gutter-size / 2;
+//   }
+// }
+
+// @mixin rs-image-list-masonry-columns($column-count, $gutter-size: $rs-image-list-masonry-gutter-size) {
+//   column-count: $column-count;
+//   column-gap: $gutter-size;
+
+//   rs-image-list > rs-image-list-item {
+//     margin-bottom: $gutter-size;
+//   }
+// }
+
+.rs-image-list {
+  // @include rs-image-list-standard-columns(5, 4px);
+  // @include rs-image-list-masonry-columns(5, 4px);
+}
+
+@media screen and (max-width:599px) { 
+  .rs-image-list {
+    // @include rs-image-list-standard-columns(2);
+  }
+}
