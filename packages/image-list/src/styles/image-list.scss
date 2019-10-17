@@ -3,13 +3,11 @@
 @import "@rsmdc/theme/mixins";
 @import "@rsmdc/typography/mixins";
 @import "./variables";
-@import "./rs-mixins";
 @import "./mixins";
-
 
 rs-image-list {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .rs-image-list {
@@ -22,11 +20,10 @@ rs-image-list {
 
 .rs-image-list-item {
   position: relative;
+  width: 100%;
   margin: 2px 2px $rs-image-list-standard-gutter-size;
   list-style-type: none;
   break-inside: avoid-column;
-  width: 100%;
-  position: relative;
   box-sizing: border-box;
 }
 
@@ -36,46 +33,40 @@ rs-image-list {
   overflow: hidden;
   
   > .image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
     border-radius: 8px;
   }
 }
 
 .rs-image-list-label {
-  min-width: 100%;
-  width: 100%;
-  height: $rs-image-list-text-protection-height;
   position: absolute;
   bottom: 0;
-  background: $rs-image-list-text-protection-background-color;
-  color: #ffffff;
+  width: 100%;
+  min-width: 100%;
+  height: $rs-image-list-text-protection-height;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 $rs-image-list-text-protection-horizontal-padding;
+  background: $rs-image-list-text-protection-background-color;
+  color: $rs-theme-on-primary;
   border-radius: 0 0 8px 8px;
   box-sizing: border-box;
   line-height: normal;
-  
-  > .text {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: inherit;
-    @include rs-typography(subtitle1);
-    @include rs-typography-overflow-ellipsis;
-  }
 }
 
-.rs-image-list-label > .text::slotted(*) {
-  color: green;
+rs-image-list-label > span {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 rs-image-list-label > rs-button {

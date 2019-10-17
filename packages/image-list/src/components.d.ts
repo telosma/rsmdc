@@ -11,7 +11,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface RsImageList {}
   interface RsImageListItem {}
-  interface RsImageListLabel {}
+  interface RsImageListLabel {
+    'wrap': (element: any, wrapper: any) => Promise<void>;
+  }
   interface RsImageListMedia {
     'alt': string;
     'src': string;
