@@ -36,6 +36,7 @@
   box-shadow: none;
   transition: 0;
   padding: 0 $rs-button-contained-horizontal-padding;
+  border-width: 0;
 
   > .label::before {
     font-family: 'Courier New', Courier, monospace;

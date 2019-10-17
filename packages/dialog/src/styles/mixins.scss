@@ -19,3 +19,35 @@
     }
   }
 }
+
+@mixin rs-dialog-shape-radius($radius) {
+  .rs-dialog {
+    > .container > .surface {
+      border-radius: $radius;
+    }
+  }
+}
+
+@mixin rs-dialog-min-width($min-width) {
+  .rs-dialog {
+    > .container > .surface {
+      min-width: $min-width;
+    }
+  }
+}
+
+@mixin rs-dialog-max-width($max-width) { 
+  .rs-dialog {
+    > .container > .surface {
+      max-width: $max-width;
+    }
+  }
+}
+
+@mixin rs-dialog-max-height($max-height) {
+  .rs-dialog {
+    > .container > .surface {
+      max-height: $max-height;
+    }
+  }
+}

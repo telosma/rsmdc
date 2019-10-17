@@ -19,3 +19,45 @@
     }
   }
 }
+
+@mixin rs-snackbar-shape-radius($radius) {
+  
+  .rs-snackbar {
+    > .surface {
+      border-radius: $radius;
+    }
+  }
+}
+
+@mixin rs-snackbar-min-width($min-width, $mobile-breakpoint: $rs-snackbar-mobile-breakpoint) {
+  .rs-snackbar {
+    > .surface {
+      min-width: $min-width;
+
+      @media (max-width: $mobile-breakpoint), (max-width: $min-width) {
+        min-width: 100%;
+      }
+    }
+  }
+}
+
+@mixin rs-snackbar-max-width($max-width) {
+
+  .rs-snackbar {
+    > .surface {
+      max-width: $max-width;
+    }
+  }
+}
+
+@mixin rs-snackbar-elevation($z-index) {
+  .rs-snackbar {
+    z-index: $z-index;
+  }
+}
+
+@mixin rs-snackbar-viewport-margin($margin) {
+  .rs-snackbar {
+    margin: $margin;
+  }
+}

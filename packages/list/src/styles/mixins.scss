@@ -97,8 +97,6 @@
   }
 }
 
-
-
 @mixin rs-list-divider-type($types...) {
   @each $type in $types {
     @if $type == inset {
@@ -113,5 +111,11 @@
         margin: 0;
       }
     }
+  }
+}
+
+@mixin rs-list-item-shape-radius($radius) {
+  .rs-list-item {
+    border-radius: $radius;
   }
 }

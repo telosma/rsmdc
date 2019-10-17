@@ -1,24 +1,3 @@
-@mixin rs-snackbar-fill-color($color) {
-  .rs-snackbar > .surface {
-    background-color: $color;
-  }
-}
-
-@mixin rs-snackbar-label-ink-color($color) {
-  rs-snackbar-text {
-    color: $color
-  }
-}
-
-@mixin rs-snackbar-min-width($min-width, $mobile-breakpoint: $rs-snackbar-mobile-breakpoint) {
-  .rs-snackbar > .surface {
-    min-width: $min-width;
-    @media (max-width: $mobile-breakpoint), (max-width: $min-width) {
-      min-width: 100%;
-    }
-  }
-}
-
 @mixin rs-snackbar-max-width($max-width) {
   .rs-snackbar > .surface {
     max-width: $max-width;
@@ -37,11 +16,4 @@
 
 @mixin rs-snackbar-z-index($z-index) {
   z-index: $z-index;
-}
-
-
-@at-root {
-  @include rs-snackbar-fill-color($rs-snackbar-fill-color);
-  @include rs-snackbar-min-width($rs-snackbar-min-width)
-  @include rs-snackbar-max-width($rs-snackbar-max-width)
 }

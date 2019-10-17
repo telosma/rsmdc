@@ -1,5 +1,4 @@
 @import "@rsmdc/animation/functions";
-@import "@rsmdc/ripple/mixins";
 @import "@rsmdc/ripple/mixins-stencil";
 @import "@rsmdc/rtl/mixins";
 @import "@rsmdc/typography/mixins";
@@ -11,8 +10,6 @@
 @import "./rs-mixins";
 
 .rs-snackbar {
-  @include rs-snackbar-z-index($rs-snackbar-z-index);
-  @include rs-snackbar-viewport-margin($rs-snackbar-viewport-margin-narrow);
   display: none;
   position: fixed;
   right: 0;
@@ -23,6 +20,8 @@
   justify-content: center;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  z-index: auto;
+  margin: $rs-snackbar-viewport-margin-narrow;
 
   &.-opening,
   &.-open,
@@ -53,6 +52,8 @@
     flex-wrap: nowrap;
     padding-bottom: 0;
     background-color: $rs-snackbar-fill-color;
+    min-width: auto;
+    max-width: 100%;
   }
 
   > .dismiss {

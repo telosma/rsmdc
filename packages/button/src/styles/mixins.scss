@@ -193,3 +193,18 @@
     @include rs-states(text-primary-on-light);
   }
 }
+
+@mixin rs-button-horizontal-padding($padding) {
+  .rs-button {
+    padding: 0 $padding 0 $padding;
+  }
+}
+
+@mixin rs-button-outline-width($outline-width, $padding: $rs-button-contained-horizontal-padding) {
+  $padding-value: max($padding - $outline-width, 0);
+
+  @include rs-button-horizontal-padding($padding-value);
+  .rs-button {
+    border-width: $outline-width;
+  }
+}

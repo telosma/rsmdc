@@ -29,6 +29,7 @@
   padding-left: $rs-list-side-padding;
   padding-right: $rs-list-side-padding;
   outline: none;
+  border-radius: 0;
 
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
