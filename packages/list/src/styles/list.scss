@@ -36,7 +36,6 @@
   @include rs-ripple-upgraded($rs-theme-on-surface);
 
   &.-disabled {
-    pointer-events: none;
     color: rgba(0,0,0,.38);
   }
   
@@ -65,6 +64,7 @@ rs-list-meta {
   display: block;
   margin: 0;
   line-height: normal;
+  color: inherit;
 }
 
 .rs-list-secondary {
@@ -82,11 +82,11 @@ rs-list-meta {
   align-items: center;
   justify-content: center;
   fill: currentColor;
-  border-radius: 0;
-  background-size: 24px;
+  border-radius: 50%;
+  background-size: 100%;
   margin-right: 32px;
   background-image: none;
-  color: inherit;
+  background-color: transparent;
 
   &::before {
     width: 24px;
@@ -94,6 +94,7 @@ rs-list-meta {
     content: '';
     font-family: inherit;
     font-size: 24px;
+    color: inherit;
   }
 }
 
@@ -112,6 +113,7 @@ rs-list-meta {
   $rs-list-subheader-margin: ($rs-list-subheader-virtual-height - $rs-list-subheader-leading) / 2;
   @include rs-typography(subtitle1);
   margin: $rs-list-subheader-margin $rs-list-side-padding;
+  color: inherit;
 }
 
 rs-list-item > rs-list-graphic {
@@ -119,6 +121,23 @@ rs-list-item > rs-list-graphic {
 }
 
 rs-list-item[selected] > rs-list-graphic,
-rs-list-item[activated] > rs-list-graphic{
+rs-list-item[activated] > rs-list-graphic {
   --rs-list-graphic---color: $rs-theme-primary;
+}
+
+rs-list-item[disabled] > rs-list-graphic {
+  --rs-list-graphicPEbefore---color: rgba(0,0,0,.38);
+  --rs-list-graphic---background-color: rgba(0,0,0,.38);
+}
+
+rs-list-item[disabled] > rs-list-text > rs-list-primary {
+  --rs-list-primary---color: rgba(0,0,0,.38);
+}
+
+rs-list-item[disabled] > rs-list-text > rs-list-secondary {
+  --rs-list-secondary---color: rgba(0,0,0,.54);
+}
+
+rs-list-item[disabled] > rs-list-meta {
+  --rs-list-meta---color: rgba(0,0,0,.38);
 }

@@ -77,7 +77,6 @@
       width: 40px;
       height: 40px;
       background-size: 40px;
-      border-radius: 50%;
     }
 
   }@else if $type == rectangle {
@@ -86,13 +85,13 @@
       width: 40px;
       height: 40px;
       background-size: 56px;
-      border-radius: 50%;
     }
 
   }@else if $type == square {
     
     .rs-list-graphic {
       background-size: 100px 56px;
+      border-radius: 0;
     }
   }
 }
@@ -117,5 +116,67 @@
 @mixin rs-list-item-shape-radius($radius) {
   .rs-list-item {
     border-radius: $radius;
+  }
+}
+
+@mixin rs-list-graphic-size($size) {
+  $text-offset: 72px;
+  $side-padding: $rs-list-side-padding;
+  $margin-value: $text-offset - $side-padding - $size;
+  .rs-list-graphic {
+    width: $size;
+    height: $size;
+  }
+}
+
+@mixin rs-list-item-primary-text-ink-color($color) {
+  .rs-list-primary {
+    color: $color;
+  }
+}
+
+@mixin rs-list-item-secondary-text-ink-color($color) {
+  .rs-list-secondary {
+    color: $color;
+  }
+}
+
+@mixin rs-list-graphic-fill-color($color) {
+  .rs-list-graphic {
+    background-color: $color;
+  }
+}
+
+@mixin rs-list-graphic-ink-color($color) {
+  .rs-list-graphic { 
+    &::before {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-list-item-meta-ink-color($color) {
+  .rs-list-meta {
+    color: $color;
+  }
+}
+
+@mixin rs-list-group-subheader-ink-color($color) {
+  .rs-list-subheader {
+    color: $color;
+  }
+}
+
+@mixin rs-list-item-states-color($color) {
+  .rs-list-item {
+    @include rs-ripple-upgraded($color);
+  }
+}
+
+@mixin rs-list-fill-color-accessible($color) {
+  .rs-list-item {
+    &:not(.-disabled) {
+      @include rs-ripple-upgraded($color);
+    }
   }
 }

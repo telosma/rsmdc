@@ -61,3 +61,26 @@
     margin: $margin;
   }
 }
+
+@mixin rs-snackbar-container-fill-color($color) {
+
+  .rs-dialog {
+    > .surface {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-snackbar-fill-color($color) {
+  .rs-snackbar {
+   > .surface {
+     background-color: $color;
+    }
+  }
+}
+
+@mixin rs-snackbar-label-ink-color($color) {
+  .rs-snackbar-title {
+    color: $color;
+  }
+}

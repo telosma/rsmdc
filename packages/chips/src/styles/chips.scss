@@ -8,7 +8,6 @@
 @import "@rsmdc/shape/mixins";
 @import "@rsmdc/shape/functions";
 @import "./variables";
-@import "./rs-mixins";
 @import "./mixins";
 
 @include rs-ripple-common;
@@ -19,20 +18,22 @@
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
   @include rs-ripple-upgraded($rs-chip-ink-color-default);
-
-  display: inline-flex;
+  height: $rs-chip-height-default;
+  display: inline-block;
+  vertical-align: middle;
   position: relative;
-  align-items: center;
   box-sizing: border-box;
   padding: 0 $rs-chip-horizontal-padding;
-  border-width: 0;
-  border: none;
+  margin: 4px 0;
   outline: none;
   cursor: pointer;
   -webkit-appearance: none;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: $rs-chip-height-default / 2;
   background-color: $rs-chip-fill-color-default;
+  border-style: none;
+  border-width: 0;
+  border-color: inherit;
   @include rs-typography(body2);
   
   > .label {
@@ -44,17 +45,19 @@
   }
 
   > .label::before {
-    display: inline;
     font-family: inherit;
+    height: auto;
+    display: inherit;
     content: none;
     margin: $rs-chip-leading-icon-margin-top;
     margin-right: $rs-chip-leading-icon-margin-right;
+    margin-left: auto;
     font-size: $rs-chip-leading-icon-size;
     color: $rs-theme-on-surface;
   }
 
   > .label::after {
-    display: inline;
+    display: none;
     font-family: inherit;
     content: none;
     margin: $rs-chip-trailing-icon-margin-top;
@@ -71,7 +74,11 @@
   &.-selected {
     background-color: $rs-selected-fill-color;
     @include rs-ripple-upgraded($rs-theme-primary);
+    border-color: white;
     > .label {
+      color: $rs-theme-primary;
+    }
+    > .label::before {
       color: $rs-theme-primary;
     }
   }

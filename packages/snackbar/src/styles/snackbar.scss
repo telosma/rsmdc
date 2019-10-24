@@ -7,18 +7,18 @@
 @import "@rsmdc/theme/mixins";
 @import "./variables";
 @import "./mixins";
-@import "./rs-mixins";
 
 .rs-snackbar {
-  display: none;
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   box-sizing: border-box;
+  visibility: hidden;
+  height: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   z-index: auto;
   margin: $rs-snackbar-viewport-margin-narrow;
@@ -27,6 +27,10 @@
   &.-open,
   &.-closing {
     display: flex;
+  }
+  &.-open {
+    visibility: visible;
+    height: auto;
   }
 
   &.-open > .surface {
@@ -41,12 +45,11 @@
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    transform: scale(0.8);
+    // transform: scale(0.8);
     opacity: 0;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
       0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
     border-radius: 4px;
-    transition: 70ms;
     flex-direction: row;
     flex-shrink: 0;
     flex-wrap: nowrap;

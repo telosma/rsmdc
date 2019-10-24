@@ -7,7 +7,6 @@
 @import "@rsmdc/typography/variables";
 @import "./variables";
 @import "./mixins";
-@import "./rs-mixins";
 
 .rs-dialog,
 .scrim {
@@ -27,7 +26,7 @@
   > .scrim {
     opacity: 0;
     z-index: -1;
-    background-color: rgba(0,0,0,.32);
+    background-color: $rs-dialog-scrim-color;
   }
 
   > .container {
@@ -43,7 +42,7 @@
 
   > .container > .surface {
     max-width: $rs-dialog-max-width;
-    min-width: $rs-dialog-min-width;
+    min-width: auto;
     max-height: calc(100vh - 32px);
     display: flex;
     flex-direction: column;
@@ -131,16 +130,6 @@ rs-dialog-title + rs-dialog-content {
   padding-top: 0;
 }
 
-rs-dialog[scrollable] {
-  > rs-dialog-title {
-    border-bottom: solid 1px rgba(0,0,0,.12);
-  }
-  > rs-dialog-content {
-    border-bottom: solid 1px rgba(0,0,0,.12);
-    padding: 8px 24px;
-  }
-}
-
 rs-dialog-title + div,
 rs-dialog-content + div {
   display: flex;
@@ -160,4 +149,18 @@ rs-dialog-content + div {
     margin-left: 8px;
   }
 }
+
+rs-dialog[scrollable] > rs-dialog-title {
+  border-bottom: solid 1px;
+  border-bottom-color: $rs-dialog-scroll-divider-color;
+}
+
+rs-dialog[scrollable] > rs-dialog-content {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: $rs-dialog-scroll-divider-color;
+  padding: 8px 24px;
+
+}
+
 

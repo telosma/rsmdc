@@ -1,3 +1,5 @@
+@import "@rsmdc/theme/mixins";
+@import "./variables";
 @mixin rs-dialog-type($type) {
   @if $type == stacked {
 
@@ -48,6 +50,38 @@
   .rs-dialog {
     > .container > .surface {
       max-height: $max-height;
+    }
+  }
+}
+
+@mixin rs-dialog-container-fill-color($color) {
+  .rs-dialog {
+    > .container > .surface {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-dialog-title-ink-color($color, $opacity: $rs-dialog-title-ink-opacity) {
+  .rs-dialog-title {
+    color: $color;
+  }
+}
+
+@mixin rs-dialog-content-ink-color($color, $opacity: $rs-dialog-content-ink-opacity) {
+  .rs-dialog-content {
+    color: $color;
+  }
+}
+
+@mixin rs-dialog-scroll-divider-color($color, $opacity: $rs-dialog-scroll-divider-opacity) {
+  
+  @at-root {
+    rs-dialog[scrollable] > rs-dialog-title {
+      border-color: $color;
+    }
+    rs-dialog[scrollable] > rs-dialog-content {
+      border-color: $color;
     }
   }
 }

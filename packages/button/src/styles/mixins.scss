@@ -181,16 +181,17 @@
 
   @if ($fill-tone == "dark") {
     @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
-    @include rs-button-icon-ink-color(
-      rs-theme-ink-color-for-fill_(primary, dark)
-    );
-    @include rs-states(text-primary-on-dark);
+    @include rs-ripple-upgraded(text-primary-on-dark);
   } @else {
     @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
-    @include rs-button-icon-ink-color(
-      rs-theme-ink-color-for-fill_(primary, light)
-    );
-    @include rs-states(text-primary-on-light);
+    @include rs-ripple-upgraded(text-primary-on-light);
+
+  }
+}
+
+@mixin rs-button-shape-radius($radius) {
+  .rs-button {
+    border-radius: $radius;
   }
 }
 
@@ -206,5 +207,55 @@
   @include rs-button-horizontal-padding($padding-value);
   .rs-button {
     border-width: $outline-width;
+  }
+}
+
+@mixin rs-button-outline-width($outline-width, $padding: $rs-button-contained-horizontal-padding) {
+  $padding-value: max($padding - $outline-width, 0);
+
+  @include rs-button-horizontal-padding($padding-value);
+  .rs-button {
+    border-width: $outline-width;
+  }
+}
+
+@mixin rs-button-container-fill-color($color) {
+  .rs-button {
+    &:not(.-disabled) {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-button-outline-color($color) {
+  .rs-button {
+    &:not(.-disabled) {
+      border-color: $color;
+    }
+  }
+}
+
+@mixin rs-button-icon-color($color) {
+  .rs-button:not(.-disabled) {
+    > .label::before {
+      color: $color;
+    }
+    > .label::after {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-button-ink-color($color) {
+  .rs-button {
+    &:not(.-disabled) {
+     color: $color;
+    }
+  }
+}
+
+@mixin rs-button-states-color($color) {
+  .rs-button {
+    @include rs-ripple-upgraded($color);
   }
 }
