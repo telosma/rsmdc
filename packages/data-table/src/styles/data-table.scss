@@ -88,11 +88,12 @@ rs-data-table-body {
 rs-data-table-row {
   display: table-row;
   background-color: inherit;
-  &:not(:first-child) {
-    border-top-style: solid;
-    border-top-width: $rs-data-table-divider-size;
-    border-top-color: $rs-data-table-divider-color;
-  }
+}
+
+rs-data-table-body > rs-data-table-row {
+  border-top-style: solid;
+  border-top-width: $rs-data-table-divider-size;
+  border-top-color: $rs-data-table-divider-color;
 }
 
 rs-data-table-cell {

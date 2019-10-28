@@ -14,7 +14,7 @@
   }
 }
 
-@mixin rs-data-table-body-text-align($type) {
+@mixin rs-data-table-text-align($type) {
   @if $type == center {
     rs-data-table-body > rs-data-table-row > rs-data-table-cell {
       justify-content: center;
@@ -30,14 +30,8 @@
   }
 }
 
-@mixin rs-data-table-header-height($height) {
-  rs-data-table-header > rs-datat-table-row {
-    height: $height;
-  }
-}
-
 @mixin rs-data-table-height($height) {
-  .rs-data-table-row {
+  .rs-data-table-body {
     height: $height;
   }
 }

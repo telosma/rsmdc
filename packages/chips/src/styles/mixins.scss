@@ -1,5 +1,5 @@
 @import "@rsmdc/ripple/mixins-stencil";
-@mixin rs-chip-icon-image($icon, $codepoint: "") {
+@mixin rs-chip-leading-icon-image($icon, $codepoint: "") {
   $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
 
   @if $value == path {
@@ -15,26 +15,36 @@
       > .label::before {
         font-family: $font-family;
         content: $name;
+        display: block;
       }
       > .label::after {
-        font-family: $font-family;
-        content: $name;
+        display: none;
       }
     }
   }
 }
 
-@mixin rs-chip-icon-position($position: left) {
-  @if $position == right {
+@mixin rs-chip-trailing-icon-image($icon, $codepoint: "") {
+  $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
+
+  @if $value == path {
+    .rs-chip > .label {
+      background-image: $icon;
+      height: 24px;
+    }
+  } @else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + "\\"+ $codepoint + '"';
+
     .rs-chip {
-      padding-left: 0;
-      padding-right: 8px;
-    }
-    .rs-chip > .label::before {
-      display: none;
-    }
-    .rs-chip > .label::after {
-      display: block;
+      > .label::before {
+        display: none;
+      }
+      > .label::after {
+        font-family: $font-family;
+        content: $name;
+        display: block;
+      }
     }
   }
 }
@@ -186,5 +196,11 @@
     > .label::after {
       font-size: $size;
     }
+  }
+}
+
+@mixin rs-chip-shape-radius($radius) {
+  .rs-chip {
+    border-radius: $radius;
   }
 }

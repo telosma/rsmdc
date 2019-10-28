@@ -47,7 +47,7 @@
   > .label::before {
     font-family: inherit;
     height: auto;
-    display: inherit;
+    display: none;
     content: none;
     margin: $rs-chip-leading-icon-margin-top;
     margin-right: $rs-chip-leading-icon-margin-right;
