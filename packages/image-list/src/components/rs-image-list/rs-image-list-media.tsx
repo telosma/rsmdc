@@ -2,7 +2,7 @@ import { Component, Element, Host, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'rs-image-list-media',
-  styleUrl: "../../dist/result.css",
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 
