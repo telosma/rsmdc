@@ -228,7 +228,7 @@ export class Select {
       const width = optionWidth > labelWidth
         ? optionWidth
         : labelWidth
-      ;(this.select as HTMLElement).style.setProperty('width', `calc(52px + 16px + ${width}px`)
+      ;(this.select as HTMLElement).style.setProperty('--rs-select---width', `calc(52px + 16px + ${width}px)`)
       this.hasSelectedOption(this.options)
     })
 

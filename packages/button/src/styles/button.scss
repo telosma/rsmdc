@@ -46,13 +46,14 @@
     transform: none;
   }
   color: inherit;
+  white-space: nowrap;
 
   > .label::before {
     font-family: 'Courier New', Courier, monospace;
     content: '';
-    display: inherit;
-    width: 18px;
-    height: 18px;
+    display: none;
+    width: auto;
+    height: auto;
     font-size: medium;
     vertical-align: middle;
     margin: 0 8px 0 -4px;
@@ -62,9 +63,9 @@
   > .label::after {
     font-family: 'Courier New', Courier, monospace;
     content: '';
-    display: inherit;
-    width: 18px;
-    height: 18px;
+    display: none;
+    width: auto;
+    height: auto;
     font-size: medium;
     vertical-align: middle;
     margin: 0 -4px 0 8px;

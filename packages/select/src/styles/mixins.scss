@@ -260,3 +260,9 @@
     }  
   }
 }
+
+@mixin rs-select-width($width) {
+  .rs-select {
+    width: $width;
+  }
+}

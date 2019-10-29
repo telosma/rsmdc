@@ -6,16 +6,31 @@
 rs-drawer {
   --rs-drawer-list-item--border-radius: 4px;
   position: fixed;
+  height: 0;
+  opacity: 0;
+}
+
+rs-drawer[opened] {
   height: 100%;
+  opacity: 1;
 }
 
 rs-drawer[closing] {
   z-index: 10;
+  transition-duration: $rs-drawer-animation-exit;
 }
 
 .rs-drawer {
-  height: 100%;
-  display: block;
+  height: 0;
+  opacity: 0;
+
+  &.-open {
+    height: 100%;
+    opacity: 1;
+    transition-property: transform;
+    transition-timing-function: $rs-animation-standard-curve-timing-function;
+
+  }
 
   > .content {
     width: $rs-drawer-width;
@@ -142,12 +157,13 @@ rs-drawer-content > rs-list > rs-list-item > rs-list-graphic {
 .rs-drawer-title {
   $baselineTop: 36px;
   $baselineBottom: 20px;
+  background-color: gray;
 
   @include rs-typography(headline6);
   margin-top: 0;
   display: block;
   line-height: normal;
-  margin-bottom: -1 * $baselineBottom;
+  // margin-bottom: -1 * $baselineBottom;
   color: $rs-drawer-title-ink-color;
 
   &::before {
