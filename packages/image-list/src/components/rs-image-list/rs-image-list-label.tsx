@@ -23,7 +23,7 @@ export class ImageListLabel{
 
     const slot = this.el.shadowRoot.querySelector('slot')
     
-    const textParent = document.createElement("span");
+    const textParent = document.createElement('span');
     textParent.classList.add('text')
     
     const texts = slot.assignedNodes().filter(node => node.nodeType === 3)
