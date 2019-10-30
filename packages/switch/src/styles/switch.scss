@@ -81,6 +81,7 @@
 
     > .thumbunderlay {
       transform: translateX($rs-switch-thumb-active-margin);
+      @include rs-ripple-upgraded($rs-switch-baseline-theme-color);
     }
 
     > .thumbunderlay > .thumb {

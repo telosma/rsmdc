@@ -1,0 +1,73 @@
+@import "@rsmdc/ripple/mixins-stencil";
+
+@mixin rs-switch-toggled-on-track-color($color) {
+ 
+  .rs-switch.-checked {
+    > .track {
+      background-color: $color;
+      border-color: $color;
+    }
+  }
+}
+
+@mixin rs-switch-toggled-off-track-color($color) {
+  .rs-switch {
+    &:not(.-checked) {
+      > .track {
+        border-color: $color;
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-switch-toggled-on-thumb-color($color) {
+ .rs-switch.-checked {
+    > .thumbunderlay > .thumb {
+      border-color: $color;
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-switch-toggled-off-thumb-color($color) {
+
+  .rs-switch {
+    &:not(.-checked) {
+      > .thumbunderlay > .thumb {
+        border-color: $color;
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-switch-toggled-on-ripple-color($color) {
+  .rs-switch.-checked {
+    > .thumbunderlay {
+      @include rs-ripple-upgraded($color);
+    }
+  }
+}
+
+@mixin rs-switch-toggled-off-ripple-color($color) {
+  .rs-switch {
+    &:not(.-checked) {
+      > .thumbunderlay {
+        @include rs-ripple-upgraded($color);
+      }
+    }
+  }
+}
+
+@mixin rs-switch-toggled-on-color($color) {
+  @include rs-switch-toggled-on-track-color($color);
+  @include rs-switch-toggled-on-thumb-color($color);
+  @include rs-switch-toggled-on-ripple-color($color);
+}
+
+@mixin rs-switch-toggled-off-color($color) {
+  @include rs-switch-toggled-off-track-color($color);
+  @include rs-switch-toggled-off-thumb-color($color);
+  @include rs-switch-toggled-off-ripple-color($color);
+}
