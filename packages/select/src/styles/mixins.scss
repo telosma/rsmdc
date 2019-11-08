@@ -263,7 +263,7 @@
 
 
 @mixin rs-select-width($width) {
-  rs-select {
-    --rs-select---width: calc(52px + 16px + $width);
+  .rs-select {
+    width: calc( 52px + 16px + $width );
   }
 }
