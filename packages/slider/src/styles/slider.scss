@@ -5,7 +5,7 @@
 @import "@rsmdc/rtl/mixins";
 @import "./variables";
 @import "./keyframes";
-// @import "./mixins";
+@import "./mixins";
 
 @include rs-slider-emphasize-keyframes_;
 
@@ -63,7 +63,7 @@
 
     > .thumbcontainer > .focusring {
       transform: scale3d(1.55, 1.55, 1.55);
-      background: $rs-theme-secondary;
+      background-color: $rs-theme-secondary;
       transition: transform 266.67ms ease-out, opacity 266.67ms ease-out;
     }
   }

@@ -77,12 +77,10 @@ export class Slider {
 
   componentDidLoad() {
     this.slider = this.el.shadowRoot.querySelector(".rs-slider")
-
-    this.isDisabled();
-    this.isCountable();
     this.isMarked();
-
+    this.isCountable();
     this.rsSlider = new RSSlider(this.slider);
+    this.isDisabled();
   }
 
   render() {

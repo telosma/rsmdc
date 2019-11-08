@@ -1,0 +1,86 @@
+@mixin rs-slider-highlight-color($color) {
+  .rs-slider {
+    > .trackcontainer > .track {
+      background-color: $color;
+    } 
+  }
+}
+
+@mixin rs-slider-rail-color($color, $opacity: $rs-slider-baseline-rail-opacity) {
+  .rs-slider {
+    > .trackcontainer {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-slider-rail-tick-mark-color($color) {
+  .rs-slider {
+    > .trackcontainer > .trackmarkercontainer > .trackmarker {
+      &::after {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-slider-thumb-color($color) {
+  .rs-slider {
+    > .thumbcontainer > .thumb {
+      fill: $color;
+      stroke: $color;
+    }
+  }
+}
+
+@mixin rs-slider-thumb-stroke-cutout($color) {
+  .rs-slider {
+    > .thumbcontainer > .thumb {
+      stroke: $color;
+    }
+  }
+}
+
+@mixin rs-slider-focus-halo-color($color) {
+
+  .rs-slider {
+    &:active {
+      > .thumbcontainer > .focusring {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-slider-value-pin-ink-color($color) {
+  .rs-slider {
+    > .thumbcontainer > .pin {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-slider-value-pin-fill-color($color) {
+  .rs-slider {
+    > .thumbcontainer > .pin {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-slider-value-pin-fill-color-accessible($color) {
+  $color-value: rs-theme-prop-value($color);
+  $ink-color: if(rs-theme-tone($color-value) == "light", text-primary-on-light, text-primary-on-dark);
+
+  @include rs-slider-value-pin-fill-color($color);
+  @include rs-slider-value-pin-ink-color($ink-color);
+}
+
+@mixin rs-slider-color-accessible($color) {
+  @include rs-slider-highlight-color($color);
+  @include rs-slider-rail-color($color);
+  @include rs-slider-rail-tick-mark-color($color);
+  @include rs-slider-thumb-color($color);
+  @include rs-slider-focus-halo-color($color);
+  @include rs-slider-value-pin-fill-color-accessible($color);
+}
