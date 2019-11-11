@@ -230,7 +230,6 @@ export class Select {
         : labelWidth
       ;(this.select as HTMLElement).style.setProperty('--width', `calc(52px + 16px + ${width}px`)
       this.hasSelectedOption(this.options)
-      console.log(width)
     })
 
     this.nativeControl.addEventListener('focus', () => {
