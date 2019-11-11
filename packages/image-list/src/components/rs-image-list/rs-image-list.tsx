@@ -9,7 +9,7 @@ import { Component, Host, h } from '@stencil/core';
 export class ImageList {
 
   render() {
-    return  <Host>    
+    return  <Host>
               <div class="rs-image-list">
                 <slot />
               </div>

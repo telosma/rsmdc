@@ -34,8 +34,31 @@
   }
 }
 
-@mixin rs-image-list-columns($column-count) {
+@mixin rs-image-list-columns($column-count, $gutter-size) {
   .rs-image-list {
     column-count: $column-count;
+    column-gap: $gutter-size;
+  }
+}
+
+@mixin rs-image-list-shape-radius($radius) {
+  .rs-image-list-image {
+    > .image {
+      border-radius: $radius;
+    }
+  }
+
+  .rs-image-list-label {
+    border-radius: 0 0 $radius $radius;
+  }
+}
+
+@mixin rs-image-list-aspect($width-height-ratio) {
+  .rs-image-list-image {
+    padding-bottom: calc(100% / $width-height-ratio);
+    > .image {
+      position: absolute;
+      bottom: 0;
+    } 
   }
 }
