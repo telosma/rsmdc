@@ -1,1 +1,0 @@
-System.register(["./p-89bdd8dd.system.js"],(function(){"use strict";var e,t;return{setters:[function(s){e=s.p;t=s.b}],execute:function(){e().then((function(e){return t([["p-ccziss9a.system",[[1,"rs-menu",{opened:[4],isOpened:[64]}]]]],e)}))}}}));

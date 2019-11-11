@@ -1,1 +1,0 @@
-System.register(["./p-7d5f628f.system.js"],(function(){"use strict";var t,e;return{setters:[function(n){t=n.p;e=n.b}],execute:function(){t().then((function(t){return e([["p-e7ts8a1n.system",[[1,"rs-menu"]]]],t)}))}}}));

@@ -1,1 +1,0 @@
-System.register(["./p-1b850f76.system.js"],(function(n){"use strict";var t,e,r;return{setters:[function(n){t=n.r;e=n.h;r=n.H}],execute:function(){var s=n("rs_menu",function(){function n(n){t(this,n)}n.prototype.render=function(){return e(r,null,e("div",{class:"rs-menu rs-menu-surface"},e("slot",null)))};return n}())}}}));

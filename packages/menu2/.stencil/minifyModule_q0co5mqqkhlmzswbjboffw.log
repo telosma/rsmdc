@@ -1,1 +1,0 @@
-System.register(["./p-f177ddcb.system.js"],(function(){"use strict";var e,t;return{setters:[function(n){e=n.p;t=n.b}],execute:function(){e().then((function(e){return t([["p-wyrgdc65.system",[[1,"rs-menu",{opened:[4],isOpened:[64]}]]]],e)}))}}}));

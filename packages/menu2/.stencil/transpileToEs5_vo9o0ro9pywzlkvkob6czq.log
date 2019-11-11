@@ -1,4 +1,0 @@
-import { p as patchBrowser, b as bootstrapLazy } from './core-143ab076.js';
-patchBrowser().then(function (options) {
-    return bootstrapLazy([["rs-menu", [[1, "rs-menu", { "opened": [4], "isOpened": [64] }]]]], options);
-});
