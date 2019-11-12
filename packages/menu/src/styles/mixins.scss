@@ -1,0 +1,31 @@
+@import "./variables";
+
+@mixin rs-menu-surface-ink-color($color) {
+  .rs-menu {
+    &.rs-menu-surface {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-menu-surface-fill-color($color) {
+  .rs-menu {
+    &.rs-menu-surface {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-menu-surface-shape-radius($radius) {
+  .rs-menu {
+    &.rs-menu-surface {
+      border-radius: $radius;
+    }
+  }
+}
+
+@mixin rs-menu-width($width) {
+  .rs-menu {
+    width: $width;
+  }
+}

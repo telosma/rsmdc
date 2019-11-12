@@ -2,9 +2,11 @@
 @import "@rsmdc/animation/variables";
 @import "@rsmdc/shape/rs-functions";
 @import "./variables";
+@import "./mixins";
 
 .rs-menu {
   min-width: $rs-menu-min-width;
+  width: auto;
 
   &.rs-menu-surface {
     background-color: $rs-theme-surface;
@@ -26,7 +28,6 @@
   box-shadow: #{rs-elevation(8)};
   min-width: $rs-menu-min-width;
   transition: opacity $rs-menu-surface-fade-out-duration linear;
-  
   &.-opened {
     height: auto;
     will-change: transform, opacity;
