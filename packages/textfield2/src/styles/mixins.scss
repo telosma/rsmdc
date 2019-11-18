@@ -1,0 +1,109 @@
+@mixin rs-textfield-type($type) {
+  @if $type == outlined {
+
+    .rs-textfield {
+
+      &:not(.-disabled) > .form:not(.-textarea) {
+        background-color: transparent;
+      }
+
+      &:not(.-disabled) > .form:not(.-textarea) > .input {
+        background-color: transparent;
+      }
+
+      &:not(.-disabled) > .form:not(.-textarea):hover > .input {
+        background-color: transparent;
+      }
+
+      > .form:not(.-textarea) > .input {
+        border-bottom: none;
+      }
+
+      > .form:not(.-textarea) > .input > .nativecontrol {
+        padding: 12px 16px 14px;
+      }
+
+      > .label {
+        display: none;
+      }
+
+      > .rs-line-ripple {
+        background-color: none;
+      }
+
+      > .outline {
+       &.-none {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+@mixin rs-textfield-leading-icon-image($icon, $codepoint: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    .rs-textfield {
+
+      > .form:not(.-textarea) > .input {
+        background-image: $icon;
+        height: 24px;
+        display: block;
+      }
+    }
+  }@else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + '\\' + $codepoint + '"';
+
+    .rs-textfield {
+      font-family: $font-family;
+
+      > .form:not(.-textarea) > .input::before {
+        content: $name;
+        display: block;
+        padding-left: 48px;
+      }
+
+      > .form:not(.-textarea) > .input {
+        padding-left: 48px;
+      }
+
+      > .form:not(.-textarea) > .input > .nativecontrol {
+        padding-left: 48px;
+      }
+      
+      > .label {
+        left: 48px;
+      }
+
+    }
+  }
+}
+
+@mixin rs-textfield-trailing-icon-image($icon, $codepoint: '') {
+  $value: if(str-slice('#{$icon}', 1, 4) == 'url(', path, font-family);
+
+  @if $value == path {
+    .rs-textfield {
+      > .form:not(.-textarea) > .input > .action  {
+        background-image: $icon;
+        height: 24px;
+      }
+    }
+  }@else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + '\\' + $codepoint + '"';
+
+    .rs-textfield {
+      font-family: $font-family;
+
+      > .form:not(.-textarea) > .input > .action {
+        &::before {
+          content: $name;
+          display: block;
+        }
+      }
+    }
+  }
+}

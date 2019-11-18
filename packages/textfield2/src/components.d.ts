@@ -9,6 +9,27 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface RsTextarea {
+    'addFocusStyle': () => Promise<void>;
+    'changeHandler': () => Promise<void>;
+    'countable': boolean;
+    'disabled': boolean;
+    'floatLabel': () => Promise<void>;
+    'invalid': boolean;
+    'isCountable': () => Promise<void>;
+    'isDisabled': () => Promise<void>;
+    'isInvalid': () => Promise<void>;
+    'isRequired': () => Promise<void>;
+    'label': string;
+    'maxlength': string;
+    'placeholder': string;
+    'removeFocusStyle': () => Promise<void>;
+    'required': boolean;
+    'retriveLabelWidth': (labels: any) => Promise<any>;
+    'setLabelWidthToNotch': () => Promise<void>;
+    'type': string;
+    'value': string;
+  }
   interface RsTextfield {
     'addFocusStyle': () => Promise<void>;
     'changeHandler': () => Promise<void>;
@@ -35,17 +56,36 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLRsTextareaElement extends Components.RsTextarea, HTMLStencilElement {}
+  var HTMLRsTextareaElement: {
+    prototype: HTMLRsTextareaElement;
+    new (): HTMLRsTextareaElement;
+  };
+
   interface HTMLRsTextfieldElement extends Components.RsTextfield, HTMLStencilElement {}
   var HTMLRsTextfieldElement: {
     prototype: HTMLRsTextfieldElement;
     new (): HTMLRsTextfieldElement;
   };
   interface HTMLElementTagNameMap {
+    'rs-textarea': HTMLRsTextareaElement;
     'rs-textfield': HTMLRsTextfieldElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface RsTextarea extends JSXBase.HTMLAttributes<HTMLRsTextareaElement> {
+    'countable'?: boolean;
+    'disabled'?: boolean;
+    'invalid'?: boolean;
+    'label'?: string;
+    'maxlength'?: string;
+    'onChange'?: (event: CustomEvent<any>) => void;
+    'placeholder'?: string;
+    'required'?: boolean;
+    'type'?: string;
+    'value'?: string;
+  }
   interface RsTextfield extends JSXBase.HTMLAttributes<HTMLRsTextfieldElement> {
     'countable'?: boolean;
     'disabled'?: boolean;
@@ -60,6 +100,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'rs-textarea': RsTextarea;
     'rs-textfield': RsTextfield;
   }
 }

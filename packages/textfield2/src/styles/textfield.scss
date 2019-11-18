@@ -6,25 +6,55 @@
 @import "@rsmdc/ripple/mixins-stencil";
 @import "@rsmdc/line-ripple/rs-line-ripple";
 @import "@rsmdc/notched-outline/mixins-stencil";
+@import "./mixins";
 
 @include rs-floating-label-animation;
 
 .rs-textfield {
-   > .form {
+  position: relative;
+  font-family: inherit;
+
+   > .form:not(.-textarea) {
     display: block;
     position: relative;
     box-sizing: border-box;
-    height: $rs-text-field-height;
     will-change: opacity, transform, color;
+    height: $rs-text-field-height;
     width: auto;
     overflow: hidden;
     border: none;
     border-radius: 4px 4px 0 0;
   }
+
+  &.-textarea.-outlined {
+    width: 100%;
+  } 
+
+  > .form.-textarea {
+    width: 142px;
+    > .input {
+      margin: 8px 1px 1px 0;
+      padding: 0 16px 16px;
+      border: none;
+      align-self: auto;
+      height: auto;
+      line-height: 1.75rem;
+      outline: none;
+    }
+  }
+
+  > .label {
+    @include rs-floating-label_;
+    display: inherit;
+  }
+
+  &.-focused > .label {
+    color: $rs-theme-primary;
+  } 
   
 
   &.-disabled {
-    > .form {
+    > .form:not(.-textarea) {
       pointer-events: none;
       border-bottom: none;
       border-color: $rs-text-field-outlined-disabled-border;
@@ -32,7 +62,7 @@
       border-bottom-color: $rs-text-field-fullwidth-bottom-line-color;
     }
 
-    > .form > .input {
+    > .form:not(.-textarea) > .input {
       background-color: $rs-text-field-disabled-background;
       border-bottom-color: $rs-text-field-disabled-border;
 
@@ -45,7 +75,7 @@
       }    
     }
 
-    > .form > .input > .nativecontrol {
+    > .form:not(.-textarea) > .input > .nativecontrol {
       color: $rs-text-field-disabled-ink-color;
 
       &:hover {
@@ -58,7 +88,7 @@
     }
   }
 
-  > .form > .input {
+  > .form:not(.-textarea) > .input {
     display: flex;
     align-items: center;
     position: relative;
@@ -76,7 +106,6 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: 24px;
-  
       height: auto;
       font-family: inherit;
       background-image: none;
@@ -91,11 +120,17 @@
   }
 
   &:not(.-disabled) {
-    > .form {
+    > .form:not(.-textarea) {
       background-color: $rs-text-field-background;
+
+      &:hover {
+        > .input {
+          background-color: #ececec;
+        } 
+      }
     }
 
-    > .form > .input {
+    > .form:not(.-textarea) > .input {
       background-color: $rs-text-field-background;
       border-bottom-color: $rs-text-field-bottom-line-idle;
 
@@ -104,7 +139,7 @@
       }
     }
     
-    > .form > .input > .nativecontrol {
+    > .form:not(.-textarea) > .input > .nativecontrol {
       background-color: transparent;
       color: $rs-text-field-ink-color;
     }
@@ -115,7 +150,7 @@
   }
 
   &:not(.-disabled).-invalid {
-    > .form > .input {
+    > .form:not(.-textarea) > .input {
       border-bottom-color: $rs-text-field-error;
 
       &:hover {
@@ -124,7 +159,8 @@
     }
   }
 
-  > .form > .input > .nativecontrol {
+
+  > .form:not(.-textarea) > .input > .nativecontrol {
     @include rs-typography(subtitle1);
     align-self: flex-end;
     box-sizing: border-box;
@@ -136,6 +172,7 @@
     line-height: 1.75rem;
     caret-color: $rs-theme-primary;
     padding: 20px 16px 6px;
+    padding-left: 16px;
 
     &::placeholder {
       transition: rs-text-field-transition(opacity, $duration: 67ms);
@@ -165,7 +202,7 @@
   }
 
   &.-invalid {
-    > .form > .input > .nativecontrol {
+    > .form:not(.-textarea) > .input > .nativecontrol {
       box-shadow: none;
       caret-color: $rs-text-field-error;  
     }
@@ -176,7 +213,7 @@
   }
 
   &.-nolabel {
-    > .form > .input > .nativecontrol {
+    > .form:not(.-textarea) > .input > .nativecontrol {
       padding: 16px;
       &::placeholder {
         opacity: 1;
@@ -184,13 +221,16 @@
     }
   }
 
-  > .form > .input > .action {
-    min-width: 24px;
-    height: 24px;
-    margin-right: 16px;
-    margin-left: -4px;
-
-    &.-none {
+  > .form:not(.-textarea) > .input > .action {
+    &::before {
+      min-width: 24px;
+      width: 24px;
+      height: 24px;
+      margin-right: 16px;
+      margin-left: -4px;
+      content: none;
+      font-size: 24px;
+      color: $rs-text-field-icon-color;
       display: none;
     }
   }
@@ -199,9 +239,60 @@
     background-color: $rs-theme-primary;
   }
 
+  &.-focused {
+    > .outline > .notch,
+    > .outline > .leading,
+    > .outline > .trailing {
+      border-color: $rs-theme-primary;
+      border-width: 2px;
+    }
+
+    > .outline > .notch {
+      border-top: none;
+    }
+
+    > .outline > .notch > .label {
+      color: $rs-theme-primary;
+    }
+  }
+
   > .outline {
+    @include rs-notched-outline_;
+  
+    > .notch {
+      @include rs-notched-outline-notch_;
+      border-top: solid;
+      border-top-width: 1px;
+      border-color: rgba(0, 0, 0, .24);
+    }
+
+    > .notch > .label {
+      @include rs-floating-label_;
+    } 
+
+    > .leading {
+      @include rs-notched-outline-leading_;
+      border-color: rgba(0, 0, 0, .24);
+    }
+
+    > .trailing {
+      @include rs-notched-outline-trailing_;
+      border-color: rgba(0, 0, 0, .24);
+
+    }
+    
     &.-none {
       display: none;
+    }
+  }
+
+  &:not(.-focused):hover {
+    > .outline > .leading {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+    
+    > .outline > .trailing {
+      border-color: $rs-text-field-outlined-hover-border;
     }
   }
 

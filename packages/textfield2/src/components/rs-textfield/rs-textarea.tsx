@@ -3,11 +3,11 @@ import { RSRipple } from '@rsmdc/ripple'
 import { RSLineRipple } from "@rsmdc/line-ripple"
 
 @Component({
-  tag: 'rs-textfield',
+  tag: 'rs-textarea',
   styleUrl: '../../dist/result.css',
   shadow: true
 })
-export class Textfield {
+export class Textarea {
 
   @Element() el: HTMLElement
 
@@ -144,7 +144,7 @@ export class Textfield {
       if (this.invalid && this.value) l.classList.add('-shake')
       if (this.value) return
       l.classList.remove('-floatabove')
-      this.notch.style.setProperty('width', 'auto')
+      // this.notch.style.setProperty('width', 'auto')
     })
   }
 
@@ -167,7 +167,7 @@ export class Textfield {
   componentDidLoad() {
     this.textfield = this.el.shadowRoot.querySelector('.rs-textfield')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
-    this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
+    // this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
     this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement);
     this.notch = this.el.shadowRoot.querySelector('.notch')
     this.counter = this.el.shadowRoot.querySelector('.counter')
@@ -178,58 +178,47 @@ export class Textfield {
     this.isInvalid()
     this.isRequired()
     
-    this.nativeControl.addEventListener('focus', () => {
-      this.addFocusStyle()
-    })
+    // this.nativeControl.addEventListener('focus', () => {
+    //   this.addFocusStyle()
+    // })
 
-    this.nativeControl.addEventListener('change', () => {
-      this.changeHandler()
-    })
+    // this.nativeControl.addEventListener('change', () => {
+    //   this.changeHandler()
+    // })
 
-    this.nativeControl.addEventListener('blur', () => {
-      this.removeFocusStyle()
-    })
+    // this.nativeControl.addEventListener('blur', () => {
+    //   this.removeFocusStyle()
+    // })
   }
 
   componentDidUnLoad() {
-    this.nativeControl.removeEventListener('focus', () => {
-      this.addFocusStyle()
-    })
+    // this.nativeControl.removeEventListener('focus', () => {
+    //   this.addFocusStyle()
+    // })
 
-    this.nativeControl.removeEventListener('change', () => {
-      this.changeHandler()
-    })
+    // this.nativeControl.removeEventListener('change', () => {
+    //   this.changeHandler()
+    // })
 
-    this.nativeControl.removeEventListener('blur', () => {
-      this.removeFocusStyle()
-    })
+    // this.nativeControl.removeEventListener('blur', () => {
+    //   this.removeFocusStyle()
+    // })
   }
 
   render() {
     return  <Host>
-              <div class="rs-textfield -textarea">
-                <div class="form">
-                  <div class="input">
-                    <input
-                      type={this.type}
-                      placeholder={this.placeholder}
-                      maxlength={this.maxlength}
-                      class="nativecontrol" />
-                    <div class="action -none">
-                      <slot />
-                    </div>
-                  </div>
+              <div class="rs-textfield -outlined -textarea">
+                <div class="form -textarea">
+                  <textarea class="input" v-model="text" />
                 </div>
-                <label class="label">{this.label}</label>
-                <div class="rs-line-ripple" />
-                <div class="outline -none">
+                <div class="outline">
                   <div class="leading" />
                   <div class="notch">
-                    <label class="label -outlined">{this.label}</label>
+                    <label class="label -outlined">{ this.label }</label>
                   </div>
                   <div class="trailing" />
                 </div>
-                <div class="counter -none">{`${this.value.length} / ${this.maxlength}` }</div>
+                <div class="counter" v-if="countable">{ `${this.value.length} / ${this.maxlength}` }</div>
               </div>
             </Host>
   }
