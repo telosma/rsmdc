@@ -25,7 +25,7 @@
   height: $rs-select-height;
   overflow: hidden;
   will-change: opacity, transform, color;
-  width: --width;
+  width: var(--width, 200px);
 
   // states-base-color
   &::before,
