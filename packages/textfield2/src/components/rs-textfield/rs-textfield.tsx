@@ -31,6 +31,8 @@ export class Textfield {
 
   textfield: Element
 
+  trailing: Element
+
   labels: Element[]
 
   nativeControl: Element
@@ -39,11 +41,15 @@ export class Textfield {
 
   notch: HTMLElement
 
+  action: Element
+
   counter: Element
 
   rsRipple: RSRipple
 
   rsLineRipple: RSLineRipple
+
+  labelEl: Element
 
   @Event({
     cancelable: false,
@@ -103,7 +109,7 @@ export class Textfield {
       this.counter.classList.remove('-hidden')
     } else {
       this.counter.classList.add('-hidden')
-    }
+     }
   }
 
   @Method()
@@ -111,7 +117,6 @@ export class Textfield {
     this.labels.forEach(l => { 
       l.classList.add('-floatabove')
     })
-    this.setLabelWidthToNotch()
   }
 
   @Method()
@@ -125,9 +130,10 @@ export class Textfield {
   async addFocusStyle() {
     this.textfield.classList.add('-focused')
     this.textfield.classList.add('rs-ripple-upgraded--background-focused')
-    this.rsLineRipple.activate()
+    this.rsLineRipple.activate()      
     this.labels.forEach(l => { 
       l.classList.add('-floatabove')
+      this.notch.classList.add('-border')
       if (!l.classList.contains('-shake')) { return }
       l.classList.remove('-shake')
     })
@@ -135,17 +141,27 @@ export class Textfield {
   }
 
   @Method()
+  async addFocusToParent() {
+    const trailingEl = this.trailing.shadowRoot.querySelector(
+      ".rs-textfield-trailing"
+    )
+    trailingEl.addEventListener('click', () => {
+      this.htmlNativeConctrol.focus();
+    })
+  }
+
+  @Method()
   async removeFocusStyle() {
     this.textfield.classList.remove('-focused')
     this.textfield.classList.remove('rs-ripple-upgraded--background-focused')
     this.rsLineRipple.deactivate()
-
     this.labels.forEach(l => {
       if (this.invalid && this.value) l.classList.add('-shake')
       if (this.value) return
       l.classList.remove('-floatabove')
-      this.notch.style.setProperty('width', 'auto')
-    })
+      this.notch.classList.remove('-border')
+      this.notch.style.setProperty('--width', 'auto')
+     })
   }
 
   @Method()
@@ -160,24 +176,39 @@ export class Textfield {
   @Method()
   async changeHandler() {
     this.value = this.htmlNativeConctrol.value
-
     this.change.emit({ value: this.value })
   }
 
   componentDidLoad() {
     this.textfield = this.el.shadowRoot.querySelector('.rs-textfield')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
+    this.labelEl = this.el.shadowRoot.querySelector('.label') 
     this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
     this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement);
     this.notch = this.el.shadowRoot.querySelector('.notch')
     this.counter = this.el.shadowRoot.querySelector('.counter')
+    this.action = this.el.shadowRoot.querySelector('.action')
     this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
     this.rsRipple = new RSRipple(this.textfield)
+
+    const slot = this.el.shadowRoot.querySelector('slot')
+    const children = Array.from(slot.assignedElements())
+    this.trailing = children.find(child => child.tagName === 'RS-TEXTFIELD-TRAILING')
+
+    if (this.trailing) {
+      this.addFocusToParent()
+    }
+    
+    if (this.type === 'date') {
+      this.labelEl.classList.add('-date-label')
+    }
 
     this.isDisabled()
     this.isInvalid()
     this.isRequired()
-    
+    this.isCountable()
+    this.isRequired()
+
     this.nativeControl.addEventListener('focus', () => {
       this.addFocusStyle()
     })
@@ -189,8 +220,12 @@ export class Textfield {
     this.nativeControl.addEventListener('blur', () => {
       this.removeFocusStyle()
     })
-  }
 
+    this.nativeControl.addEventListener("keyup", () => {
+      this.value = this.htmlNativeConctrol.value;
+    });
+  }
+  
   componentDidUnLoad() {
     this.nativeControl.removeEventListener('focus', () => {
       this.addFocusStyle()
@@ -203,6 +238,12 @@ export class Textfield {
     this.nativeControl.removeEventListener('blur', () => {
       this.removeFocusStyle()
     })
+
+    this.trailing.shadowRoot.querySelector(
+      ".rs-textfield-trailing"
+    ).removeEventListener("click", () => {
+      this.htmlNativeConctrol.focus();
+    });
   }
 
   render() {
@@ -219,8 +260,8 @@ export class Textfield {
                       <slot />
                     </div>
                   </div>
+                  <label class="label">{this.label}</label>
                 </div>
-                <label class="label">{this.label}</label>
                 <div class="rs-line-ripple" />
                 <div class="outline -none">
                   <div class="leading" />
@@ -229,7 +270,7 @@ export class Textfield {
                   </div>
                   <div class="trailing" />
                 </div>
-                <div class="counter -none">{`${this.value.length} / ${this.maxlength}` }</div>
+                <div class="counter">{`${this.value.length} / ${this.maxlength}` }</div>
               </div>
             </Host>
   }

@@ -12,206 +12,283 @@
 
 .rs-textfield {
   position: relative;
+  display: inline-block;
   font-family: inherit;
-
-   > .form:not(.-textarea) {
+  > .form:not(.-textarea) {
     display: block;
     position: relative;
     box-sizing: border-box;
-    will-change: opacity, transform, color;
     height: $rs-text-field-height;
-    width: auto;
+    width: 100%;
+    will-change: opacity, transform, color;
     overflow: hidden;
+    text-overflow: hidden;
+    white-space: nowrap;
     border: none;
     border-radius: 4px 4px 0 0;
-  }
-
-  &.-textarea.-outlined {
-    width: 100%;
-  } 
-
-  > .form.-textarea {
-    width: 142px;
     > .input {
-      margin: 8px 1px 1px 0;
-      padding: 0 16px 16px;
+      width: var(--width, 200px);
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: 100%;
+      transition: rs-text-field-transition(opacity);
+      box-sizing: border-box;
       border: none;
-      align-self: auto;
+      border-bottom: 1px solid;
+      overflow: hidden;
+      &::before {
+        width: 24px;
+        position: absolute;
+        left: 16px;
+        font-family: inherit;
+        color: $rs-text-field-icon-color;
+        font-size: 24px;
+        display: none;
+        content: none;
+        top: auto;
+        bottom: auto;
+      }
+    }
+    > .input > .nativecontrol {
+      @include rs-typography(subtitle1);
+      align-self: flex-end;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      background: none;
+      appearance: none;
+      border: none;
+      line-height: 1.75rem;
+      caret-color: $rs-theme-primary;
+      padding: 20px 16px 6px;
+      padding-left: 16px;
+      &::placeholder {
+        transition: rs-text-field-transition(opacity, $duration: 67ms);
+        color: $rs-text-field-placeholder-ink-color;
+        opacity: 0;
+        transition-delay: 0;
+        transition-duration: 0;
+      }
+      &:-ms-input-placeholder {
+        color: $rs-text-field-placeholder-ink-color !important;
+      }
+      &:focus {
+        outline: none;
+      }
+      &:focus::placeholder {
+        transition-delay: 40ms;
+        transition-duration: 110ms;
+        opacity: 1;
+      }
+      &:-webkit-autofill {
+        z-index: auto !important;
+      }
+    }
+  }
+  > .form.-textarea {
+    position: relative;
+    height: auto;
+    display: block;
+    overflow: hidden;
+    box-sizing: border-box;
+    > .input {
+      $padding-inset: 16px;
+      width: 100%;
       height: auto;
+      display: flex;
+      align-items: center;
+      align-self: auto;
+      position: relative;
+      box-sizing: border-box;
+      margin: $padding-inset/2 1px 1px 0;
+      padding: 0 $padding-inset $padding-inset;
+      border: none;
       line-height: 1.75rem;
       outline: none;
+      font-size: 1rem;
+      caret-color: $rs-theme-primary;
+      resize: auto;
+      &::placeholder {
+        transition: rs-text-field-transition(opacity, $duration: 67ms);
+        color: $rs-text-field-placeholder-ink-color;
+        opacity: 0;
+        transition-delay: 0;
+        transition-duration: 0;
+      }
+      &:-ms-input-placeholder {
+        color: $rs-text-field-placeholder-ink-color !important;
+      }
+      &:focus {
+        outline: none;
+      }
+      &:focus::placeholder {
+        transition-delay: 40ms;
+        transition-duration: 110ms;
+        opacity: 1;
+      }
     }
   }
-
-  > .label {
+  > .form > .label {
     @include rs-floating-label_;
     display: inherit;
-  }
-
-  &.-focused > .label {
-    color: $rs-theme-primary;
-  } 
-  
-
-  &.-disabled {
-    > .form:not(.-textarea) {
-      pointer-events: none;
-      border-bottom: none;
-      border-color: $rs-text-field-outlined-disabled-border;
-      background-color: $rs-text-field-disabled-background;
-      border-bottom-color: $rs-text-field-fullwidth-bottom-line-color;
-    }
-
-    > .form:not(.-textarea) > .input {
-      background-color: $rs-text-field-disabled-background;
-      border-bottom-color: $rs-text-field-disabled-border;
-
-      &:hover {
-        border-bottom-color: $rs-text-field-disabled-border;
-      }
-
-      &::before {
-        color: $rs-text-field-disabled-icon;
-      }    
-    }
-
-    > .form:not(.-textarea) > .input > .nativecontrol {
-      color: $rs-text-field-disabled-ink-color;
-
-      &:hover {
-        color: $rs-text-field-disabled-ink-color;
-      }
-    }
-
-    > .counter {
-      color: $rs-text-field-disabled-helper-text-color;
+    &.-date-label {
+      transform: translateY(-50%) scale(.75);
     }
   }
-
-  > .form:not(.-textarea) > .input {
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 100%;
-    transition: rs-text-field-transition(opacity);
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 1px solid;
-
-    &::before {
-      width: 24px;
-      position: absolute;
-      left: 16px;
-      margin: auto;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 24px;
-      height: auto;
-      font-family: inherit;
-      background-image: none;
-      color: $rs-text-field-icon-color;
-      font-size: 24px;
-      font-weight: 400;
-      display: none;
-      content: none;
-      top: auto;
-      bottom: auto;
-    }
-  }
-
-  &:not(.-disabled) {
-    > .form:not(.-textarea) {
-      background-color: $rs-text-field-background;
-
-      &:hover {
-        > .input {
-          background-color: #ececec;
-        } 
+   &.-required {
+    > .form > .label {
+      display: inline-flex;
+      &:after {
+        content: '*';
+        display: block;
+        margin-left: 1px;
+      }
+      &.-none {
+        display: none;
       }
     }
-
-    > .form:not(.-textarea) > .input {
-      background-color: $rs-text-field-background;
-      border-bottom-color: $rs-text-field-bottom-line-idle;
-
-      &:hover {
-        border-bottom-color: $rs-text-field-bottom-line-hover;
+    > .outline {
+      > .notch > .label {
+        display: flex;
+        &:after {
+          content: '*';
+          margin-left: 1px;
+        }
       }
     }
-    
-    > .form:not(.-textarea) > .input > .nativecontrol {
-      background-color: transparent;
-      color: $rs-text-field-ink-color;
-    }
-
-    > .counter {
-      color: $rs-text-field-helper-text-color;
-    }
   }
-
-  &:not(.-disabled).-invalid {
-    > .form:not(.-textarea) > .input {
+  &.-invalid {
+    > .form:not(.-textarea) > .input > .nativecontrol,
+    > .form.-textarea > .input {
+      box-shadow: none;
+      caret-color: $rs-text-field-error;  
+    }
+    > .outline {
+      > .leading {
+        border-color: $rs-text-field-error;
+      }
+      > .trailing {
+        border-color: $rs-text-field-error;
+      }
+      > .notch {
+        border-color: $rs-text-field-error;
+      }
+      > .notch > .label {
+        color: $rs-text-field-error;
+      }
+    }
+    > .form > .label {
+      color: $rs-text-field-error;
+    }
+    > .rs-line-ripple {
+      background-color: $rs-text-field-error;
+    }
+    &:hover:not(.-focused) {
+      > .outline > .leading {
+        border-color: $rs-text-field-error;
+      } 
+    }
+    &:not(.-disabled) > .form:not(.-textarea) > .input {
       border-bottom-color: $rs-text-field-error;
-
       &:hover {
         border-bottom-color: $rs-text-field-error;
       }
     }
-  }
-
-
-  > .form:not(.-textarea) > .input > .nativecontrol {
-    @include rs-typography(subtitle1);
-    align-self: flex-end;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    background: none;
-    appearance: none;
-    border: none;
-    line-height: 1.75rem;
-    caret-color: $rs-theme-primary;
-    padding: 20px 16px 6px;
-    padding-left: 16px;
-
-    &::placeholder {
-      transition: rs-text-field-transition(opacity, $duration: 67ms);
-      color: $rs-text-field-placeholder-ink-color;
-      opacity: 0;
-      transition-delay: 0;
-      transition-duration: 0;
+    &:not(.-focused):not(.-disabled):hover {
+      > .outline > .notch {
+        border-color: $rs-text-field-error;
+      }
     }
-
-    &:-ms-input-placeholder {
-      color: $rs-text-field-placeholder-ink-color !important;
-    }
-  
-    &:focus {
-      outline: none;
-    }
-  
-    &:focus::placeholder {
-      transition-delay: 40ms;
-      transition-duration: 110ms;
-      opacity: 1;
-    }
-
-    &:-webkit-autofill {
-      z-index: auto !important;
+    &.-focused {
+      > .form > .label {
+        color: $rs-text-field-error;
+      }
+      > .outline {
+        > .leading {
+          border-color: $rs-text-field-error;
+        }
+        > .trailing {
+          border-color: $rs-text-field-error;
+        }
+        > .notch {
+          border-color: $rs-text-field-error;
+        }
+        > .notch > .label {
+          color: $rs-text-field-error;
+        }
+      }
     }
   }
-
-  &.-invalid {
+  &.-disabled {
+    > .form {
+      pointer-events: none;
+      border-color: $rs-text-field-outlined-disabled-border;
+      background-color: $rs-text-field-disabled-background;
+    }
+    > .form > .input {
+      background-color: $rs-text-field-disabled-background;
+      resize: none;
+      &:not(.-textarea) {
+        border-bottom-color: $rs-text-field-disabled-border;
+      }
+      &:hover {
+        border-bottom-color: $rs-text-field-disabled-border;
+      }
+    }
     > .form:not(.-textarea) > .input > .nativecontrol {
-      box-shadow: none;
-      caret-color: $rs-text-field-error;  
+      color: $rs-text-field-disabled-ink-color;
+      &:hover {
+        color: $rs-text-field-disabled-ink-color;
+      }
     }
-
-    > .rs-line-ripple {
-      background-color: $rs-text-field-error;
+    > .form > .label {
+      color: $rs-text-field-disabled-ink-color;
+    }
+    > .counter {
+      color: $rs-text-field-disabled-helper-text-color;
+    }
+    > .outline > .notch > .label {
+      color: $rs-text-field-disabled-ink-color;
+    }
+    > .outline > .leading {
+      border-color: $rs-text-field-disabled-border;
+    }
+    > .outline > .trailing {
+      border-color: $rs-text-field-disabled-border;
+    }
+    &:not(.-focused):hover {
+      > .outline > .leading {
+        border-color: $rs-text-field-disabled-border;
+      } 
+      > .outline > .trailing {
+        border-color: $rs-text-field-disabled-border;
+      }
+      > .outline > .notch {
+        border-color: $rs-text-field-disabled-border;
+      }
     }
   }
-
+  &:not(.-disabled) {
+    > .form:not(.-textarea) > .input {
+      background-color: $rs-text-field-background;
+      border-bottom-color: $rs-text-field-bottom-line-idle;
+    }
+    > .form:not(.-textarea):hover {
+      > .input {
+        background-color: #ececec;
+        border-bottom-color: $rs-text-field-bottom-line-hover;
+      }
+    }
+    &.-focused {
+      > .form:not(.-textarea) {
+        background-color: #dcdcdc;
+        &:hover > .input {
+          background-color:#dcdcdc;
+        }
+      }
+    }
+  }
   &.-nolabel {
     > .form:not(.-textarea) > .input > .nativecontrol {
       padding: 16px;
@@ -220,86 +297,77 @@
       }
     }
   }
-
-  > .form:not(.-textarea) > .input > .action {
-    &::before {
-      min-width: 24px;
-      width: 24px;
-      height: 24px;
-      margin-right: 16px;
-      margin-left: -4px;
-      content: none;
-      font-size: 24px;
-      color: $rs-text-field-icon-color;
-      display: none;
-    }
-  }
-
   > .rs-line-ripple {
     background-color: $rs-theme-primary;
+    &.-none {
+      background-color: none;
+    }
+  
   }
-
   &.-focused {
+    > .form > .label {
+      color: $rs-theme-primary;
+    } 
     > .outline > .notch,
     > .outline > .leading,
     > .outline > .trailing {
       border-color: $rs-theme-primary;
       border-width: 2px;
     }
-
-    > .outline > .notch {
+    > .outline > .notch.-border {
       border-top: none;
-    }
 
+    }
     > .outline > .notch > .label {
+      @include rs-floating-label_;
       color: $rs-theme-primary;
+      left: 16px;
     }
   }
-
+  &:not(.-focused):not(.-disabled):not(.-invalid):hover {
+    > .outline > .leading {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+    > .outline > .trailing {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+    > .outline > .notch {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+  }
   > .outline {
     @include rs-notched-outline_;
-  
     > .notch {
       @include rs-notched-outline-notch_;
+      max-width: calc(100% - 24px);
       border-top: solid;
       border-top-width: 1px;
       border-color: rgba(0, 0, 0, .24);
     }
-
+    > .notch.-border {
+      border-top: none;
+    }
     > .notch > .label {
       @include rs-floating-label_;
-    } 
-
+    }
+    > .notch.-border > .label {
+      left: 16px;
+    }
     > .leading {
       @include rs-notched-outline-leading_;
       border-color: rgba(0, 0, 0, .24);
     }
-
     > .trailing {
       @include rs-notched-outline-trailing_;
       border-color: rgba(0, 0, 0, .24);
-
     }
-    
     &.-none {
       display: none;
     }
   }
-
-  &:not(.-focused):hover {
-    > .outline > .leading {
-      border-color: $rs-text-field-outlined-hover-border;
-    }
-    
-    > .outline > .trailing {
-      border-color: $rs-text-field-outlined-hover-border;
-    }
-  }
-
   > .counter {
     @include rs-typography(caption);
     @include rs-typography-baseline-top(16px);
-  
     margin-left: auto;
     margin-right: 0;
     padding-left: 16px;
@@ -308,17 +376,32 @@
     position: absolute;
     bottom: $rs-text-field-character-counter-bottom;
     right: 16px;
-
-    &.-none {
+    color: $rs-text-field-label;
+    display: block;
+    &.-hidden {
       display: none;
+    }
+    &.-textarea {
+      bottom: 13px;
     }
   }
 }
-
-rs-textfield[invalid] > rs-textfield-trailing {
-  color: $rs-text-field-error;
-}
-
-rs-textfield[disabled] > rs-textfield-trailing {
-  color: $rs-text-field-disabled-icon;
+.rs-textfield-trailing {
+  background-image: none;
+  font-family: inherit;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  margin-left: -4px;
+  font-size: 24px;
+  color: $rs-text-field-icon-color;
+  cursor: pointer;
+  &:before {
+    content: none;
+    display: none;
+  }
 }

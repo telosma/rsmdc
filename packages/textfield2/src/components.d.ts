@@ -12,6 +12,7 @@ export namespace Components {
   interface RsTextarea {
     'addFocusStyle': () => Promise<void>;
     'changeHandler': () => Promise<void>;
+    'cols': number;
     'countable': boolean;
     'disabled': boolean;
     'floatLabel': () => Promise<void>;
@@ -26,12 +27,14 @@ export namespace Components {
     'removeFocusStyle': () => Promise<void>;
     'required': boolean;
     'retriveLabelWidth': (labels: any) => Promise<any>;
+    'rows': number;
     'setLabelWidthToNotch': () => Promise<void>;
     'type': string;
     'value': string;
   }
   interface RsTextfield {
     'addFocusStyle': () => Promise<void>;
+    'addFocusToParent': () => Promise<void>;
     'changeHandler': () => Promise<void>;
     'countable': boolean;
     'disabled': boolean;
@@ -51,6 +54,7 @@ export namespace Components {
     'type': string;
     'value': string;
   }
+  interface RsTextfieldTrailing {}
 }
 
 declare global {
@@ -67,14 +71,22 @@ declare global {
     prototype: HTMLRsTextfieldElement;
     new (): HTMLRsTextfieldElement;
   };
+
+  interface HTMLRsTextfieldTrailingElement extends Components.RsTextfieldTrailing, HTMLStencilElement {}
+  var HTMLRsTextfieldTrailingElement: {
+    prototype: HTMLRsTextfieldTrailingElement;
+    new (): HTMLRsTextfieldTrailingElement;
+  };
   interface HTMLElementTagNameMap {
     'rs-textarea': HTMLRsTextareaElement;
     'rs-textfield': HTMLRsTextfieldElement;
+    'rs-textfield-trailing': HTMLRsTextfieldTrailingElement;
   }
 }
 
 declare namespace LocalJSX {
   interface RsTextarea extends JSXBase.HTMLAttributes<HTMLRsTextareaElement> {
+    'cols'?: number;
     'countable'?: boolean;
     'disabled'?: boolean;
     'invalid'?: boolean;
@@ -83,6 +95,7 @@ declare namespace LocalJSX {
     'onChange'?: (event: CustomEvent<any>) => void;
     'placeholder'?: string;
     'required'?: boolean;
+    'rows'?: number;
     'type'?: string;
     'value'?: string;
   }
@@ -98,10 +111,12 @@ declare namespace LocalJSX {
     'type'?: string;
     'value'?: string;
   }
+  interface RsTextfieldTrailing extends JSXBase.HTMLAttributes<HTMLRsTextfieldTrailingElement> {}
 
   interface IntrinsicElements {
     'rs-textarea': RsTextarea;
     'rs-textfield': RsTextfield;
+    'rs-textfield-trailing': RsTextfieldTrailing;
   }
 }
 
