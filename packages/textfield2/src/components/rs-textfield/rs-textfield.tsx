@@ -1,6 +1,6 @@
 import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
-import { RSLineRipple } from "@rsmdc/line-ripple"
+import { RSLineRipple } from '@rsmdc/line-ripple'
 
 @Component({
   tag: 'rs-textfield',
@@ -50,6 +50,8 @@ export class Textfield {
   rsLineRipple: RSLineRipple
 
   labelEl: Element
+
+  trailingEl: Element
 
   @Event({
     cancelable: false,
@@ -142,11 +144,9 @@ export class Textfield {
 
   @Method()
   async addFocusToParent() {
-    const trailingEl = this.trailing.shadowRoot.querySelector(
-      ".rs-textfield-trailing"
-    )
-    trailingEl.addEventListener('click', () => {
-      this.htmlNativeConctrol.focus();
+    this.trailingEl = this.trailing.shadowRoot.querySelector('.rs-textfield-trailing')
+    this.trailingEl.addEventListener('click', () => {
+      this.htmlNativeConctrol.focus()
     })
   }
 
@@ -184,7 +184,7 @@ export class Textfield {
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
     this.labelEl = this.el.shadowRoot.querySelector('.label') 
     this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
-    this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement);
+    this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement)
     this.notch = this.el.shadowRoot.querySelector('.notch')
     this.counter = this.el.shadowRoot.querySelector('.counter')
     this.action = this.el.shadowRoot.querySelector('.action')
@@ -221,9 +221,9 @@ export class Textfield {
       this.removeFocusStyle()
     })
 
-    this.nativeControl.addEventListener("keyup", () => {
-      this.value = this.htmlNativeConctrol.value;
-    });
+    this.nativeControl.addEventListener('keyup', () => {
+      this.value = this.htmlNativeConctrol.value
+    })
   }
   
   componentDidUnLoad() {
@@ -239,11 +239,13 @@ export class Textfield {
       this.removeFocusStyle()
     })
 
-    this.trailing.shadowRoot.querySelector(
-      ".rs-textfield-trailing"
-    ).removeEventListener("click", () => {
-      this.htmlNativeConctrol.focus();
-    });
+    this.nativeControl.removeEventListener('keyup', () => {
+      this.value = this.htmlNativeConctrol.value
+    })
+
+    this.trailingEl.removeEventListener('click', () => {
+      this.htmlNativeConctrol.focus()
+    })
   }
 
   render() {

@@ -1,6 +1,6 @@
 import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
-import { RSLineRipple } from "@rsmdc/line-ripple"
+import { RSLineRipple } from '@rsmdc/line-ripple'
 
 @Component({
   tag: 'rs-textarea',
@@ -175,7 +175,7 @@ export class Textarea {
     this.textarea = this.el.shadowRoot.querySelector('.rs-textfield')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
     this.nativeControl = this.el.shadowRoot.querySelector('.input')
-    this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement);
+    this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement)
     this.notch = this.el.shadowRoot.querySelector('.notch')
     this.counter = this.el.shadowRoot.querySelector('.counter')
     this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
@@ -198,9 +198,9 @@ export class Textarea {
       this.removeFocusStyle()
     })
     
-    this.nativeControl.addEventListener("keyup", () => {
-      this.value = this.htmlNativeConctrol.value;
-    });
+    this.nativeControl.addEventListener('keyup', () => {
+      this.value = this.htmlNativeConctrol.value
+    })
   }
 
   componentDidUnLoad() {
@@ -215,13 +215,17 @@ export class Textarea {
     this.nativeControl.removeEventListener('blur', () => {
       this.removeFocusStyle()
     })
+
+    this.nativeControl.removeEventListener('keyup', () => {
+      this.value = this.htmlNativeConctrol.value
+    })
   }
 
   render() {
     return  <Host>
               <div class="rs-textfield -outlined -textarea">
                 <div class="form -textarea">
-                  <textarea class="input" cols={this.cols} rows={this.rows} placeholder={this.placeholder} maxlength={this.maxlength} v-model="text" />
+                  <textarea class="input" cols={this.cols} rows={this.rows} placeholder={this.placeholder} maxlength={this.maxlength} />
                 </div>
                 <div class="rs-line-ripple -none" />
                 <div class="outline">
@@ -231,7 +235,7 @@ export class Textarea {
                   </div>
                   <div class="trailing" />
                 </div>
-                <div class="counter -none -textarea" v-if="countable">{ `${this.value.length} / ${this.maxlength}` }</div>
+                <div class="counter -none -textarea">{ `${this.value.length} / ${this.maxlength}` }</div>
               </div>
             </Host>
   }
