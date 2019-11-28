@@ -251,7 +251,7 @@ export class Textfield {
   render() {
     return  <Host>
               <div class="rs-textfield -textarea">
-                <div class="form">
+                <div class="form -outline">
                   <div class="input">
                     <input
                       type={this.type}

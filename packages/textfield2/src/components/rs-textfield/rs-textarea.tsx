@@ -228,7 +228,7 @@ export class Textarea {
                   <textarea class="input" cols={this.cols} rows={this.rows} placeholder={this.placeholder} maxlength={this.maxlength} />
                 </div>
                 <div class="rs-line-ripple -none" />
-                <div class="outline">
+                <div class="outline -area">
                   <div class="leading" />
                   <div class="notch">
                     <label class="label -outlined">{ this.label }</label>

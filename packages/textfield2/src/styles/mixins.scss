@@ -5,6 +5,7 @@
 
       > .form:not(.-textarea) > .input {
         border-bottom: none;
+        border-radius: 4px;
       }
 
       > .form:not(.-textarea) > .input > .nativecontrol {
@@ -155,6 +156,292 @@
   .rs-textfield {
     > .form.-textarea > .input {
       line-height: $line-height;
+    }
+  }
+}
+
+@mixin rs-textfield-ink-color($color) {
+  .rs-textfield {
+    > .form:not(.-textarea) > .input > .nativecontrol {
+      color: $color; 
+    }
+  }
+}
+
+@mixin rs-textarea-ink-color($color) {
+  .rs-textfield {
+    > .form.-textarea > .input {
+      color: $color; 
+    }
+  }
+}
+
+@mixin rs-textfield-caret-color($color) {
+  .rs-textfield {
+    > .form:not(.-textarea) > .input > .nativecontrol {
+      caret-color: $color;
+    }
+  }
+}
+
+@mixin rs-textarea-caret-color($color) {
+  .rs-textfield {
+    > .form.-textarea > .input {
+      caret-color: $color;
+    }
+  }
+}
+
+@mixin rs-textfield-fill-color($color) {
+  .rs-textfield {
+    &:not(.-disabled) > .form:not(.-textarea) > .input {
+      background-color: $color;
+    }
+
+    &:not(.-disabled) > .form:not(.-textarea):hover > .input {
+      background-color: $color;
+    }
+
+    &:not(.-disabled).-focused > .form:not(.-textarea) {
+      background-color: $color;
+    }
+    &:not(.-disabled).-focused > .form:not(.-textarea):hover > .input {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-textarea-fill-color($color) {
+  .rs-textfield {
+    &:not(.-disabled) > .form.-textarea {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin rs-textfield-bottom-line-color($color) {
+  .rs-textfield {
+    &:not(.-disabled) > .form:not(.-textarea) > .input {
+      border-bottom-color: $color;
+    }
+  }
+}
+
+@mixin rs-textfield-hover-bottom-line-color($color) {
+  .rs-textfield {
+    &:not(.-disabled) > .form:not(.-textarea):hover > .input {
+      border-bottom-color: $color;
+    }
+  }
+}
+
+@mixin rs-textfield-line-ripple-color($color) {
+  .rs-textfield {
+    > .rs-line-ripple {
+      background-color: $color;
+    }
+    &.-focused:not(.-disabled):not(.-invalid) > .form > .label {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-textfield-stroke-color($color) {
+  .rs-textfield {
+    &:not(.-focused):not(.-invalid) > .outline:not(.-area) {
+      > .leading {
+        border-color: $color;
+      }
+
+      > .notch {
+        border-color: $color;
+      }
+
+      > .trailing {
+        border-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-textarea-stroke-color($color) {
+  .rs-textfield {
+    &:not(.-focused):not(.-disabled):not(.-invalid) > .outline.-area {
+      > .leading {
+        border-color: $color;
+      }
+      
+      > .notch {
+        border-color: $color;
+      }
+
+      > .trailing {
+        border-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-textfield-hover-outline-color($color) {
+  .rs-textfield {
+    &:not(.-focused):not(.-disabled):not(.-invalid):hover {
+      > .outline:not(.-area) > .leading {
+        border-color: $color;
+      }
+
+      > .outline:not(.-area) > .notch {
+        border-color: $color;
+      }
+
+      > .outline:not(.-area) > .trailing {
+        border-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-textarea-hover-outline-color($color) {
+  .rs-textfield {
+    &:not(.-focused):not(.-disabled):not(.-invalid):hover {
+      > .outline.-area > .leading {
+        border-color: $color;
+      }
+
+      > .outline.-area > .notch {
+        border-color: $color;
+      }
+
+      > .outline.-area > .trailing {
+        border-color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-textfield-focused-outline-color($color) {
+  .rs-textfield {
+    &.-focused:not(.-disabled):not(.-invalid) {
+      > .outline:not(.-area) {
+        > .leading,
+        > .notch,
+        > .trailing {
+          border-color: $color;
+        }
+        
+        > .notch > .label {
+          color: $color;
+        }
+      }
+    }
+  }
+}
+
+@mixin rs-textarea-focused-outline-color($color) {
+  .rs-textfield {
+    &.-focused:not(.-disabled):not(.-invalid) {
+      > .outline.-area {
+        > .leading,
+        > .notch, 
+        > .trailing {
+          border-color: $color;
+        }
+
+        > .notch > .label {
+          color: $color;
+        }
+      }
+    }
+  }
+}
+
+@mixin rs-textfield-focused-color-accessible($color) {
+  @include rs-textfield-focused-outline-color($color);
+  @include rs-textfield-line-ripple-color($color);
+  @include rs-textfield-caret-color($color);
+  .rs-textfield {
+    &.-focused:not(.-disabled):not(.-invalid) {
+      > .form > .label {
+        color: $color;
+      }
+      > .outline:not(.-area) > .notch > .label {
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-textarea-focused-color-accessible($color) {
+  @include rs-textarea-focused-outline-color($color);
+  @include rs-textarea-caret-color($color);
+  .rs-textfield {
+    &.-focused:not(.-disabled):not(.-invalid) {
+      > .outline.-area > .notch > .label {
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-textfield-character-counter-ink-color($color) {
+  .rs-textfield {
+    &:not(.-disabled) > .counter:not(.-textarea) {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-textarea-character-counter-ink-color($color) {
+  .rs-textfield {
+    &:not(.-disabled) > .counter.-textarea {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-textfield-character-counter-position($xOffset, $yOffset) {
+  .rs-textfield {
+    > .counter:not(.-textarea) {
+      right: $xOffset;
+      bottom: $yOffset;
+    }
+  }
+}
+
+@mixin rs-textfield-shape-radius($radius) {
+  .rs-textfield {
+    > .form:not(.-textarea) {
+      border-radius: $radius $radius 0 0;
+    }
+
+    > .form:not(.-textarea) > .input{
+      border-radius: $radius $radius 0 0;
+    }
+
+    > .outline:not(.-area) {
+      > .leading {
+        border-radius: $radius 0 0 $radius;
+      }
+
+      > .trailing {
+        border-radius: 0 $radius $radius 0;
+      }
+    }
+  }
+}
+
+@mixin rs-textarea-shape-radius($radius) {
+  .rs-textfield {
+    > .form.-textarea {
+      border-radius: $radius;
+    }
+
+    > .outline.-area {
+      > .leading {
+        border-radius: $radius 0 0 $radius;
+      }
+      > .trailing {
+        border-radius: 0 $radius $radius 0;
+      }
     }
   }
 }

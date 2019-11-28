@@ -12,8 +12,10 @@
 
 .rs-textfield {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: inherit;
+  vertical-align: middle;
   > .form:not(.-textarea) {
     display: block;
     position: relative;
@@ -25,6 +27,7 @@
     text-overflow: hidden;
     white-space: nowrap;
     border: none;
+    overflow: hidden;
     border-radius: 4px 4px 0 0;
     > .input {
       width: var(--width, 200px);
@@ -37,6 +40,7 @@
       border: none;
       border-bottom: 1px solid;
       overflow: hidden;
+      border-radius: 4px 4px 0 0;
       &::before {
         width: 24px;
         position: absolute;
@@ -63,6 +67,7 @@
       caret-color: $rs-theme-primary;
       padding: 20px 16px 6px;
       padding-left: 16px;
+      color: inherit;
       &::placeholder {
         transition: rs-text-field-transition(opacity, $duration: 67ms);
         color: $rs-text-field-placeholder-ink-color;
@@ -92,6 +97,7 @@
     display: block;
     overflow: hidden;
     box-sizing: border-box;
+    border-radius: 4px;
     > .input {
       $padding-inset: 16px;
       width: 100%;
@@ -109,6 +115,7 @@
       font-size: 1rem;
       caret-color: $rs-theme-primary;
       resize: auto;
+      color: inherit;
       &::placeholder {
         transition: rs-text-field-transition(opacity, $duration: 67ms);
         color: $rs-text-field-placeholder-ink-color;
@@ -164,7 +171,7 @@
       box-shadow: none;
       caret-color: $rs-text-field-error;  
     }
-    > .outline {
+    > .outline:not(.-area) {
       > .leading {
         border-color: $rs-text-field-error;
       }
@@ -184,20 +191,23 @@
     > .rs-line-ripple {
       background-color: $rs-text-field-error;
     }
-    &:hover:not(.-focused) {
-      > .outline > .leading {
+
+    > .outline.-area {
+      > .leading,
+      > .notch,
+      > .trailing {
         border-color: $rs-text-field-error;
-      } 
+      }
+
+      > .notch > .label {
+        color: $rs-text-field-error;
+      }
     }
+
     &:not(.-disabled) > .form:not(.-textarea) > .input {
       border-bottom-color: $rs-text-field-error;
       &:hover {
         border-bottom-color: $rs-text-field-error;
-      }
-    }
-    &:not(.-focused):not(.-disabled):hover {
-      > .outline > .notch {
-        border-color: $rs-text-field-error;
       }
     }
     &.-focused {
@@ -205,14 +215,11 @@
         color: $rs-text-field-error;
       }
       > .outline {
-        > .leading {
-          border-color: $rs-text-field-error;
-        }
-        > .trailing {
-          border-color: $rs-text-field-error;
-        }
+        > .leading,
+        > .trailing,
         > .notch {
           border-color: $rs-text-field-error;
+          border-width: 2px;
         }
         > .notch > .label {
           color: $rs-text-field-error;
@@ -248,13 +255,20 @@
     > .counter {
       color: $rs-text-field-disabled-helper-text-color;
     }
-    > .outline > .notch > .label {
+    > .outline:not(.-area) > .notch > .label {
       color: $rs-text-field-disabled-ink-color;
     }
-    > .outline > .leading {
+    > .outline.-area > .notch > .label {
+      color: $rs-text-field-disabled-ink-color;
+    }
+    > .outline:not(.-area) > .leading,
+    > .outline:not(.-area) > .notch,
+    > .outline:not(.-area) > .trailing {
       border-color: $rs-text-field-disabled-border;
     }
-    > .outline > .trailing {
+    > .outline.-area > .leading,
+    > .outline.-area > .notch,
+    > .outline.-area > .trailing {
       border-color: $rs-text-field-disabled-border;
     }
     &:not(.-focused):hover {
@@ -280,6 +294,12 @@
         border-bottom-color: $rs-text-field-bottom-line-hover;
       }
     }
+    > .form.-textarea {
+      background-color: transparent;
+    }
+    > .form.-textarea > .input {
+      background-color: transparent;
+    }
     &.-focused {
       > .form:not(.-textarea) {
         background-color: #dcdcdc;
@@ -304,37 +324,60 @@
     }
   
   }
-  &.-focused {
-    > .form > .label {
-      color: $rs-theme-primary;
-    } 
-    > .outline > .notch,
-    > .outline > .leading,
-    > .outline > .trailing {
-      border-color: $rs-theme-primary;
-      border-width: 2px;
-    }
-    > .outline > .notch.-border {
-      border-top: none;
-
-    }
-    > .outline > .notch > .label {
-      @include rs-floating-label_;
-      color: $rs-theme-primary;
-      left: 16px;
-    }
-  }
   &:not(.-focused):not(.-disabled):not(.-invalid):hover {
-    > .outline > .leading {
+    > .outline:not(.-area) > .leading {
       border-color: $rs-text-field-outlined-hover-border;
     }
-    > .outline > .trailing {
+    > .outline:not(.-area) > .trailing {
       border-color: $rs-text-field-outlined-hover-border;
     }
-    > .outline > .notch {
+    > .outline:not(.-area) > .notch {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+    > .outline.-area > .leading {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+    > .outline.-area > .trailing {
+      border-color: $rs-text-field-outlined-hover-border;
+    }
+    > .outline.-area > .notch {
       border-color: $rs-text-field-outlined-hover-border;
     }
   }
+ 
+  > .counter {
+    @include rs-typography(caption);
+    @include rs-typography-baseline-top(16px);
+    margin-left: auto;
+    margin-right: 0;
+    padding-left: 16px;
+    padding-right: 0;
+    white-space: nowrap;
+    position: absolute;
+    display: block;
+    &.-hidden {
+      display: none;
+    }
+    &.-textarea {
+      bottom: 13px;
+      right: 16px;
+    }
+    &:not(.-textarea) {
+      bottom: $rs-text-field-character-counter-bottom;
+      right: 16px;
+    }
+  }
+  &:not(.-disabled) {
+    > .counter {
+      &:not(.-textarea) {
+        color: $rs-text-field-label;
+      }
+      &.-textarea {
+        color: $rs-text-field-label;
+      }
+    }
+  }
+
   > .outline {
     @include rs-notched-outline_;
     > .notch {
@@ -342,7 +385,6 @@
       max-width: calc(100% - 24px);
       border-top: solid;
       border-top-width: 1px;
-      border-color: rgba(0, 0, 0, .24);
     }
     > .notch.-border {
       border-top: none;
@@ -353,39 +395,79 @@
     > .notch.-border > .label {
       left: 16px;
     }
-    > .leading {
-      @include rs-notched-outline-leading_;
-      border-color: rgba(0, 0, 0, .24);
+    &:not(.-area) {
+      > .leading {
+        @include rs-notched-outline-leading_;
+      }
+      > .trailing {
+        @include rs-notched-outline-trailing_;
+      }
     }
-    > .trailing {
-      @include rs-notched-outline-trailing_;
-      border-color: rgba(0, 0, 0, .24);
+    &.-area {
+      > .leading {
+        @include rs-notched-outline-leading_;
+        border-radius: 4px 0 0 4px;
+      }
+      > .trailing {
+        @include rs-notched-outline-trailing_;
+        border-radius: 0 4px 4px 0;
+      }
     }
     &.-none {
       display: none;
     }
   }
-  > .counter {
-    @include rs-typography(caption);
-    @include rs-typography-baseline-top(16px);
-    margin-left: auto;
-    margin-right: 0;
-    padding-left: 16px;
-    padding-right: 0;
-    white-space: nowrap;
-    position: absolute;
-    bottom: $rs-text-field-character-counter-bottom;
-    right: 16px;
-    color: $rs-text-field-label;
-    display: block;
-    &.-hidden {
-      display: none;
+  &:not(.-focused):not(.-invalid) > .outline:not(.-area) {
+    > .leading {
+      border-color: $rs-text-field-outlined-idle-border;
     }
-    &.-textarea {
-      bottom: 13px;
+    > .notch {
+      border-color: $rs-text-field-outlined-idle-border;
+    }
+    > .trailing {
+      border-color: $rs-text-field-outlined-idle-border;
+    }
+  }
+  &:not(.-focused):not(.-disabled):not(.-invalid) > .outline.-area {
+    > .leading {
+      border-color: $rs-text-field-outlined-idle-border;
+    }
+    > .notch {
+      border-color: $rs-text-field-outlined-idle-border;
+    }
+    > .trailing {
+      border-color: $rs-text-field-outlined-idle-border;
+    }
+  }
+  &.-focused:not(.-disabled):not(.-invalid) {
+    > .form > .label {
+      color: $rs-theme-primary;
+    }
+    > .outline:not(.-area) {
+      > .leading,
+      > .notch, 
+      > .trailing {
+        border-color: $rs-theme-primary;
+        border-width: 2px;
+      }
+      > .notch > .label {
+        color: $rs-theme-primary;
+      }
+    }
+    > .outline.-area {
+      > .leading,
+      > .notch, 
+      > .trailing {
+        border-color: $rs-theme-primary;
+        border-width: 2px;
+      }
+      > .notch > .label {
+        color: $rs-theme-primary;
+      }
     }
   }
 }
+
 .rs-textfield-trailing {
   background-image: none;
   font-family: inherit;
