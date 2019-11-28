@@ -144,7 +144,6 @@ export class Textfield {
 
   @Method()
   async addFocusToParent() {
-    this.trailingEl = this.trailing.shadowRoot.querySelector('.rs-textfield-trailing')
     this.trailingEl.addEventListener('click', () => {
       this.htmlNativeConctrol.focus()
     })
@@ -196,6 +195,7 @@ export class Textfield {
     this.trailing = children.find(child => child.tagName === 'RS-TEXTFIELD-TRAILING')
 
     if (this.trailing) {
+      this.trailingEl = this.trailing.shadowRoot.querySelector('.rs-textfield-trailing')
       this.addFocusToParent()
     }
     
