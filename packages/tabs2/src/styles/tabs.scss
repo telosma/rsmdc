@@ -1,0 +1,186 @@
+@import "@rsmdc/animation/variables";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/ripple/mixins-stencil";
+@import "@rsmdc/rtl/mixins";
+@import "@rsmdc/theme/variables";
+@import "@rsmdc/typography/mixins";
+@import "./variables";
+@import "./mixins";
+
+@include rs-ripple-common;
+
+.rs-tab-bar {
+  width: 100%;
+  > .scroller {
+    overflow-y: hidden;
+  }
+
+  > .scroller > .scrolarea {
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  > .scroller > .scrollarea > .scrollcontent {
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    transform: none;
+    will-change: transform;
+  }
+}
+
+.rs-tab-indicator {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: 
+    left 0.2s ease-in-out,
+    width 0.2s ease-in-out;
+  width: 86px;
+  height: 2px;
+  background-color: $rs-theme-primary;
+  &.-no-animating {
+    transition: none;
+  }
+}
+
+.rs-tab {
+  @include rs-ripple-surface;
+  @include rs-ripple-radius-bounded;
+  @include rs-ripple-upgraded($rs-theme-primary);
+
+  @include rs-typography(button);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  height: $rs-tab-height;
+  padding: 0 24px;
+  border: none;
+  outline: none;
+  background: none;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-appearance: none;
+  z-index: 1;
+  width: 100%;
+  margin: auto;
+  
+
+
+  &.-activated {
+    background-color: $rs-tab-active-fill-color;
+    > .ripple {
+      &:hover::before {
+        opacity: rs-states-opacity(primary, focus);
+      }
+
+      &:focus::before {
+        background-color: $rs-theme-primary;
+        content: '';
+        opacity: rs-states-opacity(primary, focus);
+      }
+
+      &:focus::after {
+        background-color: $rs-theme-primary;
+        content: '';
+      }
+    }
+
+    > .content {
+      color: $rs-theme-primary;
+    }
+
+    > .content::before,
+    > .content::after {
+      opacity: 1;
+    }
+
+    > .content > .textlabel {
+      color: $rs-theme-primary;
+      transition-delay: 100ms;
+      opacity: 1;
+    }
+  }
+
+  > .content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: inherit;
+    pointer-events: none;
+    align-items: center;
+    color: $rs-theme-on-surface;
+
+    &::before {
+      width: 24px;
+      background-size: 24px;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: $rs-tab-icon-opacity;
+
+      height: auto;
+      font-size: 24px;
+      font-weight: 400;
+      display: none;
+      content: '';
+      font-family: inherit;
+      background-image: none;
+      position: auto;
+      top: auto;
+    }
+
+    &::after {
+      width: 24px;
+      background-size: 24px;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: $rs-tab-icon-opacity;
+      height: auto;
+      font-size: 24px;
+      font-weight: 400;
+      display: none;
+      content: '';
+      font-family: inherit;
+      background-image: none;
+    }
+  }
+
+  > .content > .textlabel {
+    display: inline-block;
+    opacity: $rs-tab-text-label-opacity;
+    line-height: 1;
+    transition: 150ms color linear, 150ms opacity linear;
+    z-index: 2;
+    color: $rs-theme-on-surface;
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    &.-no-text {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  > .ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: none;
+  }
+
+}
+
+

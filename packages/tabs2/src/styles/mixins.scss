@@ -1,0 +1,49 @@
+@mixin rs-tab-icon-image($icon, $codepoint: "") {
+  $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
+
+  @if $value == path {
+
+    .rs-tab {
+      background-image: $icon;
+    }
+
+  } @else {
+    $font-family: '"' + $icon + '"';
+    $name: '"' + "\\"+ $codepoint + '"';
+
+    .rs-tab > .content {
+      &::before {
+        font-family: $font-family;
+        content: $name;
+        display: block;
+      }
+
+      &::after {
+        font-family: $font-family;
+        content: $name;
+      }
+    }
+
+    .rs-tab  > .content > .textlabel {
+      padding-left: 8px;
+    }
+  }
+}
+
+@mixin rs-tab-icon-position($position) {
+  .rs-tab > .content {
+
+    &::before {
+      display: none;
+    }
+    
+    &::after {
+      display: block;
+    }
+
+    > .textlabel {
+      padding-left: 0;
+      padding-right: 8px;
+    }
+  }
+}
