@@ -15,10 +15,7 @@ export class TabItem {
 
   ripple: RSRipple
 
-  children: Element[]
-
-  @Prop() activated: boolean
-
+  @Prop() activated:boolean
 
   @Watch("activated")
   activatedHandler() {
@@ -28,28 +25,15 @@ export class TabItem {
   @Method()
   async isActivated() {
     if (this.activated) {
-      this.tabItem.classList.add("-activated");
-    } else {
-      this.tabItem.classList.remove("-activated");
+      this.tabItem.classList.add('-activated')
     }
   }
-  
+
   componentDidLoad() {
     this.tabItem = this.el.shadowRoot.querySelector('.rs-tab')
-    this.ripple = new RSRipple(this.tabItem);
-    const slot = this.el.shadowRoot.querySelector('slot')
-    this.children = Array.from(slot.assignedElements())
-   
-    // this.children.forEach(el => {
-    //   el.addEventListener('click', () => {
-    //     if (this.tabItem.classList.contains('-activated')) {
-    //       this.tabItem.classList.remove('-activated')
-    //     }
-    //   })
-    // })
-
+    this.ripple = new RSRipple(this.tabItem)
+    
     this.isActivated()
-  
   }
 
   render() {

@@ -21,13 +21,13 @@
  * THE SOFTWARE.
  */
 var cssClasses = {
-    ACTIVE: 'rs-tab--active',
+    ACTIVE: '-active',
 };
 var strings = {
     ARIA_SELECTED: 'aria-selected',
-    CONTENT_SELECTOR: '.rs-tab__content',
+    CONTENT_SELECTOR: '.content',
     INTERACTED_EVENT: 'rsTab:interacted',
-    RIPPLE_SELECTOR: '.rs-tab__ripple',
+    RIPPLE_SELECTOR: '.ripple',
     TABINDEX: 'tabIndex',
     TAB_INDICATOR_SELECTOR: '.rs-tab-indicator',
 };

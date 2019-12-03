@@ -14,17 +14,14 @@
   > .scroller {
     overflow-y: hidden;
   }
-
-  > .scroller > .scrolarea {
+  > .scroller > .scrollarea {
     -webkit-overflow-scrolling: touch;
     display: flex;
     overflow-x: scroll;
-
     &::-webkit-scrollbar {
       display: none;
     }
   }
-
   > .scroller > .scrollarea > .scrollcontent {
     position: relative;
     display: flex;
@@ -42,7 +39,7 @@
   transition: 
     left 0.2s ease-in-out,
     width 0.2s ease-in-out;
-  width: 86px;
+  width: auto;
   height: 2px;
   background-color: $rs-theme-primary;
   &.-no-animating {
@@ -54,13 +51,14 @@
   @include rs-ripple-surface;
   @include rs-ripple-radius-bounded;
   @include rs-ripple-upgraded($rs-theme-primary);
-
   @include rs-typography(button);
   position: relative;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
+  width: 100%;
   height: $rs-tab-height;
+  margin: auto;
   padding: 0 24px;
   border: none;
   outline: none;
@@ -71,13 +69,7 @@
   overflow: hidden;
   -webkit-appearance: none;
   z-index: 1;
-  width: 100%;
-  margin: auto;
-  
-
-
-  &.-activated {
-    background-color: $rs-tab-active-fill-color;
+  &.-activated {   
     > .ripple {
       &:hover::before {
         opacity: rs-states-opacity(primary, focus);
@@ -94,23 +86,19 @@
         content: '';
       }
     }
-
     > .content {
       color: $rs-theme-primary;
     }
-
     > .content::before,
     > .content::after {
       opacity: 1;
     }
-
     > .content > .textlabel {
       color: $rs-theme-primary;
       transition-delay: 100ms;
       opacity: 1;
     }
   }
-
   > .content {
     position: relative;
     display: flex;
@@ -119,7 +107,6 @@
     pointer-events: none;
     align-items: center;
     color: $rs-theme-on-surface;
-
     &::before {
       width: 24px;
       background-size: 24px;
@@ -137,7 +124,6 @@
       position: auto;
       top: auto;
     }
-
     &::after {
       width: 24px;
       background-size: 24px;
@@ -153,7 +139,6 @@
       background-image: none;
     }
   }
-
   > .content > .textlabel {
     display: inline-block;
     opacity: $rs-tab-text-label-opacity;
@@ -164,13 +149,11 @@
     padding-right: 0;
     padding-left: 0;
     margin-bottom: 0;
-
     &.-no-text {
       padding-right: 0;
       padding-left: 0;
     }
   }
-
   > .ripple {
     position: absolute;
     top: 0;
@@ -180,7 +163,6 @@
     overflow: hidden;
     outline: none;
   }
-
 }
 
 
