@@ -13,11 +13,9 @@ export class TabItem {
 
   tabItem: Element
 
-  ripple: RSRipple
-
   @Prop() activated:boolean
 
-  @Watch("activated")
+  @Watch('activated')
   activatedHandler() {
     this.isActivated();
   }
@@ -31,7 +29,8 @@ export class TabItem {
 
   componentDidLoad() {
     this.tabItem = this.el.shadowRoot.querySelector('.rs-tab')
-    this.ripple = new RSRipple(this.tabItem)
+    const ripple = new RSRipple(this.tabItem)
+    ripple.unbounded = false
     
     this.isActivated()
   }
