@@ -3,11 +3,11 @@ import { RSRipple } from '@rsmdc/ripple'
 import { RSLineRipple } from '@rsmdc/line-ripple'
 
 @Component({
-  tag: 'rs-textfield',
+  tag: 'rs-textarea',
   styleUrl: '../../dist/result.css',
   shadow: true
 })
-export class Textfield {
+export class Textarea {
 
   @Element() el: HTMLElement
 
@@ -29,9 +29,12 @@ export class Textfield {
 
   @Prop() maxlength: string = ''
 
-  textfield: Element
+  @Prop() cols: number
 
-  trailing: Element
+  @Prop() rows: number
+
+
+  textarea: Element
 
   labels: Element[]
 
@@ -41,17 +44,11 @@ export class Textfield {
 
   notch: HTMLElement
 
-  action: Element
-
   counter: Element
 
   rsRipple: RSRipple
 
   rsLineRipple: RSLineRipple
-
-  labelEl: Element
-
-  trailingEl: Element
 
   @Event({
     cancelable: false,
@@ -81,27 +78,27 @@ export class Textfield {
   @Method()
   async isDisabled() {
     if (this.disabled) {
-      this.textfield.classList.add('-disabled')
+      this.textarea.classList.add('-disabled')
     } else {
-      this.textfield.classList.remove('-disabled')
+      this.textarea.classList.remove('-disabled')
     }
   }
 
   @Method()
   async isInvalid() {
     if (this.invalid) {
-      this.textfield.classList.add('-invalid')
+      this.textarea.classList.add('-invalid')
     } else {
-      this.textfield.classList.remove('-invalid')
+      this.textarea.classList.remove('-invalid')
     }
   }
 
   @Method()
   async isRequired() {
     if (this.required) {
-      this.textfield.classList.add('-required')
+      this.textarea.classList.add('-required')
     } else {
-      this.textfield.classList.remove('-required')
+      this.textarea.classList.remove('-required')
     }
   }
 
@@ -111,7 +108,7 @@ export class Textfield {
       this.counter.classList.remove('-hidden')
     } else {
       this.counter.classList.add('-hidden')
-     }
+    }
   }
 
   @Method()
@@ -119,20 +116,21 @@ export class Textfield {
     this.labels.forEach(l => { 
       l.classList.add('-floatabove')
     })
+    this.setLabelWidthToNotch()
   }
 
   @Method()
   async setLabelWidthToNotch() {
     const labelWidth = await this.retriveLabelWidth(this.labels)
-    const width = labelWidth * 0.8 + 4
+    const width = labelWidth * 0.75 + 8
     this.notch.style.setProperty('width', `${width}px`)
   }
 
   @Method()
   async addFocusStyle() {
-    this.textfield.classList.add('-focused')
-    this.textfield.classList.add('rs-ripple-upgraded--background-focused')
-    this.rsLineRipple.activate()      
+    this.textarea.classList.add('-focused')
+    this.textarea.classList.add('rs-ripple-upgraded--background-focused')
+    this.rsLineRipple.activate()
     this.labels.forEach(l => { 
       l.classList.add('-floatabove')
       this.notch.classList.add('-border')
@@ -143,24 +141,18 @@ export class Textfield {
   }
 
   @Method()
-  async addFocusToParent() {
-    this.trailingEl.addEventListener('click', () => {
-      this.htmlNativeConctrol.focus()
-    })
-  }
-
-  @Method()
   async removeFocusStyle() {
-    this.textfield.classList.remove('-focused')
-    this.textfield.classList.remove('rs-ripple-upgraded--background-focused')
-    this.rsLineRipple.deactivate()
+    this.textarea.classList.remove('-focused')
+    this.textarea.classList.remove('rs-ripple-upgraded--background-focused')
+    this.rsLineRipple.activate()
+
     this.labels.forEach(l => {
       if (this.invalid && this.value) l.classList.add('-shake')
       if (this.value) return
       l.classList.remove('-floatabove')
       this.notch.classList.remove('-border')
       this.notch.style.setProperty('--width', 'auto')
-     })
+    })
   }
 
   @Method()
@@ -175,40 +167,25 @@ export class Textfield {
   @Method()
   async changeHandler() {
     this.value = this.htmlNativeConctrol.value
+
     this.change.emit({ value: this.value })
   }
 
   componentDidLoad() {
-    this.textfield = this.el.shadowRoot.querySelector('.rs-textfield')
+    this.textarea = this.el.shadowRoot.querySelector('.rs-textfield')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
-    this.labelEl = this.el.shadowRoot.querySelector('.label') 
-    this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
+    this.nativeControl = this.el.shadowRoot.querySelector('.input')
     this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement)
     this.notch = this.el.shadowRoot.querySelector('.notch')
     this.counter = this.el.shadowRoot.querySelector('.counter')
-    this.action = this.el.shadowRoot.querySelector('.action')
     this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
-    this.rsRipple = new RSRipple(this.textfield)
-
-    const slot = this.el.shadowRoot.querySelector('slot')
-    const children = Array.from(slot.assignedElements())
-    this.trailing = children.find(child => child.tagName === 'RS-TEXTFIELD-TRAILING')
-
-    if (this.trailing) {
-      this.trailingEl = this.trailing.shadowRoot.querySelector('.rs-textfield-trailing')
-      this.addFocusToParent()
-    }
+    this.rsRipple = new RSRipple(this.textarea)
     
-    if (this.type === 'date') {
-      this.labelEl.classList.add('-date-label')
-    }
-
     this.isDisabled()
     this.isInvalid()
     this.isRequired()
     this.isCountable()
-    this.isRequired()
-
+    
     this.nativeControl.addEventListener('focus', () => {
       this.addFocusStyle()
     })
@@ -220,12 +197,12 @@ export class Textfield {
     this.nativeControl.addEventListener('blur', () => {
       this.removeFocusStyle()
     })
-
+    
     this.nativeControl.addEventListener('keyup', () => {
       this.value = this.htmlNativeConctrol.value
     })
   }
-  
+
   componentDidUnLoad() {
     this.nativeControl.removeEventListener('focus', () => {
       this.addFocusStyle()
@@ -242,37 +219,23 @@ export class Textfield {
     this.nativeControl.removeEventListener('keyup', () => {
       this.value = this.htmlNativeConctrol.value
     })
-
-    this.trailingEl.removeEventListener('click', () => {
-      this.htmlNativeConctrol.focus()
-    })
   }
 
   render() {
     return  <Host>
-              <div class="rs-textfield -textarea">
-                <div class="form -outline">
-                  <div class="input">
-                    <input
-                      type={this.type}
-                      placeholder={this.placeholder}
-                      maxlength={this.maxlength}
-                      class="nativecontrol" />
-                    <div class="action -none">
-                      <slot />
-                    </div>
-                  </div>
-                  <label class="label">{this.label}</label>
+              <div class="rs-textfield -outlined -textarea">
+                <div class="form -textarea">
+                  <textarea class="input" cols={this.cols} rows={this.rows} placeholder={this.placeholder} maxlength={this.maxlength} />
                 </div>
-                <div class="rs-line-ripple" />
-                <div class="outline -none">
+                <div class="rs-line-ripple -none" />
+                <div class="outline -area">
                   <div class="leading" />
                   <div class="notch">
-                    <label class="label -outlined">{this.label}</label>
+                    <label class="label -outlined">{ this.label }</label>
                   </div>
                   <div class="trailing" />
                 </div>
-                <div class="counter">{`${this.value.length} / ${this.maxlength}` }</div>
+                <div class="counter -none -textarea">{ `${this.value.length} / ${this.maxlength}` }</div>
               </div>
             </Host>
   }
