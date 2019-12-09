@@ -9,12 +9,12 @@ import ResizeObserver from 'resize-observer-polyfill'
 
 export class TabBar {
 
-  @Element() el: Element;
+  @Element() el: Element
 
   @Method()
   async wrap(element, wrapper) {
-    element.parentNode.insertBefore(wrapper, element);
-    wrapper.appendChild(element);
+    element.parentNode.insertBefore(wrapper, element)
+    wrapper.appendChild(element)
   }
 
   @Method()

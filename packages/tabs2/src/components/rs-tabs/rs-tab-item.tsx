@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Prop, Watch, Method } from '@stencil/core';
+import { Component, Element, h, Host, Prop, Watch, Method } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
 
 @Component({
@@ -17,7 +17,7 @@ export class TabItem {
 
   @Watch('activated')
   activatedHandler() {
-    this.isActivated();
+    this.isActivated()
   }
   
   @Method()
