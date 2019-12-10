@@ -18,6 +18,13 @@ export class TabBar {
   }
 
   @Method()
+  async setIndicatorStyle(position, width) {
+    const indicator = (this.el.shadowRoot.querySelector('.rs-tab-indicator') as HTMLScriptElement)
+    indicator.style.setProperty('left', `${position}px`)
+    indicator.style.setProperty('--rs-tab-indicator---width', `${width}px`)
+  }
+
+  @Method()
   async setScrollPosition(scrollArea, left) {
     scrollArea.scrollTo({
       top: 0,
@@ -28,26 +35,24 @@ export class TabBar {
 
   async componentDidLoad() {
     const slot = this.el.shadowRoot.querySelector('slot')
-    const children = Array.from(slot.assignedElements())
-    const tabItem = children.find(child => child.tagName === 'RS-TAB-ITEM')
+    const tabs = Array.from(slot.assignedElements())
+    const tabItem = tabs.find(tab => tab.tagName === 'RS-TAB-ITEM')
     const tabItemEl = tabItem.shadowRoot.querySelector('.rs-tab')
-    const scrollArea = this.el.shadowRoot.querySelector('.scrollarea')
-    const scrollAreaWidth = this.el.shadowRoot.querySelector('.scrollarea').clientWidth
-
     const indicator = (this.el.shadowRoot.querySelector('.rs-tab-indicator') as HTMLScriptElement)
-    if (indicator) {
-      indicator.classList.add('-no-animating')
-    }
 
-    children.forEach((item, i) => {
+    tabs.forEach((item, i) => {
       const itemEl = item.shadowRoot.querySelector('.rs-tab')
 
       itemEl.addEventListener('click', () => {
+        const scrollArea = this.el.shadowRoot.querySelector('.scrollarea')
+        const scrollAreaWidth = this.el.shadowRoot.querySelector('.scrollarea').clientWidth
         const tabLeftPosition = itemEl.getBoundingClientRect().left
         const tabRightPosition = itemEl.getBoundingClientRect().right
-
-        children.forEach((child, n) => {
-          const tabEl = child.shadowRoot.querySelector('.rs-tab')
+    
+        indicator.classList.remove('-no-animating')
+        
+        tabs.forEach((tab, n) => {
+          const tabEl = tab.shadowRoot.querySelector('.rs-tab')
           if (i === n) {
             tabEl.classList.add('-activated')
           } else {
@@ -55,7 +60,7 @@ export class TabBar {
           }
         })
         
-        if (i === 0 || i === children.length-1) {
+        if (i === 0 || i === tabs.length-1) {
           if (tabRightPosition > scrollAreaWidth) {
             const left = tabRightPosition + scrollArea.scrollLeft
             this.setScrollPosition(scrollArea, left)
@@ -63,11 +68,11 @@ export class TabBar {
             this.setScrollPosition(scrollArea, 0)
           }
         } else {
-          const rightTabWidth = children[i + 1].clientWidth / 3
-          const leftTabWidth = children[i - 1].clientWidth / 3
+          const rightTabWidth = tabs[i + 1].clientWidth / 3
+          const leftTabWidth = tabs[i - 1].clientWidth / 3
           const rightViewPosition = tabRightPosition + rightTabWidth
           const leftViewPosition = tabLeftPosition - leftTabWidth
-        
+  
           if (rightViewPosition > scrollAreaWidth) {
             const diff = rightViewPosition - scrollAreaWidth
             const left = diff + scrollArea.scrollLeft
@@ -81,22 +86,18 @@ export class TabBar {
     })
 
     const observer = new ResizeObserver(() => {
-      children.forEach(tab => {
+      tabs.forEach(tab => {
         const itemEl = tab.shadowRoot.querySelector('.rs-tab')
-        const width = itemEl.clientWidth
-        const left = itemEl.getBoundingClientRect().left
-        
-        indicator.style.setProperty('width', `${width}px`)
-        
+        const tabWidth = itemEl.clientWidth
+        const tabLeft = itemEl.getBoundingClientRect().left
+        indicator.style.setProperty('--rs-tab-indicator---width', `${tabWidth}px`)
+
         if (itemEl.classList.contains('-activated')) {
-          indicator.style.setProperty('width', `${width}px`)
-          indicator.style.setProperty('left', `${left}px`)
+          this.setIndicatorStyle(tabLeft, tabWidth)
         }
-        
+
         tab.addEventListener('click', () => {
-          indicator.style.setProperty('width', `${width}px`)
-          indicator.style.setProperty('left', `${left}px`)
-          indicator.classList.remove('-no-animating')
+          this.setIndicatorStyle(tabLeft, tabWidth)
         })
       })
     })

@@ -1,3 +1,5 @@
+@import "@rsmdc/ripple/mixins-stencil";
+
 @mixin rs-tab-icon-image($icon, $codepoint: "") {
   $value: if(str-slice("#{$icon}", 1, 4) == "url(", path, font-family);
 
@@ -31,19 +33,94 @@
 }
 
 @mixin rs-tab-icon-position($position) {
-  .rs-tab > .content {
+  @if $position == right {
+    .rs-tab > .content {
 
-    &::before {
-      display: none;
+      &::before {
+        display: none;
+      }
+      
+      &::after {
+        display: block;
+      }
+
+      > .textlabel {
+        padding-left: 0;
+        padding-right: 8px;
+      }
     }
-    
-    &::after {
-      display: block;
+  }
+}
+
+@mixin rs-tab-ink-color($color) {
+  .rs-tab {
+    > .content {
+      color: $color;
     }
 
-    > .textlabel {
-      padding-left: 0;
-      padding-right: 8px;
+    > .content > .textlabel {
+      color: $color;
+    }
+  }
+}
+
+@mixin rs-tab-activated-color($color) {
+  .rs-tab {
+    &.-activated {
+      > .content {
+        color: $color;
+      }
+      > .content > .textlabel {
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin rs-tab-states-color($color) {
+  .rs-tab {
+    @include rs-ripple-upgraded($color);
+  }
+}
+
+@mixin rs-tab-indicator-color($color) {
+  .rs-tab-indicator {
+    background-color: $color;  
+  }
+}
+
+@mixin rs-tab-indicator-height($height) {
+  .rs-tab-indicator {
+    height: $height;
+  }
+}
+
+@mixin rs-tab-width($width) {
+  .rs-tab-bar {
+    > .scroller {
+      width: $width;
+    }
+  }
+}
+
+@mixin rs-tab-fixed-width($width) {
+  rs-tab-item {
+    flex: 0 1 $width;
+  }
+}
+
+@mixin rs-tab-bar-position($justify-content) {
+  @if $justify-content == flex-end {
+    .rs-tab-bar{
+      > .scroller > .scrollarea > .scrollcontent {
+        justify-content: flex-end;
+      }
+    }
+  } @else if $justify-content == center {
+    .rs-tab-bar{
+      > .scroller > .scrollarea > .scrollcontent {
+        justify-content: center;
+      }
     }
   }
 }

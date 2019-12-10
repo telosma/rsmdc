@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsTabBar {
+    'setIndicatorStyle': (position: any, width: any) => Promise<void>;
     'setScrollPosition': (scrollArea: any, left: any) => Promise<void>;
     'wrap': (element: any, wrapper: any) => Promise<void>;
   }

@@ -11,8 +11,11 @@
 
 .rs-tab-bar {
   width: 100%;
+  display: inherit;
+  justify-content: flex-start;
   > .scroller {
     overflow-y: hidden;
+    width: auto;
   }
   > .scroller > .scrollarea {
     -webkit-overflow-scrolling: touch;
@@ -28,6 +31,7 @@
     flex: 1 0 auto;
     transform: none;
     will-change: transform;
+    justify-content: flex-start;
   }
 }
 
@@ -39,12 +43,18 @@
   transition: 
     left 0.2s ease-in-out,
     width 0.2s ease-in-out;
-  width: auto;
+  width: var(--rs-tab-indicator---width);
   height: 2px;
   background-color: $rs-theme-primary;
+  display: flex;
+  justify-content: flex-start;
   &.-no-animating {
     transition: none;
   }
+}
+
+rs-tab-item {
+  flex: 1 0 auto;
 }
 
 .rs-tab {
@@ -69,6 +79,8 @@
   overflow: hidden;
   -webkit-appearance: none;
   z-index: 1;
+  flex: var(--flex, 1 0 auto);
+
   &.-activated {   
     > .ripple {
       &:hover::before {
@@ -113,7 +125,7 @@
       background-position: center;
       background-repeat: no-repeat;
       opacity: $rs-tab-icon-opacity;
-
+      
       height: auto;
       font-size: 24px;
       font-weight: 400;
@@ -164,5 +176,3 @@
     outline: none;
   }
 }
-
-
