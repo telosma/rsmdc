@@ -115,6 +115,7 @@ rs-tab-item {
     position: relative;
     display: flex;
     justify-content: center;
+    flex-direction: row;
     height: inherit;
     pointer-events: none;
     align-items: center;

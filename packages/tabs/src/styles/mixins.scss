@@ -49,6 +49,18 @@
         padding-right: 8px;
       }
     }
+  } @else if $position == center {
+    .rs-tab {
+      height: 72px;
+      > .content {
+        flex-direction: column;
+      }
+
+      > .content > .textlabel {
+        margin-bottom: 16px;
+        padding-left: 0;
+      }
+    }
   }
 }
 
