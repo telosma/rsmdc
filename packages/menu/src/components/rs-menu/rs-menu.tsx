@@ -1,24 +1,24 @@
-import { Component, Host, h, Element, Prop, Watch, Event, EventEmitter, Method } from '@stencil/core';
+import { Component, Host, h, Element, Prop, Watch, Event, EventEmitter, Method } from '@stencil/core'
 
 @Component({
   tag: 'rs-menu',
-  styleUrl: "../../dist/result.css",
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
   
 export class Menu {
 
-  @Element() el: Element;
+  @Element() el: Element
+
+  @Prop() opened: boolean
 
   menu: HTMLElement
 
   listItems: Element[]
 
-  @Prop() opened: boolean
-
-  @Watch("opened")
+  @Watch('opened')
   openeddHandler() {
-    this.isOpened();
+    this.isOpened()
   }
 
   @Event({
@@ -31,7 +31,7 @@ export class Menu {
     if (this.opened) {
       this.menu.classList.add('-opened')
     } else {
-      this.menu.classList.remove("-opened");
+      this.menu.classList.remove('-opened')
     }
   }
     
