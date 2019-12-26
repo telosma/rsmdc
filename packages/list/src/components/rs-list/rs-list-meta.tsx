@@ -1,8 +1,8 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, h } from '@stencil/core'
 
 @Component({
   tag: 'rs-list-meta',
-  styleUrl: "../../dist/result.css",
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 export class ListMeta {

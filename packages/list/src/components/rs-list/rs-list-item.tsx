@@ -1,18 +1,14 @@
-import { Component, Element, Prop, Host, h, Method, Watch } from '@stencil/core';
+import { Component, Element, Prop, Host, h, Method, Watch } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
 
 @Component({
   tag: 'rs-list-item',
-  styleUrl: "../../dist/result.css",
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 export class ListItem {
 
-  @Element() el: Element;
-
-  listItem: HTMLElement
-
-  ripple: RSRipple
+  @Element() el: Element
 
   @Prop() selected: boolean
 
@@ -20,47 +16,49 @@ export class ListItem {
 
   @Prop() disabled: boolean
 
-  @Watch("disabled")
+  listItem: HTMLElement
+
+  ripple: RSRipple
+
+  @Watch('disabled')
   disabledHandler() {
-    this.isDisabled();
+    this.isDisabled()
   }
 
-  @Watch("selected")
+  @Watch('selected')
   selectedHandler() {
-    this.isSelected();
+    this.isSelected()
   }
 
-  @Watch("activated")
+  @Watch('activated')
   activatedHandler() {
-    this.isActivated();
+    this.isActivated()
   }
 
   @Method()
   async isDisabled() {
     if (this.disabled) {
-      this.listItem.classList.add("-disabled");
+      this.listItem.classList.add('-disabled')
     } else {
-      this.listItem.classList.remove("-disabled");
+      this.listItem.classList.remove('-disabled')
     }
   }
 
   @Method()
   async isSelected() {
-    this.listItem = this.el.shadowRoot.querySelector('.rs-list-item')
     if (this.selected) {
-      this.listItem.classList.add("-selected");
+      this.listItem.classList.add('-selected')
     } else {
-      this.listItem.classList.remove("-selected");
+      this.listItem.classList.remove('-selected')
     }
   }
 
   @Method()
   async isActivated() {
-    this.listItem = this.el.shadowRoot.querySelector('.rs-list-item')
     if (this.activated) {
-      this.listItem.classList.add("-activated");
+      this.listItem.classList.add('-activated')
     } else {
-      this.listItem.classList.remove("-activated");
+      this.listItem.classList.remove('-activated')
     }
   }
 
