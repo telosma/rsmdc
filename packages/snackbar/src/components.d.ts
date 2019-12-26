@@ -10,7 +10,10 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface RsSnackbar {
+    'countSurvivalTime': () => Promise<void>;
     'isOpened': () => Promise<void>;
+    'keepAlive': number;
+    'openSnackbarMotion': () => Promise<void>;
     'opened': boolean;
   }
   interface RsSnackbarText {}
@@ -38,6 +41,8 @@ declare global {
 
 declare namespace LocalJSX {
   interface RsSnackbar extends JSXBase.HTMLAttributes<HTMLRsSnackbarElement> {
+    'keepAlive'?: number;
+    'onChange'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
   interface RsSnackbarText extends JSXBase.HTMLAttributes<HTMLRsSnackbarTextElement> {}

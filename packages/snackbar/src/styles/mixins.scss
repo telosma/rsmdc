@@ -73,8 +73,8 @@
 
 @mixin rs-snackbar-fill-color($color) {
   .rs-snackbar {
-   > .surface {
-     background-color: $color;
+    > .surface {
+      background-color: $color;
     }
   }
 }
