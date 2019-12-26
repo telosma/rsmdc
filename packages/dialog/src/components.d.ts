@@ -14,7 +14,7 @@ export namespace Components {
     'isScrollable': () => Promise<void>;
     'opened': boolean;
     'scrollable': boolean;
-    'wrap': (element: any, wrapper: any) => Promise<void>;
+    'wrapElements': (element: any, wrapper: any) => Promise<void>;
   }
   interface RsDialogContent {}
   interface RsDialogTitle {}

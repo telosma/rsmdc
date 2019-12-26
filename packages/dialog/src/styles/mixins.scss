@@ -1,5 +1,6 @@
 @import "@rsmdc/theme/mixins";
 @import "./variables";
+
 @mixin rs-dialog-type($type) {
   @if $type == stacked {
 
