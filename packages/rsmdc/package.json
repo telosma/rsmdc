@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/rsmdc",
   "main": "dist/rs-elements.common.js",
-  "description": "The Material Components for the web all components",
+  "description": "All components of the material design components",
   "version": "1.1.22",
   "license": "MIT",
   "sideEffects": false,

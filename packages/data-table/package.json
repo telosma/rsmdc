@@ -2,6 +2,7 @@
   "name": "@rsmdc/data-table",
   "version": "1.1.20",
   "main": "dist/index.js",
+  "description": "Material design data-table component by custom elements",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
   "es2017": "dist/esm/index.mjs",

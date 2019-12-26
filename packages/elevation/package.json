@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/elevation",
-  "description": "Material Components for the web mixins + CSS Classes for Material Design elevation",
+  "description": "Material Components for the web mixins + CSS Classes for rsmdc",
   "version": "1.1.0",
   "license": "MIT",
   "keywords": [
