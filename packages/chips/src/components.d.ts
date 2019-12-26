@@ -12,9 +12,7 @@ export namespace Components {
   interface RsChip {
     'activateRipple': () => Promise<void>;
     'isSelected': () => Promise<void>;
-    'isShaped': () => Promise<void>;
     'selected': boolean;
-    'shaped': boolean;
   }
 }
 
@@ -34,7 +32,6 @@ declare global {
 declare namespace LocalJSX {
   interface RsChip extends JSXBase.HTMLAttributes<HTMLRsChipElement> {
     'selected'?: boolean;
-    'shaped'?: boolean;
   }
 
   interface IntrinsicElements {

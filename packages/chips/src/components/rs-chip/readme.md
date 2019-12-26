@@ -10,7 +10,6 @@
 | Property   | Attribute  | Description | Type      | Default     |
 | ---------- | ---------- | ----------- | --------- | ----------- |
 | `selected` | `selected` |             | `boolean` | `undefined` |
-| `shaped`   | `shaped`   |             | `boolean` | `undefined` |
 
 
 ## Methods
@@ -26,16 +25,6 @@ Type: `Promise<void>`
 
 
 ### `isSelected() => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-### `isShaped() => Promise<void>`
 
 
 
