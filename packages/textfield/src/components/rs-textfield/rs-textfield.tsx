@@ -31,8 +31,6 @@ export class Textfield {
 
   textfield: Element
 
-  trailing: Element
-
   labels: Element[]
 
   nativeControl: Element
@@ -41,15 +39,11 @@ export class Textfield {
 
   notch: HTMLElement
 
-  action: Element
-
   counter: Element
 
   rsRipple: RSRipple
 
   rsLineRipple: RSLineRipple
-
-  labelEl: Element
 
   trailingEl: Element
 
@@ -57,6 +51,11 @@ export class Textfield {
     cancelable: false,
     composed: false,
   }) change: EventEmitter
+
+  @Event({
+    cancelable: false,
+    composed: false,
+  }) input: EventEmitter
 
   @Watch('disabled')
   disabledHandler() {
@@ -111,7 +110,7 @@ export class Textfield {
       this.counter.classList.remove('-hidden')
     } else {
       this.counter.classList.add('-hidden')
-     }
+    }
   }
 
   @Method()
@@ -160,7 +159,7 @@ export class Textfield {
       l.classList.remove('-floatabove')
       this.notch.classList.remove('-border')
       this.notch.style.setProperty('--width', 'auto')
-     })
+    })
   }
 
   @Method()
@@ -178,29 +177,34 @@ export class Textfield {
     this.change.emit({ value: this.value })
   }
 
+  @Method()
+  async inputHandler() {
+    this.value = this.htmlNativeConctrol.value
+    this.input.emit({ value: this.value })
+  }
+
   componentDidLoad() {
     this.textfield = this.el.shadowRoot.querySelector('.rs-textfield')
     this.labels = Array.from(this.el.shadowRoot.querySelectorAll('.label'))
-    this.labelEl = this.el.shadowRoot.querySelector('.label') 
     this.nativeControl = this.el.shadowRoot.querySelector('.nativecontrol')
     this.htmlNativeConctrol = (this.nativeControl as HTMLSelectElement)
     this.notch = this.el.shadowRoot.querySelector('.notch')
     this.counter = this.el.shadowRoot.querySelector('.counter')
-    this.action = this.el.shadowRoot.querySelector('.action')
     this.rsLineRipple = new RSLineRipple(this.el.shadowRoot.querySelector('.rs-line-ripple'))
     this.rsRipple = new RSRipple(this.textfield)
 
     const slot = this.el.shadowRoot.querySelector('slot')
     const children = Array.from(slot.assignedElements())
-    this.trailing = children.find(child => child.tagName === 'RS-TEXTFIELD-TRAILING')
+    const trailing = children.find(child => child.tagName === 'RS-TEXTFIELD-TRAILING')
 
-    if (this.trailing) {
-      this.trailingEl = this.trailing.shadowRoot.querySelector('.rs-textfield-trailing')
+    if (trailing) {
+      this.trailingEl = trailing.shadowRoot.querySelector('.rs-textfield-trailing')
       this.addFocusToParent()
     }
     
     if (this.type === 'date') {
-      this.labelEl.classList.add('-date-label')
+      const labelEl = this.el.shadowRoot.querySelector('.label') 
+      labelEl.classList.add('-date-label')
     }
 
     this.isDisabled()
@@ -217,12 +221,12 @@ export class Textfield {
       this.changeHandler()
     })
 
-    this.nativeControl.addEventListener('blur', () => {
-      this.removeFocusStyle()
+    this.nativeControl.addEventListener('input', () => {
+      this.inputHandler()
     })
 
-    this.nativeControl.addEventListener('keyup', () => {
-      this.value = this.htmlNativeConctrol.value
+    this.nativeControl.addEventListener('blur', () => {
+      this.removeFocusStyle()
     })
   }
   
@@ -235,12 +239,12 @@ export class Textfield {
       this.changeHandler()
     })
 
-    this.nativeControl.removeEventListener('blur', () => {
-      this.removeFocusStyle()
+    this.nativeControl.removeEventListener('input', () => {
+      this.inputHandler()
     })
 
-    this.nativeControl.removeEventListener('keyup', () => {
-      this.value = this.htmlNativeConctrol.value
+    this.nativeControl.removeEventListener('blur', () => {
+      this.removeFocusStyle()
     })
 
     this.trailingEl.removeEventListener('click', () => {

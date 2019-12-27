@@ -16,6 +16,7 @@ export namespace Components {
     'countable': boolean;
     'disabled': boolean;
     'floatLabel': () => Promise<void>;
+    'inputHandler': () => Promise<void>;
     'invalid': boolean;
     'isCountable': () => Promise<void>;
     'isDisabled': () => Promise<void>;
@@ -39,6 +40,7 @@ export namespace Components {
     'countable': boolean;
     'disabled': boolean;
     'floatLabel': () => Promise<void>;
+    'inputHandler': () => Promise<void>;
     'invalid': boolean;
     'isCountable': () => Promise<void>;
     'isDisabled': () => Promise<void>;
@@ -93,6 +95,7 @@ declare namespace LocalJSX {
     'label'?: string;
     'maxlength'?: string;
     'onChange'?: (event: CustomEvent<any>) => void;
+    'onInput'?: (event: CustomEvent<any>) => void;
     'placeholder'?: string;
     'required'?: boolean;
     'rows'?: number;
@@ -106,6 +109,7 @@ declare namespace LocalJSX {
     'label'?: string;
     'maxlength'?: string;
     'onChange'?: (event: CustomEvent<any>) => void;
+    'onInput'?: (event: CustomEvent<any>) => void;
     'placeholder'?: string;
     'required'?: boolean;
     'type'?: string;

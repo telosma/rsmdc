@@ -1,14 +1,14 @@
-import { Component, Element, Host, h } from "@stencil/core";
+import { Component, Element, Host, h } from '@stencil/core'
 
 @Component({
-  tag: "rs-textfield-trailing",
-  styleUrl: "../../dist/result.css",
+  tag: 'rs-textfield-trailing',
+  styleUrl: '../../dist/result.css',
   shadow: true
 })
 export class TextfieldTrailing {
-  @Element() el: HTMLElement;
+  @Element() el: HTMLElement
 
-  trailing: Element;
+  trailing: Element
 
   render() {
     return (

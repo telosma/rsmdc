@@ -33,7 +33,6 @@ export class Textarea {
 
   @Prop() rows: number
 
-
   textarea: Element
 
   labels: Element[]
@@ -54,6 +53,11 @@ export class Textarea {
     cancelable: false,
     composed: false,
   }) change: EventEmitter
+
+  @Event({
+    cancelable: false,
+    composed: false,
+  }) input: EventEmitter
 
   @Watch('disabled')
   disabledHandler() {
@@ -134,7 +138,7 @@ export class Textarea {
     this.labels.forEach(l => { 
       l.classList.add('-floatabove')
       this.notch.classList.add('-border')
-      if (!l.classList.contains('-shake')) { return }
+      if (!l.classList.contains('-shake')) return
       l.classList.remove('-shake')
     })
     this.setLabelWidthToNotch()
@@ -167,8 +171,13 @@ export class Textarea {
   @Method()
   async changeHandler() {
     this.value = this.htmlNativeConctrol.value
-
     this.change.emit({ value: this.value })
+  }
+
+  @Method()
+  async inputHandler() {
+    this.value = this.htmlNativeConctrol.value
+    this.input.emit({ value: this.value })
   }
 
   componentDidLoad() {
@@ -194,12 +203,12 @@ export class Textarea {
       this.changeHandler()
     })
 
+    this.nativeControl.addEventListener('input', () => {
+      this.inputHandler()
+    })
+
     this.nativeControl.addEventListener('blur', () => {
       this.removeFocusStyle()
-    })
-    
-    this.nativeControl.addEventListener('keyup', () => {
-      this.value = this.htmlNativeConctrol.value
     })
   }
 
@@ -216,8 +225,8 @@ export class Textarea {
       this.removeFocusStyle()
     })
 
-    this.nativeControl.removeEventListener('keyup', () => {
-      this.value = this.htmlNativeConctrol.value
+    this.nativeControl.removeEventListener('input', () => {
+      this.inputHandler()
     })
   }
 
