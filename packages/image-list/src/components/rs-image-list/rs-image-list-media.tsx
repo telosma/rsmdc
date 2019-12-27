@@ -1,4 +1,4 @@
-import { Component, Element, Host, h, Prop } from '@stencil/core';
+import { Component, Element, Host, h, Prop } from '@stencil/core'
 
 @Component({
   tag: 'rs-image-list-media',

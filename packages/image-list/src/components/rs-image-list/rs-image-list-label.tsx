@@ -1,4 +1,4 @@
-import { Component, Host, h, Element, Method } from '@stencil/core';
+import { Component, Host, h, Element, Method } from '@stencil/core'
 
 @Component({
   tag: 'rs-image-list-label',
@@ -8,14 +8,14 @@ import { Component, Host, h, Element, Method } from '@stencil/core';
 
 export class ImageListLabel{
 
-  @Element() el: Element;
+  @Element() el: Element
 
-  imageListLabel: HTMLElement;
+  imageListLabel: HTMLElement
 
   @Method()
   async wrap(element, wrapper) {
-    element.parentNode.insertBefore(wrapper, element);
-    wrapper.appendChild(element);
+    element.parentNode.insertBefore(wrapper, element)
+    wrapper.appendChild(element)
   }
 
   componentDidLoad() {
@@ -23,13 +23,13 @@ export class ImageListLabel{
 
     const slot = this.el.shadowRoot.querySelector('slot')
     
-    const textParent = document.createElement('span');
+    const textParent = document.createElement('span')
     textParent.classList.add('text')
     
     const texts = slot.assignedNodes().filter(node => node.nodeType === 3)
     texts.forEach(text => {
-      this.wrap(text, textParent);
-    });
+      this.wrap(text, textParent)
+    })
   }
 
   render() {
