@@ -157,7 +157,7 @@
 @mixin rs-button-icon-position($position: left) {
   @if $position == left {
 
-     .rs-button {
+    .rs-button {
       
       > .label::before {
         display: inline-block;
@@ -218,15 +218,6 @@
   }
 }
 
-@mixin rs-button-outline-width($outline-width, $padding: $rs-button-contained-horizontal-padding) {
-  $padding-value: max($padding - $outline-width, 0);
-
-  @include rs-button-horizontal-padding($padding-value);
-  .rs-button {
-    border-width: $outline-width;
-  }
-}
-
 @mixin rs-button-container-fill-color($color) {
   .rs-button {
     &:not(.-disabled) {
@@ -257,7 +248,7 @@
 @mixin rs-button-ink-color($color) {
   .rs-button {
     &:not(.-disabled) {
-     color: $color;
+      color: $color;
     }
   }
 }

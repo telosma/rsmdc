@@ -1,4 +1,4 @@
-import { Component, Element, Host, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, Element, Host, h, Method, Prop, Watch } from '@stencil/core'
 import { RSRipple } from '@rsmdc/ripple'
 
 @Component({
@@ -7,9 +7,7 @@ import { RSRipple } from '@rsmdc/ripple'
   shadow: true
 })
 export class Button {
-  @Element() el: Element;
-
-  button: HTMLElement
+  @Element() el: Element
 
   @Prop() disabled: boolean
 
@@ -17,75 +15,73 @@ export class Button {
 
   @Prop() fixed: boolean
 
-  @Watch("disabled")
+  button: HTMLElement
+
+  @Watch('disabled')
   disabledHandler() {
-    this.isDisabled();
+    this.isDisabled()
   }
 
-  @Watch("exited")
+  @Watch('exited')
   exitedHandler() {
-    this.isExited();
+    this.isExited()
   }
 
-  @Watch("fixed")
+  @Watch('fixed')
   fixedHandler() {
-    this.isFixed();
+    this.isFixed()
   }
 
   @Method()
   async isDisabled() {
-    this.button = this.el.shadowRoot.querySelector('.rs-button')
     if (this.disabled) {
-      this.button.classList.add("-disabled");
+      this.button.classList.add('-disabled')
     } else {
-      this.button.classList.remove("-disabled");
+      this.button.classList.remove('-disabled')
     }
   }
 
   @Method()
   async isExited() {
-    this.button = this.el.shadowRoot.querySelector('.rs-button')
     if (this.exited) {
-      this.button.classList.add("-exited");
+      this.button.classList.add('-exited')
     } else {
-      this.button.classList.remove("-exited");
+      this.button.classList.remove('-exited')
     }
   }
   
   @Method()
   async activateRipple() {
-    this.button = this.el.shadowRoot.querySelector(".rs-button");
-    this.button[0].ripple.active();
+    this.button[0].ripple.active()
     setTimeout(() => {
       // TODO
-      this.button[0].ripple.deactivate();
+      this.button[0].ripple.deactivate()
     })
   }
 
   @Method()
   async isFixed() {
-    this.button = this.el.shadowRoot.querySelector('.rs-button')
     if (this.fixed) {
-      this.button.classList.add("-fixed");
+      this.button.classList.add('-fixed')
     } else {
-      this.button.classList.remove("-fixed");
+      this.button.classList.remove('-fixed')
     }
   }
 
   componentDidLoad() {
-    const button = this.el.shadowRoot.querySelector('.rs-button');
-    const ripple = new RSRipple(button)
-    const slot = this.el.shadowRoot.querySelector('slot');
+    this.button = this.el.shadowRoot.querySelector('.rs-button')
+    const ripple = new RSRipple(this.button)
+    const slot = this.el.shadowRoot.querySelector('slot')
     
-    const styles = window.getComputedStyle(button)
-    const isRippleUnbounded = String(styles.getPropertyValue('--rs-button-----ripple')).trim()
+    const styles = window.getComputedStyle(this.button)
+    const isRippleUnbounded = String(styles.getPropertyValue('--rs-button-----ripple')).trim() // TODO
 
     const slotChildren = Array.from(slot.assignedNodes())
     if (slotChildren.length === 0 && !isRippleUnbounded) {
-      button.classList.add('-no-text')
+      this.button.classList.add('-no-text')
       ripple.unbounded = true
     } else if (slotChildren.length > 0 && isRippleUnbounded) {
-      button.classList.add('-extended')
+      this.button.classList.add('-extended')
     }
 
     this.isDisabled()
