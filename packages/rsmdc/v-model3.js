@@ -1,16 +1,11 @@
 const makeFunc = (type, value) => {
   return (e, dataName, vnode, el) => {
-    if (type === 'select' || type === 'radio') {
-      typeof dataName === 'object'
-        ? vnode.context[dataName[0]][dataName[1]] = e.detail.value
-        : vnode.context[dataName] = e.detail.value
-        
-    } else if (type === 'checkbox') {
+    if (type === 'checkbox') {
       const vNodeValue = typeof dataName === 'object'
         ? vnode.context[dataName[0]][dataName[1]]
         : vnode.context[dataName]
       const isChecked = el.getAttribute('data-checked') ? true : false
-              
+            
       if (typeof vNodeValue === 'object') {
         const index = vNodeValue.findIndex(v => v === value)
 
@@ -26,56 +21,47 @@ const makeFunc = (type, value) => {
           ? vnode.context[dataName[0]][dataName[1]] = e.detail.value
           : vnode.context[dataName] = e.detail.value
       }
+    } else {
+      typeof dataName === 'object'
+        ? vnode.context[dataName[0]][dataName[1]] = e.detail.value
+        : vnode.context[dataName] = e.detail.value
     }
   }
 }
 
 export const VModel3 = {
   bind(el, binding, vNode) {
-    let observer
     const type = vNode.data.attrs.type
     const value = vNode.data.attrs.value
-    const dataName = binding.expression
+    const dataName = binding.expression.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
+      ? binding.expression.split('.')
+      : binding.expression
+    
+    const func = makeFunc(type, value)
 
-    if (type === 'select' || type === 'checkbox' || type === 'radio') {
-      const dataName = binding.expression.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
-        ? binding.expression.split('.')
-        : binding.expression
-      
-      const func = makeFunc(type, value)
-
-      if (!vNode.data.on || !vNode.data.on.change) {
-        el.addEventListener('change', e => {
-          func(e, dataName, vNode, el)
-        })
-        
-      } else {
-        const changeEvent = vNode.data.on.change.fns
-        vNode.data.on.change.fns = e => {
-          func(e, dataName, vNode, el)
-          changeEvent(e)
-        }
+    if (!vNode.data.on || !vNode.data.on.change) {
+      el.addEventListener('change', e => {
+        func(e, dataName, vNode, el)
+      })      
+    } else {
+      const changeEvent = vNode.data.on.change.fns
+      vNode.data.on.change.fns = e => {
+        func(e, dataName, vNode, el)
+        changeEvent(e)
       }
-    } else if (type === 'text' || type === 'textarea' || type === 'date') {
-      observer = new MutationObserver(mutations => {
-        const text = mutations[0].target.text
-        const dataNames = dataName.match(/\..*?[a-z|A-Z].*?(?=\.|$)/g)
-        const objectName = dataName.replace(/\..*/, '')
+    }
 
-        if (dataNames || objectName !== dataName) {
-          const data = dataNames[0].replace(/\./, '')
-
-          vNode.context.$data[objectName][data] = text
-        } else {
-          vNode.context[dataName] = text
-        }
-      })
-
-      observer.observe(el, {
-        attributes: true,
-        subtree: true
-      })
-    } 
+    if (!vNode.data.on || !vNode.data.on.input) {
+      el.addEventListener('input', e => {
+        func(e, dataName, vNode, el)
+      })      
+    } else {
+      const inputEvent = vNode.data.on.input.fns
+      vNode.data.on.input.fns = e => {
+        func(e, dataName, vNode, el)
+        inputEvent(e)
+      }
+    }
   },
   componentUpdated(el, binding, vNode) {
     const value = vNode.data.attrs.value
@@ -85,13 +71,22 @@ export const VModel3 = {
       : binding.expression
     const func = makeFunc(type, value)
 
-    if (type === 'select' || type === 'checkbox' || type === 'radio') {
-      if (!vNode.data.on || !vNode.data.on.change) return
+    if (!vNode.data.on) return
 
+    if (vNode.data.on.change) {
       const changeEvent = vNode.data.on.change.fns
       vNode.data.on.change.fns = e => {
         func(e, dataName, vNode, el)
         changeEvent(e)
+      }
+    }
+    if (vNode.data.on.input) {
+      const inputEvent = vNode.data.on.input.fns
+      vNode.data.on.input.fns = e => {
+        if (typeof e.detail === 'number') return
+
+        func(e, dataName, vNode, el)
+        inputEvent(e)
       }
     }
   },
@@ -103,12 +98,16 @@ export const VModel3 = {
       : binding.expression
     const func = makeFunc(type, value)
 
-    if (type === 'select' || type === 'checkbox' || type === 'radio') {
-      if (vNode.data.on && vNode.data.on.change) return
-
+    if (!vNode.data.on || !vNode.data.on.change) {
       el.removeEventListener('change', e => {
         func(e, dataName, vNode, el)
-      })
+      })  
+    }
+
+    if (!vNode.data.on || !vNode.data.on.input) {
+      el.removeEventListener('input', e => {
+        func(e, dataName, vNode, el)
+      })  
     }
   }
 }
