@@ -23,6 +23,7 @@ rs-drawer[closing] {
 .rs-drawer {
   height: 100%;
   display: block;
+  width: auto;
 
   > .content {
     width: $rs-drawer-width;

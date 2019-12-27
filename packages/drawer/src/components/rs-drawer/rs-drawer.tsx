@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core';
+import { Component, Element, Prop, Watch, Event, EventEmitter, Method, Host, h } from '@stencil/core'
 
 @Component({
   tag: 'rs-drawer',
@@ -68,15 +68,15 @@ export class Drawer {
     this.drawer = this.el.shadowRoot.querySelector('.rs-drawer')
     this.scrim = this.el.shadowRoot.querySelector('.scrim')
     this.body = window.document.querySelector('body')
-
     const slot = this.el.shadowRoot.querySelector('slot')
+
     slot.addEventListener('slotchange', () => {
       const drawerHeader = Array.from(slot.assignedElements())
         .find(el => el.tagName === 'RS-DRAWER-HEADER')
       const height = drawerHeader
         ? drawerHeader.getBoundingClientRect().height
         : 0
-      this. body.style.setProperty('--rs-drawer-content---height', `calc(100vh - ${height}px)`)
+      this.body.style.setProperty('--rs-drawer-content---height', `calc(100vh - ${height}px)`)
     })
 
     this.isOpened()

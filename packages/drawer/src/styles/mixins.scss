@@ -25,6 +25,8 @@
     @at-root {  
       rs-drawer[opened] {
         z-index: 100;
+        position: absolute;
+        left: 0;      
       }      
 
       rs-drawer[opened] + rs-app-layout-content {
@@ -36,6 +38,38 @@
       rs-drawer[opened] + rs-app-layout-content { 
         --rs-app-layout-content---margin-left: auto;
       }
+    }
+  }
+}
+
+@mixin rs-drawer-width($width) {
+  .rs-drawer {
+    width: $width;
+
+    > .content {
+      width: $width;
+    }
+  }
+
+  @at-root {  
+    rs-drawer[opened] + rs-app-layout-content {
+      rs-app-bar {
+        --rs-app-bar---margin-left: #{$width};
+      }
+    }
+    
+    rs-drawer[opened] + rs-app-layout-content { 
+      --rs-app-layout-content---margin-left: #{$width};
+    }
+  }
+}
+
+@mixin rs-drawer-modal-width($width) {
+  .rs-drawer {
+    width: $width;
+
+    > .content {
+      width: $width;
     }
   }
 }
