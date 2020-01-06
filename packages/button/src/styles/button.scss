@@ -37,6 +37,8 @@
   transition: 0;
   padding: 0 $rs-button-contained-horizontal-padding;
   border-width: 2px;
+  color: inherit;
+  white-space: nowrap;
 
   &.-fixed {
     position: fixed;
@@ -45,29 +47,27 @@
     left: auto;
     transform: none;
   }
-  color: inherit;
-  white-space: nowrap;
 
-  > .label::before {
+  > .label:before {
     font-family: 'Courier New', Courier, monospace;
     content: '';
     display: none;
-    width: auto;
-    height: auto;
-    font-size: medium;
-    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    vertical-align: top;
     margin: 0 8px 0 -4px;
     color: inherit;
   }
 
-  > .label::after {
+  > .label:after {
     font-family: 'Courier New', Courier, monospace;
     content: '';
     display: none;
-    width: auto;
-    height: auto;
-    font-size: medium;
-    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    vertical-align: top;
     margin: 0 -4px 0 8px;
   }
   
@@ -88,7 +88,16 @@
     border-radius: 50%;
     color: $rs-theme-on-surface;
 
-    > .label::before {
+
+    > .label:before {
+      width: 24px;
+      height: 24px;
+      font-size: 24px;
+      margin: 0;
+      vertical-align: top;
+    }
+
+    > .label:after {
       width: 24px;
       height: 24px;
       font-size: 24px;
@@ -108,20 +117,18 @@
     font-size: .875rem;
     padding: 0 $rs-fab-extended-label-padding;
     line-height: 2.25rem;
-    > .label::before {
+    > .label:before {
       margin: 0 12px 0 -8px;
     }
-    > .label::after {
+    > .label:after {
       margin: 0 -8px 0 12px;
     }
   }
 
   &.-exited {
-    transform: scale(0);
-    transition:
-      opacity 15ms linear 150ms,
-      rs-animation-exit-permanent(transform, 180ms);
-    opacity: 0;
+    transform: none;
+    transition: none;
+    opacity: 1;
   }
 
   &:not(.-disabled).-no-text {
@@ -135,15 +142,18 @@
   }
 
   &:not(.-disabled) {
-    > .label::before {
+    > .label {
       color: inherit;
     }
-    > .label::after {
-      color: inherit;
+    > .label:before {
+      color: $rs-theme-primary;
+    }
+    > .label:after {
+      color: $rs-theme-primary;
     }
   }
 
-  &::-moz-focus-inner {
+  &:-moz-focus-inner {
     padding: 0;
     border: 0;
   }

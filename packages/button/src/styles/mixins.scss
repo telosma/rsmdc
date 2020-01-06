@@ -2,118 +2,20 @@
 @import "@rsmdc/ripple/mixins-stencil";
 @import "./variables";
 
-@mixin rs-button-type($types...) {
-  @each $type in $types {
-    @if $type == outlined {
-      
-      .rs-button {
-        border: solid 2px $rs-theme-primary;
-        
-        &.-disabled {
-          border-color: $rs-button-disabled-ink-color; 
-        }
-      
-      }
-    }@else if $type == raised {
-    
-      .rs-button {
-        box-shadow: rs-elevation(2);
-        transition: rs-elevation-transition-value();
-        @include rs-ripple-upgraded($rs-theme-on-primary);
-
-        &:hover {
-          box-shadow: rs-elevation(4);
-        }
-
-        &:active {
-          box-shadow: rs-elevation(10);
-        }
-        
-        &:not(.-disabled) {
-          background-color: $rs-theme-primary;
-          color: $rs-theme-on-primary;
-        }
-        &.-disabled {
-          background: $rs-button-disabled-fill-color;
-        }
-      }
-
-    } @else if $type == dense {
-    
-      .rs-button {
-        height: $rs-dense-button-height;
-        font-size: 0.8125rem;
-      }
-
-    }@else if $type == unelevated {
-    
-      .rs-button {
-        @include rs-ripple-upgraded($rs-theme-on-primary);
-        
-        &:not(.-disabled) {
-          background-color: $rs-theme-primary;
-          color: $rs-theme-on-primary;
-        }
-        
-        &.-disabled {
-          background: $rs-button-disabled-fill-color;
-        }
-      }
-
-    }@else if $type == fab {
-      
-      .rs-button {
-        --ripple: unbounded;
-        min-width: auto;
-        width: $rs-fab-height;
-        height: $rs-fab-height;
-        border-radius: 50%;
-        box-shadow: rs-elevation(6);
-        transition: rs-elevation-transition-value();
-        @include rs-ripple-upgraded($rs-theme-on-secondary);
-        
-        > .label::before {
-          margin: 0;
-          width: 24px;
-          height: 24px;
-          font-size: 24px;
-          vertical-align: top;
-        }
-
-        > .label::after {
-          margin: 0;
-          width: 24px;
-          height: 24px;
-          font-size: 24px;
-          vertical-align: top;
-        }
-
-        &:hover {
-          box-shadow: rs-elevation(8);
-        }
-
-        &:active {
-          box-shadow: rs-elevation(12);
-        }
-
-        &:not(.-disabled) {
-          color: $rs-theme-on-secondary;
-          background-color: $rs-theme-secondary;
-        }
-      }
-    }
-  }
-}
-
-@mixin rs-button-position($position) {
+@mixin rs-button-fab-position($position) {
   @if $position == center {
-
     .rs-button {
-
       &.-fixed {
         left: 50%;
         bottom: 16px;
         transform: translateX(-50%);
+      }
+    }
+  } @else if $position == left {
+    .rs-button {
+      &.-fixed {
+        left: 16px;
+        bottom: 16px;
       }
     }
   }
@@ -137,17 +39,15 @@
     $name: '"' + "\\"+ $codepoint + '"';
 
     .rs-button {
-      > .label::before {
+      > .label:before {
         font-family: $font-family;
         content: $name;
         display: inline-block;
-        vertical-align: middle;
       }
       
-      > .label::after {
+      > .label:after {
         font-family: $font-family;
         content: $name;
-        vertical-align: middle;
         display: none;
       }
     }
@@ -159,11 +59,11 @@
 
     .rs-button {
       
-      > .label::before {
+      > .label:before {
         display: inline-block;
       }
 
-      > .label::after {
+      > .label:after {
         display: none;
       }
     }
@@ -172,28 +72,14 @@
     
     .rs-button {
       
-      > .label::before {
+      > .label:before {
         display: none;
       }
 
-      > .label::after {
+      > .label:after {
         display: inline-block;
       }
     }
-  }
-}
-
-@mixin rs-button-filled-accessible($container-fill-color) {
-  $fill-tone: rs-theme-tone($container-fill-color);
-  @include rs-button-container-fill-color($container-fill-color);
-
-  @if ($fill-tone == "dark") {
-    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
-    @include rs-ripple-upgraded(text-primary-on-dark);
-  } @else {
-    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
-    @include rs-ripple-upgraded(text-primary-on-light);
-
   }
 }
 
@@ -236,18 +122,18 @@
 
 @mixin rs-button-icon-color($color) {
   .rs-button:not(.-disabled) {
-    > .label::before {
+    > .label:before {
       color: $color;
     }
-    > .label::after {
+    > .label:after {
       color: $color;
     }
   }
 }
 
 @mixin rs-button-ink-color($color) {
-  .rs-button {
-    &:not(.-disabled) {
+  .rs-button:not(.-disabled) {
+    > .label {
       color: $color;
     }
   }
@@ -256,5 +142,157 @@
 @mixin rs-button-states-color($color) {
   .rs-button {
     @include rs-ripple-upgraded($color);
+  }
+}
+
+
+@mixin rs-button-type($types...) {
+  @each $type in $types {
+    @if $type == outlined {
+      
+      .rs-button {
+        border: solid 2px $rs-theme-primary;
+        
+        &.-disabled {
+          border-color: $rs-button-disabled-ink-color; 
+        }
+      
+      }
+    }@else if $type == raised {
+    
+      .rs-button {
+        box-shadow: rs-elevation(2);
+        transition: rs-elevation-transition-value();
+        @include rs-ripple-upgraded($rs-theme-on-primary);
+
+        &:hover {
+          box-shadow: rs-elevation(4);
+        }
+
+        &:active {
+          box-shadow: rs-elevation(10);
+        }
+        
+        &:not(.-disabled) {
+          background-color: $rs-theme-primary;
+          color: $rs-theme-on-primary;
+        }
+
+        &.-disabled {
+          background: $rs-button-disabled-fill-color;
+        }
+
+        &:not(.-disabled) > .label:before {
+          color: $rs-theme-on-primary;
+        }
+
+        &:not(.-disabled) > .label:after {
+          color: $rs-theme-on-primary;
+        }
+     
+      }
+
+    } @else if $type == dense {
+    
+      .rs-button {
+        height: $rs-dense-button-height;
+        font-size: 0.8125rem;
+      }
+
+    }@else if $type == unelevated {
+    
+      .rs-button {
+        @include rs-ripple-upgraded($rs-theme-on-primary);
+        
+        &:not(.-disabled) {
+          background-color: $rs-theme-primary;
+          color: $rs-theme-on-primary;
+        }
+        
+        &:not(.-disabled) > .label:before {
+          color: $rs-theme-on-primary;
+        }
+
+        &:not(.-disabled) > .label:after {
+          color: $rs-theme-on-primary;
+        }
+        
+        &.-disabled {
+          background: $rs-button-disabled-fill-color;
+        }
+      }
+
+    }@else if $type == fab {
+      
+      .rs-button {
+        --ripple: unbounded;
+        min-width: auto;
+        width: $rs-fab-height;
+        height: $rs-fab-height;
+        border-radius: 50%;
+        box-shadow: rs-elevation(6);
+        transition: rs-elevation-transition-value();
+        @include rs-ripple-upgraded($rs-theme-on-secondary);
+        
+        > .label:before {
+          margin: 0;
+          width: 24px;
+          height: 24px;
+          font-size: 24px;
+        }
+
+        > .label:after {
+          margin: 0;
+          width: 24px;
+          height: 24px;
+          font-size: 24px;
+        }
+
+        &.-exited {
+          transform: scale(0);
+          transition:
+            opacity 15ms linear 150ms,
+            rs-animation-exit-permanent(transform, 180ms);
+          opacity: 0;
+        }
+
+        &:not(.-disabled) > .label:before {
+          color: $rs-theme-on-primary;
+        }
+
+        &:not(.-disabled) > .label:after {
+          color: $rs-theme-on-primary;
+        }
+
+        &:hover {
+          box-shadow: rs-elevation(8);
+        }
+
+        &:active {
+          box-shadow: rs-elevation(12);
+        }
+
+        &:not(.-disabled) {
+          color: $rs-theme-on-secondary;
+          background-color: $rs-theme-secondary;
+        }
+      }
+    }
+  }
+}
+
+
+@mixin rs-button-filled-accessible($container-fill-color) {
+  $fill-tone: rs-theme-tone($container-fill-color);
+  @include rs-button-container-fill-color($container-fill-color);
+
+  @if ($fill-tone == "dark") {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, dark));
+    @include rs-button-states-color(rs-theme-ink-color-for-fill_(primary, dark));
+    @include rs-button-icon-color(rs-theme-ink-color-for-fill_(primary, dark));
+  } @else {
+    @include rs-button-ink-color(rs-theme-ink-color-for-fill_(primary, light));
+    @include rs-button-states-color(rs-theme-ink-color-for-fill_(primary, light));
+    @include rs-button-icon-color(rs-theme-ink-color-for-fill_(primary, light));
   }
 }
