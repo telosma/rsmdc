@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/appbar",
-  "version": "1.1.23",
+  "version": "1.1.24",
   "description": "Material design appbar component by custom elements.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -25,14 +25,14 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "dependencies": {
-    "@rsmdc/animation": "^1.1.23",
-    "@rsmdc/base": "^1.1.23",
-    "@rsmdc/elevation": "^1.1.23",
-    "@rsmdc/ripple": "^1.1.23",
-    "@rsmdc/rtl": "^1.1.23",
-    "@rsmdc/shape": "^1.1.23",
-    "@rsmdc/theme": "^1.1.23",
-    "@rsmdc/typography": "^1.1.23",
+    "@rsmdc/animation": "^1.1.24",
+    "@rsmdc/base": "^1.1.24",
+    "@rsmdc/elevation": "^1.1.24",
+    "@rsmdc/ripple": "^1.1.24",
+    "@rsmdc/rtl": "^1.1.24",
+    "@rsmdc/shape": "^1.1.24",
+    "@rsmdc/theme": "^1.1.24",
+    "@rsmdc/typography": "^1.1.24",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
