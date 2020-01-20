@@ -1,6 +1,6 @@
 {
   "name": "@rsmdc/animation",
-  "description": "Animation Variables and Mixins used by rsmdc",
+  "description": "Animation Variables and Mixins used by rsmdc.",
   "version": "1.1.23",
   "license": "MIT",
   "keywords": [

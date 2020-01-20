@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/snackbar",
   "version": "1.1.23",
-  "description": "Material design snackbar component by custom elements",
+  "description": "Material design snackbar component by custom elements.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
