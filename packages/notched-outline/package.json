@@ -1,7 +1,7 @@
 {
   "name": "@rsmdc/notched-outline",
   "description": "The Material Components for rsmdc",
-  "version": "1.1.20",
+  "version": "1.1.23",
   "license": "MIT",
   "keywords": [
     "material components",
@@ -13,9 +13,9 @@
     "url": "https://github.com/rsmdc/rsmdc.git"
   },
   "dependencies": {
-    "@rsmdc/animation": "^1.1.0",
-    "@rsmdc/shape": "^1.1.0",
-    "@rsmdc/theme": "^1.1.0"
+    "@rsmdc/animation": "^1.1.23",
+    "@rsmdc/shape": "^1.1.23",
+    "@rsmdc/theme": "^1.1.23"
   },
   "publishConfig": {
     "access": "public"
