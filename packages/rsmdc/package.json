@@ -2,7 +2,7 @@
   "name": "@rsmdc/rsmdc",
   "main": "dist/rs-elements.common.js",
   "description": "All components of the material design components.",
-  "version": "1.1.25",
+  "version": "1.1.26",
   "license": "MIT",
   "sideEffects": false,
   "keywords": [
@@ -25,7 +25,7 @@
     "@rsmdc/data-table": "^1.1.24",
     "@rsmdc/dialog": "^1.1.24",
     "@rsmdc/dom": "^1.1.24",
-    "@rsmdc/drawer": "^1.1.24",
+    "@rsmdc/drawer": "^1.1.26",
     "@rsmdc/elevation": "^1.1.24",
     "@rsmdc/floating-label": "^1.1.24",
     "@rsmdc/form-field": "^1.1.24",
