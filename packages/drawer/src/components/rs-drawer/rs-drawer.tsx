@@ -34,9 +34,9 @@ export class Drawer {
   @Method()
   async isOpened() {
     if (this.opened) {
-      this.drawer.classList.add('-open')
+      this.openDrawerMotion()
     } else {
-      this.drawer.classList.remove('-open')
+      this.closeDrawerMotion()
     }
   }
 
