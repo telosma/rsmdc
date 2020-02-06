@@ -55,6 +55,7 @@ export namespace Components {
     'setLabelWidthToNotch': () => Promise<void>;
     'type': string;
     'value': string;
+    'valueChanged': () => Promise<void>;
   }
   interface RsTextfieldTrailing {}
 }

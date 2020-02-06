@@ -1,6 +1,5 @@
 {
   "name": "rsmdc",
-  "private": true,
   "scripts": {
     "clean": "yarn lerna clean",
     "bootstrap": "yarn lerna bootstrap",

@@ -77,6 +77,11 @@ export class Textfield {
     this.isCountable()
   }
 
+  @Watch('value')
+  valueHandler() {
+    this.valueChanged()
+  }
+
   @Method()
   async isDisabled() {
     if (this.disabled) {
@@ -181,6 +186,13 @@ export class Textfield {
   async inputHandler() {
     this.value = this.htmlNativeConctrol.value
     this.input.emit({ value: this.value })
+  }
+
+  @Method()
+  async valueChanged() {
+    if (this.htmlNativeConctrol.value !== this.value) {
+      this.htmlNativeConctrol.value = this.value
+    }
   }
 
   componentDidLoad() {
